@@ -1,0 +1,99 @@
+-------------------------------------------------------------------------------------
+SISTEMA PESMA (ERP)							VERSION 1.X.X
+-------------------------------------------------------------------------------------
+- copyright (c) 2009-2012 por Sebastian Ituarte, Alejandro Ferreira.
+
+
+-----------------------------------------------
+- Fecha de liberacion 09 de noviembre del 2012 - 1.2.5 (ACTUALMENTE EN DESARROLLO)
+-----------------------------------------------
+
+- $config['global_xss_filtering'] = FALSE; // se cambio por TRUE por el Global XSS Filtering temas de seguridad, en caso de error volver el parametro a FALSE
+
+
+
+-----------------------------------------------
+- Fecha de liberacion 08 de noviembre del 2012 - 1.2.4 (ACTUALMENTE EN PRODUCCION)
+-----------------------------------------------
+
+- Se arregla seleccion la seleccion de dinamiges en modulos de salida de empresas.
+- Se realiza consulta de auditoria de acceso al sistema.
+- Se agrega boton al pie de pagina, para subir hasta el tope de la pagina nuevamente.
+- Se testea nueva implementacion de DINAMIGES.
+- Se mejora modulas de salida de producto terminado para empresas.
+
+-----------------------------------------------
+- Fecha de liberacion 22 de octubre del 2012 - 1.2.3
+-----------------------------------------------
+
+- Se agrega mantenimiento de datos de la empresa
+- Se mejora la vista de las grillas para reportes (se completa para version 1.2.4). 
+- Correcion de modulo DINAMIGE. 
+- Mantenimiento para todos los certificados de las empresas, Mantenimientos >> Empresas >> Certificados.
+- Ingresar DINAMIGE tambien para los accesorios de voladura habilitados, si ya habia ingresado el DINAMIGE sin estos datos entonces vaya a Mantenimientos >> Empresas >> Certificados >> DINAMIGE.
+- El DINAMIGE para productos ahora es por peso.
+- Nueva consulta, listado de todas las empresas que hay ingresadas en el sistema.
+- Nueva consulta, produccion entre fechas, se selecciona la produccion que se realizo entre dos fechas.
+- Se agrega el mantenimiento de los datos de las empresas. 
+
+-----------------------------------------------
+- Fecha de liberacion 18 de octubre del 2012 - 1.2.2 
+-----------------------------------------------
+
+- Se repara problema con modulos de impresion, el sistema no estaba habilitando las impresiones de consultas.
+
+-----------------------------------------------
+- Fecha de liberacion 10 de octubre del 2012 - 1.2.1 
+-----------------------------------------------
+
+- Se repara problema critico de lentitud en carga de los modulos.
+- Se agrega icono para salir del sistema, eliminando todas las variables de sesion y liberando espacio el servidor.
+
+-----------------------------------------------
+- Fecha de liberacion 03 de octubre del 2012 - 1.2.0 
+-----------------------------------------------
+
+- Se pasa el sistema a html5 mejorando un monton de detalles de diseño, para hacer el sistema
+  mas practico.
+
+-----------------------------------------------
+- Fecha de liberacion 27 de septiembre del 2012 - 1.1.4 
+-----------------------------------------------
+
+- Se termina y se testea el modulo de gestion de usuario, se completo dicho modulo.
+- Se agregan datos extra de usuarios a la informacion sobre usted.
+- Modulo de mantenimientos (Stock de materia prima).
+
+PENDIENTES
+----------
+Modulo de mantenimientos (Datos de materia prima).
+Consulta de Accesorio de voladuras.
+
+-----------------------------------------------
+- Fecha de liberacion 13 de septiembre del 2012 - 1.1.3 
+-----------------------------------------------
+
+- Se arregla el boton de volver cuando se estaba visualizando un correo.
+- Se prepara una primera version de gestion de usuario con errores.
+
+-----------------------------------------------
+- Fecha de liberacion 07 de septiembre del 2012 - 1.1.2 
+-----------------------------------------------
+
+- Se libera una primera reparacion del problema de doble scroll en tentativas de mejoras.
+
+- Se arregla problema con consulta de stock de materia prima.
+
+-Se mejora el sistema de alertas con la nueva mejora del doble scroll.
+
+-Se repara codigo en gral que habia detalles que se encontraron al correr de algunos testeos.
+
+
+-----------------------------------------------
+- Fecha de liberacion 05 de septiembre del 2012 - 1.1.1
+-----------------------------------------------
+
+- Se agrega pantalla del resumen del sistema, creando respecticas graficas con consultas de los productos mas entregados, como tambien 
+  los productos que hay mayor stock en deposito.
+
+- Se agrega el agregar imagenes y documentos por parte de los usuarios pesma a las empresas asociadas al sistema.

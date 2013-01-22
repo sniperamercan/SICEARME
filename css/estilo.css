@@ -1,0 +1,242 @@
+/* HOJA DE ESTILO PESMA
+   @author Sebastian Ituarte
+   @copyright 2012
+*/
+
+input[type="text"], input[type="password"], select { 	    
+    border: 1px solid;
+    border-color: #C0C0C0 #E4E4E4 #E4E4E4 #C0C0C0;
+    background: #FFF;
+    padding: 4px 5px;
+    font: 12px Arial, Tahoma, Helvetica, sans-serif;
+    -moz-box-shadow: 0 0 5px #C0C0C0;
+    -moz-border-radius: 5px;
+    -webkit-box-shadow: 0 0 5px #C0C0C0;
+    -webkit-border-radius: 5px;
+    box-shadow: 0 0 5px #C0C0C0;
+    border-radius: 5px;
+    width: 320px;
+    height: 17px;
+    background-color: #FAFAFA;
+}
+
+select { width: 332px; height: 27px; }
+
+textarea {	
+    width: 320px;
+    border: 1px solid;
+    border-color: #C0C0C0 #E4E4E4 #E4E4E4 #C0C0C0;
+    background: #FFF;
+    padding: 8px 5px;
+    font: 12px Arial, Tahoma, Helvetica, sans-serif;
+    -moz-box-shadow: 0 0 5px #C0C0C0;
+    -moz-border-radius: 5px;
+    -webkit-box-shadow: 0 0 5px #C0C0C0;
+    -webkit-border-radius: 5px;
+    box-shadow: 0 0 5px #C0C0C0;
+    border-radius: 5px;
+    height: 100px;	
+}
+
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus { 
+    border-color: #000000 #000000 #000000 #000000;
+    outline: none;
+    -moz-box-shadow: 0 0 10px #000000;
+    -webkit-box-shadow: 0 0 10px #000000;
+    box-shadow: 0 0 10px #000000;
+}
+
+font {font: Tahoma, Helvetica, sans-serif;}
+
+footer {
+    padding: 5px;
+    border: none;
+    color: black;
+    text-shadow: -2px 2px 3px #888;
+}
+
+fieldset {
+    background: #c9de96; /* Old browsers */
+    background: -moz-linear-gradient(top,  #c9de96 0%, #8ab66b 44%, #398235 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#c9de96), color-stop(44%,#8ab66b), color-stop(100%,#398235)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #c9de96 0%,#8ab66b 44%,#398235 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #c9de96 0%,#8ab66b 44%,#398235 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #c9de96 0%,#8ab66b 44%,#398235 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #c9de96 0%,#8ab66b 44%,#398235 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c9de96', endColorstr='#398235',GradientType=0 ); /* IE6-9 */
+
+    /* No cambiar */
+    border: none; padding: 10px; margin-bottom: 26px; width: 700px; border-radius: 5px; -moz-border-radius: 5px; -moz-box-shadow: 0 0 5px 5px #888; box-shadow: 0 0 5px 5px #888;
+}
+
+fieldset.action {background: #398235; margin-top: -20px;}
+
+article.resumen {
+    border-radius: 5px; -moz-border-radius: 5px; -moz-box-shadow: 0 0 5px 5px #888; -moz-box-shadow: 0 0 5px 5px #888; box-shadow: 0 0 5px 5px #888;
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    color: white;
+}
+
+article.href {
+    border-radius: 5px; -moz-border-radius: 5px;
+    padding: 10px;
+    border: none;
+    width: 50%;
+    height: 50px;
+    background-color: #3366CC;
+    color: white;
+    text-shadow: -2px 2px 3px #888;  
+    text-align: center;
+    line-height: 50px;
+}
+
+article.exito {
+    border-radius: 5px; -moz-border-radius: 5px; -moz-box-shadow: 0 0 2px 2px #009933; -moz-box-shadow: 0 0 2px 2px #009933; box-shadow: 0 0 2px 2px #009933;
+    padding: 10px;
+    border: none;
+    width: 50%;
+    alignment-adjust: central;
+    background-color: #ccffcc;
+    color: #009933;
+    text-shadow: -2px 2px 3px #888;    
+}
+
+article.error {
+    border-radius: 5px; -moz-border-radius: 5px; -moz-box-shadow: 0 0 2px 2px #ff0033; -moz-box-shadow: 0 0 2px 2px #ff0033; box-shadow: 0 0 2px 2px #ff0033;
+    padding: 10px;
+    width: 50%;
+    alignment-adjust: central;
+    border: none;
+    background-color: #ffcccc;
+    color: #ff0033;
+    text-shadow: -2px 2px 3px #888;    
+}
+
+legend {background: #0B3B0B; color: #fff; font: 17px/21px Calibri, Arial, Helvetica, sans-serif; padding: 0 10px; margin: -26px 0 0 -11px; font-weight: bold; border: 1px solid #fff; border-color: #e5e5c3 #505014 #505014 #e5e5c3; border-radius: 5px;}
+
+label {
+    font-size: 11px; font-weight: bold; color: black;
+    text-shadow: -2px 2px 3px #888;
+}
+
+label.opt {font-weight: normal;}
+
+label.resumen {color: #08298A; text-decoration: underline; font-size: 13px;}
+
+label.resumenResult {color: black; font-size: 13px;}
+
+label.facturaTitulo {color: black; font-size: 14px;}
+
+label.facturaResultado {font-size: 14px; font-weight: bold; color: #666;}
+
+label.success {font-size: 14px; color: black;}
+
+label.warning { font-size: 11px; color: #1C1C1C; }
+
+dl {clear: both;}
+
+dt {float: left; text-align: right; width: 100px; line-height: 25px; margin: 0 10px 10px 0;}
+
+dd {float: left; width: 475px; line-height: 25px; margin: 0 0 10px 0;}
+
+#footer {font-size: 11px;}
+
+textarea.correo {width: 550px; height: 200px;}
+
+body.cuerpo {
+    margin: 0px;
+    padding: 20px 40px;		
+    font-size: 62.5%;
+    font-family: 'trebuchet MS', 'Lucida sans', Arial;
+    color: #000000;
+}
+
+h1 {
+    text-shadow: -2px 2px 3px #888; padding: 5px;
+    font-size: 15px;
+}
+
+h2 {
+    font-weight: normal;
+}
+
+input.boton {
+    font-family: Verdana;
+    font-size: 10px;
+    background-color: #3366CC;
+    color: #FFFFFF;
+    letter-spacing: 2pt;
+    position: relative;
+    margin-right: 5px;
+}
+
+input.number {
+        font-weight: bold; text-align: center;
+}
+
+input.date {
+        font-weight: bold; text-align: center;
+}
+
+input.txtautomatico {
+        font-weight: bold; text-align: center; background-color: #BDBDBD;
+}
+
+p.titulo {
+        color: #0B3861; font-family: Arial Narrow; font-size: 12pt;
+}
+
+p.labelImg {
+        font-family: Arial Narrow; font-size: 14px; color: #0B0B3B;
+}
+
+p.labelAviso {
+        font-family: Arial Narrow; font-size: 14px; color: #FF0000;
+}
+
+p.labelImgTit{
+        font-family: Arial Narrow; font-size: 15px; color: #B40404; text-decoration: underline;
+}	
+
+p.version {
+        font-family: Arial Narrow; font-size: 11pt;color: white; text-align: center;
+}
+
+p.centrar {
+        text-align: center;
+}
+
+p.label {
+        font-family: Arial Narrow; font-size: 10pt;
+}
+
+p.reporte {
+        font:15px/19px Calibri, Arial, Helvetica, sans-serif;
+}	
+
+p.label_login {
+        font-family: Arial Narrow; font-size: 10pt;color: white;
+}
+
+b.usuario {
+        font-family: Arial Narrow; font-size: 10pt;color: #000080;font-weight: bold;
+}
+
+p.tituloform {
+        font-family: Arial Narrow; font-size: 12pt;font-weight: bold;text-align: center;font-style: italic;
+        /* NO OLVIDARSE DE PONER EL <hr /> */  
+}
+
+p.subtituloform {
+        font-size: 13px; font-weight: bold; color: #424242;
+        /* NO OLVIDARSE DE PONER EL <hr /> */  
+}
+
+div.error {
+    background-color: #F78181;
+    font-size: 11px; 
+    font-weight: bold; 
+    color: #FAFAFA;            
+}        
