@@ -103,9 +103,7 @@ class agregar_usuario extends CI_Controller {
             $this->agregar_usuario_model->agregarUsuario($usuario, $nombre, $apellido, $clave, $permisos);
             echo 1;
         }
-        
     }
-    
 }
 
 ?>
