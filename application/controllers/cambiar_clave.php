@@ -16,7 +16,7 @@ class cambiar_clave extends CI_Controller {
     }
     
     function index() {
-        //$data['heading'] = $this->load->view("jss-css");
+        
         $this->load->view('cambiar_clave_view');  
     }
     
