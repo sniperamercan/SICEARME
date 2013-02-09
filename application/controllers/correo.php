@@ -16,8 +16,8 @@ class correo extends CI_Controller {
     }
     
     function index() {
-        
-        //cambio pa ve si funca
+
+        //probando con nicolas
         
         unset($_SESSION['id_correo']);
         
