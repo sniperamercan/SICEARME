@@ -2,7 +2,7 @@
 
 /**
  * clase para manejo de permisos
- * @author Sebastian Ituarte
+ * @author UDE_PG_CALIT
  * @copyright 2013
  */
 
@@ -197,90 +197,7 @@ Class Perms extends CI_Model {
             
             return $query->num_rows();
         }        
-        
-/*
-	public static function verificoAdministrador($usuario){
-		
-		$registroAdmin = db::query("SELECT * 
-	    							FROM administradores
-	    							WHERE usuario=".db::quote($usuario));
-		
-		if(db::num_rows($registroAdmin) == 1){
-			return true;
-		}else{
-			return false;
-		}
-		
-	}	
-	
-	/**
-	 * verificar acceso en modulos del sistema  
-	 *//*
-	public static function verificoPermisos($tipoPerm){
-		
-		$usuario = base64_decode($_SESSION['usuario']);
-				
-		$registro = db::query("SELECT permiso_tipo
-							   FROM permisos p 
-							   INNER JOIN usuarios u ON p.permiso_id = u.permiso_id
-							   WHERE u.usuario=".db::quote($usuario));
-		
-		$reg = db::fetch_assoc($registro);
-		
-		$permUsu = $reg['permiso_tipo'];
-				
-		if($tipoPerm == PERM_ADMIN){//permiso para administrador acepta todo
-			
-			if($permUsu == PERM_ADMIN){				
-				return true;				
-			}else{
-				return false;
-			}
-			
-		}else if($tipoPerm == PERM_MANT){
-			
-			if($permUsu == PERM_MANT || $permUsu == PERM_ADMIN){
-				return true;
-			}else{
-				return false;
-			}
-			
-		}elseif($tipoPerm == PERM_USU){//permiso para usuario ver lo de consulta tambien
-		
-			if($permUsu == PERM_USU || $permUsu == PERM_MANT || $permUsu == PERM_ADMIN){				
-				return true;			
-			}else{
-				return false;
-			}
-		
-		}else{
-			
-			if($permUsu == PERM_CONSUL || $permUsu == PERM_USU || $permUsu == PERM_MANT || $permUsu == PERM_ADMIN){//permiso para consultas solo ve lo de consultas
-				return true;
-			}else{
-				return false;
-			}
-			
-		}
-		
-		
-	}
 
-	public static function getPermUsuario(){
-		
-		$usuario = base64_decode($_SESSION['usuario']);
-		
-		$registro = db::query("SELECT permiso_tipo
-							   FROM permisos p 
-							   INNER JOIN usuarios u ON p.permiso_id = u.permiso_id
-							   WHERE u.usuario=".db::quote($usuario));
-		
-		$reg = db::fetch_assoc($registro);
-		
-		
-		return $reg['permiso_tipo'];
-		
-	}	*/
 }
 
 

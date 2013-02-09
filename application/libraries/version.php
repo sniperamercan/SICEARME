@@ -1,9 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 
 /**
- * @author Sebastian Ituarte
- * @copyright 2012
- * @Project PESMA (ERP)
+ * @author UDE_PG_CALIT
+ * @copyright 2013
+ * @Project SICEARME
  * version.php 
  */
 
