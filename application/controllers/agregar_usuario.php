@@ -21,7 +21,6 @@ class agregar_usuario extends CI_Controller {
     }
     
     function index() {
-        //$data['heading'] = $this->load->view("jss-css");
         
         $permisos = $this->agregar_usuario_model->cargoPermisos();
         $data['permisos_usuario'] = "";
