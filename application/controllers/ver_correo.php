@@ -23,8 +23,6 @@ class ver_correo extends CI_Controller {
 
         if(isset($_SESSION['id_correo'])) {
         
-            //$data['heading'] = $this->load->view('jss-css');
-
             $correo = array();
 
             $this->ver_correo_model->mensajeLeido($_SESSION['id_correo']);

@@ -19,7 +19,6 @@ Class PanelPrincipal extends CI_Controller{
         
         $data['info']    = $this->version->getInfo();
         $data['version'] = $this->version->getVersion();
-        //$data['heading'] = $this->load->view('jss-css');
         
         if( empty($_SESSION['irAFrame']) ) {
             $data['irAFrame'] = "irAFrame('".base_url('resumen')."','Inicio >> Resumen');";

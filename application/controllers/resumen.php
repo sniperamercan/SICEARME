@@ -16,8 +16,8 @@ class resumen extends CI_Controller {
     }
     
     function index() {
+        
         $data['descripcion_version'] = $this->version->getDescripcion();
-        //$data['heading']             = $this->load->view('jss-css');
         $data['version']             = $this->version->getVer();
         
         $this->load->view('resumen_view', $data);

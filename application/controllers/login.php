@@ -20,7 +20,6 @@ class login extends CI_Controller {
         
         $data['version'] = $this->version->getVersion();
         $data['info']    = $this->version->getInfo();
-        //$data['heading'] = $this->load->view('jss-css');
         $this->load->view('login_view', $data);        
     }
     

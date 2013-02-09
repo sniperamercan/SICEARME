@@ -21,7 +21,6 @@ class desarrollo_incremento_version_sistema extends CI_Controller {
     }
     
     function index() {
-        //$data['heading'] = $this->load->view('jss-css');
         
         $data['version'] = $this->version->getVer();
         $data['version_nueva'] = $data['version'] + 0.001;

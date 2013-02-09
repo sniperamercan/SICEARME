@@ -21,6 +21,7 @@ class consulta_logs_ingresos extends CI_Controller {
     }
     
     function index() {
+        
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
         $this->consulta();

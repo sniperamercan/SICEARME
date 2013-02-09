@@ -17,8 +17,6 @@ class redactar_correo extends CI_Controller {
     
     function index() {
         
-        //$data['heading'] = $this->load->view('jss-css');
-        
         if(!isset($_SESSION['id_correo'])) {
             
             $data['asunto'] = "";

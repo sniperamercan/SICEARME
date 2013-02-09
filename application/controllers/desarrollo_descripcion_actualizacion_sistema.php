@@ -22,7 +22,6 @@ class desarrollo_descripcion_actualizacion_sistema extends CI_Controller {
     
     function index() {
         
-        //$data['heading'] = $this->load->view("jss-css");
         $data['version'] = $this->desarrollo_descripcion_actualizacion_sistema_model->getVersion();
         $this->load->view('desarrollo_descripcion_actualizacion_sistema_view', $data);        
     }
