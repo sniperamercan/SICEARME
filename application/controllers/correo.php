@@ -19,7 +19,6 @@ class correo extends CI_Controller {
         
         unset($_SESSION['id_correo']);
         
-        //$data['heading'] = $this->load->view('jss-css');
         $data['correo'] = '';
         
         if($this->correo_model->verificoCorreos() > 0){
