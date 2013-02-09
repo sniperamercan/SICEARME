@@ -22,8 +22,6 @@ class agregar_usuario extends CI_Controller {
     
     function index() {
         
-        //a ver que pasa
-        
         $permisos = $this->agregar_usuario_model->cargoPermisos();
         $data['permisos_usuario'] = "";
         
