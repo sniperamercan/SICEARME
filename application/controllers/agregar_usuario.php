@@ -10,7 +10,6 @@ class agregar_usuario extends CI_Controller {
         $this->load->library('perms'); 
         $this->load->library('form_validation'); 
         
-        //verifico si el usuario esta registrado al sistema
         if(!$this->perms->VerificoUsuario()) {
             die($this->mensajes->sinPermisos());
         }         
