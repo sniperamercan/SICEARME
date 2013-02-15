@@ -22,6 +22,8 @@ class agregar_usuario extends CI_Controller {
     
     function index() {
         
+        //la concha de la lora con esta mierda
+        
         $permisos = $this->agregar_usuario_model->cargoPermisos();
         $data['permisos_usuario'] = "";
         
