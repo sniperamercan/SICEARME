@@ -61,9 +61,7 @@ class cambiar_clave extends CI_Controller {
             $_SESSION['usuario2'] = base64_encode(sha1(md5($clave_nueva)));
             echo 1;
         }
-        
     }
-    
 }
 
 ?>

@@ -43,6 +43,7 @@ class agregar_usuario extends CI_Controller {
         $apellido = $_POST['apellido'];
         $clave    = $_POST['clave'];
         
+        //json decode para el arreglo de permisos de javascript
         $permisos = json_decode($_POST['persmisos']);
         
         $mensjError = array();
