@@ -422,7 +422,7 @@
                         <li><a href="#"> Administracion </a>
                             <ul>
                                 <li><a href="#" onclick="irAFrame('<?php echo base_url('agregar_usuario'); ?>','Adminitracion >> Agregar usuarios');"> Agregar usuario </a></li>
-                                <li><a href="#" onclick="irAFrame('<?php echo base_url('gestion_usuarios'); ?>','Administracion >> Gestion de usuario');"> Gestion de usuario </a></li>
+                                <li><a href="#" onclick="irAFrame('<?php echo base_url('gestionar_usuarios'); ?>','Administracion >> Gestion de usuario');"> Gestion de usuario </a></li>
                                 <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_logs_ingresos'); ?>','Administracion >> Ver logs ingresos');"> Ver logs ingresos </a></li>
                                 <li><a href="#"> Desarrollo </a>
                                     <ul>
