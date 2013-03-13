@@ -423,7 +423,7 @@
                         <li><a href="#"> Administracion </a>
                             <ul>
                                 <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_usuarios'); ?>','Adminitracion >> Alta usuarios');"> Alta usuario </a></li>
-                                <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_usuarios'); ?>','Administracion >> Modificar usuarios');"> Modificar usuarios </a></li>
+                                <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_usuarios'); ?>','Administracion >> Modificar usuarios');"> Modificar usuarios </a></li>
                                 <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_usuarios'); ?>','Administracion >> Listado usuarios');"> Listado usuarios </a></li>
                                 <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_logs_ingresos'); ?>','Administracion >> Ver logs ingresos');"> Ver logs ingresos </a></li>
                                 <li><a href="#"> Desarrollo </a>
