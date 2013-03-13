@@ -1,11 +1,11 @@
 <?php
 
-class mb_usuarios extends CI_Controller {
+class mb_catalogos extends CI_Controller {
 
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('mb_usuarios_model');
+        $this->load->model('mb_catalogos_model');
         $this->load->library('mensajes');
         $this->load->library('perms'); 
         $this->load->library('form_validation'); 
@@ -22,7 +22,7 @@ class mb_usuarios extends CI_Controller {
     
     function index() {
         
-        $usuarios = $this->mb_usuarios_model->listadoUsuarios();
+        $usuarios = $this->mb_catalogos_model->listadoUsuarios();
         
         $concat = "";
         
@@ -87,7 +87,7 @@ class mb_usuarios extends CI_Controller {
         
         $data['listado'] = $concat;
         
-        $this->load->view("mb_usuarios_view", $data);
+        $this->load->view("mb_catalogos_view", $data);
     }
 }
 
