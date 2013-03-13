@@ -177,7 +177,7 @@
                             <div class="dock-container">
                                   <?php if($this->perms->verificoPerfil1()) { ?><a class="dock-item" onclick='$.colorbox({href:"<?php echo base_url('agregar_usuario'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:400, title:"AGREGAR USUARIO"});'><img src='<?php echo base_url('images/user_add.png'); ?>' alt="Agregar usuario" /><span>Agregar usuario</span></a><?php } ?>
                                   <a class="dock-item" onclick='window.open ("js/calculadora/calculadora.html", "mywindow","toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=206,height=200");'><img src='<?php echo base_url('images/calc.png'); ?>' alt="Calculadora" /><span>Calculadora</span></a> 
-                                  <a class="dock-item" onclick='$.colorbox({href:"<?php echo base_url('cambiar_clave'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:300, title:"CAMBIAR CLAVE"});'><img src='<?php echo base_url('images/key.png'); ?>' alt="Cambiar clave" /><span>Cambiar clave</span></a>                               			 
+                                  <a class="dock-item" onclick='$.colorbox({href:"<?php echo base_url('modificar_clave'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:300, title:"MODIFICAR CLAVE"});'><img src='<?php echo base_url('images/key.png'); ?>' alt="Modificar clave" /><span>Modificar clave</span></a>                               			 
                             </div>
                         </div> 				
 
@@ -201,11 +201,11 @@
                                 
                                 <?php if($this->perms->verificoPerfil2() || $this->perms->verificoPerfil3()) { ?>
                                 
-                                    <li><a href="#"> Ingresos </a>
+                                    <li><a href="#"> Altas </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('compras'); ?>','O.C.I >> Ingresos >> Compras');"> Compras </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('catalogos'); ?>','O.C.I >> Ingresos >> Catalogos');"> Catalogos </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('fichas'); ?>','O.C.I >> Ingresos >> Fichas');"> Fichas </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_compras'); ?>','O.C.I >> Alta >> Compras');"> Compras </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_catalogos'); ?>','O.C.I >> Alta >> Catalogos');"> Catalogos </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_fichas'); ?>','O.C.I >> Alta >> Fichas');"> Fichas </a></li>
                                         </ul>
                                     </li> 
                                 
@@ -213,11 +213,11 @@
                                 
                                 <?php if($this->perms->verificoPerfil3()) { ?>    
                                     
-                                    <li><a href="#"> Mantenimientos </a>
+                                    <li><a href="#"> Modificar </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mantenimiento_compras'); ?>','O.C.I >> Mantenimientos >> Compras');"> Compras </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mantenimiento_catalogos'); ?>','O.C.I >> Mantenimientos >> Catalogos');"> Catalogos </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mantenimiento_fichas'); ?>','O.C.I >> Mantenimientos >> Fichas');"> Fichas </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_compras'); ?>','O.C.I >> Modificar >> Compras');"> Compras </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_catalogos'); ?>','O.C.I >> Modificar >> Catalogos');"> Catalogos </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_fichas'); ?>','O.C.I >> Modificar >> Fichas');"> Fichas </a></li>
                                         </ul>
                                     </li>
                                 
@@ -225,11 +225,11 @@
                                 
                                 <?php if($this->perms->verificoPerfil2() || $this->perms->verificoPerfil3()) { ?>
                                 
-                                    <li><a href="#"> Consultas </a>
+                                    <li><a href="#"> Listado </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_compras'); ?>','O.C.I >> Consultas >> Compras');"> Compras </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_catalogos'); ?>','O.C.I >> Consultas >> Catalogos');"> Catalogos </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_fichas'); ?>','O.C.I >> Consultas >> Fichas');"> Fichas </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_compras'); ?>','O.C.I >> Listado >> Compras');"> Compras </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_catalogos'); ?>','O.C.I >> Listado >> Catalogos');"> Catalogos </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_fichas'); ?>','O.C.I >> Listado >> Fichas');"> Fichas </a></li>
                                         </ul>
                                     </li>
                                 
@@ -251,10 +251,10 @@
                                 
                                 <?php if($this->perms->verificoPerfil4() || $this->perms->verificoPerfil5()) { ?>
                                 
-                                    <li><a href="#"> Ingresos </a>
+                                    <li><a href="#"> Alta </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('actas_alta'); ?>','Abastecimiento >> Ingresos >> Actas alta');"> Actas alta </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('actas_baja'); ?>','Abastecimiento >> Ingresos >> Actas baja');"> Actas Baja </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_actas_alta'); ?>','Abastecimiento >> Alta >> Actas alta');"> Actas alta </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_actas_baja'); ?>','Abastecimiento >> Alta >> Actas baja');"> Actas Baja </a></li>
                                         </ul>
                                     </li> 
                                 
@@ -262,10 +262,10 @@
                                 
                                 <?php if($this->perms->verificoPerfil5()) { ?>    
                                     
-                                    <li><a href="#"> Mantenimientos </a>
+                                    <li><a href="#"> Modificar </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mantenimiento_actas_alta'); ?>','Abastecimiento >> Mantenimientos >> Actas altas');"> Actas altas </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mantenimiento_actas_baja'); ?>','Abastecimiento >> Mantenimientos >> Actas bajas');"> Actas bajas </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_actas_alta'); ?>','Abastecimiento >> Modificar >> Actas altas');"> Actas altas </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_actas_baja'); ?>','Abastecimiento >> Modificar >> Actas bajas');"> Actas bajas </a></li>
                                         </ul>
                                     </li>
                                 
@@ -273,11 +273,11 @@
                                 
                                 <?php if($this->perms->verificoPerfil4() || $this->perms->verificoPerfil5()) { ?>
                                 
-                                    <li><a href="#"> Consultas </a>
+                                    <li><a href="#"> Listado </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_actas_alta'); ?>','Abastecimiento >> Consultas >> Actas altas');"> Actas altas </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_actas_baja'); ?>','Abastecimiento >> Consultas >> Actas bajas');"> Actas bajas </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_historial_arma'); ?>','Abastecimiento >> Consultas >> Historial de arma');"> Historial de arma </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_actas_alta'); ?>','Abastecimiento >> Listado >> Actas altas');"> Actas altas </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_actas_baja'); ?>','Abastecimiento >> Listado >> Actas bajas');"> Actas bajas </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_historial_arma'); ?>','Abastecimiento >> Listado >> Historial de arma');"> Historial de arma </a></li>
                                         </ul>
                                     </li>
                                 
@@ -297,21 +297,21 @@
                         <li><a href="#"> Reserva </a>
                             <ul>
                                 
-                                <li><a href="#"> Ingresos </a>
+                                <li><a href="#"> Alta </a>
                                     <ul>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('inventario_reserva'); ?>','Reserva >> Ingresos >> Inventario reserva');"> Inventario reserva </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_inventarios_reserva'); ?>','Reserva >> Alta >> Inventarios reserva');"> Inventarios reserva </a></li>
                                     </ul>
                                 </li> 
 
-                                <li><a href="#"> Mantenimientos </a>
+                                <li><a href="#"> Modificar </a>
                                     <ul>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('mantenimiento_inventario_reserva'); ?>','Reserva >> Mantenimientos >> Inventario reserva');"> Inventario reserva </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_inventarios_reserva'); ?>','Reserva >> Modificar >> Inventarios reserva');"> Inventarios reserva </a></li>
                                     </ul>
                                 </li>
 
-                                <li><a href="#"> Consultas </a>
+                                <li><a href="#"> Listado </a>
                                     <ul>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_inventario_reserva'); ?>','Reserva >> Consultas >> Inventario reserva');"> Inventario reserva </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_inventarios_reserva'); ?>','Reserva >> Listado >> Inventarios reserva');"> Inventarios reserva </a></li>
                                     </ul>
                                 </li>
                                 
@@ -331,9 +331,9 @@
                                 
                                 <?php if($this->perms->verificoPerfil6() || $this->perms->verificoPerfil7()) { ?>
                                 
-                                    <li><a href="#"> Ingresos </a>
+                                    <li><a href="#"> Alta </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('orden_trabajo'); ?>','Taller armamento >> Ingresos >> Orden de trabajo');"> Orden de trabajo </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_ordenes_de_trabajo'); ?>','Taller armamento >> Alta >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
                                         </ul>
                                     </li> 
                                 
@@ -341,10 +341,10 @@
                                 
                                 <?php if($this->perms->verificoPerfil7()) { ?>    
                                     
-                                    <li><a href="#"> Mantenimientos </a>
+                                    <li><a href="#"> Modificar </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mantenimiento_orden_trabajo'); ?>','Taller armamento >> Mantenimientos >> Orden de trabajo');"> Orden de trabajo </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mantenimiento_cambios_ficha'); ?>','Taller armamento >> Mantenimientos >> Cambios ficha de armamento');"> Cambios ficha de armamento </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_ordenes_de_trabajo'); ?>','Taller armamento >> Modificar >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_cambios_ficha'); ?>','Taller armamento >> Modificar >> Cambios ficha de armamento');"> Cambios ficha de armamento </a></li>
                                         </ul>
                                     </li>
                                 
@@ -352,11 +352,11 @@
                                 
                                 <?php if($this->perms->verificoPerfil6() || $this->perms->verificoPerfil7()) { ?>
                                 
-                                    <li><a href="#"> Consultas </a>
+                                    <li><a href="#"> Listado </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_orden_trabajo'); ?>','Taller armamento >> Consultas >> Orden de trabajo');"> Orden de trabajo </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_estado_armamento'); ?>','Taller armamento >> Consultas >> Estado del armamento');"> Estado del armamento </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_historial_reparacion'); ?>','Taller armamento >> Consultas >> Historial de reparacion');"> Historial de reparacion </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_ordenes_de_trabajo'); ?>','Taller armamento >> Listado >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_estado_armamento'); ?>','Taller armamento >> Listado >> Estado del armamento');"> Estado del armamento </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_historial_reparacion'); ?>','Taller armamento >> Listado >> Historial de reparacion');"> Historial de reparacion </a></li>
                                         </ul>
                                     </li>
                                 
@@ -376,21 +376,21 @@
                         <li><a href="#"> Almacen </a>
                             <ul>
                                 
-                                <li><a href="#"> Ingresos </a>
+                                <li><a href="#"> Alta </a>
                                     <ul>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_repuestos'); ?>','Almacen >> Ingersos >> Alta de respuestos');"> Alta de respuestos </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_repuestos'); ?>','Almacen >> Alta >> Respuestos');"> Respuestos </a></li>
                                     </ul>
                                 </li> 
 
-                                <li><a href="#"> Mantenimientos </a>
+                                <li><a href="#"> Modificar </a>
                                     <ul>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('baja_repuestos'); ?>','Almacen >> Mantenimientos >> Baja de respuestos');"> Baja de respuestos </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_repuestos'); ?>','Almacen >> Modificar >> Respuestos');"> Respuestos </a></li>
                                     </ul>
                                 </li>
 
-                                <li><a href="#"> Consultas </a>
+                                <li><a href="#"> Listado </a>
                                     <ul>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_repuestos'); ?>','Almacen >> Consultas >> Respuestos');"> Respuestos </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_repuestos'); ?>','Almacen >> Listado >> Respuestos');"> Respuestos </a></li>
                                     </ul>
                                 </li>
                                 
@@ -421,9 +421,9 @@
 
                         <li><a href="#"> Administracion </a>
                             <ul>
-                                <li><a href="#" onclick="irAFrame('<?php echo base_url('agregar_usuario'); ?>','Adminitracion >> Agregar usuarios');"> Agregar usuario </a></li>
-                                <li><a href="#" onclick="irAFrame('<?php echo base_url('gestionar_usuarios'); ?>','Administracion >> Gestion de usuario');"> Gestion de usuario </a></li>
-                                <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_logs_ingresos'); ?>','Administracion >> Ver logs ingresos');"> Ver logs ingresos </a></li>
+                                <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_usuarios'); ?>','Adminitracion >> Alta usuarios');"> Alta usuario </a></li>
+                                <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_usuarios'); ?>','Administracion >> Modificar usuarios');"> Modificar usuarios </a></li>
+                                <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_logs_ingresos'); ?>','Administracion >> Ver logs ingresos');"> Ver logs ingresos </a></li>
                                 <li><a href="#"> Desarrollo </a>
                                     <ul>
                                         <li><a href="#" onclick="irAFrame('<?php echo base_url('desarrollo_descripcion_actualizacion_sistema'); ?>','Administracion >> Desarrollo >> Descripcion actualizacion');"> Descripcion actualizacion </a></li>

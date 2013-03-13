@@ -1,25 +1,36 @@
 <?php
 
-class compras_model extends CI_Model {
+class alta_usuarios_model extends CI_Model {
     
     function __construct() {
         parent::__construct();
         $this->load->database();
     }
     
-    function cargoPaises() {
+    function existeUsuario($usuario) {
         
-        $query = $this->db->query("SELECT PAI_NOMBRE
-                                   FROM pai_pais
-                                   ORDER BY PAI_NOMBRE");
+        $query = $this->db->query("SELECT *
+                                   FROM usuarios
+                                   WHERE usuario = ".$this->db->escape($usuario));
         
-        $paises = array();
+        return $query->num_rows();
+    }
+    
+    function cargoPermisos() {
+        
+        $query = $this->db->query("SELECT * 
+                                   FROM permisos
+                                   ORDER BY perfil");
+        
+        $permisos = array();
         
         foreach($query->result() as $row) {
-            $paises[] = $row->PAI_NOMBRE;
+            $permisos[] = $row->perfil;
+            $permisos[] = $row->descripcion;
         }
         
-        return $paises;
+        return $permisos;
+        
     }
     
     function agregarUsuario($usuario, $nombre, $apellido, $clave, $permisos) {

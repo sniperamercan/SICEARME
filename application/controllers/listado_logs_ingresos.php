@@ -1,11 +1,11 @@
 <?php
 
-class consulta_logs_ingresos extends CI_Controller {
+class listado_logs_ingresos extends CI_Controller {
     
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('consulta_logs_ingresos_model');
+        $this->load->model('listado_logs_ingresos_model');
         $this->load->library('perms');
         $this->load->library('pagination');   
         $this->load->library('mensajes');
@@ -52,7 +52,7 @@ class consulta_logs_ingresos extends CI_Controller {
         
         $concat = "";
         
-        $result = $this->consulta_logs_ingresos_model->consulta_db($param, $cantReg, $condicion, $order);
+        $result = $this->listado_logs_ingresos_model->consulta_db($param, $cantReg, $condicion, $order);
         
         $concat .= '<div class="datagrid">';
         
@@ -128,7 +128,7 @@ class consulta_logs_ingresos extends CI_Controller {
         
         $data['consulta'] = $concat;
          
-        $this->load->view("consulta_logs_ingresos_view", $data);
+        $this->load->view("listado_logs_ingresos_view", $data);
     }    
     
     function seteoImpresion() {       
@@ -161,11 +161,11 @@ class consulta_logs_ingresos extends CI_Controller {
             echo "La pagina inicial y final deben de estar completadas ";
         }else if( $a_pagina < $de_pagina ){
             echo "La pagina inicila no puede ser mayor que la pagina final verifique";
-        }else if( $this->consulta_logs_ingresos_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
+        }else if( $this->listado_logs_ingresos_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
             echo "No existe tal cantidad de paginas para esa consulta verifique";
         }else{
             echo "1";
-            if( $this->consulta_logs_ingresos_model->cantidadRegistros($condicion) <= 30 ){
+            if( $this->listado_logs_ingresos_model->cantidadRegistros($condicion) <= 30 ){
                 $ini   = 0;
                 $param = 30;
                 $this->consultaImpresion($condicion, $ini, $param, $order);
@@ -192,7 +192,7 @@ class consulta_logs_ingresos extends CI_Controller {
         
         $concat = "";
         
-        $result = $this->consulta_logs_ingresos_model->consulta_db($param, $cantReg, $condicion, $order);
+        $result = $this->listado_logs_ingresos_model->consulta_db($param, $cantReg, $condicion, $order);
         
         $concat .= '<div class="datagrid">';
         

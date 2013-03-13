@@ -1,11 +1,11 @@
 <?php
 
-class compras extends CI_Controller {
+class alta_compras extends CI_Controller {
     
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('compras_model');
+        $this->load->model('alta_compras_model');
         $this->load->library('mensajes');
         $this->load->library('perms'); 
         $this->load->library('form_validation'); 
@@ -22,7 +22,7 @@ class compras extends CI_Controller {
     
     function index() {
         
-        $array_paises = $this->compras_model->cargoPaises();
+        $array_paises = $this->alta_compras_model->cargoPaises();
         
         $data['paises'] = "<option> </option>";
         
@@ -30,7 +30,7 @@ class compras extends CI_Controller {
             $data['paises'] .= "<option val='".$val."'>".$val."</option>";
         }
         
-        $this->load->view('compras_view', $data);  
+        $this->load->view('alta_compras_view', $data);  
     }
     
     function validarDatos() {
@@ -60,7 +60,7 @@ class compras extends CI_Controller {
             $mensjError[] = 4;
         }        
         
-        if($this->agregar_usuario_model->existeUsuario($usuario)) {
+        if($this->alta_usuarios_model->existeUsuario($usuario)) {
             $mensjError[] = 5;
         }
         
@@ -97,7 +97,7 @@ class compras extends CI_Controller {
                     break;                
             }
         }else {
-            $this->agregar_usuario_model->agregarUsuario($usuario, $nombre, $apellido, $clave, $permisos);
+            $this->alta_usuarios_model->agregarUsuario($usuario, $nombre, $apellido, $clave, $permisos);
             echo 1;
         }
         

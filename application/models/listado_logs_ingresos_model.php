@@ -1,6 +1,6 @@
 <?php
 
-class consulta_logs_ingresos_model extends CI_Model {
+class listado_logs_ingresos_model extends CI_Model {
     
     function __construct() {
         parent::__construct();
