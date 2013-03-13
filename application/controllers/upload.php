@@ -21,19 +21,19 @@ class upload extends CI_Controller {
         $_SESSION['id_upload'][1] = 0;
         
         //cargo empresas
-        $empresas = array();
-        $empresas = $this->upload_model->cargoEmpresas();
+        $catalogos = array();
+        $catalogos = $this->upload_model->cargoCatalogos();
         
         $concat = "<option selected='selected'> </option>";
         
-        foreach($empresas as $val) {
+        foreach($catalogos as $val) {
             $concat .= "<option value='".$val."'>".$val."</option>";
         }
         //fin cargo empresas
             
         $data = array(
             'error'   => ' ',
-            'empresas'=> $concat
+            'catalogos'=> $concat
         );
 
         $this->load->view('upload_view', $data);

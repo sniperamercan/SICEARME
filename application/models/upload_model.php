@@ -7,7 +7,7 @@ class upload_model extends CI_Model {
         $this->load->database();
     }
     
-    function cargoEmpresas() {
+    function cargoCatalogos() {
         
         $query = $this->db->query("SELECT nro_interno
                                    FROM catalogos
@@ -16,7 +16,7 @@ class upload_model extends CI_Model {
         $result = array();
         
         foreach($query->result() as $row) {
-            $result[] = $row->rut;
+            $result[] = $row->nro_interno;
         }
         
         return $result;

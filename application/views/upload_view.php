@@ -95,7 +95,7 @@
             <fieldset>	
 
                 <dl>
-                <dt><label for="rut"> RUT </label></dt>
+                <dt><label for="rut"> Catalogos </label></dt>
                 <dd><select id="rut"> <?php echo $empresas; ?> </select> <img style="cursor: pointer;" onclick="buscarEmpresa();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>              
                 
