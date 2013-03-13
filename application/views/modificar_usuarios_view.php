@@ -100,7 +100,7 @@
 
                 <dl>
                 <dt><label for="usuario"> Usuario </label></dt>
-                <dd><input type="text" id="usuario" class="text" /></dd>
+                <dd><input type="text" id="usuario" class="txtautomatico" readonly="readonly" /></dd>
                 </dl>
 
                 <dl>

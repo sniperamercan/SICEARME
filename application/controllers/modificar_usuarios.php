@@ -5,7 +5,7 @@ class modificar_usuarios extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('alta_usuarios_model');
+        $this->load->model('modificar_usuarios_model');
         $this->load->library('mensajes');
         $this->load->library('perms'); 
         $this->load->library('form_validation'); 
@@ -22,7 +22,7 @@ class modificar_usuarios extends CI_Controller {
     
     function index() {
         
-        $permisos = $this->alta_usuarios_model->cargoPermisos();
+        $permisos = $this->modificar_usuarios_model->cargoPermisos();
         $data['permisos_usuario'] = "";
         
         for($i=0; $i<count($permisos); $i=$i+2) {
@@ -33,7 +33,7 @@ class modificar_usuarios extends CI_Controller {
                                          </dl>';
         }
         
-        $this->load->view('alta_usuarios_view', $data);  
+        $this->load->view('modificar_usuarios_view', $data);  
     }
     
     function validarDatos() {
@@ -63,7 +63,7 @@ class modificar_usuarios extends CI_Controller {
             $mensjError[] = 4;
         }        
         
-        if($this->alta_usuarios_model->existeUsuario($usuario)) {
+        if($this->modificar_usuarios_model->existeUsuario($usuario)) {
             $mensjError[] = 5;
         }
         
@@ -100,7 +100,7 @@ class modificar_usuarios extends CI_Controller {
                     break;                
             }
         }else {
-            $this->alta_usuarios_model->agregarUsuario($usuario, $nombre, $apellido, $clave, $permisos);
+            $this->modificar_usuarios_model->agregarUsuario($usuario, $nombre, $apellido, $clave, $permisos);
             echo 1;
         }
     }
