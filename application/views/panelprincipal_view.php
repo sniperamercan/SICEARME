@@ -265,8 +265,8 @@
                                     
                                     <li><a href="#"> Modificar </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_actas_alta'); ?>','Abastecimiento >> Modificar >> Actas altas');"> Actas altas </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_actas_baja'); ?>','Abastecimiento >> Modificar >> Actas bajas');"> Actas bajas </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_actas_alta'); ?>','Abastecimiento >> Modificar >> Actas altas');"> Actas altas </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_actas_baja'); ?>','Abastecimiento >> Modificar >> Actas bajas');"> Actas bajas </a></li>
                                         </ul>
                                     </li>
                                 
