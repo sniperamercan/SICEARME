@@ -75,11 +75,11 @@
                 $.ajax({
                     type: "post",  
                     dataType: "json",
-                    url: "<?php base_url(); ?>agregar_usuario/validarDatos",
+                    url: "<?php base_url(); ?>alta_usuarios/validarDatos",
                     data: "usuario="+usuario+"&nombre="+nombre+"&apellido="+apellido+"&clave="+clave+"&persmisos="+JSON.stringify(permisos),
                     success: function(data){
                         if(data == "1"){            
-                            jAlert("Usuario agregado al sistema con exito", "Correcto", function() { irAFrame('<?php echo base_url('agregar_usuario'); ?>','Adminitracion >> Agregar usuarios'); });
+                            jAlert("Alta de usuario correcta", "Correcto", function() { irAFrame('<?php echo base_url('alta_usuarios'); ?>','Adminitracion >> Alta usuarios'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
@@ -94,7 +94,7 @@
 
         <div>			
 
-            <h1> Agregar usuario </h1>    
+            <h1> Alta usuarios </h1>    
             
             <fieldset>	
 
@@ -127,7 +127,7 @@
             </fieldset>	
 
             <fieldset class="action">	
-                <button onclick="ingresarDatos();"> Agregar usuario </button>
+                <button onclick="ingresarDatos();"> Alta usuario </button>
             </fieldset>           
             
         </div>        

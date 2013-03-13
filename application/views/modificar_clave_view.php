@@ -20,7 +20,7 @@
                 
                 $.ajax({
                     type: "post",                    
-                    url: "<?php base_url(); ?>cambiar_clave/validarDatos",
+                    url: "<?php base_url(); ?>modificar_clave/validarDatos",
                     data: "clave_antigua="+clave_antigua+"&clave_nueva="+clave_nueva+"&repetir="+repetir,
                     success: function(data){
                         if(data == "1"){            
