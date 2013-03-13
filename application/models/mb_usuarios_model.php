@@ -1,6 +1,6 @@
 <?php
 
-class modificar_usuarios_model extends CI_Model {
+class mb_usuarios_model extends CI_Model {
     
     function __construct() {
         parent::__construct();

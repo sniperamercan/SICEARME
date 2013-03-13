@@ -1,11 +1,11 @@
 <?php
 
-class modificar_usuarios extends CI_Controller {
+class mb_usuarios extends CI_Controller {
 
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('modificar_usuarios_model');
+        $this->load->model('mb_usuarios_model');
         $this->load->library('mensajes');
         $this->load->library('perms'); 
         $this->load->library('form_validation'); 
@@ -22,7 +22,7 @@ class modificar_usuarios extends CI_Controller {
     
     function index() {
         
-        $usuarios = $this->modificar_usuarios_model->listadoUsuarios();
+        $usuarios = $this->mb_usuarios_model->listadoUsuarios();
         
         $concat = "";
         
@@ -87,7 +87,7 @@ class modificar_usuarios extends CI_Controller {
         
         $data['listado'] = $concat;
         
-        $this->load->view("modificar_usuarios_view", $data);
+        $this->load->view("mb_usuarios_view", $data);
     }
 }
 

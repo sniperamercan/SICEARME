@@ -39,7 +39,7 @@
 
         <div>			
 
-            <h1> Cambiar clave </h1>
+            <h1> Modificar clave </h1>
             
             <fieldset>	
 
