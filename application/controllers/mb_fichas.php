@@ -73,7 +73,7 @@ class mb_fichas extends CI_Controller {
                     <td> ".$fichas[$i+6]." </td>
                     <td style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
                     <td style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
-                    <td style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/edit.png' /> </td>
+                    <td style='text-align: center; cursor: pointer;' onclick='editarDatos();'> <img src='".base_url()."images/edit.png' /> </td>
                     <td style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/delete.gif' /> </td>
                 </tr>
             ";

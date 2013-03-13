@@ -77,7 +77,7 @@ class mb_catalogos extends CI_Controller {
                     <td> ".$catalogos[$i+8]." </td>
                     <td> ".$catalogos[$i+9]." </td>
                     <td> ".$catalogos[$i+10]." </td>
-                    <td style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/edit.png' /> </td>
+                    <td style='text-align: center; cursor: pointer;' onclick='editarDatos();'> <img src='".base_url()."images/edit.png' /> </td>
                     <td style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/delete.gif' /> </td>
                 </tr>
             ";

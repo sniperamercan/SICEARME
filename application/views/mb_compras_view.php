@@ -54,6 +54,10 @@
                   }
                 });               
             }
+            
+            function editarDatos() {
+                $.colorbox({href: "<?php echo base_url() ?>modificar_compras", title: "MODIFICAR COMPRAS", iframe: false, innerWidth: "60%", innerHeight: "550px", onClosed: function(){  } });
+            }              
         </script>
         
     </head>
