@@ -1,6 +1,6 @@
 <?php
 
-class alta_compras_model extends CI_Model {
+class alta_catalogos_model extends CI_Model {
     
     function __construct() {
         parent::__construct();

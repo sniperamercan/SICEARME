@@ -29,6 +29,8 @@
             $(document).ready(function() {
                 $("#nro_compra").focus();
                 $("#fecha").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
+                $("#fabricacion").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
+                $("#vencimiento").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
                 $("input:submit").button();
                 $("button").button(); 
                 $("input:button").button(); 
@@ -63,19 +65,44 @@
 
         <div>			
 
-            <h1> Alta compras </h1>    
+            <h1> Alta catalogos </h1>    
             
             <fieldset>	
-
-                <dl>
-                <dt><label for="nro_compra"> Numero compra </label></dt>
-                <dd><input type="text" id="nro_compra" class="text" /></dd>
-                </dl>
 
                 <dl>
                 <dt><label for="fecha"> Fecha </label></dt>
                 <dd><input type="text" id="fecha" class="text" /></dd>
                 </dl>                
+
+                <dl>
+                <dt><label for="cant_armas"> Cant armas </label></dt>
+                <dd><input type="text" id="cant_armas" class="number" /></dd>
+                </dl>                 
+                
+                <dl> 		
+                <dt><label for="tipo_arma"> Tipo arma </label></dt>	
+                <dd><select id="tipo_arma"> <?php echo $tipo_arma; ?> </select> <img style="cursor: pointer;" onclick="crearTipoArma();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
+                </dl>
+                
+                <dl> 		
+                <dt><label for="marca"> Marca </label></dt>	
+                <dd><select id="marca"> <?php echo $marca; ?> </select> <img style="cursor: pointer;" onclick="crearMarca();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
+                </dl>
+                
+                <dl> 		
+                <dt><label for="calibre"> Calibre </label></dt>	
+                <dd><select id="calibre"> <?php echo $calibre; ?> </select> <img style="cursor: pointer;" onclick="crearCalibre();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
+                </dl>
+                
+                <dl> 		
+                <dt><label for="modelo"> Modelo </label></dt>	
+                <dd><select id="modelo"> <?php echo $modelo; ?> </select> <img style="cursor: pointer;" onclick="crearModelo();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
+                </dl>
+                
+                <dl> 		
+                <dt><label for="sistema"> Sistema </label></dt>	
+                <dd><select id="sistema"> <?php echo $sistema; ?> </select> <img style="cursor: pointer;" onclick="crearSistema();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
+                </dl>
                 
                 <dl>
                 <dt><label for="empresa"> Empresa </label></dt>
@@ -88,63 +115,20 @@
                 </dl>                 
 
                 <dl>
-                <dt><label for="descripcion"> Descripcion </label></dt>
-                <dd><input type="text" id="descripcion" class="text" /></dd>
-                </dl>                 
+                <dt><label for="fabricacion"> Fabricacion </label></dt>
+                <dd><input type="text" id="fabricacion" class="text" /></dd>
+                </dl>
                 
                 <dl>
-                <dt><label for="modalidad"> Modalidad </label></dt>
-                <dd><input type="text" id="modalidad" class="text" /></dd>
-                </dl>                 
-                
-                <dl>
-                <dt><label for="cant_total_armas"> Cant total armas </label></dt>
-                <dd><input type="text" id="cant_total_armas" class="number" /></dd>
-                </dl>                 
-                
-                <dl>
-                <dt><label for="costo_total"> Costo total </label></dt>
-                <dd><input type="text" id="costo_total" class="number" /></dd>
-                </dl>                 
-                
+                <dt><label for="vencimiento"> Vencimiento </label></dt>
+                <dd><input type="text" id="vencimiento" class="text" /></dd>
+                </dl>  
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="ingresarDatos();"> Alta compra </button> <button onclick="agregaCatalogo();"> Agregar catalogo </button>
+                <button style="margin-right: 20px;" onclick="ingresarDatos();"> Alta catalogo </button>
             </fieldset>  
-            
-            <hr />
-            
-            <div>
-                
-                <h1> Catalogos </h1>       
-                
-                <fieldset>	
-
-                    <div id="imprimir">
-                                 
-                        <div class="datagrid" style="margin-top: 30px;">
-                            <table> 
-                                <thead>
-                                    <tr>
-                                        <th> Nro catalogo </th> <th> Tipo arma </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Sistema </th> 
-                                    </tr>
-                                </thead>
-                                <tbody id="catalogos"></tbody>
-                                <tfoot>
-                                    <tr> <td colspan="6"> <div id="paging"> <br /> </div> </td> </tr>
-                                </tfoot>                                
-                            </table> 
-                        </div>
-                        
-                        <br />
-                    
-                    </div>    
-                        
-                </fieldset>	
-                
-            </div>
             
         </div>        
         

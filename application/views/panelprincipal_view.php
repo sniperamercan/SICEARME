@@ -205,6 +205,7 @@
                                         <ul>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_compras'); ?>','O.C.I >> Alta >> Compras');"> Compras </a></li>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_catalogos'); ?>','O.C.I >> Alta >> Catalogos');"> Catalogos </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('upload'); ?>','O.C.I >> Cargo documentos / imagenes');"> Cargo documentos / imagenes </a></li>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_fichas'); ?>','O.C.I >> Alta >> Fichas');"> Fichas </a></li>
                                         </ul>
                                     </li> 

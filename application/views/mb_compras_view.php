@@ -22,13 +22,12 @@
             .datagrid table tfoot  li { display: inline; }
             .datagrid table tfoot li a { text-decoration: none; display: inline-block;  padding: 2px 8px; margin: 1px;color: #F5F5F5;border: 1px solid #8C8C8C;-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8C8C8C), color-stop(1, #7D7D7D) );background:-moz-linear-gradient( center top, #8C8C8C 5%, #7D7D7D 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8C8C8C', endColorstr='#7D7D7D');background-color:#8C8C8C; }
             .datagrid table tfoot ul.active, .datagrid table tfoot ul a:hover { text-decoration: none;border-color: #7D7D7D; color: #F5F5F5; background: none; background-color:#8C8C8C;}
-        </style>         
+        </style>        
+        
     
         <script type="text/javascript">
 
             $(document).ready(function() {
-                $("#nro_compra").focus();
-                $("#fecha").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
                 $("input:submit").button();
                 $("button").button(); 
                 $("input:button").button(); 
@@ -62,89 +61,8 @@
     <body class="cuerpo">
 
         <div>			
-
-            <h1> Alta compras </h1>    
             
-            <fieldset>	
-
-                <dl>
-                <dt><label for="nro_compra"> Numero compra </label></dt>
-                <dd><input type="text" id="nro_compra" class="text" /></dd>
-                </dl>
-
-                <dl>
-                <dt><label for="fecha"> Fecha </label></dt>
-                <dd><input type="text" id="fecha" class="text" /></dd>
-                </dl>                
-                
-                <dl>
-                <dt><label for="empresa"> Empresa </label></dt>
-                <dd><input type="text" id="empresa" class="text" /></dd>
-                </dl>                
-                
-                <dl>
-                <dt><label for="pais_empresa"> Pais empresa </label></dt>
-                <dd><select id="pais_empresa"> <?php echo $paises ?> </select></dd>
-                </dl>                 
-
-                <dl>
-                <dt><label for="descripcion"> Descripcion </label></dt>
-                <dd><input type="text" id="descripcion" class="text" /></dd>
-                </dl>                 
-                
-                <dl>
-                <dt><label for="modalidad"> Modalidad </label></dt>
-                <dd><input type="text" id="modalidad" class="text" /></dd>
-                </dl>                 
-                
-                <dl>
-                <dt><label for="cant_total_armas"> Cant total armas </label></dt>
-                <dd><input type="text" id="cant_total_armas" class="number" /></dd>
-                </dl>                 
-                
-                <dl>
-                <dt><label for="costo_total"> Costo total </label></dt>
-                <dd><input type="text" id="costo_total" class="number" /></dd>
-                </dl>                 
-                
-                
-            </fieldset>	
-
-            <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="ingresarDatos();"> Alta compra </button> <button onclick="agregaCatalogo();"> Agregar catalogo </button>
-            </fieldset>  
-            
-            <hr />
-            
-            <div>
-                
-                <h1> Catalogos </h1>       
-                
-                <fieldset>	
-
-                    <div id="imprimir">
-                                 
-                        <div class="datagrid" style="margin-top: 30px;">
-                            <table> 
-                                <thead>
-                                    <tr>
-                                        <th> Nro catalogo </th> <th> Tipo arma </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Sistema </th> 
-                                    </tr>
-                                </thead>
-                                <tbody id="catalogos"></tbody>
-                                <tfoot>
-                                    <tr> <td colspan="6"> <div id="paging"> <br /> </div> </td> </tr>
-                                </tfoot>                                
-                            </table> 
-                        </div>
-                        
-                        <br />
-                    
-                    </div>    
-                        
-                </fieldset>	
-                
-            </div>
+            <?php echo $listado; ?>
             
         </div>        
         

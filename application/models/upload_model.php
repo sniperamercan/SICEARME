@@ -9,9 +9,9 @@ class upload_model extends CI_Model {
     
     function cargoEmpresas() {
         
-        $query = $this->db->query("SELECT rut
-                                   FROM empresas
-                                   ORDER BY rut");
+        $query = $this->db->query("SELECT nro_interno
+                                   FROM catalogos
+                                   ORDER BY nro_interno");
         
         $result = array();
         

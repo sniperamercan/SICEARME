@@ -33,8 +33,7 @@ class upload extends CI_Controller {
             
         $data = array(
             'error'   => ' ',
-            'empresas'=> $concat,
-            'heading' => $this->load->view('jss-css'),
+            'empresas'=> $concat
         );
 
         $this->load->view('upload_view', $data);
