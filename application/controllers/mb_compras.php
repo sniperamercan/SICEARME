@@ -22,7 +22,7 @@ class mb_compras extends CI_Controller {
     
     function index() {
         
-        $usuarios = $this->mb_compras_model->listadoUsuarios();
+        $compras = $this->mb_compras_model->listadoCompras();
         
         $concat = "";
         
@@ -34,13 +34,17 @@ class mb_compras extends CI_Controller {
         
         $concat .= "
             <tr>      
-                <th style='text-align: center;'> Usuario      </th>
-                <th style='text-align: center;'> Nombre       </th>
-                <th style='text-align: center;'> Apellido     </th>
-                <th style='text-align: center;'> Permisos     </th>
-                <th style='text-align: center;'> Vaciar clave </th>
-                <th style='text-align: center;'> Editar       </th>
-                <th style='text-align: center;'> Eliminar     </th>
+                <th style='text-align: center;'> Nro interno     </th>
+                <th style='text-align: center;'> Nro compra     </th>
+                <th style='text-align: center;'> Fecha          </th>
+                <th style='text-align: center;'> Empresa        </th>
+                <th style='text-align: center;'> Pais           </th>
+                <th style='text-align: center;'> Modalidad      </th>
+                <th style='text-align: center;'> Cantidad armas </th>
+                <th style='text-align: center;'> Precio         </th>
+                <th style='text-align: center;'> Ver catalogos  </th>
+                <th style='text-align: center;'> Modificar      </th>
+                <th style='text-align: center;'> Anular         </th>
             </tr>   
         ";
         
@@ -50,7 +54,7 @@ class mb_compras extends CI_Controller {
         
         $j=0;
         
-        for($i=0;$i<count($usuarios); $i=$i+3) {
+        for($i=0;$i<count($compras); $i=$i+8) {
         
             if($j % 2 == 0){
                 $class = "";
@@ -60,11 +64,15 @@ class mb_compras extends CI_Controller {
             
             $concat .= "
                 <tr class='".$class."'> 
-                    <td> ".$usuarios[$i]."   </td>
-                    <td> ".$usuarios[$i+1]." </td>
-                    <td> ".$usuarios[$i+2]." </td>
+                    <td> ".$compras[$i]."   </td>
+                    <td> ".$compras[$i+1]." </td>
+                    <td> ".$compras[$i+2]." </td>
+                    <td> ".$compras[$i+3]." </td>
+                    <td> ".$compras[$i+4]." </td>
+                    <td> ".$compras[$i+5]." </td>
+                    <td> ".$compras[$i+6]." </td>
+                    <td> ".$compras[$i+7]." </td>
                     <td style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
-                    <td style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/vaciar.png' /> </td>
                     <td style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/edit.png' /> </td>
                     <td style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/delete.gif' /> </td>
                 </tr>
@@ -77,7 +85,7 @@ class mb_compras extends CI_Controller {
         
         $concat .= '
             <tfoot>
-                <tr> <td colspan="7"> <div id="paging"> <br /> </div> </td> </tr>
+                <tr> <td colspan="11"> <div id="paging"> <br /> </div> </td> </tr>
             </tfoot>
         ';
         

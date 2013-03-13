@@ -214,11 +214,11 @@
                                 
                                 <?php if($this->perms->verificoPerfil3()) { ?>    
                                     
-                                    <li><a href="#"> Modificar </a>
+                                    <li><a href="#"> Modificar/Anular </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_compras'); ?>','O.C.I >> Modificar >> Compras');"> Compras </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_catalogos'); ?>','O.C.I >> Modificar >> Catalogos');"> Catalogos </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_fichas'); ?>','O.C.I >> Modificar >> Fichas');"> Fichas </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_compras'); ?>','O.C.I >> Modificar/Anular >> Compras');"> Compras </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_catalogos'); ?>','O.C.I >> Modificar/Anular >> Catalogos');"> Catalogos </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_fichas'); ?>','O.C.I >> Modificar/Anular >> Fichas');"> Fichas </a></li>
                                         </ul>
                                     </li>
                                 

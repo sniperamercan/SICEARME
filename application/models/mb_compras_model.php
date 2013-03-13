@@ -7,21 +7,26 @@ class mb_compras_model extends CI_Model {
         $this->load->database();
     }   
     
-    function listadoUsuarios() {
+    function listadoCompras() {
         
-        $query = $this->db->query("SELECT usuario, nombre, apellido
-                                   FROM usuarios
-                                   ORDER BY usuario");
+        $query = $this->db->query("SELECT nro_interno, nro_compra, fecha, empresa_proveedora, pais_empresa, modalidad, cantidad_armas, precio
+                                   FROM compras
+                                   ORDER BY nro_interno");
         
-        $usuarios = array();
+        $compras = array();
         
         foreach($query->result() as $row) {
-            $usuarios[]  = $row->usuario;
-            $usuarios[]   = $row->nombre;
-            $usuarios[] = $row->apellido;
+            $compras[]  = $row->nro_interno;
+            $compras[]  = $row->nro_compra;
+            $compras[]  = $row->fecha;
+            $compras[]  = $row->empresa_proveedora;
+            $compras[]  = $row->pais_empresa;
+            $compras[]  = $row->modalidad;
+            $compras[]  = $row->cantidad_armas;
+            $compras[]  = $row->precio;
         }
         
-        return $usuarios;
+        return $compras;
     }
     
     

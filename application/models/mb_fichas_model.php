@@ -7,24 +7,26 @@ class mb_fichas_model extends CI_Model {
         $this->load->database();
     }   
     
-    function listadoUsuarios() {
+    function listadoFichas() {
         
-        $query = $this->db->query("SELECT usuario, nombre, apellido
-                                   FROM usuarios
-                                   ORDER BY usuario");
+        $query = $this->db->query("SELECT nro_serie, marca, modelo, calibre, nro_interno_compra, nro_interno_catalogo, ubicacion
+                                   FROM fichas
+                                   ORDER BY nro_serie");
         
-        $usuarios = array();
+        $fichas = array();
         
         foreach($query->result() as $row) {
-            $usuarios[]  = $row->usuario;
-            $usuarios[]   = $row->nombre;
-            $usuarios[] = $row->apellido;
+            $fichas[]  = $row->nro_serie;
+            $fichas[]  = $row->marca;
+            $fichas[]  = $row->modelo;
+            $fichas[]  = $row->calibre;
+            $fichas[]  = $row->nro_interno_compra;
+            $fichas[]  = $row->nro_interno_catalogo;
+            $fichas[]  = $row->ubicacion;
         }
         
-        return $usuarios;
+        return $fichas;
     }
-    
-    
 }
 
 ?>

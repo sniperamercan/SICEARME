@@ -7,24 +7,30 @@ class mb_catalogos_model extends CI_Model {
         $this->load->database();
     }   
     
-    function listadoUsuarios() {
+    function listadoCatalogos() {
         
-        $query = $this->db->query("SELECT usuario, nombre, apellido
-                                   FROM usuarios
-                                   ORDER BY usuario");
+        $query = $this->db->query("SELECT nro_interno, fecha_creacion, cantidad_armas, tipo_arma, marca, modelo, calibre, sistema, año_fabricacion, pais_origen, garantia
+                                   FROM catalogos
+                                   ORDER BY nro_interno");
         
-        $usuarios = array();
+        $catalogos = array();
         
         foreach($query->result() as $row) {
-            $usuarios[]  = $row->usuario;
-            $usuarios[]   = $row->nombre;
-            $usuarios[] = $row->apellido;
+            $catalogos[]  = $row->nro_interno;
+            $catalogos[]  = $row->fecha_creacion;
+            $catalogos[]  = $row->cantidad_armas;
+            $catalogos[]  = $row->tipo_arma;
+            $catalogos[]  = $row->marca;
+            $catalogos[]  = $row->modelo;
+            $catalogos[]  = $row->calibre;
+            $catalogos[]  = $row->sistema;
+            $catalogos[]  = $row->año_fabricacion;
+            $catalogos[]  = $row->pais_origen;
+            $catalogos[]  = $row->garantia;
         }
         
-        return $usuarios;
+        return $catalogos;
     }
-    
-    
 }
 
 ?>
