@@ -22,7 +22,7 @@ class modificar_usuarios extends CI_Controller {
     
     function index() {
         
-        $usuarios = $this->alta_usuarios_model->listadoUsuarios();
+        $usuarios = $this->modificar_usuarios_model->listadoUsuarios();
         
         $concat = "";
         
