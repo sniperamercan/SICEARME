@@ -94,7 +94,7 @@
 
         <div>			
 
-            <h1> Alta usuarios </h1>    
+            <h1> Modificar usuario </h1>    
             
             <fieldset>	
 
