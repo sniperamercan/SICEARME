@@ -65,23 +65,62 @@
 
         <div>			
 
-            <h1> Alta actas de baja </h1>    
+            <h1> Alta actas de alta </h1>    
             
             <fieldset>	
 
                 <dl>
-                <dt><label for="nro_serie"> Nro serie </label></dt>
-                <dd><input type="text" id="nro_serie" class="text" /></dd>
+                <dt><label for="fecha"> Fecha </label></dt>
+                <dd><input type="text" id="fecha" class="text" /></dd>
                 </dl>                
                 
                 <dl> 		
+                <dt><label for="unidad_entrega"> Unidad entrega </label></dt>	
+                <dd><input type="text" id="unidad_recibe" class="txtautomatico" readonly="readonly" value="S.M.A" /></dd> 					
+                </dl>
+                
+                <dl> 		
+                <dt><label for="unidad_recibe"> Unidad recibe </label></dt>	
+                <dd><select id="unidad_recibe"> <?php echo $unidades; ?> </select></dd> 					
+                </dl>
+                
+                <dl> 		
+                <dt><label for="representante_sma"> Repr SMA </label></dt>	
+                <dd><input type="text" id="representante_sma" class="text" /></dd> 					
+                </dl>
+                
+                <dl> 		
+                <dt><label for="representante_unidad"> Repr unidad </label></dt>	
+                <dd><input type="text" id="representante_unidad" class="text" /></dd> 					
+                </dl>
+                
+                <dl> 		
+                <dt><label for="supervision"> Supervision </label></dt>	
+                <dd><input type="text" id="supervision" class="text" /></dd> 					
+                </dl>                
+ 
+                <dl> 		
+                <dt><label for="observaciones"> Observaciones </label></dt>	
+                <dd><textarea id="observaciones"> </textarea></dd> 					
+                </dl>
+                
+                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                
+                <p class="subtituloform"> Armamento a entregar </p>
+                
+                <dl> 		
+                <dt><label for="tipo_arma"> Nro serie </label></dt>	
+                <dd><select id="tipo_arma"> <?php echo $tipo_arma; ?> </select> <img style="cursor: pointer;" onclick="crearTipoArma();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                </dl>
+                
+                <dl> 		
                 <dt><label for="marca"> Marca </label></dt>	
-                <dd><select id="marca"> <?php echo $marca; ?> </select></dd> 					
+                <dd><select id="marca"> <?php echo $marca; ?> </select> </dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre"> Calibre </label></dt>	
-                <dd><select id="calibre"> <?php echo $calibre; ?> </select></dd> 					
+                <dd><select id="calibre"> <?php echo $calibre; ?> </select> </dd> 					
                 </dl>
                 
                 <dl> 		
@@ -89,100 +128,106 @@
                 <dd><select id="modelo"> <?php echo $modelo; ?> </select></dd> 					
                 </dl>
                 
-                <dl> 		
-                <dt><label for="nro_compra"> Nro compra </label></dt>	
-                <dd><select id="nro_compra"> <?php echo $nro_compra; ?> </select> <img style="cursor: pointer;" onclick="listarCompras();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
-                </dl>                
+                <button style="margin-right: 20px;" onclick="agregarCatalogo();"> Agregar armamento </button>     
+                
+                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                
+                <p class="subtituloform"> Accesorios a entregar </p>
                 
                 <dl> 		
-                <dt><label for="nro_catalogo"> Nro catalogo </label></dt>	
-                <dd><select id="nro_catalogo"> <?php echo $nro_catalogo; ?> </select> <img style="cursor: pointer;" onclick="listarCatalogos();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dt><label for="tipo_arma"> Nro serie </label></dt>	
+                <dd><select id="tipo_arma"> <?php echo $nro_serie; ?> </select> <img style="cursor: pointer;" onclick="crearTipoArma();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
-
-                <dl> 		
-                <dt><label for="ubicacion"> Ubicacion </label></dt>	
-                <dd><select id="ubicacion"> <?php echo $ubicacion; ?> </select> <img style="cursor: pointer;" onclick="crearUbicacion();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
-                </dl>     
-                
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
-                
-                <p class="subtituloform"> Accesorios - </p>
-
-                <dl>
-                <dt><label for="nro_accesorio"> Nro accesorio </label></dt>
-                <dd><input type="text" id="nro_accesorio" class="text" /></dd>
-                </dl> 
                 
                 <dl> 		
-                <dt><label for="tipo_accesorio"> Tipo accesorio </label></dt>	
-                <dd><select id="tipo_accesorio"> <?php echo $tipo_accesorio; ?> </select> <img style="cursor: pointer;" onclick="crearTipoAccesorio();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
-                </dl>                
-                
-                <dl>
-                <dt><label for="descricion_accesorio"> Descripcion </label></dt>
-                <dd><input type="text" id="descripcion_accesorio" class="text" /></dd>
-                </dl>                
-                
-                <p><button id="agregar_accesorio" onclick="agregarAccesorio();"> Agregar accesorio </button></p>
-
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
-                
-                <div class="datagrid">
-                    <table> 
-                        <thead>
-                            <tr>
-                                <th></th> <th> Nro accesorio </th> <th> Tipo </th> <th> Descripcion </th>
-                            </tr>
-                        </thead>
-                        <tbody id="accesorios"></tbody> 
-                        <tfoot>
-                            <tr> <td colspan="4"> <div id="paging"> <br /> </div> </td> </tr>
-                        </tfoot>
-                    </table> 
-                </div>
-                
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
-                
-                <p class="subtituloform"> Piezas - </p>
-
-                <dl>
-                <dt><label for="nro_pieza"> Nro pieza </label></dt>
-                <dd><input type="text" id="nro_pieza" class="text" /></dd>
-                </dl> 
+                <dt><label for="marca"> Marca </label></dt>	
+                <dd><select id="marca"> </select> </dd> 					
+                </dl>
                 
                 <dl> 		
-                <dt><label for="tipo_pieza"> Tipo pieza </label></dt>	
-                <dd><select id="tipo_pieza"> <?php echo $tipo_pieza; ?> </select> <img style="cursor: pointer;" onclick="crearTipoPieza();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
+                <dt><label for="calibre"> Calibre </label></dt>	
+                <dd><select id="calibre"> </select> </dd> 					
+                </dl>
+                
+                <dl> 		
+                <dt><label for="modelo"> Modelo </label></dt>	
+                <dd><select id="modelo"> </select></dd> 					
+                </dl>
+                
+                <dl> 		
+                <dt><label for="nro_accesorio"> Nro accesorio </label></dt>	
+                <dd><select id="nro_accesorio"> </select></dd> 					
                 </dl>                
                 
-                <dl>
-                <dt><label for="descricion_pieza"> Descripcion </label></dt>
-                <dd><input type="text" id="descripcion_pieza" class="text" /></dd>
-                </dl>                
-                
-                <p><button id="agregar_pieza" onclick="agregarPieza();"> Agregar pieza &emsp14;&emsp14;&emsp14;&emsp14; </button></p>
-
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
-                
-                <div class="datagrid">
-                    <table> 
-                        <thead>
-                            <tr>
-                                <th></th> <th> Nro pieza </th> <th> Tipo </th> <th> Descripcion </th>
-                            </tr>
-                        </thead>
-                        <tbody id="piezas"></tbody> 
-                        <tfoot>
-                            <tr> <td colspan="4"> <div id="paging"> <br /> </div> </td> </tr>
-                        </tfoot>
-                    </table> 
-                </div> 
+                <button style="margin-right: 20px;" onclick="agregarCatalogo();"> Agregar accesorio </button>               
                                 
             </fieldset>	
 
             <fieldset class="action">	
                 <button style="margin-right: 20px;" onclick="ingresarDatos();"> Alta ficha </button>
-            </fieldset>  
+            </fieldset> 
+            
+            <hr />
+            
+            <div>
+                
+                <h1> Entregas armamento </h1>       
+                
+                <fieldset>	
+
+                    <div id="imprimir">
+                                 
+                        <div class="datagrid" style="margin-top: 30px;">
+                            <table> 
+                                <thead>
+                                    <tr>
+                                        <th> Nro acta </th> <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> 
+                                    </tr>
+                                </thead>
+                                <tbody id="entregas_armamento"></tbody>
+                                <tfoot>
+                                    <tr> <td colspan="5"> <div id="paging"> <br /> </div> </td> </tr>
+                                </tfoot>                                
+                            </table> 
+                        </div>
+                        
+                        <br />
+                    
+                    </div>    
+                        
+                </fieldset>	
+                
+            </div>
+            
+            <div>
+                
+                <h1> Entregas accesorios </h1>       
+                
+                <fieldset>	
+
+                    <div id="imprimir">
+                                 
+                        <div class="datagrid" style="margin-top: 30px;">
+                            <table> 
+                                <thead>
+                                    <tr>
+                                        <th> Nro acta </th> <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Nro accesorio </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="entregas_accesorios"></tbody>
+                                <tfoot>
+                                    <tr> <td colspan="6"> <div id="paging"> <br /> </div> </td> </tr>
+                                </tfoot>                                
+                            </table> 
+                        </div>
+                        
+                        <br />
+                    
+                    </div>    
+                        
+                </fieldset>	
+                
+            </div>            
             
         </div>        
         

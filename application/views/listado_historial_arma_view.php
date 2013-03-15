@@ -72,12 +72,7 @@
                 <tr>
                     <td><label> &emsp; Modelo - </label> </td> <td> <input type="text" class="text" id="modelo" /></td>
                     <td><label> &emsp; Calibre - </label> </td> <td> <input type="text" class="text" id="calibre" /></td>
-                </tr>
-                
-                <tr>
-                    <td><label> &emsp; Nro compra - </label> </td> <td> <input type="text" class="text" id="nro_compra" /></td>
-                    <td><label> &emsp; Nro catalogo - </label> </td> <td> <input type="text" class="text" id="nro_catalogo" /></td>
-                </tr>                
+                </tr>             
 
             </table>
 

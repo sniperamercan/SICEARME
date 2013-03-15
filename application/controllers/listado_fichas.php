@@ -40,7 +40,6 @@ class listado_fichas extends CI_Controller {
                 <th style='text-align: center;'> Calibre        </th>
                 <th style='text-align: center;'> Nro compra     </th>
                 <th style='text-align: center;'> Nro catalogo   </th>
-                <th style='text-align: center;'> Ubicacion      </th>
                 <th style='text-align: center;'> Ver accesorios </th>
                 <th style='text-align: center;'> Ver piezas     </th>
             </tr>   
@@ -68,7 +67,6 @@ class listado_fichas extends CI_Controller {
                     <td> ".$fichas[$i+3]." </td>
                     <td> ".$fichas[$i+4]." </td>
                     <td> ".$fichas[$i+5]." </td>
-                    <td> ".$fichas[$i+6]." </td>
                     <td style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
                     <td style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
                 </tr>
@@ -81,7 +79,7 @@ class listado_fichas extends CI_Controller {
         
         $concat .= '
             <tfoot>
-                <tr> <td colspan="9"> <div id="paging"> <br /> </div> </td> </tr>
+                <tr> <td colspan="8"> <div id="paging"> <br /> </div> </td> </tr>
             </tfoot>
         ';
         

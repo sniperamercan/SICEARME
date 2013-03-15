@@ -97,12 +97,7 @@
                 <dl> 		
                 <dt><label for="nro_catalogo"> Nro catalogo </label></dt>	
                 <dd><input type="text" id="nro_catalogo" class="txtautomatico" readonly="readonly" /></dd> 					
-                </dl>
-
-                <dl> 		
-                <dt><label for="ubicacion"> Ubicacion </label></dt>	
-                <dd><select id="ubicacion"> <?php echo $ubicacion; ?> </select> <img style="cursor: pointer;" onclick="crearUbicacion();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
-                </dl>     
+                </dl>   
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 

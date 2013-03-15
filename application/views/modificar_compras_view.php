@@ -97,21 +97,31 @@
                 <dd><input type="text" id="modalidad" class="text" /></dd>
                 </dl>                 
                 
+                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                
+                <p class="subtituloform"> Detalles de la compra </p>
+                
+                <dl>
+                <dt><label for="catalogo"> Catalogo </label></dt>
+                <dd><select id="catalogo"> <?php echo $catalogo ?> </select> <img style="cursor: pointer;" onclick="listarCompras();" src="<?php echo base_url(); ?>images/search.png" />  <img style="cursor: pointer;" onclick="crearTipoAccesorio();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
+                </dl>  
+                
                 <dl>
                 <dt><label for="cant_total_armas"> Cant total armas </label></dt>
                 <dd><input type="text" id="cant_total_armas" class="number" /></dd>
                 </dl>                 
                 
                 <dl>
-                <dt><label for="costo_total"> Costo total </label></dt>
+                <dt><label for="costo_total"> Costo </label></dt>
                 <dd><input type="text" id="costo_total" class="number" /></dd>
-                </dl>                 
+                </dl> 
                 
+                <button style="margin-right: 20px;" onclick="agregarCatalogo();"> Agregar catalogo </button>
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="ingresarDatos();"> Modificar compra </button> <button onclick="agregaCatalogo();"> Agregar catalogo </button>
+                <button style="margin-right: 20px;" onclick="ingresarDatos();"> Modificar compra </button>
             </fieldset>  
             
             <hr />

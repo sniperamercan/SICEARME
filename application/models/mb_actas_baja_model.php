@@ -9,8 +9,7 @@ class mb_actas_baja_model extends CI_Model {
     
     function listadoFichas() {
         
-        $query = $this->db->query("SELECT nro_serie, marca, modelo, calibre, nro_interno_compra, nro_interno_catalogo, ubicacion
-                                   FROM fichas
+        $query = $this->db->query("SELECT nro_serie, marca, modelo, calibre, nro_interno_compra
                                    ORDER BY nro_serie");
         
         $fichas = array();
@@ -21,8 +20,6 @@ class mb_actas_baja_model extends CI_Model {
             $fichas[]  = $row->modelo;
             $fichas[]  = $row->calibre;
             $fichas[]  = $row->nro_interno_compra;
-            $fichas[]  = $row->nro_interno_catalogo;
-            $fichas[]  = $row->ubicacion;
         }
         
         return $fichas;

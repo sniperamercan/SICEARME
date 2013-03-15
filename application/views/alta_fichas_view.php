@@ -76,17 +76,17 @@
                 
                 <dl> 		
                 <dt><label for="marca"> Marca </label></dt>	
-                <dd><select id="marca"> <?php echo $marca; ?> </select></dd> 					
+                <dd><input type="text" id="marca" class="txtautomatico" readonly="readonly" value="<?php echo $marca; ?>" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre"> Calibre </label></dt>	
-                <dd><select id="calibre"> <?php echo $calibre; ?> </select></dd> 					
+                <dd><input type="text" id="marca" class="txtautomatico" readonly="readonly" value="<?php echo $calibre; ?>" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="modelo"> Modelo </label></dt>	
-                <dd><select id="modelo"> <?php echo $modelo; ?> </select></dd> 					
+                <dd><input type="text" id="marca" class="txtautomatico" readonly="readonly" value="<?php echo $modelo; ?>" /></dd> 					
                 </dl>
                 
                 <dl> 		
@@ -98,11 +98,6 @@
                 <dt><label for="nro_catalogo"> Nro catalogo </label></dt>	
                 <dd><select id="nro_catalogo"> <?php echo $nro_catalogo; ?> </select> <img style="cursor: pointer;" onclick="listarCatalogos();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
-
-                <dl> 		
-                <dt><label for="ubicacion"> Ubicacion </label></dt>	
-                <dd><select id="ubicacion"> <?php echo $ubicacion; ?> </select> <img style="cursor: pointer;" onclick="crearUbicacion();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
-                </dl>     
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 

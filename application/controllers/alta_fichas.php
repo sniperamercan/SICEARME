@@ -25,6 +25,9 @@ class alta_fichas extends CI_Controller {
         $array_paises = $this->alta_fichas_model->cargoPaises();
         
         $data['paises'] = "<option> </option>";
+        $data['marca'] = "";
+        $data['calibre'] = "";
+        $data['modelo'] = "";
         
         foreach($array_paises as $val) {
             $data['paises'] .= "<option val='".$val."'>".$val."</option>";

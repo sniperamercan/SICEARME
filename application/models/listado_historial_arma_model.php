@@ -9,7 +9,7 @@ class listado_historial_arma_model extends CI_Model {
     
     function listadoFichas() {
         
-        $query = $this->db->query("SELECT nro_serie, marca, modelo, calibre, nro_interno_compra, nro_interno_catalogo, ubicacion
+        $query = $this->db->query("SELECT nro_serie, marca, modelo, calibre, nro_interno_compra, nro_interno_catalogo
                                    FROM fichas
                                    ORDER BY nro_serie");
         
@@ -22,7 +22,6 @@ class listado_historial_arma_model extends CI_Model {
             $fichas[]  = $row->calibre;
             $fichas[]  = $row->nro_interno_compra;
             $fichas[]  = $row->nro_interno_catalogo;
-            $fichas[]  = $row->ubicacion;
         }
         
         return $fichas;

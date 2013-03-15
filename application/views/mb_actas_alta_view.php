@@ -69,18 +69,18 @@
             <table>
 
                 <tr>
-                    <td><label> &emsp; Nro serie - </label> </td> <td> <input type="text" class="text" id="nro_serie" /></td>
-                    <td><label> &emsp; Marca - </label> </td> <td> <input type="text" class="text" id="marca" /></td>
+                    <td><label> &emsp; Nro acta - </label> </td> <td> <input type="text" class="text" id="nro_acta" /></td>
+                    <td><label> &emsp; Estado - </label> </td> <td> <input type="text" class="text" id="estado" /></td>
                 </tr>
 
                 <tr>
-                    <td><label> &emsp; Modelo - </label> </td> <td> <input type="text" class="text" id="modelo" /></td>
-                    <td><label> &emsp; Calibre - </label> </td> <td> <input type="text" class="text" id="calibre" /></td>
+                    <td><label> &emsp; Unidad entrega - </label> </td> <td> <input type="text" class="text" id="unidad_entrega" /></td>
+                    <td><label> &emsp; Unidad recibe - </label> </td> <td> <input type="text" class="text" id="unidad_recibe" /></td>
                 </tr>
                 
                 <tr>
-                    <td><label> &emsp; Nro compra - </label> </td> <td> <input type="text" class="text" id="nro_compra" /></td>
-                    <td><label> &emsp; Nro catalogo - </label> </td> <td> <input type="text" class="text" id="nro_catalogo" /></td>
+                    <td><label> &emsp; Fecha 1 - </label> </td> <td> <input type="text" class="text" id="fecha1" /></td>
+                    <td><label> &emsp; Fecha 2 - </label> </td> <td> <input type="text" class="text" id="fecha2" /></td>
                 </tr>                
 
             </table>

@@ -68,16 +68,6 @@
             <h1> Alta catalogos </h1>    
             
             <fieldset>	
-
-                <dl>
-                <dt><label for="fecha"> Fecha </label></dt>
-                <dd><input type="text" id="fecha" class="text" /></dd>
-                </dl>                
-
-                <dl>
-                <dt><label for="cant_armas"> Cant armas </label></dt>
-                <dd><input type="text" id="cant_armas" class="number" /></dd>
-                </dl>                 
                 
                 <dl> 		
                 <dt><label for="tipo_arma"> Tipo arma </label></dt>	
@@ -106,7 +96,7 @@
                 
                 <dl>
                 <dt><label for="empresa"> Empresa </label></dt>
-                <dd><input type="text" id="empresa" class="text" /></dd>
+                <dd><select id="empresa"> <?php echo $empresa; ?> </select> <img style="cursor: pointer;" onclick="crearTipoAccesorio();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
                 </dl>                
                 
                 <dl>
@@ -115,7 +105,7 @@
                 </dl>                 
 
                 <dl>
-                <dt><label for="fabricacion"> Fabricacion </label></dt>
+                <dt><label for="fabricacion"> Año Fabricacion </label></dt>
                 <dd><input type="text" id="fabricacion" class="text" /></dd>
                 </dl>
                 

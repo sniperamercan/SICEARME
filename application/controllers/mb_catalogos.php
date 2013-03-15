@@ -35,8 +35,6 @@ class mb_catalogos extends CI_Controller {
         $concat .= "
             <tr>      
                 <th style='text-align: center;'> Nro interno    </th>
-                <th style='text-align: center;'> Fecha          </th>
-                <th style='text-align: center;'> Cantidad armas </th>
                 <th style='text-align: center;'> Tipo arma      </th>
                 <th style='text-align: center;'> Marca          </th>
                 <th style='text-align: center;'> Modelo         </th>
@@ -75,8 +73,6 @@ class mb_catalogos extends CI_Controller {
                     <td> ".$catalogos[$i+6]." </td>
                     <td> ".$catalogos[$i+7]." </td>
                     <td> ".$catalogos[$i+8]." </td>
-                    <td> ".$catalogos[$i+9]." </td>
-                    <td> ".$catalogos[$i+10]." </td>
                     <td style='text-align: center; cursor: pointer;' onclick='editarDatos();'> <img src='".base_url()."images/edit.png' /> </td>
                     <td style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/delete.gif' /> </td>
                 </tr>
@@ -89,7 +85,7 @@ class mb_catalogos extends CI_Controller {
         
         $concat .= '
             <tfoot>
-                <tr> <td colspan="13"> <div id="paging"> <br /> </div> </td> </tr>
+                <tr> <td colspan="11"> <div id="paging"> <br /> </div> </td> </tr>
             </tfoot>
         ';
         
