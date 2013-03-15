@@ -79,7 +79,7 @@
                 
                 <dl>
                 <dt><label for="empresa"> Empresa </label></dt>
-                <dd><input type="text" id="empresa" class="text" /></dd>
+                <dd><input type="text" id="empresa" class="text" /> <img style="cursor: pointer;" onclick="crearTipoAccesorio();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
                 </dl>                
                 
                 <dl>
