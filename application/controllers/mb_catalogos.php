@@ -42,7 +42,7 @@ class mb_catalogos extends CI_Controller {
                 <th style='text-align: center;'> Sistema        </th>
                 <th style='text-align: center;'> Fabricacion    </th>
                 <th style='text-align: center;'> Pais           </th>
-                <th style='text-align: center;'> Garantina      </th>
+                <th style='text-align: center;'> Vencimiento    </th>
                 <th style='text-align: center;'> Editar         </th>
                 <th style='text-align: center;'> Anular         </th>
             </tr>   

@@ -15,13 +15,74 @@ class alta_catalogos extends CI_Controller {
         }         
         
         //Modulo solo visible para el peril 2 y 3 - Usuarios O.C.I y Administradores O.C.I 
-        if(!$this->perms->verificoPerfil2()) {
+        if(!$this->perms->verificoPerfil2() || !$this->perms->verificoPerfil3()) {
             die($this->mensajes->sinPermisos());
         }
     }
     
     function index() {
+
+        //INICIO - cargo tipos armas
+        $array_tipos_armas = $this->alta_catalogos_model->cargoTiposArmas();
         
+        $data['tipos_armas'] = "<option> </option>";
+        
+        foreach($array_tipos_armas as $val) {
+            $data['tipos_armas'] .= "<option val='".$val."'>".$val."</option>";
+        }
+        //FIN - cargo tipos armas
+        
+        //INICIO - cargo marcas
+        $array_marcas = $this->alta_catalogos_model->cargoMarcas();
+        
+        $data['marcas'] = "<option> </option>";
+        
+        foreach($array_marcas as $val) {
+            $data['marcas'] .= "<option val='".$val."'>".$val."</option>";
+        }
+        //FIN - cargo marcas
+        
+        //INICIO - cargo calibres
+        $array_calibres = $this->alta_catalogos_model->cargoCalibres();
+        
+        $data['calibres'] = "<option> </option>";
+        
+        foreach($array_calibres as $val) {
+            $data['calibres'] .= "<option val='".$val."'>".$val."</option>";
+        }
+        //FIN - cargo calibres
+        
+        //INICIO - cargo modelos
+        $array_modelos = $this->alta_catalogos_model->cargoModelos();
+        
+        $data['modelos'] = "<option> </option>";
+        
+        foreach($array_modelos as $val) {
+            $data['modelos'] .= "<option val='".$val."'>".$val."</option>";
+        }
+        //FIN - cargo modelos
+        
+        //INICIO - cargo sistemas
+        $array_sistemas = $this->alta_catalogos_model->cargoSistemas();
+        
+        $data['sistemas'] = "<option> </option>";
+        
+        foreach($array_sistemas as $val) {
+            $data['sistemas'] .= "<option val='".$val."'>".$val."</option>";
+        }
+        //FIN - cargo sistemas
+        
+        //INICIO - cargo empresas
+        $array_empresas = $this->alta_catalogos_model->cargoEmpresas();
+        
+        $data['empresas'] = "<option> </option>";
+        
+        foreach($array_empresas as $val) {
+            $data['empresas'] .= "<option val='".$val."'>".$val."</option>";
+        }
+        //FIN - cargo empresas     
+        
+        //INICIO - cargo paises
         $array_paises = $this->alta_catalogos_model->cargoPaises();
         
         $data['paises'] = "<option> </option>";
@@ -29,80 +90,110 @@ class alta_catalogos extends CI_Controller {
         foreach($array_paises as $val) {
             $data['paises'] .= "<option val='".$val."'>".$val."</option>";
         }
+        //FIN - cargo paises
         
         $this->load->view('alta_catalogos_view', $data);  
     }
     
     function validarDatos() {
         
-        $usuario  = $_POST['usuario'];
-        $nombre   = $_POST['nombre'];
-        $apellido = $_POST['apellido'];
-        $clave    = $_POST['clave'];
-        
-        $permisos = json_decode($_POST['persmisos']);
+        $tipo_arma    = $_POST["tipo_arma"];
+        $marca        = $_POST["marca"];
+        $calibre      = $_POST["calibre"];
+        $modelo       = $_POST["modelo"];
+        $sistema      = $_POST["sistema"];
+        $empresa      = $_POST["empresa"];
+        $pais_empresa = $_POST["pais_empresa"];
+        $fabricacion  = $_POST["fabricacion"];
+        $vencimiento  = $_POST["vencimiento"];
         
         $mensjError = array();
+        $retorno = array();
         
-        if(empty($usuario)) {
+        if(empty($tipo_arma)) {
             $mensjError[] = 1;
         }
         
-        if(empty($nombre)) {
+        if(empty($marca)) {
             $mensjError[] = 2;
         }
         
-        if(empty($apellido)) {
+        if(empty($calibre)) {
             $mensjError[] = 3;
         }
         
-        if(empty($clave)) {
+        if(empty($modelo)) {
             $mensjError[] = 4;
         }        
         
-        if($this->alta_usuarios_model->existeUsuario($usuario)) {
+        if(empty($sistema)) {
             $mensjError[] = 5;
-        }
-        
-        if(count($permisos) == 0) {
+        }        
+
+        if(empty($empresa)) {
             $mensjError[] = 6;
-        }
+        }        
+
+        if(empty($pais_empresa)) {
+            $mensjError[] = 7;
+        }        
+
+        if(empty($fabricacion)) {
+            $mensjError[] = 8;
+        }        
+
+        if(empty($vencimiento)) {
+            $mensjError[] = 9;
+        }          
         
         if(count($mensjError) > 0) {
             
             switch($mensjError[0]) {
                 
                 case 1:
-                    echo $this->mensajes->errorVacio('usuario');
+                    $retorno[] = $this->mensajes->errorVacio('tipo arma');
                     break;
                 
                 case 2:
-                    echo $this->mensajes->errorVacio('nombre');
+                    $retorno[] = $this->mensajes->errorVacio('marca');
                     break;
                 
                 case 3:
-                    echo $this->mensajes->errorVacio('apellido');
+                    $retorno[] = $this->mensajes->errorVacio('calibre');
                     break;
                 
                 case 4:
-                    echo $this->mensajes->errorVacio('clave');
+                    $retorno[] = $this->mensajes->errorVacio('modelo');
                     break;
                 
                 case 5:
-                    echo $this->mensajes->errorExiste('usuario');
+                    $retorno[] = $this->mensajes->errorVacio('sistema');
                     break;
                 
-                case 5:
-                    echo $this->mensajes->sinPerfilSeleccionado();
-                    break;                
+                case 6:
+                    $retorno[] = $this->mensajes->errorVacio('empresa');
+                    break;
+                
+                case 7:
+                    $retorno[] = $this->mensajes->errorVacio('pais empresa');
+                    break;
+               
+                case 8:
+                    $retorno[] = $this->mensajes->errorVacio('fabricacion');
+                    break;
+                
+                case 9:
+                    $retorno[] = $this->mensajes->errorVacio('vencimiento');
+                    break;
             }
         }else {
-            $this->alta_usuarios_model->agregarUsuario($usuario, $nombre, $apellido, $clave, $permisos);
-            echo 1;
+            $nro_interno = $this->alta_catalogos_model->altaCatalogo($tipo_arma, $marca, $calibre, $modelo, $sistema, $empresa, $pais_empresa, $fabricacion, $vencimiento);
+            $retorno[] = 1;
+            $retorno[] = $nro_interno;
         }
         
+        echo json_encode($retorno);
     }
-    
 }
 
 ?>
