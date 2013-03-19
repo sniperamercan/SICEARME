@@ -86,6 +86,27 @@ class alta_compras extends CI_Controller {
         echo $concat;
     }
     
+    function cargoCatalogosFiltro() {
+        
+        $catalogos = $this->alta_compras_model->cargoCatalogos();
+        
+        $concat = "<option> </option>";
+        
+        foreach($catalogos as $val) {
+            if(isset($_SESSION['seleccion_busqueda'])) {
+                if($val == $_SESSION['seleccion_busqueda']) {
+                    $concat .= "<option selected='selected' val='".$val."'>".$val."</option>";
+                }else {
+                    $concat .= "<option val='".$val."'>".$val."</option>";
+                }
+            }else {
+                $concat .= "<option val='".$val."'>".$val."</option>";
+            }
+        }
+        
+        echo $concat;        
+    }
+    
     function agregarCatalogos() {
         
         $catalogo         = $_POST['catalogo'];

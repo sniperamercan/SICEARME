@@ -133,6 +133,21 @@
                 });                
             }
             
+            function busquedaCatalogos() {
+                $.colorbox({href:"<?php echo base_url('busqueda_catalogos'); ?>", top:true, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA CATALOGOS", onClosed: function(){ cargoCatalogosFiltro(); } });
+            }
+            
+            function cargoCatalogosFiltro() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_compras/cargoCatalogosFiltro",
+                   success: function(data) {
+                       $("#catalogo").html("");
+                       $("#catalogo").html(data);
+                   }
+                });                
+            }
+            
         </script>
         
     </head>
@@ -181,7 +196,7 @@
                 
                 <dl>
                 <dt><label for="catalogo"> Catalogo </label></dt>
-                <dd><select id="catalogo"> <?php echo $catalogos ?> </select> <img style="cursor: pointer;" onclick="listarCatalogos();" src="<?php echo base_url(); ?>images/search.png" />  <img style="cursor: pointer;" onclick="crearCatalogo();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
+                <dd><select id="catalogo"> <?php echo $catalogos ?> </select> <img style="cursor: pointer;" onclick="busquedaCatalogos();" src="<?php echo base_url(); ?>images/search.png" />  <img style="cursor: pointer;" onclick="crearCatalogo();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
                 </dl>  
                 
                 <dl>
