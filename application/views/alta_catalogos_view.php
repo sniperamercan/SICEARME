@@ -40,6 +40,11 @@
                   }
                 });               
             }
+            
+            function crearTipoArma() {
+                $.colorbox({href:"<?php echo base_url('alta_tipo_arma'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA TIPO ARMA"});
+            }
+            
         </script>
         
     </head>

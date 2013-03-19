@@ -16,7 +16,7 @@ class alta_tipo_arma_model extends CI_Model {
         return $query->num_rows();
     }
     
-    function altaCatalogo($tipo_arma) {
+    function altaTipoArma($tipo_arma) {
         
         $data_tipo_arma = array(
             'tipo_arma' => $tipo_arma

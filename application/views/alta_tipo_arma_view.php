@@ -12,7 +12,7 @@
                 $("input:button").button(); 
             });	
 
-            function altaCatalogo() {
+            function altaTipoArma() {
                 
                 var tipo_arma    = $("#tipo_arma").val();
                 
@@ -37,7 +37,7 @@
 
         <div>			
 
-            <h1> Alta tipo armas </h1>    
+            <h1> Alta tipo arma </h1>    
             
             <fieldset>	
 

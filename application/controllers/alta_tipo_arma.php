@@ -51,7 +51,7 @@ class alta_tipo_arma extends CI_Controller {
                     break;
             }
         }else {
-            $this->alta_catalogos_model->altaCatalogo($tipo_arma);
+            $this->alta_tipo_arma_model->altaTipoArma($tipo_arma);
             echo 1;
         }
      }
