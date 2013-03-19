@@ -41,9 +41,98 @@
                 });               
             }
             
+            //INICIO llamadas a crear los tipos
+            
             function crearTipoArma() {
-                $.colorbox({href:"<?php echo base_url('alta_tipo_arma'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA TIPO ARMA"});
+                $.colorbox({href:"<?php echo base_url('alta_tipo_arma'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA TIPO ARMA", onClosed: function(){ cargoTiposArmas(); } });
             }
+            
+            function crearMarca() {
+                $.colorbox({href:"<?php echo base_url('alta_tipo_arma'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA MARCA", onClosed: function(){ cargoMarcas(); } });
+            }
+
+            function crearCalibre() {
+                $.colorbox({href:"<?php echo base_url('alta_tipo_arma'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA CALIBRE", onClosed: function(){ cargoCalibres(); } });
+            }
+            
+            function crearModelo() {
+                $.colorbox({href:"<?php echo base_url('alta_tipo_arma'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA MODELO", onClosed: function(){ cargoModelos(); } });
+            }
+
+            function crearSistema() {
+                $.colorbox({href:"<?php echo base_url('alta_tipo_arma'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA SISTEMA", onClosed: function(){ cargoSistemas(); } });
+            }
+            
+            function crearEmpresa() {
+                $.colorbox({href:"<?php echo base_url('alta_tipo_arma'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA EMPRESA", onClosed: function(){ cargoEmpresas(); } });
+            }            
+            
+            //FIN de llamadas a crear los tipos
+            
+            //INICIO funciones para refrescar los tipos una vez que se cierra el evento de crear los tipos
+            
+            function cargoTiposArmas() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_catalogos/cargoTiposArmas",
+                   success: function(data) {
+                       $("#tipo_arma").html(data);
+                   }
+                });
+            }     
+            
+            function cargoMarcas() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_catalogos/cargoMarcas",
+                   success: function(data) {
+                       $("#marca").html(data);
+                   }
+                });
+            }
+
+            function cargoCalibres() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_catalogos/cargoCalibres",
+                   success: function(data) {
+                       $("#calibre").html(data);
+                   }
+                });
+            }
+            
+            function cargoModelos() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_catalogos/cargoModelos",
+                   success: function(data) {
+                       $("#modelo").html(data);
+                   }
+                });
+            }
+
+            function cargoSistemas() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_catalogos/cargoSistemas",
+                   success: function(data) {
+                       $("#sistema").html(data);
+                   }
+                });
+            }
+            
+            function cargoEmpresas() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_catalogos/cargoEmpresas",
+                   success: function(data) {
+                       $("#empresa").html(data);
+                   }
+                });
+            }            
+            
+            //FIN de las funciones para refrescar los tipos
+            
             
         </script>
         

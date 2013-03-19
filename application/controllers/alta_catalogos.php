@@ -95,6 +95,84 @@ class alta_catalogos extends CI_Controller {
         $this->load->view('alta_catalogos_view', $data);  
     }
     
+    function cargoTiposArmas() {
+        
+        $tipos_armas = $this->alta_catalogos_model->cargoTiposArmas_db();
+        
+        $concat = "<option> </option>";
+        
+        foreach($tipos_armas as $val) {
+            $concat .= "<option val='".$val."'>".$val."</option>";
+        }
+        
+        echo $concat;
+    }
+    
+    function cargoMarcas() {
+        
+        $marcas = $this->alta_catalogos_model->cargoMarcas_db();
+        
+        $concat = "<option> </option>";
+        
+        foreach($marcas as $val) {
+            $concat .= "<option val='".$val."'>".$val."</option>";
+        }
+        
+        echo $concat;
+    }
+    
+    function cargoCalibres() {
+        
+        $calibres = $this->alta_catalogos_model->cargoCalibres_db();
+        
+        $concat = "<option> </option>";
+        
+        foreach($calibres as $val) {
+            $concat .= "<option val='".$val."'>".$val."</option>";
+        }
+        
+        echo $concat;
+    }
+    
+    function cargoModelos() {
+        
+        $modelos = $this->alta_catalogos_model->cargoModelos_db();
+        
+        $concat = "<option> </option>";
+        
+        foreach($modelos as $val) {
+            $concat .= "<option val='".$val."'>".$val."</option>";
+        }
+        
+        echo $concat;
+    }
+    
+    function cargoSistemas() {
+        
+        $sistemas = $this->alta_catalogos_model->cargoSistemas_db();
+        
+        $concat = "<option> </option>";
+        
+        foreach($sistemas as $val) {
+            $concat .= "<option val='".$val."'>".$val."</option>";
+        }
+        
+        echo $concat;
+    }
+    
+    function cargoEmpresas() {
+        
+        $empresas = $this->alta_catalogos_model->cargoEmpresas_db();
+        
+        $concat = "<option> </option>";
+        
+        foreach($empresas as $val) {
+            $concat .= "<option val='".$val."'>".$val."</option>";
+        }
+        
+        echo $concat;
+    }    
+    
     function validarDatos() {
         
         $tipo_arma    = $_POST["tipo_arma"];
