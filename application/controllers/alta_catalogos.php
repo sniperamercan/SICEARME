@@ -97,7 +97,7 @@ class alta_catalogos extends CI_Controller {
     
     function cargoTiposArmas() {
         
-        $tipos_armas = $this->alta_catalogos_model->cargoTiposArmas_db();
+        $tipos_armas = $this->alta_catalogos_model->cargoTiposArmas();
         
         $concat = "<option> </option>";
         
@@ -110,7 +110,7 @@ class alta_catalogos extends CI_Controller {
     
     function cargoMarcas() {
         
-        $marcas = $this->alta_catalogos_model->cargoMarcas_db();
+        $marcas = $this->alta_catalogos_model->cargoMarcas();
         
         $concat = "<option> </option>";
         
@@ -123,7 +123,7 @@ class alta_catalogos extends CI_Controller {
     
     function cargoCalibres() {
         
-        $calibres = $this->alta_catalogos_model->cargoCalibres_db();
+        $calibres = $this->alta_catalogos_model->cargoCalibres();
         
         $concat = "<option> </option>";
         
@@ -136,7 +136,7 @@ class alta_catalogos extends CI_Controller {
     
     function cargoModelos() {
         
-        $modelos = $this->alta_catalogos_model->cargoModelos_db();
+        $modelos = $this->alta_catalogos_model->cargoModelos();
         
         $concat = "<option> </option>";
         
@@ -149,7 +149,7 @@ class alta_catalogos extends CI_Controller {
     
     function cargoSistemas() {
         
-        $sistemas = $this->alta_catalogos_model->cargoSistemas_db();
+        $sistemas = $this->alta_catalogos_model->cargoSistemas();
         
         $concat = "<option> </option>";
         
@@ -162,7 +162,7 @@ class alta_catalogos extends CI_Controller {
     
     function cargoEmpresas() {
         
-        $empresas = $this->alta_catalogos_model->cargoEmpresas_db();
+        $empresas = $this->alta_catalogos_model->cargoEmpresas();
         
         $concat = "<option> </option>";
         
