@@ -11,8 +11,9 @@
             .datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8C8C8C), color-stop(1, #7D7D7D) );background:-moz-linear-gradient( center top, #8C8C8C 5%, #7D7D7D 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8C8C8C', endColorstr='#7D7D7D');background-color:#8C8C8C; color:#FFFFFF; font-size: 15px; font-weight: bold; border-left: 1px solid #A3A3A3; } 
             .datagrid table thead th:first-child { border: none; }
             
-            .datagrid table tbody td { background: #F2FBEF; color: #7D7D7D; border-left: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; font-size: 12px;font-weight: normal; }
+            .datagrid table tbody td { background: #F2FBEF; color: #7D7D7D; border-left: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; font-size: 12px; font-weight: normal; }
             .datagrid table tbody .alt td { background: #E6F8E0; color: #7D7D7D; }
+            .datagrid table tbody .total td { background: #F5F6CE; color: #7D7D7D; font-weight: bold; text-align: center; }
             .datagrid table tbody td:first-child { border-left: none; }
             .datagrid table tbody tr:last-child td { border-bottom: none; }
             
@@ -128,6 +129,9 @@
                            $("#catalogos").html(data[1]);
                            $("#totales").html("");
                            $("#totales").html(data[2]);                           
+                       }else {
+                           $("#catalogos").html("");
+                           $("#totales").html("<tr class='total'> <td> 0 </td> <td> 0 </td> </tr>");
                        }
                    }
                 });                
@@ -229,7 +233,7 @@
                                  
                         <div class="datagrid" style="margin-top: 30px;">
                             <table> 
-                                <thead>
+                                <thead style="text-align: center;">
                                     <tr>
                                         <th> Nro catalogo </th> <th> Tipo arma </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Sistema </th> <th> Cant armas </th> <th> Costo </th> <th> </th> 
                                     </tr>
@@ -245,12 +249,12 @@
                         
                         <div class="datagrid" style="margin-top: 30px; width: 50%; float: right;">
                             <table> 
-                                <thead>
+                                <thead style="text-align: center;">
                                     <tr>
                                         <th> Total de armas </th> <th> Costo total </th> 
                                     </tr>
                                 </thead>
-                                <tbody id="totales"></tbody>
+                                <tbody id="totales"> <tr class="total"> <td> 0 </td> <td> 0 </td> </tr> </tbody>
                             </table> 
                         </div>                        
                     

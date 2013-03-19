@@ -163,27 +163,27 @@ class alta_compras extends CI_Controller {
             switch ($mensjError[0]) {
                 
                 case 1:
-                    $retorno[] = $this->mensajes->errorVacio($catalogo);
+                    $retorno[] = $this->mensajes->errorVacio('catalogo');
                     break;
                 
                 case 2:
-                    $retorno[] = $this->mensajes->errorVacio($cant_total_armas);
+                    $retorno[] = $this->mensajes->errorVacio('cant total armas');
                     break;
                 
                 case 3:
-                    $retorno[] = $this->mensajes->errorVacio($costo_total);
+                    $retorno[] = $this->mensajes->errorVacio('costo');
                     break;
                 
                 case 4:
-                    $retorno[] = $this->mensajes->errorNoExiste($catalogo);
+                    $retorno[] = $this->mensajes->errorNoExiste('el catalogo '.$catalogo);
                     break;
                 
                 case 5:
-                    $retorno[] = $this->mensajes->errorNumerico($cant_total_armas);
+                    $retorno[] = $this->mensajes->errorNumerico('cant total armas');
                     break;
                 
                 case 6:
-                    $retorno[] = $this->mensajes->errorNumerico($costo_total);
+                    $retorno[] = $this->mensajes->errorNumerico('costo');
                     break;
                 
                 case 7:
@@ -200,10 +200,10 @@ class alta_compras extends CI_Controller {
             $datos_catalogo = $this->alta_compras_model->datosCatalogo($catalogo);
             
             $concat = "<tr> 
-                            <td>".$catalogo."</td> <td>".$datos_catalogo['tipo_arma']."</td> <td>".$datos_catalogo['marca']."</td> <td>".$datos_catalogo['modelo']."</td> <td>".$datos_catalogo['calibre']."</td> <td>".$datos_catalogo['sistema']."</td> <td>".$cant_total_armas."</td> <td>".$costo_total."</td> <td><img style='cursor: pointer;' onclick='anularCatalogo(".$catalogo.");' src='".  base_url()."images/delete.gif'/></td>
+                            <td style='text-align: center;'>".$catalogo."</td> <td>".$datos_catalogo['tipo_arma']."</td> <td>".$datos_catalogo['marca']."</td> <td>".$datos_catalogo['modelo']."</td> <td>".$datos_catalogo['calibre']."</td> <td>".$datos_catalogo['sistema']."</td> <td style='text-align: center;'>".$cant_total_armas."</td> <td style='text-align: center;'>".$costo_total."</td> <td><img style='cursor: pointer;' onclick='anularCatalogo(".$catalogo.");' src='".  base_url()."images/delete.gif'/></td>
                        </tr>";
             
-            $totales = "<tr> 
+            $totales = "<tr class='total'> 
                             <td>".$this->obtenerCantidadArmasTotales()."</td> <td>".$this->obterPrecioTotal()."</td>
                         </tr>";
             
@@ -243,16 +243,20 @@ class alta_compras extends CI_Controller {
                 $datos_catalogo = $this->alta_compras_model->datosCatalogo($_SESSION['catalogos'][$i]);
                 
                 $concat .= "<tr> 
-                                <td>".$_SESSION['catalogos'][$i]."</td> <td>".$datos_catalogo['tipo_arma']."</td> <td>".$datos_catalogo['marca']."</td> <td>".$datos_catalogo['modelo']."</td> <td>".$datos_catalogo['calibre']."</td> <td>".$datos_catalogo['sistema']."</td> <td>".$_SESSION['catalogos'][$i+1]."</td> <td>".$_SESSION['catalogos'][$i+2]."</td> <td><img style='cursor: pointer;' onclick='anularCatalogo(".$_SESSION['catalogos'][$i].");' src='".  base_url()."images/delete.gif'/></td>
+                                <td style='text-align: center;'>".$_SESSION['catalogos'][$i]."</td> <td>".$datos_catalogo['tipo_arma']."</td> <td>".$datos_catalogo['marca']."</td> <td>".$datos_catalogo['modelo']."</td> <td>".$datos_catalogo['calibre']."</td> <td>".$datos_catalogo['sistema']."</td> <td style='text-align: center;'>".$_SESSION['catalogos'][$i+1]."</td> <td style='text-align: center;'>".$_SESSION['catalogos'][$i+2]."</td> <td><img style='cursor: pointer;' onclick='anularCatalogo(".$_SESSION['catalogos'][$i].");' src='".  base_url()."images/delete.gif'/></td>
                            </tr>";  
                 
-                $totales = "<tr> 
+                $totales = "<tr class='total'> 
                                 <td>".$this->obtenerCantidadArmasTotales()."</td> <td>".$this->obterPrecioTotal()."</td>
                             </tr>";                
             }
-            $retorno[] = 1;
-            $retorno[] = $concat;
-            $retorno[] = $totales;
+            if(count($_SESSION['catalogos']) == 0) {
+                $retorno[] = 0;
+            }else {
+                $retorno[] = 1;
+                $retorno[] = $concat;
+                $retorno[] = $totales;
+            }
         }else {
             $retorno[] = 0;
         }
