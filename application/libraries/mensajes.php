@@ -78,6 +78,10 @@ class mensajes {
     function sinPerfilSeleccionado() {
         return "No selecciono ningun perfil para el usuario, por lo menos debe seleccionar uno";
     }
+    
+    function errorCatalogoExiste() {
+        return "El numero de catalogo seleccionado ya existe en la compra, verifique";
+    }
 }
 
 ?>

@@ -33,7 +33,17 @@
                     data: "tipo_arma="+tipo_arma+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&sistema="+sistema+"&empresa="+empresa+"&pais_empresa="+pais_empresa+"&fabricacion="+fabricacion+"&vencimiento="+vencimiento,
                     success: function(data){
                         if(data[0] == "1"){            
-                            jAlert("Catalogo ingresado con exito - Nro de catalogo = "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('alta_catalogos'); ?>','O.C.I >> Alta >> Catalogos'); });
+                            jAlert("Catalogo ingresado con exito - Nro de catalogo = "+data[1], "Correcto", function() { 
+                                cargoTiposArmas();
+                                cargoMarcas();
+                                cargoCalibres();
+                                cargoModelos();
+                                cargoSistemas();
+                                cargoEmpresas();
+                                cargoPaises();
+                                $("#fabricacion").val('');
+                                $("#vencimiento").val('');
+                            });
                         }else{
                             jAlert(data[0], "Error");
                         }                            
@@ -129,7 +139,17 @@
                        $("#empresa").html(data);
                    }
                 });
-            }            
+            }           
+            
+            function cargoPaises() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_catalogos/cargoPaises",
+                   success: function(data) {
+                       $("#pais_empresa").html(data);
+                   }
+                });            
+            }
             
             //FIN de las funciones para refrescar los tipos
             

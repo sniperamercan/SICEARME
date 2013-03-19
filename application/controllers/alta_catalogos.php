@@ -171,7 +171,20 @@ class alta_catalogos extends CI_Controller {
         }
         
         echo $concat;
-    }    
+    }   
+    
+    function cargoPaises() {
+        
+        $paises = $this->alta_catalogos_model->cargoPaises();
+        
+        $concat = "<option> </option>";
+        
+        foreach($paises as $val) {
+            $concat .= "<option val='".$val."'>".$val."</option>";
+        }
+        
+        echo $concat;
+    }     
     
     function validarDatos() {
         

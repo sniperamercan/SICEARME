@@ -95,7 +95,7 @@ class alta_usuarios extends CI_Controller {
                     echo $this->mensajes->errorExiste('usuario');
                     break;
                 
-                case 5:
+                case 6:
                     echo $this->mensajes->sinPerfilSeleccionado();
                     break;                
             }

@@ -34,27 +34,105 @@
                 $("input:button").button(); 
             });	
 
-            function ingresarDatos() {
+            function altaCompra() {
                 
-                var usuario   = $("#usuario").val();
-                var nombre    = $("#nombre").val();
-                var apellido  = $("#apellido").val();
-                var clave     = $("#clave").val();
+                var nro_compra   = $("#nro_compra").val();
+                var fecha        = $("#fecha").val();
+                var empresa      = $("#empresa").val();
+                var pais_empresa = $("#pais_empresa").val();
+                var descripcion  = $("#descripcion").val();
+                var modalidad    = $("#modalidad").val();
                 
                 $.ajax({
                     type: "post",  
                     dataType: "json",
-                    url: "<?php base_url(); ?>agregar_usuario/validarDatos",
-                    data: "usuario="+usuario+"&nombre="+nombre+"&apellido="+apellido+"&clave="+clave+"&persmisos="+JSON.stringify(permisos),
+                    url: "<?php base_url(); ?>alta_compras/validarDatos",
+                    data: "nro_compra="+nro_compra+"&fecha="+fecha+"&empresa="+empresa+"&pais_empresa="+pais_empresa+"&descripcion="+descripcion+"&modalidad="+modalidad,
                     success: function(data){
-                        if(data == "1"){            
-                            jAlert("Usuario agregado al sistema con exito", "Correcto", function() { irAFrame('<?php echo base_url('agregar_usuario'); ?>','Adminitracion >> Agregar usuarios'); });
+                        if(data[0] == 1){            
+                            jAlert("Compra agregada al sistema con exito - Nro interno de compra generado = "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('alta_compras'); ?>','O.C.I >> Alta >> Compras'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
                   }
                 });               
             }
+            
+            function agregarCatalogo() {
+            
+                var catalogo           = $("#catalogo").val();
+                var cant_total_armas   = $("#cant_total_armas").val();
+                var costo_total        = $("#costo_total").val();
+            
+                 $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_compras/agregarCatalogos",
+                   data: "catalogo="+catalogo+"&cant_total_armas="+cant_total_armas+"&costo_total="+costo_total,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#catalogos").append(data[1]);
+                           $("#totales").html("");
+                           $("#totales").html(data[2]);
+                           cargoCatalogos();
+                           $("#cant_total_armas").val("");
+                           $("#costo_total").val("");
+                       }else {
+                           jAlert(data[0], "Error");
+                       }
+                   }
+                });  
+            }
+            
+            //cargo y creo Empresas
+            function crearEmpresa() {
+                $.colorbox({href:"<?php echo base_url('alta_tipo_arma'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA EMPRESA", onClosed: function(){ cargoEmpresas(); } });
+            }            
+            
+            function cargoEmpresas() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_compras/cargoEmpresas",
+                   success: function(data) {
+                       $("#empresa").html(data);
+                   }
+                });
+            }     
+            //fin cargo y creo Empresas
+            
+            //cargo y creo Catalogos
+            function crearCatalogo() {
+                $.colorbox({href:"<?php echo base_url('alta_catalogos'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:500, title:"ALTA CATALOGO", onClosed: function(){ cargoCatalogos(); } });
+            }            
+            
+            function cargoCatalogos() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_compras/cargoCatalogos",
+                   success: function(data) {
+                       $("#catalogo").html(data);
+                   }
+                });
+            }   
+            //fin cargo y creo Catalogos
+            
+            function anularCatalogo(nro_catalogo) {
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_compras/anularCatalogo",
+                   data: "nro_catalogo="+nro_catalogo,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#catalogos").html("");
+                           $("#catalogos").html(data[1]);
+                           $("#totales").html("");
+                           $("#totales").html(data[2]);                           
+                       }
+                   }
+                });                
+            }
+            
         </script>
         
     </head>
@@ -79,7 +157,7 @@
                 
                 <dl>
                 <dt><label for="empresa"> Empresa </label></dt>
-                <dd><input type="text" id="empresa" class="text" /> <img style="cursor: pointer;" onclick="crearTipoAccesorio();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
+                <dd><select id="empresa"> <?php echo $empresas ?> </select> <img style="cursor: pointer;" onclick="crearEmpresa();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
                 </dl>                
                 
                 <dl>
@@ -103,7 +181,7 @@
                 
                 <dl>
                 <dt><label for="catalogo"> Catalogo </label></dt>
-                <dd><select id="catalogo"> <?php echo $catalogo ?> </select> <img style="cursor: pointer;" onclick="listarCompras();" src="<?php echo base_url(); ?>images/search.png" />  <img style="cursor: pointer;" onclick="crearTipoAccesorio();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
+                <dd><select id="catalogo"> <?php echo $catalogos ?> </select> <img style="cursor: pointer;" onclick="listarCatalogos();" src="<?php echo base_url(); ?>images/search.png" />  <img style="cursor: pointer;" onclick="crearCatalogo();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
                 </dl>  
                 
                 <dl>
@@ -121,7 +199,7 @@
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="ingresarDatos();"> Alta compra </button>
+                <button style="margin-right: 20px;" onclick="altaCompra();"> Alta compra </button>
             </fieldset>  
             
             <hr />
@@ -138,17 +216,28 @@
                             <table> 
                                 <thead>
                                     <tr>
-                                        <th> Nro catalogo </th> <th> Tipo arma </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Sistema </th> <th> Cant armas </th> <th> Costo </th> 
+                                        <th> Nro catalogo </th> <th> Tipo arma </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Sistema </th> <th> Cant armas </th> <th> Costo </th> <th> </th> 
                                     </tr>
                                 </thead>
                                 <tbody id="catalogos"></tbody>
                                 <tfoot>
-                                    <tr> <td colspan="8"> <div id="paging"> <br /> </div> </td> </tr>
+                                    <tr> <td colspan="9"> <div id="paging"> <br /> </div> </td> </tr>
                                 </tfoot>                                
                             </table> 
                         </div>
                         
                         <br />
+                        
+                        <div class="datagrid" style="margin-top: 30px; width: 50%; float: right;">
+                            <table> 
+                                <thead>
+                                    <tr>
+                                        <th> Total de armas </th> <th> Costo total </th> 
+                                    </tr>
+                                </thead>
+                                <tbody id="totales"></tbody>
+                            </table> 
+                        </div>                        
                     
                     </div>    
                         
