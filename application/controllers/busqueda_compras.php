@@ -125,11 +125,12 @@ class busqueda_compras extends CI_Controller {
                 $class = "alt";
             }                        
             
-            $aux_rut = '"'.$result[$i].'"';
+            $aux_compra   = '"'.$result[$i].'"';
+            $aux_catalogo = '"'.$result[$i+1].'"';
             
             $concat .= "
                 <tr class='".$class."'> 
-                    <td onclick='seleccion(".$aux_rut.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/select.png' /> </td>
+                    <td onclick='seleccion(".$aux_compra.",".$aux_catalogo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/select.png' /> </td>
                     <td> ".$result[$i]."   </td>
                     <td> ".$result[$i+1]." </td>
                     <td> ".$result[$i+2]." </td>
