@@ -87,7 +87,7 @@
             
             //cargo y creo Empresas
             function crearEmpresa() {
-                $.colorbox({href:"<?php echo base_url('alta_tipo_arma'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA EMPRESA", onClosed: function(){ cargoEmpresas(); } });
+                $.colorbox({href:"<?php echo base_url('alta_empresa'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA EMPRESA", onClosed: function(){ cargoEmpresas(); } });
             }            
             
             function cargoEmpresas() {
