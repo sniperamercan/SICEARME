@@ -54,7 +54,7 @@ class mb_catalogos extends CI_Controller {
         
         $j=0;
         
-        for($i=0;$i<count($catalogos); $i=$i+11) {
+        for($i=0;$i<count($catalogos); $i=$i+9) {
         
             if($j % 2 == 0){
                 $class = "";

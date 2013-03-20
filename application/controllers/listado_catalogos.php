@@ -42,7 +42,7 @@ class listado_catalogos extends CI_Controller {
                 <th style='text-align: center;'> Sistema        </th>
                 <th style='text-align: center;'> Fabricacion    </th>
                 <th style='text-align: center;'> Pais           </th>
-                <th style='text-align: center;'> Garantina      </th>
+                <th style='text-align: center;'> Vencimiento      </th>
             </tr>   
         ";
         
@@ -52,7 +52,7 @@ class listado_catalogos extends CI_Controller {
         
         $j=0;
         
-        for($i=0;$i<count($catalogos); $i=$i+11) {
+        for($i=0;$i<count($catalogos); $i=$i+9) {
         
             if($j % 2 == 0){
                 $class = "";
