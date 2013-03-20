@@ -46,7 +46,7 @@
                     data: "nro_serie="+nro_serie+"&nro_compra="+nro_compra+"&nro_catalogo="+nro_catalogo,
                     success: function(data){
                         if(data == "1"){            
-                            jAlert("Ficha del arma agregada al sistema con exito", "Correcto", function() { irAFrame('<?php echo base_url('alta_ficha'); ?>','O.C.I >> Alta >> Fichas'); });
+                            jAlert("Ficha del arma agregada al sistema con exito", "Correcto", function() { irAFrame('<?php echo base_url('alta_fichas'); ?>','O.C.I >> Alta >> Fichas'); });
                         }else{
                             jAlert(data, "Error");
                         }                            

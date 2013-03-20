@@ -56,7 +56,9 @@ class alta_fichas extends CI_Controller {
         
         $nro_catalogo = $_POST['nro_catalogo'];
         
-        $info_catalogo = $this->alta_fichas_model->cargoInformacion($nro_catalogo);
+        if($this->alta_fichas_model->existeNroCatalogo($nro_catalogo)) {
+            $info_catalogo = $this->alta_fichas_model->cargoInformacion($nro_catalogo);
+        }
         
         echo json_encode($info_catalogo);
     }
@@ -81,20 +83,26 @@ class alta_fichas extends CI_Controller {
             $mensjError[] = 3;
         }      
         
-        $info_catalogo = $this->alta_fichas_model->cargoInformacion($nro_catalogo);
-        $marca   = $info_catalogo[0];
-        $calibre = $info_catalogo[1];
-        $modelo  = $info_catalogo[2];
+        $marca   = "";
+        $calibre = "";
+        $modelo  = "";
         
-        if($this->alta_usuarios_model->existeFicha($nro_serie, $marca, $calibre, $modelo)) {
+        if($this->alta_fichas_model->existeNroCatalogo($nro_catalogo)) {
+            $info_catalogo = $this->alta_fichas_model->cargoInformacion($nro_catalogo);
+            $marca   = $info_catalogo[0];
+            $calibre = $info_catalogo[1];
+            $modelo  = $info_catalogo[2];
+        }
+        
+        if($this->alta_fichas_model->existeFicha($nro_serie, $marca, $calibre, $modelo)) {
             $mensjError[] = 4;
         }
         
-        if(!$this->alta_usuarios_model->existeNroCompra($nro_compra)) {
+        if(!$this->alta_fichas_model->existeNroCompra($nro_compra)) {
             $mensjError[] = 5;
         }
         
-        if(!$this->alta_usuarios_model->existeNroCatalogo($nro_catalogo)) {
+        if(!$this->alta_fichas_model->existeNroCatalogo($nro_catalogo)) {
             $mensjError[] = 6;
         }      
         

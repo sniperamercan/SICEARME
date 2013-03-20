@@ -87,20 +87,20 @@ class alta_fichas_model extends CI_Model {
     function agregarFicha($nro_serie, $marca, $calibre, $modelo, $nro_compra, $nro_catalogo) {
         
         $data_ficha = array(
-            'nro_serie'           => $nro_serie,
-            'marca'               => $marca,
-            'modelo'              => $modelo,
-            'calibre'             => $calibre,
-            'nro_interno_compra'  => $nro_compra,
-            'nro_interno_calibre' => $nro_catalogo,
-            'usuario_alta'        => base64_decode($_SESSION['usuario']),
-            'usuario_edita'       => base64_decode($_SESSION['usuario'])
+            'nro_serie'            => $nro_serie,
+            'marca'                => $marca,
+            'modelo'               => $modelo,
+            'calibre'              => $calibre,
+            'nro_interno_compra'   => $nro_compra,
+            'nro_interno_catalogo' => $nro_catalogo,
+            'usuario_alta'         => base64_decode($_SESSION['usuario']),
+            'usuario_edita'        => base64_decode($_SESSION['usuario'])
         );
         
         $data_db_logs = array(
             'tipo_movimiento' => 'insert',
             'tabla'           => 'fichas',
-            'clave_tabla'     => 'nro_serie = '.$usuario.' & marca = '.$marca.' & modelo = '.$modelo.' & calibre = '.$calibre,
+            'clave_tabla'     => 'nro_serie = '.$nro_serie.' & marca = '.$marca.' & modelo = '.$modelo.' & calibre = '.$calibre,
             'usuario'         => base64_decode($_SESSION['usuario'])
         );        
 
