@@ -5,7 +5,7 @@ class busqueda_compras extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('busqueda_catalogos_model');
+        $this->load->model('busqueda_compras_model');
         $this->load->library('perms');
         $this->load->library('pagination');   
         $this->load->library('mensajes');
@@ -21,26 +21,44 @@ class busqueda_compras extends CI_Controller {
     }
     
     function index() {
-        $_SESSION['seleccion_busqueda'] = ""; //elemento que se selecciona
+        $_SESSION['seleccion_busqueda'] = "";  //elemento que se selecciona 1
+        $_SESSION['seleccion_busqueda1'] = ""; //elemento que se selecciona 2
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
-        $this->load->view("busqueda_catalogos_view");
+        $this->load->view("busqueda_compras_view");
     }
     
     //cantReg = cantidad de registros x pagina
     function consulta($param="",$cantReg=30) {   
      
         //INICIO, ARMO CONDICIONES WHERE PARA SQL
-        if( isset($_POST['tipo_arma']) && isset($_POST['marca']) && isset($_POST['calibre']) && isset($_POST['modelo']) ) { 
+        if( isset($_POST['nro_compra']) && isset($_POST['nro_catalogo']) && isset($_POST['tipo_arma']) && isset($_POST['marca']) && isset($_POST['calibre']) && isset($_POST['modelo']) ) { 
             
             $condicion = "";
             $and = 0;
- 
+
+            if(!empty($_POST['nro_compra'])){
+                $aux = $_POST['nro_compra'];
+                $condicion .= " nro_interno_compra = ".$this->db->escape($aux);
+                $and = 1; //agrego AND en proximo filtro
+            }              
+            
+            if(!empty($_POST['nro_catalogo'])){
+                if($and == 1){
+                    $condicion .= " AND ";
+                }
+                $condicion .= " nro_catalogo = ".$this->db->escape($aux);
+                $and = 1; //agrego AND en proximo filtro
+            }            
+            
             if(!empty($_POST['tipo_arma'])){
-                $aux = $_POST['tipo_arma'];
+                if($and == 1){
+                    $condicion .= " AND ";
+                }
+                $aux = "%".$_POST['tipo_arma']."%";
                 $condicion .= " tipo_arma LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
-            }          
+            }         
             
             if(!empty($_POST['marca'])){
                 if($and == 1){
@@ -83,7 +101,7 @@ class busqueda_compras extends CI_Controller {
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
-            $order = "nro_interno";
+            $order = "nro_interno_compra";
         }
         //fin verifico order        
         
@@ -95,11 +113,11 @@ class busqueda_compras extends CI_Controller {
         
         $concat = "";
         
-        $result = $this->busqueda_catalogos_model->consulta_db($param, $cantReg, $condicion, $order);
+        $result = $this->busqueda_compras_model->consulta_db($param, $cantReg, $condicion, $order);
           
         $j=0;
         
-        for($i=0;$i<count($result);$i=$i+5) {
+        for($i=0;$i<count($result);$i=$i+6) {
             
             if($j % 2 == 0){
                 $class = "";
@@ -112,11 +130,12 @@ class busqueda_compras extends CI_Controller {
             $concat .= "
                 <tr class='".$class."'> 
                     <td onclick='seleccion(".$aux_rut.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/select.png' /> </td>
-                    <td> ".$result[$i]." </td>
+                    <td> ".$result[$i]."   </td>
                     <td> ".$result[$i+1]." </td>
                     <td> ".$result[$i+2]." </td>
                     <td> ".$result[$i+3]." </td>
                     <td> ".$result[$i+4]." </td>
+                    <td> ".$result[$i+5]." </td>
                 </tr>
             ";
             
@@ -124,8 +143,8 @@ class busqueda_compras extends CI_Controller {
             
         }                  
         
-        $config['base_url'] = site_url("busqueda_catalogos/consulta");
-        $config['total_rows'] = $this->busqueda_catalogos_model->cantidadRegistros($condicion);
+        $config['base_url'] = site_url("busqueda_compras/consulta");
+        $config['total_rows'] = $this->busqueda_compras_model->cantidadRegistros($condicion);
         $config['per_page'] = $cantReg;
         $config['first_link'] = 'Primera';
         $config['last_link'] = 'Ultima';
@@ -208,7 +227,7 @@ class busqueda_compras extends CI_Controller {
         
         $concat = "";
         
-        $result = $this->busqueda_catalogos_model->consulta_db($param, $cantReg, $condicion, $order);
+        $result = $this->busqueda_compras_model->consulta_db($param, $cantReg, $condicion, $order);
                 
         
         $concat .= '<center>';
@@ -217,7 +236,8 @@ class busqueda_compras extends CI_Controller {
         
         $concat .= '
             <tr>
-                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro interno </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro compra </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro catalogo </td>
                 <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Tipo arma </td>
                 <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Marca </td>
                 <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Calibre </td>
@@ -233,6 +253,7 @@ class busqueda_compras extends CI_Controller {
                     <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+2]." </td>
                     <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+3]." </td>
                     <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+4]." </td>
+                    <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+5]." </td>
                 </tr>
             ";
         }                  
@@ -251,22 +272,26 @@ class busqueda_compras extends CI_Controller {
         switch($order){
             
             case 0:
-                $_SESSION['order'][0] = 'nro_interno';
+                $_SESSION['order'][0] = 'nro_interno_compra';
                 break;
             
             case 1:
+                $_SESSION['order'][0] = 'nro_interno_catalogo';
+                break;            
+            
+            case 2:
                 $_SESSION['order'][0] = 'tipo_arma';
                 break;
             
-            case 2:
+            case 3:
                 $_SESSION['order'][0] = 'marca';
                 break;
             
-            case 3:
+            case 4:
                 $_SESSION['order'][0] = 'calibre';
                 break;
             
-            case 4:
+            case 5:
                 $_SESSION['order'][0] = 'modelo';
                 break;            
         }
@@ -281,7 +306,8 @@ class busqueda_compras extends CI_Controller {
     }    
 
     function seteoSeleccion() {
-        $_SESSION['seleccion_busqueda'] = $_POST['nro_interno'];
+        $_SESSION['seleccion_busqueda']  = $_POST['nro_compra'];
+        $_SESSION['seleccion_busqueda1'] = $_POST['nro_catalogo'];
         
         /*al seleccionar un catalogo del listado usar esta variable de sesion 
         *   $_SESSION['seleccion_busqueda']

@@ -35,15 +35,17 @@
      
             function filtrar(){
                 
-                var tipo_arma  = $("#tipo_arma").val();
-                var marca      = $("#marca").val();
-                var calibre    = $("#calibre").val();
-                var modelo     = $("#modelo").val();
+                var nro_compra    = $("#nro_compra").val();
+                var nro_catalogo  = $("#nro_catalogo").val();
+                var tipo_arma     = $("#tipo_arma").val();
+                var marca         = $("#marca").val();
+                var calibre       = $("#calibre").val();
+                var modelo        = $("#modelo").val();
                 
                 $.ajax({ 
                     type: 'post',
-                    url: '<?php echo base_url(); ?>busqueda_catalogos/consulta/0',
-                    data: "tipo_arma="+tipo_arma+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
+                    url: '<?php echo base_url(); ?>busqueda_compras/consulta/0',
+                    data: "nro_compra="+nro_compra+"&nro_catalogo="+nro_catalogo+"&tipo_arma="+tipo_arma+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
                     success: function(){
                         cargoConsulta();
                     }
@@ -51,13 +53,13 @@
             }
             
             function impresion(){                
-                $.colorbox({href:"<?php echo base_url('busqueda_catalogos/seteoImpresion'); ?>", top: true, iframe: false, scrolling: false, innerWidth: 800, innerHeight: 200, title: "IMPRESION"});                
+                $.colorbox({href:"<?php echo base_url('busqueda_compras/seteoImpresion'); ?>", top: true, iframe: false, scrolling: false, innerWidth: 800, innerHeight: 200, title: "IMPRESION"});                
             } 
 
             function seteoImpresion(de_pagina, a_pagina){                
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("busqueda_catalogos/armoImpresion"); ?>",
+                    url: "<?php echo base_url("busqueda_compras/armoImpresion"); ?>",
                     data: "de_pagina="+de_pagina+"&a_pagina="+a_pagina,
                     success: function(data){
                         if(data == "1"){
@@ -72,7 +74,7 @@
             function orderBy(param){            
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("busqueda_catalogos/orderBy"); ?>",
+                    url: "<?php echo base_url("busqueda_compras/orderBy"); ?>",
                     data: "order="+param,
                     success: function(){
                         cargoConsulta();                       
@@ -80,14 +82,14 @@
                 });           
             }      
             
-            function seleccion(nro_interno) {
+            function seleccion(nro_compra, nro_catalogo) {
                 
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("busqueda_catalogos/seteoSeleccion"); ?>",
-                    data: "nro_interno="+nro_interno,
+                    url: "<?php echo base_url("busqueda_compras/seteoSeleccion"); ?>",
+                    data: "nro_compra="+nro_compra+"&nro_catalogo="+nro_catalogo,
                     success: function(){
-                        jAlert("Nro interno - "+nro_interno+" seleccionado", "SELECCION", parent.$.colorbox.close());                        
+                        jAlert("Nro compra - "+nro_compra+" y Nro catalogo - "+nro_catalogo+" seleccionados", "SELECCION", parent.$.colorbox.close());                        
                     }                  
                 });            
             }
@@ -96,7 +98,7 @@
                 $.ajax({
                     type: 'post',
                     dataType: 'json',
-                    url: "<?php echo base_url("busqueda_catalogos/consulta"); ?>",
+                    url: "<?php echo base_url("busqueda_compras/consulta"); ?>",
                     success: function(data){
                         $("#datos_consulta").html(data[0]);
                         $("#paginado").html(data[1]);
@@ -111,6 +113,11 @@
     <body class="cuerpo">
         
         <table>
+            
+            <tr>
+                <td><label> &emsp; Nro compra   - </label> </td> <td> <input type="text" class="text" id="nro_compra" /></td>
+                <td><label> &emsp; Nro catalogo - </label> </td> <td>  <input type="text" class="text" id="nro_catalogo" /></td>
+            </tr>            
             
             <tr>
                 <td><label> &emsp; Tipo arma       - </label> </td> <td> <input type="text" class="text" id="tipo_arma" /></td>
@@ -139,18 +146,19 @@
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
                         <th> Seleccion  </th>
-                        <th onclick="orderBy(0)"> Nro interno </th>
-                        <th onclick="orderBy(1)"> Tipo arma   </th>
-                        <th onclick="orderBy(2)"> Marca       </th>
-                        <th onclick="orderBy(3)"> Calibre     </th>
-                        <th onclick="orderBy(4)"> Modelo      </th>
+                        <th onclick="orderBy(0)"> Nro compra </th>
+                        <th onclick="orderBy(1)"> Nro catalogo </th>
+                        <th onclick="orderBy(2)"> Tipo arma   </th>
+                        <th onclick="orderBy(3)"> Marca       </th>
+                        <th onclick="orderBy(4)"> Calibre     </th>
+                        <th onclick="orderBy(5)"> Modelo      </th>
                     </tr>
                 </thead>
 
                 <tbody id="datos_consulta"> </tbody>   
 
                 <tfoot>
-                    <tr> <td colspan="6"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="7"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
                 
            </table>  

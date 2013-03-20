@@ -82,6 +82,21 @@
                 });
             }
             
+            function busquedaCompras() {
+                $.colorbox({href:"<?php echo base_url('busqueda_compras'); ?>", top:true, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA COMPRAS", onClosed: function(){ cargoComprasFiltro(); } });
+            }
+            
+            function cargoComprasFiltro() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_fichas/cargoComprasFiltro",
+                   success: function(data) {
+                       $("#catalogo").html("");
+                       $("#catalogo").html(data);
+                   }
+                });                
+            }            
+            
         </script>
         
     </head>
@@ -116,7 +131,7 @@
                 
                 <dl> 		
                 <dt><label for="nro_compra"> Nro compra </label></dt>	
-                <dd><select id="nro_compra"> <?php echo $nro_compras; ?> </select> <img style="cursor: pointer;" onclick="listarCompras();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><select id="nro_compra"> <?php echo $nro_compras; ?> </select> <img style="cursor: pointer;" onclick="busquedaCompras();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>                
                 
                 <dl> 		
