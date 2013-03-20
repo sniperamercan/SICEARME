@@ -30,7 +30,7 @@ class alta_modelo_model extends CI_Model {
         );        
         
         $this->db->trans_start();
-            $this->db->insert('modelo', $data_modelo);
+            $this->db->insert('modelos', $data_modelo);
             $this->db->insert('db_logs', $data_db_logs);
         $this->db->trans_complete();    
     }

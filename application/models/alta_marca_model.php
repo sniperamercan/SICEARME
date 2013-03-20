@@ -30,7 +30,7 @@ class alta_marca_model extends CI_Model {
         );        
         
         $this->db->trans_start();
-            $this->db->insert('marca', $data_marca);
+            $this->db->insert('marcas', $data_marca);
             $this->db->insert('db_logs', $data_db_logs);
         $this->db->trans_complete();    
     }

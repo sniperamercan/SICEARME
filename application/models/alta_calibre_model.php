@@ -30,7 +30,7 @@ class alta_calibre_model extends CI_Model {
         );        
         
         $this->db->trans_start();
-            $this->db->insert('calibre', $data_calibre);
+            $this->db->insert('calibres', $data_calibre);
             $this->db->insert('db_logs', $data_db_logs);
         $this->db->trans_complete();    
     }
