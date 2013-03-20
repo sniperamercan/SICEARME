@@ -37,6 +37,51 @@ class alta_fichas extends CI_Controller {
         $this->load->view('alta_fichas_view', $data);  
     }
     
+    function cargoComprasFiltro() {
+        
+        $nro_compra   = $_SESSION['seleccion_busqueda'];
+        $nro_catalogo = $_SESSION['seleccion_busqueda1'];
+        
+        //cargo los numeros de compras filtrados por el seleccionado
+        $nro_compras = $this->alta_fichas_model->cargoNroCompras();
+        
+        $compras = "<option> </option>";
+        
+        foreach($nro_compras as $val) {
+            
+            if($nro_compra == $val) {
+                $compras .= "<option onclick='cargoNroCatalogos(".$val.")' selected='selected' val='".$val."'>".$val."</option>";
+            }else{
+                $compras .= "<option onclick='cargoNroCatalogos(".$val.")' val='".$val."'>".$val."</option>";
+            }
+        }
+        
+        //cargo los numeros de catalogos filtrados por el seleccionado
+        $nro_catalogos = $this->alta_fichas_model->cargoNroCatalogos($nro_compra);
+        
+        $catalogos = "<option> </option>";
+        
+        foreach($nro_catalogos as $val) {
+            if($nro_catalogo == $val) {
+                $catalogos .= "<option onclick='cargoInformacion(".$val.")' selected='selected' val='".$val."'>".$val."</option>";
+            }else{
+                $catalogos .= "<option onclick='cargoInformacion(".$val.")' val='".$val."'>".$val."</option>";
+            }
+        }
+        
+        //retorno los datos
+        $info_catalogos = $this->cargoInformacionArray($nro_catalogo);
+        $retorno = array();
+        $retorno[] = $compras;
+        $retorno[] = $catalogos;
+        $retorno[] = $info_catalogos[0];
+        $retorno[] = $info_catalogos[1];
+        $retorno[] = $info_catalogos[2];
+        
+        echo json_encode($retorno);
+    }
+    
+    
     function cargoNroCatalogos() {
         
         $nro_compra = $_POST['nro_compra'];
@@ -62,6 +107,15 @@ class alta_fichas extends CI_Controller {
         
         echo json_encode($info_catalogo);
     }
+    
+    function cargoInformacionArray($nro_catalogo) {
+        
+        if($this->alta_fichas_model->existeNroCatalogo($nro_catalogo)) {
+            $info_catalogo = $this->alta_fichas_model->cargoInformacion($nro_catalogo);
+        }
+        
+        return $info_catalogo;
+    }    
     
     function validarDatos() {
         

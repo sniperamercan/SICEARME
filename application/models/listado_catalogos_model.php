@@ -9,7 +9,7 @@ class listado_catalogos_model extends CI_Model {
     
     function listadoCatalogos() {
         
-        $query = $this->db->query("SELECT nro_interno, tipo_arma, marca, modelo, calibre, sistema, año_fabricacion, pais_origen, garantia
+        $query = $this->db->query("SELECT nro_interno, tipo_arma, marca, modelo, calibre, sistema, año_fabricacion, pais_origen, vencimiento
                                    FROM catalogos
                                    ORDER BY nro_interno");
         
@@ -24,7 +24,7 @@ class listado_catalogos_model extends CI_Model {
             $catalogos[]  = $row->sistema;
             $catalogos[]  = $row->año_fabricacion;
             $catalogos[]  = $row->pais_origen;
-            $catalogos[]  = $row->garantia;
+            $catalogos[]  = $row->vencimiento;
         }
         
         return $catalogos;

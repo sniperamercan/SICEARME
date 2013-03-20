@@ -28,7 +28,6 @@
 
             $(document).ready(function() {
                 $("#nro_serie").focus();
-                $("#nro_catalogo").prop('disabled', true);
                 $("input:submit").button();
                 $("button").button(); 
                 $("input:button").button(); 
@@ -61,7 +60,9 @@
                    url: "<?php base_url(); ?>alta_fichas/cargoNroCatalogos",
                    data: "nro_compra="+nro_compra,
                    success: function(data) {
-                       $('#nro_catalogo').prop('disabled', false);
+                       $('#marca').val("");
+                       $('#calibre').val("");
+                       $('#modelo').val("");                        
                        $('#nro_catalogo').html(data);
                    }
                 });
@@ -75,6 +76,9 @@
                    url: "<?php base_url(); ?>alta_fichas/cargoInformacion",
                    data: "nro_catalogo="+nro_catalogo,
                    success: function(data) {
+                       $('#marca').val("");
+                       $('#calibre').val("");
+                       $('#modelo').val("");                        
                        $('#marca').val(data[0]);
                        $('#calibre').val(data[1]);
                        $('#modelo').val(data[2]);
@@ -89,10 +93,20 @@
             function cargoComprasFiltro() {
                 $.ajax({
                    type: "post",
+                   dataType: "json",
                    url: "<?php base_url(); ?>alta_fichas/cargoComprasFiltro",
                    success: function(data) {
-                       $("#catalogo").html("");
-                       $("#catalogo").html(data);
+                       $("#nro_compra").html("");
+                       $("#nro_compra").html(data[0]);
+                       $("#nro_catalogo").html("");
+                       $("#nro_catalogo").html(data[1]);
+                       $('#marca').val("");
+                       $('#calibre').val("");
+                       $('#modelo').val("");                       
+                       $('#marca').val(data[2]);
+                       $('#calibre').val(data[3]);
+                       $('#modelo').val(data[4]);
+                       
                    }
                 });                
             }            

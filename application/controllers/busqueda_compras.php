@@ -21,7 +21,7 @@ class busqueda_compras extends CI_Controller {
     }
     
     function index() {
-        $_SESSION['seleccion_busqueda'] = "";  //elemento que se selecciona 1
+        $_SESSION['seleccion_busqueda']  = "";  //elemento que se selecciona 1
         $_SESSION['seleccion_busqueda1'] = ""; //elemento que se selecciona 2
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
@@ -47,7 +47,8 @@ class busqueda_compras extends CI_Controller {
                 if($and == 1){
                     $condicion .= " AND ";
                 }
-                $condicion .= " nro_catalogo = ".$this->db->escape($aux);
+                $aux = $_POST['nro_catalogo'];
+                $condicion .= " nro_interno_catalogo = ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }            
             
@@ -197,11 +198,11 @@ class busqueda_compras extends CI_Controller {
             echo "La pagina inicial y final deben de estar completadas ";
         }else if( $a_pagina < $de_pagina ){
             echo "La pagina inicila no puede ser mayor que la pagina final verifique";
-        }else if( $this->busqueda_catalogos_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
+        }else if( $this->busqueda_compras_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
             echo "No existe tal cantidad de paginas para esa consulta verifique";
         }else{
             echo "1";
-            if( $this->busqueda_catalogos_model->cantidadRegistros($condicion) <= 30 ){
+            if( $this->busqueda_compras_model->cantidadRegistros($condicion) <= 30 ){
                 $ini   = 0;
                 $param = 30;
                 $this->consultaImpresion($condicion, $ini, $param, $order);
@@ -246,7 +247,7 @@ class busqueda_compras extends CI_Controller {
             </tr>   
         ';
                 
-        for($i=0;$i<count($result);$i=$i+5) {            
+        for($i=0;$i<count($result);$i=$i+6) {            
             $concat .= "
                 <tr>
                     <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i]."   </td>
