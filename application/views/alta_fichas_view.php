@@ -27,36 +27,61 @@
         <script type="text/javascript">
 
             $(document).ready(function() {
-                $("#nro_compra").focus();
-                $("#fecha").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
-                $("#fabricacion").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
-                $("#vencimiento").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
+                $("#nro_serie").focus();
+                $("#nro_catalogo").prop('disabled', true);
                 $("input:submit").button();
                 $("button").button(); 
                 $("input:button").button(); 
             });	
 
-            function ingresarDatos() {
+            function altaFicha() {
                 
-                var usuario   = $("#usuario").val();
-                var nombre    = $("#nombre").val();
-                var apellido  = $("#apellido").val();
-                var clave     = $("#clave").val();
+                var nro_serie     = $("#nro_serie").val();
+                var nro_compra    = $("#nro_compra").val();   
+                var nro_catalogo  = $("#nro_catalogo").val();   
                 
                 $.ajax({
                     type: "post",  
-                    dataType: "json",
-                    url: "<?php base_url(); ?>agregar_usuario/validarDatos",
-                    data: "usuario="+usuario+"&nombre="+nombre+"&apellido="+apellido+"&clave="+clave+"&persmisos="+JSON.stringify(permisos),
+                    url: "<?php base_url(); ?>alta_fichas/validarDatos",
+                    data: "nro_serie="+nro_serie+"&nro_compra="+nro_compra+"&nro_catalogo="+nro_catalogo,
                     success: function(data){
                         if(data == "1"){            
-                            jAlert("Usuario agregado al sistema con exito", "Correcto", function() { irAFrame('<?php echo base_url('agregar_usuario'); ?>','Adminitracion >> Agregar usuarios'); });
+                            jAlert("Ficha del arma agregada al sistema con exito", "Correcto", function() { irAFrame('<?php echo base_url('alta_ficha'); ?>','O.C.I >> Alta >> Fichas'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
                   }
                 });               
             }
+            
+            function cargoNroCatalogos(nro_compra) {
+            
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_fichas/cargoNroCatalogos",
+                   data: "nro_compra="+nro_compra,
+                   success: function(data) {
+                       $('#nro_catalogo').prop('disabled', false);
+                       $('#nro_catalogo').html(data);
+                   }
+                });
+            }
+            
+            function cargoInformacion(nro_catalogo) {
+ 
+                 $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_fichas/cargoInformacion",
+                   data: "nro_catalogo="+nro_catalogo,
+                   success: function(data) {
+                       $('#marca').val(data[0]);
+                       $('#calibre').val(data[1]);
+                       $('#modelo').val(data[2]);
+                   }
+                });
+            }
+            
         </script>
         
     </head>
@@ -76,27 +101,27 @@
                 
                 <dl> 		
                 <dt><label for="marca"> Marca </label></dt>	
-                <dd><input type="text" id="marca" class="txtautomatico" readonly="readonly" value="<?php echo $marca; ?>" /></dd> 					
+                <dd><input type="text" id="marca" class="txtautomatico" readonly="readonly" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre"> Calibre </label></dt>	
-                <dd><input type="text" id="marca" class="txtautomatico" readonly="readonly" value="<?php echo $calibre; ?>" /></dd> 					
+                <dd><input type="text" id="calibre" class="txtautomatico" readonly="readonly" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="modelo"> Modelo </label></dt>	
-                <dd><input type="text" id="marca" class="txtautomatico" readonly="readonly" value="<?php echo $modelo; ?>" /></dd> 					
+                <dd><input type="text" id="modelo" class="txtautomatico" readonly="readonly" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="nro_compra"> Nro compra </label></dt>	
-                <dd><select id="nro_compra"> <?php echo $nro_compra; ?> </select> <img style="cursor: pointer;" onclick="listarCompras();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><select id="nro_compra"> <?php echo $nro_compras; ?> </select> <img style="cursor: pointer;" onclick="listarCompras();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>                
                 
                 <dl> 		
                 <dt><label for="nro_catalogo"> Nro catalogo </label></dt>	
-                <dd><select id="nro_catalogo"> <?php echo $nro_catalogo; ?> </select> <img style="cursor: pointer;" onclick="listarCatalogos();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><select id="nro_catalogo">  </select></dd> 					
                 </dl>
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
@@ -176,7 +201,7 @@
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="ingresarDatos();"> Alta ficha </button>
+                <button style="margin-right: 20px;" onclick="altaFicha();"> Alta ficha </button>
             </fieldset>  
             
         </div>        
