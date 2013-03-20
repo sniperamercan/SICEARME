@@ -117,6 +117,206 @@ class alta_fichas extends CI_Controller {
         return $info_catalogo;
     }    
     
+    function agregarAccesorio() {
+        
+        $nro_accesorio         = $_POST['nro_accesorio'];
+        $tipo_accesorio        = $_POST['tipo_accesorio'];
+        $descripcion_accesorio = $_POST['descripcion_accesorio'];
+        $nro_catalogo          = $_POST['nro_catalogo'];
+        $nro_serie             = $_POST['nro_serie'];
+        
+        $mensjError = array();
+        $retorno = array();
+        
+        if(empty($nro_accesorio)) {
+            $mensjError[] = 1;
+        }
+        
+        if(empty($tipo_accesorio)) {
+            $mensjError[] = 2;
+        }
+        
+        if(empty($descripcion_accesorio)) {
+            $mensjError[] = 3;
+        }
+        
+        if(empty($nro_catalogo)) {
+            $mensjError[] = 4;
+        }else {
+            
+            $info_catalogos = $this->cargoInformacionArray($nro_catalogo);
+            $marca   = $info_catalogos[0];
+            $calibre = $info_catalogos[1];
+            $modelo  = $info_catalogos[2];
+            
+            if(!$this->alta_compras_model->existeAccesorio($nro_serie, $marca, $calibre, $modelo, $nro_accesorio)) {
+                $mensjError[] = 5;
+            }            
+        }
+        
+        //verifico que el nro de catalogo no exista ya en el listado
+        $encontre = false;
+        $i = 0;
+        
+        while($i < count($_SESSION['accesorios']) && !$encontre) {
+            
+            if($_SESSION['accesorios'][$i] == $nro_accesorio) {
+                $encontre = true;
+            }
+            
+            $i=$i+3; 
+        }
+        
+        if($encontre) {
+           $mensjError[] = 6; 
+        }
+        
+        if(count($mensjError) > 0) {
+            
+            switch ($mensjError[0]) {
+                
+                case 1:
+                    $retorno[] = $this->mensajes->errorVacio('nro accesorio');
+                    break;
+                
+                case 2:
+                    $retorno[] = $this->mensajes->errorVacio('tipo accesorio');
+                    break;
+                
+                case 3:
+                    $retorno[] = $this->mensajes->errorVacio('descripcion accesorio');
+                    break;
+                
+                case 4:
+                    $retorno[] = $this->mensajes->errorVacio('nro catalogo');
+                    break;
+                
+                case 5:
+                    $retorno[] = $this->mensajes->errorExiste('accesorio');
+                    break;
+                
+                case 6:
+                    $retorno[] = $this->mensajes->errorAccesorioExiste();
+                    break;
+            }
+        }else {
+            
+            $retorno[] = 1; 
+            
+            $_SESSION['accesorios'][] = $nro_accesorio;
+            $_SESSION['accesorios'][] = $tipo_accesorio;
+            $_SESSION['accesorios'][] = $descripcion_accesorio;
+            
+            $concat = "<tr> 
+                            <td style='text-align: center;'>".$nro_accesorio."</td> <td>".$tipo_accesorio."</td> <td>".$descripcion_accesorio."</td> <td><img style='cursor: pointer;' onclick='anularCatalogo(".$catalogo.");' src='".  base_url()."images/delete.gif'/></td>
+                       </tr>";
+            
+            $retorno[] = $concat;
+        }
+        
+        echo json_encode($retorno);        
+    }
+    
+    function agregarPieza() {
+
+        $nro_pieza         = $_POST['nro_pieza'];
+        $tipo_pieza        = $_POST['tipo_pieza'];
+        $descripcion_pieza = $_POST['descripcion_pieza'];
+        $nro_catalogo      = $_POST['nro_catalogo'];
+        $nro_serie         = $_POST['nro_serie'];
+        
+        $mensjError = array();
+        $retorno = array();
+        
+        if(empty($nro_pieza)) {
+            $mensjError[] = 1;
+        }
+        
+        if(empty($tipo_pieza)) {
+            $mensjError[] = 2;
+        }
+        
+        if(empty($descripcion_pieza)) {
+            $mensjError[] = 3;
+        }
+        
+        if(empty($nro_catalogo)) {
+            $mensjError[] = 4;
+        }else {
+            
+            $info_catalogos = $this->cargoInformacionArray($nro_catalogo);
+            $marca   = $info_catalogos[0];
+            $calibre = $info_catalogos[1];
+            $modelo  = $info_catalogos[2];
+            
+            if(!$this->alta_compras_model->existePieza($nro_serie, $marca, $calibre, $modelo, $nro_pieza)) {
+                $mensjError[] = 5;
+            }            
+        }
+        
+        //verifico que el nro de catalogo no exista ya en el listado
+        $encontre = false;
+        $i = 0;
+        
+        while($i < count($_SESSION['piezas']) && !$encontre) {
+            
+            if($_SESSION['piezas'][$i] == $nro_pieza) {
+                $encontre = true;
+            }
+            
+            $i=$i+3; 
+        }
+        
+        if($encontre) {
+           $mensjError[] = 6; 
+        }
+        
+        if(count($mensjError) > 0) {
+            
+            switch ($mensjError[0]) {
+                
+                case 1:
+                    $retorno[] = $this->mensajes->errorVacio('nro pieza');
+                    break;
+                
+                case 2:
+                    $retorno[] = $this->mensajes->errorVacio('tipo pieza');
+                    break;
+                
+                case 3:
+                    $retorno[] = $this->mensajes->errorVacio('descripcion pieza');
+                    break;
+                
+                case 4:
+                    $retorno[] = $this->mensajes->errorVacio('nro catalogo');
+                    break;
+                
+                case 5:
+                    $retorno[] = $this->mensajes->errorExiste('accesorio');
+                    break;
+                
+                case 6:
+                    $retorno[] = $this->mensajes->errorAccesorioExiste();
+                    break;
+            }
+        }else {
+            
+            $retorno[] = 1; 
+            
+            $_SESSION['piezas'][] = $nro_pieza;
+            $_SESSION['piezas'][] = $tipo_pieza;
+            $_SESSION['piezas'][] = $descripcion_pieza;
+            
+            $concat = "<tr> 
+                            <td style='text-align: center;'>".$nro_pieza."</td> <td>".$tipo_pieza."</td> <td>".$descripcion_pieza."</td> <td><img style='cursor: pointer;' onclick='anularCatalogo(".$catalogo.");' src='".  base_url()."images/delete.gif'/></td>
+                       </tr>";
+            
+            $retorno[] = $concat;
+        }
+        
+        echo json_encode($retorno);           
+    }
+    
     function validarDatos() {
         
         $nro_serie    = $_POST['nro_serie'];

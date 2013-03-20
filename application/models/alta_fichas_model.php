@@ -54,6 +54,32 @@ class alta_fichas_model extends CI_Model {
         return $retorno;
     }
     
+    function existeAccesorio($nro_serie, $marca, $calibre, $modelo, $nro_accesorio) {
+        
+        $query = $this->db->query("SELECT *
+                                   FROM fichas_accesorios
+                                   WHERE nro_serie   = ".$this->db->escape($nro_serie)."
+                                   AND marca         = ".$this->db->escape($marca)."
+                                   AND calibre       = ".$this->db->escape($calibre)."
+                                   AND modelo        = ".$this->db->escape($modelo)."
+                                   AND nro_accesorio = ".$this->db->escape($nro_accesorio));
+        
+        return $query->num_rows();        
+    }
+    
+    function existePieza($nro_serie, $marca, $calibre, $modelo, $nro_pieza) {
+        
+        $query = $this->db->query("SELECT *
+                                   FROM fichas_piezas
+                                   WHERE nro_serie   = ".$this->db->escape($nro_serie)."
+                                   AND marca         = ".$this->db->escape($marca)."
+                                   AND calibre       = ".$this->db->escape($calibre)."
+                                   AND modelo        = ".$this->db->escape($modelo)."
+                                   AND nro_pieza     = ".$this->db->escape($nro_pieza));
+        
+        return $query->num_rows();        
+    }    
+    
     function existeFicha($nro_serie, $marca, $calibre, $modelo) {
         
         $query = $this->db->query("SELECT *

@@ -188,6 +188,7 @@ class alta_compras extends CI_Controller {
                 
                 case 7:
                     $retorno[] = $this->mensajes->errorCatalogoExiste();
+                    break;
             }
         }else {
             

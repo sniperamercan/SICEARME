@@ -82,6 +82,14 @@ class mensajes {
     function errorCatalogoExiste() {
         return "El numero de catalogo seleccionado ya existe en la compra, verifique";
     }
+    
+    function errorAccesorioExiste() {
+        return "El numero de accesorio seleccionado ya existe en listado de ficha, verifique";
+    }
+    
+    function errorPiezaExiste() {
+        return "El numero de pieza seleccionado ya existe en listado de ficha, verifique";
+    }    
 }
 
 ?>

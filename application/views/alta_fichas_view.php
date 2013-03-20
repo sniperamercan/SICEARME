@@ -109,7 +109,53 @@
                        
                    }
                 });                
-            }            
+            } 
+            
+            function agregarAccesorio() {
+            
+                var nro_accesorio          = $("#nro_accesorio").val();
+                var tipo_accesorio         = $("#tipo_accesorio").val();
+                var descripcion_accesorio  = $("#descripcion_accesorio").val();
+                var nro_catalogo           = $("#nro_catalogo").val();
+                var nro_serie              = $("#nro_serie").val();
+            
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_fichas/agregarAccesorios",
+                   data: "nro_accesorio="+nro_accesorio+"&tipo_accesorio="+tipo_accesorio+"&descripcion_accesorio="+descripcion_accesorio+"&nro_catalogo="+nro_catalogo+"&nro_serie="+nro_serie,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#accesorios").append(data[1]);
+                       }else {
+                           jAlert(data[0], "Error");
+                       }
+                   }
+                });           
+            }
+            
+            function agregarPieza() {
+            
+                var nro_pieza          = $("#nro_pieza").val();
+                var tipo_pieza         = $("#tipo_pieza").val();
+                var descripcion_pieza  = $("#descripcion_pieza").val();
+                var nro_catalogo       = $("#nro_catalogo").val();
+                var nro_serie          = $("#nro_serie").val();
+            
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_fichas/agregarPiezas",
+                   data: "nro_pieza="+nro_pieza+"&tipo_pieza="+tipo_pieza+"&descripcion_pieza="+descripcion_pieza+"&nro_catalogo="+nro_catalogo+"&nro_serie="+nro_serie,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#piezas").append(data[1]);
+                       }else {
+                           jAlert(data[0], "Error");
+                       }
+                   }
+                });                
+            }
             
         </script>
         
@@ -180,7 +226,7 @@
                     <table> 
                         <thead>
                             <tr>
-                                <th></th> <th> Nro accesorio </th> <th> Tipo </th> <th> Descripcion </th>
+                                <th> Nro accesorio </th> <th> Tipo </th> <th> Descripcion </th> <th> </th>
                             </tr>
                         </thead>
                         <tbody id="accesorios"></tbody> 
@@ -217,7 +263,7 @@
                     <table> 
                         <thead>
                             <tr>
-                                <th></th> <th> Nro pieza </th> <th> Tipo </th> <th> Descripcion </th>
+                                <th> Nro pieza </th> <th> Tipo </th> <th> Descripcion </th> <th> </th>
                             </tr>
                         </thead>
                         <tbody id="piezas"></tbody> 
