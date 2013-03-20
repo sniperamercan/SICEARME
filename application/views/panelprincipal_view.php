@@ -252,10 +252,10 @@
                                 
                                 <?php if($this->perms->verificoPerfil4() || $this->perms->verificoPerfil5()) { ?>
                                 
-                                    <li><a href="#"> Alta </a>
+                                    <li><a href="#"> Actas </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_actas_alta'); ?>','Abastecimiento >> Alta >> Actas alta');"> Actas alta </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_actas_baja'); ?>','Abastecimiento >> Alta >> Actas baja');"> Actas Baja </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_actas_alta'); ?>','Abastecimiento >> Actas >> Acta alta');"> Actas alta </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_actas_baja'); ?>','Abastecimiento >> Actas >> Acta baja');"> Actas baja </a></li>
                                         </ul>
                                     </li> 
                                 
