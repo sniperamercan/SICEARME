@@ -193,7 +193,7 @@
                 
                 <dl>
                 <dt><label for="empresa"> Empresa </label></dt>
-                <dd><select id="empresa"> <?php echo $empresas; ?> </select> <img style="cursor: pointer;" onclick="crearTipoAccesorio();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
+                <dd><select id="empresa"> <?php echo $empresas; ?> </select> <img style="cursor: pointer;" onclick="crearEmpresas();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
                 </dl>                
                 
                 <dl>
