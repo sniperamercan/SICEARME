@@ -21,11 +21,25 @@ class alta_fichas extends CI_Controller {
     }
     
     function index() {
+        
+        //Inicializo variable de session de catalogos vacia
+        if(isset($_SESSION['accesorios'])) {
+            unset($_SESSION['accesorios']);
+        }
+       
+        $_SESSION['accesorios'] = array();        
 
+        if(isset($_SESSION['piezas'])) {
+            unset($_SESSION['piezas']);
+        }
+       
+        $_SESSION['piezas'] = array();        
+        
         $data['marca'] = "";
         $data['calibre'] = "";
-        $data['modelo'] = "";        
+        $data['modelo'] = "";         
         
+        //numero de compra
         $nro_compras = $this->alta_fichas_model->cargoNroCompras();
         
         $data['nro_compras'] = "<option> </option>";
@@ -34,6 +48,25 @@ class alta_fichas extends CI_Controller {
             $data['nro_compras'] .= "<option onclick='cargoNroCatalogos(".$val.")' val='".$val."'>".$val."</option>";
         }
         
+        //accesorios
+        $accesorios = $this->alta_fichas_model->cargoAccesorios();
+        
+        $data['tipo_accesorios'] = "<option> </option>";
+        
+        foreach($accesorios as $val) {
+            $data['tipo_accesorios'] .= "<option val='".$val."'>".$val."</option>";
+        }        
+        
+        //piezas
+        $piezas = $this->alta_fichas_model->cargoPiezas();
+        
+        $data['tipo_piezas'] = "<option> </option>";
+        
+        foreach($piezas as $val) {
+            $data['tipo_piezas'] .= "<option val='".$val."'>".$val."</option>";
+        }        
+        
+        //cargo la vista
         $this->load->view('alta_fichas_view', $data);  
     }
     
@@ -149,7 +182,7 @@ class alta_fichas extends CI_Controller {
             $calibre = $info_catalogos[1];
             $modelo  = $info_catalogos[2];
             
-            if(!$this->alta_compras_model->existeAccesorio($nro_serie, $marca, $calibre, $modelo, $nro_accesorio)) {
+            if($this->alta_fichas_model->existeAccesorio($nro_serie, $marca, $calibre, $modelo, $nro_accesorio)) {
                 $mensjError[] = 5;
             }            
         }
@@ -207,8 +240,10 @@ class alta_fichas extends CI_Controller {
             $_SESSION['accesorios'][] = $tipo_accesorio;
             $_SESSION['accesorios'][] = $descripcion_accesorio;
             
+            $aux = '"'.$nro_accesorio.'"';
+            
             $concat = "<tr> 
-                            <td style='text-align: center;'>".$nro_accesorio."</td> <td>".$tipo_accesorio."</td> <td>".$descripcion_accesorio."</td> <td><img style='cursor: pointer;' onclick='anularCatalogo(".$catalogo.");' src='".  base_url()."images/delete.gif'/></td>
+                            <td style='text-align: center;'>".$nro_accesorio."</td> <td>".$tipo_accesorio."</td> <td>".$descripcion_accesorio."</td> <td><img style='cursor: pointer;' onclick='anularAccesorio(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
                        </tr>";
             
             $retorno[] = $concat;
@@ -249,7 +284,7 @@ class alta_fichas extends CI_Controller {
             $calibre = $info_catalogos[1];
             $modelo  = $info_catalogos[2];
             
-            if(!$this->alta_compras_model->existePieza($nro_serie, $marca, $calibre, $modelo, $nro_pieza)) {
+            if($this->alta_fichas_model->existePieza($nro_serie, $marca, $calibre, $modelo, $nro_pieza)) {
                 $mensjError[] = 5;
             }            
         }
@@ -292,7 +327,7 @@ class alta_fichas extends CI_Controller {
                     break;
                 
                 case 5:
-                    $retorno[] = $this->mensajes->errorExiste('accesorio');
+                    $retorno[] = $this->mensajes->errorExiste('pieza');
                     break;
                 
                 case 6:
@@ -307,8 +342,10 @@ class alta_fichas extends CI_Controller {
             $_SESSION['piezas'][] = $tipo_pieza;
             $_SESSION['piezas'][] = $descripcion_pieza;
             
+            $aux = '"'.$nro_pieza.'"';
+            
             $concat = "<tr> 
-                            <td style='text-align: center;'>".$nro_pieza."</td> <td>".$tipo_pieza."</td> <td>".$descripcion_pieza."</td> <td><img style='cursor: pointer;' onclick='anularCatalogo(".$catalogo.");' src='".  base_url()."images/delete.gif'/></td>
+                            <td style='text-align: center;'>".$nro_pieza."</td> <td>".$tipo_pieza."</td> <td>".$descripcion_pieza."</td> <td><img style='cursor: pointer;' onclick='anularPieza(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
                        </tr>";
             
             $retorno[] = $concat;

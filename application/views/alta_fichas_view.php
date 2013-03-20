@@ -122,7 +122,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_fichas/agregarAccesorios",
+                   url: "<?php base_url(); ?>alta_fichas/agregarAccesorio",
                    data: "nro_accesorio="+nro_accesorio+"&tipo_accesorio="+tipo_accesorio+"&descripcion_accesorio="+descripcion_accesorio+"&nro_catalogo="+nro_catalogo+"&nro_serie="+nro_serie,
                    success: function(data) {
                        if(data[0] == 1) {
@@ -145,7 +145,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_fichas/agregarPiezas",
+                   url: "<?php base_url(); ?>alta_fichas/agregarPieza",
                    data: "nro_pieza="+nro_pieza+"&tipo_pieza="+tipo_pieza+"&descripcion_pieza="+descripcion_pieza+"&nro_catalogo="+nro_catalogo+"&nro_serie="+nro_serie,
                    success: function(data) {
                        if(data[0] == 1) {
@@ -155,6 +155,14 @@
                        }
                    }
                 });                
+            }
+            
+            function anularAccesorio(nro_accesorio) {
+                alert(nro_accesorio);
+            }
+            
+            function anularCatalogo(nro_pieza) {
+                alert(nro_pieza);
             }
             
         </script>
@@ -210,7 +218,7 @@
                 
                 <dl> 		
                 <dt><label for="tipo_accesorio"> Tipo accesorio </label></dt>	
-                <dd><select id="tipo_accesorio"> <?php echo $tipo_accesorio; ?> </select> <img style="cursor: pointer;" onclick="crearTipoAccesorio();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
+                <dd><select id="tipo_accesorio"> <?php echo $tipo_accesorios; ?> </select> <img style="cursor: pointer;" onclick="crearTipoAccesorio();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
                 </dl>                
                 
                 <dl>
@@ -247,7 +255,7 @@
                 
                 <dl> 		
                 <dt><label for="tipo_pieza"> Tipo pieza </label></dt>	
-                <dd><select id="tipo_pieza"> <?php echo $tipo_pieza; ?> </select> <img style="cursor: pointer;" onclick="crearTipoPieza();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
+                <dd><select id="tipo_pieza"> <?php echo $tipo_piezas; ?> </select> <img style="cursor: pointer;" onclick="crearTipoPieza();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
                 </dl>                
                 
                 <dl>

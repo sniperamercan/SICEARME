@@ -38,6 +38,36 @@ class alta_fichas_model extends CI_Model {
         return $nro_catalogos;
     }    
     
+    function cargoAccesorios() {
+        
+        $query = $this->db->query("SELECT tipo_accesorio
+                                   FROM tipos_accesorios
+                                   ORDER BY tipo_accesorio");
+        
+        $tipos_accesorios = array();
+        
+        foreach($query->result() as $row) {
+            $tipos_accesorios[] = $row->tipo_accesorio;
+        }
+        
+        return $tipos_accesorios;        
+    }
+    
+    function cargoPiezas() {
+        
+        $query = $this->db->query("SELECT tipo_pieza
+                                   FROM tipos_piezas
+                                   ORDER BY tipo_pieza");
+        
+        $tipos_piezas = array();
+        
+        foreach($query->result() as $row) {
+            $tipos_piezas[] = $row->tipo_pieza;
+        }
+        
+        return $tipos_piezas;        
+    }    
+    
     function cargoInformacion($nro_catalogo) {
         
         $query = $this->db->query("SELECT marca, calibre, modelo
