@@ -100,8 +100,8 @@
                    url: "<?php base_url(); ?>alta_actas_alta/cargoMarcasAccesorios",
                    data: "nro_serie="+nro_serie,
                    success: function(data) {
-                       $("#marca").html("");
-                       $("#marca").html(data);
+                       $("#marca_accesorio").html("");
+                       $("#marca_accesorio").html(data);
                    }
                 });                
             }
@@ -112,8 +112,8 @@
                    url: "<?php base_url(); ?>alta_actas_alta/cargoCalibresAccesorios",
                    data: "nro_serie="+nro_serie+"&marca="+marca,
                    success: function(data) {
-                       $("#calibre").html("");
-                       $("#calibre").html(data);
+                       $("#calibre_accesorio").html("");
+                       $("#calibre_accesorio").html(data);
                    }
                 });                
             }
@@ -124,8 +124,8 @@
                    url: "<?php base_url(); ?>alta_actas_alta/cargoModelosAccesorios",
                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre,
                    success: function(data) {
-                       $("#modelo").html("");
-                       $("#modelo").html(data);
+                       $("#modelo_accesorio").html("");
+                       $("#modelo_accesorio").html(data);
                    }
                 });                
             }
@@ -133,7 +133,7 @@
             function cargoNroAccesorios(nro_serie, marca, calibre, modelo) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoModelosAccesorios",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoNroAccesorios",
                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
                    success: function(data) {
                        $("#nro_accesorio").html("");
@@ -266,7 +266,7 @@
                             <table> 
                                 <thead>
                                     <tr>
-                                        <th> Nro acta </th> <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> 
+                                        <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> </th>
                                     </tr>
                                 </thead>
                                 <tbody id="entregas_armamento"></tbody>
@@ -295,8 +295,8 @@
                         <div class="datagrid" style="margin-top: 30px;">
                             <table> 
                                 <thead>
-                                    <tr>
-                                        <th> Nro acta </th> <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Nro accesorio </th>
+                                    <tr> 
+                                        <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Nro accesorio </th> <th> </th>
                                     </tr>
                                 </thead>
                                 <tbody id="entregas_accesorios"></tbody>

@@ -27,7 +27,7 @@ class alta_actas_alta_model extends CI_Model {
         
         //idunidad = 98 - Deposito inicial
         
-        $query = $this->db->query("SELECT nro_serie
+        $query = $this->db->query("SELECT DISTINCT nro_serie
                                    FROM stock_unidades
                                    WHERE idunidad = ".$this->db->escape('98')."
                                    ORDER BY nro_serie");
@@ -45,7 +45,7 @@ class alta_actas_alta_model extends CI_Model {
         
         //idunidad = 98 - Deposito inicial
         
-        $query = $this->db->query("SELECT marca
+        $query = $this->db->query("SELECT DISTINCT marca
                                    FROM stock_unidades
                                    WHERE idunidad = ".$this->db->escape('98')."
                                    AND nro_serie  = ".$this->db->escape($nro_serie)."    
@@ -64,7 +64,7 @@ class alta_actas_alta_model extends CI_Model {
         
         //idunidad = 98 - Deposito inicial
         
-        $query = $this->db->query("SELECT calibre
+        $query = $this->db->query("SELECT DISTINCT calibre
                                    FROM stock_unidades
                                    WHERE idunidad = ".$this->db->escape('98')."
                                    AND nro_serie  = ".$this->db->escape($nro_serie)."
@@ -84,7 +84,7 @@ class alta_actas_alta_model extends CI_Model {
         
         //idunidad = 98 - Deposito inicial
         
-        $query = $this->db->query("SELECT modelo
+        $query = $this->db->query("SELECT DISTINCT modelo
                                    FROM stock_unidades
                                    WHERE idunidad = ".$this->db->escape('98')."
                                    AND nro_serie  = ".$this->db->escape($nro_serie)."
@@ -105,7 +105,7 @@ class alta_actas_alta_model extends CI_Model {
         
         //idunidad = 98 - Deposito inicial
         
-        $query = $this->db->query("SELECT nro_serie
+        $query = $this->db->query("SELECT DISTINCT nro_serie
                                    FROM stock_unidades_accesorios
                                    WHERE idunidad = ".$this->db->escape('98')."
                                    ORDER BY nro_serie");
@@ -123,7 +123,7 @@ class alta_actas_alta_model extends CI_Model {
         
         //idunidad = 98 - Deposito inicial
         
-        $query = $this->db->query("SELECT marca
+        $query = $this->db->query("SELECT DISTINCT marca
                                    FROM stock_unidades_accesorios
                                    WHERE idunidad = ".$this->db->escape('98')."
                                    AND nro_serie  = ".$this->db->escape($nro_serie)."    
@@ -142,7 +142,7 @@ class alta_actas_alta_model extends CI_Model {
         
         //idunidad = 98 - Deposito inicial
         
-        $query = $this->db->query("SELECT calibre
+        $query = $this->db->query("SELECT DISTINCT calibre
                                    FROM stock_unidades_accesorios
                                    WHERE idunidad = ".$this->db->escape('98')."
                                    AND nro_serie  = ".$this->db->escape($nro_serie)."
@@ -162,7 +162,7 @@ class alta_actas_alta_model extends CI_Model {
         
         //idunidad = 98 - Deposito inicial
         
-        $query = $this->db->query("SELECT modelo
+        $query = $this->db->query("SELECT DISTINCT modelo
                                    FROM stock_unidades_accesorios
                                    WHERE idunidad = ".$this->db->escape('98')."
                                    AND nro_serie  = ".$this->db->escape($nro_serie)."
@@ -183,7 +183,7 @@ class alta_actas_alta_model extends CI_Model {
         
         //idunidad = 98 - Deposito inicial
         
-        $query = $this->db->query("SELECT nro_accesorio
+        $query = $this->db->query("SELECT DISTINCT nro_accesorio
                                    FROM stock_unidades_accesorios
                                    WHERE idunidad  = ".$this->db->escape('98')."
                                    AND nro_serie   = ".$this->db->escape($nro_serie)."
