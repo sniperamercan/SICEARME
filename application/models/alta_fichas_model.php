@@ -142,27 +142,59 @@ class alta_fichas_model extends CI_Model {
     
     function agregarFicha($nro_serie, $marca, $calibre, $modelo, $nro_compra, $nro_catalogo) {
         
-        $data_ficha = array(
-            'nro_serie'            => $nro_serie,
-            'marca'                => $marca,
-            'modelo'               => $modelo,
-            'calibre'              => $calibre,
-            'nro_interno_compra'   => $nro_compra,
-            'nro_interno_catalogo' => $nro_catalogo,
-            'usuario_alta'         => base64_decode($_SESSION['usuario']),
-            'usuario_edita'        => base64_decode($_SESSION['usuario'])
-        );
-        
-        $data_db_logs = array(
-            'tipo_movimiento' => 'insert',
-            'tabla'           => 'fichas',
-            'clave_tabla'     => 'nro_serie = '.$nro_serie.' & marca = '.$marca.' & modelo = '.$modelo.' & calibre = '.$calibre,
-            'usuario'         => base64_decode($_SESSION['usuario'])
-        );        
-
         $this->db->trans_start();
+        
+            $data_ficha = array(
+                'nro_serie'            => $nro_serie,
+                'marca'                => $marca,
+                'modelo'               => $modelo,
+                'calibre'              => $calibre,
+                'nro_interno_compra'   => $nro_compra,
+                'nro_interno_catalogo' => $nro_catalogo,
+                'usuario_alta'         => base64_decode($_SESSION['usuario']),
+                'usuario_edita'        => base64_decode($_SESSION['usuario'])
+            );
+
+            $data_db_logs = array(
+                'tipo_movimiento' => 'insert',
+                'tabla'           => 'fichas',
+                'clave_tabla'     => 'nro_serie = '.$nro_serie.' & marca = '.$marca.' & modelo = '.$modelo.' & calibre = '.$calibre,
+                'usuario'         => base64_decode($_SESSION['usuario'])
+            );        
+
             $this->db->insert('fichas', $data_ficha);
-            $this->db->insert('db_logs', $data_db_logs);
+            $this->db->insert('db_logs', $data_db_logs);            
+            
+            for($i=0; $i < count($_SESSION['accesorios']); $i=$i+3) {
+                
+                $data_ficha_accesorio = array(
+                    'nro_serie'       => $nro_serie,
+                    'marca'           => $marca,
+                    'modelo'          => $modelo,
+                    'calibre'         => $calibre,
+                    'nro_accesorio'   => $_SESSION['accesorios'][$i],
+                    'tipo_accesorio'  => $_SESSION['accesorios'][$i+1],
+                    'descripcion'     => $_SESSION['accesorios'][$i+2]
+                );
+                
+                $this->db->insert('fichas_accesorios', $data_ficha_accesorio);
+            }
+            
+            for($i=0; $i < count($_SESSION['piezas']); $i=$i+3) {
+                
+                $data_ficha_pieza = array(
+                    'nro_serie'       => $nro_serie,
+                    'marca'           => $marca,
+                    'modelo'          => $modelo,
+                    'calibre'         => $calibre,
+                    'nro_pieza'       => $_SESSION['piezas'][$i],
+                    'tipo_pieza'      => $_SESSION['piezas'][$i+1],
+                    'descripcion'     => $_SESSION['piezas'][$i+2]
+                );
+                
+                $this->db->insert('fichas_piezas', $data_ficha_pieza);
+            }        
+            
         $this->db->trans_complete();            
     }
 }
