@@ -207,18 +207,18 @@ class alta_actas_alta extends CI_Controller {
         
         $aux_nro_serie = '"'.$nro_serie.'"';
         $nro_series  = "<option onclick='cargoMarcas(".$aux.");'> </option>";
-        $nro_series .= "<option onclick='cargoMarcas(".$aux_nro_serie.");' val='".$nro_serie."'>".$nro_serie."</option>";
+        $nro_series .= "<option selected='selected' onclick='cargoMarcas(".$aux_nro_serie.");' val='".$nro_serie."'>".$nro_serie."</option>";
 
         $aux_marca = '"'.$marca.'"';
         $marcas  = "<option onclick='cargoCalibres(".$aux.");'> </option>";
-        $marcas .= "<option onclick='cargoCalibres(".$aux_nro_serie.",".$aux_marca.");' val='".$marca."'>".$marca."</option>";
+        $marcas .= "<option selected='selected' onclick='cargoCalibres(".$aux_nro_serie.",".$aux_marca.");' val='".$marca."'>".$marca."</option>";
         
         $aux_calibre = '"'.$calibre.'"';
         $calibres  = "<option onclick='cargoModelos(".$aux.");'> </option>";
-        $calibres .= "<option onclick='cargoModelos(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' val='".$calibre."'>".$calibre."</option>";
+        $calibres .= "<option selected='selected' onclick='cargoModelos(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' val='".$calibre."'>".$calibre."</option>";
         
         $modelos  = "<option> </option>";
-        $modelos .= "<option val='".$modelo."'>".$modelo."</option>";        
+        $modelos .= "<option selected='selected' val='".$modelo."'>".$modelo."</option>";        
         
         //retorno los datos
         $retorno = array();

@@ -45,20 +45,20 @@ class busqueda_fichas extends CI_Controller {
                 $and = 1; //agrego AND en proximo filtro
             }              
             
-            if(!empty($_POST['nro_interno_compra'])){
+            if(!empty($_POST['nro_compra'])){
                 if($and == 1){
                     $condicion .= " AND ";
                 }
-                $aux = $_POST['nro_interno_compra'];
+                $aux = $_POST['nro_compra'];
                 $condicion .= " nro_interno_compra = ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }            
             
-            if(!empty($_POST['nro_interno_catalogo'])){
+            if(!empty($_POST['nro_catalogo'])){
                 if($and == 1){
                     $condicion .= " AND ";
                 }
-                $aux = $_POST['nro_interno_catalogo'];
+                $aux = $_POST['nro_catalogo'];
                 $condicion .= " nro_interno_catalogo = ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }         
@@ -129,9 +129,9 @@ class busqueda_fichas extends CI_Controller {
             }                        
             
             $aux_nro_serie = '"'.$result[$i].'"';
-            $aux_marca     = '"'.$result[$i+1].'"';
-            $aux_calibre   = '"'.$result[$i+2].'"';
-            $aux_modelo    = '"'.$result[$i+3].'"';
+            $aux_marca     = '"'.$result[$i+3].'"';
+            $aux_calibre   = '"'.$result[$i+4].'"';
+            $aux_modelo    = '"'.$result[$i+5].'"';
             
             $concat .= "
                 <tr class='".$class."'> 
