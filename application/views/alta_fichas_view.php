@@ -193,6 +193,34 @@
                 });
             }
             
+            function crearTipoAccesorio() {
+                $.colorbox({href:"<?php echo base_url('alta_tipo_accesorio'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA ACCESORIOS", onClosed: function(){ cargoAccesorios(); } });
+            }
+
+            function crearTipoPieza() {
+                $.colorbox({href:"<?php echo base_url('alta_tipo_pieza'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA PIEZAS", onClosed: function(){ cargoPiezas(); } });
+            }
+
+            function cargoAccesorios() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_fichas/cargoAccesorios",
+                   success: function(data) {
+                       $("#tipo_accesorio").html(data);
+                   }
+                });
+            }     
+            
+            function cargoPiezas() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_fichas/cargoPiezas",
+                   success: function(data) {
+                       $("#tipo_pieza").html(data);
+                   }
+                });
+            }
+            
         </script>
         
     </head>

@@ -157,6 +157,32 @@ class alta_fichas extends CI_Controller {
         return $info_catalogo;
     }    
     
+    function cargoAccesorios() {
+        
+        $accesorios = $this->alta_fichas_model->cargoAccesorios();
+        
+        $concat = "<option> </option>";
+        
+        foreach($accesorios as $val) {
+            $concat .= "<option val='".$val."'>".$val."</option>";
+        }  
+        
+        echo $concat;
+    }
+    
+    function cargoPiezas() {
+
+        $piezas = $this->alta_fichas_model->cargoPiezas();
+        
+        $concat = "<option> </option>";
+        
+        foreach($piezas as $val) {
+            $concat .= "<option val='".$val."'>".$val."</option>";
+        }
+        
+        echo $concat;
+    }
+    
     function agregarAccesorio() {
         
         $nro_accesorio         = $_POST['nro_accesorio'];
