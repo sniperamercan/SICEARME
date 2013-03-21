@@ -141,6 +141,52 @@
                    }
                 });                
             }
+            
+            function busquedaFichas() {
+                $.colorbox({href:"<?php echo base_url('busqueda_fichas'); ?>", top:true, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA FICHAS", onClosed: function(){ cargoFichasFiltro(); } });
+            }
+            
+            function busquedaAccesorios() {
+                $.colorbox({href:"<?php echo base_url('busqueda_accesorios'); ?>", top:true, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA ACCESORIOS", onClosed: function(){ cargoAccesoriosFiltro(); } });
+            }            
+
+            function cargoFichasFiltro() {
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoFichasFiltro",
+                   success: function(data) {
+                       $("#nro_serie").html("");
+                       $("#nro_serie").html(data[0]);
+                       $("#marca").html("");
+                       $("#marca").html(data[1]);
+                       $("#calibre").html("");
+                       $("#calibre").html(data[2]);
+                       $("#modelo").html("");
+                       $("#modelo").html(data[3]);
+                   }
+                });                
+            } 
+            
+            function cargoAccesoriosFiltro() {
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoAccesoriosFiltro",
+                   success: function(data) {
+                       $("#nro_serie_accesorio").html("");
+                       $("#nro_serie_accesorio").html(data[0]);
+                       $("#marca_accesorio").html("");
+                       $("#marca_accesorio").html(data[1]);
+                       $("#calibre_accesorio").html("");
+                       $("#calibre_accesorio").html(data[2]);
+                       $("#modelo_accesorio").html("");
+                       $("#modelo_accesorio").html(data[3]);
+                       $("#nro_accesorio_accesorio").html("");
+                       $("#nro_accesorio_accesorio").html(data[4]);                       
+                   }
+                });                
+            }             
 
         </script>
         
@@ -195,7 +241,7 @@
                 
                 <dl> 		
                 <dt><label for="nro_serie"> Nro serie </label></dt>	
-                <dd><select id="nro_serie"> <?php echo $nro_series; ?> </select> <img style="cursor: pointer;" onclick="crearTipoArma();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><select id="nro_serie"> <?php echo $nro_series; ?> </select> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
@@ -221,7 +267,7 @@
                 
                 <dl> 		
                 <dt><label for="nro_serie_accesorio"> Nro serie </label></dt>	
-                <dd><select id="nro_serie_accesorio"> <?php echo $nro_series_accesorios; ?> </select> <img style="cursor: pointer;" onclick="crearTipoArma();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><select id="nro_serie_accesorio"> <?php echo $nro_series_accesorios; ?> </select> <img style="cursor: pointer;" onclick="busquedaAccesorios();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		

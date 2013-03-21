@@ -196,6 +196,81 @@ class alta_actas_alta extends CI_Controller {
         echo $concat;
     }     
     
+    function cargoFichasFiltro() {
+        
+        $nro_serie = $_SESSION['seleccion_busqueda'];
+        $marca     = $_SESSION['seleccion_busqueda1'];
+        $calibre   = $_SESSION['seleccion_busqueda2'];
+        $modelo    = $_SESSION['seleccion_busqueda3'];
+       
+        $aux = '""';
+        
+        $aux_nro_serie = '"'.$nro_serie.'"';
+        $nro_series  = "<option onclick='cargoMarcas(".$aux.");'> </option>";
+        $nro_series .= "<option onclick='cargoMarcas(".$aux_nro_serie.");' val='".$nro_serie."'>".$nro_serie."</option>";
+
+        $aux_marca = '"'.$marca.'"';
+        $marcas  = "<option onclick='cargoCalibres(".$aux.");'> </option>";
+        $marcas .= "<option onclick='cargoCalibres(".$aux_nro_serie.",".$aux_marca.");' val='".$marca."'>".$marca."</option>";
+        
+        $aux_calibre = '"'.$calibre.'"';
+        $calibres  = "<option onclick='cargoModelos(".$aux.");'> </option>";
+        $calibres .= "<option onclick='cargoModelos(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' val='".$calibre."'>".$calibre."</option>";
+        
+        $modelos  = "<option> </option>";
+        $modelos .= "<option val='".$modelo."'>".$modelo."</option>";        
+        
+        //retorno los datos
+        $retorno = array();
+        $retorno[] = $nro_series;
+        $retorno[] = $marcas;
+        $retorno[] = $calibres;
+        $retorno[] = $modelos;
+        
+        echo json_encode($retorno);        
+    }
+    
+    function cargoAccesoriosFiltro() {
+        
+        $nro_serie     = $_SESSION['seleccion_busqueda'];
+        $marca         = $_SESSION['seleccion_busqueda1'];
+        $calibre       = $_SESSION['seleccion_busqueda2'];
+        $modelo        = $_SESSION['seleccion_busqueda3'];
+        $nro_accesorio = $_SESSION['seleccion_busqueda4'];
+       
+        $aux = '""';
+        
+        $aux_nro_serie = '"'.$nro_serie.'"';
+        $nro_series  = "<option onclick='cargoMarcasAccerios(".$aux.");'> </option>";
+        $nro_series .= "<option onclick='cargoMarcasAccerios(".$aux_nro_serie.");' val='".$nro_serie."'>".$nro_serie."</option>";
+
+        $aux_marca = '"'.$marca.'"';
+        $marcas  = "<option onclick='cargoCalibresAccesorios(".$aux.",".$aux.");'> </option>";
+        $marcas .= "<option onclick='cargoCalibres(".$aux_nro_serie.",".$aux_marca.");' val='".$marca."'>".$marca."</option>";
+        
+        $aux_calibre = '"'.$calibre.'"';
+        $calibres  = "<option onclick='cargoModelosAccesorios(".$aux.",".$aux.",".$aux.");'> </option>";
+        $calibres .= "<option onclick='cargoModelosAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' val='".$calibre."'>".$calibre."</option>";
+
+        $aux_modelo = '"'.$modelo.'"';
+        $modelos  = "<option onclick='cargoNroAccesorios(".$aux.",".$aux.",".$aux.",".$aux.");'> </option>";
+        $modelos .= "<option onclick='cargoNroAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.", ".$aux_modelo.");' val='".$modelo."'>".$modelo."</option>";
+        
+        $nro_accesorios  = "<option> </option>";
+        $nro_accesorios .= "<option val='".$modelo."'>".$modelo."</option>";        
+        
+        //retorno los datos
+        $retorno = array();
+        $retorno[] = $nro_series;
+        $retorno[] = $marcas;
+        $retorno[] = $calibres;
+        $retorno[] = $modelos;
+        $retorno[] = $nro_accesorios;
+        
+        echo json_encode($retorno);        
+    }    
+    
+    
     function validarDatos() {
         
         $usuario  = $_POST['usuario'];
