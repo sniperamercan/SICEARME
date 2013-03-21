@@ -42,7 +42,9 @@ class alta_fichas extends CI_Controller {
         //numero de compra
         $nro_compras = $this->alta_fichas_model->cargoNroCompras();
         
-        $data['nro_compras'] = "<option> </option>";
+        $aux = '""';
+        
+        $data['nro_compras'] = "<option onclick='cargoNroCatalogos(".$aux.")' val=''> </option>";
         
         foreach($nro_compras as $val) {
             $data['nro_compras'] .= "<option onclick='cargoNroCatalogos(".$val.")' val='".$val."'>".$val."</option>";
@@ -121,7 +123,9 @@ class alta_fichas extends CI_Controller {
         
         $nro_catalogos = $this->alta_fichas_model->cargoNroCatalogos($nro_compra);
         
-        $concat = "<option> </option>";
+        $aux = '""';
+        
+        $concat = "<option onclick='cargoInformacion(".$aux.")' val=''> </option>";
         
         foreach($nro_catalogos as $val) {
             $concat .= "<option onclick='cargoInformacion(".$val.")' val='".$val."'>".$val."</option>";
@@ -133,6 +137,7 @@ class alta_fichas extends CI_Controller {
     function cargoInformacion() {
         
         $nro_catalogo = $_POST['nro_catalogo'];
+        $info_catalogo = array();
         
         if($this->alta_fichas_model->existeNroCatalogo($nro_catalogo)) {
             $info_catalogo = $this->alta_fichas_model->cargoInformacion($nro_catalogo);
@@ -142,6 +147,8 @@ class alta_fichas extends CI_Controller {
     }
     
     function cargoInformacionArray($nro_catalogo) {
+        
+        $info_catalogo = array();
         
         if($this->alta_fichas_model->existeNroCatalogo($nro_catalogo)) {
             $info_catalogo = $this->alta_fichas_model->cargoInformacion($nro_catalogo);
@@ -158,6 +165,7 @@ class alta_fichas extends CI_Controller {
         $nro_catalogo          = $_POST['nro_catalogo'];
         $nro_serie             = $_POST['nro_serie'];
         
+        $info_catalogos = array();
         $mensjError = array();
         $retorno = array();
         
@@ -177,16 +185,18 @@ class alta_fichas extends CI_Controller {
             $mensjError[] = 4;
         }else {
             
-            $info_catalogos = $this->cargoInformacionArray($nro_catalogo);
-            $marca   = $info_catalogos[0];
-            $calibre = $info_catalogos[1];
-            $modelo  = $info_catalogos[2];
+            if(!is_null($nro_catalogo)) {
+                $info_catalogos = $this->cargoInformacionArray($nro_catalogo);
+                $marca   = $info_catalogos[0];
+                $calibre = $info_catalogos[1];
+                $modelo  = $info_catalogos[2];
+
+                if($this->alta_fichas_model->existeAccesorio($nro_serie, $marca, $calibre, $modelo, $nro_accesorio)) {
+                    $mensjError[] = 5;
+                }  
+            }
+        }    
             
-            if($this->alta_fichas_model->existeAccesorio($nro_serie, $marca, $calibre, $modelo, $nro_accesorio)) {
-                $mensjError[] = 5;
-            }            
-        }
-        
         //verifico que el nro de catalogo no exista ya en el listado
         $encontre = false;
         $i = 0;
@@ -260,6 +270,7 @@ class alta_fichas extends CI_Controller {
         $nro_catalogo      = $_POST['nro_catalogo'];
         $nro_serie         = $_POST['nro_serie'];
         
+        $info_catalogos = array();
         $mensjError = array();
         $retorno = array();
         
@@ -278,15 +289,18 @@ class alta_fichas extends CI_Controller {
         if(empty($nro_catalogo)) {
             $mensjError[] = 4;
         }else {
-            
-            $info_catalogos = $this->cargoInformacionArray($nro_catalogo);
-            $marca   = $info_catalogos[0];
-            $calibre = $info_catalogos[1];
-            $modelo  = $info_catalogos[2];
-            
-            if($this->alta_fichas_model->existePieza($nro_serie, $marca, $calibre, $modelo, $nro_pieza)) {
-                $mensjError[] = 5;
-            }            
+           
+            if(!is_null($nro_catalogo)) {
+
+                $info_catalogos = $this->cargoInformacionArray($nro_catalogo);
+                $marca   = $info_catalogos[0];
+                $calibre = $info_catalogos[1];
+                $modelo  = $info_catalogos[2];
+
+                if($this->alta_fichas_model->existePieza($nro_serie, $marca, $calibre, $modelo, $nro_pieza)) {
+                    $mensjError[] = 5;
+                }  
+            }
         }
         
         //verifico que el nro de catalogo no exista ya en el listado
@@ -352,6 +366,96 @@ class alta_fichas extends CI_Controller {
         }
         
         echo json_encode($retorno);           
+    }
+    
+    function anularAccesorio() {
+        
+        $nro_accesorio = $_POST['nro_accesorio'];
+        
+        $retorno = array();
+        $encontre = false;
+        $i = 0;
+        
+        while($i < count($_SESSION['accesorios']) && !$encontre) {
+            
+            if($_SESSION['accesorios'][$i] == $nro_accesorio) {
+                $encontre = true;
+                unset($_SESSION['accesorios'][$i]); //nro_accesorio
+                unset($_SESSION['accesorios'][$i+1]); //tipo_accesorio
+                unset($_SESSION['accesorios'][$i+2]); //descripcion_accesorio
+                $_SESSION['accesorios'] = array_values($_SESSION['accesorios']); //reordeno el array
+            }
+            $i=$i+3;
+        }
+        
+        if($encontre) {
+            
+            $concat = '';
+            
+            for($i=0; $i < count($_SESSION['accesorios']); $i=$i+3) {
+
+                $aux = '"'.$_SESSION['accesorios'][$i].'"';
+
+                $concat .= "<tr> 
+                                <td style='text-align: center;'>".$_SESSION['accesorios'][$i]."</td> <td>".$_SESSION['accesorios'][$i+1]."</td> <td>".$_SESSION['accesorios'][$i+2]."</td> <td><img style='cursor: pointer;' onclick='anularAccesorio(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
+                           </tr>";
+            }
+            if(count($_SESSION['accesorios']) == 0) {
+                $retorno[] = 0;
+            }else {
+                $retorno[] = 1;
+                $retorno[] = $concat;
+            }
+        }else {
+            $retorno[] = 0;
+        }
+        
+        echo json_encode($retorno);        
+    }
+    
+    function anularPieza() {
+        
+        $nro_pieza = $_POST['nro_pieza'];
+        
+        $retorno = array();
+        $encontre = false;
+        $i = 0;
+        
+        while($i < count($_SESSION['piezas']) && !$encontre) {
+            
+            if($_SESSION['piezas'][$i] == $nro_pieza) {
+                $encontre = true;
+                unset($_SESSION['piezas'][$i]); //nro_accesorio
+                unset($_SESSION['piezas'][$i+1]); //tipo_accesorio
+                unset($_SESSION['piezas'][$i+2]); //descripcion_accesorio
+                $_SESSION['piezas'] = array_values($_SESSION['piezas']); //reordeno el array
+            }
+            $i=$i+3;
+        }
+        
+        if($encontre) {
+            
+            $concat = '';
+            
+            for($i=0; $i<count($_SESSION['piezas']); $i=$i+3) {
+
+                $aux = '"'.$_SESSION['piezas'][$i].'"';
+
+                $concat .= "<tr> 
+                                <td style='text-align: center;'>".$_SESSION['piezas'][$i]."</td> <td>".$_SESSION['piezas'][$i+1]."</td> <td>".$_SESSION['piezas'][$i+2]."</td> <td><img style='cursor: pointer;' onclick='anularPieza(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
+                           </tr>";
+            }
+            if(count($_SESSION['piezas']) == 0) {
+                $retorno[] = 0;
+            }else {
+                $retorno[] = 1;
+                $retorno[] = $concat;
+            }
+        }else {
+            $retorno[] = 0;
+        }
+        
+        echo json_encode($retorno);        
     }
     
     function validarDatos() {

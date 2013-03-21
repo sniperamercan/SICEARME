@@ -158,11 +158,39 @@
             }
             
             function anularAccesorio(nro_accesorio) {
-                alert(nro_accesorio);
+            
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_fichas/anularAccesorio",
+                   data: "nro_accesorio="+nro_accesorio,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#accesorios").html("");
+                           $("#accesorios").html(data[1]);
+                       }else {
+                           $("#accesorios").html("");
+                       }
+                   }
+                });
             }
             
-            function anularCatalogo(nro_pieza) {
-                alert(nro_pieza);
+            function anularPieza(nro_pieza) {
+            
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_fichas/anularPieza",
+                   data: "nro_pieza="+nro_pieza,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#piezas").html("");
+                           $("#piezas").html(data[1]);
+                       }else {
+                           $("#piezas").html("");
+                       }
+                   }
+                });
             }
             
         </script>
@@ -204,7 +232,7 @@
                 
                 <dl> 		
                 <dt><label for="nro_catalogo"> Nro catalogo </label></dt>	
-                <dd><select id="nro_catalogo">  </select></dd> 					
+                <dd><select id="nro_catalogo"> <option selected="selected" val=""> </option>  </select></dd> 					
                 </dl>
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
