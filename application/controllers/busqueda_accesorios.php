@@ -1,11 +1,11 @@
 <?php
 
-class busqueda_fichas extends CI_Controller {
+class busqueda_accesorios extends CI_Controller {
     
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('busqueda_fichas_model');
+        $this->load->model('busqueda_accesorios_model');
         $this->load->library('perms');
         $this->load->library('pagination');   
         $this->load->library('mensajes');
@@ -25,9 +25,10 @@ class busqueda_fichas extends CI_Controller {
         $_SESSION['seleccion_busqueda1'] = ""; //elemento que se selecciona 2
         $_SESSION['seleccion_busqueda2'] = ""; //elemento que se selecciona 3
         $_SESSION['seleccion_busqueda3'] = ""; //elemento que se selecciona 4
+        $_SESSION['seleccion_busqueda4'] = ""; //elemento que se selecciona 5
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
-        $this->load->view("busqueda_fichas_view");
+        $this->load->view("busqueda_accesorios_view");
     }
     
     //cantReg = cantidad de registros x pagina
@@ -116,11 +117,11 @@ class busqueda_fichas extends CI_Controller {
         
         $concat = "";
         
-        $result = $this->busqueda_fichas_model->consulta_db($param, $cantReg, $condicion, $order);
+        $result = $this->busqueda_accesorios_model->consulta_db($param, $cantReg, $condicion, $order);
           
         $j=0;
         
-        for($i=0;$i<count($result);$i=$i+6) {
+        for($i=0;$i<count($result);$i=$i+7) {
             
             if($j % 2 == 0){
                 $class = "";
@@ -128,28 +129,30 @@ class busqueda_fichas extends CI_Controller {
                 $class = "alt";
             }                        
             
-            $aux_nro_serie = '"'.$result[$i].'"';
-            $aux_marca     = '"'.$result[$i+3].'"';
-            $aux_calibre   = '"'.$result[$i+4].'"';
-            $aux_modelo    = '"'.$result[$i+5].'"';
+            $aux_nro_serie     = '"'.$result[$i].'"';
+            $aux_marca         = '"'.$result[$i+3].'"';
+            $aux_calibre       = '"'.$result[$i+4].'"';
+            $aux_modelo        = '"'.$result[$i+5].'"';
+            $aux_nro_accesorio = '"'.$result[$i+6].'"';
             
             $concat .= "
                 <tr class='".$class."'> 
-                    <td onclick='seleccion(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/select.png' /> </td>
+                    <td onclick='seleccion(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.",".$aux_nro_accesorio.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/select.png' /> </td>
                     <td> ".$result[$i]."   </td>
                     <td> ".$result[$i+1]." </td>
                     <td> ".$result[$i+2]." </td>
                     <td> ".$result[$i+3]." </td>
                     <td> ".$result[$i+4]." </td>
                     <td> ".$result[$i+5]." </td>
+                    <td> ".$result[$i+6]." </td>
                 </tr>
             ";
             
             $j++;
         }                  
         
-        $config['base_url'] = site_url("busqueda_fichas/consulta");
-        $config['total_rows'] = $this->busqueda_fichas_model->cantidadRegistros($condicion);
+        $config['base_url'] = site_url("busqueda_accesorios/consulta");
+        $config['total_rows'] = $this->busqueda_accesorios_model->cantidadRegistros($condicion);
         $config['per_page'] = $cantReg;
         $config['first_link'] = 'Primera';
         $config['last_link'] = 'Ultima';
@@ -201,11 +204,11 @@ class busqueda_fichas extends CI_Controller {
             echo "La pagina inicial y final deben de estar completadas ";
         }else if( $a_pagina < $de_pagina ){
             echo "La pagina inicila no puede ser mayor que la pagina final verifique";
-        }else if( $this->busqueda_fichas_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
+        }else if( $this->busqueda_accesorios_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
             echo "No existe tal cantidad de paginas para esa consulta verifique";
         }else{
             echo "1";
-            if( $this->busqueda_fichas_model->cantidadRegistros($condicion) <= 30 ){
+            if( $this->busqueda_accesorios_model->cantidadRegistros($condicion) <= 30 ){
                 $ini   = 0;
                 $param = 30;
                 $this->consultaImpresion($condicion, $ini, $param, $order);
@@ -232,7 +235,7 @@ class busqueda_fichas extends CI_Controller {
         
         $concat = "";
         
-        $result = $this->busqueda_fichas_model->consulta_db($param, $cantReg, $condicion, $order);
+        $result = $this->busqueda_accesorios_model->consulta_db($param, $cantReg, $condicion, $order);
                 
         
         $concat .= '<center>';
@@ -241,16 +244,17 @@ class busqueda_fichas extends CI_Controller {
         
         $concat .= '
             <tr>
-                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro serie    </td>
-                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro compra   </td>
-                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro catalogo </td>
-                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Marca        </td>
-                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Calibre      </td>
-                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Modelo       </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro serie      </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro compra     </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro catalogo   </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Marca          </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Calibre        </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Modelo         </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro accesorio  </td>
             </tr>   
         ';
                 
-        for($i=0;$i<count($result);$i=$i+6) {            
+        for($i=0;$i<count($result);$i=$i+7) {            
             $concat .= "
                 <tr>
                     <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i]."   </td>
@@ -259,6 +263,7 @@ class busqueda_fichas extends CI_Controller {
                     <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+3]." </td>
                     <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+4]." </td>
                     <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+5]." </td>
+                    <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+6]." </td>
                 </tr>
             ";
         }                  
@@ -298,7 +303,11 @@ class busqueda_fichas extends CI_Controller {
             
             case 5:
                 $_SESSION['order'][0] = 'modelo';
-                break;            
+                break;   
+            
+            case 6:
+                $_SESSION['order'][0] = 'nro_accesorio';
+                break;             
         }
        
         if(!isset($_SESSION['order'][1])){
@@ -315,6 +324,7 @@ class busqueda_fichas extends CI_Controller {
         $_SESSION['seleccion_busqueda1'] = $_POST['marca'];
         $_SESSION['seleccion_busqueda2'] = $_POST['calibre'];
         $_SESSION['seleccion_busqueda3'] = $_POST['modelo'];
+        $_SESSION['seleccion_busqueda4'] = $_POST['nro_accesorio'];
         
         /*al seleccionar un catalogo del listado usar esta variable de sesion 
         *   $_SESSION['seleccion_busqueda']

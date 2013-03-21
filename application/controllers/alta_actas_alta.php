@@ -242,22 +242,22 @@ class alta_actas_alta extends CI_Controller {
         
         $aux_nro_serie = '"'.$nro_serie.'"';
         $nro_series  = "<option onclick='cargoMarcasAccerios(".$aux.");'> </option>";
-        $nro_series .= "<option onclick='cargoMarcasAccerios(".$aux_nro_serie.");' val='".$nro_serie."'>".$nro_serie."</option>";
+        $nro_series .= "<option selected='selected' onclick='cargoMarcasAccerios(".$aux_nro_serie.");' val='".$nro_serie."'>".$nro_serie."</option>";
 
         $aux_marca = '"'.$marca.'"';
         $marcas  = "<option onclick='cargoCalibresAccesorios(".$aux.",".$aux.");'> </option>";
-        $marcas .= "<option onclick='cargoCalibres(".$aux_nro_serie.",".$aux_marca.");' val='".$marca."'>".$marca."</option>";
+        $marcas .= "<option selected='selected' onclick='cargoCalibres(".$aux_nro_serie.",".$aux_marca.");' val='".$marca."'>".$marca."</option>";
         
         $aux_calibre = '"'.$calibre.'"';
         $calibres  = "<option onclick='cargoModelosAccesorios(".$aux.",".$aux.",".$aux.");'> </option>";
-        $calibres .= "<option onclick='cargoModelosAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' val='".$calibre."'>".$calibre."</option>";
+        $calibres .= "<option selected='selected' onclick='cargoModelosAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' val='".$calibre."'>".$calibre."</option>";
 
         $aux_modelo = '"'.$modelo.'"';
         $modelos  = "<option onclick='cargoNroAccesorios(".$aux.",".$aux.",".$aux.",".$aux.");'> </option>";
-        $modelos .= "<option onclick='cargoNroAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.", ".$aux_modelo.");' val='".$modelo."'>".$modelo."</option>";
+        $modelos .= "<option selected='selected' onclick='cargoNroAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.", ".$aux_modelo.");' val='".$modelo."'>".$modelo."</option>";
         
         $nro_accesorios  = "<option> </option>";
-        $nro_accesorios .= "<option val='".$modelo."'>".$modelo."</option>";        
+        $nro_accesorios .= "<option selected='selected' val='".$nro_accesorio."'>".$nro_accesorio."</option>";        
         
         //retorno los datos
         $retorno = array();

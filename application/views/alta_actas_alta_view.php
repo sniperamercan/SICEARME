@@ -182,8 +182,8 @@
                        $("#calibre_accesorio").html(data[2]);
                        $("#modelo_accesorio").html("");
                        $("#modelo_accesorio").html(data[3]);
-                       $("#nro_accesorio_accesorio").html("");
-                       $("#nro_accesorio_accesorio").html(data[4]);                       
+                       $("#nro_accesorio").html("");
+                       $("#nro_accesorio").html(data[4]);                       
                    }
                 });                
             }             
