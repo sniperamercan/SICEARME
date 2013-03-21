@@ -178,6 +178,19 @@ class alta_fichas_model extends CI_Model {
                 );
                 
                 $this->db->insert('fichas_accesorios', $data_ficha_accesorio);
+                
+                //doy de alta los accesorios al stock de deposito inicial
+                $data_stock_accesorio = array(
+                    'nro_serie'       => $nro_serie,
+                    'marca'           => $marca,
+                    'calibre'         => $modelo,
+                    'modelo'          => $calibre,
+                    'nro_accesorio'   => $_SESSION['accesorios'][$i],
+                    'idunidad'        => 98 //Unidad - Deposito inicial,
+                );
+                
+                $this->db->insert('stock_unidades_accesorios', $data_stock_accesorio);                
+                
             }
             
             for($i=0; $i < count($_SESSION['piezas']); $i=$i+3) {
@@ -201,8 +214,8 @@ class alta_fichas_model extends CI_Model {
                 'marca'           => $marca,
                 'modelo'          => $modelo,
                 'calibre'         => $calibre,
-                'idunidad'       => 98
-            );       
+                'idunidad'       => 98 //Unidad - Deposito inicial
+            );   
 
             $this->db->insert('stock_unidades', $data_stock_unidad);
             

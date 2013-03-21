@@ -57,6 +57,91 @@
                   }
                 });               
             }
+            
+            function cargoMarcas(nro_serie) {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoMarcas",
+                   data: "nro_serie="+nro_serie,
+                   success: function(data) {
+                       $("#marca").html("");
+                       $("#marca").html(data);
+                   }
+                });                
+            }
+            
+            function cargoCalibres(nro_serie, marca) {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoCalibres",
+                   data: "nro_serie="+nro_serie+"&marca="+marca,
+                   success: function(data) {
+                       $("#calibre").html("");
+                       $("#calibre").html(data);
+                   }
+                });                
+            }
+            
+            function cargoModelos(nro_serie, marca, calibre) {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoModelos",
+                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre,
+                   success: function(data) {
+                       $("#modelo").html("");
+                       $("#modelo").html(data);
+                   }
+                });                
+            }
+
+            function cargoMarcasAccesorios(nro_serie) {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoMarcasAccesorios",
+                   data: "nro_serie="+nro_serie,
+                   success: function(data) {
+                       $("#marca").html("");
+                       $("#marca").html(data);
+                   }
+                });                
+            }
+            
+            function cargoCalibresAccesorios(nro_serie, marca) {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoCalibresAccesorios",
+                   data: "nro_serie="+nro_serie+"&marca="+marca,
+                   success: function(data) {
+                       $("#calibre").html("");
+                       $("#calibre").html(data);
+                   }
+                });                
+            }
+            
+            function cargoModelosAccesorios(nro_serie, marca, calibre) {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoModelosAccesorios",
+                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre,
+                   success: function(data) {
+                       $("#modelo").html("");
+                       $("#modelo").html(data);
+                   }
+                });                
+            }
+
+            function cargoNroAccesorios(nro_serie, marca, calibre, modelo) {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoModelosAccesorios",
+                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
+                   success: function(data) {
+                       $("#nro_accesorio").html("");
+                       $("#nro_accesorio").html(data);
+                   }
+                });                
+            }
+
         </script>
         
     </head>
@@ -109,23 +194,23 @@
                 <p class="subtituloform"> Armamento a entregar </p>
                 
                 <dl> 		
-                <dt><label for="tipo_arma"> Nro serie </label></dt>	
-                <dd><select id="tipo_arma"> <?php echo $tipo_arma; ?> </select> <img style="cursor: pointer;" onclick="crearTipoArma();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dt><label for="nro_serie"> Nro serie </label></dt>	
+                <dd><select id="nro_serie"> <?php echo $nro_series; ?> </select> <img style="cursor: pointer;" onclick="crearTipoArma();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="marca"> Marca </label></dt>	
-                <dd><select id="marca"> <?php echo $marca; ?> </select> </dd> 					
+                <dd><select id="marca"> </select></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre"> Calibre </label></dt>	
-                <dd><select id="calibre"> <?php echo $calibre; ?> </select> </dd> 					
+                <dd><select id="calibre"> </select></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="modelo"> Modelo </label></dt>	
-                <dd><select id="modelo"> <?php echo $modelo; ?> </select></dd> 					
+                <dd><select id="modelo"> </select></dd> 					
                 </dl>
                 
                 <button style="margin-right: 20px;" onclick="agregarCatalogo();"> Agregar armamento </button>     
@@ -135,23 +220,23 @@
                 <p class="subtituloform"> Accesorios a entregar </p>
                 
                 <dl> 		
-                <dt><label for="tipo_arma"> Nro serie </label></dt>	
-                <dd><select id="tipo_arma"> <?php echo $nro_serie; ?> </select> <img style="cursor: pointer;" onclick="crearTipoArma();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dt><label for="nro_serie_accesorio"> Nro serie </label></dt>	
+                <dd><select id="nro_serie_accesorio"> <?php echo $nro_series_accesorios; ?> </select> <img style="cursor: pointer;" onclick="crearTipoArma();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="marca"> Marca </label></dt>	
-                <dd><select id="marca"> </select> </dd> 					
+                <dt><label for="marca_accesorio"> Marca </label></dt>	
+                <dd><select id="marca_accesorio"> </select> </dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="calibre"> Calibre </label></dt>	
-                <dd><select id="calibre"> </select> </dd> 					
+                <dt><label for="calibre_accesorio"> Calibre </label></dt>	
+                <dd><select id="calibre_accesorio"> </select> </dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="modelo"> Modelo </label></dt>	
-                <dd><select id="modelo"> </select></dd> 					
+                <dt><label for="modelo_accesorio"> Modelo </label></dt>	
+                <dd><select id="modelo_accesorio"> </select></dd> 					
                 </dl>
                 
                 <dl> 		
