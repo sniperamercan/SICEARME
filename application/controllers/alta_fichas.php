@@ -559,9 +559,7 @@ class alta_fichas extends CI_Controller {
             $this->alta_fichas_model->agregarFicha($nro_serie, $marca, $calibre, $modelo, $nro_compra, $nro_catalogo);
             echo 1;
         }
-        
     }
-    
 }
 
 ?>

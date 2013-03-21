@@ -193,7 +193,18 @@ class alta_fichas_model extends CI_Model {
                 );
                 
                 $this->db->insert('fichas_piezas', $data_ficha_pieza);
-            }        
+            }     
+            
+            //ese armemento lo doy de alta al stock de la unidad deposito inicial
+            $data_stock_unidad = array(
+                'nro_serie'       => $nro_serie,
+                'marca'           => $marca,
+                'modelo'          => $modelo,
+                'calibre'         => $calibre,
+                'idunidad'       => 98
+            );       
+
+            $this->db->insert('stock_unidades', $data_stock_unidad);
             
         $this->db->trans_complete();            
     }
