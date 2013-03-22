@@ -675,4 +675,3 @@ class alta_actas_alta extends CI_Controller {
 }
 
 ?>
->>>>>>> 
