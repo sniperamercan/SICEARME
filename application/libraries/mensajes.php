@@ -87,6 +87,10 @@ class mensajes {
         return "El numero de accesorio seleccionado ya existe en listado de ficha, verifique";
     }
     
+    function errorFichaExiste() {
+        return "La ficha seleccionado ya existe en listado de armamento a entregar, verifique";
+    }    
+    
     function errorPiezaExiste() {
         return "El numero de pieza seleccionado ya existe en listado de ficha, verifique";
     }    

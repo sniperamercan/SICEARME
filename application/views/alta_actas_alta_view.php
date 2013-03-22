@@ -27,30 +27,29 @@
         <script type="text/javascript">
 
             $(document).ready(function() {
-                $("#nro_compra").focus();
                 $("#fecha").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
-                $("#fabricacion").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
-                $("#vencimiento").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
                 $("input:submit").button();
                 $("button").button(); 
                 $("input:button").button(); 
             });	
 
-            function ingresarDatos() {
+            function altaActa() {
                 
-                var usuario   = $("#usuario").val();
-                var nombre    = $("#nombre").val();
-                var apellido  = $("#apellido").val();
-                var clave     = $("#clave").val();
+                var fecha                = $("#fecha").val();
+                var unidad_recibe        = $("#unidad_recibe").val();
+                var representante_sma    = $("#representante_sma").val();
+                var representante_unidad = $("#representante_unidad").val();
+                var supervision          = $("#supervision").val();
+                var observaciones        = $("#observaciones").val();
                 
                 $.ajax({
                     type: "post",  
                     dataType: "json",
-                    url: "<?php base_url(); ?>agregar_usuario/validarDatos",
-                    data: "usuario="+usuario+"&nombre="+nombre+"&apellido="+apellido+"&clave="+clave+"&persmisos="+JSON.stringify(permisos),
+                    url: "<?php base_url(); ?>alta_actas_alta/validarDatos",
+                    data: "fecha="+fecha+"&unidad_recibe="+unidad_recibe+"&representante_sma="+representante_sma+"&representante_unidad="+representante_unidad+"&supervision="+supervision+"&observaciones="+observaciones,
                     success: function(data){
-                        if(data == "1"){            
-                            jAlert("Usuario agregado al sistema con exito", "Correcto", function() { irAFrame('<?php echo base_url('agregar_usuario'); ?>','Adminitracion >> Agregar usuarios'); });
+                        if(data[0] == "1"){            
+                            jAlert("El acta se genero con exito, el nro de acta de alta generado es - "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('alta_actas_alta'); ?>','Abastecimiento >> Actas >> Acta alta'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
@@ -186,7 +185,88 @@
                        $("#nro_accesorio").html(data[4]);                       
                    }
                 });                
-            }             
+            } 
+
+            function agregarFicha() {
+            
+                var nro_serie  = $("#nro_serie").val();
+                var marca      = $("#marca").val();
+                var calibre    = $("#calibre").val();
+                var modelo     = $("#modelo").val();
+             
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_actas_alta/agregarFicha",
+                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#entregas_fichas").append(data[1]);
+                       }else {
+                           jAlert(data[0], "Error");
+                       }
+                   }
+                });           
+            }
+            
+            function anularFicha(nro_serie, marca, calibre, modelo) {
+            
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_actas_alta/anularFicha",
+                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#entregas_fichas").html("");
+                           $("#entregas_fichas").html(data[1]);
+                       }else {
+                           $("#entregas_fichas").html("");
+                       }
+                   }
+                });
+            }
+            
+            function agregarAccesorio() {
+            
+                var nro_serie     = $("#nro_serie_accesorio").val();
+                var marca         = $("#marca_accesorio").val();
+                var calibre       = $("#calibre_accesorio").val();
+                var modelo        = $("#modelo_accesorio").val();
+                var nro_accesorio = $("#nro_accesorio").val();
+             
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_actas_alta/agregarAccesorio",
+                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&nro_accesorio="+nro_accesorio,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#entregas_accesorios").append(data[1]);
+                       }else {
+                           jAlert(data[0], "Error");
+                       }
+                   }
+                });           
+            }
+            
+            function anularAccesorio(nro_serie, marca, calibre, modelo, nro_accesorio) {
+            
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_actas_alta/anularAccesorio",
+                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&nro_accesorio="+nro_accesorio,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#entregas_accesorios").html("");
+                           $("#entregas_accesorios").html(data[1]);
+                       }else {
+                           $("#entregas_accesorios").html("");
+                       }
+                   }
+                });
+            }            
 
         </script>
         
@@ -207,7 +287,7 @@
                 
                 <dl> 		
                 <dt><label for="unidad_entrega"> Unidad entrega </label></dt>	
-                <dd><input type="text" id="unidad_recibe" class="txtautomatico" readonly="readonly" value="S.M.A" /></dd> 					
+                <dd><input type="text" id="unidad_entrega" class="txtautomatico" readonly="readonly" value="S.M.A" /></dd> 					
                 </dl>
                 
                 <dl> 		
@@ -259,7 +339,7 @@
                 <dd><select id="modelo"> </select></dd> 					
                 </dl>
                 
-                <button style="margin-right: 20px;" onclick="agregarCatalogo();"> Agregar armamento </button>     
+                <button style="margin-right: 20px;" onclick="agregarFicha();"> Agregar armamento </button>     
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 
@@ -290,12 +370,12 @@
                 <dd><select id="nro_accesorio"> </select></dd> 					
                 </dl>                
                 
-                <button style="margin-right: 20px;" onclick="agregarCatalogo();"> Agregar accesorio </button>               
+                <button style="margin-right: 20px;" onclick="agregarAccesorio();"> Agregar accesorio </button>               
                                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="ingresarDatos();"> Alta ficha </button>
+                <button style="margin-right: 20px;" onclick="altaActa();"> Dar de alta el acta </button>
             </fieldset> 
             
             <hr />
@@ -315,7 +395,7 @@
                                         <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> </th>
                                     </tr>
                                 </thead>
-                                <tbody id="entregas_armamento"></tbody>
+                                <tbody id="entregas_fichas"></tbody>
                                 <tfoot>
                                     <tr> <td colspan="5"> <div id="paging"> <br /> </div> </td> </tr>
                                 </tfoot>                                
