@@ -57,6 +57,136 @@
                   }
                 });               
             }
+            
+            function cargoMarcas(nro_serie) {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoMarcas",
+                   data: "nro_serie="+nro_serie,
+                   success: function(data) {
+                       $("#marca").html("");
+                       $("#marca").html(data);
+                   }
+                });                
+            }
+            
+            function cargoCalibres(nro_serie, marca) {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoCalibres",
+                   data: "nro_serie="+nro_serie+"&marca="+marca,
+                   success: function(data) {
+                       $("#calibre").html("");
+                       $("#calibre").html(data);
+                   }
+                });                
+            }
+            
+            function cargoModelos(nro_serie, marca, calibre) {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoModelos",
+                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre,
+                   success: function(data) {
+                       $("#modelo").html("");
+                       $("#modelo").html(data);
+                   }
+                });                
+            }
+
+            function cargoMarcasAccesorios(nro_serie) {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoMarcasAccesorios",
+                   data: "nro_serie="+nro_serie,
+                   success: function(data) {
+                       $("#marca_accesorio").html("");
+                       $("#marca_accesorio").html(data);
+                   }
+                });                
+            }
+            
+            function cargoCalibresAccesorios(nro_serie, marca) {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoCalibresAccesorios",
+                   data: "nro_serie="+nro_serie+"&marca="+marca,
+                   success: function(data) {
+                       $("#calibre_accesorio").html("");
+                       $("#calibre_accesorio").html(data);
+                   }
+                });                
+            }
+            
+            function cargoModelosAccesorios(nro_serie, marca, calibre) {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoModelosAccesorios",
+                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre,
+                   success: function(data) {
+                       $("#modelo_accesorio").html("");
+                       $("#modelo_accesorio").html(data);
+                   }
+                });                
+            }
+
+            function cargoNroAccesorios(nro_serie, marca, calibre, modelo) {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoNroAccesorios",
+                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
+                   success: function(data) {
+                       $("#nro_accesorio").html("");
+                       $("#nro_accesorio").html(data);
+                   }
+                });                
+            }
+            
+            function busquedaFichas() {
+                $.colorbox({href:"<?php echo base_url('busqueda_fichas'); ?>", top:true, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA FICHAS", onClosed: function(){ cargoFichasFiltro(); } });
+            }
+            
+            function busquedaAccesorios() {
+                $.colorbox({href:"<?php echo base_url('busqueda_accesorios'); ?>", top:true, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA ACCESORIOS", onClosed: function(){ cargoAccesoriosFiltro(); } });
+            }            
+
+            function cargoFichasFiltro() {
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoFichasFiltro",
+                   success: function(data) {
+                       $("#nro_serie").html("");
+                       $("#nro_serie").html(data[0]);
+                       $("#marca").html("");
+                       $("#marca").html(data[1]);
+                       $("#calibre").html("");
+                       $("#calibre").html(data[2]);
+                       $("#modelo").html("");
+                       $("#modelo").html(data[3]);
+                   }
+                });                
+            } 
+            
+            function cargoAccesoriosFiltro() {
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoAccesoriosFiltro",
+                   success: function(data) {
+                       $("#nro_serie_accesorio").html("");
+                       $("#nro_serie_accesorio").html(data[0]);
+                       $("#marca_accesorio").html("");
+                       $("#marca_accesorio").html(data[1]);
+                       $("#calibre_accesorio").html("");
+                       $("#calibre_accesorio").html(data[2]);
+                       $("#modelo_accesorio").html("");
+                       $("#modelo_accesorio").html(data[3]);
+                       $("#nro_accesorio").html("");
+                       $("#nro_accesorio").html(data[4]);                       
+                   }
+                });                
+            }
         </script>
         
     </head>
@@ -109,8 +239,8 @@
                 <p class="subtituloform"> Armamento a devolver </p>
                 
                 <dl> 		
-                <dt><label for="tipo_arma"> Nro serie </label></dt>	
-                <dd><select id="tipo_arma"> <?php echo $tipo_arma; ?> </select> <img style="cursor: pointer;" onclick="crearTipoArma();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dt><label for="nro_serie"> Nro serie </label></dt>	
+                <dd><select id="nro_serie"> <?php echo $nro_series; ?> </select> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
@@ -135,23 +265,23 @@
                 <p class="subtituloform"> Accesorios a devolver </p>
                 
                 <dl> 		
-                <dt><label for="tipo_arma"> Nro serie </label></dt>	
-                <dd><select id="tipo_arma"> <?php echo $nro_serie; ?> </select> <img style="cursor: pointer;" onclick="crearTipoArma();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dt><label for="nro_serie_accesorio"> Nro serie </label></dt>	
+                <dd><select id="nro_serie_accesorio"> <?php echo $nro_series_accesorios; ?> </select> <img style="cursor: pointer;" onclick="busquedaAccesorios();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="marca"> Marca </label></dt>	
-                <dd><select id="marca"> </select> </dd> 					
+                <dt><label for="marca_accesorio"> Marca </label></dt>	
+                <dd><select id="marca_accesorio"> </select> </dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="calibre"> Calibre </label></dt>	
-                <dd><select id="calibre"> </select> </dd> 					
+                <dt><label for="calibre_accesorio"> Calibre </label></dt>	
+                <dd><select id="calibre_accesorio"> </select> </dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="modelo"> Modelo </label></dt>	
-                <dd><select id="modelo"> </select></dd> 					
+                <dt><label for="modelo_accesorio"> Modelo </label></dt>	
+                <dd><select id="modelo_accesorio"> </select></dd> 					
                 </dl>
                 
                 <dl> 		
@@ -181,10 +311,10 @@
                             <table> 
                                 <thead>
                                     <tr>
-                                        <th> Nro acta </th> <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> 
+                                        <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> 
                                     </tr>
                                 </thead>
-                                <tbody id="entregas_armamento"></tbody>
+                                <tbody id="devolucion_armamento"></tbody>
                                 <tfoot>
                                     <tr> <td colspan="5"> <div id="paging"> <br /> </div> </td> </tr>
                                 </tfoot>                                
@@ -211,10 +341,10 @@
                             <table> 
                                 <thead>
                                     <tr>
-                                        <th> Nro acta </th> <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Nro accesorio </th>
+                                        <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Nro accesorio </th>
                                     </tr>
                                 </thead>
-                                <tbody id="entregas_accesorios"></tbody>
+                                <tbody id="devolucion_accesorios"></tbody>
                                 <tfoot>
                                     <tr> <td colspan="6"> <div id="paging"> <br /> </div> </td> </tr>
                                 </tfoot>                                

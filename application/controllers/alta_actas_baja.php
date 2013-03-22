@@ -14,8 +14,8 @@ class alta_actas_baja extends CI_Controller {
             die($this->mensajes->sinPermisos());
         }         
         
-        //Modulo solo visible para el peril 2 y 3 - Usuarios O.C.I y Administradores O.C.I 
-        if(!$this->perms->verificoPerfil2()) {
+        //Modulo solo visible para el peril 6 y 7 - Usuarios taller y Administradores taller
+        if(!$this->perms->verificoPerfil6() || !$this->perms->verificoPerfil7()) {
             die($this->mensajes->sinPermisos());
         }
     }
@@ -30,7 +30,252 @@ class alta_actas_baja extends CI_Controller {
             $data['paises'] .= "<option val='".$val."'>".$val."</option>";
         }
         
+        //cargo las unidades
+        $unidades = $this->alta_actas_alta_model->cargoUnidades();
+        
+        $data['unidades'] = "<option> </option>";
+        
+        for($i=0; $i < count($unidades); $i=$i+2) {
+            $data['unidades'] .= "<option val='".$unidades[$i]."'>".$unidades[$i+1]."</option>";
+        }
+        //fin cargo unidades
+        
+        //cargo nro de series de armamentos que esten en abastecimiento
+        $nro_series = $this->alta_actas_baja_model->cargoNroSeries();
+        
+        $aux = '""';
+        $data['nro_series'] = "<option onclick='cargoMarcas(".$aux.");'> </option>";
+        
+        foreach($nro_series as $val) {
+            $aux = '"'.$val.'"';
+            $data['nro_series'] .= "<option onclick='cargoMarcas(".$aux.");' val='".$val."'>".$val."</option>";
+        }
+        //fin cargo nro de series de armamento en abastecimiento
+        
+        //cargo nro de series de armamentos que esten en abastecimiento de accesorios
+        $nro_series_accesorios = $this->alta_actas_baja_model->cargoNroSeriesAccesorios();
+        
+        $aux = '""';
+        $data['nro_series_accesorios'] = "<option onclick='cargoMarcasAccesorios(".$aux.");'> </option>";
+        
+        foreach($nro_series_accesorios as $val) {
+            $aux = '"'.$val.'"';
+            $data['nro_series_accesorios'] .= "<option onclick='cargoMarcasAccesorios(".$aux.");' val='".$val."'>".$val."</option>";
+        }
+        //fin cargo nro de series de armamento en abastecimiento de accesorios  
+        
         $this->load->view('alta_actas_baja_view', $data);  
+    }
+    
+    function cargoMarcas() {
+        
+        $nro_serie     = $_POST['nro_serie'];
+        $aux_nro_serie = '"'.$nro_serie.'"';
+        
+        $marcas = $this->alta_actas_baja_model->cargoMarcas($nro_serie);
+        
+        $aux = '""';
+        $concat = "<option onclick='cargoCalibres(".$aux.",".$aux.");'> </option>";
+        
+        foreach($marcas as $val) {
+            $aux_marca = '"'.$val.'"';
+            $concat .= "<option onclick='cargoCalibres(".$aux_nro_serie.",".$aux_marca.");' val='".$val."'>".$val."</option>";
+        }
+        
+        echo $concat;
+    }
+    
+    function cargoCalibres() {
+        
+        $nro_serie     = $_POST['nro_serie'];
+        $aux_nro_serie = '"'.$nro_serie.'"';
+        
+        $marca     = $_POST['marca'];
+        $aux_marca = '"'.$marca.'"';            
+        
+        $calibres = $this->alta_actas_baja_model->cargoCalibres($nro_serie, $marca);
+        
+        $aux = '""';
+        $concat = "<option onclick='cargoModelos(".$aux.",".$aux.",".$aux.");'> </option>";
+        
+        foreach($calibres as $val) {
+            $aux_calibre = '"'.$val.'"';
+            $concat .= "<option onclick='cargoModelos(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' val='".$val."'>".$val."</option>";
+        }
+        
+        echo $concat;
+    }
+    
+     function cargoModelos() {
+        
+        $nro_serie = $_POST['nro_serie'];
+        $marca     = $_POST['marca'];
+        $calibre   = $_POST['calibre'];
+        
+        $modelos = $this->alta_actas_baja_model->cargoModelos($nro_serie, $marca, $calibre);
+        
+        $concat = "<option> </option>";
+        
+        foreach($modelos as $val) {
+            $concat .= "<option val='".$val."'>".$val."</option>";
+        }
+        
+        echo $concat;
+    }   
+    
+    function cargoMarcasAccesorios() {
+        
+        $nro_serie     = $_POST['nro_serie'];
+        $aux_nro_serie = '"'.$nro_serie.'"';
+        
+        $marcas = $this->alta_actas_baja_model->cargoMarcasAccesorios($nro_serie);
+        
+        $aux = '""';
+        $concat = "<option onclick='cargoCalibresAccesorios(".$aux.",".$aux.");'> </option>";
+        
+        foreach($marcas as $val) {
+            $aux_marca = '"'.$val.'"';
+            $concat .= "<option onclick='cargoCalibresAccesorios(".$aux_nro_serie.",".$aux_marca.");' val='".$val."'>".$val."</option>";
+        }
+        
+        echo $concat;
+    }
+    
+    function cargoCalibresAccesorios() {
+        
+        $nro_serie     = $_POST['nro_serie'];
+        $aux_nro_serie = '"'.$nro_serie.'"';
+        
+        $marca     = $_POST['marca'];
+        $aux_marca = '"'.$marca.'"';            
+        
+        $calibres = $this->alta_actas_baja_model->cargoCalibresAccesorios($nro_serie, $marca);
+        
+        $aux = '""';
+        $concat = "<option onclick='cargoModelosAccesorios(".$aux.",".$aux.",".$aux.");'> </option>";
+        
+        foreach($calibres as $val) {
+            $aux_calibre = '"'.$val.'"';
+            $concat .= "<option onclick='cargoModelosAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' val='".$val."'>".$val."</option>";
+        }
+        
+        echo $concat;
+    }
+    
+     function cargoModelosAccesorios() {
+        
+        $nro_serie     = $_POST['nro_serie'];
+        $aux_nro_serie = '"'.$nro_serie.'"';
+        
+        $marca     = $_POST['marca'];
+        $aux_marca = '"'.$marca.'"';     
+        
+        $calibre     = $_POST['calibre'];
+        $aux_calibre = '"'.$calibre.'"';     
+        
+        $modelos = $this->alta_actas_baja_model->cargoModelosAccesorios($nro_serie, $marca, $calibre);
+        
+        $aux = '""';
+        $concat = "<option onclick='cargoNroAccesorios(".$aux.",".$aux.",".$aux.");'> </option>";
+        
+        foreach($modelos as $val) {
+            $aux_modelo = '"'.$val.'"';
+            $concat .= "<option onclick='cargoNroAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.");' val='".$val."'>".$val."</option>";
+        }
+        
+        echo $concat;
+    } 
+    
+     function cargoNroAccesorios() {
+        
+        $nro_serie = $_POST['nro_serie'];
+        $marca     = $_POST['marca'];
+        $calibre   = $_POST['calibre'];
+        $modelo    = $_POST['modelo'];
+        
+        $modelos = $this->alta_actas_baja_model->cargoNroAccesorios($nro_serie, $marca, $calibre, $modelo);
+        
+        $concat = "<option> </option>";
+        
+        foreach($modelos as $val) {
+            $concat .= "<option val='".$val."'>".$val."</option>";
+        }
+        
+        echo $concat;
+    }     
+    
+    function cargoFichasFiltro() {
+        
+        $nro_serie = $_SESSION['seleccion_busqueda'];
+        $marca     = $_SESSION['seleccion_busqueda1'];
+        $calibre   = $_SESSION['seleccion_busqueda2'];
+        $modelo    = $_SESSION['seleccion_busqueda3'];
+       
+        $aux = '""';
+        
+        $aux_nro_serie = '"'.$nro_serie.'"';
+        $nro_series  = "<option onclick='cargoMarcas(".$aux.");'> </option>";
+        $nro_series .= "<option selected='selected' onclick='cargoMarcas(".$aux_nro_serie.");' val='".$nro_serie."'>".$nro_serie."</option>";
+
+        $aux_marca = '"'.$marca.'"';
+        $marcas  = "<option onclick='cargoCalibres(".$aux.");'> </option>";
+        $marcas .= "<option selected='selected' onclick='cargoCalibres(".$aux_nro_serie.",".$aux_marca.");' val='".$marca."'>".$marca."</option>";
+        
+        $aux_calibre = '"'.$calibre.'"';
+        $calibres  = "<option onclick='cargoModelos(".$aux.");'> </option>";
+        $calibres .= "<option selected='selected' onclick='cargoModelos(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' val='".$calibre."'>".$calibre."</option>";
+        
+        $modelos  = "<option> </option>";
+        $modelos .= "<option selected='selected' val='".$modelo."'>".$modelo."</option>";        
+        
+        //retorno los datos
+        $retorno = array();
+        $retorno[] = $nro_series;
+        $retorno[] = $marcas;
+        $retorno[] = $calibres;
+        $retorno[] = $modelos;
+        
+        echo json_encode($retorno);        
+    }
+    
+    function cargoAccesoriosFiltro() {
+        
+        $nro_serie     = $_SESSION['seleccion_busqueda'];
+        $marca         = $_SESSION['seleccion_busqueda1'];
+        $calibre       = $_SESSION['seleccion_busqueda2'];
+        $modelo        = $_SESSION['seleccion_busqueda3'];
+        $nro_accesorio = $_SESSION['seleccion_busqueda4'];
+       
+        $aux = '""';
+        
+        $aux_nro_serie = '"'.$nro_serie.'"';
+        $nro_series  = "<option onclick='cargoMarcasAccerios(".$aux.");'> </option>";
+        $nro_series .= "<option selected='selected' onclick='cargoMarcasAccerios(".$aux_nro_serie.");' val='".$nro_serie."'>".$nro_serie."</option>";
+
+        $aux_marca = '"'.$marca.'"';
+        $marcas  = "<option onclick='cargoCalibresAccesorios(".$aux.",".$aux.");'> </option>";
+        $marcas .= "<option selected='selected' onclick='cargoCalibres(".$aux_nro_serie.",".$aux_marca.");' val='".$marca."'>".$marca."</option>";
+        
+        $aux_calibre = '"'.$calibre.'"';
+        $calibres  = "<option onclick='cargoModelosAccesorios(".$aux.",".$aux.",".$aux.");'> </option>";
+        $calibres .= "<option selected='selected' onclick='cargoModelosAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' val='".$calibre."'>".$calibre."</option>";
+
+        $aux_modelo = '"'.$modelo.'"';
+        $modelos  = "<option onclick='cargoNroAccesorios(".$aux.",".$aux.",".$aux.",".$aux.");'> </option>";
+        $modelos .= "<option selected='selected' onclick='cargoNroAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.", ".$aux_modelo.");' val='".$modelo."'>".$modelo."</option>";
+        
+        $nro_accesorios  = "<option> </option>";
+        $nro_accesorios .= "<option selected='selected' val='".$nro_accesorio."'>".$nro_accesorio."</option>";        
+        
+        //retorno los datos
+        $retorno = array();
+        $retorno[] = $nro_series;
+        $retorno[] = $marcas;
+        $retorno[] = $calibres;
+        $retorno[] = $modelos;
+        $retorno[] = $nro_accesorios;
+        
+        echo json_encode($retorno);        
     }
     
     function validarDatos() {

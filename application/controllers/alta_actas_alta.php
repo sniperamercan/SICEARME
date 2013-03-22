@@ -14,7 +14,7 @@ class alta_actas_alta extends CI_Controller {
             die($this->mensajes->sinPermisos());
         }         
         
-        //Modulo solo visible para el peril 4 y 5 - Usuarios O.C.I y Administradores O.C.I 
+        //Modulo solo visible para el peril 4 y 5 - Usuarios abastecimiento y Administradores abastecimiento 
         if(!$this->perms->verificoPerfil4() || !$this->perms->verificoPerfil5()) {
             die($this->mensajes->sinPermisos());
         }
@@ -54,7 +54,7 @@ class alta_actas_alta extends CI_Controller {
             $aux = '"'.$val.'"';
             $data['nro_series_accesorios'] .= "<option onclick='cargoMarcasAccesorios(".$aux.");' val='".$val."'>".$val."</option>";
         }
-        //fin cargo nro de series de armamento en deposito inicial        
+        //fin cargo nro de series de armamento en deposito inicial de accesorios        
         
         $this->load->view('alta_actas_alta_view', $data);  
     }
