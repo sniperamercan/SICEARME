@@ -240,6 +240,10 @@ class alta_fichas extends CI_Controller {
            $mensjError[] = 6; 
         }
         
+        if(!$this->form_validation->numeric($nro_accesorio)) {
+            $mensjError[] = 7;
+        }         
+        
         if(count($mensjError) > 0) {
             
             switch ($mensjError[0]) {
@@ -267,6 +271,10 @@ class alta_fichas extends CI_Controller {
                 case 6:
                     $retorno[] = $this->mensajes->errorAccesorioExiste();
                     break;
+                
+                case 7:
+                    $retorno[] = $this->mensajes->errorNumerico('nro accesorio');
+                    break;                
             }
         }else {
             
@@ -346,6 +354,10 @@ class alta_fichas extends CI_Controller {
            $mensjError[] = 6; 
         }
         
+        if(!$this->form_validation->numeric($nro_pieza)) {
+            $mensjError[] = 7;
+        }        
+        
         if(count($mensjError) > 0) {
             
             switch ($mensjError[0]) {
@@ -373,6 +385,10 @@ class alta_fichas extends CI_Controller {
                 case 6:
                     $retorno[] = $this->mensajes->errorAccesorioExiste();
                     break;
+                
+                case 7:
+                    $retorno[] = $this->mensajes->errorNumerico('nro pieza');
+                    break;                
             }
         }else {
             
@@ -527,6 +543,10 @@ class alta_fichas extends CI_Controller {
             $mensjError[] = 6;
         }      
         
+        if(!$this->form_validation->numeric($nro_serie)) {
+            $mensjError[] = 7;
+        }
+        
         if(count($mensjError) > 0) {
             
             switch($mensjError[0]) {
@@ -553,7 +573,11 @@ class alta_fichas extends CI_Controller {
                 
                 case 6:
                     echo $this->mensajes->errorNoExiste('nro catalogo');
-                    break;                 
+                    break;     
+                
+                case 7:
+                    echo $this->mensajes->errorNumerico('nro serie');
+                    break;                
             }
         }else {
             $this->alta_fichas_model->agregarFicha($nro_serie, $marca, $calibre, $modelo, $nro_compra, $nro_catalogo);
