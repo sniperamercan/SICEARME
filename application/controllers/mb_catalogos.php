@@ -14,8 +14,8 @@ class mb_catalogos extends CI_Controller {
             die($this->mensajes->sinPermisos());
         }         
         
-        //Modulo solo visible para el peril 1 - Administradores del sistema 
-        if(!$this->perms->verificoPerfil1()) {
+        //Modulo solo visible para el peril 3 - Administradores O.C.I 
+        if(!$this->perms->verificoPerfil3()) {
             die($this->mensajes->sinPermisos());
         }
     }

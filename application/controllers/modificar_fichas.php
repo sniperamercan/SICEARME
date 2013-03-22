@@ -14,8 +14,8 @@ class modificar_fichas extends CI_Controller {
             die($this->mensajes->sinPermisos());
         }         
         
-        //Modulo solo visible para el peril 2 y 3 - Usuarios O.C.I y Administradores O.C.I 
-        if(!$this->perms->verificoPerfil2()) {
+        //Modulo solo visible para el peril 3 - Administradores O.C.I 
+        if(!$this->perms->verificoPerfil3()) {
             die($this->mensajes->sinPermisos());
         }
     }
