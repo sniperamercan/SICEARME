@@ -84,16 +84,12 @@ class modificar_usuarios extends CI_Controller {
             $mensjError[] = 3;
         }
         
-        if(empty($clave)) {
+        if(!$this->modificar_usuarios_model->existeUsuario($usuario)) {
             $mensjError[] = 4;
-        }        
-        
-        if($this->modificar_usuarios_model->existeUsuario($usuario)) {
-            $mensjError[] = 5;
         }
         
         if(count($permisos) == 0) {
-            $mensjError[] = 6;
+            $mensjError[] = 5;
         }
         
         if(count($mensjError) > 0) {
@@ -113,11 +109,7 @@ class modificar_usuarios extends CI_Controller {
                     break;
                 
                 case 4:
-                    echo $this->mensajes->errorVacio('clave');
-                    break;
-                
-                case 5:
-                    echo $this->mensajes->errorExiste('usuario');
+                    echo $this->mensajes->errorNoExiste('usuario');
                     break;
                 
                 case 5:
@@ -125,7 +117,7 @@ class modificar_usuarios extends CI_Controller {
                     break;                
             }
         }else {
-            $this->modificar_usuarios_model->agregarUsuario($usuario, $nombre, $apellido, $clave, $permisos);
+            $this->modificar_usuarios_model->modificarUsuario($usuario, $nombre, $apellido, $permisos);
             echo 1;
         }
     }

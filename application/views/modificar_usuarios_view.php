@@ -73,11 +73,11 @@
                 $.ajax({
                     type: "post",  
                     dataType: "json",
-                    url: "<?php base_url(); ?>alta_usuarios/validarDatos",
-                    data: "usuario="+usuario+"&nombre="+nombre+"&apellido="+apellido+"&clave="+clave+"&persmisos="+JSON.stringify(permisos),
+                    url: "<?php base_url(); ?>modificar_usuarios/validarDatos",
+                    data: "usuario="+usuario+"&nombre="+nombre+"&apellido="+apellido+"&persmisos="+JSON.stringify(permisos),
                     success: function(data){
                         if(data == "1"){            
-                            jAlert("Alta de usuario correcta", "Correcto", function() { irAFrame('<?php echo base_url('alta_usuarios'); ?>','Adminitracion >> Alta usuarios'); });
+                            jAlert("El usuario se modifico con exito", "Correcto", function() { });
                         }else{
                             jAlert(data, "Error");
                         }                            

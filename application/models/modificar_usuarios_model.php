@@ -65,26 +65,31 @@ class modificar_usuarios_model extends CI_Model {
         return $permisos;        
     }
     
-    function agregarUsuario($usuario, $nombre, $apellido, $clave, $permisos) {
+    function modificarUsuario($usuario, $nombre, $apellido, $permisos) {
         
-        $data_usuario = array(
-            'usuario'  => $usuario,
+        $data_usuario_set = array(
             'nombre'   => $nombre,
-            'apellido' => $apellido,
-            'clave'    => md5($clave)
+            'apellido' => $apellido
         );
         
+        $data_usuario_where = array(
+            'usuario' => $usuario
+        );        
+        
         $data_db_logs = array(
-            'tipo_movimiento' => 'insert',
+            'tipo_movimiento' => 'update',
             'tabla'           => 'usuarios',
             'clave_tabla'     => 'usuario = '.$usuario,
             'usuario'         => base64_decode($_SESSION['usuario'])
         );        
 
         $this->db->trans_start();
-            $this->db->insert('usuarios', $data_usuario);
+            $this->db->update('usuarios', $data_usuario_set, $data_usuario_where);
             $this->db->insert('db_logs', $data_db_logs);
         $this->db->trans_complete();            
+        
+        //elimino todos los permisos y los vuelo a ingresar
+        $this->db->delete('permisos_usuario', $data_usuario_where);
         
         foreach($permisos as $val) {
             
@@ -95,9 +100,7 @@ class modificar_usuarios_model extends CI_Model {
             
             $this->db->insert('permisos_usuario', $data_permisos);
         }
-    
     }
-    
 }
 
 ?>
