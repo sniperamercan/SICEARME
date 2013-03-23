@@ -37,7 +37,9 @@ class mb_usuarios extends CI_Controller {
                 <th style='text-align: center;'> Usuario      </th>
                 <th style='text-align: center;'> Nombre       </th>
                 <th style='text-align: center;'> Apellido     </th>
+                <th style='text-align: center;'> Estado       </th>
                 <th style='text-align: center;'> Permisos     </th>
+                <th style='text-align: center;'> Inactivar/Activar </th>
                 <th style='text-align: center;'> Vaciar clave </th>
                 <th style='text-align: center;'> Editar       </th>
                 <th style='text-align: center;'> Eliminar     </th>
@@ -50,7 +52,7 @@ class mb_usuarios extends CI_Controller {
         
         $j=0;
         
-        for($i=0;$i<count($usuarios); $i=$i+3) {
+        for($i=0;$i<count($usuarios); $i=$i+4) {
         
             if($j % 2 == 0){
                 $class = "";
@@ -58,15 +60,26 @@ class mb_usuarios extends CI_Controller {
                 $class = "alt";
             }             
             
+            //estado del usuario
+            if($usuarios[$i+3]==0) {
+                $estado = 'Inactivo';
+            }else {
+                $estado = 'Activo';
+            }
+            
+            $aux_usuario = '"'.$usuarios[$i].'"';
+            
             $concat .= "
                 <tr class='".$class."'> 
                     <td> ".$usuarios[$i]."   </td>
                     <td> ".$usuarios[$i+1]." </td>
                     <td> ".$usuarios[$i+2]." </td>
-                    <td style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
-                    <td style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/vaciar.png' /> </td>
-                    <td style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/edit.png' /> </td>
-                    <td style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/delete.gif' /> </td>
+                    <td style='text-align: center;'> ".$estado." </td>
+                    <td style='text-align: center; cursor: pointer;' onclick='verPermisos(".$aux_usuario.");'>     <img src='".base_url()."images/eye.png' /> </td>
+                    <td style='text-align: center; cursor: pointer;' onclick='cambiarEstado(".$aux_usuario.");'>   <img src='".base_url()."images/refresh.png' /> </td>
+                    <td style='text-align: center; cursor: pointer;' onclick='vaciarClave(".$aux_usuario.");'>     <img src='".base_url()."images/vaciar.png' /> </td>
+                    <td style='text-align: center; cursor: pointer;' onclick='editarUsuario(".$aux_usuario.");'>   <img src='".base_url()."images/edit.png' /> </td>
+                    <td style='text-align: center; cursor: pointer;' onclick='eliminarUsuario(".$aux_usuario.");'> <img src='".base_url()."images/delete.gif' /> </td>
                 </tr>
             ";
             
@@ -77,7 +90,7 @@ class mb_usuarios extends CI_Controller {
         
         $concat .= '
             <tfoot>
-                <tr> <td colspan="7"> <div id="paging"> <br /> </div> </td> </tr>
+                <tr> <td colspan="9"> <div id="paging"> <br /> </div> </td> </tr>
             </tfoot>
         ';
         
@@ -88,6 +101,53 @@ class mb_usuarios extends CI_Controller {
         $data['listado'] = $concat;
         
         $this->load->view("mb_usuarios_view", $data);
+    }
+    
+    function verPermisos() {
+        
+        $usuario = $_POST['usuario'];
+        
+    }
+    
+    function cambiarEstado() {
+        
+        $usuario = $_POST['usuario'];
+        
+        $estado = $this->mb_usuarios_model->obtenerEstado($usuario);
+        
+        if($estado == 0) {
+            $estado = 1;
+        }else {
+            $estado = 0;
+        }
+        
+        $this->mb_usuarios_model->cambiarEstado($usuario, $estado);
+        
+        echo $this->mensajes->estadoUsuarioCambiado($usuario);
+    }
+    
+    function vaciarClave() {
+        
+        $usuario = $_POST['usuario'];
+        
+        $this->mb_usuarios_model->vaciarClave($usuario);
+        
+        echo $this->mensajes->vaciarClave($usuario);        
+        
+    }
+    
+    function eliminarUsuario() {
+        
+        $usuario = $_POST['usuario'];
+        
+        //controlo que el usuario no tenga registros de logs en el sistema
+        if(!$this->db->mb_usuarios_model->logsUsuario($usuario)) {
+            $this->db->mb_usuarios_model->eliminarUsuario($usuario);
+            echo $this->mensajes->usuarioEliminado($usuario);
+        }else {
+            echo "El usuario - ".$usuario." no se puede eliminar del sistema, ya que tiene registros en el mismo";
+        }
+        
     }
 }
 

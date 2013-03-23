@@ -6,30 +6,6 @@
 
 class mensajes {
     
-    function sinPermisos() {
-        return "USTED NO TIENE PERMISO PARA ACCEDER A ESTA PANTALLA, SE GENERO UN REGISTRO DE ACCESO NO PERMITIDO";
-    }
-    
-    function errorUsuario() {
-        return "ACCESO NO PERMITIDO, SE ALMACENO UN REGISTRO";
-    }
-    
-    function errorUsuarioVacio() {
-        return "El usuario no puede ser vacio";
-    }
-    
-    function errorClaveVacia() {
-        return "La clave no puede ser vacia";
-    }
-    
-    function errorDatosIncorrectos() {
-        return "Datos Incorrectos verifique";
-    }
-    
-    function errorUsuarioInactivo() {
-        return "Su usuario esta inactivo, no podra acceder al sistema";
-    }    
-    
     //error cuando la transaccion no se pudo completar
     function errorSolicitud() {
         return "Error hubo un error en su solicitud...";
@@ -90,6 +66,45 @@ class mensajes {
     function errorPiezaExiste() {
         return "El numero de pieza seleccionado ya existe en listado de ficha, verifique";
     }    
+    
+    //para modulo de usuarios
+    function estadoUsuarioCambiado($usuario) {
+        return "El estado del usuario - ".$usuario." fue modificado con exito";
+    }      
+    
+    function vaciarClave($usuario) {
+        return "La clave del usuario - ".$usuario." fue modificada a (sicearme) con exito";
+    }
+    
+    function sinPermisos() {
+        return "USTED NO TIENE PERMISO PARA ACCEDER A ESTA PANTALLA, SE GENERO UN REGISTRO DE ACCESO NO PERMITIDO";
+    }
+    
+    function errorUsuario() {
+        return "ACCESO NO PERMITIDO, SE ALMACENO UN REGISTRO";
+    }
+    
+    function errorUsuarioVacio() {
+        return "El usuario no puede ser vacio";
+    }
+    
+    function errorClaveVacia() {
+        return "La clave no puede ser vacia";
+    }
+    
+    function errorDatosIncorrectos() {
+        return "Datos Incorrectos verifique";
+    }
+    
+    function errorUsuarioInactivo() {
+        return "Su usuario esta inactivo, no podra acceder al sistema";
+    }
+    
+    function usuarioElminado($usuario) {
+        return "El usuario - ".$usuario." fue eliminado con exito del sistema";
+    }
+    
+    
 }
 
 ?>

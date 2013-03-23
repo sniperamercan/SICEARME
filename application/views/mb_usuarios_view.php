@@ -54,6 +54,67 @@
                   }
                 });               
             }
+            
+            function verPermisos(usuario) {
+                $.ajax({
+                    type: "post",  
+                    url: "<?php base_url(); ?>agregar_usuario/verPermisos",
+                    data: "usuario="+usuario,
+                    success: function(data){
+                        jAlert(data, "PERMISOS DEL USUARIO");
+                  }
+                });                
+            }
+            
+            function cambiarEstado(usuario) {
+                jConfirm('Estas seguro que quieres cambiar el estado del usuario - '+usuario, 'MODIFICAR ESTADO DEL USUARIO', function(r) {
+                    if(r) {
+                        $.ajax({
+                            type: "post",  
+                            url: "<?php base_url(); ?>mb_usuarios/cambiarEstado",
+                            data: "usuario="+usuario,
+                            success: function(data){
+                                jAlert(data, "MODIFICAR ESTADO DEL USUARIO", function() { irAFrame('<?php echo base_url('mb_usuarios'); ?>','Adminitracion >> Modificar usuarios'); });
+                          }
+                        });                         
+                    }
+                });                
+            }
+            
+            function vaciarClave(usuario) {
+                jConfirm('Estas seguro que quieres vaciar la clave del usuario - '+usuario, 'VACIAR CLAVE DEL USUARIO', function(r) {
+                    if(r) {
+                        $.ajax({
+                            type: "post",  
+                            url: "<?php base_url(); ?>mb_usuarios/vaciarClave",
+                            data: "usuario="+usuario,
+                            success: function(data){
+                                jAlert(data, "VACIAR CLAVE DEL USUARIO");
+                          }
+                        });                         
+                    }
+                });                
+            }
+            
+            function editarUsuario(usuario) {
+               
+            }
+            
+            function eliminarUsuario(usuario) {
+                jConfirm('Estas seguro que quieres eliminar el usuario - '+usuario, 'ELIMINAR USUARIO DEL SISTEMA', function(r) {
+                    if(r) {
+                        $.ajax({
+                            type: "post",  
+                            url: "<?php base_url(); ?>mb_usuarios/eliminarUsuario",
+                            data: "usuario="+usuario,
+                            success: function(data){
+                                jAlert(data, "ELIMINAR USUARIO USUARIO DEL SISTEMA", function() { irAFrame('<?php echo base_url('mb_usuarios'); ?>','Adminitracion >> Modificar usuarios'); });
+                          }
+                        });                         
+                    }
+                });                 
+            }
+            
         </script>
         
     </head>

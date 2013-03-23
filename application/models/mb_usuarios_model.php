@@ -9,7 +9,7 @@ class mb_usuarios_model extends CI_Model {
     
     function listadoUsuarios() {
         
-        $query = $this->db->query("SELECT usuario, nombre, apellido
+        $query = $this->db->query("SELECT usuario, nombre, apellido, estado
                                    FROM usuarios
                                    ORDER BY usuario");
         
@@ -17,11 +17,97 @@ class mb_usuarios_model extends CI_Model {
         
         foreach($query->result() as $row) {
             $usuarios[]  = $row->usuario;
-            $usuarios[]   = $row->nombre;
-            $usuarios[] = $row->apellido;
+            $usuarios[]  = $row->nombre;
+            $usuarios[]  = $row->apellido;
+            $usuarios[]  = $row->estado;
         }
         
         return $usuarios;
+    }
+    
+    function obtenerEstado($usuario) {
+        
+        $query = $this->db->query("SELECT estado
+                                   FROM usuarios
+                                   WHERE usuario = ".$this->db->escape($usuario));
+        
+        $row = $query->row();
+        
+        return $row->estado;
+    }
+    
+    function logsUsuario($usuario) {
+        
+        $query = $this->db->query("SELECT *
+                                   FROM logs_ingresos
+                                   WHERE logusuario = ".$this->db->escape($usuario));
+        
+        return $query->num_rows();     
+    }    
+    
+    function cambiarEstado($usuario, $estado) {
+        
+        $data_usuario_set = array(
+            'estado' => $estado
+        );
+        
+        $data_usuario_where = array(
+            'usuario' => $usuario
+        );
+        
+        $data_db_logs = array(
+            'tipo_movimiento' => 'update',
+            'tabla'           => 'usuarios',
+            'clave_tabla'     => 'usuario = '.$usuario,
+            'usuario'         => base64_decode($_SESSION['usuario'])
+        );        
+        
+        $this->db->trans_start();
+            $this->db->update('usuarios', $data_usuario_set, $data_usuario_where);
+            $this->db->insert('db_logs', $data_db_logs); 
+        $this->db->trans_complete();
+    }
+    
+    function vaciarClave($usuario) {
+        
+        $data_usuario_set = array(
+            'clave' => md5('sicearme')
+        );
+        
+        $data_usuario_where = array(
+            'usuario' => $usuario
+        );
+        
+        $data_db_logs = array(
+            'tipo_movimiento' => 'update',
+            'tabla'           => 'usuarios',
+            'clave_tabla'     => 'usuario = '.$usuario,
+            'usuario'         => base64_decode($_SESSION['usuario'])
+        );        
+        
+        $this->db->trans_start();
+            $this->db->update('usuarios', $data_usuario_set, $data_usuario_where);
+            $this->db->insert('db_logs', $data_db_logs); 
+        $this->db->trans_complete();        
+    }
+    
+    function eliminarUsuario($usuario) {
+        
+        $data_usuario_where = array(
+            'usuario' => $usuario
+        );
+        
+        $data_db_logs = array(
+            'tipo_movimiento' => 'delete',
+            'tabla'           => 'usuarios',
+            'clave_tabla'     => 'usuario = '.$usuario,
+            'usuario'         => base64_decode($_SESSION['usuario'])
+        );        
+        
+        $this->db->trans_start();
+            $this->db->delete('usuarios', $data_usuario_where);
+            $this->db->insert('db_logs', $data_db_logs); 
+        $this->db->trans_complete();         
     }
     
     
