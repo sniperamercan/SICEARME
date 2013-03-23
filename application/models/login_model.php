@@ -16,6 +16,17 @@ class login_model extends CI_Model {
         return $query->num_rows();        
     }
     
+    function verificoEstado($usuario) {
+        
+        $query = $this->db->query("SELECT estado
+                                   FROM usuarios
+                                   WHERE usuario = ".$this->db->escape($usuario));
+        
+        $row = $query->row();
+        
+        return $row->estado;
+    }
+    
     function ingresoLog($usuario) {
         
         $this->db->trans_start();
@@ -58,162 +69,6 @@ class login_model extends CI_Model {
                                    WHERE usuario = ".$this->db->escape($usuario));
         
         return $query->num_rows();
-    }
-    
-    function consultoEmpresas() {
-        
-        $query = $this->db->query("SELECT rut
-                                   FROM empresas
-                                   ORDER BY rut");
-        
-        $empresas = array();
-        
-        foreach($query->result() as $row) {
-            $empresas[] = $row->rut;
-        }
-        
-        return $empresas;
-    }    
-    
-    function hayDinamige($rut) {
-        
-        $query = $this->db->query("SELECT *
-                                   FROM dinamige
-                                   WHERE rut = ".$this->db->escape($rut));
-        
-        return $query->num_rows();
-    }
-    
-    function hayBps($rut) {
-        
-        $query = $this->db->query("SELECT *
-                                   FROM bps
-                                   WHERE rut = ".$this->db->escape($rut));
-        
-        return $query->num_rows();
-    }
-    
-    function hayDgi($rut) {
-        
-         $query = $this->db->query("SELECT *
-                                   FROM dgi
-                                   WHERE rut = ".$this->db->escape($rut));
-        
-        return $query->num_rows();   }
-    
-    function hayBancoSeguros($rut) {
-        
-        $query = $this->db->query("SELECT *
-                                   FROM banco_seguros
-                                   WHERE rut = ".$this->db->escape($rut));
-        
-        return $query->num_rows();
-    }
-    
-    function hayCertificadoConfianza($rut) {
-        
-        $query = $this->db->query("SELECT *
-                                   FROM certificado_confianza
-                                   WHERE rut = ".$this->db->escape($rut));
-        
-        return $query->num_rows();
-    }    
-    
-    function fechaValidezDinamige($rut) {
-        
-        $query = $this->db->query("SELECT nro_certificado, fecha_validez
-                                   FROM dinamige
-                                   WHERE rut = ".$this->db->escape($rut));        
-     
-        $retorno = array();
-        
-        foreach($query->result() as $row) {
-            $retorno[] = $row->nro_certificado;
-            $retorno[] = $row->fecha_validez;
-        }
-        
-        return $retorno;
-    }
-    
-    function fechaValidezBps($rut) {
-        
-        $query = $this->db->query("SELECT nro_certificado, fecha_validez
-                                   FROM bps
-                                   WHERE rut = ".$this->db->escape($rut));   
-        
-        $row = $query->row();
-        
-        $retorno = array();
-        $retorno[] = $row->nro_certificado;
-        $retorno[] = $row->fecha_validez; 
-        
-        return $retorno;
-    }
-    
-    function fechaValidezDgi($rut) {
-        
-        $query = $this->db->query("SELECT nro_certificado, fecha_validez
-                                   FROM dgi
-                                   WHERE rut = ".$this->db->escape($rut));   
-        
-        $row = $query->row();
-        
-        $retorno = array();
-        $retorno[] = $row->nro_certificado;
-        $retorno[] = $row->fecha_validez;   
-        
-        return $retorno;
-    }
-    
-    function fechaValidezBancoSeguros($rut) {
-        
-        $query = $this->db->query("SELECT nro_certificado, fecha_validez
-                                   FROM banco_seguros
-                                   WHERE rut = ".$this->db->escape($rut));   
-        
-        $row = $query->row();
-        
-        $retorno = array();
-        $retorno[] = $row->nro_certificado;
-        $retorno[] = $row->fecha_validez;  
-        
-        return $retorno;
-    }
-    
-    function fechaValidezCertificadoConfianza($rut) {
-        
-        $query = $this->db->query("SELECT nro_certificado, fecha_validez
-                                   FROM certificado_confianza
-                                   WHERE rut = ".$this->db->escape($rut));   
-        
-        $row = $query->row();
-        
-        $retorno = array();
-        $retorno[] = $row->nro_certificado;
-        $retorno[] = $row->fecha_validez;  
-        
-        return $retorno;
-    }    
-    
-    
-    function enviarAlerta($rut, $certificado, $nro_certificado, $fecha) {
-        
-        $contenido = "
-            La empresa con numero de rut - ".$rut.", tiene el siguiente certificado - ".$certificado.",
-            con numero de certificado - ".$nro_certificado." vencido en la fecha ".$fecha.".
-        ";
-        
-        
-        $data = array(
-            'usuario_envia'  => 'Administracion',
-            'usuario_recibe' => base64_decode($_SESSION['usuario']),
-            'asunto'         => 'Alerta',
-            'contenido'      => $contenido,
-            'leido'          => 1
-        );
-        
-        $this->db->insert('correos', $data);
-        
     }
     
 }

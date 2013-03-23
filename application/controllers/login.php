@@ -42,8 +42,12 @@ class login extends CI_Controller {
         
         if(!$this->login_model->verificoUsuario_db($usuario, $clave)) {
             $errorMensj[] = 3;
-        }
-        
+        }else {
+           if($this->login_model->verificoEstado($usuario) == 0) {
+                $errorMensj[] = 4;
+            }
+        }  
+            
         if(count($errorMensj) > 0) {
             
             switch($errorMensj[0]) {
@@ -58,7 +62,11 @@ class login extends CI_Controller {
                     
                 case 3:
                     echo $this->mensajes->errorDatosIncorrectos();
-                    break;                   
+                    break;       
+                
+                case 4:
+                    echo $this->mensajes->errorUsuarioInactivo();
+                    break;                 
             }            
         }else{
             $_SESSION['usuario']  = base64_encode($usuario);

@@ -26,6 +26,10 @@ class mensajes {
         return "Datos Incorrectos verifique";
     }
     
+    function errorUsuarioInactivo() {
+        return "Su usuario esta inactivo, no podra acceder al sistema";
+    }    
+    
     //error cuando la transaccion no se pudo completar
     function errorSolicitud() {
         return "Error hubo un error en su solicitud...";
