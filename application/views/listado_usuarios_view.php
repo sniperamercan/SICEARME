@@ -33,27 +33,17 @@
                 $("input:button").button(); 
             });	
 
-            function ingresarDatos() {
-                
-                var usuario   = $("#usuario").val();
-                var nombre    = $("#nombre").val();
-                var apellido  = $("#apellido").val();
-                var clave     = $("#clave").val();
-                
+            function verPermisos(usuario) {
                 $.ajax({
                     type: "post",  
-                    dataType: "json",
-                    url: "<?php base_url(); ?>agregar_usuario/validarDatos",
-                    data: "usuario="+usuario+"&nombre="+nombre+"&apellido="+apellido+"&clave="+clave+"&persmisos="+JSON.stringify(permisos),
+                    url: "<?php base_url(); ?>listado_usuarios/verPermisos",
+                    data: "usuario="+usuario,
                     success: function(data){
-                        if(data == "1"){            
-                            jAlert("Usuario agregado al sistema con exito", "Correcto", function() { irAFrame('<?php echo base_url('agregar_usuario'); ?>','Adminitracion >> Agregar usuarios'); });
-                        }else{
-                            jAlert(data, "Error");
-                        }                            
+                        jAlert(data, "PERMISOS DEL USUARIO");
                   }
-                });               
+                });                
             }
+
         </script>
         
     </head>
