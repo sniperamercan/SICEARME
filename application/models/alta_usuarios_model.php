@@ -39,7 +39,8 @@ class alta_usuarios_model extends CI_Model {
             'usuario'  => $usuario,
             'nombre'   => $nombre,
             'apellido' => $apellido,
-            'clave'    => md5($clave)
+            'clave'    => md5($clave),
+            'estado'   => 1
         );
         
         $data_db_logs = array(

@@ -63,14 +63,6 @@ class mensajes {
         return "El catalogo con el tipo de arma, marca, modelo, calibre que desea ingresar ya existe verifique, <u> es el catalogo </u> <b> Nro - ".$nro_catalogo." </b>";
     }
     
-    function menorStock() {
-        return "<u>No hay suficiente cantidad de cajas para ese lote y producto para cubrir dicha salida</u>";
-    }
-    
-    function menorStockMateriaPrima() {
-        return "<u>No hay suficiente cantidad de materia prima para cubrir dicha salida</u>";
-    }
-    
     function mailIncorrecto() {
         return "El mail que desea ingresar tiene un formato incorrecto, verifique";
     }

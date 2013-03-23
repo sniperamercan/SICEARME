@@ -79,7 +79,7 @@
                     data: "usuario="+usuario+"&nombre="+nombre+"&apellido="+apellido+"&clave="+clave+"&persmisos="+JSON.stringify(permisos),
                     success: function(data){
                         if(data == "1"){            
-                            jAlert("Alta de usuario correcta", "Correcto", function() { irAFrame('<?php echo base_url('alta_usuarios'); ?>','Adminitracion >> Alta usuarios'); });
+                            jAlert("Alta de usuario correcta", "Correcto", function() { irAFrame('<?php echo base_url('alta_usuarios'); ?>','Administracion >> Alta usuarios'); });
                         }else{
                             jAlert(data, "Error");
                         }                            

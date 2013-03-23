@@ -76,32 +76,32 @@ class alta_usuarios extends CI_Controller {
             switch($mensjError[0]) {
                 
                 case 1:
-                    echo $this->mensajes->errorVacio('usuario');
+                    echo json_encode($this->mensajes->errorVacio('usuario'));
                     break;
                 
                 case 2:
-                    echo $this->mensajes->errorVacio('nombre');
+                    echo json_encode($this->mensajes->errorVacio('nombre'));
                     break;
                 
                 case 3:
-                    echo $this->mensajes->errorVacio('apellido');
+                    echo json_encode($this->mensajes->errorVacio('apellido'));
                     break;
                 
                 case 4:
-                    echo $this->mensajes->errorVacio('clave');
+                    echo json_encode($this->mensajes->errorVacio('clave'));
                     break;
                 
                 case 5:
-                    echo $this->mensajes->errorExiste('usuario');
+                    echo json_encode($this->mensajes->errorExiste('usuario'));
                     break;
                 
                 case 6:
-                    echo $this->mensajes->sinPerfilSeleccionado();
+                    echo json_encode($this->mensajes->sinPerfilSeleccionado());
                     break;                
             }
         }else {
             $this->alta_usuarios_model->agregarUsuario($usuario, $nombre, $apellido, $clave, $permisos);
-            echo 1;
+            echo json_encode(1);
         }
     }
 }
