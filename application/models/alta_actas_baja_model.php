@@ -260,7 +260,7 @@ class alta_actas_baja_model extends CI_Model {
                 $data_db_logs = array(
                     'tipo_movimiento' => 'insert',
                     'tabla'           => 'actas_baja_devolucion_armamento',
-                    'clave_tabla'     => 'nro_serie = '.$_SESSION['fichas'][$i]. ' && marca = '.$_SESSION['fichas'][$i+1].' && calibre = '.$_SESSION['fichas'][$i+2].' && modelo ='.$_SESSION['fichas'][$i+3].' && idunidad = '.$unidad_recibe,
+                    'clave_tabla'     => 'nro_serie = '.$_SESSION['fichas'][$i]. ' && marca = '.$_SESSION['fichas'][$i+1].' && calibre = '.$_SESSION['fichas'][$i+2].' && modelo ='.$_SESSION['fichas'][$i+3].' && idunidad = '.$unidad_entrega,
                     'usuario'         => base64_decode($_SESSION['usuario'])
                 );        
 
@@ -284,7 +284,7 @@ class alta_actas_baja_model extends CI_Model {
                 $data_db_logs = array(
                     'tipo_movimiento' => 'insert',
                     'tabla'           => 'actas_baja_devolucion_accesorios',
-                    'clave_tabla'     => 'nro_serie = '.$_SESSION['accesorios'][$i]. ' && marca = '.$_SESSION['accesorios'][$i+1].' && calibre = '.$_SESSION['accesorios'][$i+2].' && modelo ='.$_SESSION['accesorios'][$i+3].' && nro_accesorio = '.$_SESSION['accesorios'][$i+4].' && idunidad = '.$unidad_recibe,
+                    'clave_tabla'     => 'nro_serie = '.$_SESSION['accesorios'][$i]. ' && marca = '.$_SESSION['accesorios'][$i+1].' && calibre = '.$_SESSION['accesorios'][$i+2].' && modelo ='.$_SESSION['accesorios'][$i+3].' && nro_accesorio = '.$_SESSION['accesorios'][$i+4].' && idunidad = '.$unidad_entrega,
                     'usuario'         => base64_decode($_SESSION['usuario'])
                 );        
 
