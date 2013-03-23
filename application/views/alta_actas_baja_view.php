@@ -252,6 +252,7 @@
 
             function agregarFicha() {
             
+                var unidad     = $("#unidad_entrega").val();
                 var nro_serie  = $("#nro_serie").val();
                 var marca      = $("#marca").val();
                 var calibre    = $("#calibre").val();
@@ -261,7 +262,7 @@
                    type: "post",
                    dataType: "json",
                    url: "<?php base_url(); ?>alta_actas_baja/agregarFicha",
-                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
+                   data: "unidad="+unidad+"&nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
                    success: function(data) {
                        if(data[0] == 1) {
                            $("#entregas_fichas").append(data[1]);
@@ -291,7 +292,8 @@
             }
             
             function agregarAccesorio() {
-            
+                
+                var unidad        = $("#unidad_entrega").val();
                 var nro_serie     = $("#nro_serie_accesorio").val();
                 var marca         = $("#marca_accesorio").val();
                 var calibre       = $("#calibre_accesorio").val();
@@ -302,7 +304,7 @@
                    type: "post",
                    dataType: "json",
                    url: "<?php base_url(); ?>alta_actas_baja/agregarAccesorio",
-                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&nro_accesorio="+nro_accesorio,
+                   data: "unidad="+unidad+"&nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&nro_accesorio="+nro_accesorio,
                    success: function(data) {
                        if(data[0] == 1) {
                            $("#entregas_accesorios").append(data[1]);

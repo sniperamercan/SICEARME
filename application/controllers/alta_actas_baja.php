@@ -308,6 +308,7 @@ class alta_actas_baja extends CI_Controller {
     
     function agregarFicha() {
         
+        $unidad     = $_POST['unidad'];
         $nro_serie  = $_POST['nro_serie'];
         $marca      = $_POST['marca'];
         $calibre    = $_POST['calibre'];
@@ -332,9 +333,13 @@ class alta_actas_baja extends CI_Controller {
             $mensjError[] = 4;
         }
             
-        //verifico que esa ficha exista en la base de datos en deposito inicial
-        if(!$this->alta_actas_baja_model->existeFicha($nro_serie, $marca, $calibre, $modelo)) {
+        if(empty($unidad)) {
             $mensjError[] = 5;
+        }         
+        
+        //verifico que esa ficha exista en la base de datos en deposito inicial
+        if(!$this->alta_actas_baja_model->existeFicha($unidad, $nro_serie, $marca, $calibre, $modelo)) {
+            $mensjError[] = 6;
         }
         
         //verifico que el nro de catalogo no exista ya en el listado
@@ -353,7 +358,7 @@ class alta_actas_baja extends CI_Controller {
         }
         
         if($encontre) {
-           $mensjError[] = 6; 
+           $mensjError[] = 7; 
         }
         
         if(count($mensjError) > 0) {
@@ -377,10 +382,14 @@ class alta_actas_baja extends CI_Controller {
                     break;
                 
                 case 5:
+                    $retorno[] = $this->mensajes->errorVacio('unidad');
+                    break;                
+                
+                case 6:
                     $retorno[] = $this->mensajes->errorExiste('ficha');
                     break;
                 
-                case 6:
+                case 7:
                     $retorno[] = $this->mensajes->errorFichaExiste();
                     break;
             }
@@ -464,6 +473,7 @@ class alta_actas_baja extends CI_Controller {
     
     function agregarAccesorio() {
         
+        $unidad        = $_POST['unidad'];
         $nro_serie     = $_POST['nro_serie'];
         $marca         = $_POST['marca'];
         $calibre       = $_POST['calibre'];
@@ -491,11 +501,15 @@ class alta_actas_baja extends CI_Controller {
 
         if(empty($nro_accesorio)) {
             $mensjError[] = 5;
-        }          
+        }    
+        
+        if(empty($unidad)) {
+            $mensjError[] = 6;
+        }           
         
         //verifico que esa ficha exista en la base de datos en deposito inicial
-        if(!$this->alta_actas_baja_model->existeAccesorio($nro_serie, $marca, $calibre, $modelo, $nro_accesorio)) {
-            $mensjError[] = 6;
+        if(!$this->alta_actas_baja_model->existeAccesorio($unidad, $nro_serie, $marca, $calibre, $modelo, $nro_accesorio)) {
+            $mensjError[] = 7;
         }
         
         //verifico que el nro de catalogo no exista ya en el listado
@@ -514,7 +528,7 @@ class alta_actas_baja extends CI_Controller {
         }
         
         if($encontre) {
-           $mensjError[] = 7; 
+           $mensjError[] = 8; 
         }
         
         if(count($mensjError) > 0) {
@@ -539,13 +553,17 @@ class alta_actas_baja extends CI_Controller {
                 
                 case 5:
                     $retorno[] = $this->mensajes->errorVacio('nro accesorio');
-                    break;                
+                    break;         
                 
                 case 6:
+                    $retorno[] = $this->mensajes->errorVacio('unidad');
+                    break;                 
+                
+                case 7:
                     $retorno[] = $this->mensajes->errorExiste('accesorio');
                     break;
                 
-                case 7:
+                case 8:
                     $retorno[] = $this->mensajes->errorAccesorioExiste();
                     break;
             }
@@ -639,7 +657,7 @@ class alta_actas_baja extends CI_Controller {
     function validarDatos() {
         
         $fecha                = $_POST["fecha"];
-        $unidad_recibe        = $_POST["unidad_recibe"];
+        $unidad_entrega       = $_POST["unidad_entrega"];
         $representante_sma    = $_POST["representante_sma"];
         $representante_unidad = $_POST["representante_unidad"];
         $supervision          = $_POST["supervision"];
@@ -652,7 +670,7 @@ class alta_actas_baja extends CI_Controller {
             $mensjError[] = 1;
         }
         
-        if(empty($unidad_recibe)) {
+        if(empty($unidad_entrega)) {
             $mensjError[] = 2;
         }
         
@@ -682,7 +700,7 @@ class alta_actas_baja extends CI_Controller {
                     break;
                 
                 case 2:
-                    $retorno[] = $this->mensajes->errorVacio('unidad recibe');
+                    $retorno[] = $this->mensajes->errorVacio('unidad entrega');
                     break;
                 
                 case 3:
@@ -702,7 +720,7 @@ class alta_actas_baja extends CI_Controller {
                     break;               
             }
         }else {
-            $nro_acta = $this->alta_actas_baja_model->altaActa_db($fecha, $unidad_recibe, $representante_sma, $representante_unidad, $supervision, $observaciones);
+            $nro_acta = $this->alta_actas_baja_model->altaActa_db($fecha, $unidad_entrega, $representante_sma, $representante_unidad, $supervision, $observaciones);
             $retorno[] = 1;
             $retorno[] = $nro_acta;
         }
