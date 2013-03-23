@@ -43,7 +43,7 @@ class alta_actas_alta extends CI_Controller {
         
         foreach($nro_series as $val) {
             $aux = '"'.$val.'"';
-            $data['nro_series'] .= "<option onclick='cargoMarcas(".$aux.");' val='".$val."'>".$val."</option>";
+            $data['nro_series'] .= "<option onclick='cargoMarcas(".$aux.");' value='".$val."'>".$val."</option>";
         }
         //fin cargo nro de series de armamento en deposito inicial
         
@@ -74,7 +74,7 @@ class alta_actas_alta extends CI_Controller {
         
         foreach($marcas as $val) {
             $aux_marca = '"'.$val.'"';
-            $concat .= "<option onclick='cargoCalibres(".$aux_nro_serie.",".$aux_marca.");' val='".$val."'>".$val."</option>";
+            $concat .= "<option onclick='cargoCalibres(".$aux_nro_serie.",".$aux_marca.");' value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -95,7 +95,7 @@ class alta_actas_alta extends CI_Controller {
         
         foreach($calibres as $val) {
             $aux_calibre = '"'.$val.'"';
-            $concat .= "<option onclick='cargoModelos(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' val='".$val."'>".$val."</option>";
+            $concat .= "<option onclick='cargoModelos(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -112,7 +112,7 @@ class alta_actas_alta extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($modelos as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -130,7 +130,7 @@ class alta_actas_alta extends CI_Controller {
         
         foreach($marcas as $val) {
             $aux_marca = '"'.$val.'"';
-            $concat .= "<option onclick='cargoCalibresAccesorios(".$aux_nro_serie.",".$aux_marca.");' val='".$val."'>".$val."</option>";
+            $concat .= "<option onclick='cargoCalibresAccesorios(".$aux_nro_serie.",".$aux_marca.");' value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -151,7 +151,7 @@ class alta_actas_alta extends CI_Controller {
         
         foreach($calibres as $val) {
             $aux_calibre = '"'.$val.'"';
-            $concat .= "<option onclick='cargoModelosAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' val='".$val."'>".$val."</option>";
+            $concat .= "<option onclick='cargoModelosAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -171,11 +171,11 @@ class alta_actas_alta extends CI_Controller {
         $modelos = $this->alta_actas_alta_model->cargoModelosAccesorios($nro_serie, $marca, $calibre);
         
         $aux = '""';
-        $concat = "<option onclick='cargoNroAccesorios(".$aux.",".$aux.",".$aux.");'> </option>";
+        $concat = "<option onclick='cargoNroAccesorios(".$aux.",".$aux.",".$aux.",".$aux.");'> </option>";
         
         foreach($modelos as $val) {
             $aux_modelo = '"'.$val.'"';
-            $concat .= "<option onclick='cargoNroAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.");' val='".$val."'>".$val."</option>";
+            $concat .= "<option onclick='cargoNroAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.");' value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -193,7 +193,7 @@ class alta_actas_alta extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($modelos as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;

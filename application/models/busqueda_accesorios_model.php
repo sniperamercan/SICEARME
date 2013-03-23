@@ -13,7 +13,7 @@ class busqueda_accesorios_model extends CI_Model {
                                    FROM stock_unidades_accesorios s
                                    INNER JOIN fichas f ON s.nro_serie = f.nro_serie AND s.marca = f.marca AND s.calibre = f.calibre AND s.modelo = f.modelo 
                                    WHERE ".$condicion." 
-                                   AND idunidad = ".$this->db->escape(98));
+                                   AND idunidad = ".$this->db->escape($_SESSION['unidad']));
         
         return $query->num_rows();
     }
@@ -26,7 +26,7 @@ class busqueda_accesorios_model extends CI_Model {
                                    FROM stock_unidades_accesorios s
                                    INNER JOIN fichas f ON s.nro_serie = f.nro_serie AND s.marca = f.marca AND s.calibre = f.calibre AND s.modelo = f.modelo 
                                    WHERE ".$condicion."
-                                   AND idunidad = ".$this->db->escape(98)."    
+                                   AND idunidad = ".$this->db->escape($_SESSION['unidad'])."    
                                    ORDER BY ".$order."
                                    LIMIT ".$ini.",".$param);
         

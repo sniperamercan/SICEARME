@@ -23,13 +23,11 @@ class alta_actas_baja_model extends CI_Model {
         return $unidades;
     }
     
-    function cargoNroSeries() {
-        
-        //idunidad = 98 - Deposito inicial
+    function cargoNroSeries($unidad) {
         
         $query = $this->db->query("SELECT DISTINCT nro_serie
                                    FROM stock_unidades
-                                   WHERE idunidad = ".$this->db->escape('98')."
+                                   WHERE idunidad = ".$unidad."
                                    ORDER BY nro_serie");
         
         $nro_series = array();
@@ -41,13 +39,11 @@ class alta_actas_baja_model extends CI_Model {
         return $nro_series;        
     }
     
-    function cargoMarcas($nro_serie) {
-        
-        //idunidad = 98 - Deposito inicial
+    function cargoMarcas($unidad, $nro_serie) {
         
         $query = $this->db->query("SELECT DISTINCT marca
                                    FROM stock_unidades
-                                   WHERE idunidad = ".$this->db->escape('98')."
+                                   WHERE idunidad = ".$this->db->escape($unidad)."
                                    AND nro_serie  = ".$this->db->escape($nro_serie)."    
                                    ORDER BY marca");
         
@@ -60,13 +56,11 @@ class alta_actas_baja_model extends CI_Model {
         return $marcas;        
     }
     
-    function cargoCalibres($nro_serie, $marca) {
-        
-        //idunidad = 98 - Deposito inicial
+    function cargoCalibres($unidad, $nro_serie, $marca) {
         
         $query = $this->db->query("SELECT DISTINCT calibre
                                    FROM stock_unidades
-                                   WHERE idunidad = ".$this->db->escape('98')."
+                                   WHERE idunidad = ".$this->db->escape($unidad)."
                                    AND nro_serie  = ".$this->db->escape($nro_serie)."
                                    AND marca      = ".$this->db->escape($marca)."
                                    ORDER BY calibre");
@@ -80,13 +74,11 @@ class alta_actas_baja_model extends CI_Model {
         return $calibres;       
     }
     
-    function cargoModelos($nro_serie, $marca, $calibre) {
-        
-        //idunidad = 98 - Deposito inicial
+    function cargoModelos($unidad, $nro_serie, $marca, $calibre) {
         
         $query = $this->db->query("SELECT DISTINCT modelo
                                    FROM stock_unidades
-                                   WHERE idunidad = ".$this->db->escape('98')."
+                                   WHERE idunidad = ".$this->db->escape($unidad)."
                                    AND nro_serie  = ".$this->db->escape($nro_serie)."
                                    AND marca      = ".$this->db->escape($marca)."
                                    AND calibre    = ".$this->db->escape($calibre)."
@@ -101,13 +93,11 @@ class alta_actas_baja_model extends CI_Model {
         return $modelos;        
     }    
     
-    function cargoNroSeriesAccesorios() {
-        
-        //idunidad = 98 - Deposito inicial
+    function cargoNroSeriesAccesorios($unidad) {
         
         $query = $this->db->query("SELECT DISTINCT nro_serie
                                    FROM stock_unidades_accesorios
-                                   WHERE idunidad = ".$this->db->escape('98')."
+                                   WHERE idunidad = ".$this->db->escape($unidad)."
                                    ORDER BY nro_serie");
         
         $nro_series = array();
@@ -119,13 +109,11 @@ class alta_actas_baja_model extends CI_Model {
         return $nro_series;        
     }
     
-    function cargoMarcasAccesorios($nro_serie) {
-        
-        //idunidad = 98 - Deposito inicial
+    function cargoMarcasAccesorios($unidad, $nro_serie) {
         
         $query = $this->db->query("SELECT DISTINCT marca
                                    FROM stock_unidades_accesorios
-                                   WHERE idunidad = ".$this->db->escape('98')."
+                                   WHERE idunidad = ".$this->db->escape($unidad)."
                                    AND nro_serie  = ".$this->db->escape($nro_serie)."    
                                    ORDER BY marca");
         
@@ -138,13 +126,11 @@ class alta_actas_baja_model extends CI_Model {
         return $marcas;        
     }
     
-    function cargoCalibresAccesorios($nro_serie, $marca) {
-        
-        //idunidad = 98 - Deposito inicial
-        
+    function cargoCalibresAccesorios($unidad, $nro_serie, $marca) {
+
         $query = $this->db->query("SELECT DISTINCT calibre
                                    FROM stock_unidades_accesorios
-                                   WHERE idunidad = ".$this->db->escape('98')."
+                                   WHERE idunidad = ".$this->db->escape($unidad)."
                                    AND nro_serie  = ".$this->db->escape($nro_serie)."
                                    AND marca      = ".$this->db->escape($marca)."
                                    ORDER BY calibre");
@@ -158,13 +144,11 @@ class alta_actas_baja_model extends CI_Model {
         return $calibres;       
     }
     
-    function cargoModelosAccesorios($nro_serie, $marca, $calibre) {
-        
-        //idunidad = 98 - Deposito inicial
+    function cargoModelosAccesorios($unidad, $nro_serie, $marca, $calibre) {
         
         $query = $this->db->query("SELECT DISTINCT modelo
                                    FROM stock_unidades_accesorios
-                                   WHERE idunidad = ".$this->db->escape('98')."
+                                   WHERE idunidad = ".$this->db->escape($unidad)."
                                    AND nro_serie  = ".$this->db->escape($nro_serie)."
                                    AND marca      = ".$this->db->escape($marca)."
                                    AND calibre    = ".$this->db->escape($calibre)."
@@ -179,13 +163,11 @@ class alta_actas_baja_model extends CI_Model {
         return $modelos;        
     }     
     
-    function cargoNroAccesorios($nro_serie, $marca, $calibre, $modelo) {
-        
-        //idunidad = 98 - Deposito inicial
+    function cargoNroAccesorios($unidad, $nro_serie, $marca, $calibre, $modelo) {
         
         $query = $this->db->query("SELECT DISTINCT nro_accesorio
                                    FROM stock_unidades_accesorios
-                                   WHERE idunidad  = ".$this->db->escape('98')."
+                                   WHERE idunidad  = ".$this->db->escape($unidad)."
                                    AND nro_serie   = ".$this->db->escape($nro_serie)."
                                    AND marca       = ".$this->db->escape($marca)."
                                    AND calibre     = ".$this->db->escape($calibre)."
@@ -201,13 +183,11 @@ class alta_actas_baja_model extends CI_Model {
         return $nro_accesorios;        
     }     
     
-    function existeFicha($nro_serie, $marca, $calibre, $modelo) {
-        
-        //idunidad = 98 - Deposito inicial
+    function existeFicha($unidad, $nro_serie, $marca, $calibre, $modelo) {
         
         $query = $this->db->query("SELECT *
                                    FROM stock_unidades
-                                   WHERE idunidad  = ".$this->db->escape('98')."
+                                   WHERE idunidad  = ".$this->db->escape($unidad)."
                                    AND nro_serie   = ".$this->db->escape($nro_serie)."
                                    AND marca       = ".$this->db->escape($marca)."
                                    AND calibre     = ".$this->db->escape($calibre)."
@@ -216,13 +196,11 @@ class alta_actas_baja_model extends CI_Model {
         return $query->num_rows();
     }
     
-    function existeAccesorio($nro_serie, $marca, $calibre, $modelo, $nro_accesorio) {
-        
-        //idunidad = 98 - Deposito inicial
+    function existeAccesorio($unidad, $nro_serie, $marca, $calibre, $modelo, $nro_accesorio) {
         
         $query = $this->db->query("SELECT *
                                    FROM stock_unidades_accesorios
-                                   WHERE idunidad    = ".$this->db->escape('98')."
+                                   WHERE idunidad    = ".$this->db->escape($unidad)."
                                    AND nro_serie     = ".$this->db->escape($nro_serie)."
                                    AND marca         = ".$this->db->escape($marca)."
                                    AND calibre       = ".$this->db->escape($calibre)."
@@ -233,14 +211,14 @@ class alta_actas_baja_model extends CI_Model {
         
     }
     
-    function altaActa_db($fecha, $unidad_recibe, $representante_sma, $representante_unidad, $supervision, $observaciones) {
+    function altaActa_db($fecha, $unidad_entrega, $representante_sma, $representante_unidad, $supervision, $observaciones) {
         
         $this->db->trans_start();
         
-            $data_acta_alta = array(
+            $data_acta_baja = array(
                 'fecha_transaccion'         => $fecha,
-                'unidad_entrega'            => 98,
-                'unidad_recibe'             => $unidad_recibe,
+                'unidad_entrega'            => $unidad_entrega,
+                'unidad_recibe'             => 98,
                 'representante_sma'         => $representante_sma,
                 'representante_unidad'      => $representante_unidad,
                 'representante_supervision' => $supervision,
@@ -250,7 +228,7 @@ class alta_actas_baja_model extends CI_Model {
                 'usuario_edita'             => base64_decode($_SESSION['usuario'])
             );
 
-            $this->db->insert('actas_alta', $data_acta_alta);
+            $this->db->insert('actas_baja', $data_acta_baja);
 
             $query = $this->db->query("SELECT last_insert_id() as nro_acta");
 
@@ -260,7 +238,7 @@ class alta_actas_baja_model extends CI_Model {
 
             $data_db_logs = array(
                 'tipo_movimiento' => 'insert',
-                'tabla'           => 'actas_alta',
+                'tabla'           => 'actas_baja',
                 'clave_tabla'     => 'nro_acta = '.$nro_acta,
                 'usuario'         => base64_decode($_SESSION['usuario'])
             );        
@@ -277,11 +255,11 @@ class alta_actas_baja_model extends CI_Model {
                     'modelo'    => $_SESSION['fichas'][$i+3]
                 );
 
-                $this->db->insert("actas_alta_entrega_armamento", $data_ficha);
+                $this->db->insert("actas_baja_devolucion_armamento", $data_ficha);
 
                 $data_db_logs = array(
                     'tipo_movimiento' => 'insert',
-                    'tabla'           => 'actas_alta_entrega_armamento',
+                    'tabla'           => 'actas_baja_devolucion_armamento',
                     'clave_tabla'     => 'nro_serie = '.$_SESSION['fichas'][$i]. ' && marca = '.$_SESSION['fichas'][$i+1].' && calibre = '.$_SESSION['fichas'][$i+2].' && modelo ='.$_SESSION['fichas'][$i+3].' && idunidad = '.$unidad_recibe,
                     'usuario'         => base64_decode($_SESSION['usuario'])
                 );        
@@ -301,11 +279,11 @@ class alta_actas_baja_model extends CI_Model {
                     'nro_accesorio' => $_SESSION['accesorios'][$i+4]
                 );
 
-                $this->db->insert("actas_alta_entrega_accesorios", $data_accesorio);
+                $this->db->insert("actas_baja_devolucion_accesorios", $data_accesorio);
 
                 $data_db_logs = array(
                     'tipo_movimiento' => 'insert',
-                    'tabla'           => 'actas_alta_entrega_accesorios',
+                    'tabla'           => 'actas_baja_devolucion_accesorios',
                     'clave_tabla'     => 'nro_serie = '.$_SESSION['accesorios'][$i]. ' && marca = '.$_SESSION['accesorios'][$i+1].' && calibre = '.$_SESSION['accesorios'][$i+2].' && modelo ='.$_SESSION['accesorios'][$i+3].' && nro_accesorio = '.$_SESSION['accesorios'][$i+4].' && idunidad = '.$unidad_recibe,
                     'usuario'         => base64_decode($_SESSION['usuario'])
                 );        

@@ -36,7 +36,7 @@
             function altaActa() {
                 
                 var fecha                = $("#fecha").val();
-                var unidad_recibe        = $("#unidad_recibe").val();
+                var unidad_entrega       = $("#unidad_entrega").val();
                 var representante_sma    = $("#representante_sma").val();
                 var representante_unidad = $("#representante_unidad").val();
                 var supervision          = $("#supervision").val();
@@ -45,11 +45,11 @@
                 $.ajax({
                     type: "post",  
                     dataType: "json",
-                    url: "<?php base_url(); ?>alta_actas_alta/validarDatos",
-                    data: "fecha="+fecha+"&unidad_recibe="+unidad_recibe+"&representante_sma="+representante_sma+"&representante_unidad="+representante_unidad+"&supervision="+supervision+"&observaciones="+observaciones,
+                    url: "<?php base_url(); ?>alta_actas_baja/validarDatos",
+                    data: "fecha="+fecha+"&unidad_entrega="+unidad_entrega+"&representante_sma="+representante_sma+"&representante_unidad="+representante_unidad+"&supervision="+supervision+"&observaciones="+observaciones,
                     success: function(data){
                         if(data[0] == "1"){            
-                            jAlert("El acta se genero con exito, el nro de acta de alta generado es - "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('alta_actas_alta'); ?>','Abastecimiento >> Actas >> Acta alta'); });
+                            jAlert("El acta se genero con exito, el nro de acta de baja generado es - "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('alta_actas_baja'); ?>','Abastecimiento >> Actas >> Acta baja'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
@@ -57,11 +57,38 @@
                 });               
             }
             
-            function cargoMarcas(nro_serie) {
+            function cargoNroSeries(unidad) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoMarcas",
-                   data: "nro_serie="+nro_serie,
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoNroSeries",
+                   data: "unidad="+unidad,
+                   success: function(data) {
+                       //cargo nro de series para armamento
+                       $("#nro_serie").html("");
+                       $("#marca").html("");
+                       $("#calibre").html("");
+                       $("#modelo").html("");
+                       
+                       $("#nro_serie").html(data[0]);
+                       
+                       //cargo nro de series para accesorios
+                       $("#nro_serie_accesorio").html("");
+                       $("#marca_accesorio").html("");
+                       $("#calibre_accesorio").html("");
+                       $("#modelo_accesorio").html("");
+                       $("#nro_accesorio").html("");
+
+                       $("#nro_serie_accesorio").html(data[1]);
+                   }
+                });                
+            }            
+            
+            function cargoMarcas(unidad, nro_serie) {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoMarcas",
+                   data: "unidad="+unidad+"&nro_serie="+nro_serie,
                    success: function(data) {
                        $("#marca").html("");
                        $("#marca").html(data);
@@ -69,11 +96,11 @@
                 });                
             }
             
-            function cargoCalibres(nro_serie, marca) {
+            function cargoCalibres(unidad, nro_serie, marca) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoCalibres",
-                   data: "nro_serie="+nro_serie+"&marca="+marca,
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoCalibres",
+                   data: "unidad="+unidad+"&nro_serie="+nro_serie+"&marca="+marca,
                    success: function(data) {
                        $("#calibre").html("");
                        $("#calibre").html(data);
@@ -81,11 +108,11 @@
                 });                
             }
             
-            function cargoModelos(nro_serie, marca, calibre) {
+            function cargoModelos(unidad, nro_serie, marca, calibre) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoModelos",
-                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre,
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoModelos",
+                   data: "unidad="+unidad+"&nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre,
                    success: function(data) {
                        $("#modelo").html("");
                        $("#modelo").html(data);
@@ -93,11 +120,23 @@
                 });                
             }
 
-            function cargoMarcasAccesorios(nro_serie) {
+            function cargoNroSeriesAccesorios(unidad) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoMarcasAccesorios",
-                   data: "nro_serie="+nro_serie,
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoNroSeries",
+                   data: "unidad="+unidad,
+                   success: function(data) {
+                       $("#nro_serie_accesorio").html("");
+                       $("#nro_serie_accesorio").html(data);
+                   }
+                });                
+            } 
+
+            function cargoMarcasAccesorios(unidad, nro_serie) {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoMarcasAccesorios",
+                   data: "unidad="+unidad+"&nro_serie="+nro_serie,
                    success: function(data) {
                        $("#marca_accesorio").html("");
                        $("#marca_accesorio").html(data);
@@ -105,11 +144,11 @@
                 });                
             }
             
-            function cargoCalibresAccesorios(nro_serie, marca) {
+            function cargoCalibresAccesorios(unidad, nro_serie, marca) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoCalibresAccesorios",
-                   data: "nro_serie="+nro_serie+"&marca="+marca,
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoCalibresAccesorios",
+                   data: "unidad="+unidad+"&nro_serie="+nro_serie+"&marca="+marca,
                    success: function(data) {
                        $("#calibre_accesorio").html("");
                        $("#calibre_accesorio").html(data);
@@ -117,11 +156,11 @@
                 });                
             }
             
-            function cargoModelosAccesorios(nro_serie, marca, calibre) {
+            function cargoModelosAccesorios(unidad, nro_serie, marca, calibre) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoModelosAccesorios",
-                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre,
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoModelosAccesorios",
+                   data: "unidad="+unidad+"&nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre,
                    success: function(data) {
                        $("#modelo_accesorio").html("");
                        $("#modelo_accesorio").html(data);
@@ -129,11 +168,11 @@
                 });                
             }
 
-            function cargoNroAccesorios(nro_serie, marca, calibre, modelo) {
+            function cargoNroAccesorios(unidad, nro_serie, marca, calibre, modelo) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoNroAccesorios",
-                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoNroAccesorios",
+                   data: "unidad="+unidad+"&nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
                    success: function(data) {
                        $("#nro_accesorio").html("");
                        $("#nro_accesorio").html(data);
@@ -142,18 +181,42 @@
             }
             
             function busquedaFichas() {
-                $.colorbox({href:"<?php echo base_url('busqueda_fichas'); ?>", top:true, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA FICHAS", onClosed: function(){ cargoFichasFiltro(); } });
+                
+                if($("#unidad_entrega").val() != '') {
+                    $.ajax({
+                       type: "post",
+                       url: "<?php base_url(); ?>alta_actas_baja/seteoUnidad",
+                       data: "unidad="+$("#unidad_entrega").val(),
+                       success: function() {
+                           $.colorbox({href:"<?php echo base_url('busqueda_fichas'); ?>", top:true, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA FICHAS", onClosed: function(){ cargoFichasFiltro(); } });
+                       }
+                    });
+                }else {
+                    jAlert("Debe seleccionar una unidad para poder realizar la busqueda", "Error");
+                }
             }
             
             function busquedaAccesorios() {
-                $.colorbox({href:"<?php echo base_url('busqueda_accesorios'); ?>", top:true, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA ACCESORIOS", onClosed: function(){ cargoAccesoriosFiltro(); } });
+            
+                if($("#unidad_entrega").val() != '') {
+                    $.ajax({
+                       type: "post",
+                       url: "<?php base_url(); ?>alta_actas_baja/seteoUnidad",
+                       data: "unidad="+$("#unidad_entrega").val(),
+                       success: function() {
+                           $.colorbox({href:"<?php echo base_url('busqueda_accesorios'); ?>", top:true, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA ACCESORIOS", onClosed: function(){ cargoAccesoriosFiltro(); } });
+                       }
+                    });
+                }else {
+                    jAlert("Debe seleccionar una unidad para poder realizar la busqueda", "Error");
+                }            
             }            
 
             function cargoFichasFiltro() {
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoFichasFiltro",
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoFichasFiltro",
                    success: function(data) {
                        $("#nro_serie").html("");
                        $("#nro_serie").html(data[0]);
@@ -171,7 +234,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoAccesoriosFiltro",
+                   url: "<?php base_url(); ?>alta_actas_baja/cargoAccesoriosFiltro",
                    success: function(data) {
                        $("#nro_serie_accesorio").html("");
                        $("#nro_serie_accesorio").html(data[0]);
@@ -197,7 +260,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_actas_alta/agregarFicha",
+                   url: "<?php base_url(); ?>alta_actas_baja/agregarFicha",
                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
                    success: function(data) {
                        if(data[0] == 1) {
@@ -214,7 +277,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_actas_alta/anularFicha",
+                   url: "<?php base_url(); ?>alta_actas_baja/anularFicha",
                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
                    success: function(data) {
                        if(data[0] == 1) {
@@ -238,7 +301,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_actas_alta/agregarAccesorio",
+                   url: "<?php base_url(); ?>alta_actas_baja/agregarAccesorio",
                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&nro_accesorio="+nro_accesorio,
                    success: function(data) {
                        if(data[0] == 1) {
@@ -255,7 +318,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_actas_alta/anularAccesorio",
+                   url: "<?php base_url(); ?>alta_actas_baja/anularAccesorio",
                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&nro_accesorio="+nro_accesorio,
                    success: function(data) {
                        if(data[0] == 1) {
@@ -276,7 +339,7 @@
 
         <div>			
 
-            <h1> Alta actas de alta </h1>    
+            <h1> Alta actas de baja </h1>    
             
             <fieldset>	
 
@@ -284,15 +347,15 @@
                 <dt><label for="fecha"> Fecha </label></dt>
                 <dd><input type="text" id="fecha" class="text" /></dd>
                 </dl>                
-                
+
                 <dl> 		
                 <dt><label for="unidad_entrega"> Unidad entrega </label></dt>	
-                <dd><input type="text" id="unidad_entrega" class="txtautomatico" readonly="readonly" value="S.M.A" /></dd> 					
-                </dl>
+                <dd><select id="unidad_entrega"> <?php echo $unidades; ?> </select></dd> 					
+                </dl>                
                 
                 <dl> 		
                 <dt><label for="unidad_recibe"> Unidad recibe </label></dt>	
-                <dd><select id="unidad_recibe"> <?php echo $unidades; ?> </select></dd> 					
+                <dd><input type="text" id="unidad_recibe" class="txtautomatico" readonly="readonly" value="S.M.A" /></dd> 					
                 </dl>
                 
                 <dl> 		
@@ -321,7 +384,7 @@
                 
                 <dl> 		
                 <dt><label for="nro_serie"> Nro serie </label></dt>	
-                <dd><select id="nro_serie"> <?php echo $nro_series; ?> </select> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><select id="nro_serie"> </select> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
@@ -341,13 +404,13 @@
                 
                 <button style="margin-right: 20px;" onclick="agregarFicha();"> Agregar armamento </button>     
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img src="<?php echo base_url(); ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> Accesorios a entregar </p>
                 
                 <dl> 		
                 <dt><label for="nro_serie_accesorio"> Nro serie </label></dt>	
-                <dd><select id="nro_serie_accesorio"> <?php echo $nro_series_accesorios; ?> </select> <img style="cursor: pointer;" onclick="busquedaAccesorios();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><select id="nro_serie_accesorio"> </select> <img style="cursor: pointer;" onclick="busquedaAccesorios();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		

@@ -21,6 +21,15 @@ class busqueda_accesorios extends CI_Controller {
     }
     
     function index() {
+        
+        if(!isset($_SESSION['unidad'])) {
+            $_SESSION['unidad'] = 98;
+        }else {
+            if(empty($_SESSION['unidad'])) {
+                $_SESSION['unidad'] = 98;
+            }
+        }
+        
         $_SESSION['seleccion_busqueda']  = "";  //elemento que se selecciona 1
         $_SESSION['seleccion_busqueda1'] = ""; //elemento que se selecciona 2
         $_SESSION['seleccion_busqueda2'] = ""; //elemento que se selecciona 3
