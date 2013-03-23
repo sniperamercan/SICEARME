@@ -1,7 +1,7 @@
 <?php
 
 class mb_usuarios_model extends CI_Model {
-    
+ 
     function __construct() {
         parent::__construct();
         $this->load->database();
@@ -36,14 +36,14 @@ class mb_usuarios_model extends CI_Model {
         return $row->estado;
     }
     
-    function logsUsuario($usuario) {
+    function registroIngresos($usuario) {
         
         $query = $this->db->query("SELECT *
                                    FROM logs_ingresos
                                    WHERE logusuario = ".$this->db->escape($usuario));
         
-        return $query->num_rows();     
-    }    
+        return $query->num_rows();
+    }
     
     function cambiarEstado($usuario, $estado) {
         
@@ -105,11 +105,37 @@ class mb_usuarios_model extends CI_Model {
         );        
         
         $this->db->trans_start();
+            $this->db->delete('permisos_usuario', $data_usuario_where);
             $this->db->delete('usuarios', $data_usuario_where);
             $this->db->insert('db_logs', $data_db_logs); 
         $this->db->trans_complete();         
     }
     
+    function tienePermisos($usuario) {
+        
+        $query = $this->db->query("SELECT *
+                                   FROM permisos_usuario
+                                   WHERE usuario = ".$this->db->escape($usuario));
+        
+        return $query->num_rows();
+    }
+    
+    function verPermisos($usuario) {
+        
+        $query = $this->db->query("SELECT pu.perfil, p.descripcion
+                                   FROM permisos_usuario pu
+                                   INNER JOIN permisos p ON pu.perfil = p.perfil
+                                   WHERE pu.usuario = ".$this->db->escape($usuario));
+        
+        $retorno = array();
+        
+        foreach($query->result() as $row) {
+            $retorno[] = $row->perfil;
+            $retorno[] = $row->descripcion;
+        }
+        
+        return $retorno;
+    }
     
 }
 

@@ -100,7 +100,7 @@ class mensajes {
         return "Su usuario esta inactivo, no podra acceder al sistema";
     }
     
-    function usuarioElminado($usuario) {
+    function usuarioEliminado($usuario) {
         return "El usuario - ".$usuario." fue eliminado con exito del sistema";
     }
     

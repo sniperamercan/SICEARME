@@ -47,7 +47,7 @@
                     data: "usuario="+usuario+"&nombre="+nombre+"&apellido="+apellido+"&clave="+clave+"&persmisos="+JSON.stringify(permisos),
                     success: function(data){
                         if(data == "1"){            
-                            jAlert("Usuario agregado al sistema con exito", "Correcto", function() { irAFrame('<?php echo base_url('agregar_usuario'); ?>','Adminitracion >> Agregar usuarios'); });
+                            jAlert("Usuario agregado al sistema con exito", "Correcto", function() { irAFrame('<?php echo base_url('agregar_usuario'); ?>','Administracion >> Agregar usuarios'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
@@ -58,7 +58,7 @@
             function verPermisos(usuario) {
                 $.ajax({
                     type: "post",  
-                    url: "<?php base_url(); ?>agregar_usuario/verPermisos",
+                    url: "<?php base_url(); ?>mb_usuarios/verPermisos",
                     data: "usuario="+usuario,
                     success: function(data){
                         jAlert(data, "PERMISOS DEL USUARIO");
@@ -74,7 +74,7 @@
                             url: "<?php base_url(); ?>mb_usuarios/cambiarEstado",
                             data: "usuario="+usuario,
                             success: function(data){
-                                jAlert(data, "MODIFICAR ESTADO DEL USUARIO", function() { irAFrame('<?php echo base_url('mb_usuarios'); ?>','Adminitracion >> Modificar usuarios'); });
+                                jAlert(data, "MODIFICAR ESTADO DEL USUARIO", function() { irAFrame('<?php echo base_url('mb_usuarios'); ?>','Administracion >> Modificar usuarios'); });
                           }
                         });                         
                     }
@@ -97,7 +97,14 @@
             }
             
             function editarUsuario(usuario) {
-               
+                $.ajax({
+                    type: "post",  
+                    url: "<?php base_url(); ?>mb_usuarios/setearUsuario",
+                    data: "usuario="+usuario,
+                    success: function(){
+                         $.colorbox({href:"<?php echo base_url('modificar_usuarios'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:700, title:"MODIFICAR USUARIOS", onClosed: function(){ irAFrame('<?php echo base_url('mb_usuarios'); ?>','Administracion >> Modificar usuarios'); } });
+                  }
+                });
             }
             
             function eliminarUsuario(usuario) {
@@ -108,7 +115,7 @@
                             url: "<?php base_url(); ?>mb_usuarios/eliminarUsuario",
                             data: "usuario="+usuario,
                             success: function(data){
-                                jAlert(data, "ELIMINAR USUARIO USUARIO DEL SISTEMA", function() { irAFrame('<?php echo base_url('mb_usuarios'); ?>','Adminitracion >> Modificar usuarios'); });
+                                jAlert(data, "ELIMINAR USUARIO USUARIO DEL SISTEMA", function() { irAFrame('<?php echo base_url('mb_usuarios'); ?>','Administracion >> Modificar usuarios'); });
                           }
                         });                         
                     }

@@ -33,6 +33,38 @@ class modificar_usuarios_model extends CI_Model {
         
     }
     
+    function obtenerDatosUsuario($usuario) {
+        
+        $query = $this->db->query("SELECT nombre, apellido 
+                                   FROM usuarios
+                                   WHERE usuario = ".$this->db->escape($usuario));
+        
+        $datos_usuarios = array();
+        
+        $row = $query->row();
+        
+        $datos_usuarios[] = $row->nombre;
+        $datos_usuarios[] = $row->apellido;
+        
+        return $datos_usuarios; 
+    }
+    
+    function permisosUsuario($usuario) {
+        
+        $query = $this->db->query("SELECT perfil
+                                   FROM permisos_usuario
+                                   WHERE usuario = ".$this->db->escape($usuario)."
+                                   ORDER BY perfil");
+        
+        $permisos = array();
+        
+        foreach($query->result() as $row) {
+            $permisos[] = $row->perfil;
+        }
+        
+        return $permisos;        
+    }
+    
     function agregarUsuario($usuario, $nombre, $apellido, $clave, $permisos) {
         
         $data_usuario = array(

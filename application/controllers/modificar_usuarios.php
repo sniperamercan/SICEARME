@@ -25,13 +25,39 @@ class modificar_usuarios extends CI_Controller {
         $permisos = $this->modificar_usuarios_model->cargoPermisos();
         $data['permisos_usuario'] = "";
         
+        $permisos_usuario = $this->modificar_usuarios_model->permisosUsuario($_SESSION['editar_usuario']);
+        
         for($i=0; $i<count($permisos); $i=$i+2) {
-            $id=$permisos[$i];
+            $id       = $permisos[$i];
+            $encontre = false;
+            
+            $j = 0;
+            
+            while($j<count($permisos_usuario) && !$encontre) {
+                if($permisos_usuario[$j] == $id) {
+                    $encontre = true;
+                }
+                $j++;
+            }
+            
+            if($encontre) {
+                $checked = 'checked';
+            }else {
+                $checked = '';
+            }
+            
             $data['permisos_usuario'] .= '<dl>
-                                         <dt><input type="checkbox" name="persmisos" id="'.$id.'" value="'.$permisos[$i].'" /></dt>
+                                         <dt><input '.$checked.' type="checkbox" name="persmisos" id="'.$id.'" value="'.$permisos[$i].'" /></dt>
                                          <dd><label for="'.$id.'">'.$permisos[$i+1].'</label></dd>
                                          </dl>';
         }
+        
+        $data['usuario'] = $_SESSION['editar_usuario'];
+        
+        $datos_usuario = $this->modificar_usuarios_model->obtenerDatosUsuario($_SESSION['editar_usuario']);
+        
+        $data['nombre']   = $datos_usuario[0];
+        $data['apellido'] = $datos_usuario[1];
         
         $this->load->view('modificar_usuarios_view', $data);  
     }
@@ -41,7 +67,6 @@ class modificar_usuarios extends CI_Controller {
         $usuario  = $_POST['usuario'];
         $nombre   = $_POST['nombre'];
         $apellido = $_POST['apellido'];
-        $clave    = $_POST['clave'];
         
         $permisos = json_decode($_POST['persmisos']);
         

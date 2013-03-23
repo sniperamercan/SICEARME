@@ -22,6 +22,8 @@ class mb_usuarios extends CI_Controller {
     
     function index() {
         
+        $_SESSION['editar_usuario'] = '';
+        
         $usuarios = $this->mb_usuarios_model->listadoUsuarios();
         
         $concat = "";
@@ -103,10 +105,8 @@ class mb_usuarios extends CI_Controller {
         $this->load->view("mb_usuarios_view", $data);
     }
     
-    function verPermisos() {
-        
-        $usuario = $_POST['usuario'];
-        
+    function setearUsuario() {
+        $_SESSION['editar_usuario'] = $_POST['usuario'];
     }
     
     function cambiarEstado() {
@@ -141,13 +141,42 @@ class mb_usuarios extends CI_Controller {
         $usuario = $_POST['usuario'];
         
         //controlo que el usuario no tenga registros de logs en el sistema
-        if(!$this->db->mb_usuarios_model->logsUsuario($usuario)) {
-            $this->db->mb_usuarios_model->eliminarUsuario($usuario);
+        if(!$this->mb_usuarios_model->registroIngresos($usuario)) {
+            $this->mb_usuarios_model->eliminarUsuario($usuario);
             echo $this->mensajes->usuarioEliminado($usuario);
         }else {
             echo "El usuario - ".$usuario." no se puede eliminar del sistema, ya que tiene registros en el mismo";
         }
+    }
+    
+    function verPermisos() {
         
+        $usuario = $_POST['usuario'];
+        
+        if(!$this->mb_usuarios_model->tienePermisos($usuario)) {
+            echo "El usuario - ".$usuario." no tiene ningun permiso asignado al sistema";
+        }else {
+            $permisos = array();
+            $permisos = $this->mb_usuarios_model->verPermisos($usuario);
+            $concat = "<p style='font-weight: bold;'> Permisos del usuario - ".$usuario." </p><table style='border: 1px solid black; border-collapse: collapse;'><thhead> <th style='background-color: #8C8C8C; color: white;'> Perfil </th> <th style='background-color: #8C8C8C; color: white;'> Descripcion </th> </thead>";
+            
+            $j = 0;
+            
+            for($i=0; $i<count($permisos); $i=$i+2) {
+                if($j % 2 == 0){
+                    $back_color = '#F2FBEF';
+                }else {
+                    $back_color = '#E6F8E0';
+                }
+                $concat .= "<tbody> <tr style='background-color: ".$back_color."'> <td style='border: 1px solid black; border-collapse: collapse;'>".$permisos[$i]."</td> <td style='border: 1px solid black; border-collapse: collapse;'>".$permisos[$i+1]."</td> </tr> </tbody>";
+            
+                $j++;
+            }
+            
+            $concat .= "</table>";
+            
+            echo $concat;
+        }
     }
 }
 

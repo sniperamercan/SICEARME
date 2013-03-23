@@ -6,7 +6,6 @@
         <script type="text/javascript">
 
             $(document).ready(function() {
-                $("#clave_antigua").focus();
                 $("input:submit").button();
                 $("button").button(); 
                 $("input:button").button(); 
@@ -17,7 +16,6 @@
                 var usuario   = $("#usuario").val();
                 var nombre    = $("#nombre").val();
                 var apellido  = $("#apellido").val();
-                var clave     = $("#clave").val();
                 
                 var permisos = new Array();
                 var i = 0;
@@ -100,23 +98,18 @@
 
                 <dl>
                 <dt><label for="usuario"> Usuario </label></dt>
-                <dd><input type="text" id="usuario" class="txtautomatico" readonly="readonly" /></dd>
+                <dd><input type="text" id="usuario" class="txtautomatico" readonly="readonly" value="<?php echo $usuario; ?>" /></dd>
                 </dl>
 
                 <dl>
                 <dt><label for="nombre"> Nombre </label></dt>
-                <dd><input type="text" id="nombre" class="text" /></dd>
+                <dd><input type="text" id="nombre" class="text" value="<?php echo $nombre; ?>" /></dd>
                 </dl>                
                 
                 <dl>
                 <dt><label for="apellido"> Apellido </label></dt>
-                <dd><input type="text" id="apellido" class="text" /></dd>
+                <dd><input type="text" id="apellido" class="text" value="<?php echo $apellido; ?>" /></dd>
                 </dl>                
-                
-                <dl>
-                <dt><label for="clave"> Clave </label></dt>
-                <dd><input type="text" id="clave" class="text" /></dd>
-                </dl>                 
                 
                 <img src="<?php base_url() ?>images/barra.png" />
                 
@@ -127,7 +120,7 @@
             </fieldset>	
 
             <fieldset class="action">	
-                <button onclick="ingresarDatos();"> Alta usuario </button>
+                <button onclick="ingresarDatos();"> Modificar usuario </button>
             </fieldset>           
             
         </div>        
