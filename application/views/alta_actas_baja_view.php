@@ -27,30 +27,29 @@
         <script type="text/javascript">
 
             $(document).ready(function() {
-                $("#nro_compra").focus();
                 $("#fecha").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
-                $("#fabricacion").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
-                $("#vencimiento").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
                 $("input:submit").button();
                 $("button").button(); 
                 $("input:button").button(); 
             });	
 
-            function ingresarDatos() {
+            function altaActa() {
                 
-                var usuario   = $("#usuario").val();
-                var nombre    = $("#nombre").val();
-                var apellido  = $("#apellido").val();
-                var clave     = $("#clave").val();
+                var fecha                = $("#fecha").val();
+                var unidad_recibe        = $("#unidad_recibe").val();
+                var representante_sma    = $("#representante_sma").val();
+                var representante_unidad = $("#representante_unidad").val();
+                var supervision          = $("#supervision").val();
+                var observaciones        = $("#observaciones").val();
                 
                 $.ajax({
                     type: "post",  
                     dataType: "json",
-                    url: "<?php base_url(); ?>agregar_usuario/validarDatos",
-                    data: "usuario="+usuario+"&nombre="+nombre+"&apellido="+apellido+"&clave="+clave+"&persmisos="+JSON.stringify(permisos),
+                    url: "<?php base_url(); ?>alta_actas_alta/validarDatos",
+                    data: "fecha="+fecha+"&unidad_recibe="+unidad_recibe+"&representante_sma="+representante_sma+"&representante_unidad="+representante_unidad+"&supervision="+supervision+"&observaciones="+observaciones,
                     success: function(data){
-                        if(data == "1"){            
-                            jAlert("Usuario agregado al sistema con exito", "Correcto", function() { irAFrame('<?php echo base_url('agregar_usuario'); ?>','Adminitracion >> Agregar usuarios'); });
+                        if(data[0] == "1"){            
+                            jAlert("El acta se genero con exito, el nro de acta de alta generado es - "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('alta_actas_alta'); ?>','Abastecimiento >> Actas >> Acta alta'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
@@ -61,7 +60,7 @@
             function cargoMarcas(nro_serie) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_baja/cargoMarcas",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoMarcas",
                    data: "nro_serie="+nro_serie,
                    success: function(data) {
                        $("#marca").html("");
@@ -73,7 +72,7 @@
             function cargoCalibres(nro_serie, marca) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_baja/cargoCalibres",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoCalibres",
                    data: "nro_serie="+nro_serie+"&marca="+marca,
                    success: function(data) {
                        $("#calibre").html("");
@@ -85,7 +84,7 @@
             function cargoModelos(nro_serie, marca, calibre) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_baja/cargoModelos",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoModelos",
                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre,
                    success: function(data) {
                        $("#modelo").html("");
@@ -97,7 +96,7 @@
             function cargoMarcasAccesorios(nro_serie) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_baja/cargoMarcasAccesorios",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoMarcasAccesorios",
                    data: "nro_serie="+nro_serie,
                    success: function(data) {
                        $("#marca_accesorio").html("");
@@ -109,7 +108,7 @@
             function cargoCalibresAccesorios(nro_serie, marca) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_baja/cargoCalibresAccesorios",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoCalibresAccesorios",
                    data: "nro_serie="+nro_serie+"&marca="+marca,
                    success: function(data) {
                        $("#calibre_accesorio").html("");
@@ -121,7 +120,7 @@
             function cargoModelosAccesorios(nro_serie, marca, calibre) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_baja/cargoModelosAccesorios",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoModelosAccesorios",
                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre,
                    success: function(data) {
                        $("#modelo_accesorio").html("");
@@ -133,7 +132,7 @@
             function cargoNroAccesorios(nro_serie, marca, calibre, modelo) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_baja/cargoNroAccesorios",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoNroAccesorios",
                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
                    success: function(data) {
                        $("#nro_accesorio").html("");
@@ -154,7 +153,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_actas_baja/cargoFichasFiltro",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoFichasFiltro",
                    success: function(data) {
                        $("#nro_serie").html("");
                        $("#nro_serie").html(data[0]);
@@ -172,7 +171,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_actas_baja/cargoAccesoriosFiltro",
+                   url: "<?php base_url(); ?>alta_actas_alta/cargoAccesoriosFiltro",
                    success: function(data) {
                        $("#nro_serie_accesorio").html("");
                        $("#nro_serie_accesorio").html(data[0]);
@@ -186,16 +185,98 @@
                        $("#nro_accesorio").html(data[4]);                       
                    }
                 });                
+            } 
+
+            function agregarFicha() {
+            
+                var nro_serie  = $("#nro_serie").val();
+                var marca      = $("#marca").val();
+                var calibre    = $("#calibre").val();
+                var modelo     = $("#modelo").val();
+             
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_actas_alta/agregarFicha",
+                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#entregas_fichas").append(data[1]);
+                       }else {
+                           jAlert(data[0], "Error");
+                       }
+                   }
+                });           
             }
+            
+            function anularFicha(nro_serie, marca, calibre, modelo) {
+            
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_actas_alta/anularFicha",
+                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#entregas_fichas").html("");
+                           $("#entregas_fichas").html(data[1]);
+                       }else {
+                           $("#entregas_fichas").html("");
+                       }
+                   }
+                });
+            }
+            
+            function agregarAccesorio() {
+            
+                var nro_serie     = $("#nro_serie_accesorio").val();
+                var marca         = $("#marca_accesorio").val();
+                var calibre       = $("#calibre_accesorio").val();
+                var modelo        = $("#modelo_accesorio").val();
+                var nro_accesorio = $("#nro_accesorio").val();
+             
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_actas_alta/agregarAccesorio",
+                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&nro_accesorio="+nro_accesorio,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#entregas_accesorios").append(data[1]);
+                       }else {
+                           jAlert(data[0], "Error");
+                       }
+                   }
+                });           
+            }
+            
+            function anularAccesorio(nro_serie, marca, calibre, modelo, nro_accesorio) {
+            
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_actas_alta/anularAccesorio",
+                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&nro_accesorio="+nro_accesorio,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#entregas_accesorios").html("");
+                           $("#entregas_accesorios").html(data[1]);
+                       }else {
+                           $("#entregas_accesorios").html("");
+                       }
+                   }
+                });
+            }            
+
         </script>
         
     </head>
 
     <body class="cuerpo">
 
-         <div>			
+        <div>			
 
-            <h1> Alta actas de baja </h1>    
+            <h1> Alta actas de alta </h1>    
             
             <fieldset>	
 
@@ -206,12 +287,12 @@
                 
                 <dl> 		
                 <dt><label for="unidad_entrega"> Unidad entrega </label></dt>	
-                <dd><select id="unidad_recibe"> <?php echo $unidades; ?> </select></dd> 					
+                <dd><input type="text" id="unidad_entrega" class="txtautomatico" readonly="readonly" value="S.M.A" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="unidad_recibe"> Unidad recibe </label></dt>	
-                <dd><input type="text" id="unidad_recibe" class="txtautomatico" readonly="readonly" value="S.M.A" /></dd> 					
+                <dd><select id="unidad_recibe"> <?php echo $unidades; ?> </select></dd> 					
                 </dl>
                 
                 <dl> 		
@@ -236,7 +317,7 @@
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 
-                <p class="subtituloform"> Armamento a devolver </p>
+                <p class="subtituloform"> Armamento a entregar </p>
                 
                 <dl> 		
                 <dt><label for="nro_serie"> Nro serie </label></dt>	
@@ -245,24 +326,24 @@
                 
                 <dl> 		
                 <dt><label for="marca"> Marca </label></dt>	
-                <dd><select id="marca"> <?php echo $marca; ?> </select> </dd> 					
+                <dd><select id="marca"> </select></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre"> Calibre </label></dt>	
-                <dd><select id="calibre"> <?php echo $calibre; ?> </select> </dd> 					
+                <dd><select id="calibre"> </select></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="modelo"> Modelo </label></dt>	
-                <dd><select id="modelo"> <?php echo $modelo; ?> </select></dd> 					
+                <dd><select id="modelo"> </select></dd> 					
                 </dl>
                 
-                <button style="margin-right: 20px;" onclick="agregarCatalogo();"> Agregar armamento </button>     
+                <button style="margin-right: 20px;" onclick="agregarFicha();"> Agregar armamento </button>     
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 
-                <p class="subtituloform"> Accesorios a devolver </p>
+                <p class="subtituloform"> Accesorios a entregar </p>
                 
                 <dl> 		
                 <dt><label for="nro_serie_accesorio"> Nro serie </label></dt>	
@@ -289,19 +370,19 @@
                 <dd><select id="nro_accesorio"> </select></dd> 					
                 </dl>                
                 
-                <button style="margin-right: 20px;" onclick="agregarCatalogo();"> Agregar accesorio </button>               
+                <button style="margin-right: 20px;" onclick="agregarAccesorio();"> Agregar accesorio </button>               
                                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="ingresarDatos();"> Alta ficha </button>
+                <button style="margin-right: 20px;" onclick="altaActa();"> Dar de alta el acta </button>
             </fieldset> 
             
             <hr />
             
             <div>
                 
-                <h1> Devolucion armamento </h1>       
+                <h1> Entregas armamento </h1>       
                 
                 <fieldset>	
 
@@ -311,10 +392,10 @@
                             <table> 
                                 <thead>
                                     <tr>
-                                        <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> 
+                                        <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> </th>
                                     </tr>
                                 </thead>
-                                <tbody id="devolucion_armamento"></tbody>
+                                <tbody id="entregas_fichas"></tbody>
                                 <tfoot>
                                     <tr> <td colspan="5"> <div id="paging"> <br /> </div> </td> </tr>
                                 </tfoot>                                
@@ -331,7 +412,7 @@
             
             <div>
                 
-                <h1> Devolucion accesorios </h1>       
+                <h1> Entregas accesorios </h1>       
                 
                 <fieldset>	
 
@@ -340,11 +421,11 @@
                         <div class="datagrid" style="margin-top: 30px;">
                             <table> 
                                 <thead>
-                                    <tr>
-                                        <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Nro accesorio </th>
+                                    <tr> 
+                                        <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Nro accesorio </th> <th> </th>
                                     </tr>
                                 </thead>
-                                <tbody id="devolucion_accesorios"></tbody>
+                                <tbody id="entregas_accesorios"></tbody>
                                 <tfoot>
                                     <tr> <td colspan="6"> <div id="paging"> <br /> </div> </td> </tr>
                                 </tfoot>                                
@@ -359,7 +440,7 @@
                 
             </div>            
             
-        </div>       
+        </div>        
         
     </body>
 	
