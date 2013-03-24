@@ -175,7 +175,7 @@
                     <td style="border: none; width: 30%" align="right">
                         <div class="dock" id="dock">
                             <div class="dock-container">
-                                  <?php if($this->perms->verificoPerfil1()) { ?><a class="dock-item" onclick='$.colorbox({href:"<?php echo base_url('agregar_usuario'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:400, title:"AGREGAR USUARIO"});'><img src='<?php echo base_url('images/user_add.png'); ?>' alt="Agregar usuario" /><span>Agregar usuario</span></a><?php } ?>
+                                  <?php if($this->perms->verificoPerfil1()) { ?><a class="dock-item" onclick='$.colorbox({href:"<?php echo base_url('alta_usuarios'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:700, title:"AGREGAR USUARIO"});'><img src='<?php echo base_url('images/user_add.png'); ?>' alt="Agregar usuario" /><span>Agregar usuario</span></a><?php } ?>
                                   <a class="dock-item" onclick='window.open ("js/calculadora/calculadora.html", "mywindow","toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=206,height=200");'><img src='<?php echo base_url('images/calc.png'); ?>' alt="Calculadora" /><span>Calculadora</span></a> 
                                   <a class="dock-item" onclick='$.colorbox({href:"<?php echo base_url('modificar_clave'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:300, title:"MODIFICAR CLAVE"});'><img src='<?php echo base_url('images/key.png'); ?>' alt="Modificar clave" /><span>Modificar clave</span></a>                               			 
                             </div>
@@ -426,16 +426,17 @@
                                 <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_usuarios'); ?>','Administracion >> Modificar usuarios');"> Modificar usuarios </a></li>
                                 <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_usuarios'); ?>','Administracion >> Listado usuarios');"> Listado usuarios </a></li>
                                 <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_logs_ingresos'); ?>','Administracion >> Ver logs ingresos');"> Ver logs ingresos </a></li>
-                                <li><a href="#"> Desarrollo </a>
-                                    <ul>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('desarrollo_descripcion_actualizacion_sistema'); ?>','Administracion >> Desarrollo >> Descripcion actualizacion');"> Descripcion actualizacion </a></li>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('desarrollo_incremento_version_sistema'); ?>','Adminitracion >> Desarrollo >> Incremento version');"> Incremento version </a></li>
-                                        <li><a href="#" onclick="<?php $this->version->copiarVersion(); ?>"> Copiar version a servidor </a></li>
-                                    </ul>
-                                </li>                                
                             </ul>
                         </li>  
 
+                        <li><a href="#"> Desarrollo </a>
+                            <ul>
+                                <li><a href="#" onclick="irAFrame('<?php echo base_url('desarrollo_descripcion_actualizacion_sistema'); ?>','Administracion >> Desarrollo >> Descripcion actualizacion');"> Descripcion actualizacion </a></li>
+                                <li><a href="#" onclick="irAFrame('<?php echo base_url('desarrollo_incremento_version_sistema'); ?>','Adminitracion >> Desarrollo >> Incremento version');"> Incremento version </a></li>
+                                <li><a href="#" onclick="<?php $this->version->copiarVersion(); ?>"> Copiar version a servidor </a></li>
+                            </ul>
+                        </li>                         
+                        
                     <?php } ?>
                         
                     <!-- FIN ADMINISTRACION -->    
