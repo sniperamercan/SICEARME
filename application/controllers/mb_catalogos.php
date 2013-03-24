@@ -24,6 +24,9 @@ class mb_catalogos extends CI_Controller {
     function index() {
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
+        
+        $_SESSION['nro_catalogo'] = ""; //para el editar
+        
         $this->load->view("mb_catalogos_view");
     }
     
@@ -345,6 +348,22 @@ class mb_catalogos extends CI_Controller {
         }else if($_SESSION['order'][1] == "ASC"){
             $_SESSION['order'][1] = "DESC";
         }        
+    }
+    
+    function editarCatalogo() {
+        $_SESSION['nro_catalogo'] = $_POST['nro_catalogo'];
+    }
+    
+    function eliminarCatalogo() {
+        
+        $nro_catalogo = $_POST['nro_catalogo'];
+        
+        if(!$this->mb_catalogos_model->catalogoAsociado($nro_catalogo)) {
+            $this->mb_catalogos_model->eliminarCatalogo($nro_catalogo);
+            echo 1;
+        }else {
+            echo 0;
+        }
     }
 }
 

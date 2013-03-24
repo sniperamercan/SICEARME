@@ -93,6 +93,39 @@
                     }                  
                 });            
             }
+            
+            function editarCatalogo(nro_catalogo) {
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo base_url("mb_catalogos/editarCatalogo"); ?>",
+                    data: "nro_catalogo="+nro_catalogo,
+                    success: function(){
+                        $.colorbox({href:"<?php echo base_url('modificar_catalogos'); ?>", top: true, iframe: false, scrolling: false, innerWidth: 800, innerHeight: 500, title: "MODIFICAR CATALOGO", onClosed: function(){ irAFrame('<?php echo base_url('mb_catalogos'); ?>','O.C.I >> Modificar/Anular >> Catalogos'); }});
+                    }                  
+                });            
+            }
+            
+            function eliminarCatalogo(nro_catalogo) {
+            
+                 jConfirm('Estas seguro que quieres eliminar el catalogo - '+nro_catalogo, 'ELIMINAR CATALOGO DEL SISTEMA', function(r) {
+                    if(r) {           
+                        $.ajax({
+                            type: 'post',
+                            url: "<?php echo base_url("mb_catalogos/eliminarCatalogo"); ?>",
+                            data: "nro_catalogo="+nro_catalogo,
+                            success: function(data){
+                                if(data == 1) {
+                                    jAlert("El catalogo nro - "+nro_catalogo+" fue eliminado con exito del sistema", "ELIMINAR CATALOGO", function() { irAFrame('<?php echo base_url('mb_catalogos'); ?>','O.C.I >> Modificar/Anular >> Catalogos') } );
+                                }else {
+
+                                    jAlert("El catalogo nro - "+nro_catalogo+" no se puede elimianar del sistema, debido a que esta asociados a compras y fichas", "ELIMINAR CATALOGO");
+                                }
+
+                            }                  
+                        });   
+                    }
+                });
+            }
                   
         </script>
         

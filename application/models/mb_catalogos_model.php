@@ -40,8 +40,37 @@ class mb_catalogos_model extends CI_Model {
         }
         
         return $result;
-    }    
+    }
     
+    function catalogoAsociado($nro_catalogo) {
+        
+        $query = $this->db->query("SELECT *
+                                   FROM compras_catalogos
+                                   WHERE nro_interno_catalogo = ".$this->db->escape($nro_catalogo));
+        
+        return $query->num_rows();
+    }
+    
+    function eliminarCatalogo($nro_catalogo) {
+        
+        $data_catalogo_where = array(
+            'nro_interno' => $nro_catalogo
+        );
+        
+        $data_db_logs = array(
+            'tipo_movimiento' => 'delete',
+            'tabla'           => 'catalogos',
+            'clave_tabla'     => 'nro_interno = '.$nro_catalogo,
+            'usuario'         => base64_decode($_SESSION['usuario'])
+        );        
+        
+        $this->db->trans_start();
+            $this->db->delete('catalogos', $data_catalogo_where);
+            $this->db->insert('db_logs', $data_db_logs); 
+        $this->db->trans_complete(); 
+        
+        //falta borrar toda la documentacion tecnica de archivos
+    }
 }
 
 ?>
