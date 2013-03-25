@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-    
+
     <head>
         
         <style>
@@ -22,77 +22,196 @@
             .datagrid table tfoot  li { display: inline; }
             .datagrid table tfoot li a { text-decoration: none; display: inline-block;  padding: 2px 8px; margin: 1px;color: #F5F5F5;border: 1px solid #8C8C8C;-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8C8C8C), color-stop(1, #7D7D7D) );background:-moz-linear-gradient( center top, #8C8C8C 5%, #7D7D7D 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8C8C8C', endColorstr='#7D7D7D');background-color:#8C8C8C; }
             .datagrid table tfoot ul.active, .datagrid table tfoot ul a:hover { text-decoration: none;border-color: #7D7D7D; color: #F5F5F5; background: none; background-color:#8C8C8C;}
-        </style>        
+        </style>          
         
-    
         <script type="text/javascript">
-
+     
             $(document).ready(function() {
                 $("input:submit").button();
                 $("button").button(); 
                 $("input:button").button(); 
-            });	
+                cargoConsulta();
+            });	     
+     
+            function filtrar(){
+                
+                var nro_serie    = $("#nro_serie").val();
+                var marca        = $("#marca").val();
+                var calibre      = $("#calibre").val();
+                var modelo       = $("#modelo").val();
+                var nro_compra   = $("#nro_compra").val();
+                var nro_catalogo = $("#nro_catalogo").val();                
+                
+                $.ajax({ 
+                    type: 'post',
+                    url: '<?php echo base_url(); ?>mb_fichas/consulta/0',
+                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&nro_compra="+nro_compra+"&nro_catalogo="+nro_catalogo,
+                    success: function(){
+                        cargoConsulta();
+                    }
+                });                
+            }
+            
+            function impresion(){                
+                $.colorbox({href:"<?php echo base_url('mb_fichas/seteoImpresion'); ?>", top: true, iframe: false, scrolling: false, innerWidth: 800, innerHeight: 200, title: "IMPRESION"});                
+            } 
 
-            function ingresarDatos() {
-                
-                var usuario   = $("#usuario").val();
-                var nombre    = $("#nombre").val();
-                var apellido  = $("#apellido").val();
-                var clave     = $("#clave").val();
-                
+            function seteoImpresion(de_pagina, a_pagina){                
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo base_url("mb_fichas/armoImpresion"); ?>",
+                    data: "de_pagina="+de_pagina+"&a_pagina="+a_pagina,
+                    success: function(data){
+                        if(data == "1"){
+                            window.open ("<?php echo base_url("contenido_impresion"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0");
+                        }else{
+                            jAlert(data);
+                        }
+                    }                  
+                });
+            }            
+            
+            function orderBy(param){            
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo base_url("mb_fichas/orderBy"); ?>",
+                    data: "order="+param,
+                    success: function(){
+                        cargoConsulta();                       
+                    }                  
+                });           
+            }      
+
+            function cargoConsulta() {
+                $.ajax({
+                    type: 'post',
+                    dataType: 'json',
+                    url: "<?php echo base_url("mb_fichas/consulta"); ?>",
+                    success: function(data){
+                        $("#datos_consulta").html(data[0]);
+                        $("#paginado").html(data[1]);
+                    }                  
+                });            
+            }
+            
+            function verAccesorios(nro_serie, marca, calibre, modelo) {
                 $.ajax({
                     type: "post",  
-                    dataType: "json",
-                    url: "<?php base_url(); ?>agregar_usuario/validarDatos",
-                    data: "usuario="+usuario+"&nombre="+nombre+"&apellido="+apellido+"&clave="+clave+"&persmisos="+JSON.stringify(permisos),
+                    url: "<?php base_url(); ?>mb_fichas/verAccesorios",
+                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
                     success: function(data){
-                        if(data == "1"){            
-                            jAlert("Usuario agregado al sistema con exito", "Correcto", function() { irAFrame('<?php echo base_url('agregar_usuario'); ?>','Adminitracion >> Agregar usuarios'); });
-                        }else{
-                            jAlert(data, "Error");
-                        }                            
+                        jAlert(data, "ACCESORIOS DE LA FICHA");
                   }
-                });               
+                });                
+            }   
+            
+            function verPiezas(nro_serie, marca, calibre, modelo) {
+                $.ajax({
+                    type: "post",  
+                    url: "<?php base_url(); ?>mb_fichas/verPiezas",
+                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
+                    success: function(data){
+                        jAlert(data, "PIEZAS DE LA FICHA");
+                  }
+                });                
+            } 
+
+            function editarFicha(nro_serie, marca, calibre, modelo) {
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo base_url("mb_fichas/editarFicha"); ?>",
+                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
+                    success: function(){
+                        $.colorbox({href:"<?php echo base_url('modificar_fichas'); ?>", top: true, iframe: false, scrolling: true, innerWidth: 800, innerHeight: 900, title: "MODIFICAR FICHA", onClosed: function(){ irAFrame('<?php echo base_url('mb_fichas'); ?>','O.C.I >> Modificar/Anular >> Fichas'); }});
+                    }                  
+                });  
             }
+            
+            function eliminarFicha(nro_serie, marca, calibre, modelo) {
+            
+                 jConfirm('Estas seguro que quieres eliminar la ficha seleccionada', 'ELIMINAR FICHA DEL SISTEMA', function(r) {
+                    if(r) {           
+                        $.ajax({
+                            type: 'post',
+                            url: "<?php echo base_url("mb_fichas/eliminarFicha"); ?>",
+                            data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
+                            success: function(data){
+                                if(data == 1) {
+                                    jAlert("La ficha fue eliminado con exito del sistema", "ELIMINAR FICHA", function() { irAFrame('<?php echo base_url('mb_fichas'); ?>','O.C.I >> Modificar/Anular >> Fichas') } );
+                                }else {
+
+                                    jAlert("La ficha no se puede elimianar del sistema, debido a que esta ya tiene un historial generado de movimiento", "ELIMINAR FICHA");
+                                }
+
+                            }                  
+                        });   
+                    }
+                });
+            }            
+                  
         </script>
         
     </head>
-
+    
     <body class="cuerpo">
-
-        <div>	
+        
+        <table>
             
+            <tr>
+                <td><label> &emsp; Nro serie - </label> </td> <td>  <input type="text" class="text" id="nro_serie" /></td>
+                <td><label> &emsp; Marca  - </label> </td> <td>  <input type="text" class="text" id="marca" /></td>
+            </tr>
+            
+            <tr>
+                <td><label> &emsp; Calibre      - </label> </td> <td>  <input type="text" class="text" id="calibre" /></td>
+                <td><label> &emsp; Modelo - </label> </td> <td>  <input type="text" class="text" id="modelo" /></td>
+            </tr>            
+
+            <tr>
+                <td><label> &emsp; Nro compra - </label> </td> <td>  <input type="text" class="text" id="nro_compra" /></td>
+                <td><label> &emsp; Nro catalogo - </label> </td> <td>  <input type="text" class="text" id="nro_catalogo" /></td>
+            </tr>            
+            
+            
+        </table>
+        
+        <br /> 
+        
+        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        
+        <br /> 
+        
+        <hr />
+        
+        <div class="datagrid">
+        
             <table>
 
-                <tr>
-                    <td><label> &emsp; Nro serie - </label> </td> <td> <input type="text" class="text" id="nro_serie" /></td>
-                    <td><label> &emsp; Marca - </label> </td> <td> <input type="text" class="text" id="marca" /></td>
-                </tr>
+                <thead style='text-align: center; cursor: pointer;'>
+                    <tr>      
+                        <th onclick="orderBy(0)"> Nro serie    </th>
+                        <th onclick="orderBy(1)"> Marca        </th>
+                        <th onclick="orderBy(2)"> Calibre      </th>
+                        <th onclick="orderBy(3)"> Modelo       </th>
+                        <th onclick="orderBy(4)"> Nro compra   </th>
+                        <th onclick="orderBy(5)"> Nro catalogo </th>
+                        <th> Ver accesorios </th>
+                        <th> Ver piezas     </th>
+                    </tr>
+                </thead>
 
-                <tr>
-                    <td><label> &emsp; Modelo - </label> </td> <td> <input type="text" class="text" id="modelo" /></td>
-                    <td><label> &emsp; Calibre - </label> </td> <td> <input type="text" class="text" id="calibre" /></td>
-                </tr>
+                <tbody id="datos_consulta"> </tbody>   
+
+                <tfoot>
+                    <tr> <td colspan="10"> <div id="paging"> <br /> </div> </td> </tr>
+                </tfoot>
                 
-                <tr>
-                    <td><label> &emsp; Nro compra - </label> </td> <td> <input type="text" class="text" id="nro_compra" /></td>
-                    <td><label> &emsp; Nro catalogo - </label> </td> <td> <input type="text" class="text" id="nro_catalogo" /></td>
-                </tr>                
-
-            </table>
-
-            <br /> 
-
-            &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
-
-            <br /> 
-
-            <hr />            
+           </table>  
             
-            <?php echo $listado; ?>
+       </div>     
             
-        </div>        
+       <div id="paginado"> </div>     
         
-    </body>
-	
+    </body>    
+    
 </html>

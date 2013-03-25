@@ -319,36 +319,34 @@ class mb_fichas extends CI_Controller {
     
     function verAccesorios() {
         
-        $nro_interno = $_POST['nro_interno'];
+        $nro_serie = $_POST['nro_serie'];
+        $marca     = $_POST['marca'];
+        $calibre   = $_POST['calibre'];
+        $modelo    = $_POST['modelo'];
         
-        if(!$this->mb_compras_model->tieneCatalogos($nro_interno)) {
-            echo "El nro de compra - ".$nro_interno." no tiene ningun catalogo asociado";
+        if(!$this->mb_fichas_model->tieneAccesorios($nro_serie, $marca, $calibre, $modelo)) {
+            echo "No tiene ningun accesorio asociado";
         }else {
-            $catalogos = array();
-            $catalogos = $this->mb_compras_model->verCatalogos($nro_interno);
-            $concat = "<p style='font-weight: bold;'> Catalogos asociados a la compra nro - ".$nro_interno." </p><div class='datagrid'><table><thead><th> Nro catalogo </th><th> Tipo arma </th><th> Marca </th><th> Calibre </th><th> Modelo </th><th> Sistema </th><th> Empresa </th><th> Pais </th></thead>";
+            $accesorios = array();
+            $accesorios = $this->mb_fichas_model->verAccesorios($nro_serie, $marca, $calibre, $modelo);
+            $concat = "<p style='font-weight: bold;'> Acceorios asociados a la ficha </p><div class='datagrid'><table><thead><th> Nro accesorios </th><th> Tipo accesorio </th><th> Descripcion </th></thead>";
            
             /*
              * retorno del array de catalogos
-            $retorno[] = $row->nro_interno_catalogo;
-            $retorno[] = $row->tipo_arma;
-            $retorno[] = $row->marca;
-            $retorno[] = $row->calibre;
-            $retorno[] = $row->modelo;
-            $retorno[] = $row->sistema;
-            $retorno[] = $row->empresa;
-            $retorno[] = $row->pais_origen;
+            $retorno[] = $row->nro_accesorio;
+            $retorno[] = $row->tipo_accesorio;
+            $retorno[] = $row->descripcion;
             */
             
             $j = 0;
             
-            for($i=0; $i<count($catalogos); $i=$i+8) {
+            for($i=0; $i<count($accesorios); $i=$i+3) {
                 if($j % 2 == 0){
                     $class = "";
                 }else{
                     $class = "alt";
                 } 
-                $concat .= "<tbody><tr class='".$class."'> <td style='text-align: center;'>".$catalogos[$i]."</td> <td>".$catalogos[$i+1]."</td> <td>".$catalogos[$i+2]."</td> <td>".$catalogos[$i+3]."</td> <td>".$catalogos[$i+4]."</td> <td>".$catalogos[$i+5]."</td> <td>".$catalogos[$i+6]."</td> <td>".$catalogos[$i+7]."</td> </tr></tbody>";
+                $concat .= "<tbody><tr class='".$class."'> <td style='text-align: center;'>".$accesorios[$i]."</td> <td>".$accesorios[$i+1]."</td> <td>".$accesorios[$i+2]."</td> </tr></tbody>";
                 $j++;
             }
             
@@ -360,36 +358,34 @@ class mb_fichas extends CI_Controller {
     
     function verPiezas() {
         
-        $nro_interno = $_POST['nro_interno'];
+        $nro_serie = $_POST['nro_serie'];
+        $marca     = $_POST['marca'];
+        $calibre   = $_POST['calibre'];
+        $modelo    = $_POST['modelo'];
         
-        if(!$this->mb_compras_model->tieneCatalogos($nro_interno)) {
-            echo "El nro de compra - ".$nro_interno." no tiene ningun catalogo asociado";
+        if(!$this->mb_fichas_model->tienePiezas($nro_serie, $marca, $calibre, $modelo)) {
+            echo "No tiene ninguna pieza asociado";
         }else {
-            $catalogos = array();
-            $catalogos = $this->mb_compras_model->verCatalogos($nro_interno);
-            $concat = "<p style='font-weight: bold;'> Catalogos asociados a la compra nro - ".$nro_interno." </p><div class='datagrid'><table><thead><th> Nro catalogo </th><th> Tipo arma </th><th> Marca </th><th> Calibre </th><th> Modelo </th><th> Sistema </th><th> Empresa </th><th> Pais </th></thead>";
+            $piezas = array();
+            $piezas = $this->mb_fichas_model->verPiezas($nro_serie, $marca, $calibre, $modelo);
+            $concat = "<p style='font-weight: bold;'> Piezas asociados a la ficha </p><div class='datagrid'><table><thead><th> Nro pieza </th><th> Tipo pieza </th><th> Descripcion </th></thead>";
            
             /*
              * retorno del array de catalogos
-            $retorno[] = $row->nro_interno_catalogo;
-            $retorno[] = $row->tipo_arma;
-            $retorno[] = $row->marca;
-            $retorno[] = $row->calibre;
-            $retorno[] = $row->modelo;
-            $retorno[] = $row->sistema;
-            $retorno[] = $row->empresa;
-            $retorno[] = $row->pais_origen;
+            $retorno[] = $row->nro_pieza;
+            $retorno[] = $row->tipo_pieza;
+            $retorno[] = $row->descripcion;
             */
             
             $j = 0;
             
-            for($i=0; $i<count($catalogos); $i=$i+8) {
+            for($i=0; $i<count($piezas); $i=$i+3) {
                 if($j % 2 == 0){
                     $class = "";
                 }else{
                     $class = "alt";
                 } 
-                $concat .= "<tbody><tr class='".$class."'> <td style='text-align: center;'>".$catalogos[$i]."</td> <td>".$catalogos[$i+1]."</td> <td>".$catalogos[$i+2]."</td> <td>".$catalogos[$i+3]."</td> <td>".$catalogos[$i+4]."</td> <td>".$catalogos[$i+5]."</td> <td>".$catalogos[$i+6]."</td> <td>".$catalogos[$i+7]."</td> </tr></tbody>";
+                $concat .= "<tbody><tr class='".$class."'> <td style='text-align: center;'>".$piezas[$i]."</td> <td>".$piezas[$i+1]."</td> <td>".$piezas[$i+2]."</td> </tr></tbody>";
                 $j++;
             }
             

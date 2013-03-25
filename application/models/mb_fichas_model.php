@@ -38,37 +38,69 @@ class mb_fichas_model extends CI_Model {
         return $result;
     } 
     
-    function tieneCatalogos($nro_interno) {
+    function tieneAccesorios($nro_serie, $marca, $calibre, $modelo) {
         
         $query = $this->db->query("SELECT * 
-                                   FROM  compras_catalogos
-                                   WHERE nro_interno_compra = ".$this->db->escape($nro_interno));
+                                   FROM fichas_accesorios
+                                   WHERE nro_serie   = ".$this->db->escape($nro_serie)."
+                                   AND marca         = ".$this->db->escape($marca)."
+                                   AND calibre       = ".$this->db->escape($calibre)."
+                                   AND modelo        = ".$this->db->escape($modelo));
         
         return $query->num_rows();
     }
     
-    function verCatalogos($nro_interno) {
+    function tienePiezas($nro_serie, $marca, $calibre, $modelo) {
         
-        $query = $this->db->query("SELECT cc.nro_interno_catalogo, c.tipo_arma, c.marca, c.calibre, c.modelo, c.sistema, c.empresa, c.pais_origen
-                                   FROM compras_catalogos cc
-                                   INNER JOIN catalogos c ON cc.nro_interno_catalogo = c.nro_interno
-                                   WHERE cc.nro_interno_compra = ".$this->db->escape($nro_interno));
+        $query = $this->db->query("SELECT * 
+                                   FROM fichas_piezas
+                                   WHERE nro_serie   = ".$this->db->escape($nro_serie)."
+                                   AND marca         = ".$this->db->escape($marca)."
+                                   AND calibre       = ".$this->db->escape($calibre)."
+                                   AND modelo        = ".$this->db->escape($modelo));
+        
+        return $query->num_rows();
+    }    
+    
+    function verAccesorios($nro_serie, $marca, $calibre, $modelo) {
+        
+        $query = $this->db->query("SELECT nro_accesorio, tipo_accesorio, descripcion
+                                   FROM fichas_accesorios
+                                   WHERE nro_serie   = ".$this->db->escape($nro_serie)."
+                                   AND marca         = ".$this->db->escape($marca)."
+                                   AND calibre       = ".$this->db->escape($calibre)."
+                                   AND modelo        = ".$this->db->escape($modelo));
         
         $retorno = array();
         
         foreach($query->result() as $row) {
-            $retorno[] = $row->nro_interno_catalogo;
-            $retorno[] = $row->tipo_arma;
-            $retorno[] = $row->marca;
-            $retorno[] = $row->calibre;
-            $retorno[] = $row->modelo;
-            $retorno[] = $row->sistema;
-            $retorno[] = $row->empresa;
-            $retorno[] = $row->pais_origen;
+            $retorno[] = $row->nro_accesorio;
+            $retorno[] = $row->tipo_accesorio;
+            $retorno[] = $row->descripcion;
         }
         
         return $retorno;
     }
+    
+    function verPiezas($nro_serie, $marca, $calibre, $modelo) {
+        
+        $query = $this->db->query("SELECT nro_pieza, tipo_pieza, descripcion
+                                   FROM fichas_piezas
+                                   WHERE nro_serie   = ".$this->db->escape($nro_serie)."
+                                   AND marca         = ".$this->db->escape($marca)."
+                                   AND calibre       = ".$this->db->escape($calibre)."
+                                   AND modelo        = ".$this->db->escape($modelo));
+        
+        $retorno = array();
+        
+        foreach($query->result() as $row) {
+            $retorno[] = $row->nro_pieza;
+            $retorno[] = $row->tipo_pieza;
+            $retorno[] = $row->descripcion;
+        }
+        
+        return $retorno;
+    }    
     
     function existeHistorialFicha($nro_serie, $marca, $calibre, $modelo) {
         
