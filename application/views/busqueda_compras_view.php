@@ -89,7 +89,7 @@
                     url: "<?php echo base_url("busqueda_compras/seteoSeleccion"); ?>",
                     data: "nro_compra="+nro_compra+"&nro_catalogo="+nro_catalogo,
                     success: function(){
-                        jAlert("Nro compra - "+nro_compra+" y Nro catalogo - "+nro_catalogo+" seleccionados", "SELECCION", parent.$.colorbox.close());                        
+                        jAlert("Nro compra - "+nro_compra+" y Nro catalogo - "+nro_catalogo+" seleccionados", "SELECCION", parent.$.fn.colorbox.close());                        
                     }                  
                 });            
             }

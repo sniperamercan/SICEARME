@@ -126,7 +126,40 @@
                   }
                 });                
             }
-                  
+
+            function editarActa(nro_acta) {
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo base_url("mb_actas_alta/editarActa"); ?>",
+                    data: "nro_acta="+nro_acta,
+                    success: function(){
+                        $.colorbox({href:"<?php echo base_url('modificar_actas_alta'); ?>", top: true, iframe: false, scrolling: true, innerWidth: 800, innerHeight: 900, title: "MODIFICAR ACTA", onClosed: function(){ irAFrame('<?php echo base_url('mb_actas_alta'); ?>','Abastecimiento >> Modificar >> Actas altas'); }});
+                    }                  
+                });  
+            }
+            
+            function eliminarFicha(nro_serie, marca, calibre, modelo) {
+            
+                 jConfirm('Estas seguro que quieres eliminar la ficha seleccionada', 'ELIMINAR FICHA DEL SISTEMA', function(r) {
+                    if(r) {           
+                        $.ajax({
+                            type: 'post',
+                            url: "<?php echo base_url("mb_fichas/eliminarFicha"); ?>",
+                            data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
+                            success: function(data){
+                                if(data == 1) {
+                                    jAlert("La ficha fue eliminado con exito del sistema", "ELIMINAR FICHA", function() { irAFrame('<?php echo base_url('mb_fichas'); ?>','O.C.I >> Modificar/Anular >> Fichas') } );
+                                }else {
+
+                                    jAlert("La ficha no se puede elimianar del sistema, debido a que esta ya tiene un historial generado de movimiento", "ELIMINAR FICHA");
+                                }
+
+                            }                  
+                        });   
+                    }
+                });
+            }
+            
         </script>
         
     </head>

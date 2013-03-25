@@ -24,6 +24,9 @@ class mb_actas_alta extends CI_Controller {
     function index() {
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
+        
+        $_SESSION['nro_acta'] = ""; //para el editar
+        
         $this->load->view("mb_actas_alta_view");
     }
     
@@ -351,6 +354,23 @@ class mb_actas_alta extends CI_Controller {
             
             echo $concat;
         }
+    } 
+    
+    function editarActa() {
+        $_SESSION['nro_acta'] = $_POST['nro_acta'];
+    }
+    
+    function eliminarActa() {
+        
+        $nro_acta = $_POST['nro_acta'];
+        
+        if(!$this->mb_fichas_model->existeHistorialFicha($nro_serie, $marca, $calibre, $modelo)) {
+            $this->mb_fichas_model->eliminarFicha($nro_serie, $marca, $calibre, $modelo);
+            echo 1;
+        }else {
+            echo 0;
+        }        
+        
     }    
 }
 

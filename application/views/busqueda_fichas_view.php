@@ -89,7 +89,7 @@
                     url: "<?php echo base_url("busqueda_fichas/seteoSeleccion"); ?>",
                     data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
                     success: function(){
-                        jAlert("Nro serie - "+nro_serie+", Marca - "+marca+", Calibre - "+calibre+", Modelo - "+modelo+" seleccionados", "SELECCION", parent.$.colorbox.close());                        
+                        jAlert("Nro serie - "+nro_serie+", Marca - "+marca+", Calibre - "+calibre+", Modelo - "+modelo+" seleccionados", "SELECCION", parent.$.fn.colorbox.close());                        
                     }                  
                 });            
             }
