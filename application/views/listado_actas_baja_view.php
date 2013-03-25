@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-    
+
     <head>
         
         <style>
@@ -22,77 +22,172 @@
             .datagrid table tfoot  li { display: inline; }
             .datagrid table tfoot li a { text-decoration: none; display: inline-block;  padding: 2px 8px; margin: 1px;color: #F5F5F5;border: 1px solid #8C8C8C;-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8C8C8C), color-stop(1, #7D7D7D) );background:-moz-linear-gradient( center top, #8C8C8C 5%, #7D7D7D 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8C8C8C', endColorstr='#7D7D7D');background-color:#8C8C8C; }
             .datagrid table tfoot ul.active, .datagrid table tfoot ul a:hover { text-decoration: none;border-color: #7D7D7D; color: #F5F5F5; background: none; background-color:#8C8C8C;}
-        </style>        
+        </style>          
         
-    
         <script type="text/javascript">
-
+     
             $(document).ready(function() {
+                $("#fecha1").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
+                $("#fecha2").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
                 $("input:submit").button();
                 $("button").button(); 
                 $("input:button").button(); 
-            });	
+                cargoConsulta();
+            });	     
+     
+            function filtrar(){
+                
+                var nro_acta = $("#nro_acta").val();
+                var estado   = $("#estado").val();
+                var fecha1   = $("#fecha1").val();
+                var fecha2   = $("#fecha2").val();                
+                
+                $.ajax({ 
+                    type: 'post',
+                    url: '<?php echo base_url(); ?>listado_actas_baja/consulta/0',
+                    data: "nro_acta="+nro_acta+"&estado="+estado+"&fecha1="+fecha1+"&fecha2="+fecha2,
+                    success: function(){
+                        cargoConsulta();
+                    }
+                });                
+            }
+            
+            function impresion(){                
+                $.colorbox({href:"<?php echo base_url('listado_actas_baja/seteoImpresion'); ?>", top: true, iframe: false, scrolling: false, innerWidth: 800, innerHeight: 200, title: "IMPRESION"});                
+            } 
 
-            function ingresarDatos() {
-                
-                var usuario   = $("#usuario").val();
-                var nombre    = $("#nombre").val();
-                var apellido  = $("#apellido").val();
-                var clave     = $("#clave").val();
-                
+            function seteoImpresion(de_pagina, a_pagina){                
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo base_url("listado_actas_baja/armoImpresion"); ?>",
+                    data: "de_pagina="+de_pagina+"&a_pagina="+a_pagina,
+                    success: function(data){
+                        if(data == "1"){
+                            window.open ("<?php echo base_url("contenido_impresion"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0");
+                        }else{
+                            jAlert(data);
+                        }
+                    }                  
+                });
+            }            
+            
+            function orderBy(param){            
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo base_url("listado_actas_baja/orderBy"); ?>",
+                    data: "order="+param,
+                    success: function(){
+                        cargoConsulta();                       
+                    }                  
+                });           
+            }      
+
+            function cargoConsulta() {
+                $.ajax({
+                    type: 'post',
+                    dataType: 'json',
+                    url: "<?php echo base_url("listado_actas_baja/consulta"); ?>",
+                    success: function(data){
+                        $("#datos_consulta").html(data[0]);
+                        $("#paginado").html(data[1]);
+                    }                  
+                });            
+            }
+            
+            function verObservaciones(nro_acta) {
                 $.ajax({
                     type: "post",  
-                    dataType: "json",
-                    url: "<?php base_url(); ?>agregar_usuario/validarDatos",
-                    data: "usuario="+usuario+"&nombre="+nombre+"&apellido="+apellido+"&clave="+clave+"&persmisos="+JSON.stringify(permisos),
+                    url: "<?php base_url(); ?>listado_actas_baja/verObservaciones",
+                    data: "nro_acta="+nro_acta,
                     success: function(data){
-                        if(data == "1"){            
-                            jAlert("Usuario agregado al sistema con exito", "Correcto", function() { irAFrame('<?php echo base_url('agregar_usuario'); ?>','Adminitracion >> Agregar usuarios'); });
-                        }else{
-                            jAlert(data, "Error");
-                        }                            
+                        jAlert(data, "OBSERVACIONES DEL ACTA");
                   }
-                });               
+                });                
+            }    
+            
+            function verEntrega(nro_acta) {
+                $.ajax({
+                    type: "post",  
+                    url: "<?php base_url(); ?>listado_actas_baja/verEntregas",
+                    data: "nro_acta="+nro_acta,
+                    success: function(data){
+                        jAlert(data, "ARMAMENTO Y ACCESORIOS ENTREGADOS");
+                  }
+                });                
             }
+
+            function imprimirRecibo(nro_acta) {
+                $.ajax({
+                    type: "post",  
+                    url: "<?php base_url(); ?>listado_actas_baja/imprimirRecibo",
+                    data: "nro_acta="+nro_acta,
+                    success: function(){
+                        window.open ("<?php echo base_url("imprimir_acta_baja"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0");
+                  }
+                });                
+            }
+            
         </script>
         
     </head>
-
+    
     <body class="cuerpo">
-
-        <div>	
+        
+        <table>
             
+            <tr>
+                <td><label> &emsp; Nro acta - </label> </td> <td>  <input type="text" class="text" id="nro_acta" /></td>
+                <td><label> &emsp; Estado - </label> </td> <td>  <input type="text" class="text" id="estado" /></td>
+            </tr>
+         
+            <tr>
+                <td><label> &emsp; Fecha 1 - </label> </td> <td>  <input type="text" class="text" id="fecha1" /></td>
+                <td><label> &emsp; Fecha 2 - </label> </td> <td>  <input type="text" class="text" id="fecha2" /></td>
+            </tr>            
+            
+            
+        </table>
+        
+        <br /> 
+        
+        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        
+        <br /> 
+        
+        <hr />
+        
+        <div class="datagrid">
+        
             <table>
 
-                <tr>
-                    <td><label> &emsp; Nro acta - </label> </td> <td> <input type="text" class="text" id="nro_acta" /></td>
-                    <td><label> &emsp; Estado - </label> </td> <td> <input type="text" class="text" id="estado" /></td>
-                </tr>
+                <thead style='text-align: center; cursor: pointer;'>
+                    <tr>      
+                        <th onclick="orderBy(0)"> Nro acta             </th>
+                        <th onclick="orderBy(1)"> Fecha                </th>
+                        <th onclick="orderBy(2)"> Unidad entrega       </th>
+                        <th onclick="orderBy(3)"> Unidad recibe        </th>
+                        <th onclick="orderBy(4)"> Representante SMA    </th>
+                        <th onclick="orderBy(5)"> Representante unidad </th>
+                        <th onclick="orderBy(6)"> Supervision          </th>
+                        <th onclick="orderBy(7)"> Estado               </th>
+                        <th> Ver observaciones </th>
+                        <th> Ver devoluciones  </th>
+                        <th> Imprimir recibo   </th>
+                    </tr>
+                </thead>
 
-                <tr>
-                    <td><label> &emsp; Unidad entrega - </label> </td> <td> <input type="text" class="text" id="unidad_entrega" /></td>
-                    <td><label> &emsp; Unidad recibe - </label> </td> <td> <input type="text" class="text" id="unidad_recibe" /></td>
-                </tr>
+                <tbody id="datos_consulta"> </tbody>   
+
+                <tfoot>
+                    <tr> <td colspan="14"> <div id="paging"> <br /> </div> </td> </tr>
+                </tfoot>
                 
-                <tr>
-                    <td><label> &emsp; Fecha 1 - </label> </td> <td> <input type="text" class="text" id="fecha1" /></td>
-                    <td><label> &emsp; Fecha 2 - </label> </td> <td> <input type="text" class="text" id="fecha2" /></td>
-                </tr>                
-
-            </table>
-
-            <br /> 
-
-            &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
-
-            <br /> 
-
-            <hr />            
+           </table>  
             
-            <?php echo $listado; ?>
+       </div>     
             
-        </div>         
+       <div id="paginado"> </div>     
         
-    </body>
-	
+    </body>    
+    
 </html>
