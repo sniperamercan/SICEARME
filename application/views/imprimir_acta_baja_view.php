@@ -93,8 +93,8 @@
 
                      <tbody style="text-align: center"> 
                          <tr>      
+                             <td> <?php echo $unidad_entrega ?> </td>
                              <td> S.M.A </td>
-                             <td> <?php echo $unidad_recibe ?>    </td>
                          </tr>                
                      </tbody>   
 

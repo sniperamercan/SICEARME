@@ -1,6 +1,6 @@
 <?php
 
-class modificar_actas_alta_model extends CI_Model {
+class modificar_actas_baja_model extends CI_Model {
     
     function __construct() {
         parent::__construct();
@@ -10,7 +10,7 @@ class modificar_actas_alta_model extends CI_Model {
     function verificoEstadoActa($nro_acta) {
         
         $query = $this->db->query("SELECT estado
-                                   FROM actas_alta
+                                   FROM actas_baja
                                    WHERE nro_acta = ".$this->db->escape($nro_acta));
         
         $row = $query->row();
@@ -20,8 +20,8 @@ class modificar_actas_alta_model extends CI_Model {
     
     function datosActa($nro_acta) {
         
-        $query = $this->db->query("SELECT fecha_transaccion, unidad_recibe, representante_sma, representante_unidad, representante_supervision, observaciones
-                                   FROM actas_alta 
+        $query = $this->db->query("SELECT fecha_transaccion, unidad_entrega, representante_sma, representante_unidad, representante_supervision, observaciones
+                                   FROM actas_baja 
                                    WHERE nro_acta = ".$this->db->escape($nro_acta));
         
         $retorno = array();
@@ -29,7 +29,7 @@ class modificar_actas_alta_model extends CI_Model {
         $row = $query->row();
         
         $retorno[] = $row->fecha_transaccion;
-        $retorno[] = $row->unidad_recibe;
+        $retorno[] = $row->unidad_entrega;
         $retorno[] = $row->representante_sma;
         $retorno[] = $row->representante_unidad;
         $retorno[] = $row->representante_supervision;
@@ -41,7 +41,7 @@ class modificar_actas_alta_model extends CI_Model {
     function datosFichas($nro_acta) {
         
         $query = $this->db->query("SELECT nro_serie, marca, calibre, modelo
-                                   FROM actas_alta_entrega_armamento
+                                   FROM actas_baja_devolucion_armamento
                                    WHERE nro_acta = ".$this->db->escape($nro_acta));
         
         $retorno = array();
@@ -59,7 +59,7 @@ class modificar_actas_alta_model extends CI_Model {
     function datosAccesorios($nro_acta) {
         
         $query = $this->db->query("SELECT nro_serie, marca, calibre, modelo, nro_accesorio
-                                   FROM actas_alta_entrega_accesorios
+                                   FROM actas_baja_devolucion_accesorios
                                    WHERE nro_acta = ".$this->db->escape($nro_acta));
         
         $retorno = array();
@@ -301,33 +301,32 @@ class modificar_actas_alta_model extends CI_Model {
         
     }
     
-    function modificarActa_db($nro_acta, $fecha, $unidad_recibe, $representante_sma, $representante_unidad, $supervision, $observaciones) {
+    function modificarActa_db($nro_acta, $fecha, $unidad_entrega, $representante_sma, $representante_unidad, $supervision, $observaciones) {
         
         $this->db->trans_start();
 
-            $data_acta_alta_where = array(
+            $data_acta_baja_where = array(
                 'nro_acta' => $nro_acta
-            );
+            );        
         
-            $this->db->delete('actas_alta_entrega_armamento', $data_acta_alta_where);
-            $this->db->delete('actas_alta_entrega_accesorios', $data_acta_alta_where);            
-        
-            $data_acta_alta_set = array(
+            $this->db->delete('actas_baja_devolucion_armamento', $data_acta_baja_where);
+            $this->db->delete('actas_baja_devolucion_accesorios', $data_acta_baja_where);            
+            
+            $data_acta_baja_set = array(
                 'fecha_transaccion'         => $fecha,
-                'unidad_entrega'            => 98,
-                'unidad_recibe'             => $unidad_recibe,
+                'unidad_entrega'            => $unidad_entrega,
                 'representante_sma'         => $representante_sma,
                 'representante_unidad'      => $representante_unidad,
                 'representante_supervision' => $supervision,
                 'observaciones'             => $observaciones,
                 'usuario_edita'             => base64_decode($_SESSION['usuario'])
             );
-
-            $this->db->update('actas_alta', $data_acta_alta_set, $data_acta_alta_where);
+            
+            $this->db->update('actas_baja', $data_acta_baja_set, $data_acta_baja_where);
 
             $data_db_logs = array(
                 'tipo_movimiento' => 'update',
-                'tabla'           => 'actas_alta',
+                'tabla'           => 'actas_baja',
                 'clave_tabla'     => 'nro_acta = '.$nro_acta,
                 'usuario'         => base64_decode($_SESSION['usuario'])
             );        
@@ -344,12 +343,12 @@ class modificar_actas_alta_model extends CI_Model {
                     'modelo'    => $_SESSION['fichas'][$i+3]
                 );
 
-                $this->db->insert("actas_alta_entrega_armamento", $data_ficha);
+                $this->db->insert("actas_baja_devolucion_armamento", $data_ficha);
 
                 $data_db_logs = array(
                     'tipo_movimiento' => 'insert',
-                    'tabla'           => 'actas_alta_entrega_armamento',
-                    'clave_tabla'     => 'nro_serie = '.$_SESSION['fichas'][$i]. ' && marca = '.$_SESSION['fichas'][$i+1].' && calibre = '.$_SESSION['fichas'][$i+2].' && modelo ='.$_SESSION['fichas'][$i+3].' && idunidad = '.$unidad_recibe,
+                    'tabla'           => 'actas_baja_devolucion_armamento',
+                    'clave_tabla'     => 'nro_serie = '.$_SESSION['fichas'][$i]. ' && marca = '.$_SESSION['fichas'][$i+1].' && calibre = '.$_SESSION['fichas'][$i+2].' && modelo ='.$_SESSION['fichas'][$i+3].' && idunidad = '.$unidad_entrega,
                     'usuario'         => base64_decode($_SESSION['usuario'])
                 );        
 
@@ -368,71 +367,17 @@ class modificar_actas_alta_model extends CI_Model {
                     'nro_accesorio' => $_SESSION['accesorios'][$i+4]
                 );
 
-                $this->db->insert("actas_alta_entrega_accesorios", $data_accesorio);
+                $this->db->insert("actas_baja_devolucion_accesorios", $data_accesorio);
 
                 $data_db_logs = array(
                     'tipo_movimiento' => 'insert',
-                    'tabla'           => 'actas_alta_entrega_accesorios',
-                    'clave_tabla'     => 'nro_serie = '.$_SESSION['accesorios'][$i]. ' && marca = '.$_SESSION['accesorios'][$i+1].' && calibre = '.$_SESSION['accesorios'][$i+2].' && modelo ='.$_SESSION['accesorios'][$i+3].' && nro_accesorio = '.$_SESSION['accesorios'][$i+4].' && idunidad = '.$unidad_recibe,
+                    'tabla'           => 'actas_baja_devolucion_accesorios',
+                    'clave_tabla'     => 'nro_serie = '.$_SESSION['accesorios'][$i]. ' && marca = '.$_SESSION['accesorios'][$i+1].' && calibre = '.$_SESSION['accesorios'][$i+2].' && modelo ='.$_SESSION['accesorios'][$i+3].' && nro_accesorio = '.$_SESSION['accesorios'][$i+4].' && idunidad = '.$unidad_entrega,
                     'usuario'         => base64_decode($_SESSION['usuario'])
                 );        
 
                 $this->db->insert('db_logs', $data_db_logs);            
             } 
-
-            /* ESTO SUCEDE CUANDO EL ESTADO CAMBIA DE 0 A 1
-            //doy de alta las fichas del armamento a la unidad
-            for($i=0;$i<count($_SESSION['fichas']);$i=$i+4) {
-
-                $data_ficha = array(
-                    'idunidad' => $unidad_recibe
-                ); 
-
-                $data_ficha_where = array(
-                    'nro_serie' => $_SESSION['fichas'][$i],
-                    'marca'     => $_SESSION['fichas'][$i+1],
-                    'calibre'   => $_SESSION['fichas'][$i+2],
-                    'modelo'    => $_SESSION['fichas'][$i+3]
-                );
-
-                $this->db->update("stock_unidades", $data_ficha, $data_ficha_where);
-
-                $data_db_logs = array(
-                    'tipo_movimiento' => 'update',
-                    'tabla'           => 'stock_unidades',
-                    'clave_tabla'     => 'nro_serie = '.$_SESSION['fichas'][$i]. ' && marca = '.$_SESSION['fichas'][$i+1].' && calibre = '.$_SESSION['fichas'][$i+2].' && modelo ='.$_SESSION['fichas'][$i+3].' && idunidad = '.$unidad_recibe,
-                    'usuario'         => base64_decode($_SESSION['usuario'])
-                );        
-
-                $this->db->insert('db_logs', $data_db_logs);            
-            }
-
-            //si hay accesorios tambien se dan de alta
-            for($i=0;$i<count($_SESSION['accesorios']);$i=$i+5) {
-
-                $data_accesorio = array(
-                    'idunidad' => $unidad_recibe
-                ); 
-
-                $data_accesorio_where = array(
-                    'nro_serie'     => $_SESSION['accesorios'][$i],
-                    'marca'         => $_SESSION['accesorios'][$i+1],
-                    'calibre'       => $_SESSION['accesorios'][$i+2],
-                    'modelo'        => $_SESSION['accesorios'][$i+3],
-                    'nro_accesorio' => $_SESSION['accesorios'][$i+4]
-                );
-
-                $this->db->update("stock_unidades_accesorios", $data_accesorio, $data_accesorio_where);
-
-                $data_db_logs = array(
-                    'tipo_movimiento' => 'update',
-                    'tabla'           => 'stock_unidades_accesorios',
-                    'clave_tabla'     => 'nro_serie = '.$_SESSION['accesorios'][$i]. ' && marca = '.$_SESSION['accesorios'][$i+1].' && calibre = '.$_SESSION['accesorios'][$i+2].' && modelo ='.$_SESSION['accesorios'][$i+3].' && nro_accesorio = '.$_SESSION['accesorios'][$i+4].' && idunidad = '.$unidad_recibe,
-                    'usuario'         => base64_decode($_SESSION['usuario'])
-                );        
-
-                $this->db->insert('db_logs', $data_db_logs);            
-            }  */     
         
         $this->db->trans_complete();  
         
