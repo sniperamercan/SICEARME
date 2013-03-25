@@ -69,6 +69,67 @@ class mb_fichas_model extends CI_Model {
         
         return $retorno;
     }
+    
+    function existeHistorialFicha($nro_serie, $marca, $calibre, $modelo) {
+        
+        $cont = 0;
+        
+        $query = $this->db->query("SELECT *
+                                   FROM actas_alta_entrega_armamento
+                                   WHERE nro_serie   = ".$this->db->escape($nro_serie)."
+                                   AND marca         = ".$this->db->escape($marca)."
+                                   AND calibre       = ".$this->db->escape($calibre)."
+                                   AND modelo        = ".$this->db->escape($modelo));
+        
+        $cont = $query->num_rows();
+        
+        $query = $this->db->query("SELECT *
+                                   FROM actas_alta_entrega_accesorios
+                                   WHERE nro_serie   = ".$this->db->escape($nro_serie)."
+                                   AND marca         = ".$this->db->escape($marca)."
+                                   AND calibre       = ".$this->db->escape($calibre)."
+                                   AND modelo        = ".$this->db->escape($modelo));  
+        
+        $cont = $cont + $query->num_rows(); 
+        
+        $query = $this->db->query("SELECT *
+                                   FROM actas_baja_devolucion_armamento
+                                   WHERE nro_serie   = ".$this->db->escape($nro_serie)."
+                                   AND marca         = ".$this->db->escape($marca)."
+                                   AND calibre       = ".$this->db->escape($calibre)."
+                                   AND modelo        = ".$this->db->escape($modelo)); 
+        
+        $cont = $cont + $query->num_rows();
+        
+        $query = $this->db->query("SELECT *
+                                   FROM actas_baja_devolucion_accesorios
+                                   WHERE nro_serie   = ".$this->db->escape($nro_serie)."
+                                   AND marca         = ".$this->db->escape($marca)."
+                                   AND calibre       = ".$this->db->escape($calibre)."
+                                   AND modelo        = ".$this->db->escape($modelo));   
+        
+        $cont = $cont + $query->num_rows();
+        
+        return $cont;
+    }
+    
+    function eliminarFicha($nro_serie, $marca, $calibre, $modelo) {
+        
+        $data_fichas = array(
+            'nro_serie' => $nro_serie,
+            'marca'     => $marca,
+            'calibre'   => $calibre,
+            'modelo'    => $modelo
+        );
+        
+        $this->db->trans_start();
+            $this->db->delete("stock_unidades_accesorios", $data_fichas);
+            $this->db->delete("stock_unidades", $data_fichas);
+            $this->db->delete("fichas_piezas", $data_fichas);
+            $this->db->delete("fichas_accesorios", $data_fichas);
+            $this->db->delete("fichas", $data_fichas);
+        $this->db->trans_complete();  
+    }
 }
 
 ?>

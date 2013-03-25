@@ -27,36 +27,195 @@
         <script type="text/javascript">
 
             $(document).ready(function() {
-                $("#nro_compra").focus();
-                $("#fecha").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
-                $("#fabricacion").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
-                $("#vencimiento").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
+                $("#nro_serie").focus();
                 $("input:submit").button();
                 $("button").button(); 
                 $("input:button").button(); 
             });	
 
-            function ingresarDatos() {
+            function modificarFicha() {
                 
-                var usuario   = $("#usuario").val();
-                var nombre    = $("#nombre").val();
-                var apellido  = $("#apellido").val();
-                var clave     = $("#clave").val();
-                
-                $.ajax({
+                 $.ajax({
                     type: "post",  
-                    dataType: "json",
-                    url: "<?php base_url(); ?>agregar_usuario/validarDatos",
-                    data: "usuario="+usuario+"&nombre="+nombre+"&apellido="+apellido+"&clave="+clave+"&persmisos="+JSON.stringify(permisos),
+                    url: "<?php base_url(); ?>modificar_fichas/validarDatos",
                     success: function(data){
                         if(data == "1"){            
-                            jAlert("Usuario agregado al sistema con exito", "Correcto", function() { irAFrame('<?php echo base_url('agregar_usuario'); ?>','Adminitracion >> Agregar usuarios'); });
+                            jAlert("Ficha del arma modificada con exito", "Correcto", function() { });
                         }else{
                             jAlert(data, "Error");
                         }                            
                   }
                 });               
             }
+            
+            function cargoNroCatalogos(nro_compra) {
+            
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>modificar_fichas/cargoNroCatalogos",
+                   data: "nro_compra="+nro_compra,
+                   success: function(data) {
+                       $('#marca').val("");
+                       $('#calibre').val("");
+                       $('#modelo').val("");                        
+                       $('#nro_catalogo').html(data);
+                   }
+                });
+            }
+            
+            function cargoInformacion(nro_catalogo) {
+ 
+                 $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>modificar_fichas/cargoInformacion",
+                   data: "nro_catalogo="+nro_catalogo,
+                   success: function(data) {
+                       $('#marca').val("");
+                       $('#calibre').val("");
+                       $('#modelo').val("");                        
+                       $('#marca').val(data[0]);
+                       $('#calibre').val(data[1]);
+                       $('#modelo').val(data[2]);
+                   }
+                });
+            }
+            
+            function busquedaCompras() {
+                $.colorbox({href:"<?php echo base_url('busqueda_compras'); ?>", top:true, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA COMPRAS", onClosed: function(){ cargoComprasFiltro(); } });
+            }
+            
+            function cargoComprasFiltro() {
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>modificar_fichas/cargoComprasFiltro",
+                   success: function(data) {
+                       $("#nro_compra").html("");
+                       $("#nro_compra").html(data[0]);
+                       $("#nro_catalogo").html("");
+                       $("#nro_catalogo").html(data[1]);
+                       $('#marca').val("");
+                       $('#calibre').val("");
+                       $('#modelo').val("");                       
+                       $('#marca').val(data[2]);
+                       $('#calibre').val(data[3]);
+                       $('#modelo').val(data[4]);
+                       
+                   }
+                });                
+            } 
+            
+            function agregarAccesorio() {
+            
+                var nro_accesorio          = $("#nro_accesorio").val();
+                var tipo_accesorio         = $("#tipo_accesorio").val();
+                var descripcion_accesorio  = $("#descripcion_accesorio").val();
+                var nro_catalogo           = $("#nro_catalogo").val();
+                var nro_serie              = $("#nro_serie").val();
+            
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>modificar_fichas/agregarAccesorio",
+                   data: "nro_accesorio="+nro_accesorio+"&tipo_accesorio="+tipo_accesorio+"&descripcion_accesorio="+descripcion_accesorio+"&nro_catalogo="+nro_catalogo+"&nro_serie="+nro_serie,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#accesorios").append(data[1]);
+                       }else {
+                           jAlert(data[0], "Error");
+                       }
+                   }
+                });           
+            }
+            
+            function agregarPieza() {
+            
+                var nro_pieza          = $("#nro_pieza").val();
+                var tipo_pieza         = $("#tipo_pieza").val();
+                var descripcion_pieza  = $("#descripcion_pieza").val();
+                var nro_catalogo       = $("#nro_catalogo").val();
+                var nro_serie          = $("#nro_serie").val();
+            
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>modificar_fichas/agregarPieza",
+                   data: "nro_pieza="+nro_pieza+"&tipo_pieza="+tipo_pieza+"&descripcion_pieza="+descripcion_pieza+"&nro_catalogo="+nro_catalogo+"&nro_serie="+nro_serie,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#piezas").append(data[1]);
+                       }else {
+                           jAlert(data[0], "Error");
+                       }
+                   }
+                });                
+            }
+            
+            function anularAccesorio(nro_accesorio) {
+            
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>modificar_fichas/anularAccesorio",
+                   data: "nro_accesorio="+nro_accesorio,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#accesorios").html("");
+                           $("#accesorios").html(data[1]);
+                       }else {
+                           $("#accesorios").html("");
+                       }
+                   }
+                });
+            }
+            
+            function anularPieza(nro_pieza) {
+            
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>modificar_fichas/anularPieza",
+                   data: "nro_pieza="+nro_pieza,
+                   success: function(data) {
+                       if(data[0] == 1) {
+                           $("#piezas").html("");
+                           $("#piezas").html(data[1]);
+                       }else {
+                           $("#piezas").html("");
+                       }
+                   }
+                });
+            }
+            
+            function crearTipoAccesorio() {
+                $.colorbox({href:"<?php echo base_url('alta_tipo_accesorio'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA ACCESORIOS", onClosed: function(){ cargoAccesorios(); } });
+            }
+
+            function crearTipoPieza() {
+                $.colorbox({href:"<?php echo base_url('alta_tipo_pieza'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA PIEZAS", onClosed: function(){ cargoPiezas(); } });
+            }
+
+            function cargoAccesorios() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>modificar_fichas/cargoAccesorios",
+                   success: function(data) {
+                       $("#tipo_accesorio").html(data);
+                   }
+                });
+            }     
+            
+            function cargoPiezas() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>modificar_fichas/cargoPiezas",
+                   success: function(data) {
+                       $("#tipo_pieza").html(data);
+                   }
+                });
+            }
+            
         </script>
         
     </head>
@@ -71,33 +230,33 @@
 
                 <dl>
                 <dt><label for="nro_serie"> Nro serie </label></dt>
-                <dd><input type="text" id="nro_serie" class="txtautomatico" readonly="readonly" /></dd>
+                <dd><input type="text" id="nro_serie" class="txtautomatico" readonly="readonly" value="<?php echo $nro_serie; ?>"/></dd>
                 </dl>                
                 
                 <dl> 		
                 <dt><label for="marca"> Marca </label></dt>	
-                <dd><input type="text" id="marca" class="txtautomatico" readonly="readonly" /></dd> 					
+                <dd><input type="text" id="marca" class="txtautomatico" readonly="readonly" value="<?php echo $marca; ?>"/></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre"> Calibre </label></dt>	
-                <dd><input type="text" id="calibre" class="txtautomatico" readonly="readonly" /></dd> 					
+                <dd><input type="text" id="calibre" class="txtautomatico" readonly="readonly" value="<?php echo $calibre; ?>"/></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="modelo"> Modelo </label></dt>	
-                <dd><input type="text" id="modelo" class="txtautomatico" readonly="readonly" /></dd> 					
+                <dd><input type="text" id="modelo" class="txtautomatico" readonly="readonly" value="<?php echo $modelo; ?>"/></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="nro_compra"> Nro compra </label></dt>	
-                <dd><input type="text" id="nro_compra" class="txtautomatico" readonly="readonly" /></dd> 					
+                <dd><input type="text" id="nro_compra" class="txtautomatico" readonly="readonly" value="<?php echo $nro_compra; ?>"/></dd> 					
                 </dl>                
                 
                 <dl> 		
                 <dt><label for="nro_catalogo"> Nro catalogo </label></dt>	
-                <dd><input type="text" id="nro_catalogo" class="txtautomatico" readonly="readonly" /></dd> 					
-                </dl>   
+                <dd><input type="text" id="nro_catalogo" class="txtautomatico" readonly="readonly" value="<?php echo $nro_catalogo; ?>"/></dd> 					
+                </dl>
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 
@@ -110,7 +269,7 @@
                 
                 <dl> 		
                 <dt><label for="tipo_accesorio"> Tipo accesorio </label></dt>	
-                <dd><select id="tipo_accesorio"> <?php echo $tipo_accesorio; ?> </select> <img style="cursor: pointer;" onclick="crearTipoAccesorio();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
+                <dd><select id="tipo_accesorio"> <?php echo $tipo_accesorios; ?> </select> <img style="cursor: pointer;" onclick="crearTipoAccesorio();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
                 </dl>                
                 
                 <dl>
@@ -126,10 +285,10 @@
                     <table> 
                         <thead>
                             <tr>
-                                <th></th> <th> Nro accesorio </th> <th> Tipo </th> <th> Descripcion </th>
+                                <th> Nro accesorio </th> <th> Tipo </th> <th> Descripcion </th> <th> </th>
                             </tr>
                         </thead>
-                        <tbody id="accesorios"></tbody> 
+                        <tbody id="accesorios"> <?php echo $accesorios; ?> </tbody> 
                         <tfoot>
                             <tr> <td colspan="4"> <div id="paging"> <br /> </div> </td> </tr>
                         </tfoot>
@@ -147,7 +306,7 @@
                 
                 <dl> 		
                 <dt><label for="tipo_pieza"> Tipo pieza </label></dt>	
-                <dd><select id="tipo_pieza"> <?php echo $tipo_pieza; ?> </select> <img style="cursor: pointer;" onclick="crearTipoPieza();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
+                <dd><select id="tipo_pieza"> <?php echo $tipo_piezas; ?> </select> <img style="cursor: pointer;" onclick="crearTipoPieza();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
                 </dl>                
                 
                 <dl>
@@ -163,10 +322,10 @@
                     <table> 
                         <thead>
                             <tr>
-                                <th></th> <th> Nro pieza </th> <th> Tipo </th> <th> Descripcion </th>
+                                <th> Nro pieza </th> <th> Tipo </th> <th> Descripcion </th> <th> </th>
                             </tr>
                         </thead>
-                        <tbody id="piezas"></tbody> 
+                        <tbody id="piezas"> <?php echo $piezas; ?> </tbody> 
                         <tfoot>
                             <tr> <td colspan="4"> <div id="paging"> <br /> </div> </td> </tr>
                         </tfoot>
@@ -176,7 +335,7 @@
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="ingresarDatos();"> Modificar ficha </button>
+                <button style="margin-right: 20px;" onclick="modificarFicha();"> Modificar ficha </button>
             </fieldset>  
             
         </div>        

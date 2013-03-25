@@ -397,7 +397,30 @@ class mb_fichas extends CI_Controller {
             
             echo $concat;
         }
-    }    
+    }  
+    
+    function editarFicha() {
+        $_SESSION['datos_ficha'][] = $_POST['nro_serie'];
+        $_SESSION['datos_ficha'][] = $_POST['marca'];
+        $_SESSION['datos_ficha'][] = $_POST['calibre'];
+        $_SESSION['datos_ficha'][] = $_POST['modelo'];
+    }
+    
+    function eliminarFicha() {
+        
+        $nro_serie = $_POST['nro_serie'];
+        $marca     = $_POST['marca'];
+        $calibre   = $_POST['calibre'];
+        $modelo    = $_POST['modelo'];
+        
+        if(!$this->mb_fichas_model->existeHistorialFicha($nro_serie, $marca, $calibre, $modelo)) {
+            $this->mb_fichas_model->eliminarFicha($nro_serie, $marca, $calibre, $modelo);
+            echo 1;
+        }else {
+            echo 0;
+        }        
+        
+    }
 }
 
 ?>
