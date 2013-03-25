@@ -33,7 +33,7 @@
                 $("input:button").button(); 
             });	
 
-            function altaActa() {
+            function modificarActa() {
                 
                 var fecha                = $("#fecha").val();
                 var unidad_recibe        = $("#unidad_recibe").val();
@@ -45,11 +45,11 @@
                 $.ajax({
                     type: "post",  
                     dataType: "json",
-                    url: "<?php base_url(); ?>alta_actas_alta/validarDatos",
+                    url: "<?php base_url(); ?>modificar_actas_alta/validarDatos",
                     data: "fecha="+fecha+"&unidad_recibe="+unidad_recibe+"&representante_sma="+representante_sma+"&representante_unidad="+representante_unidad+"&supervision="+supervision+"&observaciones="+observaciones,
                     success: function(data){
                         if(data[0] == "1"){            
-                            jAlert("El acta se genero con exito, el nro de acta de alta generado es - "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('alta_actas_alta'); ?>','Abastecimiento >> Actas >> Acta alta'); });
+                            jAlert("El acta fue modificada con exito", "Correcto", function() { irAFrame('<?php echo base_url('mb_actas_alta'); ?>','Abastecimiento >> Modificar >> Acta alta'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
@@ -57,10 +57,14 @@
                 });               
             }
             
+            function volverListado() {
+                irAFrame('<?php echo base_url('mb_actas_alta'); ?>','Abastecimiento >> Modificar >> Acta alta');
+            }
+            
             function cargoMarcas(nro_serie) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoMarcas",
+                   url: "<?php base_url(); ?>modificar_actas_alta/cargoMarcas",
                    data: "nro_serie="+nro_serie,
                    success: function(data) {
                        $("#marca").html("");
@@ -72,7 +76,7 @@
             function cargoCalibres(nro_serie, marca) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoCalibres",
+                   url: "<?php base_url(); ?>modificar_actas_alta/cargoCalibres",
                    data: "nro_serie="+nro_serie+"&marca="+marca,
                    success: function(data) {
                        $("#calibre").html("");
@@ -84,7 +88,7 @@
             function cargoModelos(nro_serie, marca, calibre) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoModelos",
+                   url: "<?php base_url(); ?>modificar_actas_alta/cargoModelos",
                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre,
                    success: function(data) {
                        $("#modelo").html("");
@@ -96,7 +100,7 @@
             function cargoMarcasAccesorios(nro_serie) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoMarcasAccesorios",
+                   url: "<?php base_url(); ?>modificar_actas_alta/cargoMarcasAccesorios",
                    data: "nro_serie="+nro_serie,
                    success: function(data) {
                        $("#marca_accesorio").html("");
@@ -108,7 +112,7 @@
             function cargoCalibresAccesorios(nro_serie, marca) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoCalibresAccesorios",
+                   url: "<?php base_url(); ?>modificar_actas_alta/cargoCalibresAccesorios",
                    data: "nro_serie="+nro_serie+"&marca="+marca,
                    success: function(data) {
                        $("#calibre_accesorio").html("");
@@ -120,7 +124,7 @@
             function cargoModelosAccesorios(nro_serie, marca, calibre) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoModelosAccesorios",
+                   url: "<?php base_url(); ?>modificar_actas_alta/cargoModelosAccesorios",
                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre,
                    success: function(data) {
                        $("#modelo_accesorio").html("");
@@ -132,7 +136,7 @@
             function cargoNroAccesorios(nro_serie, marca, calibre, modelo) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoNroAccesorios",
+                   url: "<?php base_url(); ?>modificar_actas_alta/cargoNroAccesorios",
                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
                    success: function(data) {
                        $("#nro_accesorio").html("");
@@ -153,7 +157,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoFichasFiltro",
+                   url: "<?php base_url(); ?>modificar_actas_alta/cargoFichasFiltro",
                    success: function(data) {
                        $("#nro_serie").html("");
                        $("#nro_serie").html(data[0]);
@@ -171,7 +175,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_actas_alta/cargoAccesoriosFiltro",
+                   url: "<?php base_url(); ?>modificar_actas_alta/cargoAccesoriosFiltro",
                    success: function(data) {
                        $("#nro_serie_accesorio").html("");
                        $("#nro_serie_accesorio").html(data[0]);
@@ -197,7 +201,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_actas_alta/agregarFicha",
+                   url: "<?php base_url(); ?>modificar_actas_alta/agregarFicha",
                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
                    success: function(data) {
                        if(data[0] == 1) {
@@ -214,7 +218,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_actas_alta/anularFicha",
+                   url: "<?php base_url(); ?>modificar_actas_alta/anularFicha",
                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
                    success: function(data) {
                        if(data[0] == 1) {
@@ -238,7 +242,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_actas_alta/agregarAccesorio",
+                   url: "<?php base_url(); ?>modificar_actas_alta/agregarAccesorio",
                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&nro_accesorio="+nro_accesorio,
                    success: function(data) {
                        if(data[0] == 1) {
@@ -255,7 +259,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_actas_alta/anularAccesorio",
+                   url: "<?php base_url(); ?>modificar_actas_alta/anularAccesorio",
                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&nro_accesorio="+nro_accesorio,
                    success: function(data) {
                        if(data[0] == 1) {
@@ -266,8 +270,7 @@
                        }
                    }
                 });
-            }            
-
+            }
         </script>
         
     </head>
@@ -276,7 +279,7 @@
 
         <div>			
 
-            <h1> Alta actas de alta </h1>    
+            <h1> Modificar actas de alta </h1>    
             
             <fieldset>	
 
@@ -375,7 +378,7 @@
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="altaActa();"> Dar de alta el acta </button>
+                <button style="margin-right: 20px;" onclick="modificarActa();"> Modificar acta de alta </button> <button style="margin-right: 20px;" onclick="volverListado();"> Volver al listado de actas </button>
             </fieldset> 
             
             <hr />

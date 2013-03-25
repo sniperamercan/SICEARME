@@ -7,6 +7,17 @@ class modificar_actas_alta_model extends CI_Model {
         $this->load->database();
     }
     
+    function verificoEstadoActa($nro_acta) {
+        
+        $query = $this->db->query("SELECT estado
+                                   FROM actas_alta
+                                   WHERE nro_acta = ".$this->db->escape($nro_acta));
+        
+        $row = $query->row();
+        
+        return $row->estado;
+    }
+    
     function datosActa($nro_acta) {
         
         $query = $this->db->query("SELECT fecha_transaccion, unidad_recibe, representante_sma, representante_unidad, representante_supervision, observaciones
@@ -290,7 +301,7 @@ class modificar_actas_alta_model extends CI_Model {
         
     }
     
-    function modficarActa_db($nro_acta, $fecha, $unidad_recibe, $representante_sma, $representante_unidad, $supervision, $observaciones) {
+    function modificarActa_db($nro_acta, $fecha, $unidad_recibe, $representante_sma, $representante_unidad, $supervision, $observaciones) {
         
         $this->db->trans_start();
         

@@ -315,38 +315,46 @@ class mb_actas_alta extends CI_Controller {
         }        
     }
     
-    function verCatalogos() {
+    function verObservaciones() {
         
-        $nro_interno = $_POST['nro_interno'];
+        $nro_acta = $_POST['nro_acta'];
         
-        if(!$this->mb_actas_alta_model->tieneCatalogos($nro_interno)) {
-            echo "El nro de compra - ".$nro_interno." no tiene ningun catalogo asociado";
+        $observaciones = $this->mb_actas_alta_model->verObservaciones($nro_acta);
+        $concat = "<p style='font-weight: bold;'> Nro de acta - ".$nro_acta." </p><div class='datagrid'><table><thead><th> Observaciones </th></thead>";
+        $concat .= "<tbody><tr> <td style='text-align: center;'>".$observaciones."</td></tr></tbody>";
+        $concat .= "</table></div>";
+
+        echo $concat;
+    } 
+    
+    function verEntregas() {
+        
+        $nro_acta = $_POST['nro_acta'];
+        
+        if(!$this->mb_actas_alta_model->tieneFichas($nro_acta)) {
+            echo "El nro de acta - ".$nro_acta." no tiene ninguna ficha asociada";
         }else {
-            $catalogos = array();
-            $catalogos = $this->mb_actas_alta_model->verCatalogos($nro_interno);
-            $concat = "<p style='font-weight: bold;'> Catalogos asociados a la compra nro - ".$nro_interno." </p><div class='datagrid'><table><thead><th> Nro catalogo </th><th> Tipo arma </th><th> Marca </th><th> Calibre </th><th> Modelo </th><th> Sistema </th><th> Empresa </th><th> Pais </th></thead>";
+            $fichas = array();
+            $fuchas = $this->mb_actas_alta_model->verFichas($nro_acta);
+            $concat = "<p style='font-weight: bold;'> Fichas asociadas al nro de acta - ".$nro_acta." </p><div class='datagrid'><table><thead><th> Nro serie </th><th> Marca </th><th> Calibre </th><th> Modelo </th></thead>";
            
             /*
              * retorno del array de catalogos
-            $retorno[] = $row->nro_interno_catalogo;
-            $retorno[] = $row->tipo_arma;
+            $retorno[] = $row->nro_serie;
             $retorno[] = $row->marca;
             $retorno[] = $row->calibre;
             $retorno[] = $row->modelo;
-            $retorno[] = $row->sistema;
-            $retorno[] = $row->empresa;
-            $retorno[] = $row->pais_origen;
             */
             
             $j = 0;
             
-            for($i=0; $i<count($catalogos); $i=$i+8) {
+            for($i=0; $i<count($fichas); $i=$i+4) {
                 if($j % 2 == 0){
                     $class = "";
                 }else{
                     $class = "alt";
                 } 
-                $concat .= "<tbody><tr class='".$class."'> <td style='text-align: center;'>".$catalogos[$i]."</td> <td>".$catalogos[$i+1]."</td> <td>".$catalogos[$i+2]."</td> <td>".$catalogos[$i+3]."</td> <td>".$catalogos[$i+4]."</td> <td>".$catalogos[$i+5]."</td> <td>".$catalogos[$i+6]."</td> <td>".$catalogos[$i+7]."</td> </tr></tbody>";
+                $concat .= "<tbody><tr class='".$class."'> <td style='text-align: center;'>".$fichas[$i]."</td> <td>".$fichas[$i+1]."</td> <td>".$fichas[$i+2]."</td> <td>".$fichas[$i+3]."</td> </tr></tbody>";
                 $j++;
             }
             
@@ -354,7 +362,7 @@ class mb_actas_alta extends CI_Controller {
             
             echo $concat;
         }
-    } 
+    }     
     
     function editarActa() {
         $_SESSION['nro_acta'] = $_POST['nro_acta'];
@@ -364,8 +372,8 @@ class mb_actas_alta extends CI_Controller {
         
         $nro_acta = $_POST['nro_acta'];
         
-        if(!$this->mb_fichas_model->existeHistorialFicha($nro_serie, $marca, $calibre, $modelo)) {
-            $this->mb_fichas_model->eliminarFicha($nro_serie, $marca, $calibre, $modelo);
+        if(!$this->mb_actas_alta_model->existeHistorialFicha($nro_acta)) {
+            $this->mb_actas_alta_model->eliminarFicha($nro_serie, $marca, $calibre, $modelo);
             echo 1;
         }else {
             echo 0;

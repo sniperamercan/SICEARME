@@ -789,7 +789,7 @@ class modificar_actas_alta extends CI_Controller {
             
             $nro_acta = $_SESSION['nro_acta'];
             
-            if($this->verificoEstadoActa($nro_acta) == 0) {
+            if($this->modificar_actas_alta_model->verificoEstadoActa($nro_acta) == 0) {
                 $this->modificar_actas_alta_model->modificarActa_db($nro_acta, $fecha, $unidad_recibe, $representante_sma, $representante_unidad, $supervision, $observaciones);
                 $retorno[] = 1;                
             }else {

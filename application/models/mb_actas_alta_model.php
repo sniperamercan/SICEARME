@@ -7,6 +7,17 @@ class mb_actas_alta_model extends CI_Model {
         $this->load->database();
     }
     
+    function verObservaciones($nro_acta) {
+        
+        $query = $this->db->query("SELECT observaciones
+                                   FROM actas_alta
+                                   WHERE nro_acta = ".$this->db->escape($nro_acta));
+        
+        $row = $query->row();
+        
+        return $row->observaciones;
+    }
+    
     //para paginado
     function cantidadRegistros($condicion){
         $query = $this->db->query("SELECT * 
