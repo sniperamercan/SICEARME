@@ -113,7 +113,7 @@
                     url: "<?php echo base_url("mb_compras/editarCompra"); ?>",
                     data: "nro_compra="+nro_compra,
                     success: function(){
-                        $.colorbox({href:"<?php echo base_url('modificar_compras'); ?>", top: true, iframe: false, scrolling: true, innerWidth: 800, innerHeight: 900, title: "MODIFICAR COMPRA", onClosed: function(){ irAFrame('<?php echo base_url('mb_compras'); ?>','O.C.I >> Modificar/Anular >> Compras'); }});
+                        irAFrame('<?php echo base_url('modificar_compras'); ?>','O.C.I >> Modificar/Anular >> Compras');
                     }                  
                 });            
             }

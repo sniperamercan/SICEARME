@@ -108,7 +108,7 @@
             function verEntrega(nro_acta) {
                 $.ajax({
                     type: "post",  
-                    url: "<?php base_url(); ?>mb_actas_alta/verEntrega",
+                    url: "<?php base_url(); ?>mb_actas_alta/verEntregas",
                     data: "nro_acta="+nro_acta,
                     success: function(data){
                         jAlert(data, "ARMAMENTO Y ACCESORIOS ENTREGADOS");
@@ -138,20 +138,20 @@
                 });  
             }
             
-            function eliminarFicha(nro_serie, marca, calibre, modelo) {
+            function eliminarActa(nro_acta) {
             
-                 jConfirm('Estas seguro que quieres eliminar la ficha seleccionada', 'ELIMINAR FICHA DEL SISTEMA', function(r) {
+                 jConfirm('Estas seguro que quiere eliminar el acta seleccionada nro acta -'+nro_acta, 'ELIMINAR ACTA DEL SISTEMA', function(r) {
                     if(r) {           
                         $.ajax({
                             type: 'post',
-                            url: "<?php echo base_url("mb_fichas/eliminarFicha"); ?>",
-                            data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
+                            url: "<?php echo base_url("mb_actas_alta/eliminarActa"); ?>",
+                            data: "nro_acta="+nro_acta,
                             success: function(data){
                                 if(data == 1) {
-                                    jAlert("La ficha fue eliminado con exito del sistema", "ELIMINAR FICHA", function() { irAFrame('<?php echo base_url('mb_fichas'); ?>','O.C.I >> Modificar/Anular >> Fichas') } );
+                                    jAlert("El acta fue eliminado con exito del sistema", "ELIMINAR ACTA DEL SISTEMA", function() { irAFrame('<?php echo base_url('mb_actas_alta'); ?>','Abastecimiento >> Modificar >> Actas altas') } );
                                 }else {
 
-                                    jAlert("La ficha no se puede elimianar del sistema, debido a que esta ya tiene un historial generado de movimiento", "ELIMINAR FICHA");
+                                    jAlert("El acta no se puede elimianar del sistema, debido a que esta ya tiene un historial generado de movimiento", "ELIMINAR ACTA DEL SISTEMA");
                                 }
 
                             }                  
@@ -159,6 +159,28 @@
                     }
                 });
             }
+            
+            function activarActa(nro_acta) {
+            
+                 jConfirm('Estas seguro que quiere activar el acta seleccionada nro acta -'+nro_acta, 'ACTIVAR ACTA', function(r) {
+                    if(r) {           
+                        $.ajax({
+                            type: 'post',
+                            url: "<?php echo base_url("mb_actas_alta/activarActa"); ?>",
+                            data: "nro_acta="+nro_acta,
+                            success: function(data){
+                                if(data == 1) {
+                                    jAlert("El nro de acta - "+nro_acta+" fue activa correctamente", "ACTIVAR CTA", function() { irAFrame('<?php echo base_url('mb_actas_alta'); ?>','Abastecimiento >> Modificar >> Actas altas') } );
+                                }else {
+
+                                    jAlert("El nro de acta - "+nro_acta+" no se pudo activar debido a un error con los datos", "ACTIVAR ACTA");
+                                }
+
+                            }                  
+                        });   
+                    }
+                });
+            }            
             
         </script>
         

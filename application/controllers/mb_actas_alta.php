@@ -334,16 +334,22 @@ class mb_actas_alta extends CI_Controller {
         if(!$this->mb_actas_alta_model->tieneFichas($nro_acta)) {
             echo "El nro de acta - ".$nro_acta." no tiene ninguna ficha asociada";
         }else {
+            
             $fichas = array();
-            $fuchas = $this->mb_actas_alta_model->verFichas($nro_acta);
-            $concat = "<p style='font-weight: bold;'> Fichas asociadas al nro de acta - ".$nro_acta." </p><div class='datagrid'><table><thead><th> Nro serie </th><th> Marca </th><th> Calibre </th><th> Modelo </th></thead>";
+            $fichas = $this->mb_actas_alta_model->verFichas($nro_acta);
+            
+            $accesorios = array();
+            $accesorios = $this->mb_actas_alta_model->verAccesorios($nro_acta);
+            
+            $concat = "<p style='font-weight: bold;'> Entregas asociadas al nro de acta - ".$nro_acta." </p>";
+            
+            $concat .= "<div class='datagrid'><table><thead><th> Nro serie </th><th> Marca </th><th> Calibre </th><th> Modelo </th></thead>";
            
             /*
-             * retorno del array de catalogos
-            $retorno[] = $row->nro_serie;
-            $retorno[] = $row->marca;
-            $retorno[] = $row->calibre;
-            $retorno[] = $row->modelo;
+             * $retorno[] = $row->nro_serie;
+             * $retorno[] = $row->marca;
+             * $retorno[] = $row->calibre;
+             * $retorno[] = $row->modelo;
             */
             
             $j = 0;
@@ -358,7 +364,38 @@ class mb_actas_alta extends CI_Controller {
                 $j++;
             }
             
-            $concat .= "</table></div>";
+            $concat .= "</table>";
+              
+            $concat .= "</div>";
+            
+            $concat .= "<br /> <br />";
+            
+            $concat .= "<div class='datagrid'><table><thead><th> Nro serie </th><th> Marca </th><th> Calibre </th><th> Modelo </th><th> Nro accesorio </th></thead>";
+           
+            /*
+             * $retorno[] = $row->nro_serie;
+             * $retorno[] = $row->marca;
+             * $retorno[] = $row->calibre;
+             * $retorno[] = $row->modelo;
+             * $retorno[] = $row->nro_accesorio;
+            */
+            
+            $j = 0;
+            
+            for($i=0; $i<count($accesorios); $i=$i+5) {
+                if($j % 2 == 0){
+                    $class = "";
+                }else{
+                    $class = "alt";
+                } 
+                $concat .= "<tbody><tr class='".$class."'> <td style='text-align: center;'>".$accesorios[$i]."</td> <td>".$accesorios[$i+1]."</td> <td>".$accesorios[$i+2]."</td> <td>".$accesorios[$i+3]."</td> <td>".$accesorios[$i+4]."</td> </tr></tbody>";
+                $j++;
+            }
+            
+            $concat .= "</table>";            
+            
+
+            $concat .= "</div>";
             
             echo $concat;
         }
@@ -372,14 +409,32 @@ class mb_actas_alta extends CI_Controller {
         
         $nro_acta = $_POST['nro_acta'];
         
-        if(!$this->mb_actas_alta_model->existeHistorialFicha($nro_acta)) {
-            $this->mb_actas_alta_model->eliminarFicha($nro_serie, $marca, $calibre, $modelo);
+        if($this->mb_actas_alta_model->verEstadoActa($nro_acta) == 0) {
+            $this->mb_actas_alta_model->eliminarActa($nro_acta);
             echo 1;
         }else {
             echo 0;
-        }        
-        
+        } 
     }    
+    
+    function activarActa() {
+        
+        $nro_acta = $_POST['nro_acta'];
+        
+        $datos_fichas     = $this->mb_actas_alta_model->obtenerFichasActas($nro_acta);
+        $datos_accesorios = $this->mb_actas_alta_model->obtenerAccesoriosActas($nro_acta);
+        
+        $unidad_recibe = $this->mb_actas_alta_model->obterUnidadRecibe($nro_acta);
+        
+        if($this->mb_actas_alta_model->verEstadoActa($nro_acta) == 0) {
+            $this->mb_actas_alta_model->activarActa($nro_acta, $datos_fichas, $datos_accesorios, $unidad_recibe);
+            echo 1;
+        }else {
+            echo 0;
+        } 
+        
+    }
+    
 }
 
 ?>

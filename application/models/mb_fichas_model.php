@@ -154,7 +154,16 @@ class mb_fichas_model extends CI_Model {
             'modelo'    => $modelo
         );
         
+        $data_db_logs = array(
+            'tipo_movimiento' => 'delete',
+            'tabla'           => 'usuarios',
+            'clave_tabla'     => 'usuario = '.$usuario,
+            'usuario'         => base64_decode($_SESSION['usuario'])
+        );  
+        
+        
         $this->db->trans_start();
+            $this->db->insert('db_logs', $data_db_logs); 
             $this->db->delete("stock_unidades_accesorios", $data_fichas);
             $this->db->delete("stock_unidades", $data_fichas);
             $this->db->delete("fichas_piezas", $data_fichas);

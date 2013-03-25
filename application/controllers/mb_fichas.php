@@ -24,6 +24,9 @@ class mb_fichas extends CI_Controller {
     function index() {
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
+        
+        $_SESSION['datos_ficha'] = array();
+        
         $this->load->view("mb_fichas_view");
     }
     

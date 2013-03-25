@@ -100,7 +100,7 @@
                     url: "<?php echo base_url("mb_catalogos/editarCatalogo"); ?>",
                     data: "nro_catalogo="+nro_catalogo,
                     success: function(){
-                        $.colorbox({href:"<?php echo base_url('modificar_catalogos'); ?>", top: true, iframe: false, scrolling: false, innerWidth: 800, innerHeight: 500, title: "MODIFICAR CATALOGO", onClosed: function(){ irAFrame('<?php echo base_url('mb_catalogos'); ?>','O.C.I >> Modificar/Anular >> Catalogos'); }});
+                        irAFrame('<?php echo base_url('modificar_catalogos'); ?>','O.C.I >> Modificar/Anular >> Catalogos');
                     }                  
                 });            
             }

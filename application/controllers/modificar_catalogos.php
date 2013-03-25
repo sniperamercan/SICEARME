@@ -76,6 +76,12 @@ class modificar_catalogos extends CI_Controller {
     
     function armoFormulario() {
         
+        if(isset($_SESSION['nro_catalogo']) && !empty($_SESSION['nro_catalogo'])) {
+            $nro_catalogo = $_SESSION['nro_catalogo'];
+        }else {
+            $nro_catalogo = 0;
+        }           
+        
         $retorno = array();
         /*
          * $retorno[0] = 0 -> entonces el catalogo NO esta asociado a una ficha

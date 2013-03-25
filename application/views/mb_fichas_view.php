@@ -122,7 +122,7 @@
                     url: "<?php echo base_url("mb_fichas/editarFicha"); ?>",
                     data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
                     success: function(){
-                        $.colorbox({href:"<?php echo base_url('modificar_fichas'); ?>", top: true, iframe: false, scrolling: true, innerWidth: 800, innerHeight: 900, title: "MODIFICAR FICHA", onClosed: function(){ irAFrame('<?php echo base_url('mb_fichas'); ?>','O.C.I >> Modificar/Anular >> Fichas'); }});
+                        irAFrame('<?php echo base_url('modificar_fichas'); ?>','O.C.I >> Modificar/Anular >> Fichas');
                     }                  
                 });  
             }

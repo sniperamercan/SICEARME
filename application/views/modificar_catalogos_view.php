@@ -63,13 +63,17 @@
                     data: "tipo_arma="+tipo_arma+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&sistema="+sistema+"&empresa="+empresa+"&pais_empresa="+pais_empresa+"&fabricacion="+fabricacion+"&vencimiento="+vencimiento,
                     success: function(data){
                         if(data[0] == "1"){            
-                            jAlert("Catalogo modificado con exito - Nro de catalogo = "+data[1], "Correcto", function() {  });
+                            jAlert("Catalogo modificado con exito - Nro de catalogo = "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('mb_catalogos'); ?>','O.C.I >> Modificar/Anular >> Catalogos');  });
                         }else{
                             jAlert(data[0], "Error");
                         }                            
                   }
                 });               
             }
+            
+            function volverListado() {
+                irAFrame('<?php echo base_url('mb_catalogos'); ?>','O.C.I >> Modificar/Anular >> Catalogos');
+            }            
             
             //INICIO llamadas a crear los tipos
             
@@ -182,7 +186,7 @@
 
         <div>			
 
-            <h1> Alta catalogos </h1>    
+            <h1> Modificar catalogos </h1>    
             
             <fieldset>	
                 
@@ -234,7 +238,7 @@
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="modificarCatalogo();"> Modificar catalogo </button>
+                <button style="margin-right: 20px;" onclick="modificarCatalogo();"> Modificar catalogo </button> <button style="margin-right: 20px;" onclick="volverListado();"> Volver al listado de catalogos </button>
             </fieldset>  
             
         </div>        

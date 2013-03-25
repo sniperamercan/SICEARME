@@ -40,13 +40,17 @@
                     url: "<?php base_url(); ?>modificar_fichas/validarDatos",
                     success: function(data){
                         if(data == "1"){            
-                            jAlert("Ficha del arma modificada con exito", "Correcto", function() { });
+                            jAlert("Ficha del arma modificada con exito", "Correcto", function() { irAFrame('<?php echo base_url('mb_fichas'); ?>','O.C.I >> Modificar/Anular >> Fichas'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
                   }
                 });               
             }
+            
+            function volverListado() {
+                irAFrame('<?php echo base_url('mb_fichas'); ?>','O.C.I >> Modificar/Anular >> Fichas');
+            }         
             
             function cargoNroCatalogos(nro_compra) {
             
@@ -335,7 +339,7 @@
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="modificarFicha();"> Modificar ficha </button>
+                <button style="margin-right: 20px;" onclick="modificarFicha();"> Modificar ficha </button> <button style="margin-right: 20px;" onclick="volverListado();"> Volver al listado de fichas </button>
             </fieldset>  
             
         </div>        

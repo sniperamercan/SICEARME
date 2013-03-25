@@ -51,13 +51,17 @@
                     data: "nro_compra="+nro_compra+"&fecha="+fecha+"&empresa="+empresa+"&pais_empresa="+pais_empresa+"&descripcion="+descripcion+"&modalidad="+modalidad,
                     success: function(data){
                         if(data[0] == 1){            
-                            jAlert("Compra agregada al sistema con exito - Nro interno de compra generado = "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('alta_compras'); ?>','O.C.I >> Alta >> Compras'); });
+                            jAlert("Compra modificada  con exito Nro interno de compra - "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('mb_compras'); ?>','O.C.I >> Modificar/Anular >> Compras'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
                   }
                 });               
             }
+            
+            function volverListado() {
+                irAFrame('<?php echo base_url('mb_compras'); ?>','O.C.I >> Modificar/Anular >> Compras');
+            }              
             
             function agregarCatalogo() {
             
@@ -160,7 +164,7 @@
 
         <div>			
 
-            <h1> Alta compras </h1>    
+            <h1> Modificar compras </h1>    
             
             <fieldset>	
 
@@ -218,7 +222,7 @@
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="modificarCompra();"> Modificar compra </button>
+                <button style="margin-right: 20px;" onclick="modificarCompra();"> Modificar compra </button> <button style="margin-right: 20px;" onclick="volverListado();"> Volver al listado de compras </button>
             </fieldset>  
             
             <hr />

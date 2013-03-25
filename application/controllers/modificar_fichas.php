@@ -22,7 +22,7 @@ class modificar_fichas extends CI_Controller {
     
     function index() {
         
-        if(isset($_SESSION['datos_ficha']) && !empty($_SESSION['datos_ficha'])) {
+        if(isset($_SESSION['datos_ficha']) && count($_SESSION['datos_ficha'])>0) {
             $datos_ficha = $_SESSION['datos_ficha'];
         }else {
             $datos_ficha = array();

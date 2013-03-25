@@ -448,7 +448,9 @@ class modificar_compras extends CI_Controller {
             
             $nro_interno = $_SESSION['nro_compra'];
             
-            $retorno[] = $this->modificar_compras_model->modificarCompra($nro_interno, $nro_compra, $fecha, $empresa, $pais_empresa, $descripcion, $modalidad, $precio_total, $cantidad_armas);
+            $retorno[] = $nro_interno;
+            
+            $this->modificar_compras_model->modificarCompra($nro_interno, $nro_compra, $fecha, $empresa, $pais_empresa, $descripcion, $modalidad, $precio_total, $cantidad_armas);
         }
         
         echo json_encode($retorno);
