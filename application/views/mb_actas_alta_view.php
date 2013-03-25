@@ -121,8 +121,8 @@
                     type: "post",  
                     url: "<?php base_url(); ?>mb_actas_alta/imprimirRecibo",
                     data: "nro_acta="+nro_acta,
-                    success: function(data){
-                        jAlert(data, "RECIBO DEL ACTA");
+                    success: function(){
+                        window.open ("<?php echo base_url("imprimir_acta_alta"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0");
                   }
                 });                
             }

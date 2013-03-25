@@ -15,10 +15,10 @@ class mb_actas_alta extends CI_Controller {
             die($this->mensajes->sinPermisos());
         }
         
-        //Modulo solo visible para el peril 2 y 3 - Usuarios O.C.I y Administradores O.C.I 
-        if(!$this->perms->verificoPerfil2() || !$this->perms->verificoPerfil3()) {
+        //Modulo solo visible 5 - Administradores O.C.I 
+        if(!$this->perms->verificoPerfil5()) {
             die($this->mensajes->sinPermisos());
-        }        
+        }       
     }
     
     function index() {
@@ -404,6 +404,10 @@ class mb_actas_alta extends CI_Controller {
     function editarActa() {
         $_SESSION['nro_acta'] = $_POST['nro_acta'];
     }
+    
+    function imprimirRecibo() {
+        $_SESSION['nro_acta'] = $_POST['nro_acta'];
+    }    
     
     function eliminarActa() {
         
