@@ -72,6 +72,34 @@ class mb_compras_model extends CI_Model {
         
         return $retorno;
     }
+    
+    function eliminarCompra($nro_compra) {
+        
+        $data_compra_where = array(
+            'nro_interno' => $nro_compra
+        );
+        
+        $data_db_logs = array(
+            'tipo_movimiento' => 'delete',
+            'tabla'           => 'compras',
+            'clave_tabla'     => 'nro_interno = '.$nro_compra,
+            'usuario'         => base64_decode($_SESSION['usuario'])
+        );        
+        
+        $this->db->trans_start();
+            $this->db->delete('compras', $data_compra_where);
+            $this->db->insert('db_logs', $data_db_logs); 
+        $this->db->trans_complete(); 
+    }
+    
+    function fichaAsociada($nro_compra) {
+        
+        $query = $this->db->query("SELECT *
+                                   FROM fichas
+                                   WHERE nro_interno_compra = ".$this->db->escape($nro_compra));
+        
+        return $query->num_rows();
+    }
 }
 
 ?>

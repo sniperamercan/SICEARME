@@ -106,7 +106,40 @@
                   }
                 });                
             }            
-                  
+              
+            function editarCompra(nro_compra) {
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo base_url("mb_compras/editarCompra"); ?>",
+                    data: "nro_compra="+nro_compra,
+                    success: function(){
+                        $.colorbox({href:"<?php echo base_url('modificar_compras'); ?>", top: true, iframe: false, scrolling: true, innerWidth: 800, innerHeight: 900, title: "MODIFICAR COMPRA", onClosed: function(){ irAFrame('<?php echo base_url('mb_compras'); ?>','O.C.I >> Modificar/Anular >> Compras'); }});
+                    }                  
+                });            
+            }
+            
+            function eliminarCompra(nro_compra) {
+            
+                 jConfirm('Estas seguro que quieres eliminar la compra - '+nro_compra, 'ELIMINAR COMPRA DEL SISTEMA', function(r) {
+                    if(r) {           
+                        $.ajax({
+                            type: 'post',
+                            url: "<?php echo base_url("mb_compras/eliminarCompra"); ?>",
+                            data: "nro_compra="+nro_compra,
+                            success: function(data){
+                                if(data == 1) {
+                                    jAlert("La compra nro - "+nro_compra+" fue eliminado con exito del sistema", "ELIMINAR COMPRA", function() { irAFrame('<?php echo base_url('mb_compras'); ?>','O.C.I >> Modificar/Anular >> Compras') } );
+                                }else {
+
+                                    jAlert("La compra nro - "+nro_compra+" no se puede elimianar del sistema, debido a que esta asociados a una ficha", "ELIMINAR COMPRA");
+                                }
+
+                            }                  
+                        });   
+                    }
+                });
+            }            
+              
         </script>
         
     </head>

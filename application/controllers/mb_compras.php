@@ -368,6 +368,22 @@ class mb_compras extends CI_Controller {
             
             echo $concat;
         }
+    } 
+    
+    function editarCompra() {
+        $_SESSION['nro_compra'] = $_POST['nro_compra'];
+    }
+    
+    function eliminarCompra() {
+        
+        $nro_compra = $_POST['nro_compra'];
+        
+        if(!$this->mb_compras_model->fichaAsociada($nro_compra)) {
+            $this->mb_compras_model->eliminarCompra($nro_compra);
+            echo 1;
+        }else {
+            echo 0;
+        }
     }    
 }
 
