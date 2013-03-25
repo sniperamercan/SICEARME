@@ -165,4 +165,3 @@ class listado_fichas_model extends CI_Model {
 }
 
 ?>
-

@@ -5,7 +5,7 @@ class listado_fichas extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('mb_fichas_model');
+        $this->load->model('listado_fichas_model');
         $this->load->library('perms');
         $this->load->library('pagination');   
         $this->load->library('mensajes');
@@ -24,7 +24,7 @@ class listado_fichas extends CI_Controller {
     function index() {
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
-        $this->load->view("mb_fichas_view");
+        $this->load->view("listado_fichas_view");
     }
     
     //cantReg = cantidad de registros x pagina
@@ -111,7 +111,7 @@ class listado_fichas extends CI_Controller {
         
         $concat = "";
         
-        $result = $this->mb_fichas_model->consulta_db($param, $cantReg, $condicion, $order);
+        $result = $this->listado_fichas_model->consulta_db($param, $cantReg, $condicion, $order);
           
         $j=0;
         
@@ -146,8 +146,6 @@ class listado_fichas extends CI_Controller {
                     <td style='text-align: center;'> ".$result[$i+5]." </td>
                     <td onclick='verAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
                     <td onclick='verPiezas(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
-                    <td onclick='editarFicha(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/edit.png' /> </td>
-                    <td onclick='eliminarFicha(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/delete.gif' /> </td>    
                 </tr>
             ";
             
@@ -155,8 +153,8 @@ class listado_fichas extends CI_Controller {
             
         }                  
         
-        $config['base_url'] = site_url("mb_fichas/consulta");
-        $config['total_rows'] = $this->mb_fichas_model->cantidadRegistros($condicion);
+        $config['base_url'] = site_url("listado_fichas/consulta");
+        $config['total_rows'] = $this->listado_fichas_model->cantidadRegistros($condicion);
         $config['per_page'] = $cantReg;
         $config['first_link'] = 'Primera';
         $config['last_link'] = 'Ultima';
@@ -208,11 +206,11 @@ class listado_fichas extends CI_Controller {
             echo "La pagina inicial y final deben de estar completadas ";
         }else if( $a_pagina < $de_pagina ){
             echo "La pagina inicila no puede ser mayor que la pagina final verifique";
-        }else if( $this->mb_fichas_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
+        }else if( $this->listado_fichas_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
             echo "No existe tal cantidad de paginas para esa consulta verifique";
         }else{
             echo "1";
-            if( $this->mb_fichas_model->cantidadRegistros($condicion) <= 30 ){
+            if( $this->listado_fichas_model->cantidadRegistros($condicion) <= 30 ){
                 $ini   = 0;
                 $param = 30;
                 $this->consultaImpresion($condicion, $ini, $param, $order);
@@ -239,7 +237,7 @@ class listado_fichas extends CI_Controller {
         
         $concat = "";
         
-        $result = $this->mb_fichas_model->consulta_db($param, $cantReg, $condicion, $order);
+        $result = $this->listado_fichas_model->consulta_db($param, $cantReg, $condicion, $order);
                 
         
         $concat .= '<center>';
@@ -324,11 +322,11 @@ class listado_fichas extends CI_Controller {
         $calibre   = $_POST['calibre'];
         $modelo    = $_POST['modelo'];
         
-        if(!$this->mb_fichas_model->tieneAccesorios($nro_serie, $marca, $calibre, $modelo)) {
+        if(!$this->listado_fichas_model->tieneAccesorios($nro_serie, $marca, $calibre, $modelo)) {
             echo "No tiene ningun accesorio asociado";
         }else {
             $accesorios = array();
-            $accesorios = $this->mb_fichas_model->verAccesorios($nro_serie, $marca, $calibre, $modelo);
+            $accesorios = $this->listado_fichas_model->verAccesorios($nro_serie, $marca, $calibre, $modelo);
             $concat = "<p style='font-weight: bold;'> Acceorios asociados a la ficha </p><div class='datagrid'><table><thead><th> Nro accesorios </th><th> Tipo accesorio </th><th> Descripcion </th></thead>";
            
             /*
@@ -363,11 +361,11 @@ class listado_fichas extends CI_Controller {
         $calibre   = $_POST['calibre'];
         $modelo    = $_POST['modelo'];
         
-        if(!$this->mb_fichas_model->tienePiezas($nro_serie, $marca, $calibre, $modelo)) {
+        if(!$this->listado_fichas_model->tienePiezas($nro_serie, $marca, $calibre, $modelo)) {
             echo "No tiene ninguna pieza asociado";
         }else {
             $piezas = array();
-            $piezas = $this->mb_fichas_model->verPiezas($nro_serie, $marca, $calibre, $modelo);
+            $piezas = $this->listado_fichas_model->verPiezas($nro_serie, $marca, $calibre, $modelo);
             $concat = "<p style='font-weight: bold;'> Piezas asociados a la ficha </p><div class='datagrid'><table><thead><th> Nro pieza </th><th> Tipo pieza </th><th> Descripcion </th></thead>";
            
             /*
@@ -409,8 +407,8 @@ class listado_fichas extends CI_Controller {
         $calibre   = $_POST['calibre'];
         $modelo    = $_POST['modelo'];
         
-        if(!$this->mb_fichas_model->existeHistorialFicha($nro_serie, $marca, $calibre, $modelo)) {
-            $this->mb_fichas_model->eliminarFicha($nro_serie, $marca, $calibre, $modelo);
+        if(!$this->listado_fichas_model->existeHistorialFicha($nro_serie, $marca, $calibre, $modelo)) {
+            $this->listado_fichas_model->eliminarFicha($nro_serie, $marca, $calibre, $modelo);
             echo 1;
         }else {
             echo 0;

@@ -44,7 +44,7 @@
                 
                 $.ajax({ 
                     type: 'post',
-                    url: '<?php echo base_url(); ?>mb_fichas/consulta/0',
+                    url: '<?php echo base_url(); ?>listado_fichas/consulta/0',
                     data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&nro_compra="+nro_compra+"&nro_catalogo="+nro_catalogo,
                     success: function(){
                         cargoConsulta();
@@ -53,13 +53,13 @@
             }
             
             function impresion(){                
-                $.colorbox({href:"<?php echo base_url('mb_fichas/seteoImpresion'); ?>", top: true, iframe: false, scrolling: false, innerWidth: 800, innerHeight: 200, title: "IMPRESION"});                
+                $.colorbox({href:"<?php echo base_url('listado_fichas/seteoImpresion'); ?>", top: true, iframe: false, scrolling: false, innerWidth: 800, innerHeight: 200, title: "IMPRESION"});                
             } 
 
             function seteoImpresion(de_pagina, a_pagina){                
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("mb_fichas/armoImpresion"); ?>",
+                    url: "<?php echo base_url("listado_fichas/armoImpresion"); ?>",
                     data: "de_pagina="+de_pagina+"&a_pagina="+a_pagina,
                     success: function(data){
                         if(data == "1"){
@@ -74,7 +74,7 @@
             function orderBy(param){            
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("mb_fichas/orderBy"); ?>",
+                    url: "<?php echo base_url("listado_fichas/orderBy"); ?>",
                     data: "order="+param,
                     success: function(){
                         cargoConsulta();                       
@@ -86,7 +86,7 @@
                 $.ajax({
                     type: 'post',
                     dataType: 'json',
-                    url: "<?php echo base_url("mb_fichas/consulta"); ?>",
+                    url: "<?php echo base_url("listado_fichas/consulta"); ?>",
                     success: function(data){
                         $("#datos_consulta").html(data[0]);
                         $("#paginado").html(data[1]);
@@ -97,7 +97,7 @@
             function verAccesorios(nro_serie, marca, calibre, modelo) {
                 $.ajax({
                     type: "post",  
-                    url: "<?php base_url(); ?>mb_fichas/verAccesorios",
+                    url: "<?php base_url(); ?>listado_fichas/verAccesorios",
                     data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
                     success: function(data){
                         jAlert(data, "ACCESORIOS DE LA FICHA");
@@ -108,47 +108,14 @@
             function verPiezas(nro_serie, marca, calibre, modelo) {
                 $.ajax({
                     type: "post",  
-                    url: "<?php base_url(); ?>mb_fichas/verPiezas",
+                    url: "<?php base_url(); ?>listado_fichas/verPiezas",
                     data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
                     success: function(data){
                         jAlert(data, "PIEZAS DE LA FICHA");
                   }
                 });                
             } 
-
-            function editarFicha(nro_serie, marca, calibre, modelo) {
-                $.ajax({
-                    type: 'post',
-                    url: "<?php echo base_url("mb_fichas/editarFicha"); ?>",
-                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
-                    success: function(){
-                        $.colorbox({href:"<?php echo base_url('modificar_fichas'); ?>", top: true, iframe: false, scrolling: true, innerWidth: 800, innerHeight: 900, title: "MODIFICAR FICHA", onClosed: function(){ irAFrame('<?php echo base_url('mb_fichas'); ?>','O.C.I >> Modificar/Anular >> Fichas'); }});
-                    }                  
-                });  
-            }
-            
-            function eliminarFicha(nro_serie, marca, calibre, modelo) {
-            
-                 jConfirm('Estas seguro que quieres eliminar la ficha seleccionada', 'ELIMINAR FICHA DEL SISTEMA', function(r) {
-                    if(r) {           
-                        $.ajax({
-                            type: 'post',
-                            url: "<?php echo base_url("mb_fichas/eliminarFicha"); ?>",
-                            data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
-                            success: function(data){
-                                if(data == 1) {
-                                    jAlert("La ficha fue eliminado con exito del sistema", "ELIMINAR FICHA", function() { irAFrame('<?php echo base_url('mb_fichas'); ?>','O.C.I >> Modificar/Anular >> Fichas') } );
-                                }else {
-
-                                    jAlert("La ficha no se puede elimianar del sistema, debido a que esta ya tiene un historial generado de movimiento", "ELIMINAR FICHA");
-                                }
-
-                            }                  
-                        });   
-                    }
-                });
-            }            
-                  
+              
         </script>
         
     </head>
@@ -203,7 +170,7 @@
                 <tbody id="datos_consulta"> </tbody>   
 
                 <tfoot>
-                    <tr> <td colspan="10"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="8"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
                 
            </table>  
