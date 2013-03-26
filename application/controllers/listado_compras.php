@@ -252,7 +252,7 @@ class listado_compras extends CI_Controller {
             </tr>   
         ';
                 
-        for($i=0;$i<count($result);$i=$i+10) {            
+        for($i=0;$i<count($result);$i=$i+9) {            
             $concat .= "
                 <tr>
                     <td  style='text-align: center;'> ".$result[$i]." </td>

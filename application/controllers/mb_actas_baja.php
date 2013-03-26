@@ -176,7 +176,7 @@ class mb_actas_baja extends CI_Controller {
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
-            $order = "nro_interno";
+            $order = "nro_acta";
         }
         //fin verifico order
         
@@ -221,7 +221,7 @@ class mb_actas_baja extends CI_Controller {
         
         $concat = "";
         
-        $result = $this->mb_actas_alta_model->consulta_db($param, $cantReg, $condicion, $order);
+        $result = $this->mb_actas_baja_model->consulta_db($param, $cantReg, $condicion, $order);
                 
         
         $concat .= '<center>';
@@ -241,10 +241,10 @@ class mb_actas_baja extends CI_Controller {
             </tr>   
         ';
                 
-        for($i=0;$i<count($result);$i=$i+10) {   
+        for($i=0;$i<count($result);$i=$i+8) {   
             
-            $unidad_entrega = $this->mb_actas_alta_model->nombreUnidad($result[$i+2]);
-            $unidad_recibe  = $this->mb_actas_alta_model->nombreUnidad($result[$i+3]);            
+            $unidad_entrega = $this->mb_actas_baja_model->nombreUnidad($result[$i+2]);
+            $unidad_recibe  = $this->mb_actas_baja_model->nombreUnidad($result[$i+3]);            
             
             $concat .= "
                 <tr>

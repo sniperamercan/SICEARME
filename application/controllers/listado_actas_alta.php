@@ -173,7 +173,7 @@ class listado_actas_alta extends CI_Controller {
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
-            $order = "nro_interno";
+            $order = "nro_acta";
         }
         //fin verifico order
         
@@ -238,7 +238,7 @@ class listado_actas_alta extends CI_Controller {
             </tr>   
         ';
                 
-        for($i=0;$i<count($result);$i=$i+10) {   
+        for($i=0;$i<count($result);$i=$i+8) {   
             
             $unidad_entrega = $this->listado_actas_alta_model->nombreUnidad($result[$i+2]);
             $unidad_recibe  = $this->listado_actas_alta_model->nombreUnidad($result[$i+3]);            

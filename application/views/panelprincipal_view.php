@@ -278,7 +278,6 @@
                                         <ul>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_actas_alta'); ?>','Abastecimiento >> Listado >> Actas altas');"> Actas altas </a></li>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_actas_baja'); ?>','Abastecimiento >> Listado >> Actas bajas');"> Actas bajas </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_historial_arma'); ?>','Abastecimiento >> Listado >> Historial de arma');"> Historial de arma </a></li>
                                         </ul>
                                     </li>
                                 

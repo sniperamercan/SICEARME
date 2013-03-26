@@ -197,7 +197,7 @@ class mb_fichas extends CI_Controller {
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
-            $order = "nro_interno";
+            $order = "nro_serie";
         }
         //fin verifico order
         
