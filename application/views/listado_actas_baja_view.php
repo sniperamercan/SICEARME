@@ -5,7 +5,7 @@
         
         <style>
             .datagrid table { border-collapse: collapse; text-align: left; width: 100%; } 
-            .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #8C8C8C; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
+            .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: auto; border: 1px solid #8C8C8C; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
             .datagrid table td, .datagrid table th { padding: 3px 10px; }
             
             .datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8C8C8C), color-stop(1, #7D7D7D) );background:-moz-linear-gradient( center top, #8C8C8C 5%, #7D7D7D 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8C8C8C', endColorstr='#7D7D7D');background-color:#8C8C8C; color:#FFFFFF; font-size: 15px; font-weight: bold; border-left: 1px solid #A3A3A3; } 
@@ -162,17 +162,17 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> Nro acta             </th>
+                        <th onclick="orderBy(0)"> N. Acta             </th>
                         <th onclick="orderBy(1)"> Fecha                </th>
-                        <th onclick="orderBy(2)"> Unidad entrega       </th>
-                        <th onclick="orderBy(3)"> Unidad recibe        </th>
-                        <th onclick="orderBy(4)"> Representante SMA    </th>
-                        <th onclick="orderBy(5)"> Representante unidad </th>
+                        <th onclick="orderBy(2)"> U. Entrega       </th>
+                        <th onclick="orderBy(3)"> U. Recibe        </th>
+                        <th onclick="orderBy(4)"> Repr SMA    </th>
+                        <th onclick="orderBy(5)"> Repr unidad </th>
                         <th onclick="orderBy(6)"> Supervision          </th>
                         <th onclick="orderBy(7)"> Estado               </th>
-                        <th> Ver observaciones </th>
-                        <th> Ver devoluciones  </th>
-                        <th> Imprimir recibo   </th>
+                        <th> Ver observ </th>
+                        <th> Ver devol  </th>
+                        <th> Imprimir   </th>
                     </tr>
                 </thead>
 
