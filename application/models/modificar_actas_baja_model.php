@@ -75,6 +75,17 @@ class modificar_actas_baja_model extends CI_Model {
         return $retorno;
     }    
     
+    function datosUnidad($unidad) {
+        
+        $query = $this->db->query("SELECT nombreunidad
+                                   FROM unidades
+                                   WHERE idunidad = ".$this->db->escape($unidad));
+        
+        $row = $query->row();
+        
+        return $row->nombreunidad;
+    }
+    
     function cargoUnidades() {
         
         $query = $this->db->query("SELECT idunidad, nombreunidad

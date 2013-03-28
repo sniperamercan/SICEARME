@@ -28,12 +28,10 @@ class alta_actas_baja extends CI_Controller {
         //cargo las unidades
         $unidades = $this->alta_actas_baja_model->cargoUnidades();
         
-        $aux = '""';
-        $data['unidades'] = "<option onchange='cargoNroSeries(".$aux.");'> </option>";
+        $data['unidades'] = "<option> </option>";
         
         for($i=0; $i < count($unidades); $i=$i+2) {
-            $aux = '"'.$unidades[$i].'"';
-            $data['unidades'] .= "<option value='".$unidades[$i]."' onchange='cargoNroSeries(".$aux.");'>".$unidades[$i+1]."</option>";
+            $data['unidades'] .= "<option value='".$unidades[$i]."'>".$unidades[$i+1]."</option>";
         }
         //fin cargo unidades
         
@@ -42,32 +40,27 @@ class alta_actas_baja extends CI_Controller {
     
     function cargoNroSeries() {
 
-        $unidad     = $_POST['unidad'];
-        $aux_unidad = '"'.$unidad.'"';
+        $unidad = $_POST['unidad'];
         
         $retorno = array();
         
        //cargo nro de series de armamentos que esten en la unidad
         $nro_series = $this->alta_actas_baja_model->cargoNroSeries($unidad);
         
-        $aux = '""';
-        $retorno[0] = "<option onchange='cargoMarcas(".$aux.",".$aux.");'> </option>";
+        $retorno[0] = "<option> </option>";
         
         foreach($nro_series as $val) {
-            $aux_nro_serie = '"'.$val.'"';
-            $retorno[0] .= "<option onchange='cargoMarcas(".$aux_unidad.",".$aux_nro_serie.");' value='".$val."'>".$val."</option>";
+            $retorno[0] .= "<option value='".$val."'>".$val."</option>";
         }
         //fin cargo nro de series de armamento que este en esa unidad
         
         //cargo nro de series de accesorios que esten en la unidad
         $nro_series_accesorios = $this->alta_actas_baja_model->cargoNroSeriesAccesorios($unidad);
         
-        $aux = '""';
-        $retorno[1] = "<option onchange='cargoMarcasAccesorios(".$aux.",".$aux.");'> </option>";
+        $retorno[1] = "<option> </option>";
         
         foreach($nro_series_accesorios as $val) {
-            $aux_nro_serie = '"'.$val.'"';
-            $retorno[1] .= "<option onchange='cargoMarcasAccesorios(".$aux_unidad.",".$aux_nro_serie.");' value='".$val."'>".$val."</option>";
+            $retorno[1] .= "<option value='".$val."'>".$val."</option>";
         }
         //fin cargo nro de series de accesorios en unidad
         
@@ -77,19 +70,14 @@ class alta_actas_baja extends CI_Controller {
     function cargoMarcas() {
         
         $unidad     = $_POST['unidad'];
-        $aux_unidad = '"'.$unidad.'"';
-        
-        $nro_serie     = $_POST['nro_serie'];
-        $aux_nro_serie = '"'.$nro_serie.'"';
+        $nro_serie  = $_POST['nro_serie'];
         
         $marcas = $this->alta_actas_baja_model->cargoMarcas($unidad, $nro_serie);
         
-        $aux = '""';
-        $concat = "<option onchange='cargoCalibres(".$aux.",".$aux.",".$aux.");'> </option>";
+        $concat = "<option> </option>";
         
         foreach($marcas as $val) {
-            $aux_marca = '"'.$val.'"';
-            $concat .= "<option onchange='cargoCalibres(".$aux_unidad.",".$aux_nro_serie.",".$aux_marca.");' value='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -97,23 +85,16 @@ class alta_actas_baja extends CI_Controller {
     
     function cargoCalibres() {
        
-        $unidad     = $_POST['unidad'];
-        $aux_unidad = '"'.$unidad.'"';
-        
-        $nro_serie     = $_POST['nro_serie'];
-        $aux_nro_serie = '"'.$nro_serie.'"';
-        
+        $unidad    = $_POST['unidad'];
+        $nro_serie = $_POST['nro_serie'];
         $marca     = $_POST['marca'];
-        $aux_marca = '"'.$marca.'"';            
         
         $calibres = $this->alta_actas_baja_model->cargoCalibres($unidad, $nro_serie, $marca);
         
-        $aux = '""';
-        $concat = "<option onchange='cargoModelos(".$aux.",".$aux.",".$aux.",".$aux.");'> </option>";
+        $concat = "<option> </option>";
         
         foreach($calibres as $val) {
-            $aux_calibre = '"'.$val.'"';
-            $concat .= "<option onchange='cargoModelos(".$aux_unidad.",".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' value='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -140,19 +121,14 @@ class alta_actas_baja extends CI_Controller {
     function cargoMarcasAccesorios() {
         
         $unidad     = $_POST['unidad'];
-        $aux_unidad = '"'.$unidad.'"';        
-        
-        $nro_serie     = $_POST['nro_serie'];
-        $aux_nro_serie = '"'.$nro_serie.'"';
-        
+        $nro_serie  = $_POST['nro_serie'];
+      
         $marcas = $this->alta_actas_baja_model->cargoMarcasAccesorios($unidad, $nro_serie);
         
-        $aux = '""';
-        $concat = "<option onchange='cargoCalibresAccesorios(".$aux.",".$aux.",".$aux.");'> </option>";
+        $concat = "<option> </option>";
         
         foreach($marcas as $val) {
-            $aux_marca = '"'.$val.'"';
-            $concat .= "<option onchange='cargoCalibresAccesorios(".$aux_unidad.",".$aux_nro_serie.",".$aux_marca.");' value='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -160,23 +136,16 @@ class alta_actas_baja extends CI_Controller {
     
     function cargoCalibresAccesorios() {
         
-        $unidad     = $_POST['unidad'];
-        $aux_unidad = '"'.$unidad.'"';        
-        
-        $nro_serie     = $_POST['nro_serie'];
-        $aux_nro_serie = '"'.$nro_serie.'"';
-        
+        $unidad    = $_POST['unidad'];
+        $nro_serie = $_POST['nro_serie'];
         $marca     = $_POST['marca'];
-        $aux_marca = '"'.$marca.'"';            
         
         $calibres = $this->alta_actas_baja_model->cargoCalibresAccesorios($unidad, $nro_serie, $marca);
         
-        $aux = '""';
-        $concat = "<option onchange='cargoModelosAccesorios(".$aux.",".$aux.",".$aux.",".$aux.");'> </option>";
+        $concat = "<option> </option>";
         
         foreach($calibres as $val) {
-            $aux_calibre = '"'.$val.'"';
-            $concat .= "<option onchange='cargoModelosAccesorios(".$aux_unidad.",".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' value='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -184,26 +153,17 @@ class alta_actas_baja extends CI_Controller {
     
      function cargoModelosAccesorios() {
         
-        $unidad     = $_POST['unidad'];
-        $aux_unidad = '"'.$unidad.'"';         
-         
-        $nro_serie     = $_POST['nro_serie'];
-        $aux_nro_serie = '"'.$nro_serie.'"';
-        
+        $unidad    = $_POST['unidad'];
+        $nro_serie = $_POST['nro_serie'];
         $marca     = $_POST['marca'];
-        $aux_marca = '"'.$marca.'"';     
-        
-        $calibre     = $_POST['calibre'];
-        $aux_calibre = '"'.$calibre.'"';     
+        $calibre   = $_POST['calibre'];
         
         $modelos = $this->alta_actas_baja_model->cargoModelosAccesorios($unidad, $nro_serie, $marca, $calibre);
-        
-        $aux = '""';
-        $concat = "<option onchange='cargoNroAccesorios(".$aux.",".$aux.",".$aux.",".$aux.",".$aux.");'> </option>";
+    
+        $concat = "<option> </option>";
         
         foreach($modelos as $val) {
-            $aux_modelo = '"'.$val.'"';
-            $concat .= "<option onchange='cargoNroAccesorios(".$aux_unidad.",".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.");' value='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -211,7 +171,7 @@ class alta_actas_baja extends CI_Controller {
     
      function cargoNroAccesorios() {
         
-        $unidad     = $_POST['unidad'];
+        $unidad    = $_POST['unidad'];
         $nro_serie = $_POST['nro_serie'];
         $marca     = $_POST['marca'];
         $calibre   = $_POST['calibre'];
@@ -229,7 +189,7 @@ class alta_actas_baja extends CI_Controller {
     }     
     
     function cargoFichasFiltro() {
-        
+    
         unset($_SESSION['unidad']);
         
         $nro_serie = $_SESSION['seleccion_busqueda'];
@@ -237,19 +197,30 @@ class alta_actas_baja extends CI_Controller {
         $calibre   = $_SESSION['seleccion_busqueda2'];
         $modelo    = $_SESSION['seleccion_busqueda3'];
        
-        $aux = '""';
+        $unidad  = $_POST['unidad'];
         
-        $aux_nro_serie = '"'.$nro_serie.'"';
-        $nro_series  = "<option onchange='cargoMarcas(".$aux.");'> </option>";
-        $nro_series .= "<option selected='selected' onchange='cargoMarcas(".$aux_nro_serie.");' value='".$nro_serie."'>".$nro_serie."</option>";
+        if(empty($nro_serie)) {
+            //cargo nro de series de armamentos que esten en deposito inicial
+            $nro_series_array = $this->alta_actas_baja_model->cargoNroSeries($unidad);
 
-        $aux_marca = '"'.$marca.'"';
-        $marcas  = "<option onchange='cargoCalibres(".$aux.");'> </option>";
-        $marcas .= "<option selected='selected' onchange='cargoCalibres(".$aux_nro_serie.",".$aux_marca.");' value='".$marca."'>".$marca."</option>";
+            $aux = '""';
+            $nro_series  = "<option> </option>";
+
+            foreach($nro_series_array as $val) {
+                $aux = '"'.$val.'"';
+                $nro_series .= "<option value='".$val."'>".$val."</option>";
+            }
+            //fin cargo nro de series de armamento en deposito inicial            
+        }else {
+            $nro_series  = "<option> </option>";
+            $nro_series .= "<option selected='selected' value='".$nro_serie."'>".$nro_serie."</option>";
+        }
+
+        $marcas  = "<option> </option>";
+        $marcas .= "<option selected='selected' value='".$marca."'>".$marca."</option>";
         
-        $aux_calibre = '"'.$calibre.'"';
-        $calibres  = "<option onchange='cargoModelos(".$aux.");'> </option>";
-        $calibres .= "<option selected='selected' onchange='cargoModelos(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' value='".$calibre."'>".$calibre."</option>";
+        $calibres  = "<option> </option>";
+        $calibres .= "<option selected='selected' value='".$calibre."'>".$calibre."</option>";
         
         $modelos  = "<option> </option>";
         $modelos .= "<option selected='selected' value='".$modelo."'>".$modelo."</option>";        
@@ -273,24 +244,34 @@ class alta_actas_baja extends CI_Controller {
         $calibre       = $_SESSION['seleccion_busqueda2'];
         $modelo        = $_SESSION['seleccion_busqueda3'];
         $nro_accesorio = $_SESSION['seleccion_busqueda4'];
-       
-        $aux = '""';
+      
+        $unidad = $_POST['unidad'];
         
-        $aux_nro_serie = '"'.$nro_serie.'"';
-        $nro_series  = "<option onchange='cargoMarcasAccerios(".$aux.");'> </option>";
-        $nro_series .= "<option selected='selected' onchange='cargoMarcasAccerios(".$aux_nro_serie.");' value='".$nro_serie."'>".$nro_serie."</option>";
+        if(empty($nro_serie)) {
+            //cargo nro de series de armamentos que esten en deposito inicial
+            $nro_series_array = $this->alta_actas_baja_model->cargoNroSeries($unidad);
 
-        $aux_marca = '"'.$marca.'"';
-        $marcas  = "<option onchange='cargoCalibresAccesorios(".$aux.",".$aux.");'> </option>";
-        $marcas .= "<option selected='selected' onchange='cargoCalibres(".$aux_nro_serie.",".$aux_marca.");' value='".$marca."'>".$marca."</option>";
+            $aux = '""';
+            $nro_series  = "<option> </option>";
+
+            foreach($nro_series_array as $val) {
+                $aux = '"'.$val.'"';
+                $nro_series .= "<option value='".$val."'>".$val."</option>";
+            }
+            //fin cargo nro de series de armamento en deposito inicial            
+        }else {
+            $nro_series  = "<option> </option>";
+            $nro_series .= "<option selected='selected' value='".$nro_serie."'>".$nro_serie."</option>";
+        }
+
+        $marcas  = "<option> </option>";
+        $marcas .= "<option selected='selected' value='".$marca."'>".$marca."</option>";
         
-        $aux_calibre = '"'.$calibre.'"';
-        $calibres  = "<option onchange='cargoModelosAccesorios(".$aux.",".$aux.",".$aux.");'> </option>";
-        $calibres .= "<option selected='selected' onchange='cargoModelosAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.");' value='".$calibre."'>".$calibre."</option>";
+        $calibres  = "<option> </option>";
+        $calibres .= "<option selected='selected' value='".$calibre."'>".$calibre."</option>";
 
-        $aux_modelo = '"'.$modelo.'"';
-        $modelos  = "<option onchange='cargoNroAccesorios(".$aux.",".$aux.",".$aux.",".$aux.");'> </option>";
-        $modelos .= "<option selected='selected' onchange='cargoNroAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.", ".$aux_modelo.");' value='".$modelo."'>".$modelo."</option>";
+        $modelos  = "<option> </option>";
+        $modelos .= "<option selected='selected' value='".$modelo."'>".$modelo."</option>";
         
         $nro_accesorios  = "<option> </option>";
         $nro_accesorios .= "<option selected='selected' value='".$nro_accesorio."'>".$nro_accesorio."</option>";        

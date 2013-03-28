@@ -324,17 +324,17 @@
                 
                 <dl> 		
                 <dt><label for="nro_serie"> Nro serie </label></dt>	
-                <dd><select id="nro_serie"> <?php echo $nro_series; ?> </select> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><select id="nro_serie" onchange="cargoMarcas(this.value);"> <?php echo $nro_series; ?> </select> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="marca"> Marca </label></dt>	
-                <dd><select id="marca"> </select></dd> 					
+                <dd><select id="marca" onchange="cargoCalibres($('#nro_serie').val(), this.value);"> </select></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre"> Calibre </label></dt>	
-                <dd><select id="calibre"> </select></dd> 					
+                <dd><select id="calibre" onchange="cargoModelos($('#nro_serie').val(), $('#marca').val(), this.value);"> </select></dd> 					
                 </dl>
                 
                 <dl> 		
@@ -350,22 +350,22 @@
                 
                 <dl> 		
                 <dt><label for="nro_serie_accesorio"> Nro serie </label></dt>	
-                <dd><select id="nro_serie_accesorio"> <?php echo $nro_series_accesorios; ?> </select> <img style="cursor: pointer;" onclick="busquedaAccesorios();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><select id="nro_serie_accesorio" onchange="cargoMarcasAccesorios(this.value);"> <?php echo $nro_series_accesorios; ?> </select> <img style="cursor: pointer;" onclick="busquedaAccesorios();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="marca_accesorio"> Marca </label></dt>	
-                <dd><select id="marca_accesorio"> </select> </dd> 					
+                <dd><select id="marca_accesorio" onchange="cargoCalibresAccesorios($('#nro_serie_accesorio').val(), this.value);"> </select> </dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre_accesorio"> Calibre </label></dt>	
-                <dd><select id="calibre_accesorio"> </select> </dd> 					
+                <dd><select id="calibre_accesorio" onchange="cargoModelosAccesorios($('#nro_serie_accesorio').val(), $('#marca_accesorio').val(), this.value);"> </select> </dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="modelo_accesorio"> Modelo </label></dt>	
-                <dd><select id="modelo_accesorio"> </select></dd> 					
+                <dd><select id="modelo_accesorio" onchange="cargoNroAccesorios($('#nro_serie_accesorio').val(), $('#marca_accesorio').val(), $('#calibre_accesorio').val(), $('#modelo_accesorio').val());"> </select></dd> 					
                 </dl>
                 
                 <dl> 		

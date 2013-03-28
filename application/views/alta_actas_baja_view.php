@@ -213,9 +213,13 @@
             }            
 
             function cargoFichasFiltro() {
+            
+                var unidad = $("#unidad_entrega").val();
+            
                 $.ajax({
                    type: "post",
                    dataType: "json",
+                   data: "unidad="+unidad,
                    url: "<?php base_url(); ?>alta_actas_baja/cargoFichasFiltro",
                    success: function(data) {
                        $("#nro_serie").html("");
@@ -231,9 +235,13 @@
             } 
             
             function cargoAccesoriosFiltro() {
+            
+                var unidad = $("#unidad_entrega").val();
+            
                 $.ajax({
                    type: "post",
                    dataType: "json",
+                   data: "unidad="+unidad,
                    url: "<?php base_url(); ?>alta_actas_baja/cargoAccesoriosFiltro",
                    success: function(data) {
                        $("#nro_serie_accesorio").html("");
@@ -352,7 +360,7 @@
 
                 <dl> 		
                 <dt><label for="unidad_entrega"> Unidad entrega </label></dt>	
-                <dd><select id="unidad_entrega"> <?php echo $unidades; ?> </select></dd> 					
+                <dd><select id="unidad_entrega" onchange="cargoNroSeries(this.value);"> <?php echo $unidades; ?> </select></dd> 					
                 </dl>                
                 
                 <dl> 		
@@ -386,17 +394,17 @@
                 
                 <dl> 		
                 <dt><label for="nro_serie"> Nro serie </label></dt>	
-                <dd><select id="nro_serie"> </select> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><select id="nro_serie" onchange="cargoMarcas($('#unidad_entrega').val(), this.value);"> </select> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="marca"> Marca </label></dt>	
-                <dd><select id="marca"> </select></dd> 					
+                <dd><select id="marca" onchange="cargoCalibres($('#unidad_entrega').val(), $('#nro_serie').val(), this.value);"> </select></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre"> Calibre </label></dt>	
-                <dd><select id="calibre"> </select></dd> 					
+                <dd><select id="calibre" onchange="cargoModelos($('#unidad_entrega').val(), $('#nro_serie').val(), $('#marca').val(), this.value);"> </select></dd> 					
                 </dl>
                 
                 <dl> 		
@@ -412,22 +420,22 @@
                 
                 <dl> 		
                 <dt><label for="nro_serie_accesorio"> Nro serie </label></dt>	
-                <dd><select id="nro_serie_accesorio"> </select> <img style="cursor: pointer;" onclick="busquedaAccesorios();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><select id="nro_serie_accesorio" onchange="cargoMarcasAccesorios($('#unidad_entrega').val(), this.value);"> </select> <img style="cursor: pointer;" onclick="busquedaAccesorios();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="marca_accesorio"> Marca </label></dt>	
-                <dd><select id="marca_accesorio"> </select> </dd> 					
+                <dd><select id="marca_accesorio" onchange="cargoCalibresAccesorios($('#unidad_entrega').val(), $('#nro_serie_accesorio').val(), this.value);"> </select> </dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre_accesorio"> Calibre </label></dt>	
-                <dd><select id="calibre_accesorio"> </select> </dd> 					
+                <dd><select id="calibre_accesorio" onchange="cargoModelosAccesorios($('#unidad_entrega').val(), $('#nro_serie_accesorio').val(), $('#marca_accesorio').val(), this.value);"> </select> </dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="modelo_accesorio"> Modelo </label></dt>	
-                <dd><select id="modelo_accesorio"> </select></dd> 					
+                <dd><select id="modelo_accesorio" onchange="cargoNroAccesorios($('#unidad_entrega').val(), $('#nro_serie_accesorio').val(), $('#marca_accesorio').val(), $('#calibre_accesorio').val(), $('#modelo_accesorio').val());"> </select></dd> 					
                 </dl>
                 
                 <dl> 		
