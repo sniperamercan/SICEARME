@@ -68,7 +68,7 @@ class modificar_fichas extends CI_Controller {
         $data['tipo_accesorios'] = "<option> </option>";
         
         foreach($accesorios as $val) {
-            $data['tipo_accesorios'] .= "<option val='".$val."'>".$val."</option>";
+            $data['tipo_accesorios'] .= "<option value='".$val."'>".$val."</option>";
         }        
         
         //piezas
@@ -77,7 +77,7 @@ class modificar_fichas extends CI_Controller {
         $data['tipo_piezas'] = "<option> </option>";
         
         foreach($piezas as $val) {
-            $data['tipo_piezas'] .= "<option val='".$val."'>".$val."</option>";
+            $data['tipo_piezas'] .= "<option value='".$val."'>".$val."</option>";
         }        
         
         //cargo todos los accesorios de esa ficha
@@ -173,9 +173,9 @@ class modificar_fichas extends CI_Controller {
         foreach($nro_compras as $val) {
             
             if($nro_compra == $val) {
-                $compras .= "<option onclick='cargoNroCatalogos(".$val.")' selected='selected' val='".$val."'>".$val."</option>";
+                $compras .= "<option onchange='cargoNroCatalogos(".$val.")' selected='selected' value='".$val."'>".$val."</option>";
             }else{
-                $compras .= "<option onclick='cargoNroCatalogos(".$val.")' val='".$val."'>".$val."</option>";
+                $compras .= "<option onchange='cargoNroCatalogos(".$val.")' value='".$val."'>".$val."</option>";
             }
         }
         
@@ -186,9 +186,9 @@ class modificar_fichas extends CI_Controller {
         
         foreach($nro_catalogos as $val) {
             if($nro_catalogo == $val) {
-                $catalogos .= "<option onclick='cargoInformacion(".$val.")' selected='selected' val='".$val."'>".$val."</option>";
+                $catalogos .= "<option onchange='cargoInformacion(".$val.")' selected='selected' value='".$val."'>".$val."</option>";
             }else{
-                $catalogos .= "<option onclick='cargoInformacion(".$val.")' val='".$val."'>".$val."</option>";
+                $catalogos .= "<option onchange='cargoInformacion(".$val.")' value='".$val."'>".$val."</option>";
             }
         }
         
@@ -213,10 +213,10 @@ class modificar_fichas extends CI_Controller {
         
         $aux = '""';
         
-        $concat = "<option onclick='cargoInformacion(".$aux.")' val=''> </option>";
+        $concat = "<option onchange='cargoInformacion(".$aux.")' value=''> </option>";
         
         foreach($nro_catalogos as $val) {
-            $concat .= "<option onclick='cargoInformacion(".$val.")' val='".$val."'>".$val."</option>";
+            $concat .= "<option onchange='cargoInformacion(".$val.")' value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -252,7 +252,7 @@ class modificar_fichas extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($accesorios as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }  
         
         echo $concat;
@@ -265,7 +265,7 @@ class modificar_fichas extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($piezas as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;

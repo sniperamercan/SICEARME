@@ -28,7 +28,7 @@ class alta_catalogos extends CI_Controller {
         $data['tipos_armas'] = "<option> </option>";
         
         foreach($array_tipos_armas as $val) {
-            $data['tipos_armas'] .= "<option val='".$val."'>".$val."</option>";
+            $data['tipos_armas'] .= "<option value='".$val."'>".$val."</option>";
         }
         //FIN - cargo tipos armas
         
@@ -38,7 +38,7 @@ class alta_catalogos extends CI_Controller {
         $data['marcas'] = "<option> </option>";
         
         foreach($array_marcas as $val) {
-            $data['marcas'] .= "<option val='".$val."'>".$val."</option>";
+            $data['marcas'] .= "<option value='".$val."'>".$val."</option>";
         }
         //FIN - cargo marcas
         
@@ -48,7 +48,7 @@ class alta_catalogos extends CI_Controller {
         $data['calibres'] = "<option> </option>";
         
         foreach($array_calibres as $val) {
-            $data['calibres'] .= "<option val='".$val."'>".$val."</option>";
+            $data['calibres'] .= "<option value='".$val."'>".$val."</option>";
         }
         //FIN - cargo calibres
         
@@ -58,7 +58,7 @@ class alta_catalogos extends CI_Controller {
         $data['modelos'] = "<option> </option>";
         
         foreach($array_modelos as $val) {
-            $data['modelos'] .= "<option val='".$val."'>".$val."</option>";
+            $data['modelos'] .= "<option value='".$val."'>".$val."</option>";
         }
         //FIN - cargo modelos
         
@@ -68,7 +68,7 @@ class alta_catalogos extends CI_Controller {
         $data['sistemas'] = "<option> </option>";
         
         foreach($array_sistemas as $val) {
-            $data['sistemas'] .= "<option val='".$val."'>".$val."</option>";
+            $data['sistemas'] .= "<option value='".$val."'>".$val."</option>";
         }
         //FIN - cargo sistemas
         
@@ -78,7 +78,7 @@ class alta_catalogos extends CI_Controller {
         $data['empresas'] = "<option> </option>";
         
         foreach($array_empresas as $val) {
-            $data['empresas'] .= "<option val='".$val."'>".$val."</option>";
+            $data['empresas'] .= "<option value='".$val."'>".$val."</option>";
         }
         //FIN - cargo empresas     
         
@@ -88,7 +88,7 @@ class alta_catalogos extends CI_Controller {
         $data['paises'] = "<option> </option>";
         
         foreach($array_paises as $val) {
-            $data['paises'] .= "<option val='".$val."'>".$val."</option>";
+            $data['paises'] .= "<option value='".$val."'>".$val."</option>";
         }
         //FIN - cargo paises
         
@@ -102,7 +102,7 @@ class alta_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($tipos_armas as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -115,7 +115,7 @@ class alta_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($marcas as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -128,7 +128,7 @@ class alta_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($calibres as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -141,7 +141,7 @@ class alta_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($modelos as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -154,7 +154,7 @@ class alta_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($sistemas as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -167,7 +167,7 @@ class alta_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($empresas as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -180,7 +180,7 @@ class alta_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($paises as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;

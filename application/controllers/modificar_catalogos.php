@@ -208,7 +208,7 @@ class modificar_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($tipos_armas as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -221,7 +221,7 @@ class modificar_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($marcas as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -234,7 +234,7 @@ class modificar_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($calibres as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -247,7 +247,7 @@ class modificar_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($modelos as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -260,7 +260,7 @@ class modificar_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($sistemas as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -273,7 +273,7 @@ class modificar_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($empresas as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -286,7 +286,7 @@ class modificar_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($paises as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;

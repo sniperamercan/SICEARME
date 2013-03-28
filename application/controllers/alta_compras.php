@@ -35,7 +35,7 @@ class alta_compras extends CI_Controller {
         $data['paises'] = "<option> </option>";
         
         foreach($array_paises as $val) {
-            $data['paises'] .= "<option val='".$val."'>".$val."</option>";
+            $data['paises'] .= "<option value='".$val."'>".$val."</option>";
         }
         
         //cargo catalogos
@@ -44,7 +44,7 @@ class alta_compras extends CI_Controller {
         $data['catalogos'] = "<option> </option>";
         
         foreach($catalogos as $val) {
-            $data['catalogos'] .= "<option val='".$val."'>".$val."</option>";
+            $data['catalogos'] .= "<option value='".$val."'>".$val."</option>";
         }
         
         //cargo empresas
@@ -53,7 +53,7 @@ class alta_compras extends CI_Controller {
         $data['empresas'] = "<option> </option>";
         
         foreach($empresas as $val) {
-            $data['empresas'] .= "<option val='".$val."'>".$val."</option>";
+            $data['empresas'] .= "<option value='".$val."'>".$val."</option>";
         }       
         
         //llamo a la vista
@@ -67,7 +67,7 @@ class alta_compras extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($empresas as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -80,7 +80,7 @@ class alta_compras extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($catalogos as $val) {
-            $concat .= "<option val='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -95,12 +95,12 @@ class alta_compras extends CI_Controller {
         foreach($catalogos as $val) {
             if(isset($_SESSION['seleccion_busqueda'])) {
                 if($val == $_SESSION['seleccion_busqueda']) {
-                    $concat .= "<option selected='selected' val='".$val."'>".$val."</option>";
+                    $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
                 }else {
-                    $concat .= "<option val='".$val."'>".$val."</option>";
+                    $concat .= "<option value='".$val."'>".$val."</option>";
                 }
             }else {
-                $concat .= "<option val='".$val."'>".$val."</option>";
+                $concat .= "<option value='".$val."'>".$val."</option>";
             }
         }
         
