@@ -255,12 +255,12 @@
                 
                 <dl> 		
                 <dt><label for="nro_compra"> Nro compra </label></dt>	
-                <dd><select id="nro_compra"> <?php echo $nro_compras; ?> </select> <img style="cursor: pointer;" onclick="busquedaCompras();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><select id="nro_compra" onchange="cargoNroCatalogos(this.value);"> <?php echo $nro_compras; ?> </select> <img style="cursor: pointer;" onclick="busquedaCompras();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>                
                 
                 <dl> 		
                 <dt><label for="nro_catalogo"> Nro catalogo </label></dt>	
-                <dd><select id="nro_catalogo"> <option selected="selected" val=""> </option>  </select></dd> 					
+                <dd><select id="nro_catalogo" onchange="cargoInformacion(this.value);"> <option selected="selected" val=""> </option>  </select></dd> 					
                 </dl>
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>

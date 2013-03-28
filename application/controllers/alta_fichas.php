@@ -42,12 +42,10 @@ class alta_fichas extends CI_Controller {
         //numero de compra
         $nro_compras = $this->alta_fichas_model->cargoNroCompras();
         
-        $aux = '""';
-        
-        $data['nro_compras'] = "<option onchange='cargoNroCatalogos(".$aux.")' value=''> </option>";
+        $data['nro_compras'] = "<option value=''> </option>";
         
         foreach($nro_compras as $val) {
-            $data['nro_compras'] .= "<option onchange='cargoNroCatalogos(".$val.")' value='".$val."'>".$val."</option>";
+            $data['nro_compras'] .= "<option value='".$val."'>".$val."</option>";
         }
         
         //accesorios
@@ -85,9 +83,9 @@ class alta_fichas extends CI_Controller {
         foreach($nro_compras as $val) {
             
             if($nro_compra == $val) {
-                $compras .= "<option onchange='cargoNroCatalogos(".$val.")' selected='selected' value='".$val."'>".$val."</option>";
+                $compras .= "<option selected='selected' value='".$val."'>".$val."</option>";
             }else{
-                $compras .= "<option onchange='cargoNroCatalogos(".$val.")' value='".$val."'>".$val."</option>";
+                $compras .= "<option value='".$val."'>".$val."</option>";
             }
         }
         
@@ -98,20 +96,24 @@ class alta_fichas extends CI_Controller {
         
         foreach($nro_catalogos as $val) {
             if($nro_catalogo == $val) {
-                $catalogos .= "<option onchange='cargoInformacion(".$val.")' selected='selected' value='".$val."'>".$val."</option>";
+                $catalogos .= "<option selected='selected' value='".$val."'>".$val."</option>";
             }else{
-                $catalogos .= "<option onchange='cargoInformacion(".$val.")' value='".$val."'>".$val."</option>";
+                $catalogos .= "<option value='".$val."'>".$val."</option>";
             }
         }
         
-        //retorno los datos
-        $info_catalogos = $this->cargoInformacionArray($nro_catalogo);
         $retorno = array();
+
         $retorno[] = $compras;
-        $retorno[] = $catalogos;
-        $retorno[] = $info_catalogos[0];
-        $retorno[] = $info_catalogos[1];
-        $retorno[] = $info_catalogos[2];
+        $retorno[] = $catalogos;       
+        
+        //retorno los datos
+        if(!empty($nro_catalogo)) {
+            $info_catalogos = $this->cargoInformacionArray($nro_catalogo);
+            $retorno[] = $info_catalogos[0];
+            $retorno[] = $info_catalogos[1];
+            $retorno[] = $info_catalogos[2];
+        }
         
         echo json_encode($retorno);
     }
@@ -123,12 +125,10 @@ class alta_fichas extends CI_Controller {
         
         $nro_catalogos = $this->alta_fichas_model->cargoNroCatalogos($nro_compra);
         
-        $aux = '""';
-        
-        $concat = "<option onchange='cargoInformacion(".$aux.")' value=''> </option>";
+        $concat = "<option value=''> </option>";
         
         foreach($nro_catalogos as $val) {
-            $concat .= "<option onchange='cargoInformacion(".$val.")' value='".$val."'>".$val."</option>";
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
