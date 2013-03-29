@@ -22,7 +22,7 @@
                     data: "tipo_accesorio="+tipo_accesorio,
                     success: function(data){
                         if(data == "1"){            
-                            jAlert("Tipo accesorio ingresado con exito", "Correcto", function() { $("#tipo_accesorio").val(""); });
+                            jAlert("Tipo accesorio ingresado con exito", "Correcto", function() { parent.$.fn.colorbox.close(); });
                         }else{
                             jAlert(data, "Error");
                         }                            

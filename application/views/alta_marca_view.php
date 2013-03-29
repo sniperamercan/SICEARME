@@ -22,7 +22,7 @@
                     data: "marca="+marca,
                     success: function(data){
                         if(data == "1"){            
-                            jAlert("Marca ingresada con exito", "Correcto", function() { $("#marca").val(""); });
+                            jAlert("Marca ingresada con exito", "Correcto", function() { parent.$.fn.colorbox.close(); });
                         }else{
                             jAlert(data, "Error");
                         }                            

@@ -87,7 +87,7 @@
             
             //cargo y creo Empresas
             function crearEmpresa() {
-                $.colorbox({href:"<?php echo base_url('alta_empresa'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA EMPRESA", onClosed: function(){ cargoEmpresas(); } });
+                $.colorbox({href:"<?php echo base_url('alta_empresa'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA EMPRESA", onClosed: function(){ cargoEmpresas(); } });
             }            
             
             function cargoEmpresas() {
@@ -103,7 +103,13 @@
             
             //cargo y creo Catalogos
             function crearCatalogo() {
-                $.colorbox({href:"<?php echo base_url('alta_catalogos'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:500, title:"ALTA CATALOGO", onClosed: function(){ cargoCatalogos(); } });
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_compras/crearCatalogo",
+                   success: function(data) {
+                       $.colorbox({href:"<?php echo base_url('alta_catalogos'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:500, title:"ALTA CATALOGO", onClosed: function(){ cargoCatalogos(); } });
+                   }
+                });            
             }            
             
             function cargoCatalogos() {
@@ -138,7 +144,7 @@
             }
             
             function busquedaCatalogos() {
-                $.colorbox({href:"<?php echo base_url('busqueda_catalogos'); ?>", top:true, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA CATALOGOS", onClosed: function(){ cargoCatalogosFiltro(); } });
+                $.colorbox({href:"<?php echo base_url('busqueda_catalogos'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA CATALOGOS", onClosed: function(){ cargoCatalogosFiltro(); } });
             }
             
             function cargoCatalogosFiltro() {

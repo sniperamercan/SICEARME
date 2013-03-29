@@ -22,7 +22,7 @@
                     data: "sistema="+sistema,
                     success: function(data){
                         if(data == "1"){            
-                            jAlert("Sistema ingresado con exito", "Correcto", function() { $("#sistema").val(""); });
+                            jAlert("Sistema ingresado con exito", "Correcto", function() { parent.$.fn.colorbox.close(); });
                         }else{
                             jAlert(data, "Error");
                         }                            

@@ -22,7 +22,7 @@
                     data: "modelo="+modelo,
                     success: function(data){
                         if(data == "1"){            
-                            jAlert("Modelo ingresado con exito", "Correcto", function() { $("#modelo").val(""); });
+                            jAlert("Modelo ingresado con exito", "Correcto", function() { parent.$.fn.colorbox.close(); });
                         }else{
                             jAlert(data, "Error");
                         }                            

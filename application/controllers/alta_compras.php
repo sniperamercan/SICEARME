@@ -67,10 +67,19 @@ class alta_compras extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($empresas as $val) {
-            $concat .= "<option value='".$val."'>".$val."</option>";
+            if($val == $_SESSION['alta_empresa']) {
+                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else {
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
+            
         }
         
         echo $concat;
+    }
+    
+    function crearCatalogo() {
+        $_SESSION['crear_catalogo'] = true;
     }
     
     function cargoCatalogos() {
@@ -80,7 +89,11 @@ class alta_compras extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($catalogos as $val) {
-            $concat .= "<option value='".$val."'>".$val."</option>";
+            if($_SESSION['alta_nro_catalogo'] == $val) {
+                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else{
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
         }
         
         echo $concat;

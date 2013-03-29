@@ -22,7 +22,7 @@
                     data: "tipo_pieza="+tipo_pieza,
                     success: function(data){
                         if(data == "1"){            
-                            jAlert("Tipo pieza ingresado con exito", "Correcto", function() { $("#tipo_pieza").val(""); });
+                            jAlert("Tipo pieza ingresado con exito", "Correcto", function() { parent.$.fn.colorbox.close(); });
                         }else{
                             jAlert(data, "Error");
                         }                            

@@ -21,6 +21,7 @@ class alta_marca extends CI_Controller {
     }
     
     function index() {
+        $_SESSION['alta_marca'] = '';
         $this->load->view('alta_marca_view');  
     }
     
@@ -52,6 +53,7 @@ class alta_marca extends CI_Controller {
             }
         }else {
             $this->alta_marca_model->altaMarca($marca);
+            $_SESSION['alta_marca'] = $marca;
             echo 1;
         }
      }

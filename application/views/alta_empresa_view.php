@@ -22,7 +22,7 @@
                     data: "empresa="+empresa,
                     success: function(data){
                         if(data == "1"){            
-                            jAlert("Empresa ingresada con exito", "Correcto", function() { $("#empresa").val(""); });
+                            jAlert("Empresa ingresada con exito", "Correcto", function() { parent.$.fn.colorbox.close(); });
                         }else{
                             jAlert(data, "Error");
                         }                            

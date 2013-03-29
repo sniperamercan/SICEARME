@@ -21,6 +21,7 @@ class alta_tipo_arma extends CI_Controller {
     }
     
     function index() {
+        $_SESSION['alta_tipo_arma'] = '';
         $this->load->view('alta_tipo_arma_view');  
     }
     
@@ -52,6 +53,7 @@ class alta_tipo_arma extends CI_Controller {
             }
         }else {
             $this->alta_tipo_arma_model->altaTipoArma($tipo_arma);
+            $_SESSION['alta_tipo_arma'] = $tipo_arma;
             echo 1;
         }
      }

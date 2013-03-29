@@ -22,7 +22,7 @@
                     data: "calibre="+calibre,
                     success: function(data){
                         if(data == "1"){            
-                            jAlert("Calibre ingresado con exito", "Correcto", function() { $("#calibre").val(""); });
+                            jAlert("Calibre ingresado con exito", "Correcto", function() { parent.$.fn.colorbox.close(); });
                         }else{
                             jAlert(data, "Error");
                         }                            

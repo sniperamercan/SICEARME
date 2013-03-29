@@ -21,6 +21,7 @@ class alta_sistema extends CI_Controller {
     }
     
     function index() {
+        $_SESSION['alta_sistema'] = '';
         $this->load->view('alta_sistema_view');  
     }
     
@@ -52,6 +53,7 @@ class alta_sistema extends CI_Controller {
             }
         }else {
             $this->alta_sistema_model->altaSistema($sistema);
+            $_SESSION['alta_sistema'] = $sistema;
             echo 1;
         }
      }

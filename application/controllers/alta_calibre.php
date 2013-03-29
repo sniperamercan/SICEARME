@@ -21,6 +21,7 @@ class alta_calibre extends CI_Controller {
     }
     
     function index() {
+        $_SESSION['alta_calibre'] = '';
         $this->load->view('alta_calibre_view');  
     }
     
@@ -52,6 +53,7 @@ class alta_calibre extends CI_Controller {
             }
         }else {
             $this->alta_calibre_model->altaCalibre($calibre);
+            $_SESSION['alta_calibre'] = $calibre;
             echo 1;
         }
      }

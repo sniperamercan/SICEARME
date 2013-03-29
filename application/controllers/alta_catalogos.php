@@ -22,6 +22,12 @@ class alta_catalogos extends CI_Controller {
     
     function index() {
 
+        if(!isset($_SESSION['crear_catalogo'])) {
+            $_SESSION['crear_catalogo'] = false;
+        }
+        
+        $_SESSION['alta_nro_catalogo'] = '';
+        
         //INICIO - cargo tipos armas
         $array_tipos_armas = $this->alta_catalogos_model->cargoTiposArmas();
         
@@ -92,7 +98,9 @@ class alta_catalogos extends CI_Controller {
         }
         //FIN - cargo paises
         
-        $this->load->view('alta_catalogos_view', $data);  
+        $this->load->view('alta_catalogos_view', $data); 
+        
+        unset($_SESSION['crear_catalogo']);
     }
     
     function cargoTiposArmas() {
@@ -102,7 +110,11 @@ class alta_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($tipos_armas as $val) {
-            $concat .= "<option value='".$val."'>".$val."</option>";
+            if($_SESSION['alta_tipo_arma'] == $val) {
+                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else {
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
         }
         
         echo $concat;
@@ -115,7 +127,11 @@ class alta_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($marcas as $val) {
-            $concat .= "<option value='".$val."'>".$val."</option>";
+            if($_SESSION['alta_marca'] == $val) {
+                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else {
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
         }
         
         echo $concat;
@@ -128,7 +144,11 @@ class alta_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($calibres as $val) {
-            $concat .= "<option value='".$val."'>".$val."</option>";
+            if($_SESSION['alta_calibre'] == $val) {
+                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else {
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
         }
         
         echo $concat;
@@ -141,7 +161,11 @@ class alta_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($modelos as $val) {
-            $concat .= "<option value='".$val."'>".$val."</option>";
+            if($_SESSION['alta_modelo'] == $val) {
+                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else {
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
         }
         
         echo $concat;
@@ -154,7 +178,11 @@ class alta_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($sistemas as $val) {
-            $concat .= "<option value='".$val."'>".$val."</option>";
+            if($_SESSION['alta_sistema'] == $val) {
+                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else {
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
         }
         
         echo $concat;
@@ -167,7 +195,11 @@ class alta_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($empresas as $val) {
-            $concat .= "<option value='".$val."'>".$val."</option>";
+            if($_SESSION['alta_empresa'] == $val) {
+                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else {
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
         }
         
         echo $concat;
@@ -281,6 +313,7 @@ class alta_catalogos extends CI_Controller {
             $nro_interno = $this->alta_catalogos_model->altaCatalogo($tipo_arma, $marca, $calibre, $modelo, $sistema, $empresa, $pais_empresa, $fabricacion, $vencimiento);
             $retorno[] = 1;
             $retorno[] = $nro_interno;
+            $_SESSION['alta_nro_catalogo'] = $nro_interno;
         }
         
         echo json_encode($retorno);

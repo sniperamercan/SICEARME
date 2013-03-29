@@ -21,6 +21,7 @@ class alta_tipo_pieza extends CI_Controller {
     }
     
     function index() {
+        $_SESSION['alta_tipo_pieza'] = '';
         $this->load->view('alta_tipo_pieza_view');  
     }
     
@@ -52,6 +53,7 @@ class alta_tipo_pieza extends CI_Controller {
             }
         }else {
             $this->alta_tipo_pieza_model->altaTipoPieza($tipo_pieza);
+            $_SESSION['alta_tipo_pieza'] = $tipo_pieza;
             echo 1;
         }
      }

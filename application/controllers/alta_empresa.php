@@ -21,6 +21,7 @@ class alta_empresa extends CI_Controller {
     }
     
     function index() {
+        $_SESSION['alta_empresa'] = '';
         $this->load->view('alta_empresa_view');  
     }
     
@@ -52,6 +53,7 @@ class alta_empresa extends CI_Controller {
             }
         }else {
             $this->alta_empresa_model->altaEmpresa($empresa);
+            $_SESSION['alta_empresa'] = $empresa;
             echo 1;
         }
      }

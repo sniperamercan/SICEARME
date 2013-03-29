@@ -22,7 +22,7 @@
                     data: "tipo_arma="+tipo_arma,
                     success: function(data){
                         if(data == "1"){            
-                            jAlert("Tipo arma ingresado con exito", "Correcto", function() { $("#tipo_arma").val(""); });
+                            jAlert("Tipo arma ingresado con exito", "Correcto", function() { parent.$.fn.colorbox.close(); });
                         }else{
                             jAlert(data, "Error");
                         }                            

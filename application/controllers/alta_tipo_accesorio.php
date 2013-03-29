@@ -21,6 +21,7 @@ class alta_tipo_accesorio extends CI_Controller {
     }
     
     function index() {
+        $_SESSION['alta_tipo_accesorio'] = '';
         $this->load->view('alta_tipo_accesorio_view');  
     }
     
@@ -52,6 +53,7 @@ class alta_tipo_accesorio extends CI_Controller {
             }
         }else {
             $this->alta_tipo_accesorio_model->altaTipoAccesorio($tipo_accesorio);
+            $_SESSION['alta_tipo_accesorio'] = $tipo_accesorio;
             echo 1;
         }
      }

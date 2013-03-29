@@ -43,6 +43,7 @@
                                 cargoPaises();
                                 $("#fabricacion").val('');
                                 $("#vencimiento").val('');
+                                parent.$.fn.colorbox.close();
                             });
                         }else{
                             jAlert(data[0], "Error");
@@ -54,27 +55,27 @@
             //INICIO llamadas a crear los tipos
             
             function crearTipoArma() {
-                $.colorbox({href:"<?php echo base_url('alta_tipo_arma'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA TIPO ARMA", onClosed: function(){ cargoTiposArmas(); } });
+                $.colorbox({href:"<?php echo base_url('alta_tipo_arma'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA TIPO ARMA", onClosed: function(){ cargoTiposArmas(); } });
             }
             
             function crearMarca() {
-                $.colorbox({href:"<?php echo base_url('alta_marca'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA MARCA", onClosed: function(){ cargoMarcas(); } });
+                $.colorbox({href:"<?php echo base_url('alta_marca'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA MARCA", onClosed: function(){ cargoMarcas(); } });
             }
 
             function crearCalibre() {
-                $.colorbox({href:"<?php echo base_url('alta_calibre'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA CALIBRE", onClosed: function(){ cargoCalibres(); } });
+                $.colorbox({href:"<?php echo base_url('alta_calibre'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA CALIBRE", onClosed: function(){ cargoCalibres(); } });
             }
             
             function crearModelo() {
-                $.colorbox({href:"<?php echo base_url('alta_modelo'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA MODELO", onClosed: function(){ cargoModelos(); } });
+                $.colorbox({href:"<?php echo base_url('alta_modelo'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA MODELO", onClosed: function(){ cargoModelos(); } });
             }
 
             function crearSistema() {
-                $.colorbox({href:"<?php echo base_url('alta_sistema'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA SISTEMA", onClosed: function(){ cargoSistemas(); } });
+                $.colorbox({href:"<?php echo base_url('alta_sistema'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA SISTEMA", onClosed: function(){ cargoSistemas(); } });
             }
             
             function crearEmpresa() {
-                $.colorbox({href:"<?php echo base_url('alta_empresa'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA EMPRESA", onClosed: function(){ cargoEmpresas(); } });
+                $.colorbox({href:"<?php echo base_url('alta_empresa'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA EMPRESA", onClosed: function(){ cargoEmpresas(); } });
             }            
             
             //FIN de llamadas a crear los tipos
@@ -168,32 +169,32 @@
                 
                 <dl> 		
                 <dt><label for="tipo_arma"> Tipo arma </label></dt>	
-                <dd><select id="tipo_arma"> <?php echo $tipos_armas; ?> </select> <img style="cursor: pointer;" onclick="crearTipoArma();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
+                <dd><select id="tipo_arma"> <?php echo $tipos_armas; ?> </select> <?php if(!$_SESSION['crear_catalogo']) { ?> <img style="cursor: pointer;" onclick="crearTipoArma();" src="<?php echo base_url(); ?>images/sumar.png" /> <?php } ?> </dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="marca"> Marca </label></dt>	
-                <dd><select id="marca"> <?php echo $marcas; ?> </select> <img style="cursor: pointer;" onclick="crearMarca();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
+                <dd><select id="marca"> <?php echo $marcas; ?> </select> <?php if(!$_SESSION['crear_catalogo']) { ?> <img style="cursor: pointer;" onclick="crearMarca();" src="<?php echo base_url(); ?>images/sumar.png" /> <?php } ?> </dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre"> Calibre </label></dt>	
-                <dd><select id="calibre"> <?php echo $calibres; ?> </select> <img style="cursor: pointer;" onclick="crearCalibre();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
+                <dd><select id="calibre"> <?php echo $calibres; ?> </select> <?php if(!$_SESSION['crear_catalogo']) { ?> <img style="cursor: pointer;" onclick="crearCalibre();" src="<?php echo base_url(); ?>images/sumar.png" /> <?php } ?> </dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="modelo"> Modelo </label></dt>	
-                <dd><select id="modelo"> <?php echo $modelos; ?> </select> <img style="cursor: pointer;" onclick="crearModelo();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
+                <dd><select id="modelo"> <?php echo $modelos; ?> </select> <?php if(!$_SESSION['crear_catalogo']) { ?> <img style="cursor: pointer;" onclick="crearModelo();" src="<?php echo base_url(); ?>images/sumar.png" /> <?php } ?> </dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="sistema"> Sistema </label></dt>	
-                <dd><select id="sistema"> <?php echo $sistemas; ?> </select> <img style="cursor: pointer;" onclick="crearSistema();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
+                <dd><select id="sistema"> <?php echo $sistemas; ?> </select> <?php if(!$_SESSION['crear_catalogo']) { ?> <img style="cursor: pointer;" onclick="crearSistema();" src="<?php echo base_url(); ?>images/sumar.png" /> <?php } ?> </dd> 					
                 </dl>
                 
                 <dl>
                 <dt><label for="empresa"> Empresa </label></dt>
-                <dd><select id="empresa"> <?php echo $empresas; ?> </select> <img style="cursor: pointer;" onclick="crearEmpresa();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
+                <dd><select id="empresa"> <?php echo $empresas; ?> </select> <?php if(!$_SESSION['crear_catalogo']) { ?> <img style="cursor: pointer;" onclick="crearEmpresa();" src="<?php echo base_url(); ?>images/sumar.png" /> <?php } ?> </dd>
                 </dl>                
                 
                 <dl>
