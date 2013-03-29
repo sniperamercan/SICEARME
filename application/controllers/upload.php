@@ -50,9 +50,9 @@ class upload extends CI_Controller {
        echo $_SESSION['id_upload'][1];
     }
     
-    function do_upload($rut) {        
+    function do_upload($catalogo) {        
 
-        $html = "<!DOCTYPE html> <html lang='es'> <head> <title>PESMA</title> <meta http-equiv='content-type' content='text/html; charset=UTF-8' /> 
+        $html = "<!DOCTYPE html> <html lang='es'> <head> <title>SICEARME</title> <meta http-equiv='content-type' content='text/html; charset=UTF-8' /> 
         <link rel='stylesheet' href='".base_url('css/estilo.css')."' type='text/css' />
         <link rel='shortcut icon' href='".base_url('css/template/favicon.png')."' /> </head> <body style='background-color: #E6E6E6;'> <section>";
 
@@ -60,7 +60,7 @@ class upload extends CI_Controller {
         
         if(isset($_FILES['userfile']['name'])) {
         
-            $target_path = $_SERVER['DOCUMENT_ROOT'].'/PESMA/empresas_carpeta/'.$rut.'/';
+            $target_path = $_SERVER['DOCUMENT_ROOT'].'/SICEARME/catalogos_carpeta/'.$catalogo.'/';
 
             if(!is_dir($target_path)) {
                 mkdir($target_path, 0777);
@@ -75,7 +75,7 @@ class upload extends CI_Controller {
 
                 $mensArray = array();
 
-                if(empty($rut)) {
+                if(empty($catalogo)) {
                     $mensArray[] =  1; 
                 }    
 
@@ -151,27 +151,42 @@ class upload extends CI_Controller {
         echo $html;
     }
     
-    function cargoRut() {
+    function cargoCatalogos() {
         
-        if(isset($_SESSION['seleccion_empresa'])) {
-            //cargo empresas con el selected de esa empresa
-            $retorno = "<option> </option>";
-
-            $empresas = array();
-            $empresas = $this->upload_model->cargoEmpresas();
-            
-            foreach($empresas as $val) {
-                if($val == $_SESSION['seleccion_empresa']) {
-                    $retorno .= "<option selected='selected' value='".$val."'>".$val."</option>";
-                }else {
-                    $retorno .= "<option value='".$val."'>".$val."</option>";
-                }
+        $catalogos = $this->upload_model->cargoCatalogos();
+        
+        $concat = "<option> </option>";
+        
+        foreach($catalogos as $val) {
+            if($_SESSION['alta_nro_catalogo'] == $val) {
+                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else{
+                $concat .= "<option value='".$val."'>".$val."</option>";
             }
-            
-            unset($_SESSION['seleccion_empresa']);  
-            
-            echo $retorno;
         }
+        
+        echo $concat;
+    }
+    
+    function cargoCatalogosFiltro() {
+        
+        $catalogos = $this->upload_model->cargoCatalogos();
+        
+        $concat = "<option> </option>";
+        
+        foreach($catalogos as $val) {
+            if(isset($_SESSION['seleccion_busqueda'])) {
+                if($val == $_SESSION['seleccion_busqueda']) {
+                    $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+                }else {
+                    $concat .= "<option value='".$val."'>".$val."</option>";
+                }
+            }else {
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
+        }
+        
+        echo $concat;        
     }     
     
 }

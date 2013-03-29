@@ -13,13 +13,13 @@ class upload_model extends CI_Model {
                                    FROM catalogos
                                    ORDER BY nro_interno");
         
-        $result = array();
+        $catalogos = array();
         
         foreach($query->result() as $row) {
-            $result[] = $row->nro_interno;
+            $catalogos[] = $row->nro_interno;
         }
         
-        return $result;
+        return $catalogos;
     }
     
 }

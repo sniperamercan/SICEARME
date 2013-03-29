@@ -13,31 +13,40 @@
         
             function previo() {
                 
-                var rut = $("#rut").val();
+                var catalogo = $("#catalogo").val();
                 
-                if(rut != ""){
-                    $("form").attr("action", "<?php echo base_url(); ?>upload/do_upload/"+rut);
+                if(catalogo != ""){
+                    $("form").attr("action", "<?php echo base_url(); ?>upload/do_upload/"+catalogo);
                     $("form").submit();                   
                 }else{
-                    jAlert("El numero de rut de la empresa no puede ser vacio", "Error");
+                    jAlert("ERROR: El numero de catalogo no puede ser vacio", "Error");
                 }
             }
         
-            function buscarEmpresa() {
-                $.colorbox({href: "<?php echo base_url() ?>busqueda_empresa", title: "BUSQUEDA EMPRESA", iframe: false, innerWidth: "60%", innerHeight: "750px", onClosed: function(){ cargoRut(); } });              
+            function busquedaCatalogos() {
+                $.colorbox({href:"<?php echo base_url('busqueda_catalogos'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA CATALOGOS", onClosed: function(){ cargoCatalogosFiltro(); } });
             }
             
-            function cargoRut() {
-                
+            function cargoCatalogos() {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>upload/cargoRut",
+                   url: "<?php base_url(); ?>upload/cargoCatalogos",
                    success: function(data) {
-                       $("#rut").html(data);
+                       $("#catalogo").html(data);
                    }
-                }); 
-                
+                });
             }  
+            
+            function cargoCatalogosFiltro() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>upload/cargoCatalogosFiltro",
+                   success: function(data) {
+                       $("#catalogo").html("");
+                       $("#catalogo").html(data);
+                   }
+                });                
+            }            
             
             $('.add_field').click(function(){
 
@@ -95,8 +104,8 @@
             <fieldset>	
 
                 <dl>
-                <dt><label for="rut"> Catalogos </label></dt>
-                <dd><select id="rut"> <?php echo $empresas; ?> </select> <img style="cursor: pointer;" onclick="buscarEmpresa();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
+                <dt><label for="catalogo"> Catalogos </label></dt>
+                <dd><select id="catalogo"> <?php echo $catalogos; ?> </select> <img style="cursor: pointer;" onclick="busquedaCatalogos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>              
                 
                 <div style="padding-left: 20px; margin-top: 50px" id="archivos">
