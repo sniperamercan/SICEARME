@@ -167,17 +167,17 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> Nro interno </th>
-                        <th onclick="orderBy(1)"> Tipo arma   </th>
+                        <th onclick="orderBy(0)"> Numero      </th>
+                        <th onclick="orderBy(1)"> Tipo        </th>
                         <th onclick="orderBy(2)"> Marca       </th>
                         <th onclick="orderBy(3)"> Calibre     </th>
                         <th onclick="orderBy(4)"> Modelo      </th>
                         <th onclick="orderBy(5)"> Sistema     </th>
-                        <th onclick="orderBy(6)"> Fabricacion </th>
+                        <th onclick="orderBy(6)"> Fab         </th>
                         <th onclick="orderBy(7)"> Empresa     </th>
                         <th onclick="orderBy(8)"> Origen      </th>
-                        <th onclick="orderBy(9)"> Vencimiento </th>
-                        <th> Editar  </th>
+                        <th onclick="orderBy(9)"> Venc        </th>
+                        <th> Editar    </th>
                         <th> Eliminar  </th>
                     </tr>
                 </thead>
