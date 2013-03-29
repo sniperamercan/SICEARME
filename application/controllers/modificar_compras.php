@@ -123,9 +123,8 @@ class modificar_compras extends CI_Controller {
             if($this->modificar_compras_model->fichasAsocias($nro_compra, $compras_catalogos[$i])) {
                 $borrar = "<td> </td>";
             }else {
-                $borrar = "<td><img style='cursor: pointer;' onclick='anularCatalogo(".$catalogo.");' src='".  base_url()."images/delete.gif'/></td>";
+                $borrar = "<td><img style='cursor: pointer;' onclick='anularCatalogo(".$nro_compra.", ".$catalogo.");' src='".  base_url()."images/delete.gif'/></td>";
             }
-            
             
             $concat .= "<tr> 
                             <td style='text-align: center;'>".$compras_catalogos[$i]."</td> <td>".$compras_catalogos[$i+3]."</td> <td>".$compras_catalogos[$i+4]."</td> <td>".$compras_catalogos[$i+6]."</td> <td>".$compras_catalogos[$i+5]."</td> <td>".$compras_catalogos[$i+7]."</td> <td style='text-align: center;'>".$compras_catalogos[$i+1]."</td> <td style='text-align: center;'>".$compras_catalogos[$i+2]."</td>".$borrar."  
@@ -296,7 +295,7 @@ class modificar_compras extends CI_Controller {
             $datos_catalogo = $this->modificar_compras_model->datosCatalogo($catalogo);
             
             $concat = "<tr> 
-                            <td style='text-align: center;'>".$catalogo."</td> <td>".$datos_catalogo['tipo_arma']."</td> <td>".$datos_catalogo['marca']."</td> <td>".$datos_catalogo['modelo']."</td> <td>".$datos_catalogo['calibre']."</td> <td>".$datos_catalogo['sistema']."</td> <td style='text-align: center;'>".$cant_total_armas."</td> <td style='text-align: center;'>".$costo_total."</td> <td><img style='cursor: pointer;' onclick='anularCatalogo(".$catalogo.");' src='".  base_url()."images/delete.gif'/></td>
+                            <td style='text-align: center;'>".$catalogo."</td> <td>".$datos_catalogo['tipo_arma']."</td> <td>".$datos_catalogo['marca']."</td> <td>".$datos_catalogo['modelo']."</td> <td>".$datos_catalogo['calibre']."</td> <td>".$datos_catalogo['sistema']."</td> <td style='text-align: center;'>".$cant_total_armas."</td> <td style='text-align: center;'>".$costo_total."</td> <td><img style='cursor: pointer;' onclick='anularCatalogo(".$_SESSION['nro_compra'].",".$catalogo.");' src='".  base_url()."images/delete.gif'/></td>
                        </tr>";
             
             $totales = "<tr class='total'> 
@@ -313,6 +312,7 @@ class modificar_compras extends CI_Controller {
     function anularCatalogo() {
         
         $nro_catalogo = $_POST['nro_catalogo'];
+        $nro_compra   = $_POST['nro_compra'];
         
         $retorno = array();
         $encontre = false;
@@ -338,14 +338,21 @@ class modificar_compras extends CI_Controller {
                 
                 $datos_catalogo = $this->modificar_compras_model->datosCatalogo($_SESSION['catalogos'][$i]);
                 
+                if($this->modificar_compras_model->fichasAsocias($nro_compra, $_SESSION['catalogos'][$i])) {
+                    $borrar = "<td> </td>";
+                }else {
+                    $borrar = "<td><img style='cursor: pointer;' onclick='anularCatalogo(".$nro_compra.",".$_SESSION['catalogos'][$i].");' src='".  base_url()."images/delete.gif'/></td>";
+                }
+
                 $concat .= "<tr> 
-                                <td style='text-align: center;'>".$_SESSION['catalogos'][$i]."</td> <td>".$datos_catalogo['tipo_arma']."</td> <td>".$datos_catalogo['marca']."</td> <td>".$datos_catalogo['modelo']."</td> <td>".$datos_catalogo['calibre']."</td> <td>".$datos_catalogo['sistema']."</td> <td style='text-align: center;'>".$_SESSION['catalogos'][$i+1]."</td> <td style='text-align: center;'>".$_SESSION['catalogos'][$i+2]."</td> <td><img style='cursor: pointer;' onclick='anularCatalogo(".$_SESSION['catalogos'][$i].");' src='".  base_url()."images/delete.gif'/></td>
-                           </tr>";  
+                                <td style='text-align: center;'>".$_SESSION['catalogos'][$i]."</td> <td>".$datos_catalogo['tipo_arma']."</td> <td>".$datos_catalogo['marca']."</td> <td>".$datos_catalogo['modelo']."</td> <td>".$datos_catalogo['calibre']."</td> <td>".$datos_catalogo['sistema']."</td> <td style='text-align: center;'>".$_SESSION['catalogos'][$i+1]."</td> <td style='text-align: center;'>".$_SESSION['catalogos'][$i+2]."</td>".$borrar."  
+                           </tr>";
                 
                 $totales = "<tr class='total'> 
                                 <td>".$this->obtenerCantidadArmasTotales()."</td> <td>".$this->obterPrecioTotal()."</td>
                             </tr>";                
             }
+            
             if(count($_SESSION['catalogos']) == 0) {
                 $retorno[] = 0;
             }else {

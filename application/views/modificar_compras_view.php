@@ -126,12 +126,12 @@
             }   
             //fin cargo y creo Catalogos
             
-            function anularCatalogo(nro_catalogo) {
+            function anularCatalogo(nro_compra, nro_catalogo) {
                 $.ajax({
                    type: "post",
                    dataType: "json",
                    url: "<?php base_url(); ?>modificar_compras/anularCatalogo",
-                   data: "nro_catalogo="+nro_catalogo,
+                   data: "nro_compra="+nro_compra+"&nro_catalogo="+nro_catalogo,
                    success: function(data) {
                        if(data[0] == 1) {
                            $("#catalogos").html("");
