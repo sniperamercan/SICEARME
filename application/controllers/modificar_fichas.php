@@ -260,7 +260,11 @@ class modificar_fichas extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($accesorios as $val) {
-            $concat .= "<option value='".$val."'>".$val."</option>";
+            if($_SESSION['alta_tipo_accesorio'] == $val) {
+                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else {
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
         }  
         
         echo $concat;
@@ -273,7 +277,11 @@ class modificar_fichas extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($piezas as $val) {
-            $concat .= "<option value='".$val."'>".$val."</option>";
+            if($_SESSION['alta_tipo_pieza'] == $val) {
+                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else {
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
         }
         
         echo $concat;
