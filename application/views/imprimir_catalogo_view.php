@@ -63,17 +63,21 @@
 
                      <thead style='text-align: center; cursor: pointer;'>
                          <tr>      
-                             <th> Nro interno compra </th>
-                             <th> Nro compra    </th>
-                             <th> Fecha    </th>
+                             <th> Nro catalogo         </th>
+                             <th> Fecha fabricacion    </th>
+                             <th> Vencimiento          </th>
+                             <th> Empresa              </th>
+                             <th> Origen               </th>
                          </tr>
                      </thead>
 
                      <tbody style="text-align: center"> 
                          <tr>      
-                             <td> <?php echo $nro_interno ?> </td>
-                             <td> <?php echo $nro_compra ?>  </td>
-                             <td> <?php echo $fecha ?>       </td>
+                             <td> <?php echo $nro_catalogo; ?>      </td>
+                             <td> <?php echo $año_fabricacion; ?>   </td>
+                             <td> <?php echo $vencimiento; ?>       </td>
+                             <td> <?php echo $empresa; ?>           </td>
+                             <td> <?php echo $pais_origen; ?>            </td>
                          </tr>                
                      </tbody>   
 
@@ -83,7 +87,7 @@
 
             <hr />
             
-            <p class="subtituloform"> Datos de la empresa </p>
+            <p class="subtituloform"> Datos del armamento </p>
 
             <div class="datagrid">
 
@@ -91,85 +95,27 @@
 
                      <thead style='text-align: center; cursor: pointer;'>
                          <tr>      
-                             <th> Empresa </th>
-                             <th> Pais   </th>
+                             <th> Tipo de arma </th>
+                             <th> Marca        </th>
+                             <th> Calibre      </th>
+                             <th> Modelo       </th>
+                             <th> Sistema      </th>
                          </tr>
                      </thead>
 
                      <tbody style="text-align: center"> 
                          <tr>      
-                             <td> <?php echo $empresa ?> </td>
-                             <td> <?php echo $pais ?>    </td>
+                             <td> <?php echo $tipo_arma; ?> </td>
+                             <td> <?php echo $marca; ?>     </td>
+                             <td> <?php echo $calibre; ?>   </td>
+                             <td> <?php echo $modelo; ?>    </td>
+                             <td> <?php echo $sistema ?>    </td>
                          </tr>                
                      </tbody>   
 
                 </table> 
 
             </div> 
-
-            <br /><br />  
-
-            <div class="datagrid">
-
-                 <table>
-
-                     <thead style='text-align: center; cursor: pointer;'>
-                         <tr>      
-                             <th> Descripcion </th>
-                             <th> Modalidad </th>
-                         </tr>
-                     </thead>
-
-                     <tbody> 
-                         <tr>      
-                             <td> <?php echo $descripcion ?> </td>
-                             <td> <?php echo $modalidad ?>   </td>
-                         </tr>                
-                     </tbody>   
-
-                </table>  
-
-            </div>            
-
-            <hr />
-
-            <p class="subtituloform"> Catalogos asociados a la compra </p>
-
-            <div class="datagrid">
-
-                 <table>
-
-                     <thead style='text-align: center; cursor: pointer;'>
-                         <tr>      
-                             <th> Nro catalogo </th>
-                             <th> Tipo arma    </th>
-                             <th> Marca        </th>
-                             <th> Calibre      </th>
-                             <th> Modelo       </th>
-                             <th> Sistema      </th>
-                             <th> Cant armas   </th>
-                             <th> Costo        </th>
-                         </tr>
-                     </thead>
-
-                     <tbody> <?php echo $catalogos_asociados; ?> </tbody>   
-
-                </table>  
-
-            </div>    
-            
-            <br />
-
-            <div class="datagrid" style="margin-top: 30px; width: 50%; float: right;">
-                <table> 
-                    <thead style="text-align: center;">
-                        <tr>
-                            <th> Total de armas </th> <th> Costo total </th> 
-                        </tr>
-                    </thead>
-                    <tbody id="totales"> <tr class="total"> <td> <?php echo $total_armas; ?> </td> <td> <?php echo $precio_total; ?> </td> </tr> </tbody>
-                </table> 
-            </div>             
         
         </div>    
     </body>    

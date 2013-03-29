@@ -346,6 +346,10 @@ class listado_catalogos extends CI_Controller {
             $_SESSION['order'][1] = "DESC";
         }        
     }
+    
+    function imprimirCatalogo() {
+        $_SESSION['imprimir_nro_catalogo'] = $_POST['nro_catalogo'];
+    }
 }
 
 ?>

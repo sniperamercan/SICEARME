@@ -94,13 +94,13 @@
                 });            
             }
             
-            function imprimirRecibo(nro_acta) {
+            function imprimirCatalogo(nro_catalogo) {
                 $.ajax({
                     type: "post",  
-                    url: "<?php base_url(); ?>listado_actas_alta/imprimirRecibo",
-                    data: "nro_acta="+nro_acta,
+                    url: "<?php base_url(); ?>listado_catalogos/imprimirCatalogo",
+                    data: "nro_catalogo="+nro_catalogo,
                     success: function(){
-                        window.open ("<?php echo base_url("imprimir_acta_alta"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0");
+                        window.open ("<?php echo base_url("imprimir_catalogo"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0");
                   }
                 });                
             }            

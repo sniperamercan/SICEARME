@@ -23,92 +23,41 @@ class imprimir_catalogo extends CI_Controller {
     
     function index() {
 
-        if(isset($_SESSION['imprimir_nro_compra']) && !empty($_SESSION['imprimir_nro_compra'])) {
-            $nro_compra = $_SESSION['imprimir_nro_compra'];
+        if(isset($_SESSION['imprimir_nro_catalogo']) && !empty($_SESSION['imprimir_nro_catalogo'])) {
+            $nro_catalogo = $_SESSION['imprimir_nro_catalogo'];
         }else {
-            $nro_compra = 0;
+            $nro_catalogo = 0;
         }
             
         //traigo todos los datos del acta en un array
-        $datos_compra = $this->imprimir_compra_model->datosCompra($nro_compra);
+        $datos_catalogo = $this->imprimir_catalogo_model->datosCatalogo($nro_catalogo);
         
         /*
-            $retorno[] = $row->nro_compra;          1
-            $retorno[] = $row->fecha;               2
-            $retorno[] = $row->empresa_proveedora;  3
-            $retorno[] = $row->pais_empresa;        4
-            $retorno[] = $row->descripcion;         5
-            $retorno[] = $row->modalidad;           6
-            $retorno[] = $row->cantidad_armas;      7
-            $retorno[] = $row->precio;              8
+            $retorno[] = $row->tipo_arma;       1
+            $retorno[] = $row->marca;           2
+            $retorno[] = $row->calibre;         3
+            $retorno[] = $row->modelo;          4
+            $retorno[] = $row->sistema;         5
+            $retorno[] = $row->año_fabricacion; 6
+            $retorno[] = $row->empresa;         7
+            $retorno[] = $row->pais_origen;     8
+            $retorno[] = $row->vencimiento;     9
          */
         
-        //cargo nro_interno_compra
-        $data['nro_interno'] = $nro_compra;
-        
-        //cargo nro compra
-        $data['nro_compra'] = $datos_compra[0];
-        
-        //cargo fecha
-        $data['fecha'] = $datos_compra[1];
-        
-        //cargo empresa proveedora
-        $data['empresa'] = $datos_compra[2];
-        
-        //cargo pais empresa
-        $data['pais'] = $datos_compra[3];
-        
-        //cargo descripcion
-        $data['descripcion'] = $datos_compra[4];
-        
-        //cargo modalidad
-        $data['modalidad'] = $datos_compra[5];
-        
-        //cargo total armas
-        $data['total_armas'] = $datos_compra[6];
-        
-        //cargo precio total
-        $data['precio_total'] = $datos_compra[7];
-        
-        //Armar grilla de catalogos asociados
-        
-        $datos_catalogos = $this->imprimir_compra_model->datosCatalogos($nro_compra);
-        
-        /*
-            $retorno[] = $row->nro_interno_catalogo;  1
-            $retorno[] = $row->tipo_arma;             2
-            $retorno[] = $row->marca;                 3
-            $retorno[] = $row->calibre;               4
-            $retorno[] = $row->modelo;                5
-            $retorno[] = $row->sistema;               6
-            $retorno[] = $row->cantidad_armas;        7
-            $retorno[] = $row->costo;                 8
-         */
-
-        $concat = "";
-        
-        for($i=0; $i<count($datos_catalogos); $i=$i+8) {
-        
-            $nro_interno       = $datos_catalogos[$i];
-            $tipo_arma         = $datos_catalogos[$i+1];
-            $marca             = $datos_catalogos[$i+2];
-            $calibre           = $datos_catalogos[$i+3];
-            $modelo            = $datos_catalogos[$i+4];
-            $sistema           = $datos_catalogos[$i+5];
-            $cantidad_armas    = $datos_catalogos[$i+6];
-            $costo             = $datos_catalogos[$i+7];
-
-            $concat .= "<tr> 
-                            <td style='text-align: center;'>".$nro_interno."</td> <td>".$tipo_arma."</td> <td>".$marca."</td> <td>".$calibre."</td> <td>".$modelo."</td> <td>".$sistema."</td> <td style='text-align: center;'>".$cantidad_armas."</td> <td style='text-align: center;'>".$costo."</td>
-                       </tr>";            
-            }
+        $data['nro_catalogo']    = $nro_catalogo;
+        $data['tipo_arma']       = $datos_catalogo[0];
+        $data['marca']           = $datos_catalogo[1];
+        $data['calibre']         = $datos_catalogo[2];
+        $data['modelo']          = $datos_catalogo[3];
+        $data['sistema']         = $datos_catalogo[4];
+        $data['año_fabricacion'] = $datos_catalogo[5];
+        $data['empresa']         = $datos_catalogo[6];
+        $data['pais_origen']     = $datos_catalogo[7];
+        $data['vencimiento']     = $datos_catalogo[8];
             
-        $data['catalogos_asociados'] = $concat;
-            
-        //Fin armo grilla de entrega de armamentos    
         
         //cargo la vista
-        $this->load->view("imprimir_compra_view", $data);
+        $this->load->view("imprimir_catalogo_view", $data);
     }
     
 }
