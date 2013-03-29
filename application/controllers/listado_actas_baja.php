@@ -126,6 +126,7 @@ class listado_actas_baja extends CI_Controller {
                     <td style='text-align: center;'> ".$result[$i+7]." </td>
                     <td onclick='verObservaciones(".$aux_nro_acta.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
                     <td onclick='verEntrega(".$aux_nro_acta.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
+                    <td onclick='imprimirRecibo(".$aux_nro_acta.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td> 
                     <td onclick='imprimirRecibo(".$aux_nro_acta.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/print.png' /> </td>    
                 </tr>
             ";

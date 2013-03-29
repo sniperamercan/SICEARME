@@ -355,7 +355,7 @@
 
                 <dl>
                 <dt><label for="fecha"> Fecha </label></dt>
-                <dd><input type="text" id="fecha" class="text" /></dd>
+                <dd><input readonly="readonly" type="text" id="fecha" class="text" /></dd>
                 </dl>                
 
                 <dl> 		

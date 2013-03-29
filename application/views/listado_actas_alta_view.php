@@ -171,6 +171,7 @@
                         <th onclick="orderBy(7)"> Estado              </th>
                         <th> Ver observ </th>
                         <th> Ver entr   </th>
+                        <th> Ver   </th>
                         <th> Imprimir   </th>
                     </tr>
                 </thead>
@@ -178,7 +179,7 @@
                 <tbody id="datos_consulta"> </tbody>   
 
                 <tfoot>
-                    <tr> <td colspan="11"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="12"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
                 
            </table>  

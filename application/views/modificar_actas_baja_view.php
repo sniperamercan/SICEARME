@@ -293,7 +293,7 @@
 
                 <dl>
                 <dt><label for="fecha"> Fecha </label></dt>
-                <dd><input type="text" id="fecha" class="text" value="<?php echo $fecha; ?>" /></dd>
+                <dd><input readonly="readonly" type="text" id="fecha" class="text" value="<?php echo $fecha; ?>" /></dd>
                 </dl>                
                 
                 <dl> 		
