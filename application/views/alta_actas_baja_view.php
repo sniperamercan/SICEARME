@@ -188,7 +188,7 @@
                        url: "<?php base_url(); ?>alta_actas_baja/seteoUnidad",
                        data: "unidad="+$("#unidad_entrega").val(),
                        success: function() {
-                           $.colorbox({href:"<?php echo base_url('busqueda_fichas'); ?>", top:true, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA FICHAS", onClosed: function(){ cargoFichasFiltro(); } });
+                           $.colorbox({href:"<?php echo base_url('busqueda_fichas'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA FICHAS", onClosed: function(){ cargoFichasFiltro(); } });
                        }
                     });
                 }else {
@@ -204,7 +204,7 @@
                        url: "<?php base_url(); ?>alta_actas_baja/seteoUnidad",
                        data: "unidad="+$("#unidad_entrega").val(),
                        success: function() {
-                           $.colorbox({href:"<?php echo base_url('busqueda_accesorios'); ?>", top:true, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA ACCESORIOS", onClosed: function(){ cargoAccesoriosFiltro(); } });
+                           $.colorbox({href:"<?php echo base_url('busqueda_accesorios'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA ACCESORIOS", onClosed: function(){ cargoAccesoriosFiltro(); } });
                        }
                     });
                 }else {

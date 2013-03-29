@@ -86,7 +86,7 @@
             }
             
             function busquedaCompras() {
-                $.colorbox({href:"<?php echo base_url('busqueda_compras'); ?>", top:true, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA COMPRAS", onClosed: function(){ cargoComprasFiltro(); } });
+                $.colorbox({href:"<?php echo base_url('busqueda_compras'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA COMPRAS", onClosed: function(){ cargoComprasFiltro(); } });
             }
             
             function cargoComprasFiltro() {
@@ -193,11 +193,11 @@
             }
             
             function crearTipoAccesorio() {
-                $.colorbox({href:"<?php echo base_url('alta_tipo_accesorio'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA ACCESORIOS", onClosed: function(){ cargoAccesorios(); } });
+                $.colorbox({href:"<?php echo base_url('alta_tipo_accesorio'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA ACCESORIOS", onClosed: function(){ cargoAccesorios(); } });
             }
 
             function crearTipoPieza() {
-                $.colorbox({href:"<?php echo base_url('alta_tipo_pieza'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA PIEZAS", onClosed: function(){ cargoPiezas(); } });
+                $.colorbox({href:"<?php echo base_url('alta_tipo_pieza'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA PIEZAS", onClosed: function(){ cargoPiezas(); } });
             }
 
             function cargoAccesorios() {
