@@ -35,7 +35,7 @@ $.fn.amenu=function(settings)
 						aMenu.show($(this));
 					},
 					function(){
-						aMenu.timer=window.setTimeout("aMenu.hide()",1000);
+						aMenu.timer=window.setTimeout("aMenu.hide()",10);
 					}
 				);
 			});

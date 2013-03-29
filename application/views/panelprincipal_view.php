@@ -58,7 +58,6 @@
                 );
 
                 $('#amenu-list').amenu({
-                        'speed': 400,
                         'animation': 'none'       //  show, fade, slide, wind, none
                 });
                 
@@ -231,6 +230,7 @@
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_compras'); ?>','O.C.I >> Listado >> Compras');"> Compras </a></li>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_catalogos'); ?>','O.C.I >> Listado >> Catalogos');"> Catalogos </a></li>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_fichas'); ?>','O.C.I >> Listado >> Fichas');"> Fichas </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_documentos_imagenes_catalogos'); ?>','O.C.I >> Listado >> Documentos / imagenes (Catalogos)');"> Documentos / imagenes (Catalogos) </a></li>
                                         </ul>
                                     </li>
                                 
