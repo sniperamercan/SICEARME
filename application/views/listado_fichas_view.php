@@ -125,7 +125,18 @@
                         window.open ("<?php echo base_url("imprimir_acta_alta"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0");
                   }
                 });                
-            }            
+            } 
+            
+            function imprimirFicha(nro_serie, marca, calibre, modelo) {
+                $.ajax({
+                    type: "post",  
+                    url: "<?php base_url(); ?>listado_fichas/imprimirFicha",
+                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
+                    success: function(){
+                        window.open ("<?php echo base_url("imprimir_ficha"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0");
+                  }
+                });                
+            }             
               
         </script>
         
@@ -183,7 +194,7 @@
                 <tbody id="datos_consulta"> </tbody>   
 
                 <tfoot>
-                    <tr> <td colspan="8"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="10"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
                 
            </table>  

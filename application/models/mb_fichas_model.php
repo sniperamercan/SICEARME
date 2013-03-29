@@ -156,8 +156,8 @@ class mb_fichas_model extends CI_Model {
         
         $data_db_logs = array(
             'tipo_movimiento' => 'delete',
-            'tabla'           => 'usuarios',
-            'clave_tabla'     => 'usuario = '.$usuario,
+            'tabla'           => 'fichas',
+            'clave_tabla'     => 'nro_serie = '.$nro_serie.", marca = ".$marca.", calibre = ".$calibre.", modelo = ".$modelo,
             'usuario'         => base64_decode($_SESSION['usuario'])
         );  
         

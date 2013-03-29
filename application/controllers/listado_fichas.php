@@ -417,6 +417,13 @@ class listado_fichas extends CI_Controller {
         }        
         
     }
+    
+    function imprimirFicha() {
+        $_SESSION['imprimir_nro_serie'] = $_POST['nro_serie'];
+        $_SESSION['imprimir_marca']     = $_POST['marca'];
+        $_SESSION['imprimir_calibre']   = $_POST['calibre'];
+        $_SESSION['imprimir_modelo']    = $_POST['modelo'];
+    }    
 }
 
 ?>

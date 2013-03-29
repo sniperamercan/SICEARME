@@ -412,7 +412,7 @@ class mb_fichas extends CI_Controller {
         $calibre   = $_POST['calibre'];
         $modelo    = $_POST['modelo'];
         
-        if(!$this->mb_fichas_model->existeHistorialFicha($nro_serie, $marca, $calibre, $modelo)) {
+        if($this->mb_fichas_model->existeHistorialFicha($nro_serie, $marca, $calibre, $modelo) == 0) {
             $this->mb_fichas_model->eliminarFicha($nro_serie, $marca, $calibre, $modelo);
             echo 1;
         }else {
