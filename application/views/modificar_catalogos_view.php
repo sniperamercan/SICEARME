@@ -227,12 +227,12 @@
 
                 <dl>
                 <dt><label for="fabricacion"> Año Fabricacion </label></dt>
-                <dd><input type="text" id="fabricacion" class="text" value="<?php echo $fabricacion; ?>" /></dd>
+                <dd><input readonly="readonly" type="text" id="fabricacion" class="text" value="<?php echo $fabricacion; ?>" /></dd>
                 </dl>
                 
                 <dl>
                 <dt><label for="vencimiento"> Vencimiento </label></dt>
-                <dd><input type="text" id="vencimiento" class="text" value="<?php echo $vencimiento; ?>" /></dd>
+                <dd><input readonly="readonly" type="text" id="vencimiento" class="text" value="<?php echo $vencimiento; ?>" /></dd>
                 </dl>  
                 
             </fieldset>	

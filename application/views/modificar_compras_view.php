@@ -107,8 +107,13 @@
             
             //cargo y creo Catalogos
             function crearCatalogo() {
-                $.colorbox({href:"<?php echo base_url('alta_catalogos'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:500, title:"ALTA CATALOGO", onClosed: function(){ cargoCatalogos(); } });
-            }            
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>modificar_compras/crearCatalogo",
+                   success: function(data) {
+                       $.colorbox({href:"<?php echo base_url('alta_catalogos'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:500, title:"ALTA CATALOGO", onClosed: function(){ cargoCatalogos(); } });
+                   }
+                });            }            
             
             function cargoCatalogos() {
                 $.ajax({
@@ -175,7 +180,7 @@
 
                 <dl>
                 <dt><label for="fecha"> Fecha </label></dt>
-                <dd><input type="text" id="fecha" class="text" value="<?php echo $fecha; ?>" /></dd>
+                <dd><input readonly="readonly" type="text" id="fecha" class="text" value="<?php echo $fecha; ?>" /></dd>
                 </dl>                
                 
                 <dl>

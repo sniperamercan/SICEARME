@@ -208,7 +208,11 @@ class modificar_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($tipos_armas as $val) {
-            $concat .= "<option value='".$val."'>".$val."</option>";
+            if($_SESSION['alta_tipo_arma'] == $val) {
+                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else {
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
         }
         
         echo $concat;
@@ -221,7 +225,11 @@ class modificar_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($marcas as $val) {
-            $concat .= "<option value='".$val."'>".$val."</option>";
+            if($_SESSION['alta_marca'] == $val) {
+                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else {
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
         }
         
         echo $concat;
@@ -234,7 +242,11 @@ class modificar_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($calibres as $val) {
-            $concat .= "<option value='".$val."'>".$val."</option>";
+            if($_SESSION['alta_calibre'] == $val) {
+                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else {
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
         }
         
         echo $concat;
@@ -247,7 +259,11 @@ class modificar_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($modelos as $val) {
-            $concat .= "<option value='".$val."'>".$val."</option>";
+            if($_SESSION['alta_modelo'] == $val) {
+                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else {
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
         }
         
         echo $concat;
@@ -260,7 +276,11 @@ class modificar_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($sistemas as $val) {
-            $concat .= "<option value='".$val."'>".$val."</option>";
+            if($_SESSION['alta_sistema'] == $val) {
+                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else {
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
         }
         
         echo $concat;
@@ -273,7 +293,11 @@ class modificar_catalogos extends CI_Controller {
         $concat = "<option> </option>";
         
         foreach($empresas as $val) {
-            $concat .= "<option value='".$val."'>".$val."</option>";
+            if($_SESSION['alta_empresa'] == $val) {
+                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else {
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
         }
         
         echo $concat;

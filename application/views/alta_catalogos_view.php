@@ -204,12 +204,12 @@
 
                 <dl>
                 <dt><label for="fabricacion"> Año Fabricacion </label></dt>
-                <dd><input type="text" id="fabricacion" class="text" /></dd>
+                <dd><input readonly="readonly" type="text" id="fabricacion" class="text" /></dd>
                 </dl>
                 
                 <dl>
                 <dt><label for="vencimiento"> Vencimiento </label></dt>
-                <dd><input type="text" id="vencimiento" class="text" /></dd>
+                <dd><input readonly="readonly" type="text" id="vencimiento" class="text" /></dd>
                 </dl>  
                 
             </fieldset>	

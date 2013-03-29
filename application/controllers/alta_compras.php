@@ -72,7 +72,6 @@ class alta_compras extends CI_Controller {
             }else {
                 $concat .= "<option value='".$val."'>".$val."</option>";
             }
-            
         }
         
         echo $concat;
