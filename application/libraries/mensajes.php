@@ -8,100 +8,100 @@ class mensajes {
     
     //error cuando la transaccion no se pudo completar
     function errorSolicitud() {
-        return "Error hubo un error en su solicitud...";
+        return "ERROR: Hubo un error en su solicitud.";
     }
     
     function errorVacio($var) {
-        return "El campo ".$var." no puede ser vacia verifique";        
+        return "ERROR: El campo ".$var." no puede estar vacío. Por favor verifique e intente nuevamente.";        
     }
     
     function errorExiste($var) {
-        return "El campo ".$var." que desea ingresar ya se encuentra en la base de datos";
+        return "ERROR: El campo ".$var." que desea ingresar ya se encuentra en la base de datos.";
     }
     
     function errorNoExiste($var) {
-        return "El campo ".$var." no existe en la base de datos";
+        return "ERROR: El campo ".$var." no existe en la base de datos.";
     }    
     
     function errorExisteRegistro($var) {
-        return "Ya existe el registro ".$var." que desea ingresar";
+        return "ERROR: El registro ".$var." que desea ingresar ya existe.";
     }    
     
     function errorNumerico($var) {
-        return "El campo ".$var." debe ser numerico";
+        return "ERROR: El campo ".$var." debe ser numérico. Por favor verifique e intente nuevamente.";
     }    
     
     function errorCantidad($var, $cantidad = 0) {
-        return "La cantidad de ".$var." debe ser mayor a ".$cantidad;
+        return "ERROR: La cantidad de ".$var." debe ser mayor a ".$cantidad.". Por favor verifique e intente nuevamente.";
     }    
     
     function errorCatalogoUnico($nro_catalogo) {
-        return "El catalogo con el tipo de arma, marca, modelo, calibre que desea ingresar ya existe verifique, <u> es el catalogo </u> <b> Nro - ".$nro_catalogo." </b>";
+        return "ERROR: El catálogo con el tipo de arma, marca, modelo y calibre que desea ingresar, ya existe. Por favor verifique el catálogo nº ".$nro_catalogo.".";
     }
     
     function mailIncorrecto() {
-        return "El mail que desea ingresar tiene un formato incorrecto, verifique";
+        return "ERROR: El mail que desea ingresar tiene un formato incorrecto. Por favor verifique e intente nuevamente.";
     }
     
     function fechasIncorrectas() {
-        return "La fecha de ingreso no puede ser mayor o igual a la fecha de baja, verifique";
+        return "ERROR: La fecha de ingreso no puede ser mayor o igual a la fecha de baja. Por favor verifique e intente nuevamente.";
     }
     
     function sinPerfilSeleccionado() {
-        return "No selecciono ningun perfil para el usuario, por lo menos debe seleccionar uno";
+        return "ERROR: No seleccionó ningún perfil para el usuario, por lo menos debe seleccionar uno. Por favor verifique e intente nuevamente.";
     }
     
     function errorCatalogoExiste() {
-        return "El numero de catalogo seleccionado ya existe en la compra, verifique";
+        return "ERROR: El número de catálogo seleccionado ya existe en la compra. Por favor verifique.";
     }
     
     function errorAccesorioExiste() {
-        return "El numero de accesorio seleccionado ya existe en listado de ficha, verifique";
+        return "ERROR: El número de accesorio seleccionado ya existe en listado de la ficha. Por favor verifique.";
     }
     
     function errorFichaExiste() {
-        return "La ficha seleccionado ya existe en listado de armamento a entregar, verifique";
+        return "ERROR: La ficha seleccionada ya existe en listado del armamento a entregar. Por favor verifique.";
     }    
     
     function errorPiezaExiste() {
-        return "El numero de pieza seleccionado ya existe en listado de ficha, verifique";
+        return "ERROR: El número de pieza seleccionada ya existe en listado de la ficha. Por favor verifique.";
     }    
     
     //para modulo de usuarios
     function estadoUsuarioCambiado($usuario) {
-        return "El estado del usuario - ".$usuario." fue modificado con exito";
+        return "El estado del usuario ".$usuario." fue modificado con éxito.";
     }      
     
     function vaciarClave($usuario) {
-        return "La clave del usuario - ".$usuario." fue modificada a (sicearme) con exito";
+        return "La clave del usuario ".$usuario." fue modificada a 'sicearme' con éxito.";
     }
     
     function sinPermisos() {
-        return "USTED NO TIENE PERMISO PARA ACCEDER A ESTA PANTALLA, SE GENERO UN REGISTRO DE ACCESO NO PERMITIDO";
+        return "ERROR: Usted no tiene los permisos necesarios para acceder a esta pantalla. Por favor comuniquese con un administrador.";
     }
     
     function errorUsuario() {
-        return "ACCESO NO PERMITIDO, SE ALMACENO UN REGISTRO";
+        return "ERROR: Acceso no permitido. Por favor comuniquese con un administrador.";
     }
     
     function errorUsuarioVacio() {
-        return "El usuario no puede ser vacio";
+        return "ERROR: El campo usuario no puede estar vacío. Por favor verifique e intente nuevamente.";
     }
     
     function errorClaveVacia() {
-        return "La clave no puede ser vacia";
+        return "ERROR: La clave no puede estar vacía. Por favor verifique e intente nuevamente.";
     }
     
     function errorDatosIncorrectos() {
-        return "Datos Incorrectos verifique";
+        return "ERROR: Alguno de los datos no fue ingresado correctamente. Por favor verifique e intente nuevamente.";
     }
     
     function errorUsuarioInactivo() {
-        return "Su usuario esta inactivo, no podra acceder al sistema";
+        return "ERROR: Su usuario esta inactivo por lo que no puede acceder al sistema. Por favor comuniquese con un administrador.";
     }
     
     function usuarioEliminado($usuario) {
-        return "El usuario - ".$usuario." fue eliminado con exito del sistema";
+        return "El usuario ".$usuario." fue eliminado con éxito del sistema.";
     }
     
     
