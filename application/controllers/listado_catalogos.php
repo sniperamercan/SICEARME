@@ -152,6 +152,8 @@ class listado_catalogos extends CI_Controller {
                     <td> ".$result[$i+7]." </td>
                     <td> ".$result[$i+8]." </td>
                     <td style='text-align: center;'> ".$result[$i+9]." </td> 
+                    <td onclick='imprimirCatalogo(".$aux_nro_interno.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
+                    <td onclick='imprimirCatalogo(".$aux_nro_interno.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/print.png' /> </td>                         
                 </tr>
             ";
             

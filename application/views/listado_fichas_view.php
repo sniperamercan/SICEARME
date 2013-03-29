@@ -115,6 +115,17 @@
                   }
                 });                
             } 
+            
+            function imprimirRecibo(nro_acta) {
+                $.ajax({
+                    type: "post",  
+                    url: "<?php base_url(); ?>listado_actas_alta/imprimirRecibo",
+                    data: "nro_acta="+nro_acta,
+                    success: function(){
+                        window.open ("<?php echo base_url("imprimir_acta_alta"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0");
+                  }
+                });                
+            }            
               
         </script>
         
@@ -164,6 +175,8 @@
                         <th onclick="orderBy(5)"> N. Catalogo </th>
                         <th> Ver acc        </th>
                         <th> Ver piezas     </th>
+                        <th> Ver           </th>
+                        <th> Imprimir      </th>                        
                     </tr>
                 </thead>
 

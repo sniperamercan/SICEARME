@@ -105,6 +105,17 @@
                         jAlert(data, "CATALOGOS ASOCIADOS A LA COMPRA");
                   }
                 });                
+            }    
+            
+            function imprimirCompra(nro_compra) {
+                $.ajax({
+                    type: "post",  
+                    url: "<?php base_url(); ?>listado_compras/imprimirCompra",
+                    data: "nro_compra="+nro_compra,
+                    success: function(){
+                        window.open ("<?php echo base_url("imprimir_compra"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0");
+                  }
+                });                
             }            
                   
         </script>
@@ -157,13 +168,15 @@
                         <th onclick="orderBy(7)"> Cant armas      </th>
                         <th onclick="orderBy(8)"> Precio total    </th>
                         <th> Ver cat       </th>
+                        <th> Ver           </th>
+                        <th> Imprimir      </th>
                     </tr>
                 </thead>
 
                 <tbody id="datos_consulta"> </tbody>   
 
                 <tfoot>
-                    <tr> <td colspan="10"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="12"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
                 
            </table>  

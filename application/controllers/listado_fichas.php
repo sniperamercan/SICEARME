@@ -146,6 +146,8 @@ class listado_fichas extends CI_Controller {
                     <td style='text-align: center;'> ".$result[$i+5]." </td>
                     <td onclick='verAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
                     <td onclick='verPiezas(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
+                    <td onclick='imprimirFicha(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
+                    <td onclick='imprimirFicha(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/print.png' /> </td>                        
                 </tr>
             ";
             

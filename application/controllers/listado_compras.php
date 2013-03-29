@@ -141,6 +141,8 @@ class listado_compras extends CI_Controller {
                     <td style='text-align: center;'> ".$result[$i+7]." </td>
                     <td style='text-align: center;'> ".$result[$i+8]." </td>
                     <td onclick='verCatalogos(".$aux_nro_interno.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
+                    <td onclick='imprimirCompra(".$aux_nro_interno.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>      
+                    <td onclick='imprimirCompra(".$aux_nro_interno.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/print.png' /> </td>      
                 </tr>
             ";
             
@@ -366,7 +368,11 @@ class listado_compras extends CI_Controller {
             
             echo $concat;
         }
-    }    
+    }  
+    
+    function imprimirCompra() {
+        $_SESSION['imprimir_nro_compra'] = $_POST['nro_compra'];
+    }
 }
 
 ?>
