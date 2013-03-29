@@ -113,7 +113,7 @@ class mb_fichas_model extends CI_Model {
                                    AND calibre       = ".$this->db->escape($calibre)."
                                    AND modelo        = ".$this->db->escape($modelo));
         
-        $cont = $query->num_rows();
+        $cont = $cont + $query->num_rows();
         
         $query = $this->db->query("SELECT *
                                    FROM actas_alta_entrega_accesorios

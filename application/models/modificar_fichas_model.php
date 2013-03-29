@@ -226,62 +226,100 @@ class modificar_fichas_model extends CI_Model {
     
     function modificarFicha($nro_serie, $marca, $calibre, $modelo) {
         
-        $this->db->trans_start();
-        
-            for($i=0; $i < count($_SESSION['accesorios']); $i=$i+3) {
-                
-                $nro_accesorio = $_SESSION['accesorios'][$i];
-                
-                if(!$this->existeAccesorio($nro_serie, $marca, $calibre, $modelo, $nro_accesorio)) {
-                
-                    $data_ficha_accesorio = array(
-                        'nro_serie'       => $nro_serie,
-                        'marca'           => $marca,
-                        'modelo'          => $modelo,
-                        'calibre'         => $calibre,
-                        'nro_accesorio'   => $_SESSION['accesorios'][$i],
-                        'tipo_accesorio'  => $_SESSION['accesorios'][$i+1],
-                        'descripcion'     => $_SESSION['accesorios'][$i+2]
-                    );
+        //Borro todos los accesorios que puedo
+        $query = $this->db->query("SELECT nro_accesorio
+                                   FROM fichas_accesorios
+                                   WHERE nro_serie = ".$this->db->escape($nro_serie)."
+                                   AND marca       = ".$this->db->escape($marca)."
+                                   AND calibre     = ".$this->db->escape($calibre)."
+                                   AND modelo      = ".$this->db->escape($modelo));
 
-                    $this->db->insert('fichas_accesorios', $data_ficha_accesorio); 
-                    
-                    //doy de alta los accesorios al stock de deposito inicial
-                    $data_stock_accesorio = array(
-                        'nro_serie'       => $nro_serie,
-                        'marca'           => $marca,
-                        'calibre'         => $calibre,
-                        'modelo'          => $modelo,
-                        'nro_accesorio'   => $_SESSION['accesorios'][$i],
-                        'idunidad'        => 98 //Unidad - Deposito inicial,
-                    );
+        $array_accesorios = array();
 
-                    $this->db->insert('stock_unidades_accesorios', $data_stock_accesorio);  
-                }
-                    
+        foreach($query->result() as $row) {
+            $nro_accesorio = $row->nro_accesorio;
+            if($this->existeHistorialAccesorio($nro_serie, $marca, $calibre, $modelo, $nro_accesorio) == 0) {
+                $array_accesorios[] = $row->nro_accesorio;
             }
-            
-            for($i=0; $i < count($_SESSION['piezas']); $i=$i+3) {
-                
-                $nro_pieza = $_SESSION['piezas'][$i];
-                
-                if(!$this->existePieza($nro_serie, $marca, $calibre, $modelo, $nro_pieza)) {
-                
-                    $data_ficha_pieza = array(
-                        'nro_serie'       => $nro_serie,
-                        'marca'           => $marca,
-                        'modelo'          => $modelo,
-                        'calibre'         => $calibre,
-                        'nro_pieza'       => $_SESSION['piezas'][$i],
-                        'tipo_pieza'      => $_SESSION['piezas'][$i+1],
-                        'descripcion'     => $_SESSION['piezas'][$i+2]
-                    );
+        }
 
-                    $this->db->insert('fichas_piezas', $data_ficha_pieza);
-                }
-            }     
+        foreach($array_accesorios as $nro_accesorio) {
             
-        $this->db->trans_complete();            
+            $data_where = array(
+                'nro_serie'       => $nro_serie,
+                'marca'           => $marca,
+                'modelo'          => $modelo,
+                'calibre'         => $calibre,
+                'nro_accesorio'   => $nro_accesorio
+            );
+            
+            $this->db->delete("stock_unidades_accesorios", $data_where);
+            $this->db->delete("fichas_accesorios", $data_where);
+        }
+        
+        $data_where = array(
+            'nro_serie'       => $nro_serie,
+            'marca'           => $marca,
+            'modelo'          => $modelo,
+            'calibre'         => $calibre
+        );        
+
+        $this->db->delete("fichas_piezas", $data_where);
+        
+        for($i=0; $i < count($_SESSION['accesorios']); $i=$i+3) {
+
+            $nro_accesorio = $_SESSION['accesorios'][$i];
+
+            if(!$this->existeAccesorio($nro_serie, $marca, $calibre, $modelo, $nro_accesorio)) {
+
+                $data_ficha_accesorio = array(
+                    'nro_serie'       => $nro_serie,
+                    'marca'           => $marca,
+                    'modelo'          => $modelo,
+                    'calibre'         => $calibre,
+                    'nro_accesorio'   => $_SESSION['accesorios'][$i],
+                    'tipo_accesorio'  => $_SESSION['accesorios'][$i+1],
+                    'descripcion'     => $_SESSION['accesorios'][$i+2]
+                );
+
+                $this->db->insert('fichas_accesorios', $data_ficha_accesorio); 
+
+                //doy de alta los accesorios al stock de deposito inicial
+                $data_stock_accesorio = array(
+                    'nro_serie'       => $nro_serie,
+                    'marca'           => $marca,
+                    'calibre'         => $calibre,
+                    'modelo'          => $modelo,
+                    'nro_accesorio'   => $_SESSION['accesorios'][$i],
+                    'idunidad'        => 98 //Unidad - Deposito inicial,
+                );
+
+                $this->db->insert('stock_unidades_accesorios', $data_stock_accesorio);  
+            }
+
+        }
+
+        for($i=0; $i < count($_SESSION['piezas']); $i=$i+3) {
+
+            $nro_pieza = $_SESSION['piezas'][$i];
+
+            if(!$this->existePieza($nro_serie, $marca, $calibre, $modelo, $nro_pieza)) {
+
+                $data_ficha_pieza = array(
+                    'nro_serie'       => $nro_serie,
+                    'marca'           => $marca,
+                    'modelo'          => $modelo,
+                    'calibre'         => $calibre,
+                    'nro_pieza'       => $_SESSION['piezas'][$i],
+                    'tipo_pieza'      => $_SESSION['piezas'][$i+1],
+                    'descripcion'     => $_SESSION['piezas'][$i+2]
+                );
+
+                $this->db->insert('fichas_piezas', $data_ficha_pieza);
+            }
+        }     
+            
+                  
     }
     
     function existeEntregasAccesorio($nro_serie, $marca, $calibre, $modelo) {
@@ -295,6 +333,59 @@ class modificar_fichas_model extends CI_Model {
         
         return $query->num_rows();
     }
+    
+    function existeHistorialAccesorio($nro_serie, $marca, $calibre, $modelo, $nro_accesorio) {
+        
+        $cont = 0;
+        
+        $query = $this->db->query("SELECT *
+                                   FROM actas_alta_entrega_accesorios
+                                   WHERE nro_serie   = ".$this->db->escape($nro_serie)."
+                                   AND marca         = ".$this->db->escape($marca)."
+                                   AND calibre       = ".$this->db->escape($calibre)."
+                                   AND nro_accesorio = ".$this->db->escape($nro_accesorio)."
+                                   AND modelo        = ".$this->db->escape($modelo));  
+        
+        $cont = $cont + $query->num_rows(); 
+        
+        $query = $this->db->query("SELECT *
+                                   FROM actas_baja_devolucion_accesorios
+                                   WHERE nro_serie   = ".$this->db->escape($nro_serie)."
+                                   AND marca         = ".$this->db->escape($marca)."
+                                   AND calibre       = ".$this->db->escape($calibre)."
+                                   AND nro_accesorio = ".$this->db->escape($nro_accesorio)."
+                                   AND modelo        = ".$this->db->escape($modelo));   
+        
+        $cont = $cont + $query->num_rows();
+        
+        return $cont;
+    }
+    
+    function existeHistorialFicha($nro_serie, $marca, $calibre, $modelo) {
+        
+        $cont = 0;
+        
+        $query = $this->db->query("SELECT *
+                                   FROM actas_alta_entrega_armamento
+                                   WHERE nro_serie   = ".$this->db->escape($nro_serie)."
+                                   AND marca         = ".$this->db->escape($marca)."
+                                   AND calibre       = ".$this->db->escape($calibre)."
+                                   AND modelo        = ".$this->db->escape($modelo));
+        
+        $cont = $cont + $query->num_rows();
+        
+        
+        $query = $this->db->query("SELECT *
+                                   FROM actas_baja_devolucion_armamento
+                                   WHERE nro_serie   = ".$this->db->escape($nro_serie)."
+                                   AND marca         = ".$this->db->escape($marca)."
+                                   AND calibre       = ".$this->db->escape($calibre)."
+                                   AND modelo        = ".$this->db->escape($modelo)); 
+        
+        $cont = $cont + $query->num_rows();
+        
+        return $cont;
+    }    
 }
 
 ?>

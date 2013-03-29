@@ -105,9 +105,15 @@ class modificar_fichas extends CI_Controller {
                 $_SESSION['accesorios'][] = $descripcion_accesorio;
 
                 $aux = '"'.$nro_accesorio.'"';
+                
+                if($this->modificar_fichas_model->existeHistorialAccesorio($datos_ficha[0],$datos_ficha[1],$datos_ficha[2],$datos_ficha[3], $nro_accesorio)) {
+                    $borrar = "<td> </td>";
+                }else{
+                    $borrar = "<td style='text-align: center;'><img style='cursor: pointer;' onclick='anularAccesorio(".$aux.");' src='".  base_url()."images/delete.gif'/></td>";
+                }
 
                 $concat .= "<tr> 
-                                <td style='text-align: center;'>".$nro_accesorio."</td> <td>".$tipo_accesorio."</td> <td>".$descripcion_accesorio."</td> <td> </td>
+                                <td style='text-align: center;'>".$nro_accesorio."</td> <td>".$tipo_accesorio."</td> <td>".$descripcion_accesorio."</td>".$borrar."
                            </tr>";
             }
         }else {
@@ -143,9 +149,11 @@ class modificar_fichas extends CI_Controller {
                 $_SESSION['piezas'][] = $descripcion_pieza;
 
                 $aux = '"'.$nro_pieza.'"';
+                
+                $borrar = "<td style='text-align: center;'><img style='cursor: pointer;' onclick='anularPieza(".$aux.");' src='".  base_url()."images/delete.gif'/></td>";
 
                 $concat .= "<tr> 
-                                <td style='text-align: center;'>".$nro_pieza."</td> <td>".$tipo_pieza."</td> <td>".$descripcion_pieza."</td> <td> </td>
+                                <td style='text-align: center;'>".$nro_pieza."</td> <td>".$tipo_pieza."</td> <td>".$descripcion_pieza."</td>".$borrar."
                            </tr>";     
             }
         }else {
@@ -375,7 +383,7 @@ class modificar_fichas extends CI_Controller {
             $aux = '"'.$nro_accesorio.'"';
             
             $concat = "<tr> 
-                            <td style='text-align: center;'>".$nro_accesorio."</td> <td>".$tipo_accesorio."</td> <td>".$descripcion_accesorio."</td> <td><img style='cursor: pointer;' onclick='anularAccesorio(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
+                            <td style='text-align: center;'>".$nro_accesorio."</td> <td>".$tipo_accesorio."</td> <td>".$descripcion_accesorio."</td> <td style='text-align: center;'><img style='cursor: pointer;' onclick='anularAccesorio(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
                        </tr>";
             
             $retorno[] = $concat;
@@ -489,7 +497,7 @@ class modificar_fichas extends CI_Controller {
             $aux = '"'.$nro_pieza.'"';
             
             $concat = "<tr> 
-                            <td style='text-align: center;'>".$nro_pieza."</td> <td>".$tipo_pieza."</td> <td>".$descripcion_pieza."</td> <td><img style='cursor: pointer;' onclick='anularPieza(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
+                            <td style='text-align: center;'>".$nro_pieza."</td> <td>".$tipo_pieza."</td> <td>".$descripcion_pieza."</td> <td style='text-align: center;'><img style='cursor: pointer;' onclick='anularPieza(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
                        </tr>";
             
             $retorno[] = $concat;
@@ -526,8 +534,14 @@ class modificar_fichas extends CI_Controller {
 
                 $aux = '"'.$_SESSION['accesorios'][$i].'"';
 
+                if($this->modificar_fichas_model->existeHistorialAccesorio($_SESSION['datos_ficha'][0],$_SESSION['datos_ficha'][1],$_SESSION['datos_ficha'][2],$_SESSION['datos_ficha'][3],$_SESSION['accesorios'][$i])) {
+                    $borrar = "<td> </td>";
+                }else{
+                    $borrar = "<td style='text-align: center;'><img style='cursor: pointer;' onclick='anularAccesorio(".$aux.");' src='".  base_url()."images/delete.gif'/></td>";
+                }                
+                
                 $concat .= "<tr> 
-                                <td style='text-align: center;'>".$_SESSION['accesorios'][$i]."</td> <td>".$_SESSION['accesorios'][$i+1]."</td> <td>".$_SESSION['accesorios'][$i+2]."</td> <td><img style='cursor: pointer;' onclick='anularAccesorio(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
+                                <td style='text-align: center;'>".$_SESSION['accesorios'][$i]."</td> <td>".$_SESSION['accesorios'][$i+1]."</td> <td>".$_SESSION['accesorios'][$i+2]."</td>".$borrar."
                            </tr>";
             }
             if(count($_SESSION['accesorios']) == 0) {
@@ -570,9 +584,11 @@ class modificar_fichas extends CI_Controller {
             for($i=0; $i<count($_SESSION['piezas']); $i=$i+3) {
 
                 $aux = '"'.$_SESSION['piezas'][$i].'"';
+                
+                $borrar = "<td style='text-align: center;'><img style='cursor: pointer;' onclick='anularPieza(".$aux.");' src='".  base_url()."images/delete.gif'/></td>";
 
                 $concat .= "<tr> 
-                                <td style='text-align: center;'>".$_SESSION['piezas'][$i]."</td> <td>".$_SESSION['piezas'][$i+1]."</td> <td>".$_SESSION['piezas'][$i+2]."</td> <td><img style='cursor: pointer;' onclick='anularPieza(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
+                                <td style='text-align: center;'>".$_SESSION['piezas'][$i]."</td> <td>".$_SESSION['piezas'][$i+1]."</td> <td>".$_SESSION['piezas'][$i+2]."</td>".$borrar."
                            </tr>";
             }
             if(count($_SESSION['piezas']) == 0) {
@@ -594,13 +610,8 @@ class modificar_fichas extends CI_Controller {
         $marca     = $_SESSION['datos_ficha'][1];
         $calibre   = $_SESSION['datos_ficha'][2];
         $modelo    = $_SESSION['datos_ficha'][3];
-
-        if(!$this->modificar_fichas_model->existeEntregasAccesorio($nro_serie, $marca, $calibre, $modelo)) {   
-            $this->modificar_fichas_model->modificarFicha($nro_serie, $marca, $calibre, $modelo);
-            echo 1;
-        }else {
-            echo "Ficha seleccionada no se puede modificar, debido a que tiene moviemientos generados en el sistema";
-        }
+        $this->modificar_fichas_model->modificarFicha($nro_serie, $marca, $calibre, $modelo);
+        echo 1;
     }
 }
 
