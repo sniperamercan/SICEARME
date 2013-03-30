@@ -151,7 +151,7 @@
                                     jAlert("El acta fue eliminado con exito del sistema", "ELIMINAR ACTA DEL SISTEMA", function() { irAFrame('<?php echo base_url('mb_actas_baja'); ?>','Abastecimiento >> Modificar >> Actas bajas') } );
                                 }else {
 
-                                    jAlert("El acta no se puede elimianar del sistema, debido a que esta ya tiene un historial generado de movimiento", "ELIMINAR ACTA DEL SISTEMA");
+                                    jAlert("ERROR: El acta nro - "+nro_acta+" no se puede eliminar del sistema, debido a que ya fue activada", "ELIMINAR ACTA DEL SISTEMA");
                                 }
 
                             }                  

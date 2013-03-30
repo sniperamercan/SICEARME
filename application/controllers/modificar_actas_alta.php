@@ -783,7 +783,7 @@ class modificar_actas_alta extends CI_Controller {
                 $this->modificar_actas_alta_model->modificarActa_db($nro_acta, $fecha, $unidad_recibe, $representante_sma, $representante_unidad, $supervision, $observaciones);
                 $retorno[] = 1;                
             }else {
-                $retorno[] = "El acta ya esta activa dentro del sistema, dicha acta ya no recibir modificaciones";
+                $retorno[] = "ERROR: El acta seleccionado se encuentra activa, ya no puede recibir modificaciones";
             }
         }
         
