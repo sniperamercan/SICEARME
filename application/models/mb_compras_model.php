@@ -79,6 +79,10 @@ class mb_compras_model extends CI_Model {
             'nro_interno' => $nro_compra
         );
         
+        $data_compra_catalogo_where = array(
+            'nro_interno_compra' => $nro_compra
+        );        
+        
         $data_db_logs = array(
             'tipo_movimiento' => 'delete',
             'tabla'           => 'compras',
@@ -87,6 +91,7 @@ class mb_compras_model extends CI_Model {
         );        
         
         $this->db->trans_start();
+            $this->db->delete('compras_catalogos', $data_compra_catalogo_where);
             $this->db->delete('compras', $data_compra_where);
             $this->db->insert('db_logs', $data_db_logs); 
         $this->db->trans_complete(); 
