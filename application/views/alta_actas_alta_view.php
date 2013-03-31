@@ -142,11 +142,11 @@
             }
             
             function busquedaFichas() {
-                $.colorbox({href:"<?php echo base_url('busqueda_fichas'); ?>", top:true, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA FICHAS", onClosed: function(){ cargoFichasFiltro(); } });
+                $.colorbox({href:"<?php echo base_url('busqueda_fichas'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA FICHAS", onClosed: function(){ cargoFichasFiltro(); } });
             }
             
             function busquedaAccesorios() {
-                $.colorbox({href:"<?php echo base_url('busqueda_accesorios'); ?>", top:true, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA ACCESORIOS", onClosed: function(){ cargoAccesoriosFiltro(); } });
+                $.colorbox({href:"<?php echo base_url('busqueda_accesorios'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA ACCESORIOS", onClosed: function(){ cargoAccesoriosFiltro(); } });
             }            
 
             function cargoFichasFiltro() {
