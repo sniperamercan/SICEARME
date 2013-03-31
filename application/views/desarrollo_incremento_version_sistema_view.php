@@ -19,7 +19,7 @@
                     url: "<?php base_url(); ?>desarrollo_incremento_version_sistema/validarDatos",
                     success: function(data){
                         if(data != ""){            
-                            jAlert("Version incrementada correctamente, numero de version nueva <b>"+data+"</b>", "Correcto", function() { window.location.href = '<?php base_url() ?>/PESMA/panelprincipal' });
+                            jAlert("Version incrementada correctamente, numero de version nueva <b>"+data+"</b>", "Correcto", function() { window.location.href = '<?php base_url() ?>/SICEARME/panelprincipal' });
                         }else{
                             jAlert(data, "Error");
                         }                            
