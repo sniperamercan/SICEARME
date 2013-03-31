@@ -62,13 +62,15 @@ class modificar_fichas extends CI_Controller {
         $data['nro_compra']   = $compra_catalogo[0];
         
         //cargo catalogos 
-        $array_catalogos = $this->modificar_fichas->cargoNroCatalogos($compra_catalogo[0]);
+        $array_catalogos = $this->modificar_fichas_model->cargoNroCatalogos($compra_catalogo[0]);
+        
+        $data['nro_catalogo'] = "";
         
         foreach($array_catalogos as $catalogo) {
             if($catalogo == $compra_catalogo[1]) {
-                $data['nro_catalogo'] = "<option selected='selected' value='".$catalogo."'>".$catalogo."</option>";
+                $data['nro_catalogo'] .= "<option selected='selected' value='".$catalogo."'>".$catalogo."</option>";
             }else {
-                $data['nro_catalogo'] = "<option value='".$catalogo."'>".$catalogo."</option>";
+                $data['nro_catalogo'] .= "<option value='".$catalogo."'>".$catalogo."</option>";
             }
         }
         
