@@ -66,7 +66,9 @@
                    success: function(data) {
                        $('#marca').val("");
                        $('#calibre').val("");
-                       $('#modelo').val("");                        
+                       $('#modelo').val(""); 
+                       $('#tipo_arma').val("");
+                       $('#sistema').val("");                       
                        $('#nro_catalogo').html(data);
                    }
                 });
