@@ -63,10 +63,12 @@
 
                      <thead style='text-align: center; cursor: pointer;'>
                          <tr>      
-                             <th> Nro serie </th>
-                             <th> Marca    </th>
+                             <th> Nro serie  </th>
+                             <th> Marca      </th>
                              <th> Calibre    </th>
-                             <th> Modelo    </th>
+                             <th> Modelo     </th>
+                             <th> Tipo       </th>
+                             <th> Sistema    </th>
                          </tr>
                      </thead>
 
@@ -76,6 +78,8 @@
                              <td> <?php echo $marca; ?>         </td>
                              <td> <?php echo $calibre; ?>       </td>
                              <td> <?php echo $modelo; ?>        </td>
+                             <td> <?php echo $tipo_arma; ?>        </td>
+                             <td> <?php echo $sistema; ?>        </td>
                          </tr>                
                      </tbody>   
 

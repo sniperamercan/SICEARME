@@ -38,9 +38,15 @@ class imprimir_ficha extends CI_Controller {
         $concat = '';
         
         $data['nro_serie'] = $nro_serie;
-        $data['marca'] = $marca;
-        $data['calibre'] = $calibre;
-        $data['modelo'] = $modelo;
+        $data['marca']     = $marca;
+        $data['calibre']   = $calibre;
+        $data['modelo']    = $modelo;
+        
+        $tipo_sistema = $this->imprimir_ficha_model->verTipoSistema($nro_serie, $marca, $calibre, $modelo);
+        
+        $data['tipo_arma'] = $tipo_sistema[0];
+        $data['sistema']   = $tipo_sistema[1];
+        
         
         if(!$this->imprimir_ficha_model->tieneAccesorios($nro_serie, $marca, $calibre, $modelo)) {
             $concat = "<tr> <td style='text-align: center;'></td> <td></td> <td></td> </tr>";

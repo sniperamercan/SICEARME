@@ -7,6 +7,26 @@ class imprimir_ficha_model extends CI_Model {
         $this->load->database();
     }    
     
+    function verTipoSistema($nro_serie, $marca, $calibre, $modelo) {
+        
+        $query = $this->db->query("SELECT c.tipo_arma, c.sistema
+                                   FROM catalogos c
+                                   INNER JOIN fichas f ON c.nro_interno = f.nro_interno_catalogos
+                                   WHERE nro_serie   = ".$this->db->escape($nro_serie)."
+                                   AND marca         = ".$this->db->escape($marca)."
+                                   AND calibre       = ".$this->db->escape($calibre)."
+                                   AND modelo        = ".$this->db->escape($modelo));
+        
+        $row = $query->row();
+        
+        $retorno = array();
+        
+        $retorno[] = $row->tipo_arma;
+        $retorno[] = $row->sistema;
+        
+        return $retorno;
+    }
+    
     function tieneAccesorios($nro_serie, $marca, $calibre, $modelo) {
         
         $query = $this->db->query("SELECT * 
