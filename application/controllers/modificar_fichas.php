@@ -668,9 +668,10 @@ class modificar_fichas extends CI_Controller {
             $modelo  = $info_catalogo[2];
         }
         
+        /*
         if($this->modificar_fichas_model->existeFicha($nro_serie, $marca, $calibre, $modelo)) {
             $mensjError[] = 4;
-        }
+        }*/
         
         if(!$this->modificar_fichas_model->existeNroCompra($nro_compra)) {
             $mensjError[] = 5;
