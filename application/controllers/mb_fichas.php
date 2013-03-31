@@ -118,7 +118,7 @@ class mb_fichas extends CI_Controller {
           
         $j=0;
         
-        for($i=0;$i<count($result);$i=$i+6) {
+        for($i=0;$i<count($result);$i=$i+8) {
             
             if($j % 2 == 0){
                 $class = "";
@@ -145,8 +145,10 @@ class mb_fichas extends CI_Controller {
                     <td> ".$result[$i+1]." </td>
                     <td> ".$result[$i+2]." </td>
                     <td> ".$result[$i+3]." </td>
-                    <td style='text-align: center;'> ".$result[$i+4]." </td>
-                    <td style='text-align: center;'> ".$result[$i+5]." </td>
+                    <td> ".$result[$i+4]." </td>
+                    <td> ".$result[$i+5]." </td>
+                    <td style='text-align: center;'> ".$result[$i+6]." </td>
+                    <td style='text-align: center;'> ".$result[$i+7]." </td>
                     <td onclick='verAccesorios(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
                     <td onclick='verPiezas(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
                     <td onclick='editarFicha(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/edit.png' /> </td>
@@ -251,24 +253,28 @@ class mb_fichas extends CI_Controller {
         
         $concat .= '
             <tr>
-                <th onclick="orderBy(0)"> Nro serie    </th>
-                <th onclick="orderBy(1)"> Marca        </th>
-                <th onclick="orderBy(2)"> Calibre      </th>
-                <th onclick="orderBy(3)"> Modelo       </th>
-                <th onclick="orderBy(4)"> Nro compra   </th>
-                <th onclick="orderBy(5)"> Nro catalogo </th>
+                <th> Nro serie    </th>
+                <th> Marca        </th>
+                <th> Calibre      </th>
+                <th> Modelo       </th>
+                <th> Tipo         </th>
+                <th> Sistema      </th>
+                <th> Nro compra   </th>
+                <th> Nro catalogo </th>
             </tr>   
         ';
                 
-        for($i=0;$i<count($result);$i=$i+6) {            
+        for($i=0;$i<count($result);$i=$i+8) {            
             $concat .= "
                 <tr>
                     <td  style='text-align: center;'> ".$result[$i]." </td>
                     <td> ".$result[$i+1]." </td>
                     <td> ".$result[$i+2]." </td>
                     <td> ".$result[$i+3]." </td>
-                    <td style='text-align: center;'> ".$result[$i+4]." </td>
-                    <td style='text-align: center;'> ".$result[$i+5]." </td>
+                    <td> ".$result[$i+4]." </td>
+                    <td> ".$result[$i+5]." </td>
+                    <td style='text-align: center;'> ".$result[$i+6]." </td>
+                    <td style='text-align: center;'> ".$result[$i+7]." </td>
                 </tr>
             ";
         }                  
@@ -303,10 +309,18 @@ class mb_fichas extends CI_Controller {
                 break;
             
             case 4:
+                $_SESSION['order'][0] = 'tipo_arma';
+                break;
+            
+            case 5:
+                $_SESSION['order'][0] = 'sistema';
+                break;            
+            
+            case 6:
                 $_SESSION['order'][0] = 'nro_interno_compra';
                 break;        
             
-            case 5:
+            case 7:
                 $_SESSION['order'][0] = 'nro_interno_catalogo';
                 break;   
         }

@@ -20,8 +20,9 @@ class listado_fichas_model extends CI_Model {
         
         $result = array();
 
-        $query = $this->db->query("SELECT nro_serie, marca, calibre, modelo, nro_interno_compra, nro_interno_catalogo
-                                   FROM fichas
+        $query = $this->db->query("SELECT f.nro_serie, f.marca, f.calibre, f.modelo, c.tipo_arma, c.sistema, f.nro_interno_compra, f.nro_interno_catalogo
+                                   FROM fichas f
+                                   INNER JOIN catalogos c ON c.nro_interno = f.nro_interno_catalogo
                                    WHERE ".$condicion."
                                    ORDER BY ".$order."
                                    LIMIT ".$ini.",".$param);
@@ -31,12 +32,14 @@ class listado_fichas_model extends CI_Model {
             $result[] = $row->marca;
             $result[] = $row->calibre;
             $result[] = $row->modelo;
+            $result[] = $row->tipo_arma;
+            $result[] = $row->sistema;
             $result[] = $row->nro_interno_compra;
             $result[] = $row->nro_interno_catalogo;
         }
         
         return $result;
-    } 
+    }  
     
     function tieneAccesorios($nro_serie, $marca, $calibre, $modelo) {
         

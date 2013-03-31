@@ -189,12 +189,14 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> N. Serie    </th>
+                        <th onclick="orderBy(0)"> N. Serie     </th>
                         <th onclick="orderBy(1)"> Marca        </th>
                         <th onclick="orderBy(2)"> Calibre      </th>
                         <th onclick="orderBy(3)"> Modelo       </th>
-                        <th onclick="orderBy(4)"> N. Compra   </th>
-                        <th onclick="orderBy(5)"> N. Catalogo </th>
+                        <th onclick="orderBy(4)"> Tipo         </th>
+                        <th onclick="orderBy(5)"> Sistema      </th>
+                        <th onclick="orderBy(6)"> N. Compra    </th>
+                        <th onclick="orderBy(7)"> N. Catalogo  </th>
                         <th> Ver acc        </th>
                         <th> Ver piezas     </th>
                         <th> Editar         </th>
@@ -205,7 +207,7 @@
                 <tbody id="datos_consulta"> </tbody>   
 
                 <tfoot>
-                    <tr> <td colspan="10"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="12"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
                 
            </table>  
