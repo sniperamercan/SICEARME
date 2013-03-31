@@ -60,7 +60,7 @@ class mb_catalogos_model extends CI_Model {
         $retorno = array();
         
         foreach($query->result() as $row) {
-            $retorno[] = $row->nro_interno_catalogo;
+            $retorno[] = $row->nro_interno_compra;
         }
         
         return $retorno;
@@ -71,7 +71,7 @@ class mb_catalogos_model extends CI_Model {
         $query = $this->db->query("SELECT precio
                                    FROM compras_catalogos
                                    WHERE nro_interno_compra = ".$this->db->escape($nro_compra)."
-                                   AND nro_interno_catalogo = ".$this->db->ecape($nro_catalogo));
+                                   AND nro_interno_catalogo = ".$this->db->escape($nro_catalogo));
         
         $row = $query->row();
         
@@ -83,12 +83,45 @@ class mb_catalogos_model extends CI_Model {
         $query = $this->db->query("SELECT cantidad_armas
                                    FROM compras_catalogos
                                    WHERE nro_interno_compra = ".$this->db->escape($nro_compra)."
-                                   AND nro_interno_catalogo = ".$this->db->ecape($nro_catalogo));
+                                   AND nro_interno_catalogo = ".$this->db->escape($nro_catalogo));
         
         $row = $query->row();
         
         return $row->cantidad_armas;
     }    
+    
+    function existeCompraAsociada($nro_compra, $nro_catalogo) {
+        
+        $query = $this->db->query("SELECT *
+                                   FROM compras_catalogos
+                                   WHERE nro_interno_compra = ".$this->db->escape($nro_compra)."
+                                   AND nro_interno_catalogo = ".$this->db->escape($nro_catalogo));
+        
+        return $query->num_rows();
+    }
+    
+    function obtenerPrecioCompra($nro_compra) {
+        
+        $query = $this->db->query("SELECT precio
+                                   FROM compras
+                                   WHERE nro_interno = ".$this->db->escape($nro_compra));
+        
+        $row = $query->row();
+        
+        return $row->precio;        
+    }
+    
+    function obtenerCantArmasCompra($nro_compra) {
+        
+        $query = $this->db->query("SELECT cantidad_armas
+                                   FROM compras
+                                   WHERE nro_interno = ".$this->db->escape($nro_compra));
+                                  
+        
+        $row = $query->row();
+        
+        return $row->cantidad_armas;
+    }     
     
     function eliminarCatalogo($nro_catalogo) {
         
@@ -97,16 +130,23 @@ class mb_catalogos_model extends CI_Model {
         
         foreach($compras as $nro_compra) {
             
-            $data_where_compra = array(
-                'nro_interno_compra' => $nro_compra
-            );
-            
-            $data_set_compra = array(
-                'precio' => 'precio' - $this->obtenerPrecioCatalogo($nro_compra, $nro_catalogo),
-                'cantidad_armas' => 'cantidad_armas' - $this->obtenerCantArmasCatalogo($nro_compra, $nro_catalogo)
-            );
-            
-            $this->update("compras", $data_set_compra, $data_where_compra);            
+            if($this->existeCompraAsociada($nro_compra, $nro_catalogo)) {
+                
+                $precio         = $this->obtenerPrecioCompra($nro_compra) - $this->obtenerPrecioCatalogo($nro_compra, $nro_catalogo);
+                $cantidad_armas = $this->obtenerCantArmasCompra($nro_compra) - $this->obtenerCantArmasCatalogo($nro_compra, $nro_catalogo);
+                
+                $data_where_compra = array(
+                    'nro_interno' => $nro_compra
+                );
+
+                $data_set_compra = array(
+                    'precio'         => $precio,
+                    'cantidad_armas' => $cantidad_armas
+                    
+                );
+
+                $this->db->update("compras", $data_where_compra, $data_set_compra);   
+            }
         }
         
         $data_catalogo_where = array(

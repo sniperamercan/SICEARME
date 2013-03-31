@@ -118,7 +118,7 @@
                                     jAlert("El catalogo nro - "+nro_catalogo+" fue eliminado con exito del sistema", "ELIMINAR CATALOGO", function() { irAFrame('<?php echo base_url('mb_catalogos'); ?>','O.C.I >> Modificar/Anular >> Catalogos') } );
                                 }else {
 
-                                    jAlert("El catalogo nro - "+nro_catalogo+" no se puede elimianar del sistema, debido a que esta asociados a compras y fichas", "ELIMINAR CATALOGO");
+                                    jAlert("ERROR: El catalogo nro - "+nro_catalogo+" no se puede elimianar del sistema, debido a que esta asociados a fichas", "ELIMINAR CATALOGO");
                                 }
 
                             }                  
