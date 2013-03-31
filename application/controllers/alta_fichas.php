@@ -166,6 +166,7 @@ class alta_fichas extends CI_Controller {
         foreach($accesorios as $val) {
             if($_SESSION['alta_tipo_accesorio'] == $val) {
                 $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+                $_SESSION['alta_tipo_accesorio'] = "";
             }else {
                 $concat .= "<option value='".$val."'>".$val."</option>";
             }
@@ -183,6 +184,7 @@ class alta_fichas extends CI_Controller {
         foreach($piezas as $val) {
             if($_SESSION['alta_tipo_pieza'] == $val) {
                 $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+                $_SESSION['alta_tipo_pieza'] = "";
             }else {
                 $concat .= "<option value='".$val."'>".$val."</option>";
             }
@@ -295,7 +297,7 @@ class alta_fichas extends CI_Controller {
             $aux = '"'.$nro_accesorio.'"';
             
             $concat = "<tr> 
-                            <td style='text-align: center;'>".$nro_accesorio."</td> <td>".$tipo_accesorio."</td> <td>".$descripcion_accesorio."</td> <td><img style='cursor: pointer;' onclick='anularAccesorio(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
+                            <td style='text-align: center;'>".$nro_accesorio."</td> <td>".$tipo_accesorio."</td> <td>".$descripcion_accesorio."</td> <td style='text-align: center;'><img style='cursor: pointer;' onclick='anularAccesorio(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
                        </tr>";
             
             $retorno[] = $concat;
@@ -409,7 +411,7 @@ class alta_fichas extends CI_Controller {
             $aux = '"'.$nro_pieza.'"';
             
             $concat = "<tr> 
-                            <td style='text-align: center;'>".$nro_pieza."</td> <td>".$tipo_pieza."</td> <td>".$descripcion_pieza."</td> <td><img style='cursor: pointer;' onclick='anularPieza(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
+                            <td style='text-align: center;'>".$nro_pieza."</td> <td>".$tipo_pieza."</td> <td>".$descripcion_pieza."</td> <td style='text-align: center;'><img style='cursor: pointer;' onclick='anularPieza(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
                        </tr>";
             
             $retorno[] = $concat;
@@ -447,7 +449,7 @@ class alta_fichas extends CI_Controller {
                 $aux = '"'.$_SESSION['accesorios'][$i].'"';
 
                 $concat .= "<tr> 
-                                <td style='text-align: center;'>".$_SESSION['accesorios'][$i]."</td> <td>".$_SESSION['accesorios'][$i+1]."</td> <td>".$_SESSION['accesorios'][$i+2]."</td> <td><img style='cursor: pointer;' onclick='anularAccesorio(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
+                                <td style='text-align: center;'>".$_SESSION['accesorios'][$i]."</td> <td>".$_SESSION['accesorios'][$i+1]."</td> <td>".$_SESSION['accesorios'][$i+2]."</td> <td style='text-align: center;'><img style='cursor: pointer;' onclick='anularAccesorio(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
                            </tr>";
             }
             if(count($_SESSION['accesorios']) == 0) {
@@ -492,7 +494,7 @@ class alta_fichas extends CI_Controller {
                 $aux = '"'.$_SESSION['piezas'][$i].'"';
 
                 $concat .= "<tr> 
-                                <td style='text-align: center;'>".$_SESSION['piezas'][$i]."</td> <td>".$_SESSION['piezas'][$i+1]."</td> <td>".$_SESSION['piezas'][$i+2]."</td> <td><img style='cursor: pointer;' onclick='anularPieza(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
+                                <td style='text-align: center;'>".$_SESSION['piezas'][$i]."</td> <td>".$_SESSION['piezas'][$i+1]."</td> <td>".$_SESSION['piezas'][$i+2]."</td> <td style='text-align: center;'><img style='cursor: pointer;' onclick='anularPieza(".$aux.");' src='".  base_url()."images/delete.gif'/></td>
                            </tr>";
             }
             if(count($_SESSION['piezas']) == 0) {

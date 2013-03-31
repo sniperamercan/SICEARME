@@ -69,6 +69,8 @@ class imprimir_ficha extends CI_Controller {
        
         $data['accesorios_ficha'] = $concat;
         
+        $concat = "";
+        
         if(!$this->imprimir_ficha_model->tienePiezas($nro_serie, $marca, $calibre, $modelo)) {
             $concat = "<tr> <td style='text-align: center;'></td> <td></td> <td></td> </tr>";
         }else {

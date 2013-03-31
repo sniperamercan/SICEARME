@@ -112,6 +112,7 @@ class alta_catalogos extends CI_Controller {
         foreach($tipos_armas as $val) {
             if($_SESSION['alta_tipo_arma'] == $val) {
                 $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+                $_SESSION['alta_tipo_arma'] = "";
             }else {
                 $concat .= "<option value='".$val."'>".$val."</option>";
             }
@@ -129,6 +130,7 @@ class alta_catalogos extends CI_Controller {
         foreach($marcas as $val) {
             if($_SESSION['alta_marca'] == $val) {
                 $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+                $_SESSION['alta_marca'] = "";
             }else {
                 $concat .= "<option value='".$val."'>".$val."</option>";
             }
@@ -146,6 +148,7 @@ class alta_catalogos extends CI_Controller {
         foreach($calibres as $val) {
             if($_SESSION['alta_calibre'] == $val) {
                 $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+                $_SESSION['alta_calibre'] = "";
             }else {
                 $concat .= "<option value='".$val."'>".$val."</option>";
             }
@@ -163,6 +166,7 @@ class alta_catalogos extends CI_Controller {
         foreach($modelos as $val) {
             if($_SESSION['alta_modelo'] == $val) {
                 $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+                $_SESSION['alta_modelo'] = "";
             }else {
                 $concat .= "<option value='".$val."'>".$val."</option>";
             }
@@ -180,6 +184,7 @@ class alta_catalogos extends CI_Controller {
         foreach($sistemas as $val) {
             if($_SESSION['alta_sistema'] == $val) {
                 $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+                $_SESSION['alta_sistema'] = "";
             }else {
                 $concat .= "<option value='".$val."'>".$val."</option>";
             }
@@ -197,6 +202,7 @@ class alta_catalogos extends CI_Controller {
         foreach($empresas as $val) {
             if($_SESSION['alta_empresa'] == $val) {
                 $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+                $_SESSION['alta_empresa'] = "";
             }else {
                 $concat .= "<option value='".$val."'>".$val."</option>";
             }
