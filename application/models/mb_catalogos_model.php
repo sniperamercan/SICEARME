@@ -45,17 +45,77 @@ class mb_catalogos_model extends CI_Model {
     function catalogoAsociado($nro_catalogo) {
         
         $query = $this->db->query("SELECT *
-                                   FROM compras_catalogos
+                                   FROM fichas
                                    WHERE nro_interno_catalogo = ".$this->db->escape($nro_catalogo));
         
         return $query->num_rows();
     }
     
+    function comprasAsociadas($nro_catalogo) {
+        
+        $query = $this->db->query("SELECT nro_interno_compra
+                                   FROM compras_catalogos
+                                   WHERE nro_interno_compra = ".$this->db->escape($nro_catalogo));
+        
+        $retorno = array();
+        
+        foreach($query->result() as $row) {
+            $retorno[] = $row->nro_interno_catalogo;
+        }
+        
+        return $retorno;
+    }
+    
+    function obtenerPrecioCatalogo($nro_compra, $nro_catalogo) {
+        
+        $query = $this->db->query("SELECT precio
+                                   FROM compras_catalogos
+                                   WHERE nro_interno_compra = ".$this->db->escape($nro_compra)."
+                                   AND nro_interno_catalogo = ".$this->db->ecape($nro_catalogo));
+        
+        $row = $query->row();
+        
+        return $row->precio;
+    }
+    
+    function obtenerCantArmasCatalogo($nro_compra, $nro_catalogo) {
+        
+        $query = $this->db->query("SELECT cantidad_armas
+                                   FROM compras_catalogos
+                                   WHERE nro_interno_compra = ".$this->db->escape($nro_compra)."
+                                   AND nro_interno_catalogo = ".$this->db->ecape($nro_catalogo));
+        
+        $row = $query->row();
+        
+        return $row->cantidad_armas;
+    }    
+    
     function eliminarCatalogo($nro_catalogo) {
+        
+        //modificar el precio y la cantidad de armas de la compra
+        $compras = $this->comprasAsociadas($nro_catalogo);
+        
+        foreach($compras as $nro_compra) {
+            
+            $data_where_compra = array(
+                'nro_interno_compra' => $nro_compra
+            );
+            
+            $data_set_compra = array(
+                'precio' => 'precio' - $this->obtenerPrecioCatalogo($nro_compra, $nro_catalogo),
+                'cantidad_armas' => 'cantidad_armas' - $this->obtenerCantArmasCatalogo($nro_compra, $nro_catalogo)
+            );
+            
+            $this->update("compras", $data_set_compra, $data_where_compra);            
+        }
         
         $data_catalogo_where = array(
             'nro_interno' => $nro_catalogo
         );
+        
+        $data_catalogo_compra_where = array(
+            'nro_interno_catalogo' => $nro_catalogo
+        );        
         
         $data_db_logs = array(
             'tipo_movimiento' => 'delete',
@@ -65,6 +125,7 @@ class mb_catalogos_model extends CI_Model {
         );        
         
         $this->db->trans_start();
+            $this->db->delete('compras_catalogos', $data_catalogo_compra_where);
             $this->db->delete('catalogos', $data_catalogo_where);
             $this->db->insert('db_logs', $data_db_logs); 
         $this->db->trans_complete(); 
