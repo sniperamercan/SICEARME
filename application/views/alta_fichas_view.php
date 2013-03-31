@@ -262,7 +262,7 @@
                 <dd><input type="text" id="tipo_arma" class="txtautomatico" readonly="readonly" /></dd> 					
                 </dl>
                 
-                 <dl> 		
+                <dl> 		
                 <dt><label for="sistema"> Sistema </label></dt>	
                 <dd><input type="text" id="sistema" class="txtautomatico" readonly="readonly" /></dd> 					
                 </dl>               
