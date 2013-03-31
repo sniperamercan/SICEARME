@@ -77,10 +77,14 @@
                    success: function(data) {
                        $('#marca').val("");
                        $('#calibre').val("");
-                       $('#modelo').val("");                        
+                       $('#modelo').val("");
+                       $('#tipo_arma').val("");
+                       $('#sistema').val("");                         
                        $('#marca').val(data[0]);
                        $('#calibre').val(data[1]);
                        $('#modelo').val(data[2]);
+                       $('#tipo_arma').val(data[3]);
+                       $('#sistema').val(data[4]);                       
                    }
                 });
             }
@@ -251,6 +255,16 @@
                 <dt><label for="modelo"> Modelo </label></dt>	
                 <dd><input type="text" id="modelo" class="txtautomatico" readonly="readonly" value="<?php echo $modelo; ?>"/></dd> 					
                 </dl>
+                
+                <dl> 		
+                <dt><label for="tipo_arma"> Tipo </label></dt>	
+                <dd><input type="text" id="tipo_arma" class="txtautomatico" readonly="readonly" value="<?php echo $tipo_arma; ?>" /></dd> 					
+                </dl>
+                
+                 <dl> 		
+                <dt><label for="sistema"> Sistema </label></dt>	
+                <dd><input type="text" id="sistema" class="txtautomatico" readonly="readonly" value="<?php echo $sistema; ?>" /></dd> 					
+                </dl>                  
                 
                 <dl> 		
                 <dt><label for="nro_compra"> Nro compra </label></dt>	

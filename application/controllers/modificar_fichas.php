@@ -60,7 +60,12 @@ class modificar_fichas extends CI_Controller {
         $compra_catalogo = $this->modificar_fichas_model->cargoCompraCatalogo($datos_ficha[0], $datos_ficha[1], $datos_ficha[2], $datos_ficha[3]);
         
         $data['nro_compra']   = $compra_catalogo[0];
-        $data['nro_catalogo'] = $compra_catalogo[1]; 
+        $data['nro_catalogo'] = $compra_catalogo[1];
+        
+        $datos_extras = $this->modificar_fichas_model->datosExtras($compra_catalogo[1]);
+        
+        $data['tipo_arma'] = $datos_extras[0];
+        $data['sistema']   = $datos_extras[1];        
         
         //accesorios
         $accesorios = $this->modificar_fichas_model->cargoAccesorios();

@@ -55,7 +55,7 @@ class mb_catalogos_model extends CI_Model {
         
         $query = $this->db->query("SELECT nro_interno_compra
                                    FROM compras_catalogos
-                                   WHERE nro_interno_compra = ".$this->db->escape($nro_catalogo));
+                                   WHERE nro_interno_catalogo = ".$this->db->escape($nro_catalogo));
         
         $retorno = array();
         
@@ -145,7 +145,7 @@ class mb_catalogos_model extends CI_Model {
                     
                 );
 
-                $this->db->update("compras", $data_where_compra, $data_set_compra);   
+                $this->db->update("compras", $data_set_compra, $data_where_compra);   
             }
         }
         

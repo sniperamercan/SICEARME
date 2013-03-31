@@ -168,6 +168,21 @@ class modificar_fichas_model extends CI_Model {
         return $retorno;
     }
     
+    function datosExtras($nro_catalogo) {
+        
+        $query = $this->db->query("SELECT tipo_arma, sistema
+                                   FROM catalogos
+                                   WHERE nro_interno = ".$this->db->escape($nro_catalogo));
+        
+        $row = $query->row();
+        
+        $retorno = array();
+        $retorno[] = $row->tipo_arma;
+        $retorno[] = $row->sistema;
+        
+        return $retorno;        
+    }
+    
     function existeAccesorio($nro_serie, $marca, $calibre, $modelo, $nro_accesorio) {
         
         $query = $this->db->query("SELECT *

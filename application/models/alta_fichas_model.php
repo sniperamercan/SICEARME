@@ -70,7 +70,7 @@ class alta_fichas_model extends CI_Model {
     
     function cargoInformacion($nro_catalogo) {
         
-        $query = $this->db->query("SELECT marca, calibre, modelo
+        $query = $this->db->query("SELECT marca, calibre, modelo, tipo_arma, sistema
                                    FROM catalogos
                                    WHERE nro_interno = ".$this->db->escape($nro_catalogo));
         
@@ -80,6 +80,8 @@ class alta_fichas_model extends CI_Model {
         $retorno[] = $row->marca;
         $retorno[] = $row->calibre;
         $retorno[] = $row->modelo;
+        $retorno[] = $row->tipo_arma;
+        $retorno[] = $row->sistema;
         
         return $retorno;
     }
