@@ -279,6 +279,8 @@ class modificar_fichas_model extends CI_Model {
             'calibre'         => $calibre_ant
         );        
 
+        $this->db->delete("stock_unidades", $data_where);
+        
         $this->db->delete("fichas_piezas", $data_where);
         
         //elimino la ficha del sistema         
@@ -297,6 +299,17 @@ class modificar_fichas_model extends CI_Model {
         );
         
         $this->db->insert("fichas", $data_ficha);
+        
+        //ese armemento lo doy de alta al stock de la unidad deposito inicial
+        $data_stock_unidad = array(
+            'nro_serie'       => $nro_serie,
+            'marca'           => $marca,
+            'modelo'          => $modelo,
+            'calibre'         => $calibre,
+            'idunidad'        => 98 //Unidad - Deposito inicial
+        );   
+
+        $this->db->insert('stock_unidades', $data_stock_unidad);        
         
         $data_db_logs = array(
             'tipo_movimiento' => 'update',
