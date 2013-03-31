@@ -11,11 +11,11 @@ class imprimir_ficha_model extends CI_Model {
         
         $query = $this->db->query("SELECT c.tipo_arma, c.sistema
                                    FROM catalogos c
-                                   INNER JOIN fichas f ON c.nro_interno = f.nro_interno_catalogos
-                                   WHERE nro_serie   = ".$this->db->escape($nro_serie)."
-                                   AND marca         = ".$this->db->escape($marca)."
-                                   AND calibre       = ".$this->db->escape($calibre)."
-                                   AND modelo        = ".$this->db->escape($modelo));
+                                   INNER JOIN fichas f ON c.nro_interno = f.nro_interno_catalogo
+                                   WHERE f.nro_serie   = ".$this->db->escape($nro_serie)."
+                                   AND f.marca         = ".$this->db->escape($marca)."
+                                   AND f.calibre       = ".$this->db->escape($calibre)."
+                                   AND f.modelo        = ".$this->db->escape($modelo));
         
         $row = $query->row();
         
