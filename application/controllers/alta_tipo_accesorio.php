@@ -27,7 +27,9 @@ class alta_tipo_accesorio extends CI_Controller {
     
     function validarDatos() {
         
-        $tipo_accesorio = $_POST["tipo_accesorio"];
+        $sin_comilla = '"';
+        
+        $tipo_accesorio = str_replace($sin_comilla, "'", $_POST["tipo_accesorio"]);
         
         $mensjError = array();
         

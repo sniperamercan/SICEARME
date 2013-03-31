@@ -27,7 +27,9 @@ class alta_modelo extends CI_Controller {
     
     function validarDatos() {
         
-        $modelo = $_POST["modelo"];
+        $sin_comilla = '"';
+        
+        $modelo = str_replace($sin_comilla, "'", $_POST["modelo"]);
         
         $mensjError = array();
         

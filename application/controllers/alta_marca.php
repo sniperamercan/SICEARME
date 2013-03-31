@@ -27,7 +27,9 @@ class alta_marca extends CI_Controller {
     
     function validarDatos() {
         
-        $marca = $_POST["marca"];
+        $sin_comilla = '"';
+        
+        $marca = str_replace($sin_comilla, "'", $_POST["marca"]);
         
         $mensjError = array();
         
