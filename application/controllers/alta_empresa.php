@@ -27,9 +27,11 @@ class alta_empresa extends CI_Controller {
     
     function validarDatos() {
         
-        $sin_comilla = '"';
+        $patterns = array();
+        $patterns[] = '/"/';
+        $patterns[] = "/'/";
         
-        $empresa = str_replace($sin_comilla, "'", $_POST["empresa"]);
+        $empresa = preg_replace($patterns, '', $_POST["empresa"]);
         
         $mensjError = array();
         

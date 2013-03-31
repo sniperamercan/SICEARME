@@ -27,9 +27,11 @@ class alta_tipo_arma extends CI_Controller {
     
     function validarDatos() {
         
-        $sin_comilla = '"';
+        $patterns = array();
+        $patterns[] = '/"/';
+        $patterns[] = "/'/";
         
-        $tipo_arma = str_replace($sin_comilla, "'", $_POST["tipo_arma"]);
+        $tipo_arma = preg_replace($patterns, '', $_POST['tipo_arma']);
         
         $mensjError = array();
         

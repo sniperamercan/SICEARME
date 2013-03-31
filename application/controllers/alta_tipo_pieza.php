@@ -27,9 +27,11 @@ class alta_tipo_pieza extends CI_Controller {
     
     function validarDatos() {
         
-        $sin_comilla = '"';
+        $patterns = array();
+        $patterns[] = '/"/';
+        $patterns[] = "/'/";
         
-        $tipo_pieza = str_replace($sin_comilla, "'", $_POST["tipo_pieza"]);
+        $tipo_pieza = preg_replace($patterns, '', $_POST['tipo_pieza']);
         
         $mensjError = array();
         

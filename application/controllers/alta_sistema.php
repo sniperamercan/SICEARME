@@ -27,9 +27,11 @@ class alta_sistema extends CI_Controller {
     
     function validarDatos() {
         
-        $sin_comilla = '"';
+        $patterns = array();
+        $patterns[] = '/"/';
+        $patterns[] = "/'/";
         
-        $sistema = str_replace($sin_comilla, "'", $_POST["sistema"]);
+        $sistema = preg_replace($patterns, '', $_POST["sistema"]);
         
         $mensjError = array();
         

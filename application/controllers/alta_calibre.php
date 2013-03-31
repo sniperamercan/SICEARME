@@ -27,9 +27,11 @@ class alta_calibre extends CI_Controller {
     
     function validarDatos() {
         
-        $sin_comilla = '"';
+        $patterns = array();
+        $patterns[] = '/"/';
+        $patterns[] = "/'/";
         
-        $calibre = str_replace($sin_comilla, "'", $_POST["calibre"]);
+        $calibre = preg_replace($patterns, '', $_POST["calibre"]);
         
         $mensjError = array();
         

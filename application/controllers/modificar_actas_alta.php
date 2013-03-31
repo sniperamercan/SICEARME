@@ -712,13 +712,15 @@ class modificar_actas_alta extends CI_Controller {
     
     function validarDatos() {
         
-        $sin_comilla = '"';
-
+        $patterns = array();
+        $patterns[] = '/"/';
+        $patterns[] = "/'/";
+        
         $fecha                = $_POST["fecha"];
         $unidad_recibe        = $_POST["unidad_recibe"];
-        $representante_sma    = str_replace($sin_comilla, "'", $_POST["representante_sma"]);
-        $representante_unidad = str_replace($sin_comilla, "'", $_POST["representante_unidad"]);
-        $supervision          = str_replace($sin_comilla, "'", $_POST["supervision"]);
+        $representante_sma    = preg_replace($patterns, '', $_POST["representante_sma"]);
+        $representante_unidad = preg_replace($patterns, '', $_POST["representante_unidad"]);
+        $supervision          = preg_replace($patterns, '', $_POST["supervision"]);
         $observaciones        = $_POST["observaciones"];
         
         $mensjError = array();
