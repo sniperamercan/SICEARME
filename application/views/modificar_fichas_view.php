@@ -238,22 +238,22 @@
 
                 <dl>
                 <dt><label for="nro_serie"> Nro serie </label></dt>
-                <dd><input type="text" id="nro_serie" class="txtautomatico" readonly="readonly" value="<?php echo $nro_serie; ?>"/></dd>
+                <dd><input type="text" id="nro_serie" class="text" value="<?php echo $nro_serie; ?>" /></dd>
                 </dl>                
                 
                 <dl> 		
                 <dt><label for="marca"> Marca </label></dt>	
-                <dd><input type="text" id="marca" class="txtautomatico" readonly="readonly" value="<?php echo $marca; ?>"/></dd> 					
+                <dd><input type="text" id="marca" class="txtautomatico" readonly="readonly" value="<?php echo $marca; ?>" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre"> Calibre </label></dt>	
-                <dd><input type="text" id="calibre" class="txtautomatico" readonly="readonly" value="<?php echo $calibre; ?>"/></dd> 					
+                <dd><input type="text" id="calibre" class="txtautomatico" readonly="readonly" value="<?php echo $calibre; ?>" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="modelo"> Modelo </label></dt>	
-                <dd><input type="text" id="modelo" class="txtautomatico" readonly="readonly" value="<?php echo $modelo; ?>"/></dd> 					
+                <dd><input type="text" id="modelo" class="txtautomatico" readonly="readonly" value="<?php echo $modelo; ?>" /></dd> 					
                 </dl>
                 
                 <dl> 		
@@ -264,16 +264,16 @@
                  <dl> 		
                 <dt><label for="sistema"> Sistema </label></dt>	
                 <dd><input type="text" id="sistema" class="txtautomatico" readonly="readonly" value="<?php echo $sistema; ?>" /></dd> 					
-                </dl>                  
+                </dl>               
                 
                 <dl> 		
                 <dt><label for="nro_compra"> Nro compra </label></dt>	
-                <dd><input type="text" id="nro_compra" class="txtautomatico" readonly="readonly" value="<?php echo $nro_compra; ?>"/></dd> 					
+                <dd><select id="nro_compra" onchange="cargoNroCatalogos(this.value);"> <?php echo $nro_compras; ?> </select> <img style="cursor: pointer;" onclick="busquedaCompras();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>                
                 
                 <dl> 		
                 <dt><label for="nro_catalogo"> Nro catalogo </label></dt>	
-                <dd><input type="text" id="nro_catalogo" class="txtautomatico" readonly="readonly" value="<?php echo $nro_catalogo; ?>"/></dd> 					
+                <dd><select id="nro_catalogo" onchange="cargoInformacion(this.value);"> <?php echo $nro_catalogo; ?> </select></dd> 					
                 </dl>
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>

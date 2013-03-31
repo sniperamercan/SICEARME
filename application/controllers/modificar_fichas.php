@@ -60,12 +60,27 @@ class modificar_fichas extends CI_Controller {
         $compra_catalogo = $this->modificar_fichas_model->cargoCompraCatalogo($datos_ficha[0], $datos_ficha[1], $datos_ficha[2], $datos_ficha[3]);
         
         $data['nro_compra']   = $compra_catalogo[0];
-        $data['nro_catalogo'] = $compra_catalogo[1];
+        $data['nro_catalogo'] = "<option selected='selected' value='".$compra_catalogo[1]."'>".$compra_catalogo[1]."</option>";
         
         $datos_extras = $this->modificar_fichas_model->datosExtras($compra_catalogo[1]);
         
         $data['tipo_arma'] = $datos_extras[0];
         $data['sistema']   = $datos_extras[1];        
+        
+        //cargo nro de compras
+        
+        //numero de compra
+        $nro_compras = $this->modificar_fichas_model->cargoNroCompras();
+        
+        $data['nro_compras'] = "<option value=''> </option>";
+        
+        foreach($nro_compras as $val) {
+            if($compra_catalogo[0] == $val) {
+                $data['nro_compras'] .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else{
+                $data['nro_compras'] .= "<option value='".$val."'>".$val."</option>";
+            }
+        }
         
         //accesorios
         $accesorios = $this->modificar_fichas_model->cargoAccesorios();
@@ -619,12 +634,92 @@ class modificar_fichas extends CI_Controller {
     
     function validarDatos() {
         
-        $nro_serie = $_SESSION['datos_ficha'][0];
-        $marca     = $_SESSION['datos_ficha'][1];
-        $calibre   = $_SESSION['datos_ficha'][2];
-        $modelo    = $_SESSION['datos_ficha'][3];
-        $this->modificar_fichas_model->modificarFicha($nro_serie, $marca, $calibre, $modelo);
-        echo 1;
+        $nro_serie_ant = $_SESSION['datos_ficha'][0]; 
+        $marca_ant     = $_SESSION['datos_ficha'][1];
+        $calibre_ant   = $_SESSION['datos_ficha'][2]; 
+        $modelo_ant    = $_SESSION['datos_ficha'][3];         
+        
+        $nro_serie    = $_POST['nro_serie'];
+        $nro_compra   = $_POST['nro_compra'];
+        $nro_catalogo = $_POST['nro_catalogo'];
+        
+        $mensjError = array();
+        
+        if(empty($nro_serie)) {
+            $mensjError[] = 1;
+        }
+        
+        if(empty($nro_compra)) {
+            $mensjError[] = 2;
+        }
+        
+        if(empty($nro_catalogo)) {
+            $mensjError[] = 3;
+        }      
+        
+        $marca   = "";
+        $calibre = "";
+        $modelo  = "";
+        
+        if($this->modificar_fichas_model->existeNroCatalogo($nro_catalogo)) {
+            $info_catalogo = $this->modificar_fichas_model->cargoInformacion($nro_catalogo);
+            $marca   = $info_catalogo[0];
+            $calibre = $info_catalogo[1];
+            $modelo  = $info_catalogo[2];
+        }
+        
+        if($this->modificar_fichas_model->existeFicha($nro_serie, $marca, $calibre, $modelo)) {
+            $mensjError[] = 4;
+        }
+        
+        if(!$this->modificar_fichas_model->existeNroCompra($nro_compra)) {
+            $mensjError[] = 5;
+        }
+        
+        if(!$this->modificar_fichas_model->existeNroCatalogo($nro_catalogo)) {
+            $mensjError[] = 6;
+        }      
+        
+        if(!$this->form_validation->numeric($nro_serie)) {
+            $mensjError[] = 7;
+        }
+        
+        if(count($mensjError) > 0) {
+            
+            switch($mensjError[0]) {
+                
+                case 1:
+                    echo $this->mensajes->errorVacio('nro serie');
+                    break;
+                
+                case 2:
+                    echo $this->mensajes->errorVacio('nro compra');
+                    break;
+                
+                case 3:
+                    echo $this->mensajes->errorVacio('nro catalogo');
+                    break;
+                
+                case 4:
+                    echo $this->mensajes->errorExiste('ficha');
+                    break;
+                
+                case 5:
+                    echo $this->mensajes->errorNoExiste('nro compra');
+                    break;
+                
+                case 6:
+                    echo $this->mensajes->errorNoExiste('nro catalogo');
+                    break;     
+                
+                case 7:
+                    echo $this->mensajes->errorNumerico('nro serie');
+                    break;                
+            }
+        }else {
+            $this->modificar_fichas_model->modificarFicha($nro_serie, $marca, $calibre, $modelo, $nro_compra, $nro_catalogo, $nro_serie_ant, $marca_ant, $calibre_ant, $modelo_ant);
+            echo 1;
+        }
     }
 }
 

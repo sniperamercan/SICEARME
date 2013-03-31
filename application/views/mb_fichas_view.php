@@ -121,8 +121,13 @@
                     type: 'post',
                     url: "<?php echo base_url("mb_fichas/editarFicha"); ?>",
                     data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
-                    success: function(){
-                        irAFrame('<?php echo base_url('modificar_fichas'); ?>','O.C.I >> Modificar/Anular >> Fichas');
+                    success: function(data){
+                        if(data == 1) {
+                            irAFrame('<?php echo base_url('modificar_fichas'); ?>','O.C.I >> Modificar/Anular >> Fichas');
+                        }else {
+                            jAlert("ERROR: La ficha no se puede editar, debido a que esta ya tiene un historial generado de movimiento", "EDITAR FICHA");
+                        }
+                        
                     }                  
                 });  
             }
@@ -140,7 +145,7 @@
                                     jAlert("La ficha fue eliminado con exito del sistema", "ELIMINAR FICHA", function() { irAFrame('<?php echo base_url('mb_fichas'); ?>','O.C.I >> Modificar/Anular >> Fichas') } );
                                 }else {
 
-                                    jAlert("La ficha no se puede elimianar del sistema, debido a que esta ya tiene un historial generado de movimiento", "ELIMINAR FICHA");
+                                    jAlert("ERROR: La ficha no se puede elimianar del sistema, debido a que esta ya tiene un historial generado de movimiento", "ELIMINAR FICHA");
                                 }
 
                             }                  

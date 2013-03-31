@@ -239,21 +239,21 @@ class modificar_fichas_model extends CI_Model {
         return $query->num_rows();        
     }
     
-    function modificarFicha($nro_serie, $marca, $calibre, $modelo) {
+    function modificarFicha($nro_serie, $marca, $calibre, $modelo, $nro_compra, $nro_catalogo, $nro_serie_ant, $marca_ant, $calibre_ant, $modelo_ant) {
         
         //Borro todos los accesorios que puedo
         $query = $this->db->query("SELECT nro_accesorio
                                    FROM fichas_accesorios
-                                   WHERE nro_serie = ".$this->db->escape($nro_serie)."
-                                   AND marca       = ".$this->db->escape($marca)."
-                                   AND calibre     = ".$this->db->escape($calibre)."
-                                   AND modelo      = ".$this->db->escape($modelo));
+                                   WHERE nro_serie = ".$this->db->escape($nro_serie_ant)."
+                                   AND marca       = ".$this->db->escape($marca_ant)."
+                                   AND calibre     = ".$this->db->escape($calibre_ant)."
+                                   AND modelo      = ".$this->db->escape($modelo_ant));
 
         $array_accesorios = array();
 
         foreach($query->result() as $row) {
             $nro_accesorio = $row->nro_accesorio;
-            if($this->existeHistorialAccesorio($nro_serie, $marca, $calibre, $modelo, $nro_accesorio) == 0) {
+            if($this->existeHistorialAccesorio($nro_serie_ant, $marca_ant, $calibre_ant, $modelo_ant, $nro_accesorio) == 0) {
                 $array_accesorios[] = $row->nro_accesorio;
             }
         }
@@ -261,10 +261,10 @@ class modificar_fichas_model extends CI_Model {
         foreach($array_accesorios as $nro_accesorio) {
             
             $data_where = array(
-                'nro_serie'       => $nro_serie,
-                'marca'           => $marca,
-                'modelo'          => $modelo,
-                'calibre'         => $calibre,
+                'nro_serie'       => $nro_serie_ant,
+                'marca'           => $marca_ant,
+                'modelo'          => $modelo_ant,
+                'calibre'         => $calibre_ant,
                 'nro_accesorio'   => $nro_accesorio
             );
             
@@ -273,13 +273,39 @@ class modificar_fichas_model extends CI_Model {
         }
         
         $data_where = array(
-            'nro_serie'       => $nro_serie,
-            'marca'           => $marca,
-            'modelo'          => $modelo,
-            'calibre'         => $calibre
+            'nro_serie'       => $nro_serie_ant,
+            'marca'           => $marca_ant,
+            'modelo'          => $modelo_ant,
+            'calibre'         => $calibre_ant
         );        
 
         $this->db->delete("fichas_piezas", $data_where);
+        
+        //elimino la ficha del sistema         
+        $this->db->delete("fichas", $data_where);
+        
+        //vuelvo a crear la ficha con los datos modificados
+        $data_ficha = array(
+            'nro_serie'            => $nro_serie,
+            'marca'                => $marca,
+            'modelo'               => $modelo,
+            'calibre'              => $calibre,
+            'nro_interno_compra'   => $nro_compra,
+            'nro_interno_catalogo' => $nro_catalogo,
+            'usuario_alta'         => base64_decode($_SESSION['usuario']),
+            'usuario_edita'        => base64_decode($_SESSION['usuario'])
+        );
+        
+        $this->db->insert("fichas", $data_ficha);
+        
+        $data_db_logs = array(
+            'tipo_movimiento' => 'update',
+            'tabla'           => 'fichas',
+            'clave_tabla'     => 'nro_serie = '.$nro_serie.', marca = '.$marca.', calibre = '.$calibre.', modelo = '.$modelo,
+            'usuario'         => base64_decode($_SESSION['usuario'])
+        );        
+
+        $this->db->insert('db_logs', $data_db_logs);        
         
         for($i=0; $i < count($_SESSION['accesorios']); $i=$i+3) {
 
@@ -332,9 +358,7 @@ class modificar_fichas_model extends CI_Model {
 
                 $this->db->insert('fichas_piezas', $data_ficha_pieza);
             }
-        }     
-            
-                  
+        }         
     }
     
     function existeEntregasAccesorio($nro_serie, $marca, $calibre, $modelo) {

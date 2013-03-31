@@ -413,10 +413,21 @@ class mb_fichas extends CI_Controller {
     }  
     
     function editarFicha() {
-        $_SESSION['datos_ficha'][] = $_POST['nro_serie'];
-        $_SESSION['datos_ficha'][] = $_POST['marca'];
-        $_SESSION['datos_ficha'][] = $_POST['calibre'];
-        $_SESSION['datos_ficha'][] = $_POST['modelo'];
+        
+        $nro_serie = $_POST['nro_serie'];
+        $marca     = $_POST['marca'];
+        $calibre   = $_POST['calibre'];
+        $modelo    = $_POST['modelo'];
+        
+        if($this->mb_fichas_model->existeHistorialFicha($nro_serie, $marca, $calibre, $modelo) == 0) {
+            $_SESSION['datos_ficha'][] = $nro_serie;
+            $_SESSION['datos_ficha'][] = $marca;
+            $_SESSION['datos_ficha'][] = $calibre;
+            $_SESSION['datos_ficha'][] = $modelo;
+            echo 1;
+        }else{
+            echo 0;
+        }
     }
     
     function eliminarFicha() {
