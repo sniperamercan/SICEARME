@@ -333,7 +333,7 @@
                 <dd><input type="text" id="descripcion_pieza" class="text" /></dd>
                 </dl>                
                 
-                <p><button id="agregar_pieza" onclick="agregarPieza();"> Agregar pieza &emsp14;&emsp14;&emsp14;&emsp14; </button></p>
+                <p><button id="agregar_pieza" onclick="agregarPieza();"> Agregar pieza &nbsp;&nbsp;&nbsp;&nbsp; </button></p>
 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 
