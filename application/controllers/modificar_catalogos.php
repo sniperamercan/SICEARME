@@ -318,13 +318,15 @@ class modificar_catalogos extends CI_Controller {
     
     function validarDatos() {
         
-        $tipo_arma    = $_POST["tipo_arma"];
-        $marca        = $_POST["marca"];
-        $calibre      = $_POST["calibre"];
-        $modelo       = $_POST["modelo"];
-        $sistema      = $_POST["sistema"];
-        $empresa      = $_POST["empresa"];
-        $pais_empresa = $_POST["pais_empresa"];
+        $sin_comilla = '"';
+        
+        $tipo_arma    = str_replace($sin_comilla, "'", $_POST["tipo_arma"]);
+        $marca        = str_replace($sin_comilla, "'", $_POST["marca"]);
+        $calibre      = str_replace($sin_comilla, "'", $_POST["calibre"]);
+        $modelo       = str_replace($sin_comilla, "'", $_POST["modelo"]);
+        $sistema      = str_replace($sin_comilla, "'", $_POST["sistema"]);
+        $empresa      = str_replace($sin_comilla, "'", $_POST["empresa"]);
+        $pais_empresa = str_replace($sin_comilla, "'", $_POST["pais_empresa"]);
         $fabricacion  = $_POST["fabricacion"];
         $vencimiento  = $_POST["vencimiento"];
         

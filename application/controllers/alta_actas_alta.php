@@ -605,8 +605,6 @@ class alta_actas_alta extends CI_Controller {
         $supervision          = str_replace($sin_comilla, "'", $_POST["supervision"]);
         $observaciones        = $_POST["observaciones"];
         
-        //quieto el "" de los campos caracteres
-        
         $mensjError = array();
         $retorno = array();
         
