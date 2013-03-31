@@ -16,7 +16,7 @@ class mb_fichas extends CI_Controller {
         }
         
         //Modulo solo visible para el peril 2 y 3 - Usuarios O.C.I y Administradores O.C.I 
-        if(!$this->perms->verificoPerfil2() || !$this->perms->verificoPerfil3()) {
+        if(!$this->perms->verificoPerfil2() && !$this->perms->verificoPerfil3()) {
             die($this->mensajes->sinPermisos());
         }        
     }

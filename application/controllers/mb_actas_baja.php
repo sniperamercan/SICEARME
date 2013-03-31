@@ -15,7 +15,7 @@ class mb_actas_baja extends CI_Controller {
             die($this->mensajes->sinPermisos());
         }
         
-        //Modulo solo visible 5 - Administradores O.C.I 
+        //Modulo solo visible 5 - Administradores Abastecimiento
         if(!$this->perms->verificoPerfil5()) {
             die($this->mensajes->sinPermisos());
         }       

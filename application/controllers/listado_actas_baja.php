@@ -15,10 +15,10 @@ class listado_actas_baja extends CI_Controller {
             die($this->mensajes->sinPermisos());
         }
         
-        //Modulo solo visible 5 - Administradores O.C.I 
-        if(!$this->perms->verificoPerfil5()) {
+        //Modulo solo visible para el peril 4 y 5 - Usuarios Abastecimiento y Administradores Abastecimiento
+        if(!$this->perms->verificoPerfil4() && !$this->perms->verificoPerfil5()) {
             die($this->mensajes->sinPermisos());
-        }       
+        }         
     }
     
     function index() {

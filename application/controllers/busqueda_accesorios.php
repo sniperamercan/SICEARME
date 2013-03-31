@@ -13,11 +13,6 @@ class busqueda_accesorios extends CI_Controller {
         if(!$this->perms->VerificoUsuario()){
             die($this->mensajes->sinPermisos());
         }
-        
-        //Modulo solo visible para el peril 4 y 5 - Usuarios O.C.I y Administradores O.C.I 
-        if(!$this->perms->verificoPerfil4() || !$this->perms->verificoPerfil5()) {
-            die($this->mensajes->sinPermisos());
-        }       
     }
     
     function index() {
