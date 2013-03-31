@@ -35,9 +35,14 @@
 
             function modificarFicha() {
                 
+                 var nro_serie    = $("#nro_serie").val();
+                 var nro_compra   = $("#nro_compra").val();
+                 var nro_catalogo = $("#nro_catalogo").val();
+                 
                  $.ajax({
                     type: "post",  
                     url: "<?php base_url(); ?>modificar_fichas/validarDatos",
+                    data: "nro_serie="+nro_serie+"&nro_compra="+nro_compra+"&nro_catalogo="+nro_catalogo,
                     success: function(data){
                         if(data == "1"){            
                             jAlert("Ficha del arma modificada con exito", "Correcto", function() { irAFrame('<?php echo base_url('mb_fichas'); ?>','O.C.I >> Modificar/Anular >> Fichas'); });
