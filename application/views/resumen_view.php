@@ -24,14 +24,6 @@
             .datagrid table tfoot li a { text-decoration: none; display: inline-block;  padding: 2px 8px; margin: 1px;color: #F5F5F5;border: 1px solid #8C8C8C;-webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8C8C8C), color-stop(1, #7D7D7D) );background:-moz-linear-gradient( center top, #8C8C8C 5%, #7D7D7D 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8C8C8C', endColorstr='#7D7D7D');background-color:#8C8C8C; }
             .datagrid table tfoot ul.active, .datagrid table tfoot ul a:hover { text-decoration: none;border-color: #7D7D7D; color: #F5F5F5; background: none; background-color:#8C8C8C;}
         </style>         
-        
-        <script type="text/javascript" src='<?php echo base_url('js/charts/jquery.jqplot.min.js'); ?>'></script>
-        <script type="text/javascript" src="js/charts/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="js/charts/plugins/jqplot.canvasTextRenderer.min.js"></script>
-        <script type="text/javascript" src="js/charts/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
-        <script type="text/javascript" src="js/charts/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="js/charts/plugins/jqplot.barRenderer.min.js"></script>    
-        <link rel="stylesheet" type="text/css" href="js/charts/jquery.jqplot.css" />        
 
         <script type="text/javascript">
             
