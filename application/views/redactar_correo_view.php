@@ -23,7 +23,7 @@
                     data: "destinatario="+destinatario+"&asunto="+asunto+"&contenido="+contenido,
                     success: function(data){
                         if(data == "1"){            
-                            jAlert("Correo enviado correctamente", "Correcto", function(){ window.location.href=window.location.href; });
+                            jAlert("Correo enviado correctamente", "Correcto", function(){ parent.$.fn.colorbox.close(); });
                         }else{
                             jAlert(data, "Error");
                         }                            
