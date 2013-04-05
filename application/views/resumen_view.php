@@ -32,101 +32,6 @@
                 $("input:submit").button();
                 $("button").button(); 
                 $("input:button").button();
-/*
-                var grafica1 = [['',0]]; 
-                var grafica2 = [['',0]]; 
-                var grafica3 = [['',0]]; 
-                var i;
-                
-                $.ajax({
-                    type: "post",                    
-                    url: "<?php base_url(); ?>resumen/armoGraficas1",
-                    dataType: "json",
-                    success: function(data){
-                        
-                        for(i=0; i<data.length; i=i+2) {
-                            grafica1.push([data[i], data[i+1]]);
-                        }
-                        
-                        //PRIMER GRAFICA
-                        var plot1 = $.jqplot('chart1', [grafica1], {
-                            title: 'PRODUCTOS CON MAS STOCK EN DEPOSITO',
-                            series:[{renderer:$.jqplot.BarRenderer}],
-                            axesDefaults: {
-                                tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
-                                tickOptions: {
-                                angle: -30,
-                                fontSize: '10pt'
-                                }
-                            },
-                            axes: {
-                            xaxis: {
-                                renderer: $.jqplot.CategoryAxisRenderer
-                            }
-                            }
-                        });
-                    }
-                });
-                
-                $.ajax({
-                    type: "post",                    
-                    url: "<?php base_url(); ?>resumen/armoGraficas2",
-                    dataType: "json",
-                    success: function(data){
-                        
-                        for(i=0; i<data.length; i=i+2) {
-                            grafica2.push([data[i], data[i+1]]);
-                        }
-                        
-                        //SEGUNDA GRAFICA
-                        var plot2 = $.jqplot('chart2', [grafica2], {
-                            title: 'PRODUCTOS MAS ENTREGADOS EMPRESAS',
-                            series:[{renderer:$.jqplot.BarRenderer}],
-                            axesDefaults: {
-                                tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
-                                tickOptions: {
-                                angle: -30,
-                                fontSize: '10pt'
-                                }
-                            },
-                            axes: {
-                            xaxis: {
-                                renderer: $.jqplot.CategoryAxisRenderer
-                            }
-                            }
-                        });
-                    }
-                });
-
-                $.ajax({
-                    type: "post",                    
-                    url: "<?php base_url(); ?>resumen/armoGraficas3",
-                    dataType: "json",
-                    success: function(data){
-                        
-                        for(i=0; i<data.length; i=i+2) {
-                            grafica3.push([data[i], data[i+1]]);
-                        }
-                        
-                        //TERCER GRAFICA
-                        var plot3 = $.jqplot('chart3', [grafica3], {
-                            title: 'PRODUCTOS MAS ENTREGADOS UNIDADES',
-                            series:[{renderer:$.jqplot.BarRenderer}],
-                            axesDefaults: {
-                                tickRenderer: $.jqplot.CanvasAxisTickRenderer ,
-                                tickOptions: {
-                                angle: -30,
-                                fontSize: '10pt'
-                                }
-                            },
-                            axes: {
-                            xaxis: {
-                                renderer: $.jqplot.CategoryAxisRenderer
-                            }
-                            }
-                        });
-                    }
-                });*/
                 
             });	
 
@@ -147,12 +52,7 @@
         
         <section>
             <article class="resumen">
-                <p style="font-size: 17px; color: #1C1C1C; text-decoration: underline; font-weight: bold; font-family: monospace;"> GRAFICAS CON DATOS DEL SISTEMA </p>
                 <br />
-                
-                <div id="chart1" style="height:300px; width:500px;"></div>
-                <div id="chart2" style="height:300px; width:500px;"></div>
-                <div id="chart3" style="height:300px; width:500px;"></div>
             </article>
         </section>     
     </body>
