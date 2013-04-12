@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - alta_fichas
+*/
+
 class alta_fichas extends CI_Controller {
     
     function __construct() {
@@ -39,7 +46,7 @@ class alta_fichas extends CI_Controller {
         $data['calibre'] = "";
         $data['modelo'] = "";         
         
-        //numero de compra
+        //Numero de compra
         $nro_compras = $this->alta_fichas_model->cargoNroCompras();
         
         $data['nro_compras'] = "<option value=''> </option>";
@@ -48,7 +55,7 @@ class alta_fichas extends CI_Controller {
             $data['nro_compras'] .= "<option value='".$val."'>".$val."</option>";
         }
         
-        //accesorios
+        //Accesorios
         $accesorios = $this->alta_fichas_model->cargoAccesorios();
         
         $data['tipo_accesorios'] = "<option> </option>";
@@ -57,7 +64,7 @@ class alta_fichas extends CI_Controller {
             $data['tipo_accesorios'] .= "<option value='".$val."'>".$val."</option>";
         }        
         
-        //piezas
+        //Piezas
         $piezas = $this->alta_fichas_model->cargoPiezas();
         
         $data['tipo_piezas'] = "<option> </option>";
@@ -66,7 +73,7 @@ class alta_fichas extends CI_Controller {
             $data['tipo_piezas'] .= "<option value='".$val."'>".$val."</option>";
         }        
         
-        //cargo la vista
+        //Cargo la vista
         $this->load->view('alta_fichas_view', $data);  
     }
     
@@ -75,7 +82,7 @@ class alta_fichas extends CI_Controller {
         $nro_compra   = $_SESSION['seleccion_busqueda'];
         $nro_catalogo = $_SESSION['seleccion_busqueda1'];
         
-        //cargo los numeros de compras filtrados por el seleccionado
+        //Cargo los numeros de compras filtrados por el seleccionado
         $nro_compras = $this->alta_fichas_model->cargoNroCompras();
         
         $compras = "<option> </option>";
@@ -89,7 +96,7 @@ class alta_fichas extends CI_Controller {
             }
         }
         
-        //cargo los numeros de catalogos filtrados por el seleccionado
+        //Cargo los numeros de catalogos filtrados por el seleccionado
         $nro_catalogos = $this->alta_fichas_model->cargoNroCatalogos($nro_compra);
         
         $catalogos = "<option> </option>";
@@ -107,7 +114,7 @@ class alta_fichas extends CI_Controller {
         $retorno[] = $compras;
         $retorno[] = $catalogos;       
         
-        //retorno los datos
+        //Retorno los datos
         if(!empty($nro_catalogo)) {
             $info_catalogos = $this->cargoInformacionArray($nro_catalogo);
             $retorno[] = $info_catalogos[0];
@@ -202,23 +209,23 @@ class alta_fichas extends CI_Controller {
         $nro_serie             = $_POST['nro_serie'];
         
         $info_catalogos = array();
-        $mensjError = array();
+        $mensaje_error = array();
         $retorno = array();
         
         if(empty($nro_accesorio)) {
-            $mensjError[] = 1;
+            $mensaje_error[] = 1;
         }
         
         if(empty($tipo_accesorio)) {
-            $mensjError[] = 2;
+            $mensaje_error[] = 2;
         }
         
         if(empty($descripcion_accesorio)) {
-            $mensjError[] = 3;
+            $mensaje_error[] = 3;
         }
         
         if(empty($nro_catalogo)) {
-            $mensjError[] = 4;
+            $mensaje_error[] = 4;
         }else {
             
             if(!is_null($nro_catalogo)) {
@@ -228,12 +235,12 @@ class alta_fichas extends CI_Controller {
                 $modelo  = $info_catalogos[2];
 
                 if($this->alta_fichas_model->existeAccesorio($nro_serie, $marca, $calibre, $modelo, $nro_accesorio)) {
-                    $mensjError[] = 5;
+                    $mensaje_error[] = 5;
                 }  
             }
         }    
             
-        //verifico que el nro de catalogo no exista ya en el listado
+        //Verifico que el nro de catalogo no exista ya en el listado
         $encontre = false;
         $i = 0;
         
@@ -247,16 +254,16 @@ class alta_fichas extends CI_Controller {
         }
         
         if($encontre) {
-           $mensjError[] = 6; 
+           $mensaje_error[] = 6; 
         }
         
         if(!$this->form_validation->numeric($nro_accesorio)) {
-            $mensjError[] = 7;
+            $mensaje_error[] = 7;
         }         
         
-        if(count($mensjError) > 0) {
+        if(count($mensaje_error) > 0) {
             
-            switch ($mensjError[0]) {
+            switch ($mensaje_error[0]) {
                 
                 case 1:
                     $retorno[] = $this->mensajes->errorVacio('nro accesorio');
@@ -315,23 +322,23 @@ class alta_fichas extends CI_Controller {
         $nro_serie         = $_POST['nro_serie'];
         
         $info_catalogos = array();
-        $mensjError = array();
+        $mensaje_error = array();
         $retorno = array();
         
         if(empty($nro_pieza)) {
-            $mensjError[] = 1;
+            $mensaje_error[] = 1;
         }
         
         if(empty($tipo_pieza)) {
-            $mensjError[] = 2;
+            $mensaje_error[] = 2;
         }
         
         if(empty($descripcion_pieza)) {
-            $mensjError[] = 3;
+            $mensaje_error[] = 3;
         }
         
         if(empty($nro_catalogo)) {
-            $mensjError[] = 4;
+            $mensaje_error[] = 4;
         }else {
            
             if(!is_null($nro_catalogo)) {
@@ -342,12 +349,12 @@ class alta_fichas extends CI_Controller {
                 $modelo  = $info_catalogos[2];
 
                 if($this->alta_fichas_model->existePieza($nro_serie, $marca, $calibre, $modelo, $nro_pieza)) {
-                    $mensjError[] = 5;
+                    $mensaje_error[] = 5;
                 }  
             }
         }
         
-        //verifico que el nro de catalogo no exista ya en el listado
+        //Verifico que el nro de catalogo no exista ya en el listado
         $encontre = false;
         $i = 0;
         
@@ -361,16 +368,16 @@ class alta_fichas extends CI_Controller {
         }
         
         if($encontre) {
-           $mensjError[] = 6; 
+           $mensaje_error[] = 6; 
         }
         
         if(!$this->form_validation->numeric($nro_pieza)) {
-            $mensjError[] = 7;
+            $mensaje_error[] = 7;
         }        
         
-        if(count($mensjError) > 0) {
+        if(count($mensaje_error) > 0) {
             
-            switch ($mensjError[0]) {
+            switch ($mensaje_error[0]) {
                 
                 case 1:
                     $retorno[] = $this->mensajes->errorVacio('nro pieza');
@@ -516,18 +523,18 @@ class alta_fichas extends CI_Controller {
         $nro_compra   = $_POST['nro_compra'];
         $nro_catalogo = $_POST['nro_catalogo'];
         
-        $mensjError = array();
+        $mensaje_error = array();
         
         if(empty($nro_serie)) {
-            $mensjError[] = 1;
+            $mensaje_error[] = 1;
         }
         
         if(empty($nro_compra)) {
-            $mensjError[] = 2;
+            $mensaje_error[] = 2;
         }
         
         if(empty($nro_catalogo)) {
-            $mensjError[] = 3;
+            $mensaje_error[] = 3;
         }      
         
         $marca   = "";
@@ -542,24 +549,24 @@ class alta_fichas extends CI_Controller {
         }
         
         if($this->alta_fichas_model->existeFicha($nro_serie, $marca, $calibre, $modelo)) {
-            $mensjError[] = 4;
+            $mensaje_error[] = 4;
         }
         
         if(!$this->alta_fichas_model->existeNroCompra($nro_compra)) {
-            $mensjError[] = 5;
+            $mensaje_error[] = 5;
         }
         
         if(!$this->alta_fichas_model->existeNroCatalogo($nro_catalogo)) {
-            $mensjError[] = 6;
+            $mensaje_error[] = 6;
         }      
         
         if(!$this->form_validation->numeric($nro_serie)) {
-            $mensjError[] = 7;
+            $mensaje_error[] = 7;
         }
         
-        if(count($mensjError) > 0) {
+        if(count($mensaje_error) > 0) {
             
-            switch($mensjError[0]) {
+            switch($mensaje_error[0]) {
                 
                 case 1:
                     echo $this->mensajes->errorVacio('nro serie');

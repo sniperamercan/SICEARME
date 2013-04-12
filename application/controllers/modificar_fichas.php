@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - modificar_fichas
+*/
+
 class modificar_fichas extends CI_Controller {
     
     function __construct() {
@@ -61,7 +68,7 @@ class modificar_fichas extends CI_Controller {
         
         $data['nro_compra']   = $compra_catalogo[0];
         
-        //cargo catalogos 
+        //Cargo catalogos 
         $array_catalogos = $this->modificar_fichas_model->cargoNroCatalogos($compra_catalogo[0]);
         
         $data['nro_catalogo'] = "";
@@ -79,9 +86,9 @@ class modificar_fichas extends CI_Controller {
         $data['tipo_arma'] = $datos_extras[0];
         $data['sistema']   = $datos_extras[1];        
         
-        //cargo nro de compras
+        //Cargo nro de compras
         
-        //numero de compra
+        //Numero de compra
         $nro_compras = $this->modificar_fichas_model->cargoNroCompras();
         
         $data['nro_compras'] = "<option value=''> </option>";
@@ -94,7 +101,7 @@ class modificar_fichas extends CI_Controller {
             }
         }
         
-        //accesorios
+        //Accesorios
         $accesorios = $this->modificar_fichas_model->cargoAccesorios();
         
         $data['tipo_accesorios'] = "<option> </option>";
@@ -103,7 +110,7 @@ class modificar_fichas extends CI_Controller {
             $data['tipo_accesorios'] .= "<option value='".$val."'>".$val."</option>";
         }        
         
-        //piezas
+        //Piezas
         $piezas = $this->modificar_fichas_model->cargoPiezas();
         
         $data['tipo_piezas'] = "<option> </option>";
@@ -112,7 +119,7 @@ class modificar_fichas extends CI_Controller {
             $data['tipo_piezas'] .= "<option value='".$val."'>".$val."</option>";
         }        
         
-        //cargo todos los accesorios de esa ficha
+        //Cargo todos los accesorios de esa ficha
         
         if($this->modificar_fichas_model->existeAccesoriosFicha($datos_ficha[0], $datos_ficha[1], $datos_ficha[2], $datos_ficha[3])) {
             
@@ -154,9 +161,9 @@ class modificar_fichas extends CI_Controller {
         
         $data['accesorios'] = $concat;
 
-        //fin cargo accesorios
+        //Fin cargo accesorios
         
-        //cargo todas las piezas de esa ficha
+        //Cargo todas las piezas de esa ficha
         
         if($this->modificar_fichas_model->existePiezasFicha($datos_ficha[0], $datos_ficha[1], $datos_ficha[2], $datos_ficha[3])) {
             
@@ -194,9 +201,9 @@ class modificar_fichas extends CI_Controller {
         
         $data['piezas'] = $concat;
         
-        //fin cargo piezas
+        //Fin cargo piezas
         
-        //cargo la vista
+        //Cargo la vista
         $this->load->view('modificar_fichas_view', $data);  
     }
     
@@ -205,7 +212,7 @@ class modificar_fichas extends CI_Controller {
         $nro_compra   = $_SESSION['seleccion_busqueda'];
         $nro_catalogo = $_SESSION['seleccion_busqueda1'];
         
-        //cargo los numeros de compras filtrados por el seleccionado
+        //Cargo los numeros de compras filtrados por el seleccionado
         $nro_compras = $this->modificar_fichas_model->cargoNroCompras();
         
         $compras = "<option> </option>";
@@ -219,7 +226,7 @@ class modificar_fichas extends CI_Controller {
             }
         }
         
-        //cargo los numeros de catalogos filtrados por el seleccionado
+        //Cargo los numeros de catalogos filtrados por el seleccionado
         $nro_catalogos = $this->modificar_fichas_model->cargoNroCatalogos($nro_compra);
         
         $catalogos = "<option> </option>";
@@ -232,7 +239,7 @@ class modificar_fichas extends CI_Controller {
             }
         }
         
-        //retorno los datos
+        //Retorno los datos
         $info_catalogos = $this->cargoInformacionArray($nro_catalogo);
         $retorno = array();
         $retorno[] = $compras;
@@ -359,7 +366,7 @@ class modificar_fichas extends CI_Controller {
             }
         }    
             
-        //verifico que el nro de catalogo no exista ya en el listado
+        //Verifico que el nro de catalogo no exista ya en el listado
         $encontre = false;
         $i = 0;
         
@@ -473,7 +480,7 @@ class modificar_fichas extends CI_Controller {
             }
         }
         
-        //verifico que el nro de catalogo no exista ya en el listado
+        //Verifico que el nro de catalogo no exista ya en el listado
         $encontre = false;
         $i = 0;
         

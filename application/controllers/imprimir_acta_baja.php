@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - imprimir_acta_baja
+*/
+
 class imprimir_acta_baja extends CI_Controller {
 
     function __construct() {
@@ -29,7 +36,7 @@ class imprimir_acta_baja extends CI_Controller {
             $nro_acta = 0;
         }
             
-        //traigo todos los datos del acta en un array
+        //Obtengo todos los datos del acta en un array
         $datos_acta = $this->imprimir_acta_baja_model->datosActa($nro_acta);
         
         /*
@@ -41,25 +48,25 @@ class imprimir_acta_baja extends CI_Controller {
          * $datos_acta[] = $row->observaciones;              5
          */
         
-        //cargo nro_acta
+        //Cargo nro_acta
         $data['nro_acta'] = $nro_acta;
         
-        //cargo fecha
+        //Cargo fecha
         $data['fecha'] = $datos_acta[0];
         
-        //cargo las unidades
+        //Cargo las unidades
         $data['unidad_entrega'] = $this->imprimir_acta_baja_model->cargoNombreUnidad($datos_acta[1]);
         
-        //cargo representante sma
+        //Cargo representante sma
         $data['representante_sma'] = $datos_acta[2];
         
-        //cargo representante unidad
+        //Cargo representante unidad
         $data['representante_unidad'] = $datos_acta[3];
         
-        //cargo supervisor 
+        //Cargo supervisor 
         $data['supervision'] = $datos_acta[4];
         
-        //cargo observaciones
+        //Cargo observaciones
         $data['observaciones'] = $datos_acta[5];
         
         //Armar grilla de entrega de armamento
@@ -123,7 +130,7 @@ class imprimir_acta_baja extends CI_Controller {
         
         //Fin armo grilla de entrega de accesorios
         
-        //cargo la vista
+        //Cargo la vista
         $this->load->view("imprimir_acta_baja_view", $data);
     }
     

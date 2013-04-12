@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - modificar_catalogos
+*/
+
 class modificar_catalogos extends CI_Controller {
     
     function __construct() {
@@ -28,7 +35,7 @@ class modificar_catalogos extends CI_Controller {
             $nro_catalogo = 0;
         }        
         
-        //traigo datos generales
+        //Obtengo datos generales
         $datos_catalogo = $this->modificar_catalogos_model->datosGenerales($_SESSION['nro_catalogo']);
         
         /*
@@ -38,7 +45,7 @@ class modificar_catalogos extends CI_Controller {
          * $retorno[] = $row->vencimiento; 
         */
         
-        //INICIO - cargo empresas
+        //Inicio cargo empresas
         $array_empresas = $this->modificar_catalogos_model->cargoEmpresas();
 
         $data['empresas'] = "<option> </option>";
@@ -51,9 +58,9 @@ class modificar_catalogos extends CI_Controller {
                 $data['empresas'] .= "<option value='".$val."'>".$val."</option>";
             }
         }
-        //FIN - cargo empresas     
+        //Fin cargo empresas     
 
-        //INICIO - cargo paises
+        //Inicio cargo paises
         $array_paises = $this->modificar_catalogos_model->cargoPaises();
 
         $data['paises'] = "<option> </option>";
@@ -66,7 +73,7 @@ class modificar_catalogos extends CI_Controller {
                 $data['paises'] .= "<option value='".$val."'>".$val."</option>";
             }
         }
-        //FIN - cargo paises    
+        //Fin cargo paises    
         
         $data['fabricacion'] = $datos_catalogo[2];
         $data['vencimiento'] = $datos_catalogo[3];
@@ -112,7 +119,7 @@ class modificar_catalogos extends CI_Controller {
             $retorno[] = 0;
             $datos_catalogo = $this->modificar_catalogos_model->datosCatalogo($nro_catalogo);
             
-            //INICIO - cargo tipos armas
+            //Inicio cargo tipos armas
             $array_tipos_armas = $this->modificar_catalogos_model->cargoTiposArmas();
 
             $concat = "<option> </option>";
@@ -125,11 +132,11 @@ class modificar_catalogos extends CI_Controller {
                     $concat .= "<option value='".$val."'>".$val."</option>";
                 }
             }
-            //FIN - cargo tipos armas
+            //Fin cargo tipos armas
 
             $retorno[] = $concat; //almaceno todos los tipos de armas
             
-            //INICIO - cargo marcas
+            //Inicio cargo marcas
             $array_marcas = $this->modificar_catalogos_model->cargoMarcas();
 
             $concat = "<option> </option>";
@@ -142,11 +149,11 @@ class modificar_catalogos extends CI_Controller {
                     $concat .= "<option value='".$val."'>".$val."</option>";
                 }
             }
-            //FIN - cargo marcas
+            //Fin cargo marcas
 
             $retorno[] = $concat; //almaceno todos las marcas
             
-            //INICIO - cargo calibres
+            //Inicio cargo calibres
             $array_calibres = $this->modificar_catalogos_model->cargoCalibres();
 
             $concat = "<option> </option>";
@@ -159,11 +166,11 @@ class modificar_catalogos extends CI_Controller {
                     $concat .= "<option value='".$val."'>".$val."</option>";
                 }
             }
-            //FIN - cargo calibres
+            //Fin cargo calibres
 
             $retorno[] = $concat; //almaceno todos los calibres
             
-            //INICIO - cargo modelos
+            //Inicio cargo modelos
             $array_modelos = $this->modificar_catalogos_model->cargoModelos();
 
             $concat = "<option> </option>";
@@ -176,11 +183,11 @@ class modificar_catalogos extends CI_Controller {
                     $concat .= "<option value='".$val."'>".$val."</option>"; 
                 } 
             }
-            //FIN - cargo modelos
+            //Fin cargo modelos
 
             $retorno[] = $concat; //almaceno todos los modelos
             
-            //INICIO - cargo sistemas
+            //Inicio cargo sistemas
             $array_sistemas = $this->modificar_catalogos_model->cargoSistemas();
 
             $concat = "<option> </option>";
@@ -193,7 +200,7 @@ class modificar_catalogos extends CI_Controller {
                     $concat .= "<option value='".$val."'>".$val."</option>";    
                 }
             }
-            //FIN - cargo sistemas
+            //Fin cargo sistemas
             
             $retorno[] = $concat; //almaceno todos los sistemas
         }

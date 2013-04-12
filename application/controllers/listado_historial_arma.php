@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - listado_historial_arma
+*/
+
 class listado_historial_arma extends CI_Controller {
 
     function __construct() {

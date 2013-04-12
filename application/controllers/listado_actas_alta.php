@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - listado_actas_alta
+*/
+
 class listado_actas_alta extends CI_Controller {
 
     function __construct() {
@@ -22,6 +29,7 @@ class listado_actas_alta extends CI_Controller {
     }
     
     function index() {
+        
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
         
@@ -33,7 +41,7 @@ class listado_actas_alta extends CI_Controller {
     //cantReg = cantidad de registros x pagina
     function consulta($param="",$cantReg=30) {   
      
-        //INICIO, ARMO CONDICIONES WHERE PARA SQL
+        //Inicio, armo condiciones where para sql
         if( isset($_POST['nro_acta']) && isset($_POST['estado']) && isset($_POST['fecha1']) && isset($_POST['fecha2']) ) { 
             
             $condicion = "";
@@ -68,15 +76,15 @@ class listado_actas_alta extends CI_Controller {
         }else{
             $condicion = 1;
         }
-        //FIN, ARMO CONDICIONES WHERE PARA SQL
+        //Fin, armo condiciones where para sql
         
-        //verifico el order si esta seteado si no por defecto de esta consulta
+        //Verifico el order si esta seteado si no por defecto de esta consulta
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
             $order = "nro_acta";
         }
-        //fin verifico order        
+        //Fin verifico order        
         
         $result = array();
         
@@ -132,7 +140,6 @@ class listado_actas_alta extends CI_Controller {
             ";
             
             $j++;
-            
         }                  
         
         $config['base_url'] = site_url("listado_actas_alta/consulta");
@@ -153,7 +160,7 @@ class listado_actas_alta extends CI_Controller {
         
         $paginado .= '</center>';
         
-        //retorno de datos json
+        //Retorno de datos json
         $retorno = array();
         $retorno[] = $concat;
         $retorno[] = $paginado;
@@ -170,13 +177,13 @@ class listado_actas_alta extends CI_Controller {
         $de_pagina = $_POST['de_pagina'];
         $a_pagina  = $_POST['a_pagina'];
       
-        //verifico el order si esta seteado si no por defecto de esta consulta
+        //Verifico el order si esta seteado si no por defecto de esta consulta
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
             $order = "nro_acta";
         }
-        //fin verifico order
+        //Fin verifico order
         
         if(isset($_SESSION['condicion']) && !empty($_SESSION['condicion'])){
             $condicion = $_SESSION['condicion'];      
@@ -333,10 +340,8 @@ class listado_actas_alta extends CI_Controller {
             echo "El nro de acta - ".$nro_acta." no tiene ninguna ficha asociada";
         }else {
             
-            $fichas = array();
             $fichas = $this->listado_actas_alta_model->verFichas($nro_acta);
             
-            $accesorios = array();
             $accesorios = $this->listado_actas_alta_model->verAccesorios($nro_acta);
             
             $concat = "<p style='font-weight: bold;'> Entregas asociadas al nro de acta - ".$nro_acta." </p>";
@@ -350,7 +355,7 @@ class listado_actas_alta extends CI_Controller {
              * $retorno[] = $row->modelo;
             */
             
-            $j = 0;
+            $j = 0; 
             
             for($i=0; $i<count($fichas); $i=$i+4) {
                 if($j % 2 == 0){
@@ -400,6 +405,7 @@ class listado_actas_alta extends CI_Controller {
     }     
     
     function imprimirRecibo() {
+        
         $_SESSION['nro_acta'] = $_POST['nro_acta'];
     }
 }

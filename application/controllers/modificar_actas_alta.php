@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - modificar_actas_alta
+*/
+
 class modificar_actas_alta extends CI_Controller {
     
     function __construct() {
@@ -31,7 +38,7 @@ class modificar_actas_alta extends CI_Controller {
             $nro_acta = 0;
         }
             
-        //traigo todos los datos del acta en un array
+        //Obtengo todos los datos del acta en un array
         $datos_acta = $this->modificar_actas_alta_model->datosActa($nro_acta);
         
         /*
@@ -43,10 +50,10 @@ class modificar_actas_alta extends CI_Controller {
          * $datos_acta[] = $row->observaciones;              5
          */
         
-        //cargo fecha
+        //Cargo fecha
         $data['fecha'] = $datos_acta[0];
         
-        //cargo las unidades
+        //Cargo las unidades
         $unidades = $this->modificar_actas_alta_model->cargoUnidades();
         
         $data['unidades'] = "<option> </option>";
@@ -59,21 +66,21 @@ class modificar_actas_alta extends CI_Controller {
                 $data['unidades'] .= "<option value='".$unidades[$i]."'>".$unidades[$i+1]."</option>";
             }
         }
-        //fin cargo unidades      
+        //Fin cargo unidades      
         
-        //cargo representante sma
+        //Cargo representante sma
         $data['representante_sma'] = $datos_acta[2];
         
-        //cargo representante unidad
+        //Cargo representante unidad
         $data['representante_unidad'] = $datos_acta[3];
         
-        //cargo supervisor 
+        //Cargo supervisor 
         $data['supervision'] = $datos_acta[4];
         
-        //cargo observaciones
+        //Cargo observaciones
         $data['observaciones'] = $datos_acta[5];
         
-        //cargo nro de series de armamentos que esten en deposito inicial
+        //Cargo nro de series de armamentos que esten en deposito inicial
         $nro_series = $this->modificar_actas_alta_model->cargoNroSeries();
         
         $data['nro_series'] = "<option> </option>";
@@ -81,9 +88,9 @@ class modificar_actas_alta extends CI_Controller {
         foreach($nro_series as $val) {
             $data['nro_series'] .= "<option value='".$val."'>".$val."</option>";
         }
-        //fin cargo nro de series de armamento en deposito inicial
+        //Fin cargo nro de series de armamento en deposito inicial
         
-        //cargo nro de series de armamentos que esten en deposito inicial de accesorios
+        //Cargo nro de series de armamentos que esten en deposito inicial de accesorios
         $nro_series_accesorios = $this->modificar_actas_alta_model->cargoNroSeriesAccesorios();
         
         $data['nro_series_accesorios'] = "<option> </option>";
@@ -91,7 +98,7 @@ class modificar_actas_alta extends CI_Controller {
         foreach($nro_series_accesorios as $val) {
             $data['nro_series_accesorios'] .= "<option>".$val."</option>";
         }
-        //fin cargo nro de series de armamento en deposito inicial        
+        //Fin cargo nro de series de armamento en deposito inicial        
         
         //Armar grilla de entrega de armamento
         
@@ -175,7 +182,7 @@ class modificar_actas_alta extends CI_Controller {
         
         //Fin armo grilla de entrega de accesorios
             
-        //cargo la vista    
+        //Cargo la vista    
         $this->load->view('modificar_actas_alta_view', $data);  
     }
     
@@ -301,7 +308,7 @@ class modificar_actas_alta extends CI_Controller {
         $modelo    = $_SESSION['seleccion_busqueda3'];
        
         if(empty($nro_serie)) {
-            //cargo nro de series de armamentos que esten en deposito inicial
+            //Cargo nro de series de armamentos que esten en deposito inicial
             $nro_series_array = $this->modificar_actas_alta_model->cargoNroSeries();
 
             $aux = '""';
@@ -311,7 +318,7 @@ class modificar_actas_alta extends CI_Controller {
                 $aux = '"'.$val.'"';
                 $nro_series .= "<option value='".$val."'>".$val."</option>";
             }
-            //fin cargo nro de series de armamento en deposito inicial            
+            //Fin cargo nro de series de armamento en deposito inicial            
         }else {
             $nro_series  = "<option> </option>";
             $nro_series .= "<option selected='selected' value='".$nro_serie."'>".$nro_serie."</option>";
@@ -345,7 +352,7 @@ class modificar_actas_alta extends CI_Controller {
         $nro_accesorio = $_SESSION['seleccion_busqueda4'];
        
         if(empty($nro_serie)) {
-            //cargo nro de series de armamentos que esten en deposito inicial
+            //Cargo nro de series de armamentos que esten en deposito inicial
             $nro_series_array = $this->modificar_actas_alta_model->cargoNroSeries();
 
             $aux = '""';
@@ -355,7 +362,7 @@ class modificar_actas_alta extends CI_Controller {
                 $aux = '"'.$val.'"';
                 $nro_series .= "<option value='".$val."'>".$val."</option>";
             }
-            //fin cargo nro de series de armamento en deposito inicial            
+            //Fin cargo nro de series de armamento en deposito inicial            
         }else {
             $nro_series  = "<option> </option>";
             $nro_series .= "<option selected='selected' value='".$nro_serie."'>".$nro_serie."</option>";
@@ -373,7 +380,7 @@ class modificar_actas_alta extends CI_Controller {
         $nro_accesorios  = "<option> </option>";
         $nro_accesorios .= "<option selected='selected' value='".$nro_accesorio."'>".$nro_accesorio."</option>";        
         
-        //retorno los datos
+        //Retorno los datos
         $retorno = array();
         $retorno[] = $nro_series;
         $retorno[] = $marcas;
@@ -410,12 +417,12 @@ class modificar_actas_alta extends CI_Controller {
             $mensjError[] = 4;
         }
             
-        //verifico que esa ficha exista en la base de datos en deposito inicial
+        //Verifico que esa ficha exista en la base de datos en deposito inicial
         if(!$this->modificar_actas_alta_model->existeFicha($nro_serie, $marca, $calibre, $modelo)) {
             $mensjError[] = 5;
         }
         
-        //verifico que el nro de catalogo no exista ya en el listado
+        //Verifico que el nro de catalogo no exista ya en el listado
         $encontre = false;
         $i = 0;
         
@@ -571,12 +578,12 @@ class modificar_actas_alta extends CI_Controller {
             $mensjError[] = 5;
         }          
         
-        //verifico que esa ficha exista en la base de datos en deposito inicial
+        //Verifico que esa ficha exista en la base de datos en deposito inicial
         if(!$this->modificar_actas_alta_model->existeAccesorio($nro_serie, $marca, $calibre, $modelo, $nro_accesorio)) {
             $mensjError[] = 6;
         }
         
-        //verifico que el nro de catalogo no exista ya en el listado
+        //Verifico que el nro de catalogo no exista ya en el listado
         $encontre = false;
         $i = 0;
         
@@ -746,7 +753,7 @@ class modificar_actas_alta extends CI_Controller {
             $mensjError[] = 5;
         }            
         
-        //verifico si hay armamento para entregar
+        //Verifico si hay armamento para entregar
         if(count($_SESSION['fichas']) == 0) {
             $mensjError[] = 6;
         }

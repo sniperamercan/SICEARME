@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - listado_documentos_imagenes_catalogos
+*/
+
 class listado_documentos_imagenes_catalogos extends CI_Controller {
 
     function __construct() {
@@ -20,7 +27,7 @@ class listado_documentos_imagenes_catalogos extends CI_Controller {
         $_SESSION['id_upload'][0] = 1;
         $_SESSION['id_upload'][1] = 0;
         
-        //cargo empresas
+        //Cargo empresas
         $catalogos = array();
         $catalogos = $this->listado_documentos_imagenes_catalogos_model->cargoCatalogos();
         
@@ -29,7 +36,7 @@ class listado_documentos_imagenes_catalogos extends CI_Controller {
         foreach($catalogos as $val) {
             $concat .= "<option value='".$val."'>".$val."</option>";
         }
-        //fin cargo empresas
+        //Fin cargo empresas
             
         $data = array(
             'error'   => ' ',
@@ -71,12 +78,14 @@ class listado_documentos_imagenes_catalogos extends CI_Controller {
     }
     
     function cargoId() {
+        
        $_SESSION['id_upload'][0]++;
        $_SESSION['id_upload'][1]++;
        echo json_encode($_SESSION['id_upload']);
     }
     
     function quitoId() {
+        
        $_SESSION['id_upload'][1]--;
        echo $_SESSION['id_upload'][1];
     }
@@ -97,7 +106,7 @@ class listado_documentos_imagenes_catalogos extends CI_Controller {
                 mkdir($target_path, 0777);
             }
 
-            //le doy todos los permisos a la carpeta
+            //Asigno todos los permisos a la carpeta
             if(!chmod($target_path, 0777)) {
                 chmod($target_path, 0777); 
             }
@@ -118,7 +127,7 @@ class listado_documentos_imagenes_catalogos extends CI_Controller {
 
                 $target_path = $target_path . basename( $_FILES['userfile']['name'][$i]);
 
-                //controles sobre archivos antes de ser subidos al servidor
+                //Controles sobre archivos antes de ser subidos al servidor
 
                 if(empty($_FILES['userfile']['name'][$i])){
                     $mensArray[] =  2;

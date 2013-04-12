@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - alta_stock_de_almacen
+*/
+
 class alta_stock_de_almacen extends CI_Controller {
     
     function __construct() {

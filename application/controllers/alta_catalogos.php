@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - alta_catalogos
+*/
+
 class alta_catalogos extends CI_Controller {
     
     function __construct() {
@@ -28,7 +35,7 @@ class alta_catalogos extends CI_Controller {
         
         $_SESSION['alta_nro_catalogo'] = '';
         
-        //INICIO - cargo tipos armas
+        //Inicio cargo tipos armas
         $array_tipos_armas = $this->alta_catalogos_model->cargoTiposArmas();
         
         $data['tipos_armas'] = "<option> </option>";
@@ -36,9 +43,9 @@ class alta_catalogos extends CI_Controller {
         foreach($array_tipos_armas as $val) {
             $data['tipos_armas'] .= "<option value='".$val."'>".$val."</option>";
         }
-        //FIN - cargo tipos armas
+        //Fin cargo tipos armas
         
-        //INICIO - cargo marcas
+        //Inicio cargo marcas
         $array_marcas = $this->alta_catalogos_model->cargoMarcas();
         
         $data['marcas'] = "<option> </option>";
@@ -46,9 +53,9 @@ class alta_catalogos extends CI_Controller {
         foreach($array_marcas as $val) {
             $data['marcas'] .= "<option value='".$val."'>".$val."</option>";
         }
-        //FIN - cargo marcas
+        //Fin cargo marcas
         
-        //INICIO - cargo calibres
+        //Inicio cargo calibres
         $array_calibres = $this->alta_catalogos_model->cargoCalibres();
         
         $data['calibres'] = "<option> </option>";
@@ -56,9 +63,9 @@ class alta_catalogos extends CI_Controller {
         foreach($array_calibres as $val) {
             $data['calibres'] .= "<option value='".$val."'>".$val."</option>";
         }
-        //FIN - cargo calibres
+        //Fin cargo calibres
         
-        //INICIO - cargo modelos
+        //Inicio cargo modelos
         $array_modelos = $this->alta_catalogos_model->cargoModelos();
         
         $data['modelos'] = "<option> </option>";
@@ -66,9 +73,9 @@ class alta_catalogos extends CI_Controller {
         foreach($array_modelos as $val) {
             $data['modelos'] .= "<option value='".$val."'>".$val."</option>";
         }
-        //FIN - cargo modelos
+        //Fin cargo modelos
         
-        //INICIO - cargo sistemas
+        //Inicio cargo sistemas
         $array_sistemas = $this->alta_catalogos_model->cargoSistemas();
         
         $data['sistemas'] = "<option> </option>";
@@ -76,9 +83,9 @@ class alta_catalogos extends CI_Controller {
         foreach($array_sistemas as $val) {
             $data['sistemas'] .= "<option value='".$val."'>".$val."</option>";
         }
-        //FIN - cargo sistemas
+        //Fin cargo sistemas
         
-        //INICIO - cargo empresas
+        //Inicio cargo empresas
         $array_empresas = $this->alta_catalogos_model->cargoEmpresas();
         
         $data['empresas'] = "<option> </option>";
@@ -86,9 +93,9 @@ class alta_catalogos extends CI_Controller {
         foreach($array_empresas as $val) {
             $data['empresas'] .= "<option value='".$val."'>".$val."</option>";
         }
-        //FIN - cargo empresas     
+        //Fin cargo empresas     
         
-        //INICIO - cargo paises
+        //Inicio cargo paises
         $array_paises = $this->alta_catalogos_model->cargoPaises();
         
         $data['paises'] = "<option> </option>";
@@ -96,7 +103,7 @@ class alta_catalogos extends CI_Controller {
         foreach($array_paises as $val) {
             $data['paises'] .= "<option value='".$val."'>".$val."</option>";
         }
-        //FIN - cargo paises
+        //Fin cargo paises
         
         $this->load->view('alta_catalogos_view', $data); 
         

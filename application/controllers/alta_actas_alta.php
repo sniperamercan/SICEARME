@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - alta_actas_alta
+*/
+
 class alta_actas_alta extends CI_Controller {
     
     function __construct() {
@@ -25,7 +32,7 @@ class alta_actas_alta extends CI_Controller {
         $_SESSION['fichas']     = array(); //inicializo el array de fichas a entregar
         $_SESSION['accesorios'] = array(); //inicializo el array de accesorios a entregar
         
-        //cargo las unidades
+        //Cargo las unidades
         $unidades = $this->alta_actas_alta_model->cargoUnidades();
         
         $data['unidades'] = "<option> </option>";
@@ -33,31 +40,33 @@ class alta_actas_alta extends CI_Controller {
         for($i=0; $i < count($unidades); $i=$i+2) {
             $data['unidades'] .= "<option value='".$unidades[$i]."'>".$unidades[$i+1]."</option>";
         }
-        //fin cargo unidades
+        //Fin cargo unidades
         
-        //cargo nro de series de armamentos que esten en deposito inicial
+        //Cargo nro de series de armamentos que esten en deposito inicial
         $nro_series = $this->alta_actas_alta_model->cargoNroSeries();
         
         $aux = '""';
+        
         $data['nro_series'] = "<option> </option>";
         
         foreach($nro_series as $val) {
             $aux = '"'.$val.'"';
             $data['nro_series'] .= "<option value='".$val."'>".$val."</option>";
         }
-        //fin cargo nro de series de armamento en deposito inicial
+        //Fin cargo nro de series de armamento en deposito inicial
         
-        //cargo nro de series de armamentos que esten en deposito inicial de accesorios
+        //Cargo nro de series de armamentos que esten en deposito inicial de accesorios
         $nro_series_accesorios = $this->alta_actas_alta_model->cargoNroSeriesAccesorios();
         
         $aux = '""';
+        
         $data['nro_series_accesorios'] = "<option> </option>";
         
         foreach($nro_series_accesorios as $val) {
             $aux = '"'.$val.'"';
             $data['nro_series_accesorios'] .= "<option value='".$val."'>".$val."</option>";
         }
-        //fin cargo nro de series de armamento en deposito inicial        
+        //Fin cargo nro de series de armamento en deposito inicial de accesorios        
         
         $this->load->view('alta_actas_alta_view', $data);  
     }
@@ -185,7 +194,7 @@ class alta_actas_alta extends CI_Controller {
         $modelo    = $_SESSION['seleccion_busqueda3'];
         
         if(empty($nro_serie)) {
-            //cargo nro de series de armamentos que esten en deposito inicial
+            //Cargo nro de series de armamentos que esten en deposito inicial
             $nro_series_array = $this->alta_actas_alta_model->cargoNroSeries();
 
             $aux = '""';
@@ -195,7 +204,7 @@ class alta_actas_alta extends CI_Controller {
                 $aux = '"'.$val.'"';
                 $nro_series .= "<option value='".$val."'>".$val."</option>";
             }
-            //fin cargo nro de series de armamento en deposito inicial            
+            //Fin cargo nro de series de armamento en deposito inicial            
         }else {
             $nro_series  = "<option> </option>";
             $nro_series .= "<option selected='selected' value='".$nro_serie."'>".$nro_serie."</option>";
@@ -210,7 +219,7 @@ class alta_actas_alta extends CI_Controller {
         $modelos  = "<option> </option>";
         $modelos .= "<option selected='selected' value='".$modelo."'>".$modelo."</option>";        
         
-        //retorno los datos
+        //Retorno los datos
         $retorno = array();
         $retorno[] = $nro_series;
         $retorno[] = $marcas;
@@ -229,7 +238,7 @@ class alta_actas_alta extends CI_Controller {
         $nro_accesorio = $_SESSION['seleccion_busqueda4'];
        
         if(empty($nro_serie)) {
-            //cargo nro de series de armamentos que esten en deposito inicial
+            //Cargo nro de series de armamentos que esten en deposito inicial
             $nro_series_array = $this->alta_actas_alta_model->cargoNroSeries();
 
             $aux = '""';
@@ -239,7 +248,7 @@ class alta_actas_alta extends CI_Controller {
                 $aux = '"'.$val.'"';
                 $nro_series .= "<option value='".$val."'>".$val."</option>";
             }
-            //fin cargo nro de series de armamento en deposito inicial            
+            //Fin cargo nro de series de armamento en deposito inicial            
         }else {
             $nro_series  = "<option> </option>";
             $nro_series .= "<option selected='selected' value='".$nro_serie."'>".$nro_serie."</option>";
@@ -257,7 +266,7 @@ class alta_actas_alta extends CI_Controller {
         $nro_accesorios  = "<option> </option>";
         $nro_accesorios .= "<option selected='selected' value='".$nro_accesorio."'>".$nro_accesorio."</option>";        
         
-        //retorno los datos
+        //Retorno los datos
         $retorno = array();
         $retorno[] = $nro_series;
         $retorno[] = $marcas;
@@ -275,31 +284,31 @@ class alta_actas_alta extends CI_Controller {
         $calibre    = $_POST['calibre'];
         $modelo     = $_POST['modelo'];
         
-        $mensjError = array();
+        $mensaje_error = array();
         $retorno = array();
         
         if(empty($nro_serie)) {
-            $mensjError[] = 1;
+            $mensaje_error[] = 1;
         }
         
         if(empty($marca)) {
-            $mensjError[] = 2;
+            $mensaje_error[] = 2;
         }
         
         if(empty($calibre)) {
-            $mensjError[] = 3;
+            $mensaje_error[] = 3;
         }
         
         if(empty($modelo)) {
-            $mensjError[] = 4;
+            $mensaje_error[] = 4;
         }
             
-        //verifico que esa ficha exista en la base de datos en deposito inicial
+        //Verifico que esa ficha exista en la base de datos en deposito inicial
         if(!$this->alta_actas_alta_model->existeFicha($nro_serie, $marca, $calibre, $modelo)) {
-            $mensjError[] = 5;
+            $mensaje_error[] = 5;
         }
         
-        //verifico que el nro de catalogo no exista ya en el listado
+        //Verifico que el nro de catalogo no exista ya en el listado
         $encontre = false;
         $i = 0;
         
@@ -315,12 +324,12 @@ class alta_actas_alta extends CI_Controller {
         }
         
         if($encontre) {
-           $mensjError[] = 6; 
+           $mensaje_error[] = 6; 
         }
         
-        if(count($mensjError) > 0) {
+        if(count($mensaje_error) > 0) {
             
-            switch ($mensjError[0]) {
+            switch ($mensaje_error[0]) {
                 
                 case 1:
                     $retorno[] = $this->mensajes->errorVacio('nro serie');
@@ -432,35 +441,35 @@ class alta_actas_alta extends CI_Controller {
         $modelo        = $_POST['modelo'];
         $nro_accesorio = $_POST['nro_accesorio'];
         
-        $mensjError = array();
+        $mensaje_error = array();
         $retorno = array();
         
         if(empty($nro_serie)) {
-            $mensjError[] = 1;
+            $mensaje_error[] = 1;
         }
         
         if(empty($marca)) {
-            $mensjError[] = 2;
+            $mensaje_error[] = 2;
         }
         
         if(empty($calibre)) {
-            $mensjError[] = 3;
+            $mensaje_error[] = 3;
         }
         
         if(empty($modelo)) {
-            $mensjError[] = 4;
+            $mensaje_error[] = 4;
         }
 
         if(empty($nro_accesorio)) {
-            $mensjError[] = 5;
+            $mensaje_error[] = 5;
         }          
         
-        //verifico que esa ficha exista en la base de datos en deposito inicial
+        //Verifico que esa ficha exista en la base de datos en deposito inicial
         if(!$this->alta_actas_alta_model->existeAccesorio($nro_serie, $marca, $calibre, $modelo, $nro_accesorio)) {
-            $mensjError[] = 6;
+            $mensaje_error[] = 6;
         }
         
-        //verifico que el nro de catalogo no exista ya en el listado
+        //Verifico que el nro de catalogo no exista ya en el listado
         $encontre = false;
         $i = 0;
         
@@ -476,12 +485,12 @@ class alta_actas_alta extends CI_Controller {
         }
         
         if($encontre) {
-           $mensjError[] = 7; 
+           $mensaje_error[] = 7; 
         }
         
-        if(count($mensjError) > 0) {
+        if(count($mensaje_error) > 0) {
             
-            switch ($mensjError[0]) {
+            switch ($mensaje_error[0]) {
                 
                 case 1:
                     $retorno[] = $this->mensajes->errorVacio('nro serie');
@@ -607,37 +616,37 @@ class alta_actas_alta extends CI_Controller {
         $supervision          = preg_replace($patterns, '', $_POST["supervision"]);
         $observaciones        = $_POST["observaciones"];
         
-        $mensjError = array();
+        $mensaje_error = array();
         $retorno = array();
         
         if(empty($fecha)) {
-            $mensjError[] = 1;
+            $mensaje_error[] = 1;
         }
         
         if(empty($unidad_recibe)) {
-            $mensjError[] = 2;
+            $mensaje_error[] = 2;
         }
         
         if(empty($representante_sma)) {
-            $mensjError[] = 3;
+            $mensaje_error[] = 3;
         }
         
         if(empty($representante_unidad)) {
-            $mensjError[] = 4;
+            $mensaje_error[] = 4;
         }        
         
         if(empty($supervision)) {
-            $mensjError[] = 5;
+            $mensaje_error[] = 5;
         }            
         
-        //verifico si hay armamento para entregar
+        //Verifico si hay armamento para entregar
         if(count($_SESSION['fichas']) == 0) {
-            $mensjError[] = 6;
+            $mensaje_error[] = 6;
         }
         
-        if(count($mensjError) > 0) {
+        if(count($mensaje_error) > 0) {
             
-            switch($mensjError[0]) {
+            switch($mensaje_error[0]) {
                 
                 case 1:
                     $retorno[] = $this->mensajes->errorVacio('fecha');

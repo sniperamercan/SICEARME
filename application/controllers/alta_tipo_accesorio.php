@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - alta_tipo_accesorio
+*/
+
 class alta_tipo_accesorio extends CI_Controller {
     
     function __construct() {

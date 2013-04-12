@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - redactar_correo
+*/
+
 class redactar_correo extends CI_Controller {
     
     function __construct() {
@@ -21,7 +28,7 @@ class redactar_correo extends CI_Controller {
             
             $data['asunto'] = "";
             
-            //cargo usuario
+            //Cargo usuario
             $usuarios = array();
             $usuarios = $this->redactar_correo_model->cargoUsuarios();
 
@@ -30,7 +37,7 @@ class redactar_correo extends CI_Controller {
             foreach($usuarios as $val) {
                 $data['usuarios'] .= "<option value='".$val."'>".$val."</option>";
             }
-            //fin 
+            //Fin 
         }else{
             $datos_correo = array();
             $datos_correo = $this->redactar_correo_model->obtengoUsuarioEnvia($_SESSION['id_correo']);

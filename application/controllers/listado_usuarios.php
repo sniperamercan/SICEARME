@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - listado_usuarios
+*/
+
 class listado_usuarios extends CI_Controller {
 
     function __construct() {
@@ -56,7 +63,7 @@ class listado_usuarios extends CI_Controller {
                 $class = "alt";
             }        
             
-            //estado del usuario
+            //Estado del usuario
             if($usuarios[$i+3]==0) {
                 $estado = 'Inactivo';
             }else {

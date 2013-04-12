@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - ver_correo
+*/
+
 class ver_correo extends CI_Controller {
     
     function __construct() {

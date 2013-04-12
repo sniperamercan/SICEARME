@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - correo
+*/
+
 class correo extends CI_Controller {
     
     function __construct() {
@@ -25,7 +32,7 @@ class correo extends CI_Controller {
             $correos = array();
             $correos = $this->correo_model->cargoCorreos_db();
             
-            //armo tabla con correos
+            //Armo tabla con correos
             for($i=0; $i<count($correos); $i=$i+5) {
                 
                 $color = '#E6E6E6';
@@ -51,7 +58,7 @@ class correo extends CI_Controller {
             $correos = array();
             $correos = $this->correo_model->cargoCorreos_db();
             
-            //armo tabla con correos
+            //Armo tabla con correos
             for($i=0; $i<count($correos); $i=$i+5) {
                 
                 $color = '#E6E6E6';

@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - listado_catalogos
+*/
+
 class listado_catalogos extends CI_Controller {
 
     function __construct() {
@@ -98,13 +105,13 @@ class listado_catalogos extends CI_Controller {
         }
         //FIN, ARMO CONDICIONES WHERE PARA SQL
         
-        //verifico el order si esta seteado si no por defecto de esta consulta
+        //Verifico el order si esta seteado si no por defecto de esta consulta
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
             $order = "nro_interno";
         }
-        //fin verifico order        
+        //Fin verifico order        
         
         $result = array();
         
@@ -187,7 +194,8 @@ class listado_catalogos extends CI_Controller {
         echo json_encode($retorno);
     }    
     
-    function seteoImpresion() {       
+    function seteoImpresion() {   
+        
         $this->load->view("impresion_view");    
     }
     
@@ -196,13 +204,13 @@ class listado_catalogos extends CI_Controller {
         $de_pagina = $_POST['de_pagina'];
         $a_pagina  = $_POST['a_pagina'];
       
-        //verifico el order si esta seteado si no por defecto de esta consulta
+        //Verifico el order si esta seteado si no por defecto de esta consulta
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
             $order = "nro_interno";
         }
-        //fin verifico order
+        //Fin verifico order
         
         if(isset($_SESSION['condicion']) && !empty($_SESSION['condicion'])){
             $condicion = $_SESSION['condicion'];      
@@ -348,6 +356,7 @@ class listado_catalogos extends CI_Controller {
     }
     
     function imprimirCatalogo() {
+        
         $_SESSION['imprimir_nro_catalogo'] = $_POST['nro_catalogo'];
     }
 }

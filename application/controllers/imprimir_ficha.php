@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - imprimir_ficha
+*/
+
 class imprimir_ficha extends CI_Controller {
 
     function __construct() {
@@ -104,7 +111,7 @@ class imprimir_ficha extends CI_Controller {
         
         $data['piezas_ficha'] = $concat;
         
-        //cargo la vista
+        //Cargo la vista
         $this->load->view("imprimir_ficha_view", $data);
     }
     

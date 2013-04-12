@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - imprimir_acta_alta
+*/
+
 class imprimir_acta_alta extends CI_Controller {
 
     function __construct() {
@@ -29,7 +36,7 @@ class imprimir_acta_alta extends CI_Controller {
             $nro_acta = 0;
         }
             
-        //traigo todos los datos del acta en un array
+        //Obtengo todos los datos del acta en un array
         $datos_acta = $this->imprimir_acta_alta_model->datosActa($nro_acta);
         
         /*
@@ -41,29 +48,28 @@ class imprimir_acta_alta extends CI_Controller {
          * $datos_acta[] = $row->observaciones;              5
          */
         
-        //cargo nro_acta
+        //Cargo nro_acta
         $data['nro_acta'] = $nro_acta;
         
-        //cargo fecha
+        //Cargo fecha
         $data['fecha'] = $datos_acta[0];
         
-        //cargo las unidades
+        //Cargo las unidades
         $data['unidad_recibe'] = $this->imprimir_acta_alta_model->cargoNombreUnidad($datos_acta[1]);
         
-        //cargo representante sma
+        //Cargo representante sma
         $data['representante_sma'] = $datos_acta[2];
         
-        //cargo representante unidad
+        //Cargo representante unidad
         $data['representante_unidad'] = $datos_acta[3];
         
-        //cargo supervisor 
+        //Cargo supervisor 
         $data['supervision'] = $datos_acta[4];
         
-        //cargo observaciones
+        //Cargo observaciones
         $data['observaciones'] = $datos_acta[5];
         
         //Armar grilla de entrega de armamento
-        
         $datos_fichas = $this->imprimir_acta_alta_model->datosFichas($nro_acta);
         
         /*
@@ -72,7 +78,7 @@ class imprimir_acta_alta extends CI_Controller {
          * $datos_fichas[] = $row->calibre;   2
          * $datos_fichas[] = $row->modelo;    3
          */
-
+        
         $concat = "";
         
         for($i=0; $i<count($datos_fichas); $i=$i+4) {
@@ -88,11 +94,9 @@ class imprimir_acta_alta extends CI_Controller {
             }
             
         $data['entrega_fichas'] = $concat;
-            
         //Fin armo grilla de entrega de armamentos    
         
-        //Armar grilla de entrega de accesorios
-            
+        //Armar grilla de entrega de accesorios        
         $datos_accesorios = $this->imprimir_acta_alta_model->datosAccesorios($nro_acta);
         
         /*
@@ -116,14 +120,12 @@ class imprimir_acta_alta extends CI_Controller {
             $concat .= "<tr> 
                             <td style='text-align: center;'>".$nro_serie."</td> <td>".$marca."</td> <td>".$calibre."</td> <td>".$modelo."</td> <td>".$nro_accesorio."</td> 
                        </tr>";
-
         }
         
         $data['entrega_accesorios'] = $concat;
-        
         //Fin armo grilla de entrega de accesorios
         
-        //cargo la vista
+        //Cargo la vista
         $this->load->view("imprimir_acta_alta_view", $data);
     }
     

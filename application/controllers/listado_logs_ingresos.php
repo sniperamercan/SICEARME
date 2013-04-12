@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - listado_logs_ingresos
+*/
+
 class listado_logs_ingresos extends CI_Controller {
     
     function __construct() {
@@ -23,7 +30,7 @@ class listado_logs_ingresos extends CI_Controller {
     function index() {
         
         unset($_SESSION['condicion']); //reinicio filtro
-        unset($_SESSION['order']); //reinicio el order
+        unset($_SESSION['order']);     //reinicio el order
         $this->consulta();
     }
     
@@ -36,13 +43,13 @@ class listado_logs_ingresos extends CI_Controller {
             $condicion = 1;
         }
         
-        //verifico el order si esta seteado si no por defecto de esta consulta
+        //Verifico el order si esta seteado si no por defecto de esta consulta
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
             $order = "logfecha, loghora";
         }
-        //fin verifico order        
+        //Fin verifico order        
         
         $result = array();
         
@@ -131,7 +138,8 @@ class listado_logs_ingresos extends CI_Controller {
         $this->load->view("listado_logs_ingresos_view", $data);
     }    
     
-    function seteoImpresion() {       
+    function seteoImpresion() { 
+        
         $this->load->view("impresion_view");     
     }
     
@@ -140,13 +148,13 @@ class listado_logs_ingresos extends CI_Controller {
         $de_pagina = $_POST['de_pagina'];
         $a_pagina  = $_POST['a_pagina'];
       
-        //verifico el order si esta seteado si no por defecto de esta consulta
+        //Verifico el order si esta seteado si no por defecto de esta consulta
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
             $order = "logfecha, loghora";
         }
-        //fin verifico order
+        //Fin verifico order
         
         if(isset($_SESSION['condicion']) && !empty($_SESSION['condicion'])){
             $condicion = $_SESSION['condicion'];      

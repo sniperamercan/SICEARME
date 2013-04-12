@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - modificar_clave
+*/
+
 class modificar_clave extends CI_Controller {
     
     function __construct() {
@@ -26,23 +33,23 @@ class modificar_clave extends CI_Controller {
         $clave_nueva   = $_POST['clave_nueva'];
         $repetir       = $_POST['repetir'];
         
-        $mensjError = array();
+        $mensaje_error = array();
         
         if(empty($clave_nueva)) {
-            $mensjError[] = 1;
+            $mensaje_error[] = 1;
         }
         
         if($clave_nueva != $repetir) {
-            $mensjError[] = 2;
+            $mensaje_error[] = 2;
         }
         
         if(!$this->modificar_clave_model->verificoClave($clave_antigua)) {
-            $mensjError[] = 3;
+            $mensaje_error[] = 3;
         }
         
-        if(count($mensjError) > 0) {
+        if(count($mensaje_error) > 0) {
             
-            switch($mensjError[0]) {
+            switch($mensaje_error[0]) {
                 
                 case 1:
                     echo $this->mensajes->errorVacio('clave nueva');

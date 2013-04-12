@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - alta_registro_ingreso_taller
+*/
+
 class alta_registro_ingreso_taller extends CI_Controller {
     
     function __construct() {

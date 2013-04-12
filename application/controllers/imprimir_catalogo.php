@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - imprimir_catalogo
+*/
+
 class imprimir_catalogo extends CI_Controller {
 
     function __construct() {
@@ -29,7 +36,7 @@ class imprimir_catalogo extends CI_Controller {
             $nro_catalogo = 0;
         }
             
-        //traigo todos los datos del acta en un array
+        //Obtengo todos los datos del acta en un array
         $datos_catalogo = $this->imprimir_catalogo_model->datosCatalogo($nro_catalogo);
         
         /*
@@ -56,7 +63,7 @@ class imprimir_catalogo extends CI_Controller {
         $data['vencimiento']     = $datos_catalogo[8];
             
         
-        //cargo la vista
+        //Cargo la vista
         $this->load->view("imprimir_catalogo_view", $data);
     }
     

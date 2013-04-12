@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - contenido_impresion
+*/
+
 session_start();
 
 class contenido_impresion extends CI_Controller {

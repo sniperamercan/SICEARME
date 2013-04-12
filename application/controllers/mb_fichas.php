@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - mb_fichas
+*/
+
 class mb_fichas extends CI_Controller {
 
     function __construct() {
@@ -22,6 +29,7 @@ class mb_fichas extends CI_Controller {
     }
     
     function index() {
+        
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
         
@@ -33,7 +41,7 @@ class mb_fichas extends CI_Controller {
     //cantReg = cantidad de registros x pagina
     function consulta($param="",$cantReg=30) {   
      
-        //INICIO, ARMO CONDICIONES WHERE PARA SQL
+        //Incio, armo condiciones where para sql
         if( isset($_POST['nro_serie']) && isset($_POST['marca']) && isset($_POST['calibre'])
                 && isset($_POST['modelo']) && isset($_POST['nro_compra']) && isset($_POST['nro_catalogo']) ) { 
             
@@ -96,15 +104,15 @@ class mb_fichas extends CI_Controller {
         }else{
             $condicion = 1;
         }
-        //FIN, ARMO CONDICIONES WHERE PARA SQL
+        //Fin, armo condiciones where para sql
         
-        //verifico el order si esta seteado si no por defecto de esta consulta
+        //Verifico el order si esta seteado si no por defecto de esta consulta
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
             $order = "nro_serie";
         }
-        //fin verifico order        
+        //Fin verifico order        
         
         $result = array();
         
@@ -157,7 +165,6 @@ class mb_fichas extends CI_Controller {
             ";
             
             $j++;
-            
         }                  
         
         $config['base_url'] = site_url("mb_fichas/consulta");
@@ -178,7 +185,7 @@ class mb_fichas extends CI_Controller {
         
         $paginado .= '</center>';
         
-        //retorno de datos json
+        //Retorno de datos json
         $retorno = array();
         $retorno[] = $concat;
         $retorno[] = $paginado;
@@ -186,7 +193,8 @@ class mb_fichas extends CI_Controller {
         echo json_encode($retorno);
     }    
     
-    function seteoImpresion() {       
+    function seteoImpresion() {      
+        
         $this->load->view("impresion_view");    
     }
     
@@ -195,13 +203,13 @@ class mb_fichas extends CI_Controller {
         $de_pagina = $_POST['de_pagina'];
         $a_pagina  = $_POST['a_pagina'];
       
-        //verifico el order si esta seteado si no por defecto de esta consulta
+        //Verifico el order si esta seteado si no por defecto de esta consulta
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
             $order = "nro_serie";
         }
-        //fin verifico order
+        //Fin verifico order
         
         if(isset($_SESSION['condicion']) && !empty($_SESSION['condicion'])){
             $condicion = $_SESSION['condicion'];      
@@ -443,7 +451,6 @@ class mb_fichas extends CI_Controller {
         }else {
             echo 0;
         }        
-        
     }
 }
 

@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - alta_sistema
+*/
+
 class alta_sistema extends CI_Controller {
     
     function __construct() {
@@ -33,19 +40,19 @@ class alta_sistema extends CI_Controller {
         
         $sistema = preg_replace($patterns, '', $_POST["sistema"]);
         
-        $mensjError = array();
+        $mensaje_error = array();
         
         if(empty($sistema)) {
-            $mensjError[] = 1;
+            $mensaje_error[] = 1;
         }
         
         if($this->alta_sistema_model->existeSistema($sistema)) {
-            $mensjError[] = 2;
+            $mensaje_error[] = 2;
         }
         
-        if(count($mensjError) > 0) {
+        if(count($mensaje_error) > 0) {
             
-            switch($mensjError[0]) {
+            switch($mensaje_error[0]) {
                 
                 case 1:
                     echo $this->mensajes->errorVacio('sistema');

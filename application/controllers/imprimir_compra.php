@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - imprimir_compra
+*/
+
 class imprimir_compra extends CI_Controller {
 
     function __construct() {
@@ -29,7 +36,7 @@ class imprimir_compra extends CI_Controller {
             $nro_compra = 0;
         }
             
-        //traigo todos los datos del acta en un array
+        //Obtengo todos los datos del acta en un array
         $datos_compra = $this->imprimir_compra_model->datosCompra($nro_compra);
         
         /*
@@ -43,31 +50,31 @@ class imprimir_compra extends CI_Controller {
             $retorno[] = $row->precio;              8
          */
         
-        //cargo nro_interno_compra
+        //Cargo nro_interno_compra
         $data['nro_interno'] = $nro_compra;
         
-        //cargo nro compra
+        //Cargo nro compra
         $data['nro_compra'] = $datos_compra[0];
         
-        //cargo fecha
+        //Cargo fecha
         $data['fecha'] = $datos_compra[1];
         
-        //cargo empresa proveedora
+        //Cargo empresa proveedora
         $data['empresa'] = $datos_compra[2];
         
-        //cargo pais empresa
+        //Cargo pais empresa
         $data['pais'] = $datos_compra[3];
         
-        //cargo descripcion
+        //Cargo descripcion
         $data['descripcion'] = $datos_compra[4];
         
-        //cargo modalidad
+        //Cargo modalidad
         $data['modalidad'] = $datos_compra[5];
         
-        //cargo total armas
+        //Cargo total armas
         $data['total_armas'] = $datos_compra[6];
         
-        //cargo precio total
+        //Cargo precio total
         $data['precio_total'] = $datos_compra[7];
         
         //Armar grilla de catalogos asociados
@@ -107,7 +114,7 @@ class imprimir_compra extends CI_Controller {
             
         //Fin armo grilla de entrega de armamentos    
         
-        //cargo la vista
+        //Cargo la vista
         $this->load->view("imprimir_compra_view", $data);
     }
     

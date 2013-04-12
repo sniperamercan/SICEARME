@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - desarrollo_descripcion_actualizacion_sistema
+*/
+
 class desarrollo_descripcion_actualizacion_sistema extends CI_Controller {
     
     function __construct() {

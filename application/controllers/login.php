@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - login
+*/
+
 session_start();
 
 class login extends CI_Controller {
@@ -83,6 +90,5 @@ class login extends CI_Controller {
         }        
     }
 }
-
 
 ?>

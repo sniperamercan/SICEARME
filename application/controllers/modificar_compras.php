@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - modificar_compras
+*/
+
 class modificar_compras extends CI_Controller {
     
     function __construct() {
@@ -28,7 +35,7 @@ class modificar_compras extends CI_Controller {
             $nro_compra = 0;
         }
         
-        //traigo datos generales
+        //Obtengo datos generales
         $datos_compras = $this->modificar_compras_model->datosGenerales($_SESSION['nro_compra']);        
         
         /*
@@ -47,13 +54,13 @@ class modificar_compras extends CI_Controller {
         
         $_SESSION['catalogos'] = array();
         
-        //cargo nro compra
+        //Cargo nro compra
         $data['nro_compra'] = $datos_compras[0];
         
-        //cargo fecha
+        //Cargo fecha
         $data['fecha'] = $datos_compras[1];
         
-        //cargo empresas
+        //Cargo empresas
         $empresas = $this->modificar_compras_model->cargoEmpresas();
         
         $data['empresas'] = "<option> </option>";
@@ -66,7 +73,7 @@ class modificar_compras extends CI_Controller {
             }
         }
         
-        //cargo paises
+        //Cargo paises
         $array_paises = $this->modificar_compras_model->cargoPaises();
         
         $data['paises'] = "<option> </option>";
@@ -80,13 +87,13 @@ class modificar_compras extends CI_Controller {
             }
         }        
         
-        //cargo descripcion
+        //Cargo descripcion
         $data['descripcion'] = $datos_compras[4];   
         
-        //cargo modalidad
+        //Cargo modalidad
         $data['modalidad'] = $datos_compras[5];              
         
-        //cargo catalogos
+        //Cargo catalogos
         $catalogos = $this->modificar_compras_model->cargoCatalogos();
         
         $data['catalogos'] = "<option> </option>";
@@ -95,7 +102,7 @@ class modificar_compras extends CI_Controller {
             $data['catalogos'] .= "<option value='".$val."'>".$val."</option>";
         }
         
-        //cargo la lista de catalogos
+        //Cargo la lista de catalogos
         $compras_catalogos = $this->modificar_compras_model->cargoCatalogosCompra($nro_compra);
         
         /*
@@ -138,7 +145,7 @@ class modificar_compras extends CI_Controller {
         $data['compras_catalogos'] = $concat;
         $data['totales'] = $totales;
         
-        //llamo a la vista
+        //Llamo a la vista
         $this->load->view('modificar_compras_view', $data);  
     }
     
@@ -207,34 +214,34 @@ class modificar_compras extends CI_Controller {
         $cant_total_armas = $_POST['cant_total_armas'];
         $costo_total      = $_POST['costo_total'];
         
-        $mensjError = array();
+        $mensaje_error = array();
         $retorno = array();
         
         if(empty($catalogo)) {
-            $mensjError[] = 1;
+            $mensaje_error[] = 1;
         }
         
         if(empty($cant_total_armas)) {
-            $mensjError[] = 2;
+            $mensaje_error[] = 2;
         }
         
         if(empty($costo_total)) {
-            $mensjError[] = 3;
+            $mensaje_error[] = 3;
         }
         
         if(!$this->modificar_compras_model->existeCatalogo($catalogo)) {
-            $mensjError[] = 4;
+            $mensaje_error[] = 4;
         }
         
         if(!$this->form_validation->numeric($cant_total_armas)) {
-            $mensjError[] = 5;
+            $mensaje_error[] = 5;
         }
         
         if(!$this->form_validation->numeric($costo_total)) {
-            $mensjError[] = 6;
+            $mensaje_error[] = 6;
         }
         
-        //verifico que el nro de catalogo no exista ya en el listado
+        //Verifico que el nro de catalogo no exista ya en el listado
         $encontre = false;
         $i = 0;
         
@@ -248,13 +255,13 @@ class modificar_compras extends CI_Controller {
         }
         
         if($encontre) {
-           $mensjError[] = 7; 
+           $mensaje_error[] = 7; 
         }
         
         
-        if(count($mensjError) > 0) {
+        if(count($mensaje_error) > 0) {
             
-            switch ($mensjError[0]) {
+            switch ($mensaje_error[0]) {
                 
                 case 1:
                     $retorno[] = $this->mensajes->errorVacio('catalogo');
@@ -404,35 +411,35 @@ class modificar_compras extends CI_Controller {
         $descripcion  = $_POST["descripcion"];
         $modalidad    = $_POST["modalidad"];
         
-        $mensjError = array();
+        $mensaje_error = array();
         
         if(empty($nro_compra)) {
-            $mensjError[] = 1;
+            $mensaje_error[] = 1;
         }
         
         if(empty($fecha)) {
-            $mensjError[] = 2;
+            $mensaje_error[] = 2;
         }
         
         if(empty($empresa)) {
-            $mensjError[] = 3;
+            $mensaje_error[] = 3;
         }
         
         if(empty($pais_empresa)) {
-            $mensjError[] = 4;
+            $mensaje_error[] = 4;
         }        
         
         if(empty($descripcion)) {
-            $mensjError[] = 5;
+            $mensaje_error[] = 5;
         }  
         
         if(empty($modalidad)) {
-            $mensjError[] = 6;
+            $mensaje_error[] = 6;
         }          
         
-        if(count($mensjError) > 0) {
+        if(count($mensaje_error) > 0) {
             
-            switch($mensjError[0]) {
+            switch($mensaje_error[0]) {
                 
                 case 1:
                     $retorno[] = $this->mensajes->errorVacio('numero compra');

@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - modificar_usuarios
+*/
+
 class modificar_usuarios extends CI_Controller {
     
     function __construct() {
@@ -70,31 +77,31 @@ class modificar_usuarios extends CI_Controller {
         
         $permisos = json_decode($_POST['persmisos']);
         
-        $mensjError = array();
+        $mensaje_error = array();
         
         if(empty($usuario)) {
-            $mensjError[] = 1;
+            $mensaje_error[] = 1;
         }
         
         if(empty($nombre)) {
-            $mensjError[] = 2;
+            $mensaje_error[] = 2;
         }
         
         if(empty($apellido)) {
-            $mensjError[] = 3;
+            $mensaje_error[] = 3;
         }
         
         if(!$this->modificar_usuarios_model->existeUsuario($usuario)) {
-            $mensjError[] = 4;
+            $mensaje_error[] = 4;
         }
         
         if(count($permisos) == 0) {
-            $mensjError[] = 5;
+            $mensaje_error[] = 5;
         }
         
-        if(count($mensjError) > 0) {
+        if(count($mensaje_error) > 0) {
             
-            switch($mensjError[0]) {
+            switch($mensaje_error[0]) {
                 
                 case 1:
                     echo json_encode($this->mensajes->errorVacio('usuario'));

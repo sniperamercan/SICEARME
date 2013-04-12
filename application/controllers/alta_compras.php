@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - alta_compras
+*/
+
 class alta_compras extends CI_Controller {
     
     function __construct() {
@@ -29,7 +36,7 @@ class alta_compras extends CI_Controller {
         
         $_SESSION['catalogos'] = array();
         
-        //cargo paises
+        //Cargo paises
         $array_paises = $this->alta_compras_model->cargoPaises();
         
         $data['paises'] = "<option> </option>";
@@ -38,7 +45,7 @@ class alta_compras extends CI_Controller {
             $data['paises'] .= "<option value='".$val."'>".$val."</option>";
         }
         
-        //cargo catalogos
+        //Cargo catalogos
         $catalogos = $this->alta_compras_model->cargoCatalogos();
         
         $data['catalogos'] = "<option> </option>";
@@ -47,7 +54,7 @@ class alta_compras extends CI_Controller {
             $data['catalogos'] .= "<option value='".$val."'>".$val."</option>";
         }
         
-        //cargo empresas
+        //Cargo empresas
         $empresas = $this->alta_compras_model->cargoEmpresas();
         
         $data['empresas'] = "<option> </option>";
@@ -56,7 +63,7 @@ class alta_compras extends CI_Controller {
             $data['empresas'] .= "<option value='".$val."'>".$val."</option>";
         }       
         
-        //llamo a la vista
+        //Llamo a la vista
         $this->load->view('alta_compras_view', $data);  
     }
     
@@ -154,7 +161,7 @@ class alta_compras extends CI_Controller {
             $mensjError[] = 6;
         }
         
-        //verifico que el nro de catalogo no exista ya en el listado
+        //Verifico que el nro de catalogo no exista ya en el listado
         $encontre = false;
         $i = 0;
         
@@ -241,7 +248,7 @@ class alta_compras extends CI_Controller {
             
             if($_SESSION['catalogos'][$i] == $nro_catalogo) {
                 $encontre = true;
-                unset($_SESSION['catalogos'][$i]); //nro_interno
+                unset($_SESSION['catalogos'][$i]);   //nro_interno
                 unset($_SESSION['catalogos'][$i+1]); //cantidad_armas
                 unset($_SESSION['catalogos'][$i+2]); //precio
                 $_SESSION['catalogos'] = array_values($_SESSION['catalogos']); //reordeno el array

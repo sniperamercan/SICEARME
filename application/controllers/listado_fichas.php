@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - listado_fichas
+*/
+
 class listado_fichas extends CI_Controller {
 
     function __construct() {
@@ -95,13 +102,13 @@ class listado_fichas extends CI_Controller {
         }
         //FIN, ARMO CONDICIONES WHERE PARA SQL
         
-        //verifico el order si esta seteado si no por defecto de esta consulta
+        //Verifico el order si esta seteado si no por defecto de esta consulta
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
             $order = "nro_serie";
         }
-        //fin verifico order        
+        //Fin verifico order        
         
         $result = array();
         
@@ -175,7 +182,7 @@ class listado_fichas extends CI_Controller {
         
         $paginado .= '</center>';
         
-        //retorno de datos json
+        //Retorno de datos json
         $retorno = array();
         $retorno[] = $concat;
         $retorno[] = $paginado;
@@ -192,13 +199,13 @@ class listado_fichas extends CI_Controller {
         $de_pagina = $_POST['de_pagina'];
         $a_pagina  = $_POST['a_pagina'];
       
-        //verifico el order si esta seteado si no por defecto de esta consulta
+        //Verifico el order si esta seteado si no por defecto de esta consulta
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
             $order = "nro_serie";
         }
-        //fin verifico order
+        //Fin verifico order
         
         if(isset($_SESSION['condicion']) && !empty($_SESSION['condicion'])){
             $condicion = $_SESSION['condicion'];      
@@ -410,6 +417,7 @@ class listado_fichas extends CI_Controller {
     }  
     
     function editarFicha() {
+        
         $_SESSION['datos_ficha'][] = $_POST['nro_serie'];
         $_SESSION['datos_ficha'][] = $_POST['marca'];
         $_SESSION['datos_ficha'][] = $_POST['calibre'];
@@ -433,6 +441,7 @@ class listado_fichas extends CI_Controller {
     }
     
     function imprimirFicha() {
+        
         $_SESSION['imprimir_nro_serie'] = $_POST['nro_serie'];
         $_SESSION['imprimir_marca']     = $_POST['marca'];
         $_SESSION['imprimir_calibre']   = $_POST['calibre'];

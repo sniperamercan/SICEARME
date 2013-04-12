@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - alta_calibre
+*/
+
 class alta_calibre extends CI_Controller {
     
     function __construct() {

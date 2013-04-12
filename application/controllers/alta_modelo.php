@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - alta_modelo
+*/
+
 class alta_modelo extends CI_Controller {
     
     function __construct() {

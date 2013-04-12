@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - PanelPrincipal
+*/
+
 Class PanelPrincipal extends CI_Controller{
 	
     function __construct(){
@@ -32,6 +39,7 @@ Class PanelPrincipal extends CI_Controller{
     }
 
     function informacionUsuario(){
+        
         $reg = array();
         $reg = $this->panelprincipal_model->informacionUsuario_db();
         $info = "<b><u> INFORMACION SOBRE USTED </u></b> <br /><br /><br /> <b> Nombre - </b> ".$reg['nombre']." ".$reg['apellido']." <br /><br /> ";
@@ -40,6 +48,7 @@ Class PanelPrincipal extends CI_Controller{
     }	
 
     function destruyoSession(){
+        
         $this->panelprincipal_model->destruyoSession_db();
         //destruyo todas las variabes de session generadas por el usuario
         //$this->session->sess_destroy();
@@ -48,6 +57,7 @@ Class PanelPrincipal extends CI_Controller{
     }
     
     function verificarCorreo() {
+        
         $correo = $this->panelprincipal_model->verificarCorreo_db();
         
         if($correo > 0) {

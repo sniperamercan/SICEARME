@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - mb_usuarios
+*/
+
 class mb_usuarios extends CI_Controller {
 
     function __construct() {
@@ -62,7 +69,7 @@ class mb_usuarios extends CI_Controller {
                 $class = "alt";
             }             
             
-            //estado del usuario
+            //Estado del usuario
             if($usuarios[$i+3]==0) {
                 $estado = 'Inactivo';
             }else {
@@ -106,6 +113,7 @@ class mb_usuarios extends CI_Controller {
     }
     
     function setearUsuario() {
+        
         $_SESSION['editar_usuario'] = $_POST['usuario'];
     }
     
@@ -140,7 +148,7 @@ class mb_usuarios extends CI_Controller {
         
         $usuario = $_POST['usuario'];
         
-        //controlo que el usuario no tenga registros de logs en el sistema
+        //Controlo que el usuario no tenga registros de logs en el sistema
         if(!$this->mb_usuarios_model->registroIngresos($usuario)) {
             $this->mb_usuarios_model->eliminarUsuario($usuario);
             echo $this->mensajes->usuarioEliminado($usuario);

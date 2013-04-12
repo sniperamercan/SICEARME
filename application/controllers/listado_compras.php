@@ -1,5 +1,12 @@
 <?php
 
+/*
+* Equipo - UDEPGCALIT
+* Año - 2013
+* Iteracion - Primera Iteracion
+* Clase - listado_compras
+*/
+
 class listado_compras extends CI_Controller {
 
     function __construct() {
@@ -22,6 +29,7 @@ class listado_compras extends CI_Controller {
     }
     
     function index() {
+        
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
         $this->load->view("listado_compras_view");
@@ -30,7 +38,7 @@ class listado_compras extends CI_Controller {
     //cantReg = cantidad de registros x pagina
     function consulta($param="",$cantReg=30) {   
      
-        //INICIO, ARMO CONDICIONES WHERE PARA SQL
+        //Inicio, armo condiciones where para sql
         if( isset($_POST['nro_compra']) && isset($_POST['modalidad']) && isset($_POST['empresa'])
                 && isset($_POST['empresa']) && isset($_POST['pais_empresa']) && isset($_POST['fecha1']) && isset($_POST['fecha2']) ) { 
             
@@ -86,15 +94,15 @@ class listado_compras extends CI_Controller {
         }else{
             $condicion = 1;
         }
-        //FIN, ARMO CONDICIONES WHERE PARA SQL
+        //Fin, armo condiciones where para sql
         
-        //verifico el order si esta seteado si no por defecto de esta consulta
+        //Verifico el order si esta seteado si no por defecto de esta consulta
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
             $order = "nro_interno";
         }
-        //fin verifico order        
+        //Fin verifico order        
         
         $result = array();
         
@@ -168,7 +176,7 @@ class listado_compras extends CI_Controller {
         
         $paginado .= '</center>';
         
-        //retorno de datos json
+        //Retorno de datos json
         $retorno = array();
         $retorno[] = $concat;
         $retorno[] = $paginado;
@@ -177,6 +185,7 @@ class listado_compras extends CI_Controller {
     }    
     
     function seteoImpresion() {       
+        
         $this->load->view("impresion_view");    
     }
     
@@ -185,13 +194,13 @@ class listado_compras extends CI_Controller {
         $de_pagina = $_POST['de_pagina'];
         $a_pagina  = $_POST['a_pagina'];
       
-        //verifico el order si esta seteado si no por defecto de esta consulta
+        //Verifico el order si esta seteado si no por defecto de esta consulta
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
             $order = "nro_interno";
         }
-        //fin verifico order
+        //Fin verifico order
         
         if(isset($_SESSION['condicion']) && !empty($_SESSION['condicion'])){
             $condicion = $_SESSION['condicion'];      
@@ -371,6 +380,7 @@ class listado_compras extends CI_Controller {
     }  
     
     function imprimirCompra() {
+        
         $_SESSION['imprimir_nro_compra'] = $_POST['nro_compra'];
     }
 }
