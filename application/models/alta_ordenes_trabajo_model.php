@@ -114,40 +114,39 @@ class alta_ordenes_trabajo_model extends CI_Model {
         return $datos;
     }
     
-    function altaCatalogo($tipo_arma, $marca, $calibre, $modelo, $sistema, $empresa, $pais_empresa, $fabricacion, $vencimiento) {
+    function altaOrdenTrabajo($fecha, $unidad, $nro_serie, $marca, $calibre, $modelo, $observaciones) {
         
-        $data_catalogo = array(
-            'tipo_arma'       => $tipo_arma,
-            'marca'           => $marca,
-            'calibre'         => $calibre,
-            'modelo'          => $modelo,
-            'sistema'         => $sistema,
-            'empresa'         => $empresa,
-            'pais_origen'     => $pais_empresa,
-            'año_fabricacion' => $fabricacion,
-            'vencimiento'     => $vencimiento,
-            'usuario_alta'    => base64_decode($_SESSION['usuario']),
-            'usuario_edita'   => base64_decode($_SESSION['usuario'])
+        $data_ordenes_trabajo = array(
+            'fecha'                => $fecha,
+            'nro_serie'            => $nro_serie,
+            'marca'                => $marca,
+            'calibre'              => $calibre,
+            'modelo'               => $modelo,
+            'observaciones'        => $observaciones,
+            'idunidad'             => $unidad,
+            'estado_arma'          => 0,
+            'estado_orden_trabajo' => 0,
+            'usuario'              => base64_decode($_SESSION['usuario'])
         );
         
-        $this->db->insert('catalogos', $data_catalogo);
+        $this->db->insert('ordenes_trabajo', $data_ordenes_trabajo);
         
-        $query = $this->db->query("SELECT last_insert_id() as nro_interno");
+        $query = $this->db->query("SELECT last_insert_id() as nro_orden");
         
         $row = $query->row();
         
-        $nro_interno = $row->nro_interno;
+        $nro_orden = $row->nro_orden;
         
         $data_db_logs = array(
             'tipo_movimiento' => 'insert',
-            'tabla'           => 'catalogos',
-            'clave_tabla'     => 'nro_interno = '.$nro_interno,
+            'tabla'           => 'ordenes_trabajo',
+            'clave_tabla'     => 'nro_orden = '.$nro_orden,
             'usuario'         => base64_decode($_SESSION['usuario'])
         );        
 
         $this->db->insert('db_logs', $data_db_logs);
         
-        return $nro_interno;
+        return $nro_orden;
     }
 }
 

@@ -180,100 +180,81 @@ class alta_ordenes_trabajo extends CI_Controller {
         $patterns[] = '/"/';
         $patterns[] = "/'/";
         
-        $tipo_arma    = preg_replace($patterns, '', $_POST["tipo_arma"]);
-        $marca        = preg_replace($patterns, '', $_POST["marca"]);
-        $calibre      = preg_replace($patterns, '', $_POST["calibre"]);
-        $modelo       = preg_replace($patterns, '', $_POST["modelo"]);
-        $sistema      = preg_replace($patterns, '', $_POST["sistema"]);
-        $empresa      = preg_replace($patterns, '', $_POST["empresa"]);
-        $pais_empresa = preg_replace($patterns, '', $_POST["pais_empresa"]);
-        $fabricacion  = $_POST["fabricacion"];
-        $vencimiento  = $_POST["vencimiento"];
+        $fecha         = preg_replace($patterns, '', $_POST["fecha"]);
+        $unidad        = preg_replace($patterns, '', $_POST["unidad"]);
+        $nro_serie     = preg_replace($patterns, '', $_POST["nro_serie"]);
+        $marca         = preg_replace($patterns, '', $_POST["marca"]);
+        $calibre       = preg_replace($patterns, '', $_POST["calibre"]);
+        $modelo        = preg_replace($patterns, '', $_POST["modelo"]);
+        $observaciones = preg_replace($patterns, '', $_POST["observaciones"]);
         
         $mensjError = array();
         $retorno = array();
         
-        if(empty($tipo_arma)) {
+        if(empty($fecha)) {
             $mensjError[] = 1;
         }
         
-        if(empty($marca)) {
+        if(empty($unidad)) {
             $mensjError[] = 2;
         }
         
-        if(empty($calibre)) {
+        if(empty($nro_serie)) {
             $mensjError[] = 3;
         }
         
-        if(empty($modelo)) {
+        if(empty($marca)) {
             $mensjError[] = 4;
         }        
         
-        if(empty($sistema)) {
+        if(empty($calibre)) {
             $mensjError[] = 5;
         }        
 
-        if(empty($empresa)) {
+        if(empty($modelo)) {
             $mensjError[] = 6;
         }        
 
-        if(empty($pais_empresa)) {
+        if(empty($observaciones)) {
             $mensjError[] = 7;
         }        
-
-        if(empty($fabricacion)) {
-            $mensjError[] = 8;
-        }        
-
-        if(empty($vencimiento)) {
-            $mensjError[] = 9;
-        }          
-        
+       
         if(count($mensjError) > 0) {
             
             switch($mensjError[0]) {
                 
                 case 1:
-                    $retorno[] = $this->mensajes->errorVacio('tipo arma');
+                    $retorno[] = $this->mensajes->errorVacio('fecha');
                     break;
                 
                 case 2:
-                    $retorno[] = $this->mensajes->errorVacio('marca');
+                    $retorno[] = $this->mensajes->errorVacio('unidad');
                     break;
                 
                 case 3:
-                    $retorno[] = $this->mensajes->errorVacio('calibre');
+                    $retorno[] = $this->mensajes->errorVacio('nro serie');
                     break;
                 
                 case 4:
-                    $retorno[] = $this->mensajes->errorVacio('modelo');
+                    $retorno[] = $this->mensajes->errorVacio('marca');
                     break;
                 
                 case 5:
-                    $retorno[] = $this->mensajes->errorVacio('sistema');
+                    $retorno[] = $this->mensajes->errorVacio('calibre');
                     break;
                 
                 case 6:
-                    $retorno[] = $this->mensajes->errorVacio('empresa');
+                    $retorno[] = $this->mensajes->errorVacio('modelo');
                     break;
                 
                 case 7:
-                    $retorno[] = $this->mensajes->errorVacio('pais empresa');
-                    break;
-               
-                case 8:
-                    $retorno[] = $this->mensajes->errorVacio('fabricacion');
-                    break;
-                
-                case 9:
-                    $retorno[] = $this->mensajes->errorVacio('vencimiento');
+                    $retorno[] = $this->mensajes->errorVacio('observaciones');
                     break;
             }
         }else {
-            $nro_interno = $this->alta_catalogos_model->altaCatalogo($tipo_arma, $marca, $calibre, $modelo, $sistema, $empresa, $pais_empresa, $fabricacion, $vencimiento);
+            $nro_orden = $this->alta_ordenes_trabajo_model->altaOrdenTrabajo($fecha, $unidad, $nro_serie, $marca, $calibre, $modelo, $observaciones);
             $retorno[] = 1;
-            $retorno[] = $nro_interno;
-            $_SESSION['alta_nro_catalogo'] = $nro_interno;
+            $retorno[] = $nro_orden;
         }
         
         echo json_encode($retorno);

@@ -13,40 +13,27 @@
             });	
 
             function altaOrdenTrabajo() {
-                
-                var tipo_arma    = $("#tipo_arma").val();
-                var marca        = $("#marca").val();
-                var calibre      = $("#calibre").val();
-                var modelo       = $("#modelo").val();
-                var sistema      = $("#sistema").val();
-                var empresa      = $("#empresa").val();
-                var pais_empresa = $("#pais_empresa").val();
-                var fabricacion  = $("#fabricacion").val();
-                var vencimiento  = $("#vencimiento").val();
-                
+    
+                var fecha         = $("#fecha").val();
+                var unidad        = $("#unidad").val();
+                var nro_serie     = $("#nro_serie").val();
+                var marca         = $("#marca").val();
+                var calibre       = $("#calibre").val();
+                var modelo        = $("#modelo").val();
+                var observaciones = $("#observaciones").val();
+ 
                 $.ajax({
                     type: "post",  
                     dataType: "json",
-                    url: "<?php base_url(); ?>alta_catalogos/validarDatos",
-                    data: "tipo_arma="+tipo_arma+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&sistema="+sistema+"&empresa="+empresa+"&pais_empresa="+pais_empresa+"&fabricacion="+fabricacion+"&vencimiento="+vencimiento,
+                    url: "<?php base_url(); ?>alta_ordenes_trabajo/validarDatos",
+                    data: "fecha="+fecha+"&unidad="+unidad+"&nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&observaciones="+observaciones,
                     success: function(data){
                         if(data[0] == "1"){            
-                            jAlert("Catalogo ingresado con exito - Nro de catalogo = "+data[1], "Correcto", function() { 
-                                cargoTiposArmas();
-                                cargoMarcas();
-                                cargoCalibres();
-                                cargoModelos();
-                                cargoSistemas();
-                                cargoEmpresas();
-                                cargoPaises();
-                                $("#fabricacion").val('');
-                                $("#vencimiento").val('');
-                                parent.$.fn.colorbox.close();
-                            });
+                            jAlert("Orden de trabajo generada con exito - <b> Nro de orden generado = "+data[1]+" </b>", "Correcto", function() { irAFrame('<?php echo base_url('alta_ordenes_trabajo'); ?>','Taller armamento >> Alta >> Ordenes de trabajo'); });
                         }else{
                             jAlert(data[0], "Error");
                         }                            
-                  }
+                    }
                 });               
             }
             
@@ -146,7 +133,7 @@
                 </dl>                
                 
                 <dl>
-                <dt><label for="unidad"> Unidad actual </label></dt>
+                <dt><label for="unidad"> Unidad </label></dt>
                 <dd><select id="unidad"> <?php echo $unidades; ?> </select></dd>
                 </dl>                 
                 
