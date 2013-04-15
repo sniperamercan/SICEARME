@@ -334,19 +334,27 @@
                                     <li><a href="#"> Alta </a>
                                         <ul>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_ordenes_trabajo'); ?>','Taller armamento >> Alta >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_generar_ordenes_de_trabajo'); ?>','Taller armamento >> Alta >> Generar ordenes de trabajo');"> Generar ordenes de trabajo </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_ordenes_de_trabajo'); ?>','Taller armamento >> Alta >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
                                         </ul>
                                     </li> 
                                 
-                                <?php } ?>   
+                                <?php } ?>  
+                                    
+                                <?php if($this->perms->verificoPerfil6() || $this->perms->verificoPerfil7()) { ?>
+                                
+                                    <li><a href="#"> Accion </a>
+                                        <ul>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
+                                        </ul>
+                                    </li> 
+                                
+                                <?php } ?>                                      
                                 
                                 <?php if($this->perms->verificoPerfil7()) { ?>    
                                     
                                     <li><a href="#"> Modificar </a>
                                         <ul>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_ordenes_de_trabajo'); ?>','Taller armamento >> Modificar >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_cambios_ficha'); ?>','Taller armamento >> Modificar >> Cambios ficha de armamento');"> Cambios ficha de armamento </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_cambios_ficha'); ?>','Taller armamento >> Modificar >> Acciones de una orden');"> Acciones de una orden </a></li>
                                         </ul>
                                     </li>
                                 
