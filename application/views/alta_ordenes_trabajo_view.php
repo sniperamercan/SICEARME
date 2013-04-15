@@ -50,107 +50,82 @@
                 });               
             }
             
-            //INICIO llamadas a crear los tipos
-            
-            function crearTipoArma() {
-                $.colorbox({href:"<?php echo base_url('alta_tipo_arma'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA TIPO ARMA", onClosed: function(){ cargoTiposArmas(); } });
+            function busquedaFichas() {
+                $.colorbox({href:"<?php echo base_url('busqueda_fichas_taller'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA FICHAS", onClosed: function(){ cargoFichasFiltro(); } });
             }
             
-            function crearMarca() {
-                $.colorbox({href:"<?php echo base_url('alta_marca'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA MARCA", onClosed: function(){ cargoMarcas(); } });
-            }
-
-            function crearCalibre() {
-                $.colorbox({href:"<?php echo base_url('alta_calibre'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA CALIBRE", onClosed: function(){ cargoCalibres(); } });
-            }
-            
-            function crearModelo() {
-                $.colorbox({href:"<?php echo base_url('alta_modelo'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA MODELO", onClosed: function(){ cargoModelos(); } });
-            }
-
-            function crearSistema() {
-                $.colorbox({href:"<?php echo base_url('alta_sistema'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA SISTEMA", onClosed: function(){ cargoSistemas(); } });
-            }
-            
-            function crearEmpresa() {
-                $.colorbox({href:"<?php echo base_url('alta_empresa'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA EMPRESA", onClosed: function(){ cargoEmpresas(); } });
+            function cargoFichasFiltro() {
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_ordenes_trabajo/cargoFichasFiltro",
+                   success: function(data) {
+                       $("#nro_serie").html("");
+                       $("#nro_serie").html(data[0]);
+                       $("#marca").html("");
+                       $("#marca").html(data[1]);
+                       $("#calibre").html("");
+                       $("#calibre").html(data[2]);
+                       $("#modelo").html("");
+                       $("#modelo").html(data[3]);
+                       $("#tipo_arma").val("");
+                       $("#sistema").val("");
+                       $("#tipo_arma").val(data[4]);
+                       $("#sistema").val(data[5]);                       
+                   }
+                });                
             }            
             
-            //FIN de llamadas a crear los tipos
-            
-            //INICIO funciones para refrescar los tipos una vez que se cierra el evento de crear los tipos
-            
-            function cargoTiposArmas() {
+            function cargoMarcas(nro_serie) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_catalogos/cargoTiposArmas",
+                   url: "<?php base_url(); ?>alta_ordenes_trabajo/cargoMarcas",
+                   data: "nro_serie="+nro_serie,
                    success: function(data) {
-                       $("#tipo_arma").html(data);
-                   }
-                });
-            }     
-            
-            function cargoMarcas() {
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>alta_catalogos/cargoMarcas",
-                   success: function(data) {
+                       $("#marca").html("");
                        $("#marca").html(data);
                    }
-                });
+                });                
             }
-
-            function cargoCalibres() {
+            
+            function cargoCalibres(nro_serie, marca) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_catalogos/cargoCalibres",
+                   url: "<?php base_url(); ?>alta_ordenes_trabajo/cargoCalibres",
+                   data: "nro_serie="+nro_serie+"&marca="+marca,
                    success: function(data) {
+                       $("#calibre").html("");
                        $("#calibre").html(data);
                    }
-                });
+                });                
             }
             
-            function cargoModelos() {
+            function cargoModelos(nro_serie, marca, calibre) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_catalogos/cargoModelos",
+                   url: "<?php base_url(); ?>alta_ordenes_trabajo/cargoModelos",
+                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre,
                    success: function(data) {
+                       $("#modelo").html("");
                        $("#modelo").html(data);
                    }
-                });
-            }
-
-            function cargoSistemas() {
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>alta_catalogos/cargoSistemas",
-                   success: function(data) {
-                       $("#sistema").html(data);
-                   }
-                });
+                });                
             }
             
-            function cargoEmpresas() {
+            function cargoDatos(nro_serie, marca, calibre, modelo) {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_catalogos/cargoEmpresas",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>alta_ordenes_trabajo/cargoDatos",
+                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
                    success: function(data) {
-                       $("#empresa").html(data);
+                       $("#tipo_arma").val("");
+                       $("#sistema").val("");
+                       $("#tipo_arma").val(data[0]);
+                       $("#sistema").val(data[1]);
                    }
-                });
-            }           
-            
-            function cargoPaises() {
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>alta_catalogos/cargoPaises",
-                   success: function(data) {
-                       $("#pais_empresa").html(data);
-                   }
-                });            
+                });                 
             }
-            
-            //FIN de las funciones para refrescar los tipos
             
             
         </script>
@@ -161,7 +136,7 @@
 
         <div>			
 
-            <h1> Alta registro ingreso a taller de armamento </h1>    
+            <h1> Alta de ordenes de trabajo </h1>    
             
             <fieldset>	
                 
@@ -169,6 +144,11 @@
                 <dt><label for="fecha"> Fecha </label></dt>
                 <dd><input readonly="readonly" type="text" id="fecha" class="text" /></dd>
                 </dl>                
+                
+                <dl>
+                <dt><label for="unidad"> Unidad actual </label></dt>
+                <dd><select id="unidad"> <?php echo $unidades; ?> </select></dd>
+                </dl>                 
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 
@@ -191,7 +171,7 @@
                 
                 <dl> 		
                 <dt><label for="modelo"> Modelo </label></dt>	
-                <dd><select id="modelo"> </select></dd> 					
+                <dd><select id="modelo" onchange="cargoDatos($('#nro_serie').val(), $('#marca').val(), $('#calibre').val(), this.value);"> </select></dd> 					
                 </dl>
                 
                 <dl> 		
@@ -205,11 +185,6 @@
                 </dl>                
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
-                
-                <dl>
-                <dt><label for="unidad"> Unidad actual </label></dt>
-                <dd><input readonly="readonly" type="text" id="unidad" class="txtautomatico" /></dd>
-                </dl>    
                 
                 <dl> 		
                 <dt><label for="observaciones"> Observaciones </label></dt>	

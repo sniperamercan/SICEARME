@@ -333,7 +333,7 @@
                                 
                                     <li><a href="#"> Alta </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_registro_ingreso_taller'); ?>','Taller armamento >> Alta >> Registro ingreso taller');"> Registro ingreso a taller </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_ordenes_trabajo'); ?>','Taller armamento >> Alta >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_generar_ordenes_de_trabajo'); ?>','Taller armamento >> Alta >> Generar ordenes de trabajo');"> Generar ordenes de trabajo </a></li>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_ordenes_de_trabajo'); ?>','Taller armamento >> Alta >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
                                         </ul>

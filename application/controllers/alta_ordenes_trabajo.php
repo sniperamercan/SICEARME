@@ -29,8 +29,19 @@ class alta_ordenes_trabajo extends CI_Controller {
     
     function index() {
         
+        //Cargo las unidades
+        $unidades = $this->alta_ordenes_trabajo_model->cargoUnidades();
+        
+        $data['unidades'] = "<option> </option>";
+        
+        for($i=0; $i < count($unidades); $i=$i+2) {
+            $data['unidades'] .= "<option value='".$unidades[$i]."'>".$unidades[$i+1]."</option>";
+        }
+        //Fin cargo unidades
+        
+        
         //Cargo nro de series de armamentos que esten en deposito inicial
-        $nro_series = $this->alta_actas_alta_model->cargoNroSeries();
+        $nro_series = $this->alta_ordenes_trabajo_model->cargoNroSeries();
         
         $aux = '""';
         
@@ -45,37 +56,38 @@ class alta_ordenes_trabajo extends CI_Controller {
         $this->load->view('alta_ordenes_trabajo_view', $data); 
     }
     
-    function cargoTiposArmas() {
+    function cargoDatos() {
         
-        $tipos_armas = $this->alta_catalogos_model->cargoTiposArmas();
+        $nro_serie = $_POST['nro_serie'];
+        $marca     = $_POST['marca'];
+        $calibre   = $_POST['calibre'];
+        $modelo    = $_POST['modelo'];
         
-        $concat = "<option> </option>";
+        $datos = $this->alta_ordenes_trabajo_model->cargoDatos($nro_serie, $marca, $calibre, $modelo);
         
-        foreach($tipos_armas as $val) {
-            if($_SESSION['alta_tipo_arma'] == $val) {
-                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
-                $_SESSION['alta_tipo_arma'] = "";
-            }else {
-                $concat .= "<option value='".$val."'>".$val."</option>";
-            }
+        /*
+         * $datos[0] - tipo_arma 1 
+         * $datos[1] - sistema   2
+         */
+        
+        for($i=0; $i<count($datos); $i=$i+2) {
+            $tipo_sistema[] = $datos[$i];
+            $tipo_sistema[] = $datos[$i+1];
         }
         
-        echo $concat;
+        echo json_encode($tipo_sistema);
     }
     
     function cargoMarcas() {
         
-        $marcas = $this->alta_catalogos_model->cargoMarcas();
-        
+        $nro_serie = $_POST['nro_serie'];
+       
+        $marcas = $this->alta_ordenes_trabajo_model->cargoMarcas($nro_serie);
+       
         $concat = "<option> </option>";
         
         foreach($marcas as $val) {
-            if($_SESSION['alta_marca'] == $val) {
-                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
-                $_SESSION['alta_marca'] = "";
-            }else {
-                $concat .= "<option value='".$val."'>".$val."</option>";
-            }
+            $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
@@ -83,88 +95,84 @@ class alta_ordenes_trabajo extends CI_Controller {
     
     function cargoCalibres() {
         
-        $calibres = $this->alta_catalogos_model->cargoCalibres();
+        $nro_serie = $_POST['nro_serie'];
+        $marca     = $_POST['marca'];
+        
+        $calibres = $this->alta_ordenes_trabajo_model->cargoCalibres($nro_serie, $marca);
         
         $concat = "<option> </option>";
         
         foreach($calibres as $val) {
-            if($_SESSION['alta_calibre'] == $val) {
-                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
-                $_SESSION['alta_calibre'] = "";
-            }else {
-                $concat .= "<option value='".$val."'>".$val."</option>";
-            }
-        }
-        
-        echo $concat;
-    }
-    
-    function cargoModelos() {
-        
-        $modelos = $this->alta_catalogos_model->cargoModelos();
-        
-        $concat = "<option> </option>";
-        
-        foreach($modelos as $val) {
-            if($_SESSION['alta_modelo'] == $val) {
-                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
-                $_SESSION['alta_modelo'] = "";
-            }else {
-                $concat .= "<option value='".$val."'>".$val."</option>";
-            }
-        }
-        
-        echo $concat;
-    }
-    
-    function cargoSistemas() {
-        
-        $sistemas = $this->alta_catalogos_model->cargoSistemas();
-        
-        $concat = "<option> </option>";
-        
-        foreach($sistemas as $val) {
-            if($_SESSION['alta_sistema'] == $val) {
-                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
-                $_SESSION['alta_sistema'] = "";
-            }else {
-                $concat .= "<option value='".$val."'>".$val."</option>";
-            }
-        }
-        
-        echo $concat;
-    }
-    
-    function cargoEmpresas() {
-        
-        $empresas = $this->alta_catalogos_model->cargoEmpresas();
-        
-        $concat = "<option> </option>";
-        
-        foreach($empresas as $val) {
-            if($_SESSION['alta_empresa'] == $val) {
-                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
-                $_SESSION['alta_empresa'] = "";
-            }else {
-                $concat .= "<option value='".$val."'>".$val."</option>";
-            }
-        }
-        
-        echo $concat;
-    }   
-    
-    function cargoPaises() {
-        
-        $paises = $this->alta_catalogos_model->cargoPaises();
-        
-        $concat = "<option> </option>";
-        
-        foreach($paises as $val) {
             $concat .= "<option value='".$val."'>".$val."</option>";
         }
         
         echo $concat;
-    }     
+    }
+    
+     function cargoModelos() {
+        
+        $nro_serie = $_POST['nro_serie'];
+        $marca     = $_POST['marca'];
+        $calibre   = $_POST['calibre'];
+        
+        $modelos = $this->alta_ordenes_trabajo_model->cargoModelos($nro_serie, $marca, $calibre);
+        
+        $concat = "<option> </option>";
+        
+        foreach($modelos as $val) {
+            $concat .= "<option value='".$val."'>".$val."</option>";
+        }
+        
+        echo $concat;
+    } 
+    
+    function cargoFichasFiltro() {
+        
+        $nro_serie = $_SESSION['seleccion_busqueda'];
+        $marca     = $_SESSION['seleccion_busqueda1'];
+        $calibre   = $_SESSION['seleccion_busqueda2'];
+        $modelo    = $_SESSION['seleccion_busqueda3'];
+        
+        if(empty($nro_serie)) {
+            //Cargo nro de series de armamentos que esten en deposito inicial
+            $nro_series_array = $this->alta_actas_alta_model->cargoNroSeries();
+
+            $aux = '""';
+            $nro_series  = "<option> </option>";
+
+            foreach($nro_series_array as $val) {
+                $aux = '"'.$val.'"';
+                $nro_series .= "<option value='".$val."'>".$val."</option>";
+            }
+            //Fin cargo nro de series de armamento en deposito inicial            
+        }else {
+            $nro_series  = "<option> </option>";
+            $nro_series .= "<option selected='selected' value='".$nro_serie."'>".$nro_serie."</option>";
+        }
+
+        $marcas  = "<option> </option>";
+        $marcas .= "<option selected='selected' value='".$marca."'>".$marca."</option>";
+        
+        $calibres  = "<option> </option>";
+        $calibres .= "<option selected='selected' value='".$calibre."'>".$calibre."</option>";
+        
+        $modelos  = "<option> </option>";
+        $modelos .= "<option selected='selected' value='".$modelo."'>".$modelo."</option>";        
+        
+        //Retorno los datos
+        $retorno = array();
+        $retorno[] = $nro_series;
+        $retorno[] = $marcas;
+        $retorno[] = $calibres;
+        $retorno[] = $modelos;
+        
+        $datos = $this->alta_ordenes_trabajo_model->cargoDatos($nro_serie, $marca, $calibre, $modelo);
+        
+        $retorno[] = $datos[0]; //tipo_arma
+        $retorno[] = $datos[1]; //sistema
+        
+        echo json_encode($retorno);        
+    }    
     
     function validarDatos() {
         

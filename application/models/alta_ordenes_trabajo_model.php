@@ -7,25 +7,42 @@ class alta_ordenes_trabajo_model extends CI_Model {
         $this->load->database();
     }
 
-    function cargoTiposArmas() {
+    function cargoUnidades() {
         
-        $query = $this->db->query("SELECT tipo_arma
-                                   FROM tipos_armas
-                                   ORDER BY tipo_arma");
+        $query = $this->db->query("SELECT idunidad, nombreunidad
+                                   FROM unidades
+                                   ORDER BY nombreunidad");
         
-        $tipos_armas = array();
+        $unidades = array();
         
         foreach($query->result() as $row) {
-            $tipos_armas[] = $row->tipo_arma;
+            $unidades[] = $row->idunidad;
+            $unidades[] = $row->nombreunidad;
         }
         
-        return $tipos_armas;
+        return $unidades;
     }
     
-    function cargoMarcas() {
+    function cargoNroSeries() {
+       
+        $query = $this->db->query("SELECT DISTINCT nro_serie
+                                   FROM stock_unidades
+                                   ORDER BY nro_serie");
         
-        $query = $this->db->query("SELECT marca
-                                   FROM marcas
+        $nro_series = array();
+        
+        foreach($query->result() as $row) {
+            $nro_series[] = $row->nro_serie;
+        }
+        
+        return $nro_series;        
+    }    
+    
+    function cargoMarcas($nro_serie) {
+        
+        $query = $this->db->query("SELECT DISTINCT marca
+                                   FROM stock_unidades
+                                   WHERE nro_serie  = ".$this->db->escape($nro_serie)."    
                                    ORDER BY marca");
         
         $marcas = array();
@@ -34,13 +51,15 @@ class alta_ordenes_trabajo_model extends CI_Model {
             $marcas[] = $row->marca;
         }
         
-        return $marcas;
+        return $marcas;        
     }
     
-    function cargoCalibres() {
+    function cargoCalibres($nro_serie, $marca) {
         
-        $query = $this->db->query("SELECT calibre
-                                   FROM calibres
+        $query = $this->db->query("SELECT DISTINCT calibre
+                                   FROM stock_unidades
+                                   WHERE nro_serie  = ".$this->db->escape($nro_serie)."
+                                   AND marca      = ".$this->db->escape($marca)."
                                    ORDER BY calibre");
         
         $calibres = array();
@@ -49,13 +68,16 @@ class alta_ordenes_trabajo_model extends CI_Model {
             $calibres[] = $row->calibre;
         }
         
-        return $calibres;
+        return $calibres;       
     }
     
-    function cargoModelos() {
+    function cargoModelos($nro_serie, $marca, $calibre) {
         
-        $query = $this->db->query("SELECT modelo
-                                   FROM modelos
+        $query = $this->db->query("SELECT DISTINCT modelo
+                                   FROM stock_unidades
+                                   WHERE nro_serie  = ".$this->db->escape($nro_serie)."
+                                   AND marca      = ".$this->db->escape($marca)."
+                                   AND calibre    = ".$this->db->escape($calibre)."
                                    ORDER BY modelo");
         
         $modelos = array();
@@ -64,51 +86,32 @@ class alta_ordenes_trabajo_model extends CI_Model {
             $modelos[] = $row->modelo;
         }
         
-        return $modelos;
-    }
-        function cargoSistemas() {
-        
-        $query = $this->db->query("SELECT sistema
-                                   FROM sistemas
-                                   ORDER BY sistema");
-        
-        $sistemas = array();
-        
-        foreach($query->result() as $row) {
-            $sistemas[] = $row->sistema;
-        }
-        
-        return $sistemas;
-    }
+        return $modelos;        
+    }  
     
-    function cargoEmpresas() {
+    function cargoDatos($nro_serie, $marca, $calibre, $modelo) {
         
-        $query = $this->db->query("SELECT empresa
-                                   FROM empresas
-                                   ORDER BY empresa");
+        $query = $this->db->query("SELECT c.tipo_arma, c.sistema
+                                   FROM catalogos c
+                                   INNER JOIN fichas f ON f.nro_interno_catalogo = c.nro_interno
+                                   WHERE f.nro_serie = ".$this->db->escape($nro_serie)."
+                                   AND f.marca = ".$this->db->escape($marca)."
+                                   AND f.calibre = ".$this->db->escape($calibre)."
+                                   AND f.modelo = ".$this->db->escape($modelo));
         
-        $empresas = array();
+        $datos = array();
         
-        foreach($query->result() as $row) {
-            $empresas[] = $row->empresa;
+        if($query->num_rows() > 0) {
+            $row = $query->row();
+
+            $datos[] = $row->tipo_arma;
+            $datos[] = $row->sistema;
+        }else {
+            $datos[] = "";
+            $datos[] = "";
         }
         
-        return $empresas;
-    }    
-    
-    function cargoPaises() {
-        
-        $query = $this->db->query("SELECT nombre
-                                   FROM paises
-                                   ORDER BY nombre");
-        
-        $paises = array();
-        
-        foreach($query->result() as $row) {
-            $paises[] = $row->nombre;
-        }
-        
-        return $paises;
+        return $datos;
     }
     
     function altaCatalogo($tipo_arma, $marca, $calibre, $modelo, $sistema, $empresa, $pais_empresa, $fabricacion, $vencimiento) {
