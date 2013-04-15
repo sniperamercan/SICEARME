@@ -3,7 +3,7 @@
 /*
 * Equipo - UDEPGCALIT
 * Año - 2013
-* Iteracion - Primera Iteracion
+* Iteracion - Segunda Iteracion
 * Clase - alta_ordenes_trabajo
 */
 
