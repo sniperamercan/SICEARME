@@ -12,7 +12,7 @@
                 $("input:button").button(); 
             });	
 
-            function altaCatalogo() {
+            function altaOrdenTrabajo() {
                 
                 var tipo_arma    = $("#tipo_arma").val();
                 var marca        = $("#marca").val();
@@ -219,7 +219,7 @@
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="altaCatalogo();"> Ingresar registro </button>
+                <button style="margin-right: 20px;" onclick="altaOrdenTrabajo();"> Alta orden de trabajo </button>
             </fieldset>  
             
         </div>        

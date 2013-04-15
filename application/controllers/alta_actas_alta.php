@@ -45,8 +45,6 @@ class alta_actas_alta extends CI_Controller {
         //Cargo nro de series de armamentos que esten en deposito inicial
         $nro_series = $this->alta_actas_alta_model->cargoNroSeries();
         
-        $aux = '""';
-        
         $data['nro_series'] = "<option> </option>";
         
         foreach($nro_series as $val) {
@@ -57,8 +55,6 @@ class alta_actas_alta extends CI_Controller {
         
         //Cargo nro de series de armamentos que esten en deposito inicial de accesorios
         $nro_series_accesorios = $this->alta_actas_alta_model->cargoNroSeriesAccesorios();
-        
-        $aux = '""';
         
         $data['nro_series_accesorios'] = "<option> </option>";
         

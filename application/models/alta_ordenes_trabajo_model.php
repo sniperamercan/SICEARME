@@ -1,6 +1,6 @@
 <?php
 
-class alta_registro_ingreso_taller_model extends CI_Model {
+class alta_ordenes_trabajo_model extends CI_Model {
     
     function __construct() {
         parent::__construct();

@@ -4,15 +4,15 @@
 * Equipo - UDEPGCALIT
 * Año - 2013
 * Iteracion - Primera Iteracion
-* Clase - alta_registro_ingreso_taller
+* Clase - alta_ordenes_trabajo
 */
 
-class alta_registro_ingreso_taller extends CI_Controller {
+class alta_ordenes_trabajo extends CI_Controller {
     
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('alta_registro_ingreso_taller_model');
+        $this->load->model('alta_ordenes_trabajo_model');
         $this->load->library('mensajes');
         $this->load->library('perms'); 
         $this->load->library('form_validation'); 
@@ -21,17 +21,28 @@ class alta_registro_ingreso_taller extends CI_Controller {
             die($this->mensajes->sinPermisos());
         }         
         
-        //Modulo solo visible para el peril 2 y 3 - Usuarios O.C.I y Administradores O.C.I 
-        if(!$this->perms->verificoPerfil2() && !$this->perms->verificoPerfil3()) {
+        //Modulo solo visible para el peril 6 y 7 - Usuario Taller de armamento y Adminitrador Taller de armamento
+        if(!$this->perms->verificoPerfil6() && !$this->perms->verificoPerfil7()) {
             die($this->mensajes->sinPermisos());
         }
     }
     
     function index() {
         
-        $data['nro_series'] = "";
+        //Cargo nro de series de armamentos que esten en deposito inicial
+        $nro_series = $this->alta_actas_alta_model->cargoNroSeries();
         
-        $this->load->view('alta_registro_ingreso_taller_view', $data); 
+        $aux = '""';
+        
+        $data['nro_series'] = "<option> </option>";
+        
+        foreach($nro_series as $val) {
+            $aux = '"'.$val.'"';
+            $data['nro_series'] .= "<option value='".$val."'>".$val."</option>";
+        }
+        //Fin cargo nro de series de armamento en deposito inicial
+        
+        $this->load->view('alta_ordenes_trabajo_view', $data); 
     }
     
     function cargoTiposArmas() {
