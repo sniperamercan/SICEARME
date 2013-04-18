@@ -7,8 +7,8 @@
 	// ColorBox Default Settings.	
 	// See http://colorpowered.com/colorbox for details.
 	defaults = {
-		transition: "elastic",
-		speed: 300,
+		transition: "none",
+		speed: 1000,
 		width: false,
 		initialWidth: "600",
 		innerWidth: false,
@@ -32,8 +32,8 @@
 		current: "image {current} of {total}",
 		previous: "previous",
 		next: "next",
-		close: "close",
-		open: false,
+		close: "cerrar",
+		open: true,
 		returnFocus: true,
 		loop: true,
 		slideshow: false,

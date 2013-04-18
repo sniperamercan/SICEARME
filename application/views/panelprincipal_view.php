@@ -9,7 +9,7 @@
         <!-- SCRIPT Plugins -->
         <script type="text/javascript" src='<?php echo base_url('js/jquery-ui/js/jquery-1.8.2.min.js');?>' ></script>	
         <script type="text/javascript" src='<?php echo base_url('js/jquery-ui/js/jquery-ui-1.8.23.custom.min.js');?>' ></script>	
-        <script type="text/javascript" src='<?php echo base_url('js/colorbox/colorbox/jquery.colorbox-min.js'); ?>'></script>
+        <script type="text/javascript" src='<?php echo base_url('js/colorbox/colorbox/jquery.colorbox.js'); ?>'></script>
         <script type="text/javascript" src='<?php echo base_url('js/print/jquery.printElement.js'); ?>'></script>
         <script type="text/javascript" src='<?php echo base_url('js/jquery.alerts-1.1/jquery.alerts.js'); ?>'></script>
         <script type="text/javascript" src='<?php echo base_url('js/smartupdater/smartupdater.4.0.js'); ?>'></script>
