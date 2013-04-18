@@ -162,19 +162,47 @@
                 });                
             }
             
-            function busquedaCatalogos() {
-                $.colorbox({href:"<?php echo base_url('busqueda_catalogos'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA CATALOGOS", onClosed: function(){ cargoCatalogosFiltro(); } });
+            function busquedaOrdenesTrabajo() {
+                $.colorbox({href:"<?php echo base_url('busqueda_ordenes_trabajo'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA ORDENES TRABAJO", onClosed: function(){ cargoOrdenesTrabajoFiltro(); } });
             }
             
-            function cargoCatalogosFiltro() {
+            function cargoOrdenesTrabajoFiltro() {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_compras/cargoCatalogosFiltro",
+                   url: "<?php base_url(); ?>accion_ordenes_trabajo/cargoOrdenesTrabajoFiltro",
                    success: function(data) {
-                       $("#catalogo").html("");
-                       $("#catalogo").html(data);
+                       $("#nro_orden").html("");
+                       $("#nro_orden").html(data);
+                       cargoDatosArma();
                    }
                 });                
+            }
+            
+            function cargoDatosArma() {
+            
+                var nro_orden = $("#nro_orden").val();
+            
+                $.ajax({
+                   type: "post",
+                   dataType: "json",
+                   url: "<?php base_url(); ?>accion_ordenes_trabajo/cargoDatosArma",
+                   data: "nro_orden="+nro_orden,
+                   success: function(data) {
+                       if(data[0] !== 0) {
+                           $("#nro_serie").val(data[0]);
+                           $("#marca").val(data[1]);
+                           $("#calibre").val(data[2]);
+                           $("#modelo").val(data[3]);
+                           $("#tipo_arma").val(data[4]);
+                       }else {
+                           $("#nro_serie").val("");
+                           $("#marca").val("");
+                           $("#calibre").val("");
+                           $("#modelo").val("");
+                           $("#tipo_arma").val("");                           
+                       }   
+                   }
+                }); 
             }
             
         </script>
@@ -196,7 +224,7 @@
                 
                 <dl>
                 <dt><label for="nro_orden"> Nro orden </label></dt>
-                <dd><select id="nro_orden"> <?php echo $nro_ordenes ?> </select> <img style="cursor: pointer;" onclick="busquedaOrdenes();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
+                <dd><select id="nro_orden" onchange='cargoDatosArma(this.value);'> <?php echo $nro_ordenes ?> </select> <img style="cursor: pointer;" onclick="busquedaOrdenesTrabajo();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>                 
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
@@ -232,7 +260,7 @@
                 
                 <dl>
                 <dt><label for="seccion"> Seccion </label></dt>
-                <dd><select id="seccion"> <?php echo $empresas ?> </select> <img style="cursor: pointer;" onclick="crearSeccion();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
+                <dd><select id="seccion"> <?php echo $secciones ?> </select> <img style="cursor: pointer;" onclick="crearSeccion();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
                 </dl>       
                 
                 <dl> 		

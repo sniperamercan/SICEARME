@@ -3,16 +3,16 @@
 /*
 * Equipo - UDEPGCALIT
 * Año - 2013
-* Iteracion - Primera Iteracion
-* Clase - busqueda_fichas_taller
+* Iteracion - Segunda Iteracion
+* Clase - busqueda_ordenes_trabajo
 */
 
-class busqueda_fichas_taller extends CI_Controller {
+class busqueda_ordenes_trabajo extends CI_Controller {
     
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('busqueda_fichas_taller_model');
+        $this->load->model('busqueda_ordenes_trabajo_model');
         $this->load->library('perms');
         $this->load->library('pagination');   
         $this->load->library('mensajes');
@@ -24,54 +24,43 @@ class busqueda_fichas_taller extends CI_Controller {
     
     function index() {
         
-        $_SESSION['seleccion_busqueda']  = "";  //elemento que se selecciona 1
-        $_SESSION['seleccion_busqueda1'] = ""; //elemento que se selecciona 2
-        $_SESSION['seleccion_busqueda2'] = ""; //elemento que se selecciona 3
-        $_SESSION['seleccion_busqueda3'] = ""; //elemento que se selecciona 4
+        $_SESSION['seleccion_busqueda'] = ""; //elemento que se selecciona
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
-        $this->load->view("busqueda_fichas_taller_view");
+        $this->load->view("busqueda_ordenes_trabajo_view");
     }
     
     //cantReg = cantidad de registros x pagina
     function consulta($param="",$cantReg=30) {   
      
         //Inicio, armo condiciones where para sql
-        if( isset($_POST['nro_serie']) && isset($_POST['nro_compra']) && isset($_POST['nro_catalogo']) && isset($_POST['marca']) && isset($_POST['calibre']) && isset($_POST['modelo']) ) { 
+        if( isset($_POST['nro_orden']) && isset($_POST['nro_serie']) && isset($_POST['marca']) && isset($_POST['calibre']) && isset($_POST['modelo']) ) { 
             
             $condicion = "";
             $and = 0;
-
-            if(!empty($_POST['nro_serie'])){
-                $aux = $_POST['nro_serie'];
-                $condicion .= " s.nro_serie = ".$this->db->escape($aux);
+ 
+            if(!empty($_POST['nro_orden'])){
+                $aux = $_POST['nro_orden'];
+                $aux = "%".$_POST['nro_orden']."%";
+                $condicion .= " nro_orden LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
-            }              
+            }          
             
-            if(!empty($_POST['nro_compra'])){
+            if(!empty($_POST['nro_serie'])){
                 if($and == 1){
                     $condicion .= " AND ";
                 }
-                $aux = $_POST['nro_compra'];
-                $condicion .= " f.nro_interno_compra = ".$this->db->escape($aux);
+                $aux = "%".$_POST['nro_serie']."%";
+                $condicion .= " nro_serie LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }            
-            
-            if(!empty($_POST['nro_catalogo'])){
-                if($and == 1){
-                    $condicion .= " AND ";
-                }
-                $aux = $_POST['nro_catalogo'];
-                $condicion .= " f.nro_interno_catalogo = ".$this->db->escape($aux);
-                $and = 1; //agrego AND en proximo filtro
-            }         
             
             if(!empty($_POST['marca'])){
                 if($and == 1){
                     $condicion .= " AND ";
                 }
                 $aux = "%".$_POST['marca']."%";
-                $condicion .= " s.marca LIKE ".$this->db->escape($aux);
+                $condicion .= " marca LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }
             
@@ -80,7 +69,7 @@ class busqueda_fichas_taller extends CI_Controller {
                     $condicion .= " AND ";
                 }
                 $aux = "%".$_POST['calibre']."%";
-                $condicion .= " s.calibre LIKE ".$this->db->escape($aux);
+                $condicion .= " calibre LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }
             
@@ -89,7 +78,7 @@ class busqueda_fichas_taller extends CI_Controller {
                     $condicion .= " AND ";
                 }
                 $aux = "%".$_POST['modelo']."%";
-                $condicion .= " s.modelo LIKE ".$this->db->escape($aux);
+                $condicion .= " modelo LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }            
             
@@ -107,7 +96,7 @@ class busqueda_fichas_taller extends CI_Controller {
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
-            $order = "nro_interno_compra";
+            $order = "nro_orden";
         }
         //Fin verifico order        
         
@@ -119,11 +108,11 @@ class busqueda_fichas_taller extends CI_Controller {
         
         $concat = "";
         
-        $result = $this->busqueda_fichas_taller_model->consulta_db($param, $cantReg, $condicion, $order);
+        $result = $this->busqueda_ordenes_trabajo_model->consulta_db($param, $cantReg, $condicion, $order);
           
         $j=0;
         
-        for($i=0;$i<count($result);$i=$i+6) {
+        for($i=0;$i<count($result);$i=$i+7) {
             
             if($j % 2 == 0){
                 $class = "";
@@ -131,28 +120,26 @@ class busqueda_fichas_taller extends CI_Controller {
                 $class = "alt";
             }                        
             
-            $aux_nro_serie = '"'.$result[$i].'"';
-            $aux_marca     = '"'.$result[$i+3].'"';
-            $aux_calibre   = '"'.$result[$i+4].'"';
-            $aux_modelo    = '"'.$result[$i+5].'"';
+            $aux = '"'.$result[$i].'"';
             
             $concat .= "
                 <tr class='".$class."'> 
-                    <td onclick='seleccion(".$aux_nro_serie.",".$aux_marca.",".$aux_calibre.",".$aux_modelo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/select.png' /> </td>
-                    <td> ".$result[$i]."   </td>
-                    <td> ".$result[$i+1]." </td>
+                    <td onclick='seleccion(".$aux.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/select.png' /> </td>
+                    <td style='text-align: center;'> ".$result[$i]." </td>
+                    <td style='text-align: center;'> ".$result[$i+1]." </td>
                     <td> ".$result[$i+2]." </td>
                     <td> ".$result[$i+3]." </td>
                     <td> ".$result[$i+4]." </td>
                     <td> ".$result[$i+5]." </td>
+                    <td> ".$result[$i+6]." </td>
                 </tr>
             ";
             
             $j++;
         }                  
         
-        $config['base_url'] = site_url("busqueda_fichas_taller/consulta");
-        $config['total_rows'] = $this->busqueda_fichas_taller_model->cantidadRegistros($condicion);
+        $config['base_url'] = site_url("busqueda_ordenes_trabajo/consulta");
+        $config['total_rows'] = $this->busqueda_ordenes_trabajo_model->cantidadRegistros($condicion);
         $config['per_page'] = $cantReg;
         $config['first_link'] = 'Primera';
         $config['last_link'] = 'Ultima';
@@ -177,7 +164,7 @@ class busqueda_fichas_taller extends CI_Controller {
         echo json_encode($retorno);
     }    
     
-    function seteoImpresion() {    
+    function seteoImpresion() {       
         
         $this->load->view("impresion_view");    
     }
@@ -191,7 +178,7 @@ class busqueda_fichas_taller extends CI_Controller {
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
-            $order = "nro_interno_compra";
+            $order = "nro_orden";
         }
         //Fin verifico order
         
@@ -205,11 +192,11 @@ class busqueda_fichas_taller extends CI_Controller {
             echo "La pagina inicial y final deben de estar completadas ";
         }else if( $a_pagina < $de_pagina ){
             echo "La pagina inicila no puede ser mayor que la pagina final verifique";
-        }else if( $this->busqueda_fichas_taller_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
+        }else if( $this->busqueda_ordenes_trabajo_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
             echo "No existe tal cantidad de paginas para esa consulta verifique";
         }else{
             echo "1";
-            if( $this->busqueda_fichas_taller_model->cantidadRegistros($condicion) <= 30 ){
+            if( $this->busqueda_ordenes_trabajo_model->cantidadRegistros($condicion) <= 30 ){
                 $ini   = 0;
                 $param = 30;
                 $this->consultaImpresion($condicion, $ini, $param, $order);
@@ -226,17 +213,17 @@ class busqueda_fichas_taller extends CI_Controller {
         }    
     }    
     
-    function consultaImpresion($condicion, $param, $cantReg, $order) {        
-       
-        $result = array();
+    function consultaImpresion($condicion, $param, $cantReg, $order) {  
         
+        $result = array();
+       
         if($param == ""){
             $param = 0;
         }            
         
         $concat = "";
         
-        $result = $this->busqueda_fichas_taller_model->consulta_db($param, $cantReg, $condicion, $order);
+        $result = $this->busqueda_ordenes_trabajo_model->consulta_db($param, $cantReg, $condicion, $order);
                 
         
         $concat .= '<center>';
@@ -245,16 +232,17 @@ class busqueda_fichas_taller extends CI_Controller {
         
         $concat .= '
             <tr>
-                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro serie    </td>
-                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro compra   </td>
-                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro catalogo </td>
-                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Marca        </td>
-                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Calibre      </td>
-                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Modelo       </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro orden </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro serie </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Marca </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Calibre </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Modelo </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Fecha </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Unidad </td>
             </tr>   
         ';
                 
-        for($i=0;$i<count($result);$i=$i+6) {            
+        for($i=0;$i<count($result);$i=$i+7) {            
             $concat .= "
                 <tr>
                     <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i]."   </td>
@@ -263,6 +251,7 @@ class busqueda_fichas_taller extends CI_Controller {
                     <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+3]." </td>
                     <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+4]." </td>
                     <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+5]." </td>
+                    <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+6]." </td>
                 </tr>
             ";
         }                  
@@ -281,26 +270,22 @@ class busqueda_fichas_taller extends CI_Controller {
         switch($order){
             
             case 0:
-                $_SESSION['order'][0] = 'nro_serie';
+                $_SESSION['order'][0] = 'nro_orden';
                 break;
             
             case 1:
-                $_SESSION['order'][0] = 'nro_interno_compra';
-                break;            
-            
-            case 2:
-                $_SESSION['order'][0] = 'nro_interno_catalogo';
+                $_SESSION['order'][0] = 'nro_serie';
                 break;
             
-            case 3:
+            case 2:
                 $_SESSION['order'][0] = 'marca';
                 break;
             
-            case 4:
+            case 3:
                 $_SESSION['order'][0] = 'calibre';
                 break;
             
-            case 5:
+            case 4:
                 $_SESSION['order'][0] = 'modelo';
                 break;            
         }
@@ -316,10 +301,7 @@ class busqueda_fichas_taller extends CI_Controller {
 
     function seteoSeleccion() {
         
-        $_SESSION['seleccion_busqueda']  = $_POST['nro_serie'];
-        $_SESSION['seleccion_busqueda1'] = $_POST['marca'];
-        $_SESSION['seleccion_busqueda2'] = $_POST['calibre'];
-        $_SESSION['seleccion_busqueda3'] = $_POST['modelo'];
+        $_SESSION['seleccion_busqueda'] = $_POST['nro_orden'];
         
         /*al seleccionar un catalogo del listado usar esta variable de sesion 
         *   $_SESSION['seleccion_busqueda']

@@ -1,6 +1,6 @@
 <?php
 
-class busqueda_fichas_taller_model extends CI_Model {
+class busqueda_ordenes_trabajo_model extends CI_Model {
     
     function __construct() {
         parent::__construct();
@@ -9,9 +9,8 @@ class busqueda_fichas_taller_model extends CI_Model {
     
     //para paginado
     function cantidadRegistros($condicion){
-        $query = $this->db->query("SELECT *
-                                   FROM stock_unidades s
-                                   INNER JOIN fichas f ON s.nro_serie = f.nro_serie AND s.marca = f.marca AND s.calibre = f.calibre AND s.modelo = f.modelo 
+        $query = $this->db->query("SELECT * 
+                                   FROM ordenes_trabajo
                                    WHERE ".$condicion);
         
         return $query->num_rows();
@@ -21,20 +20,21 @@ class busqueda_fichas_taller_model extends CI_Model {
         
         $result = array();
 
-        $query = $this->db->query("SELECT s.nro_serie, f.nro_interno_compra, f.nro_interno_catalogo, s.marca, s.calibre, s.modelo
-                                   FROM stock_unidades s
-                                   INNER JOIN fichas f ON s.nro_serie = f.nro_serie AND s.marca = f.marca AND s.calibre = f.calibre AND s.modelo = f.modelo 
+        $query = $this->db->query("SELECT o.nro_orden, o.fecha, o.nro_serie, o.marca, o.calibre, o.modelo, u.nombreunidad
+                                   FROM ordenes_trabajo o
+                                   INNER JOIN unidades u ON o.idunidad = u.idunidad 
                                    WHERE ".$condicion."
                                    ORDER BY ".$order."
                                    LIMIT ".$ini.",".$param);
         
         foreach($query->result() as $row){
+            $result[] = $row->nro_orden;
+            $result[] = $row->fecha;
             $result[] = $row->nro_serie;
-            $result[] = $row->nro_interno_compra;
-            $result[] = $row->nro_interno_catalogo;
             $result[] = $row->marca;
             $result[] = $row->calibre;
             $result[] = $row->modelo;
+            $result[] = $row->nombreunidad;
         }
         
         return $result;

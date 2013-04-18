@@ -29,39 +29,25 @@ class accion_ordenes_trabajo extends CI_Controller {
     
     function index() {
         
-        //Inicializo variable de session de catalogos vacia
-        if(isset($_SESSION['catalogos'])) {
-            unset($_SESSION['catalogos']);
+        //cargo los nro de ordenes ingresados hasta el momento
+        $nro_ordenes = $this->accion_ordenes_trabajo_model->cargoNroOrdenes();
+        
+        $data['nro_ordenes'] = "<option value=''>Seleccione opcion..</option>";
+        
+        foreach($nro_ordenes as $val) {
+            $data['nro_ordenes'] .= "<option value='".$val."'>".$val."</option>";
         }
+        //fin cargo nro de ordenes ingresados hasta el momento
         
-        $_SESSION['catalogos'] = array();
+        //cargo las secciones ingresadas hasta el momento
+        $secciones = $this->accion_ordenes_trabajo_model->cargoSecciones();
         
-        //Cargo paises
-        $array_paises = $this->accion_ordenes_trabajo_model->cargoPaises();
+        $data['secciones'] = "<option value=''>Seleccione opcion..</option>";
         
-        $data['paises'] = "<option> </option>";
-        
-        foreach($array_paises as $val) {
-            $data['paises'] .= "<option value='".$val."'>".$val."</option>";
+        foreach($secciones as $val) {
+            $data['secciones'] .= "<option value='".$val."'>".$val."</option>";
         }
-        
-        //Cargo catalogos
-        $catalogos = $this->accion_ordenes_trabajo_model->cargoCatalogos();
-        
-        $data['catalogos'] = "<option> </option>";
-        
-        foreach($catalogos as $val) {
-            $data['catalogos'] .= "<option value='".$val."'>".$val."</option>";
-        }
-        
-        //Cargo empresas
-        $empresas = $this->accion_ordenes_trabajo_model->cargoEmpresas();
-        
-        $data['empresas'] = "<option> </option>";
-        
-        foreach($empresas as $val) {
-            $data['empresas'] .= "<option value='".$val."'>".$val."</option>";
-        }       
+        //fin cargo las secciones ingresadas hasta el momento
         
         //Llamo a la vista
         $this->load->view('accion_ordenes_trabajo_view', $data);  
@@ -74,6 +60,43 @@ class accion_ordenes_trabajo extends CI_Controller {
     function accionPiezasAsociadas() {
         
     }    
+
+    function cargoOrdenesTrabajoFiltro() {
+        
+        $nro_ordenes = $this->accion_ordenes_trabajo_model->cargoNroOrdenes();
+        
+        $concat = "<option value=''>Seleccione opcion..</option>";
+        
+        foreach($nro_ordenes as $val) {
+            if(isset($_SESSION['seleccion_busqueda'])) {
+                if($val == $_SESSION['seleccion_busqueda']) {
+                    $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
+                }else {
+                    $concat .= "<option value='".$val."'>".$val."</option>";
+                }
+            }else {
+                $concat .= "<option value='".$val."'>".$val."</option>";
+            }
+        }
+        
+        echo $concat;        
+    }
+    
+    function cargoDatosArma() {
+        
+        $nro_orden = $_POST['nro_orden'];
+        
+        if(!empty($nro_orden)) {
+            $datos_arma = $this->accion_ordenes_trabajo_model->cargoDatosArma($nro_orden);
+        }else {
+            $datos_arma[0] = 0;
+        }
+        
+        echo json_encode($datos_arma);
+    }
+    
+    
+    
     
     function cargoEmpresas() {
         
@@ -115,27 +138,7 @@ class accion_ordenes_trabajo extends CI_Controller {
         echo $concat;
     }
     
-    function cargoCatalogosFiltro() {
-        
-        $catalogos = $this->alta_compras_model->cargoCatalogos();
-        
-        $concat = "<option> </option>";
-        
-        foreach($catalogos as $val) {
-            if(isset($_SESSION['seleccion_busqueda'])) {
-                if($val == $_SESSION['seleccion_busqueda']) {
-                    $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
-                }else {
-                    $concat .= "<option value='".$val."'>".$val."</option>";
-                }
-            }else {
-                $concat .= "<option value='".$val."'>".$val."</option>";
-            }
-        }
-        
-        echo $concat;        
-    }
-    
+
     function agregarCatalogos() {
         
         $catalogo         = $_POST['catalogo'];
