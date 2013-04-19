@@ -35,7 +35,8 @@ textarea {
     -webkit-border-radius: 5px;
     box-shadow: 0 0 5px #C0C0C0;
     border-radius: 5px;
-    height: 100px;	
+    height: 100px;
+    resize: none;
 }
 
 input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus { 

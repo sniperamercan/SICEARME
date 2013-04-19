@@ -66,11 +66,18 @@
             }
 
             function altaAccionPiezaSecundarias() {
+                
+                var fecha         = $("#fecha").val();
+                var nro_orden     = $("#nro_orden").val();
+                var seccion       = $("#seccion").val();
+                var observaciones = $("#observaciones").val();                
+                
                 $.ajax({
                    type: "post",
                    url: "<?php base_url(); ?>accion_ordenes_trabajo/accionPiezasSecundarias",
+                   data: "fecha="+fecha+"&nro_orden="+nro_orden+"&seccion="+seccion+"&observaciones="+observaciones,
                    success: function() {
-                       irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>',' >> Taller armamento >> Accion >> Ordenes de trabajo');
+                       irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
                    }
                 });            
             }   
@@ -80,7 +87,7 @@
                    type: "post",
                    url: "<?php base_url(); ?>accion_ordenes_trabajo/accionPiezasAsociadas",
                    success: function() {
-                       irAFrame('<?php echo base_url('accion_piezas_asociadas'); ?>',' >> Taller armamento >> Accion >> Ordenes de trabajo');
+                       irAFrame('<?php echo base_url('accion_piezas_asociadas'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
                    }
                 });            
             }             

@@ -34,23 +34,20 @@
                 $("input:button").button(); 
             });	
 
-            function altaCompra() {
+            function altaAccionPiezasSecundarias() {
                 
-                var nro_compra   = $("#nro_compra").val();
-                var fecha        = $("#fecha").val();
-                var empresa      = $("#empresa").val();
-                var pais_empresa = $("#pais_empresa").val();
-                var descripcion  = $("#descripcion").val();
-                var modalidad    = $("#modalidad").val();
+                var nro_parte    = $("#nro_parte").val();
+                var nombre_parte = $("#nombre_parte").val();
+                var cant_actual  = $("#cant_actual").val();
+                var cant_usar    = $("#cant_usar").val();
                 
                 $.ajax({
                     type: "post",  
-                    dataType: "json",
-                    url: "<?php base_url(); ?>alta_compras/validarDatos",
-                    data: "nro_compra="+nro_compra+"&fecha="+fecha+"&empresa="+empresa+"&pais_empresa="+pais_empresa+"&descripcion="+descripcion+"&modalidad="+modalidad,
+                    url: "<?php base_url(); ?>accion_piezas_secundarias/validarDatos",
+                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&cant_actual="+cant_actual+"&cant_usar="+cant_usar,
                     success: function(data){
-                        if(data[0] == 1){            
-                            jAlert("Compra agregada al sistema con exito - Nro interno de compra generado = "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('alta_compras'); ?>','O.C.I >> Alta >> Compras'); });
+                        if(data == 1){            
+                            jAlert("Pieza utilizada correctamente en la orden de trabajo", "Correcto", function() { irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
@@ -62,101 +59,23 @@
                 irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
             }
             
-            function agregarCatalogo() {
-            
-                var catalogo           = $("#catalogo").val();
-                var cant_total_armas   = $("#cant_total_armas").val();
-                var costo_total        = $("#costo_total").val();
-            
-                 $.ajax({
-                   type: "post",
-                   dataType: "json",
-                   url: "<?php base_url(); ?>alta_compras/agregarCatalogos",
-                   data: "catalogo="+catalogo+"&cant_total_armas="+cant_total_armas+"&costo_total="+costo_total,
-                   success: function(data) {
-                       if(data[0] == 1) {
-                           $("#catalogos").append(data[1]);
-                           $("#totales").html("");
-                           $("#totales").html(data[2]);
-                           cargoCatalogos();
-                           $("#cant_total_armas").val("");
-                           $("#costo_total").val("");
-                       }else {
-                           jAlert(data[0], "Error");
-                       }
-                   }
-                });  
+            function busquedaRepuestos() {
+                $.colorbox({href:"<?php echo base_url('busqueda_repuestos'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA REPUESTOS", onClosed: function(){ cargoRepuestosFiltro(); } });
             }
             
-            //cargo y creo Empresas
-            function crearEmpresa() {
-                $.colorbox({href:"<?php echo base_url('alta_empresa'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA EMPRESA", onClosed: function(){ cargoEmpresas(); } });
-            }            
-            
-            function cargoEmpresas() {
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>alta_compras/cargoEmpresas",
-                   success: function(data) {
-                       $("#empresa").html(data);
-                   }
-                });
-            }     
-            //fin cargo y creo Empresas
-            
-            //cargo y creo Catalogos
-            function crearCatalogo() {
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>alta_compras/crearCatalogo",
-                   success: function(data) {
-                       $.colorbox({href:"<?php echo base_url('alta_catalogos'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:500, title:"ALTA CATALOGO", onClosed: function(){ cargoCatalogos(); } });
-                   }
-                });            
-            }            
-            
-            function cargoCatalogos() {
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>alta_compras/cargoCatalogos",
-                   success: function(data) {
-                       $("#catalogo").html(data);
-                   }
-                });
-            }   
-            //fin cargo y creo Catalogos
-            
-            function anularCatalogo(nro_catalogo) {
+            function cargoRepuestosFiltro() {
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_compras/anularCatalogo",
-                   data: "nro_catalogo="+nro_catalogo,
+                   url: "<?php base_url(); ?>accion_piezas_secundarias/cargoRepuestosFiltro",
                    success: function(data) {
-                       if(data[0] == 1) {
-                           $("#catalogos").html("");
-                           $("#catalogos").html(data[1]);
-                           $("#totales").html("");
-                           $("#totales").html(data[2]);                           
-                       }else {
-                           $("#catalogos").html("");
-                           $("#totales").html("<tr class='total'> <td> 0 </td> <td> 0 </td> </tr>");
-                       }
-                   }
-                });                
-            }
-            
-            function busquedaCatalogos() {
-                $.colorbox({href:"<?php echo base_url('busqueda_catalogos'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA CATALOGOS", onClosed: function(){ cargoCatalogosFiltro(); } });
-            }
-            
-            function cargoCatalogosFiltro() {
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>alta_compras/cargoCatalogosFiltro",
-                   success: function(data) {
-                       $("#catalogo").html("");
-                       $("#catalogo").html(data);
+                       $("#nro_parte").val("");
+                       $("#nombre_parte").val("");
+                       $("#cant_actual").val("");
+                       
+                       $("#nro_parte").val(data[0]);
+                       $("#nombre_parte").val(data[1]);
+                       $("#cant_actual").val(data[2]);                       
                    }
                 });                
             }
@@ -174,8 +93,13 @@
             <fieldset>	
             
                 <dl>
+                <dt><label> Orden de trabajo  </label></dt>
+                <dd><label> Nro - <?php echo $nro_orden ?>  </label></dd>
+                </dl>                 
+                
+                <dl>
                 <dt><label> Buscar repuesto </label></dt>
-                <dd><img style="cursor: pointer;" onclick="busquedaPartes();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
+                <dd><img style="cursor: pointer;" onclick="busquedaRepuestos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>                 
                 
                 <dl>
@@ -195,13 +119,13 @@
                 
                 <dl>
                 <dt><label for="cant_usar"> Cant a usar </label></dt>
-                <dd><input readonly="readonly" type="text" id="cant_usar" class="txtautomatico" /></dd>
+                <dd><input type="text" id="cant_usar" class="number" /></dd>
                 </dl> 
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="ingresarPieza();"> Ingresar pieza </button> 
+                <button style="margin-right: 20px;" onclick="altaAccionPiezasSecundarias();"> Ingresar pieza </button> 
                 <button style="margin-right: 20px;" onclick="volver();"> Volver </button> 
             </fieldset>  
             

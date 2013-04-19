@@ -29,6 +29,9 @@ class accion_ordenes_trabajo extends CI_Controller {
     
     function index() {
         
+        $_SESSION['nro_orden']  = "";
+        $_SESSION['nro_accion'] = "";
+        
         //cargo los nro de ordenes ingresados hasta el momento
         $nro_ordenes = $this->accion_ordenes_trabajo_model->cargoNroOrdenes();
         
@@ -54,6 +57,57 @@ class accion_ordenes_trabajo extends CI_Controller {
     }
     
     function accionPiezasSecundarias() {
+        
+        $fecha          = $_POST["fecha"];
+        $nro_orden      = $_POST["nro_orden"];
+        $seccion        = $_POST["seccion"];
+        $observaciones  = $_POST["observaciones"];
+        
+        $mensaje_error = array();
+        
+        if(empty($fecha)) {
+            $mensaje_error[] = 1;
+        }
+        
+        if(empty($nro_orden)) {
+            $mensaje_error[] = 2;
+        }
+        
+        if(empty($seccion)) {
+            $mensaje_error[] = 3;
+        }
+        
+        if(empty($observaciones)) {
+            $mensaje_error[] = 4;
+        }        
+         
+        if(count($mensaje_error) > 0) {
+            
+            switch($mensaje_error[0]) {
+                
+                case 1:
+                    echo $this->mensajes->errorVacio('fecha');
+                    break;
+                
+                case 2:
+                    echo $this->mensajes->errorVacio('nro orden');
+                    break;
+                
+                case 3:
+                    echo $this->mensajes->errorVacio('seccion');
+                    break;
+                
+                case 4:
+                    echo $this->mensajes->errorVacio('observaciones');
+                    break;
+            }
+        }else {
+            $nro_accion = $this->accion_ordenes_trabajo_model->altaAccionSimple($fecha, $nro_orden, $seccion, $observaciones);
+            //almacen info de orden en variables de session 
+            $_SESSION['nro_orden']  = $nro_orden;
+            $_SESSION['nro_accion'] = $nro_accion;       
+            echo 1;
+        }        
         
     }
     
@@ -170,27 +224,27 @@ class accion_ordenes_trabajo extends CI_Controller {
         $seccion        = $_POST["seccion"];
         $observaciones  = $_POST["observaciones"];
         
-        $mensjError = array();
+        $mensaje_error = array();
         
         if(empty($fecha)) {
-            $mensjError[] = 1;
+            $mensaje_error[] = 1;
         }
         
         if(empty($nro_orden)) {
-            $mensjError[] = 2;
+            $mensaje_error[] = 2;
         }
         
         if(empty($seccion)) {
-            $mensjError[] = 3;
+            $mensaje_error[] = 3;
         }
         
         if(empty($observaciones)) {
-            $mensjError[] = 4;
+            $mensaje_error[] = 4;
         }        
          
-        if(count($mensjError) > 0) {
+        if(count($mensaje_error) > 0) {
             
-            switch($mensjError[0]) {
+            switch($mensaje_error[0]) {
                 
                 case 1:
                     echo $this->mensajes->errorVacio('fecha');

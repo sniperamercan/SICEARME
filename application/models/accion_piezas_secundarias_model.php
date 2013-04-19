@@ -7,123 +7,81 @@ class accion_piezas_secundarias_model extends CI_Model {
         $this->load->database();
     }
     
-    function cargoPaises() {
+    function cargoCantidad($nro_parte, $nombre_parte) {
         
-        $query = $this->db->query("SELECT nombre
-                                   FROM paises
-                                   ORDER BY nombre");
+        $query = $this->db->query("SELECT cantidad
+                                   FROM stock_repuestos
+                                   WHERE nro_parte = ".$this->db->escape($nro_parte)."
+                                   AND nombre_parte = ".$this->db->escape($nombre_parte));
         
-        $paises = array();
+        $row = $query->row();
         
-        foreach($query->result() as $row) {
-            $paises[] = $row->nombre;
-        }
-        
-        return $paises;
+        return $row->cantidad;
     }
     
-    function cargoCatalogos() {
-        
-        $query = $this->db->query("SELECT nro_interno
-                                   FROM catalogos
-                                   ORDER BY nro_interno");
-        
-        $catalogos = array();
-        
-        foreach($query->result() as $row) {
-            $catalogos[] = $row->nro_interno;
-        }
-        
-        return $catalogos;
-    }    
-    
-    function cargoEmpresas() {
-        
-        $query = $this->db->query("SELECT empresa
-                                   FROM empresas
-                                   ORDER BY empresa");
-        
-        $empresas = array();
-        
-        foreach($query->result() as $row) {
-            $empresas[] = $row->empresa;
-        }
-        
-        return $empresas;
-    }     
-    
-    function existeCatalogo($nro_catalogo) {
+    function hayDatosAccion($nro_orden, $nro_accion) {
         
         $query = $this->db->query("SELECT *
-                                   FROM catalogos
-                                   WHERE nro_interno = ".$this->db->escape($nro_catalogo));
+                                   FROM cambio_piezas_no_asociadas_ordenes_trabajo
+                                   WHERE nro_orden = ".$this->db->escape($nro_orden)."
+                                   AND nro_accion = ".$this->db->escape($nro_accion));
         
         return $query->num_rows();
     }
     
-    function datosCatalogo($nro_catalogo) {
+    function cargoDatosAccion($nro_orden, $nro_accion) {
         
-        $query = $this->db->query("SELECT tipo_arma, marca, calibre, modelo, sistema
-                                   FROM catalogos
-                                   WHERE nro_interno = ".$this->db->escape($nro_catalogo));
+        $query = $this->db->query("SELECT nro_parte, nombre_parte, cantidad
+                                   FROM cambio_piezas_no_asociadas_ordenes_trabajo
+                                   WHERE nro_orden = ".$this->db->escape($nro_orden)."
+                                   AND nro_accion = ".$this->db->escape($nro_accion));
         
-        $catalogo = array();
+        $datos = array();
         
-        $row = $query->row();
-        
-        $catalogo['tipo_arma'] = $row->tipo_arma;
-        $catalogo['marca']     = $row->marca;
-        $catalogo['calibre']   = $row->calibre;
-        $catalogo['modelo']    = $row->modelo;
-        $catalogo['sistema']   = $row->sistema;
-        
-        return $catalogo;
-    }
-    
-    function altaCompra($nro_compra, $fecha, $empresa, $pais_empresa, $descripcion, $modalidad, $precio_total, $cantidad_armas) {
-        
-        $data_compra = array(
-            'nro_compra'          => $nro_compra,
-            'fecha'               => $fecha,
-            'empresa_proveedora'  => $empresa,
-            'pais_empresa'        => $pais_empresa,
-            'descripcion'         => $descripcion,
-            'modalidad'           => $modalidad,
-            'cantidad_armas'      => $cantidad_armas,
-            'precio'              => $precio_total,
-            'usuario_alta'        => base64_decode($_SESSION['usuario']),
-            'usuario_edita'       => base64_decode($_SESSION['usuario'])
-        );
-        
-        $this->db->insert('compras', $data_compra);
-        
-        $query = $this->db->query("SELECT last_insert_id() as nro_interno");
-        
-        $row = $query->row();
-        
-        $nro_interno = $row->nro_interno;
-        
-        $data_db_logs = array(
-            'tipo_movimiento' => 'insert',
-            'tabla'           => 'compras',
-            'clave_tabla'     => 'nro_interno = '.$nro_interno,
-            'usuario'         => base64_decode($_SESSION['usuario'])
-        );        
-
-        $this->db->insert('db_logs', $data_db_logs);
-        
-        for($i=0; $i<count($_SESSION['catalogos']); $i=$i+3) {
-            $data_compra_catalogo = array(
-                'nro_interno_compra'   => $nro_interno,
-                'nro_interno_catalogo' => $_SESSION['catalogos'][$i],
-                'cantidad_armas'       => $_SESSION['catalogos'][$i+1],
-                'precio'               => $_SESSION['catalogos'][$i+2]
-            );            
-
-            $this->db->insert('compras_catalogos', $data_compra_catalogo);
+        foreach($query->result() as $row) {
+            $datos[] = $row->nro_parte;
+            $datos[] = $row->nombre_parte;
+            $datos[] = $row->cantidad;
         }
         
-        return $nro_interno;
+        return $datos;
+    }
+    
+    function altaAccionPiezasSecundarias($nro_parte, $nombre_parte, $cant_usar, $cant_total) {
+        
+        $this->db->trans_start();
+        
+            $data_accion_set = array(
+                'cantidad' => $cant_total
+            );
+
+            $data_accion_where = array(
+                'nro_parte'    => $nro_parte,
+                'nombre_parte' => $nombre_parte
+            );
+
+            $this->db->update('stock_repuestos', $data_accion_set, $data_accion_where);
+
+            $data_db_logs = array(
+                'tipo_movimiento' => 'update',
+                'tabla'           => 'stock_repuestos',
+                'clave_tabla'     => 'nro_parte = '.$nro_parte.', nombre parte = '.$nombre_parte,
+                'usuario'         => base64_decode($_SESSION['usuario'])
+            );        
+
+            $this->db->insert('db_logs', $data_db_logs);
+
+            $data_accion = array(
+                'nro_orden'    => $_SESSION['nro_orden'],
+                'nro_accion'   => $_SESSION['nro_accion'],
+                'nro_parte'    => $nro_parte,
+                'nombre_parte' => $nombre_parte,
+                'cantidad'     => $cant_usar
+            );
+
+            $this->db->insert('cambio_piezas_no_asociadas_ordenes_trabajo', $data_accion);
+        
+        $this->db->trans_complete();
     }
     
 }

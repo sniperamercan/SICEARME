@@ -90,6 +90,12 @@ class accion_ordenes_trabajo_model extends CI_Model {
             'tipo_accion' => 0 //0 - accion simple 1- accion piezas secundarias 2- accion piezas asociadas.
         );
         
+        $query = $this->db->query("SELECT last_insert_id() as nro_accion");
+
+        $row = $query->row();
+
+        $nro_accion = $row->nro_accion;        
+ 
         $data_db_logs = array(
             'tipo_movimiento' => 'insert',
             'tabla'           => 'detalles_ordenes_trabajo',
@@ -100,11 +106,10 @@ class accion_ordenes_trabajo_model extends CI_Model {
         $this->db->trans_start();
             $this->db->insert('detalles_ordenes_trabajo', $data_accion_simple);
             $this->db->insert('db_logs', $data_db_logs);
-        $this->db->trans_complete();         
+        $this->db->trans_complete();    
+        
+        return $nro_accion;
     }
-    
-
-    
 }
 
 ?>
