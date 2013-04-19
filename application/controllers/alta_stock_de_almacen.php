@@ -28,10 +28,7 @@ class alta_stock_de_almacen extends CI_Controller {
     }
     
     function index() {
-        
-        $data['nro_series'] = "";
-        
-        $this->load->view('alta_stock_de_almacen_view', $data); 
+        $this->load->view('alta_stock_de_almacen_view'); 
     }
     
     function validarDatos() {
@@ -40,10 +37,10 @@ class alta_stock_de_almacen extends CI_Controller {
         $patterns[] = '/"/';
         $patterns[] = "/'/";
         
-        $nro_parte     = $_POST["nro_parte"];
-        $nombre_parte  = $_POST["nombre_parte"];
-        $precio        = $_POST["precio"];
-        $cantidad      = $_POST["cantidad"];
+        $nro_parte    = preg_replace($patterns, '', $_POST["nro_parte"]);
+        $nombre_parte = preg_replace($patterns, '', $_POST["nombre_parte"]);
+        $precio       = $_POST["precio"];
+        $cantidad     = $_POST["cantidad"];
         
         $mensjError = array();
         $retorno = array();
@@ -62,6 +59,14 @@ class alta_stock_de_almacen extends CI_Controller {
         
         if(empty($cantidad)) {
             $mensjError[] = 4;
+        }      
+        
+        if(!$this->form_validation->numeric($precio)) {
+            $mensjError[] = 5;
+        }
+        
+        if(!$this->form_validation->numeric($cantidad)) {
+            $mensjError[] = 6;
         }        
         
         if(count($mensjError) > 0) {
@@ -69,29 +74,39 @@ class alta_stock_de_almacen extends CI_Controller {
             switch($mensjError[0]) {
                 
                 case 1:
-                    $retorno[] = $this->mensajes->errorVacio('nro parte');
+                    echo $this->mensajes->errorVacio('nro parte');
                     break;
                 
                 case 2:
-                    $retorno[] = $this->mensajes->errorVacio('nombre parte');
+                    echo $this->mensajes->errorVacio('nombre parte');
                     break;
                 
                 case 3:
-                    $retorno[] = $this->mensajes->errorVacio('precio');
+                    echo $this->mensajes->errorVacio('precio');
                     break;
                 
                 case 4:
-                    $retorno[] = $this->mensajes->errorVacio('cantidad');
+                    echo $this->mensajes->errorVacio('cantidad');
                     break;
+ 
+                case 5:
+                    echo $this->mensajes->errorNumerico('precio');
+                    break;
+                
+                case 6:
+                    echo $this->mensajes->errorNumerico('cantidad');
+                    break;                
+                
             }
         }else {
-            $nro_interno = $this->alta_stock_de_almacen_model->altaStock($nro_parte, $nombre_parte, $precio, $cantidad);
-            $retorno[] = 1;
-            $retorno[] = $nro_interno;
-            $_SESSION['alta_nro_stock'] = $nro_interno;
+            if($this->alta_stock_de_almacen_modelo->existeParte($nro_parte, $nombre_parte)) {
+                $this->alta_stock_de_almacen_model->actualizoStock($nro_parte, $nombre_parte, $precio, $cantidad);
+            }else {
+                $this->alta_stock_de_almacen_model->altaStock($nro_parte, $nombre_parte, $precio, $cantidad);
+            }
+            
+            echo 1;
         }
-        
-        echo json_encode($retorno);
     }
 }
 

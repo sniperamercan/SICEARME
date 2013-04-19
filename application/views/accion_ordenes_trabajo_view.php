@@ -65,7 +65,7 @@
                 cargoAcciones();
             }
 
-            function accionPiezaSecundarias() {
+            function altaAccionPiezaSecundarias() {
                 $.ajax({
                    type: "post",
                    url: "<?php base_url(); ?>accion_ordenes_trabajo/accionPiezasSecundarias",
@@ -75,7 +75,7 @@
                 });            
             }   
             
-            function accionPiezaAsociadas() {
+            function altaAccionPiezaAsociadas() {
                 $.ajax({
                    type: "post",
                    url: "<?php base_url(); ?>accion_ordenes_trabajo/accionPiezasAsociadas",

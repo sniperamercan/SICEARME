@@ -28,7 +28,6 @@
         <script type="text/javascript">
 
             $(document).ready(function() {
-                //$("#fecha").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
                 $("input:submit").button();
                 $("button").button(); 
                 $("input:button").button(); 
@@ -43,18 +42,11 @@
                 
                 $.ajax({
                     type: "post",  
-                    dataType: "json",
                     url: "<?php base_url(); ?>alta_stock_de_almacen/validarDatos",
                     data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&precio="+precio+"&cantidad="+cantidad,
                     success: function(data){
-                        if(data[0] == "1"){            
-                            jAlert("Stock ingresado con exito - Nro de stock = "+data[1], "Correcto", function() { 
-                                $("#nro_parte").val('');
-                                $("#nombre_parte").val('');
-                                $("#precio").val('');
-                                $("#cantidad").val('');
-                                parent.$.fn.colorbox.close();
-                            });
+                        if(data == 1){            
+                            jAlert("Stock de parte ingresado correctamente al stock del almacen", "Correcto", function() { irAFrame('<?php echo base_url('alta_stock_de_almacen'); ?>','Almacen >> Alta >> Respuestos'); });
                         }else{
                             jAlert(data[0], "Error");
                         }                            
