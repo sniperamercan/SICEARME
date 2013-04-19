@@ -34,56 +34,37 @@
                 $("input:button").button(); 
             });	
 
-            function altaCompra() {
+            function altaAccionSimple() {
                 
-                var nro_compra   = $("#nro_compra").val();
-                var fecha        = $("#fecha").val();
-                var empresa      = $("#empresa").val();
-                var pais_empresa = $("#pais_empresa").val();
-                var descripcion  = $("#descripcion").val();
-                var modalidad    = $("#modalidad").val();
+                var fecha         = $("#fecha").val();
+                var nro_orden     = $("#nro_orden").val();
+                var seccion       = $("#seccion").val();
+                var observaciones = $("#observaciones").val();
                 
                 $.ajax({
                     type: "post",  
-                    dataType: "json",
-                    url: "<?php base_url(); ?>alta_compras/validarDatos",
-                    data: "nro_compra="+nro_compra+"&fecha="+fecha+"&empresa="+empresa+"&pais_empresa="+pais_empresa+"&descripcion="+descripcion+"&modalidad="+modalidad,
+                    url: "<?php base_url(); ?>accion_ordenes_trabajo/validarDatos",
+                    data: "fecha="+fecha+"&nro_orden="+nro_orden+"&seccion="+seccion+"&observaciones="+observaciones,
                     success: function(data){
-                        if(data[0] == 1){            
-                            jAlert("Compra agregada al sistema con exito - Nro interno de compra generado = "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('alta_compras'); ?>','O.C.I >> Alta >> Compras'); });
+                        if(data == 1){            
+                            jAlert("Accion simple al armamento generada correctamente sobre la orden de trabajo", "Correcto", function() { limpioCampos(); });
                         }else{
                             jAlert(data, "Error");
                         }                            
                   }
                 });               
             }
+
+            //luego de un ingreso de una accion
+            function limpioCampos() {
             
-            function agregarCatalogo() {
-            
-                var catalogo           = $("#catalogo").val();
-                var cant_total_armas   = $("#cant_total_armas").val();
-                var costo_total        = $("#costo_total").val();
-            
-                 $.ajax({
-                   type: "post",
-                   dataType: "json",
-                   url: "<?php base_url(); ?>alta_compras/agregarCatalogos",
-                   data: "catalogo="+catalogo+"&cant_total_armas="+cant_total_armas+"&costo_total="+costo_total,
-                   success: function(data) {
-                       if(data[0] == 1) {
-                           $("#catalogos").append(data[1]);
-                           $("#totales").html("");
-                           $("#totales").html(data[2]);
-                           cargoCatalogos();
-                           $("#cant_total_armas").val("");
-                           $("#costo_total").val("");
-                       }else {
-                           jAlert(data[0], "Error");
-                       }
-                   }
-                });  
+                $("#fecha").val("");
+                $("#seccion").val("");
+                $("#observaciones").val("");
+                
+                cargoAcciones();
             }
-            
+
             function accionPiezaSecundarias() {
                 $.ajax({
                    type: "post",
@@ -104,63 +85,21 @@
                 });            
             }             
             
-            //cargo y creo Empresas
-            function crearEmpresa() {
-                $.colorbox({href:"<?php echo base_url('alta_empresa'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA EMPRESA", onClosed: function(){ cargoEmpresas(); } });
+            //cargo y creo Secciones
+            function crearSeccion() {
+                $.colorbox({href:"<?php echo base_url('alta_seccion'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA SECCION", onClosed: function(){ cargoSecciones(); } });
             }            
             
-            function cargoEmpresas() {
+            function cargoSecciones() {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_compras/cargoEmpresas",
+                   url: "<?php base_url(); ?>accion_ordenes_trabajo/cargoSecciones",
                    success: function(data) {
-                       $("#empresa").html(data);
+                       $("#seccion").html(data);
                    }
                 });
             }     
             //fin cargo y creo Empresas
-            
-            //cargo y creo Catalogos
-            function crearCatalogo() {
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>alta_compras/crearCatalogo",
-                   success: function(data) {
-                       $.colorbox({href:"<?php echo base_url('alta_catalogos'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:500, title:"ALTA CATALOGO", onClosed: function(){ cargoCatalogos(); } });
-                   }
-                });            
-            }            
-            
-            function cargoCatalogos() {
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>alta_compras/cargoCatalogos",
-                   success: function(data) {
-                       $("#catalogo").html(data);
-                   }
-                });
-            }   
-            //fin cargo y creo Catalogos
-            
-            function anularCatalogo(nro_catalogo) {
-                $.ajax({
-                   type: "post",
-                   dataType: "json",
-                   url: "<?php base_url(); ?>alta_compras/anularCatalogo",
-                   data: "nro_catalogo="+nro_catalogo,
-                   success: function(data) {
-                       if(data[0] == 1) {
-                           $("#catalogos").html("");
-                           $("#catalogos").html(data[1]);
-                           $("#totales").html("");
-                           $("#totales").html(data[2]);                           
-                       }else {
-                           $("#catalogos").html("");
-                           $("#totales").html("<tr class='total'> <td> 0 </td> <td> 0 </td> </tr>");
-                       }
-                   }
-                });                
-            }
             
             function busquedaOrdenesTrabajo() {
                 $.colorbox({href:"<?php echo base_url('busqueda_ordenes_trabajo'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA ORDENES TRABAJO", onClosed: function(){ cargoOrdenesTrabajoFiltro(); } });
@@ -200,11 +139,30 @@
                            $("#calibre").val("");
                            $("#modelo").val("");
                            $("#tipo_arma").val("");                           
-                       }   
+                       } 
+                       
+                       cargoAcciones();
                    }
                 }); 
             }
+    
+            function cargoAcciones() {
             
+                var nro_orden = $("#nro_orden").val();
+               
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>accion_ordenes_trabajo/cargoAcciones",
+                   data: "nro_orden="+nro_orden,
+                   success: function(data) {
+                       if(data !== 0) {
+                           $("#acciones").html("");
+                           $("#acciones").html(data);
+                       }
+                   }
+                }); 
+            }
+    
         </script>
         
     </head>
@@ -271,16 +229,16 @@
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="accionSimple();"> Accion simple </button> 
-                <button style="margin-right: 20px;" onclick="accionPiezaSecundarias();"> Accion piezas secundarias </button> 
-                <button style="margin-right: 20px;" onclick="accionPiezaAsociadas();"> Accion piezas asociadas </button>
+                <button style="margin-right: 20px;" onclick="altaAccionSimple();"> Accion simple </button> 
+                <button style="margin-right: 20px;" onclick="altaAccionPiezaSecundarias();"> Accion piezas secundarias </button> 
+                <button style="margin-right: 20px;" onclick="altaAccionPiezaAsociadas();"> Accion piezas asociadas </button>
             </fieldset>  
             
             <hr />
             
             <div>
                 
-                <h1> Acciones sobre orden de trabajo </h1>       
+                <h1> Acciones sobre orden de trabajo <label id="acciones_nro_orden"> </label> </h1>       
                 
                 <fieldset>	
 
@@ -290,12 +248,12 @@
                             <table> 
                                 <thead style="text-align: center;">
                                     <tr>
-                                        <th> Nro accion </th> <th> Fecha </th> <th> Tipo accion </th> <th> Seccion </th> <th> Usuario </th> <th> Ver </th> <th> Ver </th> <th> Editar </th> <th> Borrar </th> 
+                                        <th> Nro accion </th> <th> Fecha </th> <th> Seccion </th> <th> Tipo accion </th> <th> Ver </th> <th> Editar </th> <th> Borrar </th> 
                                     </tr>
                                 </thead>
                                 <tbody id="acciones"></tbody>
                                 <tfoot>
-                                    <tr> <td colspan="9"> <div id="paging"> <br /> </div> </td> </tr>
+                                    <tr> <td colspan="7"> <div id="paging"> <br /> </div> </td> </tr>
                                 </tfoot>                                
                             </table> 
                         </div>

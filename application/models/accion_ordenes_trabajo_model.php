@@ -61,6 +61,48 @@ class accion_ordenes_trabajo_model extends CI_Model {
         return $datos;
     }
     
+    function cargoAcciones($nro_orden) {
+        
+        $query = $this->db->query("SELECT nro_accion, fecha, seccion, tipo_accion
+                                   FROM detalles_ordenes_trabajo
+                                   WHERE nro_orden = ".$this->db->escape($nro_orden)."
+                                   ORDER BY nro_accion");
+        
+        $retorno = array();
+        
+        foreach($query->result() as $row) {
+            $retorno[] = $row->nro_accion;
+            $retorno[] = $row->fecha;
+            $retorno[] = $row->seccion;
+            $retorno[] = $row->tipo_accion;
+        }
+        
+        return $retorno;
+    }
+    
+    function altaAccionSimple($fecha, $nro_orden, $seccion, $observaciones) {
+        
+        $data_accion_simple = array(
+            'nro_orden'   => $nro_orden,
+            'fecha'       => $fecha,
+            'seccion'     => $seccion,
+            'detalles'    => $observaciones,
+            'tipo_accion' => 0 //0 - accion simple 1- accion piezas secundarias 2- accion piezas asociadas.
+        );
+        
+        $data_db_logs = array(
+            'tipo_movimiento' => 'insert',
+            'tabla'           => 'detalles_ordenes_trabajo',
+            'clave_tabla'     => 'nro_orden = '.$nro_orden,
+            'usuario'         => base64_decode($_SESSION['usuario'])
+        );        
+        
+        $this->db->trans_start();
+            $this->db->insert('detalles_ordenes_trabajo', $data_accion_simple);
+            $this->db->insert('db_logs', $data_db_logs);
+        $this->db->trans_complete();         
+    }
+    
 
     
 }

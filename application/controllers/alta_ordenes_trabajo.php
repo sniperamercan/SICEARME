@@ -21,7 +21,7 @@ class alta_ordenes_trabajo extends CI_Controller {
             die($this->mensajes->sinPermisos());
         }         
         
-        //Modulo solo visible para el peril 6 y 7 - Usuario Taller de armamento y Adminitrador Taller de armamento
+        //Modulo solo visible para el peril 6 y 7 - Usuario Taller de armamento y Administrador Taller de armamento
         if(!$this->perms->verificoPerfil6() && !$this->perms->verificoPerfil7()) {
             die($this->mensajes->sinPermisos());
         }
