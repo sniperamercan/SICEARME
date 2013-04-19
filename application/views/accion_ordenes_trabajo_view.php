@@ -76,8 +76,12 @@
                    type: "post",
                    url: "<?php base_url(); ?>accion_ordenes_trabajo/accionPiezasSecundarias",
                    data: "fecha="+fecha+"&nro_orden="+nro_orden+"&seccion="+seccion+"&observaciones="+observaciones,
-                   success: function() {
-                       irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                   success: function(data) {
+                       if(data == 1) {
+                           irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                       }else {
+                           jAlert(data, "Error");
+                       }
                    }
                 });            
             }   
