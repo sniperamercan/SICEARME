@@ -48,9 +48,9 @@ class accion_piezas_secundarias extends CI_Controller {
             for($i=0; $i<count($datos_accion); $i=$i+3) {
                 
                 $data['acciones'] .= "<tr>
-                                        <td>".$datos_accion[0]."</td>
-                                        <td>".$datos_accion[1]."</td>
-                                        <td style='text-align: center;'>".$datos_accion[2]."</td>
+                                        <td>".$datos_accion[$i]."</td>
+                                        <td>".$datos_accion[$i+1]."</td>
+                                        <td style='text-align: center;'>".$datos_accion[$i+2]."</td>
                                         <td style='text-align: center; cursor: pointer;'><img src='".base_url()."images/delete.gif' /></td>
                                      </tr>";
             }
