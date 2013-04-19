@@ -3,7 +3,7 @@
 /*
 * Equipo - UDEPGCALIT
 * Año - 2013
-* Iteracion - Primera Iteracion
+* Iteracion - Segunda Iteracion
 * Clase - alta_stock_de_almacen
 */
 
@@ -46,7 +46,7 @@ class alta_stock_de_almacen extends CI_Controller {
         $retorno = array();
         
         if(empty($nro_parte)) {
-            $mensjError[] = 1;
+            $nro_parte = "GENERICO";
         }
         
         if(empty($nombre_parte)) {
@@ -99,7 +99,7 @@ class alta_stock_de_almacen extends CI_Controller {
                 
             }
         }else {
-            if($this->alta_stock_de_almacen_modelo->existeParte($nro_parte, $nombre_parte)) {
+            if($this->alta_stock_de_almacen_model->existeParte($nro_parte, $nombre_parte)) {
                 $this->alta_stock_de_almacen_model->actualizoStock($nro_parte, $nombre_parte, $precio, $cantidad);
             }else {
                 $this->alta_stock_de_almacen_model->altaStock($nro_parte, $nombre_parte, $precio, $cantidad);

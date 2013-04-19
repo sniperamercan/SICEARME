@@ -12,13 +12,20 @@ class alta_stock_de_almacen_model extends CI_Model {
         $data_stock = array(
             'nro_parte'       => $nro_parte,
             'nombre_parte'    => $nombre_parte,
-            'precio'          => $precio,
-            'cantidad'        => $cantidad,
-            'usuario_alta'    => base64_decode($_SESSION['usuario']),
-            'usuario_edita'   => base64_decode($_SESSION['usuario'])
+            'cantidad'        => $cantidad
         );
         
         $this->db->insert('stock_repuestos', $data_stock);
+        
+        $data_ingreso_stock = array(
+            'nro_parte'       => $nro_parte,
+            'nombre_parte'    => $nombre_parte,
+            'precio_unitario' => $precio,
+            'cantidad'        => $cantidad,
+            'usuario'         => base64_decode($_SESSION['usuario'])
+        );
+        
+        $this->db->insert('ingreso_stock_repuestos', $data_ingreso_stock);        
         
         $data_db_logs = array(
             'tipo_movimiento' => 'insert',
@@ -30,7 +37,7 @@ class alta_stock_de_almacen_model extends CI_Model {
         $this->db->insert('db_logs', $data_db_logs);
     }
     
-    function actualizoCantidad($nro_parte, $nombre_parte, $precio, $cantidad) {
+    function actualizoStock($nro_parte, $nombre_parte, $precio, $cantidad) {
         
         $data_stock_where = array(
             'nro_parte'    => $nro_parte,
@@ -45,6 +52,16 @@ class alta_stock_de_almacen_model extends CI_Model {
         
         $this->db->update("stock_repuestos", $data_stock_set, $data_stock_where);
                 
+        $data_ingreso_stock = array(
+            'nro_parte'       => $nro_parte,
+            'nombre_parte'    => $nombre_parte,
+            'precio_unitario' => $precio,
+            'cantidad'        => $cantidad,
+            'usuario'         => base64_decode($_SESSION['usuario'])
+        );
+        
+        $this->db->insert('ingreso_stock_repuestos', $data_ingreso_stock);         
+        
         $data_db_logs = array(
             'tipo_movimiento' => 'insert',
             'tabla'           => 'stock_repuestos',

@@ -48,7 +48,7 @@
                         if(data == 1){            
                             jAlert("Stock de parte ingresado correctamente al stock del almacen", "Correcto", function() { irAFrame('<?php echo base_url('alta_stock_de_almacen'); ?>','Almacen >> Alta >> Respuestos'); });
                         }else{
-                            jAlert(data[0], "Error");
+                            jAlert(data, "Error");
                         }                            
                   }
                 });               
@@ -72,17 +72,17 @@
                 </dl>                
                 
                 <dl> 		
-                <dt><label for="nombre_parte"> Nombre </label></dt>	
+                <dt><label for="nombre_parte"> Nombre <font color="red"> * </font> </label></dt>	
                 <dd><input type="text" id="nombre_parte" class="text" /></dd> 					
                 </dl>
 
                 <dl> 		
-                <dt><label for="precio"> Precio </label></dt>	
+                <dt><label for="precio"> Precio <font color="red"> * </font> </label></dt>	
                 <dd><input type="text" id="precio" class="number" /></dd> 					
                 </dl> 
                 
                 <dl> 		
-                <dt><label for="cantidad"> Cantidad </label></dt>	
+                <dt><label for="cantidad"> Cantidad <font color="red"> * </font> </label></dt>	
                 <dd><input type="text" id="cantidad" class="number" /></dd> 					
                 </dl>                
                 
