@@ -80,21 +80,23 @@ class accion_ordenes_trabajo_model extends CI_Model {
         return $retorno;
     }
     
-    function altaAccionSimple($fecha, $nro_orden, $seccion, $observaciones) {
+    function altaAccionSimple($fecha, $nro_orden, $seccion, $observaciones, $tipo_accion) {
         
         $data_accion_simple = array(
             'nro_orden'   => $nro_orden,
             'fecha'       => $fecha,
             'seccion'     => $seccion,
             'detalles'    => $observaciones,
-            'tipo_accion' => 0 //0 - accion simple 1- accion piezas secundarias 2- accion piezas asociadas.
+            'tipo_accion' => $tipo_accion //0 - accion simple 1- accion piezas secundarias 2- accion piezas asociadas.
         );
+        
+        $this->db->insert('detalles_ordenes_trabajo', $data_accion_simple);
         
         $query = $this->db->query("SELECT last_insert_id() as nro_accion");
 
         $row = $query->row();
 
-        $nro_accion = $row->nro_accion;        
+        $nro_accion = $row->nro_accion;           
  
         $data_db_logs = array(
             'tipo_movimiento' => 'insert',
@@ -102,11 +104,8 @@ class accion_ordenes_trabajo_model extends CI_Model {
             'clave_tabla'     => 'nro_orden = '.$nro_orden,
             'usuario'         => base64_decode($_SESSION['usuario'])
         );        
-        
-        $this->db->trans_start();
-            $this->db->insert('detalles_ordenes_trabajo', $data_accion_simple);
-            $this->db->insert('db_logs', $data_db_logs);
-        $this->db->trans_complete();    
+            
+        $this->db->insert('db_logs', $data_db_logs);
         
         return $nro_accion;
     }

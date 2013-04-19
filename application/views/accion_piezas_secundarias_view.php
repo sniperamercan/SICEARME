@@ -146,7 +146,7 @@
                                         <th> Nro parte </th> <th> Nombre </th> <th> Cantidad </th> <th> Borrar </th> 
                                     </tr>
                                 </thead>
-                                <tbody id="acciones"></tbody>
+                                <tbody id="acciones"> <?php echo $acciones; ?> </tbody>
                                 <tfoot>
                                     <tr> <td colspan="4"> <div id="paging"> <br /> </div> </td> </tr>
                                 </tfoot>                                
