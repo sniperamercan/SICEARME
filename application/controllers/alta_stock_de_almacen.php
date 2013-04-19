@@ -21,7 +21,7 @@ class alta_stock_de_almacen extends CI_Controller {
             die($this->mensajes->sinPermisos());
         }         
         
-        //Modulo solo visible para el peril 2 y 3 - Usuarios O.C.I y Administradores O.C.I 
+        //Modulo solo visible para el peril 6 y 7 - Usuarios taller de armamento y Administradores taller de armamento 
         if(!$this->perms->verificoPerfil2() && !$this->perms->verificoPerfil3()) {
             die($this->mensajes->sinPermisos());
         }
@@ -34,227 +34,61 @@ class alta_stock_de_almacen extends CI_Controller {
         $this->load->view('alta_stock_de_almacen_view', $data); 
     }
     
-    function cargoTiposArmas() {
-        
-        $tipos_armas = $this->alta_catalogos_model->cargoTiposArmas();
-        
-        $concat = "<option> </option>";
-        
-        foreach($tipos_armas as $val) {
-            if($_SESSION['alta_tipo_arma'] == $val) {
-                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
-                $_SESSION['alta_tipo_arma'] = "";
-            }else {
-                $concat .= "<option value='".$val."'>".$val."</option>";
-            }
-        }
-        
-        echo $concat;
-    }
-    
-    function cargoMarcas() {
-        
-        $marcas = $this->alta_catalogos_model->cargoMarcas();
-        
-        $concat = "<option> </option>";
-        
-        foreach($marcas as $val) {
-            if($_SESSION['alta_marca'] == $val) {
-                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
-                $_SESSION['alta_marca'] = "";
-            }else {
-                $concat .= "<option value='".$val."'>".$val."</option>";
-            }
-        }
-        
-        echo $concat;
-    }
-    
-    function cargoCalibres() {
-        
-        $calibres = $this->alta_catalogos_model->cargoCalibres();
-        
-        $concat = "<option> </option>";
-        
-        foreach($calibres as $val) {
-            if($_SESSION['alta_calibre'] == $val) {
-                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
-                $_SESSION['alta_calibre'] = "";
-            }else {
-                $concat .= "<option value='".$val."'>".$val."</option>";
-            }
-        }
-        
-        echo $concat;
-    }
-    
-    function cargoModelos() {
-        
-        $modelos = $this->alta_catalogos_model->cargoModelos();
-        
-        $concat = "<option> </option>";
-        
-        foreach($modelos as $val) {
-            if($_SESSION['alta_modelo'] == $val) {
-                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
-                $_SESSION['alta_modelo'] = "";
-            }else {
-                $concat .= "<option value='".$val."'>".$val."</option>";
-            }
-        }
-        
-        echo $concat;
-    }
-    
-    function cargoSistemas() {
-        
-        $sistemas = $this->alta_catalogos_model->cargoSistemas();
-        
-        $concat = "<option> </option>";
-        
-        foreach($sistemas as $val) {
-            if($_SESSION['alta_sistema'] == $val) {
-                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
-                $_SESSION['alta_sistema'] = "";
-            }else {
-                $concat .= "<option value='".$val."'>".$val."</option>";
-            }
-        }
-        
-        echo $concat;
-    }
-    
-    function cargoEmpresas() {
-        
-        $empresas = $this->alta_catalogos_model->cargoEmpresas();
-        
-        $concat = "<option> </option>";
-        
-        foreach($empresas as $val) {
-            if($_SESSION['alta_empresa'] == $val) {
-                $concat .= "<option selected='selected' value='".$val."'>".$val."</option>";
-                $_SESSION['alta_empresa'] = "";
-            }else {
-                $concat .= "<option value='".$val."'>".$val."</option>";
-            }
-        }
-        
-        echo $concat;
-    }   
-    
-    function cargoPaises() {
-        
-        $paises = $this->alta_catalogos_model->cargoPaises();
-        
-        $concat = "<option> </option>";
-        
-        foreach($paises as $val) {
-            $concat .= "<option value='".$val."'>".$val."</option>";
-        }
-        
-        echo $concat;
-    }     
-    
     function validarDatos() {
         
         $patterns = array();
         $patterns[] = '/"/';
         $patterns[] = "/'/";
         
-        $tipo_arma    = preg_replace($patterns, '', $_POST["tipo_arma"]);
-        $marca        = preg_replace($patterns, '', $_POST["marca"]);
-        $calibre      = preg_replace($patterns, '', $_POST["calibre"]);
-        $modelo       = preg_replace($patterns, '', $_POST["modelo"]);
-        $sistema      = preg_replace($patterns, '', $_POST["sistema"]);
-        $empresa      = preg_replace($patterns, '', $_POST["empresa"]);
-        $pais_empresa = preg_replace($patterns, '', $_POST["pais_empresa"]);
-        $fabricacion  = $_POST["fabricacion"];
-        $vencimiento  = $_POST["vencimiento"];
+        $nro_parte     = $_POST["nro_parte"];
+        $nombre_parte  = $_POST["nombre_parte"];
+        $precio        = $_POST["precio"];
+        $cantidad      = $_POST["cantidad"];
         
         $mensjError = array();
         $retorno = array();
         
-        if(empty($tipo_arma)) {
+        if(empty($nro_parte)) {
             $mensjError[] = 1;
         }
         
-        if(empty($marca)) {
+        if(empty($nombre_parte)) {
             $mensjError[] = 2;
         }
         
-        if(empty($calibre)) {
+        if(empty($precio)) {
             $mensjError[] = 3;
         }
         
-        if(empty($modelo)) {
+        if(empty($cantidad)) {
             $mensjError[] = 4;
         }        
-        
-        if(empty($sistema)) {
-            $mensjError[] = 5;
-        }        
-
-        if(empty($empresa)) {
-            $mensjError[] = 6;
-        }        
-
-        if(empty($pais_empresa)) {
-            $mensjError[] = 7;
-        }        
-
-        if(empty($fabricacion)) {
-            $mensjError[] = 8;
-        }        
-
-        if(empty($vencimiento)) {
-            $mensjError[] = 9;
-        }          
         
         if(count($mensjError) > 0) {
             
             switch($mensjError[0]) {
                 
                 case 1:
-                    $retorno[] = $this->mensajes->errorVacio('tipo arma');
+                    $retorno[] = $this->mensajes->errorVacio('nro parte');
                     break;
                 
                 case 2:
-                    $retorno[] = $this->mensajes->errorVacio('marca');
+                    $retorno[] = $this->mensajes->errorVacio('nombre parte');
                     break;
                 
                 case 3:
-                    $retorno[] = $this->mensajes->errorVacio('calibre');
+                    $retorno[] = $this->mensajes->errorVacio('precio');
                     break;
                 
                 case 4:
-                    $retorno[] = $this->mensajes->errorVacio('modelo');
-                    break;
-                
-                case 5:
-                    $retorno[] = $this->mensajes->errorVacio('sistema');
-                    break;
-                
-                case 6:
-                    $retorno[] = $this->mensajes->errorVacio('empresa');
-                    break;
-                
-                case 7:
-                    $retorno[] = $this->mensajes->errorVacio('pais empresa');
-                    break;
-               
-                case 8:
-                    $retorno[] = $this->mensajes->errorVacio('fabricacion');
-                    break;
-                
-                case 9:
-                    $retorno[] = $this->mensajes->errorVacio('vencimiento');
+                    $retorno[] = $this->mensajes->errorVacio('cantidad');
                     break;
             }
         }else {
-            $nro_interno = $this->alta_catalogos_model->altaCatalogo($tipo_arma, $marca, $calibre, $modelo, $sistema, $empresa, $pais_empresa, $fabricacion, $vencimiento);
+            $nro_interno = $this->alta_stock_de_almacen_model->altaStock($nro_parte, $nombre_parte, $precio, $cantidad);
             $retorno[] = 1;
             $retorno[] = $nro_interno;
-            $_SESSION['alta_nro_catalogo'] = $nro_interno;
+            $_SESSION['alta_nro_stock'] = $nro_interno;
         }
         
         echo json_encode($retorno);
