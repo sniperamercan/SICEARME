@@ -69,15 +69,36 @@
                    dataType: "json",
                    url: "<?php base_url(); ?>accion_piezas_secundarias/cargoRepuestosFiltro",
                    success: function(data) {
-                       $("#nro_parte").val("");
-                       $("#nombre_parte").val("");
-                       $("#cant_actual").val("");
-                       
-                       $("#nro_parte").val(data[0]);
-                       $("#nombre_parte").val(data[1]);
-                       $("#cant_actual").val(data[2]);                       
+               
+                        $("#nro_parte").val("");
+                        $("#nombre_parte").val("");
+                        $("#cant_actual").val("");
+                        
+                        if(data[0] !== 0) {
+                            $("#nro_parte").val(data[0]);
+                            $("#nombre_parte").val(data[1]);
+                            $("#cant_actual").val(data[2]);
+                        }
                    }
                 });                
+            }
+            
+            function eliminarAccionSimple(nro_cambio) {
+            
+                jConfirm('Esta seguro que desea eliminar esta accion ?', 'Elminar Accion', function(r) {
+                    
+                    if(r) {
+                        $.ajax({
+                            type: "post",  
+                            url: "<?php base_url(); ?>accion_piezas_secundarias/eliminarAccionSimple",
+                            data: "nro_cambio="+nro_cambio,
+                            success: function(data){
+                                irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                          }
+                        });                        
+                    }
+                    
+                });
             }
             
         </script>
@@ -143,12 +164,12 @@
                             <table> 
                                 <thead style="text-align: center;">
                                     <tr>
-                                        <th> Nro parte </th> <th> Nombre </th> <th> Cantidad </th> <th> Borrar </th> 
+                                        <th> Nro cambio </th> <th> Nro parte </th> <th> Nombre </th> <th> Cantidad </th> <th> Borrar </th> 
                                     </tr>
                                 </thead>
                                 <tbody id="acciones"> <?php echo $acciones; ?> </tbody>
                                 <tfoot>
-                                    <tr> <td colspan="4"> <div id="paging"> <br /> </div> </td> </tr>
+                                    <tr> <td colspan="5"> <div id="paging"> <br /> </div> </td> </tr>
                                 </tfoot>                                
                             </table> 
                         </div>

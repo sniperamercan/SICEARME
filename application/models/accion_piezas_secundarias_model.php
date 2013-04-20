@@ -31,7 +31,7 @@ class accion_piezas_secundarias_model extends CI_Model {
     
     function cargoDatosAccion($nro_orden, $nro_accion) {
         
-        $query = $this->db->query("SELECT nro_parte, nombre_parte, cantidad
+        $query = $this->db->query("SELECT nro_cambio, nro_parte, nombre_parte, cantidad
                                    FROM cambio_piezas_no_asociadas_ordenes_trabajo
                                    WHERE nro_orden = ".$this->db->escape($nro_orden)."
                                    AND nro_accion = ".$this->db->escape($nro_accion));
@@ -39,12 +39,62 @@ class accion_piezas_secundarias_model extends CI_Model {
         $datos = array();
         
         foreach($query->result() as $row) {
+            $datos[] = $row->nro_cambio;
             $datos[] = $row->nro_parte;
             $datos[] = $row->nombre_parte;
             $datos[] = $row->cantidad;
         }
         
         return $datos;
+    }
+    
+    function cargoDatosAccionEliminar($nro_cambio) {
+        
+        $query = $this->db->query("SELECT nro_parte, nombre_parte, cantidad
+                                   FROM cambio_piezas_no_asociadas_ordenes_trabajo
+                                   WHERE nro_cambio = ".$this->db->escape($nro_cambio));
+        
+        $datos = array();
+        
+        $row = $query->row();
+        
+        $datos[] = $row->nro_parte;
+        $datos[] = $row->nombre_parte;
+        $datos[] = $row->cantidad;
+        
+        return $datos;
+    }
+    
+    function cargoCantidadActual($nro_parte, $nombre_parte) {
+        
+        $query = $this->db->query("SELECT cantidad
+                                   FROM stock_repuestos
+                                   WHERE nro_parte = ".$this->db->escape($nro_parte)."
+                                   AND nombre_parte =".$this->db->escape($nombre_parte));
+        
+        $row = $query->row();
+        
+        return $row->cantidad;
+    }
+    
+    function eliminarAccionSecundaria($nro_cambio, $nro_parte, $nombre_parte, $cantidad) {
+        
+        $data_stock_set = array(
+            'cantidad' => $cantidad
+        );
+        
+        $data_stock_where = array(
+            'nro_parte'    => $nro_parte,
+            'nombre_parte' => $nombre_parte
+        );
+        
+        $this->db->update('stock_repuestos', $data_stock_set, $data_stock_where);
+        
+        $data_cambio_where = array(
+            'nro_cambio' => $nro_cambio
+        );
+        
+        $this->db->delete('cambio_piezas_no_asociadas_ordenes_trabajo', $data_cambio_where);
     }
     
     function altaAccionPiezasSecundarias($nro_parte, $nombre_parte, $cant_usar, $cant_total) {

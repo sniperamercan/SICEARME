@@ -24,7 +24,7 @@ class busqueda_repuestos extends CI_Controller {
     
     function index() {
         
-        $_SESSION['seleccion_busqueda'] = ""; //elemento que se selecciona
+        $_SESSION['seleccion_busqueda']  = ""; //elemento que se selecciona
         $_SESSION['seleccion_busqueda1'] = ""; //elemento que se selecciona
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
