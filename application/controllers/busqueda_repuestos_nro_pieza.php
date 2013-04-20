@@ -24,7 +24,7 @@ class busqueda_repuestos_nro_pieza extends CI_Controller {
     
     function index() {
         
-        $_SESSION['seleccion_busqueda'] = ""; //elemento que se selecciona
+        $_SESSION['seleccion_busqueda']  = ""; //elemento que se selecciona
         $_SESSION['seleccion_busqueda1'] = ""; //elemento que se selecciona
         $_SESSION['seleccion_busqueda2'] = ""; //elemento que se selecciona
         $_SESSION['seleccion_busqueda3'] = ""; //elemento que se selecciona
@@ -40,11 +40,11 @@ class busqueda_repuestos_nro_pieza extends CI_Controller {
         if( isset($_POST['nro_pieza']) && isset($_POST['nro_parte']) && isset($_POST['nombre_parte']) && isset($_POST['nro_catalogo']) ) { 
             
             $condicion = "";
-            $and = 0;
+            $and = 1;
  
             if(!empty($_POST['nro_pieza'])){
                 $aux = $_POST['nro_pieza'];
-                $condicion .= " AND nro_pieza LIKE ".$this->db->escape($aux);
+                $condicion .= " AND s.nro_pieza LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }          
             
@@ -53,7 +53,7 @@ class busqueda_repuestos_nro_pieza extends CI_Controller {
                     $condicion .= " AND ";
                 }
                 $aux = "%".$_POST['nro_parte']."%";
-                $condicion .= " nro_parte LIKE ".$this->db->escape($aux);
+                $condicion .= " s.nro_parte LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }
             
@@ -62,7 +62,7 @@ class busqueda_repuestos_nro_pieza extends CI_Controller {
                     $condicion .= " AND ";
                 }
                 $aux = "%".$_POST['nombre_parte']."%";
-                $condicion .= " nombre_parte LIKE ".$this->db->escape($aux);
+                $condicion .= " s.nombre_parte LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }
             
@@ -71,7 +71,7 @@ class busqueda_repuestos_nro_pieza extends CI_Controller {
                     $condicion .= " AND ";
                 }
                 $aux = "%".$_POST['nro_catalogo']."%";
-                $condicion .= " nro_catalogo LIKE ".$this->db->escape($aux);
+                $condicion .= " s.nro_catalogo LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }            
             
@@ -81,7 +81,7 @@ class busqueda_repuestos_nro_pieza extends CI_Controller {
         if(isset($_SESSION['condicion']) && !empty($_SESSION['condicion'])){
             $condicion = $_SESSION['condicion'];      
         }else{
-            $condicion = 1;
+            $condicion = "";
         }
         //Fin, armo condiciones where para sql
         
@@ -89,7 +89,7 @@ class busqueda_repuestos_nro_pieza extends CI_Controller {
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
-            $order = "nro_pieza";
+            $order = "s.nro_pieza";
         }
         //Fin verifico order        
         
@@ -113,15 +113,19 @@ class busqueda_repuestos_nro_pieza extends CI_Controller {
                 $class = "alt";
             }                        
             
-            $aux_rut = '"'.$result[$i].'"';
+            $aux_nro_pieza    = '"'.$result[$i].'"';
+            $aux_nro_parte    = '"'.$result[$i+1].'"';
+            $aux_nombre_parte = '"'.$result[$i+2].'"';
+            $aux_nro_catalogo = '"'.$result[$i+3].'"';
+            
             
             $concat .= "
                 <tr class='".$class."'> 
-                    <td onclick='seleccion(".$aux_rut.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/select.png' /> </td>
-                    <td> ".$result[$i]." </td>
+                    <td onclick='seleccion(".$aux_nro_pieza.",".$aux_nro_parte.",".$aux_nombre_parte.",".$aux_nro_catalogo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/select.png' /> </td>
+                    <td style='text-align: center;'> ".$result[$i]." </td>
                     <td> ".$result[$i+1]." </td>
                     <td> ".$result[$i+2]." </td>
-                    <td> ".$result[$i+3]." </td>
+                    <td style='text-align: center;'> ".$result[$i+3]." </td>
                     <td> ".$result[$i+4]." </td>
                     <td> ".$result[$i+5]." </td>
                     <td> ".$result[$i+6]." </td>
@@ -266,19 +270,19 @@ class busqueda_repuestos_nro_pieza extends CI_Controller {
         switch($order){
             
             case 0:
-                $_SESSION['order'][0] = 'nro_pieza';
+                $_SESSION['order'][0] = 's.nro_pieza';
                 break;
             
             case 1:
-                $_SESSION['order'][0] = 'nro_parte';
+                $_SESSION['order'][0] = 's.nro_parte';
                 break;
             
             case 2:
-                $_SESSION['order'][0] = 'nombre_parte';
+                $_SESSION['order'][0] = 's.nombre_parte';
                 break;
             
             case 3:
-                $_SESSION['order'][0] = 'nro_catalogo';
+                $_SESSION['order'][0] = 's.nro_catalogo';
                 break;       
         }
        
@@ -293,10 +297,10 @@ class busqueda_repuestos_nro_pieza extends CI_Controller {
 
     function seteoSeleccion() {
         
-        $_SESSION['seleccion_busqueda']  = $_POST['nro_pieza'];
-        $_SESSION['seleccion_busqueda1'] = $_POST['nro_catalogo'];
-        $_SESSION['seleccion_busqueda2'] = $_POST['nro_parte'];
-        $_SESSION['seleccion_busqueda3'] = $_POST['nombre_parte'];
+        $_SESSION['seleccion_busqueda']   = $_POST['nro_pieza'];
+        $_SESSION['seleccion_busqueda1']  = $_POST['nro_parte'];
+        $_SESSION['seleccion_busqueda2']  = $_POST['nombre_parte'];
+        $_SESSION['seleccion_busqueda3']  = $_POST['nro_catalogo'];
         
         /*al seleccionar un catalogo del listado usar esta variable de sesion 
         *   $_SESSION['seleccion_busqueda']

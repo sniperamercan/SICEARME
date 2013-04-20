@@ -10,14 +10,14 @@ class busqueda_piezas_model extends CI_Model {
     //para paginado
     function cantidadRegistros($condicion){
         
-        $query = $this->db->query("SELECT marca, calibre, modelo
+        $query = $this->db->query("SELECT nro_serie, marca, calibre, modelo
                                    FROM ordenes_trabajo
-                                   WHERE orden_trabajo = ".$this->db->escape($_SESSION['nro_orden']));
+                                   WHERE nro_orden = ".$this->db->escape($_SESSION['nro_orden']));
         
         $row = $query->row();        
         
         $query = $this->db->query("SELECT nro_pieza, tipo_pieza, descripcion
-                                   FROM fichas_pieza
+                                   FROM fichas_piezas
                                    WHERE nro_serie = ".$this->db->escape($row->nro_serie)."
                                    AND marca = ".$this->db->escape($row->marca)."
                                    AND calibre = ".$this->db->escape($row->calibre)."  
@@ -33,12 +33,12 @@ class busqueda_piezas_model extends CI_Model {
 
         $query = $this->db->query("SELECT nro_serie, marca, calibre, modelo
                                    FROM ordenes_trabajo
-                                   WHERE orden_trabajo = ".$this->db->escape($_SESSION['nro_orden']));
+                                   WHERE nro_orden = ".$this->db->escape($_SESSION['nro_orden']));
         
         $row = $query->row();        
         
         $query = $this->db->query("SELECT nro_pieza, tipo_pieza, descripcion
-                                   FROM fichas_pieza
+                                   FROM fichas_piezas
                                    WHERE nro_serie = ".$this->db->escape($row->nro_serie)."
                                    AND marca = ".$this->db->escape($row->marca)."
                                    AND calibre = ".$this->db->escape($row->calibre)."  

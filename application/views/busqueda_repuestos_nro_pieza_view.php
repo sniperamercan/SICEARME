@@ -80,12 +80,12 @@
                 });           
             }      
             
-            function seleccion(nro_pieza, nro_catalogo, nro_parte, nombre_parte) {
+            function seleccion(nro_pieza, nro_parte, nombre_parte, nro_catalogo) {
                 
                 $.ajax({
                     type: 'post',
                     url: "<?php echo base_url("busqueda_repuestos_nro_pieza/seteoSeleccion"); ?>",
-                    data: "nro_pieza="+nro_pieza+"&nro_catalogo="+nro_catalogo+"&nro_parte="+nro_parte+"&nombre_parte="+nombre_parte,
+                    data: "nro_pieza="+nro_pieza+"&nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
                     success: function(){
                         jAlert("Nro pieza - "+nro_pieza+" seleccionado", "SELECCION", parent.$.fn.colorbox.close());                        
                     }                  

@@ -28,7 +28,7 @@ class busqueda_piezas extends CI_Controller {
 
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
-        $this->load->view("busqueda_accesorios_view");
+        $this->load->view("busqueda_piezas_view");
     }
     
     //cantReg = cantidad de registros x pagina
@@ -61,7 +61,7 @@ class busqueda_piezas extends CI_Controller {
         if(isset($_SESSION['condicion']) && !empty($_SESSION['condicion'])){
             $condicion = $_SESSION['condicion'];      
         }else{
-            $condicion = 1;
+            $condicion = "";
         }
         //Fin, armo condiciones where para sql
         

@@ -12,7 +12,7 @@ class busqueda_repuestos_nro_pieza_model extends CI_Model {
         
         $query = $this->db->query("SELECT marca, calibre, modelo
                                    FROM ordenes_trabajo
-                                   WHERE orden_trabajo = ".$this->db->escape($_SESSION['nro_orden']));
+                                   WHERE nro_orden = ".$this->db->escape($_SESSION['nro_orden']));
         
         $row = $query->row();        
         
@@ -31,7 +31,7 @@ class busqueda_repuestos_nro_pieza_model extends CI_Model {
         
         $query = $this->db->query("SELECT marca, calibre, modelo
                                    FROM ordenes_trabajo
-                                   WHERE orden_trabajo = ".$this->db->escape($_SESSION['nro_orden']));
+                                   WHERE nro_orden = ".$this->db->escape($_SESSION['nro_orden']));
         
         $row = $query->row();
         
