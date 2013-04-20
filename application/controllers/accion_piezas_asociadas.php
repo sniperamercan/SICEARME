@@ -53,7 +53,7 @@ class accion_piezas_asociadas extends CI_Controller {
                                         <td style='text-align: center;'>".$datos_accion[$i]."</td>
                                         <td style='text-align: center;'>".$datos_accion[$i+1]."</td>
                                         <td style='text-align: center;'>".$datos_accion[$i+2]."</td>
-                                        <td style='text-align: center; cursor: pointer;'><img onclick='eliminarAccionSimple(".$nro_cambio_aux.");' src='".base_url()."images/delete.gif' /></td>
+                                        <td style='text-align: center; cursor: pointer;'><img onclick='eliminarAccionAsociada(".$nro_cambio_aux.");' src='".base_url()."images/delete.gif' /></td>
                                      </tr>";
             }
             
@@ -89,6 +89,42 @@ class accion_piezas_asociadas extends CI_Controller {
         
         echo $nro_pieza;
     }    
+    
+    function eliminarAccionAsociada() {
+        
+        $nro_cambio = $_POST['nro_cambio'];
+        
+        //obtengo informacion del cambio
+        $datos = $this->accion_piezas_asociadas_model->obtenerDatos($nro_cambio);
+        
+        /*
+            $datos[] = $row->nro_orden; 0
+            $datos[] = $row->nro_accion; 1
+            $datos[] = $row->nro_pieza_anterior; 2
+            $datos[] = $row->nro_pieza_nueva; 3
+            $datos[] = $row->nro_parte; 4
+            $datos[] = $row->nombre_parte; 5  
+            $datos[] = $row->nro_serie; 6
+            $datos[] = $row->marca; 7
+            $datos[] = $row->calibre; 8
+            $datos[] = $row->modelo; 9
+            $datos[] = $row->nro_interno_catalogo; 10
+         */
+        
+        $nro_orden          = $datos[0];
+        $nro_accion         = $datos[1];
+        $nro_pieza_anterior = $datos[2];
+        $nro_pieza_nueva    = $datos[3];
+        $nro_parte          = $datos[4];
+        $nombre_parte       = $datos[5];
+        $nro_serie          = $datos[6];
+        $marca              = $datos[7];
+        $calibre            = $datos[8];
+        $modelo             = $datos[9];
+        $nro_catalogo       = $datos[10];
+        
+        $this->accion_piezas_asociadas_model->eliminarAccionAsociada($nro_cambio, $nro_orden, $nro_accion, $nro_pieza_anterior, $nro_pieza_nueva, $nro_parte, $nombre_parte, $nro_serie, $marca, $calibre, $modelo, $nro_catalogo);
+    }
     
     function validarDatos() {
         

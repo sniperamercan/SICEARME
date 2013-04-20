@@ -104,7 +104,25 @@
                         }
                    }
                 });                
-            }            
+            }  
+            
+            function eliminarAccionAsociada(nro_cambio) {
+            
+                jConfirm('Esta seguro que desea eliminar esta accion ?', 'Elminar Accion', function(r) {
+                    
+                    if(r) {
+                        $.ajax({
+                            type: "post",  
+                            url: "<?php base_url(); ?>accion_piezas_asociadas/eliminarAccionAsociada",
+                            data: "nro_cambio="+nro_cambio,
+                            success: function(data){
+                                irAFrame('<?php echo base_url('accion_piezas_asociadas'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                          }
+                        });                        
+                    }
+                    
+                });
+            }
             
         </script>
         
