@@ -19,7 +19,7 @@ class accion_piezas_asociadas_model extends CI_Model {
     
     function cargoDatosAccion($nro_orden, $nro_accion) {
         
-        $query = $this->db->query("SELECT nro_cambio, nro_pieza_anterior, nro_pieza_nueva
+        $query = $this->db->query("SELECT nro_cambio, nro_pieza_nueva, nro_pieza_anterior
                                    FROM cambio_piezas_asociadas_ordenes_trabajo
                                    WHERE nro_orden = ".$this->db->escape($nro_orden)."
                                    AND nro_accion = ".$this->db->escape($nro_accion));
@@ -28,8 +28,8 @@ class accion_piezas_asociadas_model extends CI_Model {
         
         foreach($query->result() as $row) {
             $datos[] = $row->nro_cambio;
-            $datos[] = $row->nro_pieza_anterior;
             $datos[] = $row->nro_pieza_nueva;
+            $datos[] = $row->nro_pieza_anterior;
         }
         
         return $datos;

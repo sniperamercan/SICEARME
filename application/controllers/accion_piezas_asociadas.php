@@ -41,8 +41,8 @@ class accion_piezas_asociadas extends CI_Controller {
             
             /*
                 $datos[] = $row->nro_cambio;         0
-                $datos[] = $row->nro_pieza_anterior; 1
-                $datos[] = $row->nro_pieza_nueva;    2
+                $datos[] = $row->nro_pieza_nueva; 1
+                $datos[] = $row->nro_pieza_anterior;    2
              */
             
             for($i=0; $i<count($datos_accion); $i=$i+3) {
