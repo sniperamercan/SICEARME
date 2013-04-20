@@ -173,34 +173,74 @@
             
             <fieldset>	
             
-                <dl> 		
-                <dt><label for="nro_pieza"> Nro pieza </label></dt>	
-                <dd><select id="nro_pieza" onchange="cargoDatos(this.value);"> <?php echo $nro_piezas; ?> </select> <img style="cursor: pointer;" onclick="busquedaPieza();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
-                </dl>                  
+                <dl>
+                <dt><label> Orden de trabajo  </label></dt>
+                <dd><label> Nro - <?php echo $nro_orden ?>  </label></dd>
+                </dl>                 
                 
                 <dl>
-                <dt><label for="tipo_pieza"> Tipo </label></dt>
-                <dd><input readonly="readonly" type="text" id="tipo_pieza" class="txtautomatico" /> </dd>
+                <dt><label for="nro_pieza"> Nro pieza </label></dt>
+                <dd><input type="text" id="nro_pieza" class="txt" /> </dd>
+                </dl>                 
+                
+                <dl>
+                <dt><label> Buscar repuesto </label></dt>
+                <dd><img style="cursor: pointer;" onclick="busquedaRepuestos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
+                </dl>                 
+                
+                <dl>
+                <dt><label for="nro_parte"> Nro parte </label></dt>
+                <dd><input readonly="readonly" type="text" id="nro_parte" class="txtautomatico" /> </dd>
                 </dl>                 
 
                 <dl>
-                <dt><label for="descripcion"> Descripcion </label></dt>
-                <dd><input readonly="readonly" type="text" id="descripcion" class="txtautomatico" /></dd>
+                <dt><label for="nombre_parte"> Nombre parte </label></dt>
+                <dd><input readonly="readonly" type="text" id="nombre_parte" class="txtautomatico" /></dd>
                 </dl> 
-                
+
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 
-                <p class="subtituloform"> Seleccione la pieza nueva que va a portar el armamento </p>                
+                <p class="subtituloform"> Cargo el catalogo al cual pertenece este armamento </p>
                 
-                <dl> 		
-                <dt><label for="nro_pieza_nueva"> Nro pieza (nueva) </label></dt>	
-                <dd><select id="nro_pieza_nueva"> <?php echo $nro_piezas_nuevas; ?> </select> <img style="cursor: pointer;" onclick="busquedaPiezaNueva();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
-                </dl>  
+                <dl>
+                <dt><label> Buscar catalogo </label></dt>
+                <dd><img style="cursor: pointer;" onclick="busquedaCatalogos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
+                </dl>                 
+                
+                <dl>
+                <dt><label for="tipo_arma"> Tipo arma </label></dt>
+                <dd><input readonly="readonly" type="text" id="tipo_arma" class="txtautomatico" /> </dd>
+                </dl>                 
+
+                <dl>
+                <dt><label for="marca"> Marca </label></dt>
+                <dd><input readonly="readonly" type="text" id="marca" class="txtautomatico" /></dd>
+                </dl>                 
+
+                <dl>
+                <dt><label for="calibre"> Calibre </label></dt>
+                <dd><input readonly="readonly" type="text" id="calibre" class="txtautomatico" /></dd>
+                </dl>   
+                
+                <dl>
+                <dt><label for="modelo"> Modelo </label></dt>
+                <dd><input readonly="readonly" type="text" id="modelo" class="txtautomatico" /></dd>
+                </dl>   
+                
+                <dl>
+                <dt><label for="sistema"> Sistema </label></dt>
+                <dd><input readonly="readonly" type="text" id="sistema" class="txtautomatico" /></dd>
+                </dl>   
+                
+                <dl>
+                <dt><label for="empresa"> Empresa </label></dt>
+                <dd><input readonly="readonly" type="text" id="empresa" class="txtautomatico" /></dd>
+                </dl>                   
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="ingresarPieza();"> Ingresar pieza </button> 
+                <button style="margin-right: 20px;" onclick="altaAccionPiezasAsociadas();"> Ingresar pieza </button> 
                 <button style="margin-right: 20px;" onclick="volver();"> Volver </button> 
             </fieldset>  
             
