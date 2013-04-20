@@ -390,6 +390,7 @@
                                 <li><a href="#"> Alta </a>
                                     <ul>
                                         <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_stock_de_almacen'); ?>','Almacen >> Alta >> Respuestos');"> Repuestos </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_repuestos_nro_pieza'); ?>','Almacen >> Alta >> Nro pierzas');"> Nro piezas </a></li>
                                     </ul>
                                 </li> 
 

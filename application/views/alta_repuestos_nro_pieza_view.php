@@ -28,35 +28,32 @@
         <script type="text/javascript">
 
             $(document).ready(function() {
-                $("#fecha").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
+                //$("#fecha").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
                 $("input:submit").button();
                 $("button").button(); 
                 $("input:button").button(); 
             });	
-            
-            function altaAccionPiezasSecundarias() {
+
+            function altaRepuestoNroPieza() {
                 
-                var nro_parte    = $("#nro_parte").val();
-                var nombre_parte = $("#nombre_parte").val();
-                var cant_actual  = $("#cant_actual").val();
-                var cant_usar    = $("#cant_usar").val();
+                var nro_pieza      = $("#nro_pieza").val();
+                var nro_parte      = $("#nro_parte").val();
+                var nombre_parte   = $("#nombre_parte").val();
+                var cant_actual    = $("#cant_actual").val();
+                var nro_catalogo   = $("#nro_catalogo").val();
                 
                 $.ajax({
                     type: "post",  
-                    url: "<?php base_url(); ?>accion_piezas_asociadas/validarDatos",
-                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&cant_actual="+cant_actual+"&cant_usar="+cant_usar,
+                    url: "<?php base_url(); ?>alta_repuestos_nro_pieza/validarDatos",
+                    data: "nro_pieza="+nro_pieza+"&nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&cant_actual="+cant_actual+"&nro_catalogo="+nro_catalogo,
                     success: function(data){
                         if(data == 1){            
-                            jAlert("Pieza utilizada correctamente en la orden de trabajo", "Correcto", function() { irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo'); });
+                            jAlert("Repuesto con Nro de pieza ingresado correctamente", "Correcto", function() { irAFrame('<?php echo base_url('alta_repuestos_nro_pieza'); ?>','Almacen >> Alta >> Nro pierzas'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
                   }
                 });               
-            }            
-            
-            function volver() {
-                irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
             }
             
             function busquedaRepuestos() {
@@ -67,7 +64,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>accion_piezas_asociadas/cargoRepuestosFiltro",
+                   url: "<?php base_url(); ?>accion_piezas_secundarias/cargoRepuestosFiltro",
                    success: function(data) {
                
                         $("#nro_parte").val("");
@@ -83,22 +80,19 @@
                 });                
             }
             
-            function eliminarAccionSimple(nro_cambio) {
+            function busquedaCatalogos() {
+                $.colorbox({href:"<?php echo base_url('busqueda_catalogos'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA CATALOGOS", onClosed: function(){ cargoCatalogosFiltro(); } });
+            }
             
-                jConfirm('Esta seguro que desea eliminar esta accion ?', 'Elminar Accion', function(r) {
-                    
-                    if(r) {
-                        $.ajax({
-                            type: "post",  
-                            url: "<?php base_url(); ?>accion_piezas_asociadas/eliminarAccionSimple",
-                            data: "nro_cambio="+nro_cambio,
-                            success: function(data){
-                                irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
-                          }
-                        });                        
-                    }
-                    
-                });
+            function cargoCatalogosFiltro() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_repuestos_nro_pieza/cargoCatalogosFiltro",
+                   success: function(data) {
+                       $("#nro_catalogo").val("");
+                       $("#nro_catalogo").val(data);
+                   }
+                });                
             }            
             
         </script>
@@ -109,18 +103,13 @@
 
         <div>			
 
-            <h1> Accion de cambios de piezas asociadas a un armamento </h1>    
+            <h1> Alta de repuestos con Nro de pieza </h1>    
             
             <fieldset>	
-            
-                <dl>
-                <dt><label> Orden de trabajo  </label></dt>
-                <dd><label> Nro - <?php echo $nro_orden ?>  </label></dd>
-                </dl>                 
                 
                 <dl>
                 <dt><label for="nro_pieza"> Nro pieza </label></dt>
-                <dd><input type="text" id="nro_pieza" class="txt" /> </dd>
+                <dd><input type="text" id="nro_pieza" class="number" /></dd>
                 </dl>                 
                 
                 <dl>
@@ -137,7 +126,12 @@
                 <dt><label for="nombre_parte"> Nombre parte </label></dt>
                 <dd><input readonly="readonly" type="text" id="nombre_parte" class="txtautomatico" /></dd>
                 </dl> 
-
+                
+                <dl>
+                <dt><label for="cant_actual"> Cant actual </label></dt>
+                <dd><input readonly="readonly" type="text" id="cant_actual" class="txtautomatico" /></dd>
+                </dl> 
+                
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> Cargo el catalogo al cual pertenece este armamento </p>
@@ -145,74 +139,21 @@
                 <dl>
                 <dt><label> Buscar catalogo </label></dt>
                 <dd><img style="cursor: pointer;" onclick="busquedaCatalogos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
-                </dl>                 
+                </dl>         
                 
                 <dl>
-                <dt><label for="tipo_arma"> Tipo arma </label></dt>
-                <dd><input readonly="readonly" type="text" id="tipo_arma" class="txtautomatico" /> </dd>
-                </dl>                 
-
-                <dl>
-                <dt><label for="marca"> Marca </label></dt>
-                <dd><input readonly="readonly" type="text" id="marca" class="txtautomatico" /></dd>
-                </dl>                 
-
-                <dl>
-                <dt><label for="calibre"> Calibre </label></dt>
-                <dd><input readonly="readonly" type="text" id="calibre" class="txtautomatico" /></dd>
-                </dl>   
-                
-                <dl>
-                <dt><label for="modelo"> Modelo </label></dt>
-                <dd><input readonly="readonly" type="text" id="modelo" class="txtautomatico" /></dd>
-                </dl>   
-                
-                <dl>
-                <dt><label for="sistema"> Sistema </label></dt>
-                <dd><input readonly="readonly" type="text" id="sistema" class="txtautomatico" /></dd>
-                </dl>   
-                
-                <dl>
-                <dt><label for="empresa"> Empresa </label></dt>
-                <dd><input readonly="readonly" type="text" id="empresa" class="txtautomatico" /></dd>
+                <dt><label for="nro_catalogo"> Nro catalogo </label></dt>
+                <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" /> </dd>
                 </dl>                   
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="altaAccionPiezasAsociadas();"> Ingresar pieza </button> 
+                <button style="margin-right: 20px;" onclick="altaRepuestoNroPieza();"> Ingresar pieza (Nro) </button> 
                 <button style="margin-right: 20px;" onclick="volver();"> Volver </button> 
             </fieldset>  
             
             <hr />
-            
-            <div>
-                
-                <h1> Cambio de piezas </h1>       
-                
-                <fieldset>	
-
-                    <div id="imprimir">
-                                 
-                        <div class="datagrid" style="margin-top: 30px;">
-                            <table> 
-                                <thead style="text-align: center;">
-                                    <tr>
-                                        <th> Nro pieza </th> <th> Tipo </th> <th> Descripcion </th> <th> Borrar </th> 
-                                    </tr>
-                                </thead>
-                                <tbody id="acciones"></tbody>
-                                <tfoot>
-                                    <tr> <td colspan="4"> <div id="paging"> <br /> </div> </td> </tr>
-                                </tfoot>                                
-                            </table> 
-                        </div>
-                    
-                    </div>    
-                        
-                </fieldset>	
-                
-            </div>
             
         </div>        
         
