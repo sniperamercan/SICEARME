@@ -22,7 +22,7 @@ class alta_stock_de_almacen extends CI_Controller {
         }         
         
         //Modulo solo visible para el peril 6 y 7 - Usuarios taller de armamento y Administradores taller de armamento 
-        if(!$this->perms->verificoPerfil2() && !$this->perms->verificoPerfil3()) {
+        if(!$this->perms->verificoPerfil6() && !$this->perms->verificoPerfil7()) {
             die($this->mensajes->sinPermisos());
         }
     }
