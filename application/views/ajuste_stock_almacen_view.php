@@ -92,7 +92,7 @@
                 });            
             }
             
-            function editarCatalogo(nro_parte) {
+            function editarStock(nro_parte) {
                 $.ajax({
                     type: 'post',
                     url: "<?php echo base_url("ajuste_stock_almacen/editarStock"); ?>",

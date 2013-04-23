@@ -33,9 +33,9 @@ class ajuste_stock_almacen extends CI_Controller {
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
         
-        $_SESSION['nro_catalogo'] = ""; //para el editar
+        $_SESSION['nro_parte'] = ""; //para el editar
         
-        $this->load->view("mb_catalogos_view");
+        $this->load->view("ajuste_stock_almacen_view");
     }
     
     //cantReg = cantidad de registros x pagina
