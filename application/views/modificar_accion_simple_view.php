@@ -43,7 +43,7 @@
                 
                 $.ajax({
                     type: "post",  
-                    url: "<?php base_url(); ?>accion_ordenes_trabajo/validarDatos",
+                    url: "<?php base_url(); ?>modificar_accion_simple/validarDatos",
                     data: "fecha="+fecha+"&nro_orden="+nro_orden+"&seccion="+seccion+"&observaciones="+observaciones,
                     success: function(data){
                         if(data == 1){            

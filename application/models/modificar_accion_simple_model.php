@@ -22,7 +22,7 @@ class modificar_accion_simple_model extends CI_Model {
         return $retorno;
     }    
     
-    function cargoDatos($nro_accion) {
+    function cargoInformacion($nro_accion) {
         
         $query = $this->db->query("SELECT d.nro_orden, d.fecha, d.seccion, d.detalles, o.nro_serie, o.marca, o.calibre, o.modelo, c.tipo_arma
                                    FROM detalles_ordenes_trabajo d
@@ -50,34 +50,28 @@ class modificar_accion_simple_model extends CI_Model {
         return $datos;
     }
     
-    function altaAccionSimple($fecha, $nro_orden, $seccion, $observaciones, $tipo_accion) {
+    function modificarAccionSimple($nro_accion, $fecha, $seccion, $observaciones) {
         
-        $data_accion_simple = array(
-            'nro_orden'   => $nro_orden,
+        $data_accion_simple_where = array(
+            'nro_accion' => $nro_accion
+        );
+        
+        $data_accion_simple_set = array(
             'fecha'       => $fecha,
             'seccion'     => $seccion,
             'detalles'    => $observaciones,
-            'tipo_accion' => $tipo_accion //0 - accion simple 1- accion piezas secundarias 2- accion piezas asociadas.
         );
         
-        $this->db->insert('detalles_ordenes_trabajo', $data_accion_simple);
-        
-        $query = $this->db->query("SELECT last_insert_id() as nro_accion");
-
-        $row = $query->row();
-
-        $nro_accion = $row->nro_accion;           
+        $this->db->update('detalles_ordenes_trabajo', $data_accion_simple_set, $data_accion_simple_where);
  
         $data_db_logs = array(
-            'tipo_movimiento' => 'insert',
+            'tipo_movimiento' => 'update',
             'tabla'           => 'detalles_ordenes_trabajo',
-            'clave_tabla'     => 'nro_orden = '.$nro_orden,
+            'clave_tabla'     => 'nro_accion = '.$nro_accion,
             'usuario'         => base64_decode($_SESSION['usuario'])
         );        
             
         $this->db->insert('db_logs', $data_db_logs);
-        
-        return $nro_accion;
     }
 }
 
