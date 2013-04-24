@@ -142,7 +142,7 @@
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="altaAccionSimple();"> Modificar accion simple </button> 
+                <button style="margin-right: 20px;" onclick="modificarAccionSimple();"> Modificar accion simple </button> 
                 <button style="margin-right: 20px;" onclick="volver();"> Volver </button> 
             </fieldset>  
             
