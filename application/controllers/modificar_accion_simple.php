@@ -7,7 +7,7 @@
 * Clase - modificar_accion_simple
 */
 
-class accion_ordenes_trabajo extends CI_Controller {
+class modificar_accion_simple extends CI_Controller {
     
     function __construct() {
         parent::__construct();
@@ -29,26 +29,44 @@ class accion_ordenes_trabajo extends CI_Controller {
     
     function index() {
         
-        $_SESSION['nro_orden']  = "";
-        $_SESSION['nro_accion'] = "";
+        $nro_accion = $_SESSION['editar_nro_accion'];
         
-        //cargo los nro de ordenes ingresados hasta el momento
-        $nro_ordenes = $this->accion_ordenes_trabajo_model->cargoNroOrdenes();
+        //cargo informacion de la accion 
+        $datos = $this->modificar_accion_simple_model->cargoInformacion($nro_accion);
         
-        $data['nro_ordenes'] = "<option value=''>Seleccione opcion..</option>";
+        /*
+            $datos[] = $row->nro_orden;
+            $datos[] = $row->fecha;
+            $datos[] = $row->seccion;
+            $datos[] = $row->detalles;
+            $datos[] = $row->nro_serie;
+            $datos[] = $row->marca;
+            $datos[] = $row->calibre;
+            $datos[] = $row->modelo;
+            $datos[] = $row->tipo_arma; 
+        */       
         
-        foreach($nro_ordenes as $val) {
-            $data['nro_ordenes'] .= "<option value='".$val."'>".$val."</option>";
-        }
-        //fin cargo nro de ordenes ingresados hasta el momento
+        $data['nro_orden']  = $datos[0];
+        $data['fecha']      = $datos[1];
+        $seccion            = $datos[2];
+        $data['detalles']   = $datos[3];
+        $data['nro_serie']  = $datos[4];
+        $data['marca']      = $datos[5];
+        $data['calibre']    = $datos[6];
+        $data['modelo']     = $datos[7];
+        $data['tipo_arma']  = $datos[8];
         
         //cargo las secciones ingresadas hasta el momento
         $secciones = $this->accion_ordenes_trabajo_model->cargoSecciones();
         
-        $data['secciones'] = "<option value=''>Seleccione opcion..</option>";
+        $data['secciones'] = "";
         
         foreach($secciones as $val) {
-            $data['secciones'] .= "<option value='".$val."'>".$val."</option>";
+            if($seccion == $val) {
+                $data['secciones'] .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else{
+                $data['secciones'] .= "<option value='".$val."'>".$val."</option>";
+            }
         }
         //fin cargo las secciones ingresadas hasta el momento
         

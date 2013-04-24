@@ -259,7 +259,7 @@ class accion_ordenes_trabajo extends CI_Controller {
                             <td>".$datos_acciones[$i+2]."</td>  
                             <td>".$tipo_accion."</td> 
                             <td style='text-align: center; cursor: pointer;' onclick='verInformacion(".$aux_nro_accion.");'><img src='".base_url()."images/eye.png' /></td>
-                            <td style='text-align: center; cursor: pointer;'><img src='".base_url()."images/edit.png' /></td>
+                            <td style='text-align: center; cursor: pointer;' onclick='editarAccion(".$aux_nro_accion.");'><img src='".base_url()."images/edit.png' /></td>
                             <td style='text-align: center; cursor: pointer;' onclick='eliminarAccion(".$aux_nro_accion.");'><img src='".base_url()."images/delete.gif' /></td>
                             </tr>";
             }
@@ -269,6 +269,14 @@ class accion_ordenes_trabajo extends CI_Controller {
         }else {
             echo 0;
         }
+    }
+    
+    function editarAccion() {
+        $_SESSION['editar_nro_accion'] = $_POST['nro_accion'];
+        
+        $tipo_accion = $this->accion_ordenes_trabajo_model->cargoTipoAccion($nro_accion);
+        
+        echo $tipo_accion;
     }
     
     function verInformacion() {

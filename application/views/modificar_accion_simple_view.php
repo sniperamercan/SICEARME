@@ -34,7 +34,7 @@
                 $("input:button").button(); 
             });	
 
-            function altaAccionSimple() {
+            function modificarAccionSimple() {
                 
                 var fecha         = $("#fecha").val();
                 var nro_orden     = $("#nro_orden").val();
@@ -47,7 +47,7 @@
                     data: "fecha="+fecha+"&nro_orden="+nro_orden+"&seccion="+seccion+"&observaciones="+observaciones,
                     success: function(data){
                         if(data == 1){            
-                            jAlert("Accion simple al armamento generada correctamente sobre la orden de trabajo", "Correcto", function() { limpioCampos(); });
+                            jAlert("CORRECTO: La accion fue modificada correctamente", "Correcto", function() { irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Accion >> Ordenes de trabajo'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
@@ -55,58 +55,6 @@
                 });               
             }
 
-            //luego de un ingreso de una accion
-            function limpioCampos() {
-            
-                $("#fecha").val("");
-                $("#seccion").val("");
-                $("#observaciones").val("");
-                
-                cargoAcciones();
-            }
-
-            function altaAccionPiezaSecundarias() {
-                
-                var fecha         = $("#fecha").val();
-                var nro_orden     = $("#nro_orden").val();
-                var seccion       = $("#seccion").val();
-                var observaciones = $("#observaciones").val();                
-                
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>accion_ordenes_trabajo/accionPiezasSecundarias",
-                   data: "fecha="+fecha+"&nro_orden="+nro_orden+"&seccion="+seccion+"&observaciones="+observaciones,
-                   success: function(data) {
-                       if(data == 1) {
-                           irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
-                       }else {
-                           jAlert(data, "Error");
-                       }
-                   }
-                });            
-            }   
-            
-            function altaAccionPiezaAsociadas() {
-            
-                var fecha         = $("#fecha").val();
-                var nro_orden     = $("#nro_orden").val();
-                var seccion       = $("#seccion").val();
-                var observaciones = $("#observaciones").val();                
-                
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>accion_ordenes_trabajo/accionPiezasAsociadas",
-                   data: "fecha="+fecha+"&nro_orden="+nro_orden+"&seccion="+seccion+"&observaciones="+observaciones,
-                   success: function(data) {
-                       if(data == 1) {
-                           irAFrame('<?php echo base_url('accion_piezas_asociadas'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
-                       }else {
-                           jAlert(data, "Error");
-                       }
-                   }
-                });             
-            }             
-            
             //cargo y creo Secciones
             function crearSeccion() {
                 $.colorbox({href:"<?php echo base_url('alta_seccion'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA SECCION", onClosed: function(){ cargoSecciones(); } });
@@ -115,105 +63,18 @@
             function cargoSecciones() {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>accion_ordenes_trabajo/cargoSecciones",
+                   url: "<?php base_url(); ?>modificar_accion_ordenes_trabajo/cargoSecciones",
                    success: function(data) {
                        $("#seccion").html(data);
                    }
                 });
             }     
             //fin cargo y creo Empresas
-            
-            function busquedaOrdenesTrabajo() {
-                $.colorbox({href:"<?php echo base_url('busqueda_ordenes_trabajo'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA ORDENES TRABAJO", onClosed: function(){ cargoOrdenesTrabajoFiltro(); } });
-            }
-            
-            function cargoOrdenesTrabajoFiltro() {
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>accion_ordenes_trabajo/cargoOrdenesTrabajoFiltro",
-                   success: function(data) {
-                       $("#nro_orden").html("");
-                       $("#nro_orden").html(data);
-                       cargoDatosArma();
-                   }
-                });                
-            }
-            
-            function cargoDatosArma() {
-            
-                var nro_orden = $("#nro_orden").val();
-            
-                $.ajax({
-                   type: "post",
-                   dataType: "json",
-                   url: "<?php base_url(); ?>accion_ordenes_trabajo/cargoDatosArma",
-                   data: "nro_orden="+nro_orden,
-                   success: function(data) {
-                       if(data[0] !== 0) {
-                           $("#nro_serie").val(data[0]);
-                           $("#marca").val(data[1]);
-                           $("#calibre").val(data[2]);
-                           $("#modelo").val(data[3]);
-                           $("#tipo_arma").val(data[4]);
-                       }else {
-                           $("#nro_serie").val("");
-                           $("#marca").val("");
-                           $("#calibre").val("");
-                           $("#modelo").val("");
-                           $("#tipo_arma").val("");                           
-                       } 
-                       
-                       cargoAcciones();
-                   }
-                }); 
-            }
     
-            function cargoAcciones() {
-            
-                var nro_orden = $("#nro_orden").val();
-               
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>accion_ordenes_trabajo/cargoAcciones",
-                   data: "nro_orden="+nro_orden,
-                   success: function(data) {
-                       if(data !== 0) {
-                           $("#acciones").html("");
-                           $("#acciones").html(data);
-                       }
-                   }
-                }); 
+            function volver() {
+                irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
             }
             
-            function verInformacion(nro_accion) {
-            
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>accion_ordenes_trabajo/verInformacion",
-                   data: "nro_accion="+nro_accion,
-                   success: function(data) {
-                       jAlert(data, "Informacion");
-                   }
-                });                
-            
-            }
-            
-            function eliminarAccion(nro_accion) {
-            
-                jConfirm('Esta seguro que desea anular la accion Nro - '+nro_accion+'?', 'Confirme anulacion de accion', function(r) {
-                    
-                    if(r) {
-                        $.ajax({
-                           type: "post",
-                           url: "<?php base_url(); ?>accion_ordenes_trabajo/eliminarAccion",
-                           data: "nro_accion="+nro_accion,
-                           success: function(data) {
-                               jAlert(data, "Anulacion correcta", function() { cargoAcciones(); });
-                           }
-                        });  
-                    }
-                });
-            }
     
         </script>
         
@@ -223,18 +84,18 @@
 
         <div>			
 
-            <h1> Accion sobre una orden de trabajo </h1>    
+            <h1> Modificar accion simple </h1>    
             
             <fieldset>	
 
                 <dl>
                 <dt><label for="fecha"> Fecha </label></dt>
-                <dd><input readonly="readonly" type="text" id="fecha" class="text" /></dd>
+                <dd><input readonly="readonly" type="text" id="fecha" class="text" value="<?php echo $fecha; ?>" /></dd>
                 </dl>                
                 
                 <dl>
                 <dt><label for="nro_orden"> Nro orden </label></dt>
-                <dd><select id="nro_orden" onchange='cargoDatosArma(this.value);'> <?php echo $nro_ordenes ?> </select> <img style="cursor: pointer;" onclick="busquedaOrdenesTrabajo();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
+                <dd><input readonly="readonly" type="text" id="nro_orden" class="txtautomatico" value="<?php echo $nro_orden; ?>" /></dd>
                 </dl>                 
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
@@ -243,27 +104,27 @@
                 
                 <dl>
                 <dt><label for="nro_serie"> Nro serie </label></dt>
-                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" /></dd>
+                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" value="<?php echo $nro_serie; ?>" /></dd>
                 </dl>     
                 
                 <dl>
                 <dt><label for="marca"> Marca </label></dt>
-                <dd><input readonly="readonly" type="text" id="marca" class="txtautomatico" /></dd>
+                <dd><input readonly="readonly" type="text" id="marca" class="txtautomatico" value="<?php echo $marca; ?>" /></dd>
                 </dl> 
                 
                 <dl>
                 <dt><label for="calibre"> Calibre </label></dt>
-                <dd><input readonly="readonly" type="text" id="calibre" class="txtautomatico" /></dd>
+                <dd><input readonly="readonly" type="text" id="calibre" class="txtautomatico" value="<?php echo $calibre; ?>" /></dd>
                 </dl> 
                 
                 <dl>
                 <dt><label for="modelo"> Modelo </label></dt>
-                <dd><input readonly="readonly" type="text" id="modelo" class="txtautomatico" /></dd>
+                <dd><input readonly="readonly" type="text" id="modelo" class="txtautomatico" value="<?php echo $modelo; ?>" /></dd>
                 </dl> 
                 
                 <dl>
                 <dt><label for="tipo_arma"> Tipo </label></dt>
-                <dd><input readonly="readonly" type="text" id="tipo_arma" class="txtautomatico" /></dd>
+                <dd><input readonly="readonly" type="text" id="tipo_arma" class="txtautomatico" value="<?php echo $tipo_arma; ?>" /></dd>
                 </dl>                 
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
@@ -275,46 +136,15 @@
                 
                 <dl> 		
                 <dt><label for="observaciones"> Observaciones </label></dt>	
-                <dd><textarea id="observaciones"> </textarea></dd> 					
+                <dd><textarea id="observaciones"> <?php echo $detalles; ?> </textarea></dd> 					
                 </dl>                
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="altaAccionSimple();"> Accion simple </button> 
-                <button style="margin-right: 20px;" onclick="altaAccionPiezaSecundarias();"> Accion piezas secundarias </button> 
-                <button style="margin-right: 20px;" onclick="altaAccionPiezaAsociadas();"> Accion piezas asociadas </button>
+                <button style="margin-right: 20px;" onclick="altaAccionSimple();"> Modificar accion simple </button> 
+                <button style="margin-right: 20px;" onclick="volver();"> Volver </button> 
             </fieldset>  
-            
-            <hr />
-            
-            <div>
-                
-                <h1> Acciones sobre orden de trabajo <label id="acciones_nro_orden"> </label> </h1>       
-                
-                <fieldset>	
-
-                    <div id="imprimir">
-                                 
-                        <div class="datagrid" style="margin-top: 30px;">
-                            <table> 
-                                <thead style="text-align: center;">
-                                    <tr>
-                                        <th> Nro accion </th> <th> Fecha </th> <th> Seccion </th> <th> Tipo accion </th> <th> Ver </th> <th> Editar </th> <th> Borrar </th> 
-                                    </tr>
-                                </thead>
-                                <tbody id="acciones"></tbody>
-                                <tfoot>
-                                    <tr> <td colspan="7"> <div id="paging"> <br /> </div> </td> </tr>
-                                </tfoot>                                
-                            </table> 
-                        </div>
-                    
-                    </div>    
-                        
-                </fieldset>	
-                
-            </div>
             
         </div>        
         
