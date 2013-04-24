@@ -239,7 +239,7 @@ class accion_ordenes_trabajo_model extends CI_Model {
         return $datos;
     }
     
-    function elminarAccionAsociada($nro_accion) {
+    function eliminarAccionAsociada($nro_accion) {
         
         $this->db->trans_start();
         
@@ -256,7 +256,7 @@ class accion_ordenes_trabajo_model extends CI_Model {
                     'nombre_parte'         => $piezas_usadas[$i+3]
                 );
                 
-                $this->db->insert("stock_repuestos_nro_parte", $data_stock);
+                $this->db->insert("stock_repuestos_nro_pieza", $data_stock);
                 
                 $datos_arma = $this->obtenerDatosArma($nro_accion);
                 
@@ -289,7 +289,7 @@ class accion_ordenes_trabajo_model extends CI_Model {
     function obtenerDatosArma($nro_accion) {
         
         $query = $this->db->query("SELECT o.nro_serie, o.marca, o.calibre, o.modelo
-                                   FROM ordenes_trabajo
+                                   FROM ordenes_trabajo o
                                    INNER JOIN detalles_ordenes_trabajo d ON o.nro_orden = d.nro_orden
                                    WHERE d.nro_accion = ".$this->db->escape($nro_accion));
         
@@ -308,7 +308,7 @@ class accion_ordenes_trabajo_model extends CI_Model {
     function obtenerNroCatalogo($nro_accion) {
         
         $query = $this->db->query("SELECT f.nro_interno_catalogo
-                                   FROM fichas
+                                   FROM fichas f
                                    INNER JOIN ordenes_trabajo o ON o.nro_serie = f.nro_serie AND o.marca = f.marca AND o.calibre = f.calibre AND o.modelo = f.modelo
                                    INNER JOIN detalles_ordenes_trabajo d ON o.nro_orden = d.nro_orden
                                    WHERE d.nro_accion = ".$this->db->escape($nro_accion));
@@ -327,7 +327,7 @@ class accion_ordenes_trabajo_model extends CI_Model {
         
         $datos = array();
         
-        foreach($query->result as $row) {
+        foreach($query->result() as $row) {
             
             $datos[] = $row->nro_pieza_anterior;
             $datos[] = $row->nro_pieza_nueva;
