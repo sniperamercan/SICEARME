@@ -273,6 +273,7 @@ class accion_ordenes_trabajo extends CI_Controller {
     
     function editarAccion() {
         $_SESSION['editar_nro_accion'] = $_POST['nro_accion'];
+        $nro_accion = $_SESSION['editar_nro_accion'];
         
         $tipo_accion = $this->accion_ordenes_trabajo_model->cargoTipoAccion($nro_accion);
         

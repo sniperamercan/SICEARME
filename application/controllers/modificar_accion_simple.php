@@ -71,7 +71,7 @@ class modificar_accion_simple extends CI_Controller {
         //fin cargo las secciones ingresadas hasta el momento
         
         //Llamo a la vista
-        $this->load->view('accion_ordenes_trabajo_view', $data);  
+        $this->load->view('modificar_accion_simple_view', $data);  
     }
     
     function accionPiezasSecundarias() {

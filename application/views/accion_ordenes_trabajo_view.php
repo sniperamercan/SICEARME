@@ -224,15 +224,15 @@
                    success: function(data) {
                        
                        switch(data) {
-                           case 0:
+                           case '0':
                                irAFrame('<?php echo base_url('modificar_accion_simple'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
                                break;
                                
-                           case 1:
+                           case '1':
                                irAFrame('<?php echo base_url('modificar_accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
                                break;
                            
-                           case 2:
+                           case '2':
                                irAFrame('<?php echo base_url('modificar_accion_piezas_asociadas'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
                                break;
                        }
