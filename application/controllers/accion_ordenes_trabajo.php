@@ -260,7 +260,7 @@ class accion_ordenes_trabajo extends CI_Controller {
                             <td>".$tipo_accion."</td> 
                             <td style='text-align: center; cursor: pointer;' onclick='verInformacion(".$aux_nro_accion.");'><img src='".base_url()."images/eye.png' /></td>
                             <td style='text-align: center; cursor: pointer;'><img src='".base_url()."images/edit.png' /></td>
-                            <td style='text-align: center; cursor: pointer;'><img src='".base_url()."images/delete.gif' /></td>
+                            <td style='text-align: center; cursor: pointer;' onclick='eliminarAccion(".$aux_nro_accion.");'><img src='".base_url()."images/delete.gif' /></td>
                             </tr>";
             }
             
@@ -441,7 +441,7 @@ class accion_ordenes_trabajo extends CI_Controller {
         
     }
     
-    function eliminarAccion($nro_accion) {
+    function eliminarAccion() {
         
         $nro_accion = $_POST['nro_accion'];
 
@@ -450,17 +450,17 @@ class accion_ordenes_trabajo extends CI_Controller {
         switch($tipo_accion) {
             
             case 0: //accion simple
-                $this->acciones_ordenes_trabajo_model->eliminarAccionSimple($nro_accion);
+                $this->accion_ordenes_trabajo_model->eliminarAccionSimple($nro_accion);
                 echo "Accion simple Nro - ".$nro_accion." anulada correctamente";
                 break;
             
             case 1: //accion piezas secundarias
-                $concat = $this->verInformacionAccionSecundaria($nro_accion);
+                $this->accion_ordenes_trabajo_model->eliminarAccionSecundaria($nro_accion);
                 echo "Accion piezas secundarias Nro - ".$nro_accion." anulada correctamente";
                 break;
             
             case 2: //accion piezas asociadas
-                $concat = $this->verInformacionAccionAsociada($nro_accion);
+                $this->accion_ordenes_trabajo_model->eliminarAccionAsociada($nro_accion);
                 echo "Accion piezas asociadas Nro - ".$nro_accion." anulada correctamente";
                 break;
         }
