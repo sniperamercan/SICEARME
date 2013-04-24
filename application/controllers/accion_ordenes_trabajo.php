@@ -441,6 +441,28 @@ class accion_ordenes_trabajo extends CI_Controller {
         
     }
     
+    function eliminarAccion($nro_accion) {
+        
+        $nro_accion = $_POST['nro_accion'];
+
+        $tipo_accion = $this->accion_ordenes_trabajo_model->cargoTipoAccion($nro_accion);
+        
+        switch($tipo_accion) {
+            
+            case 0: //accion simple
+                $this->acciones_ordenes_trabajo_model->eliminarAccionSimple($nro_accion);
+                break;
+            
+            case 1: //accion piezas secundarias
+                $concat = $this->verInformacionAccionSecundaria($nro_accion);
+                break;
+            
+            case 2: //accion piezas asociadas
+                $concat = $this->verInformacionAccionAsociada($nro_accion);
+                break;
+        }
+    }
+    
     function validarDatos() {
         
         $fecha          = $_POST["fecha"];
