@@ -184,6 +184,19 @@
                    }
                 }); 
             }
+            
+            function verInformacion(nro_accion) {
+            
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>accion_ordenes_trabajo/verInformacion",
+                   data: "nro_accion="+nro_accion,
+                   success: function(data) {
+                       jAlert(data, "Informacion");
+                   }
+                });                
+            
+            }
     
         </script>
         

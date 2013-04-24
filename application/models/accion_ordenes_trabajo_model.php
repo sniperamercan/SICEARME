@@ -80,6 +80,76 @@ class accion_ordenes_trabajo_model extends CI_Model {
         return $retorno;
     }
     
+    function cargoTipoAccion($nro_accion) {
+        
+        $query = $this->db->query("SELECT tipo_accion
+                                   FROM detalles_ordenes_trabajo
+                                   WHERE nro_accion = ".$this->db->escape($nro_accion));
+        
+        $row = $query->row();
+        
+        return $row->tipo_accion;
+    }
+    
+    function verInformacionAccionSimple($nro_accion) {
+        
+        $query = $this->db->query("SELECT nro_orden, fecha, seccion, detalles, tipo_accion
+                                   FROM detalles_ordenes_trabajo
+                                   WHERE nro_accion = ".$this->db->escape($nro_accion));
+        
+        $row = $query->row();
+        
+        $retorno = array();
+        
+        $retorno[] = $row->nro_orden;
+        $retorno[] = $row->fecha;
+        $retorno[] = $row->seccion;
+        $retorno[] = $row->detalles;
+        $retorno[] = $row->tipo_accion;
+                
+        return $retorno;
+    }
+    
+    function verInformacionAccionSecundaria($nro_orden, $nro_accion) {
+        
+        $query = $this->db->query("SELECT nro_cambio, nro_parte, nombre_parte, cantidad
+                                   FROM cambio_piezas_no_asociadas_ordenes_trabajo
+                                   WHERE nro_orden = ".$this->db->escape($nro_orden)." 
+                                   AND nro_accion = ".$this->db->escape($nro_accion));
+        
+        $retorno = array();
+        
+        foreach($query->result() as $row) {
+            $retorno[] = $row->nro_cambio;
+            $retorno[] = $row->nro_parte;
+            $retorno[] = $row->nombre_parte;
+            $retorno[] = $row->cantidad;
+        }
+                
+        return $retorno;        
+    }
+    
+    function verInformacionAccionAsociada($nro_orden, $nro_accion) {
+        
+        $query = $this->db->query("SELECT nro_cambio, nro_pieza_anterior, nro_pieza_nueva, nro_parte, nombre_parte
+                                   FROM cambio_piezas_asociadas_ordenes_trabajo
+                                   WHERE nro_orden = ".$this->db->escape($nro_orden)." 
+                                   AND nro_accion = ".$this->db->escape($nro_accion));
+        
+        $retorno = array();
+        
+        foreach($query->result() as $row) {
+            $retorno[] = $row->nro_cambio;
+            $retorno[] = $row->nro_pieza_anterior;
+            $retorno[] = $row->nro_pieza_nueva;
+            $retorno[] = $row->nro_parte;
+            $retorno[] = $row->nombre_parte;
+        }
+                
+        return $retorno; 
+        
+    }
+    
     function altaAccionSimple($fecha, $nro_orden, $seccion, $observaciones, $tipo_accion) {
         
         $data_accion_simple = array(
