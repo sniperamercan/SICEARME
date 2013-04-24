@@ -197,6 +197,20 @@
                 });                
             
             }
+            
+            function eliminarAccion(nro_accion) {
+            
+                jConfirm('Esta seguro que desea anular la accion Nro - '+nro_accion+'?', 'Confirme anulacion de accion', function(r) {
+                    $.ajax({
+                       type: "post",
+                       url: "<?php base_url(); ?>accion_ordenes_trabajo/eliminarAccion",
+                       data: "nro_accion="+nro_accion,
+                       success: function(data) {
+                           jAlert(data, "Anulacion correcta");
+                       }
+                    });                      
+                });
+            }
     
         </script>
         

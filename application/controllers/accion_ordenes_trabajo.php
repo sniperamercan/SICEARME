@@ -451,14 +451,17 @@ class accion_ordenes_trabajo extends CI_Controller {
             
             case 0: //accion simple
                 $this->acciones_ordenes_trabajo_model->eliminarAccionSimple($nro_accion);
+                echo "Accion simple Nro - ".$nro_accion." anulada correctamente";
                 break;
             
             case 1: //accion piezas secundarias
                 $concat = $this->verInformacionAccionSecundaria($nro_accion);
+                echo "Accion piezas secundarias Nro - ".$nro_accion." anulada correctamente";
                 break;
             
             case 2: //accion piezas asociadas
                 $concat = $this->verInformacionAccionAsociada($nro_accion);
+                echo "Accion piezas asociadas Nro - ".$nro_accion." anulada correctamente";
                 break;
         }
     }
