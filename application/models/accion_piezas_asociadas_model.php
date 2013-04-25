@@ -71,9 +71,13 @@ class accion_piezas_asociadas_model extends CI_Model {
                                    AND calibre = ".$this->db->escape($calibre)." 
                                    AND modelo = ".$this->db->escape($modelo));
         
-        $row = $query->row();
+        $datos = array();
         
-        return $row->nro_pieza;
+        foreach($query->result() as $row) {
+            $datos[] = $row->nro_pieza;
+        }
+        
+        return $datos;
     }
     
     function hayDatosFicha($nro_orden) {
@@ -95,9 +99,13 @@ class accion_piezas_asociadas_model extends CI_Model {
                                    WHERE o.nro_orden = ".$this->db->escape($nro_orden));
                                    
         
-        $row = $query->row();
+        $datos = array();
         
-        return $row->nro_pieza;
+        foreach($query->result() as $row) {
+            $datos[] = $row->nro_pieza;
+        }
+        
+        return $datos;
     }
     
     function eliminarAccionAsociada($nro_cambio, $nro_orden, $nro_accion, $nro_pieza_anterior, $nro_pieza_nueva, $nro_parte, $nombre_parte, $nro_serie, $marca, $calibre, $modelo, $nro_catalogo) {

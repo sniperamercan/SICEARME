@@ -40,8 +40,14 @@ class modificar_accion_piezas_asociadas extends CI_Controller {
         
         $data['acciones'] = "";
         
+        $data['nro_pieza_actual'] = "";
+        
         if($this->modificar_accion_piezas_asociadas_model->hayDatosFicha($nro_orden)) {
-            $data['nro_pieza_actual'] = $this->modificar_accion_piezas_asociadas_model->obtenerDatosFicha($nro_orden);
+            $datos = $this->modificar_accion_piezas_asociadas_model->obtenerDatosFicha($nro_orden);
+            foreach($datos as $val) {
+                $data['nro_pieza_actual'] .= $val."/"; 
+            }
+            $data['nro_pieza_actual'] = substr($data['nro_pieza_actual'], 0, -1);
         }else {
             $data['nro_pieza_actual'] = "ARMAMENTO SIN PIEZAS ASOCIADAS";
         }
