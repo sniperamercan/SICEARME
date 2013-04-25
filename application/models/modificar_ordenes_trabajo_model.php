@@ -1,10 +1,31 @@
 <?php
 
-class alta_ordenes_trabajo_model extends CI_Model {
+class modificar_ordenes_trabajo_model extends CI_Model {
     
     function __construct() {
         parent::__construct();
         $this->load->database();
+    }
+    
+    function traigoDatos($nro_orden) {
+        
+        $query = $this->db->query("SELECT fecha, nro_serie, marca, calibre, modelo, observaciones, idunidad
+                                   FROM ordenes_trabajo
+                                   WHERE nro_orden = ".$this->db->escape($nro_orden));
+        
+        $datos = array();
+        
+        $row = $query->row();
+        
+        $datos[] = $row->fecha;
+        $datos[] = $row->nro_serie;
+        $datos[] = $row->marca;
+        $datos[] = $row->calibre;
+        $datos[] = $row->modelo;
+        $datos[] = $row->observaciones;
+        $datos[] = $row->idunidad;
+        
+        return $datos;
     }
 
     function cargoUnidades() {
@@ -164,9 +185,13 @@ class alta_ordenes_trabajo_model extends CI_Model {
         return $datos;
     }
     
-    function altaOrdenTrabajo($fecha, $unidad, $nro_serie, $marca, $calibre, $modelo, $observaciones) {
+    function modificarOrdenTrabajo($fecha, $unidad, $nro_serie, $marca, $calibre, $modelo, $observaciones, $nro_orden) {
         
-        $data_ordenes_trabajo = array(
+        $data_ordenes_where = array(
+            'nro_orden' => $nro_orden
+        );
+        
+        $data_ordenes_set = array(
             'fecha'                => $fecha,
             'nro_serie'            => $nro_serie,
             'marca'                => $marca,
@@ -174,29 +199,19 @@ class alta_ordenes_trabajo_model extends CI_Model {
             'modelo'               => $modelo,
             'observaciones'        => $observaciones,
             'idunidad'             => $unidad,
-            'estado_arma'          => 0,
-            'estado_orden_trabajo' => 0,
             'usuario'              => base64_decode($_SESSION['usuario'])
         );
         
-        $this->db->insert('ordenes_trabajo', $data_ordenes_trabajo);
-        
-        $query = $this->db->query("SELECT last_insert_id() as nro_orden");
-        
-        $row = $query->row();
-        
-        $nro_orden = $row->nro_orden;
-        
+        $this->db->update('ordenes_trabajo', $data_ordenes_set, $data_ordenes_where);
+
         $data_db_logs = array(
-            'tipo_movimiento' => 'insert',
+            'tipo_movimiento' => 'update',
             'tabla'           => 'ordenes_trabajo',
             'clave_tabla'     => 'nro_orden = '.$nro_orden,
             'usuario'         => base64_decode($_SESSION['usuario'])
         );        
 
         $this->db->insert('db_logs', $data_db_logs);
-        
-        return $nro_orden;
     }
 }
 

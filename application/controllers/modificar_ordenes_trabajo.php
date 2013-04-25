@@ -4,15 +4,15 @@
 * Equipo - UDEPGCALIT
 * Año - 2013
 * Iteracion - Segunda Iteracion
-* Clase - alta_ordenes_trabajo
+* Clase - modificar_ordenes_trabajo
 */
 
-class alta_ordenes_trabajo extends CI_Controller {
+class modificar_ordenes_trabajo extends CI_Controller {
     
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('alta_ordenes_trabajo_model');
+        $this->load->model('modificar_ordenes_trabajo_model');
         $this->load->library('mensajes');
         $this->load->library('perms'); 
         $this->load->library('form_validation'); 
@@ -29,31 +29,67 @@ class alta_ordenes_trabajo extends CI_Controller {
     
     function index() {
         
+        $nro_orden = $_SESSION['nro_orden'];
+        
+        //cargo datos de la orden de trabajo
+        $datos_orden = $this->modificar_ordenes_trabajo_model->traigoDatos($nro_orden);
+        
+        /*
+            $datos[] = $row->fecha;           0
+            $datos[] = $row->nro_serie;       1
+            $datos[] = $row->marca;           2
+            $datos[] = $row->calibre;         3
+            $datos[] = $row->modelo;          4
+            $datos[] = $row->observaciones;   5
+            $datos[] = $row->idunidad;        6
+         */
+        
+        $data['fecha']         = $datos_orden[0];
+        $nro_serie             = $datos_orden[1];
+        $marca                 = $datos_orden[2];
+        $calibre               = $datos_orden[3];
+        $modelo                = $datos_orden[4];
+        $data['observaciones'] = $datos_orden[5];
+        $idunidad              = $datos_orden[6];
+        
         //Cargo las unidades
-        $unidades = $this->alta_ordenes_trabajo_model->cargoUnidades();
+        $unidades = $this->modificar_ordenes_trabajo_model->cargoUnidades();
         
         $data['unidades'] = "<option> </option>";
         
         for($i=0; $i < count($unidades); $i=$i+2) {
-            $data['unidades'] .= "<option value='".$unidades[$i]."'>".$unidades[$i+1]."</option>";
+            if($unidades[$i] == $idunidad) {
+                $data['unidades'] .= "<option selected='selected' value='".$unidades[$i]."'>".$unidades[$i+1]."</option>";
+            }else{
+                $data['unidades'] .= "<option value='".$unidades[$i]."'>".$unidades[$i+1]."</option>";
+            }
         }
         //Fin cargo unidades
         
-        
         //Cargo nro de series de armamentos que esten en deposito inicial
-        $nro_series = $this->alta_ordenes_trabajo_model->cargoNroSeries();
-        
-        $aux = '""';
+        $nro_series = $this->modificar_ordenes_trabajo_model->cargoNroSeries();
         
         $data['nro_series'] = "<option> </option>";
         
         foreach($nro_series as $val) {
-            $aux = '"'.$val.'"';
-            $data['nro_series'] .= "<option value='".$val."'>".$val."</option>";
+            if($val == $nro_serie) {
+                $data['nro_series'] .= "<option selected='selected' value='".$val."'>".$val."</option>";
+            }else {
+                $data['nro_series'] .= "<option value='".$val."'>".$val."</option>";
+            }
         }
         //Fin cargo nro de series de armamento en deposito inicial
         
-        $this->load->view('alta_ordenes_trabajo_view', $data); 
+        $data['marca']   = "<option selected='selected' value='".$marca."'>".$marca."</option>";
+        $data['calibre'] = "<option selected='selected' value='".$calibre."'>".$calibre."</option>";
+        $data['modelo']  = "<option selected='selected' value='".$modelo."'>".$modelo."</option>";
+        
+        $datos = $this->modificar_ordenes_trabajo_model->cargoDatos($nro_serie, $marca, $calibre, $modelo);
+        
+        $data['tipo_arma'] = $datos[0];
+        $data['sistema']   = $datos[1];
+        
+        $this->load->view('modificar_ordenes_trabajo_view', $data); 
     }
     
     function cargoDatos() {
@@ -63,7 +99,7 @@ class alta_ordenes_trabajo extends CI_Controller {
         $calibre   = $_POST['calibre'];
         $modelo    = $_POST['modelo'];
         
-        $datos = $this->alta_ordenes_trabajo_model->cargoDatos($nro_serie, $marca, $calibre, $modelo);
+        $datos = $this->modificar_ordenes_trabajo_model->cargoDatos($nro_serie, $marca, $calibre, $modelo);
         
         /*
          * $datos[0] - tipo_arma 1 
@@ -82,7 +118,7 @@ class alta_ordenes_trabajo extends CI_Controller {
         
         $nro_serie = $_POST['nro_serie'];
        
-        $marcas = $this->alta_ordenes_trabajo_model->cargoMarcas($nro_serie);
+        $marcas = $this->modificar_ordenes_trabajo_model->cargoMarcas($nro_serie);
        
         $concat = "<option> </option>";
         
@@ -98,7 +134,7 @@ class alta_ordenes_trabajo extends CI_Controller {
         $nro_serie = $_POST['nro_serie'];
         $marca     = $_POST['marca'];
         
-        $calibres = $this->alta_ordenes_trabajo_model->cargoCalibres($nro_serie, $marca);
+        $calibres = $this->modificar_ordenes_trabajo_model->cargoCalibres($nro_serie, $marca);
         
         $concat = "<option> </option>";
         
@@ -115,7 +151,7 @@ class alta_ordenes_trabajo extends CI_Controller {
         $marca     = $_POST['marca'];
         $calibre   = $_POST['calibre'];
         
-        $modelos = $this->alta_ordenes_trabajo_model->cargoModelos($nro_serie, $marca, $calibre);
+        $modelos = $this->modificar_ordenes_trabajo_model->cargoModelos($nro_serie, $marca, $calibre);
         
         $concat = "<option> </option>";
         
@@ -133,9 +169,9 @@ class alta_ordenes_trabajo extends CI_Controller {
         $calibre   = $_SESSION['seleccion_busqueda2'];
         $modelo    = $_SESSION['seleccion_busqueda3'];
         
-        if(empty($nro_serie) && $this->alta_ordenes_trabajo_model->hayNroSeries()) {
+        if(empty($nro_serie) && $this->modificar_ordenes_trabajo_model->hayNroSeries()) {
             //Cargo nro de series de armamentos que esten en deposito inicial
-            $nro_series_array = $this->alta_ordenes_trabajo_model->cargoNroSeries();
+            $nro_series_array = $this->modificar_ordenes_trabajo_model->cargoNroSeries();
 
             $aux = '""';
             $nro_series  = "<option> </option>";
@@ -166,7 +202,7 @@ class alta_ordenes_trabajo extends CI_Controller {
         $retorno[] = $calibres;
         $retorno[] = $modelos;
         
-        $datos = $this->alta_ordenes_trabajo_model->cargoDatos($nro_serie, $marca, $calibre, $modelo);
+        $datos = $this->modificar_ordenes_trabajo_model->cargoDatos($nro_serie, $marca, $calibre, $modelo);
         
         $retorno[] = $datos[0]; //tipo_arma
         $retorno[] = $datos[1]; //sistema
@@ -185,7 +221,7 @@ class alta_ordenes_trabajo extends CI_Controller {
         
         if(!empty($nro_serie) && !empty($marca) && !empty($calibre) && !empty($modelo) && $this->alta_ordenes_trabajo_model->hayHistorio($nro_serie, $marca, $calibre, $modelo)) {
         
-            $datos = $this->alta_ordenes_trabajo_model->verHistorio($nro_serie, $marca, $calibre, $modelo);
+            $datos = $this->modificar_ordenes_trabajo_model->verHistorio($nro_serie, $marca, $calibre, $modelo);
 
             /*
                $datos[] = $row->nro_acta;
@@ -298,9 +334,10 @@ class alta_ordenes_trabajo extends CI_Controller {
                     break;
             }
         }else {
-            $nro_orden = $this->alta_ordenes_trabajo_model->altaOrdenTrabajo($fecha, $unidad, $nro_serie, $marca, $calibre, $modelo, $observaciones);
+            $nro_orden = $_SESSION['nro_orden'];
+            $this->modificar_ordenes_trabajo_model->modificarOrdenTrabajo($fecha, $unidad, $nro_serie, $marca, $calibre, $modelo, $observaciones, $nro_orden);
             $retorno[] = 1;
-            $retorno[] = $nro_orden;
+            unset($_SESSION['nro_orden']);
         }
         
         echo json_encode($retorno);

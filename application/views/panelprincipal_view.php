@@ -354,7 +354,7 @@
                                     
                                     <li><a href="#"> Modificar </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_ordenes_de_trabajo'); ?>','Taller armamento >> Modificar >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_ordenes_trabajo'); ?>','Taller armamento >> Modificar >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_cambios_ficha'); ?>','Taller armamento >> Modificar >> Acciones de una orden');"> Acciones de una orden </a></li>
                                         </ul>
                                     </li>
