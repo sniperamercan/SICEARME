@@ -469,7 +469,7 @@ class accion_ordenes_trabajo extends CI_Controller {
                 break;
             
             case 2: //accion piezas asociadas
-                if(!$this->accion_ordenes_trabajo_model->hayPiezaCambio($nro_accion)) {
+                if(!$this->accion_ordenes_trabajo_model->hayAcciones($nro_accion)) {
                     $this->accion_ordenes_trabajo_model->eliminarAccionAsociada($nro_accion);
                     echo "Accion piezas asociadas Nro - ".$nro_accion." anulada correctamente";
                 }else{

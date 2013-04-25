@@ -270,6 +270,15 @@ class accion_ordenes_trabajo_model extends CI_Model {
         return $query->num_rows();
     }
     
+    function hayAcciones($nro_accion) {
+        
+        $query = $this->db->query("SELECT *
+                                   FROM cambio_piezas_asociadas_ordenes_trabajo
+                                   WHERE nro_accion = ".$this->db->escape($nro_accion));
+        
+        return $query->num_rows();
+    }
+    
     function obtenerDatosArma($nro_accion) {
         
         $query = $this->db->query("SELECT o.nro_serie, o.marca, o.calibre, o.modelo
