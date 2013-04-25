@@ -473,7 +473,7 @@ class accion_ordenes_trabajo extends CI_Controller {
                     $this->accion_ordenes_trabajo_model->eliminarAccionAsociada($nro_accion);
                     echo "Accion piezas asociadas Nro - ".$nro_accion." anulada correctamente";
                 }else{
-                    echo "ERROR: Borrar accion de cambio de pieza no se puede ejecutar, debido a que la pieza del armamento ya no posee dicha pieza";
+                    echo "ERROR: La accion tiene varios cambios de pieza usted debe ingresar a editar la accion y borrar uno a uno los cambios de pieza";
                 }
                 break;
         }
