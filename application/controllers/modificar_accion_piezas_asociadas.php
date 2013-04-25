@@ -139,7 +139,7 @@ class modificar_accion_piezas_asociadas extends CI_Controller {
         $modelo             = $datos[9];
         $nro_catalogo       = $datos[10];
         
-        if($nro_pieza_nueva == $this->modificar_accion_piezas_asociadas_model->obtenerPiezaFicha($nro_serie, $marca, $calibre, $modelo)) {
+        if($this->modificar_accion_piezas_asociadas_model->obtenerPiezaFicha($nro_serie, $marca, $calibre, $modelo, $nro_pieza_nueva)) {
             $this->modificar_accion_piezas_asociadas_model->eliminarAccionAsociada($nro_cambio, $nro_orden, $nro_accion, $nro_pieza_anterior, $nro_pieza_nueva, $nro_parte, $nombre_parte, $nro_serie, $marca, $calibre, $modelo, $nro_catalogo);
             echo 1;
         }else {

@@ -73,22 +73,17 @@ class modificar_accion_piezas_asociadas_model extends CI_Model {
         return $datos;
     }
     
-    function obtenerPiezaFicha($nro_serie, $marca, $calibre, $modelo) {
+    function obtenerPiezaFicha($nro_serie, $marca, $calibre, $modelo, $nro_pieza) {
         
         $query = $this->db->query("SELECT nro_pieza
                                    FROM fichas_piezas
                                    WHERE nro_serie = ".$this->db->escape($nro_serie)." 
                                    AND marca = ".$this->db->escape($marca)." 
                                    AND calibre = ".$this->db->escape($calibre)." 
-                                   AND modelo = ".$this->db->escape($modelo));
+                                   AND modelo = ".$this->db->escape($modelo)."
+                                   AND nro_pieza = ".$this->db->escape($nro_pieza));
         
-        $datos = array();
-        
-        foreach($query->result() as $row) {
-            $datos[] = $row->nro_pieza;
-        }
-        
-        return $datos;
+        return $query->num_rows();
     }    
 
     function hayDatosFicha($nro_orden) {
@@ -131,7 +126,8 @@ class modificar_accion_piezas_asociadas_model extends CI_Model {
                 'nro_serie' => $nro_serie,
                 'marca'     => $marca,
                 'calibre'   => $calibre,
-                'modelo'    => $modelo
+                'modelo'    => $modelo,
+                'nro_pieza' => $nro_pieza_nueva
             );
             
             $this->db->update('fichas_piezas', $data_ficha_pieza_set, $data_ficha_pieza_where);
@@ -234,7 +230,8 @@ class modificar_accion_piezas_asociadas_model extends CI_Model {
                 'nro_serie' => $row->nro_serie,
                 'marca'     => $row->marca,
                 'calibre'   => $row->calibre,
-                'modelo'    => $row->modelo
+                'modelo'    => $row->modelo,
+                'nro_pieza' => $nro_pieza_anterior
             );
             
             $this->db->update('fichas_piezas', $data_ficha_set, $data_ficha_where);
