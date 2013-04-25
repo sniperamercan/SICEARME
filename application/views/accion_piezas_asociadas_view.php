@@ -116,7 +116,11 @@
                             url: "<?php base_url(); ?>accion_piezas_asociadas/eliminarAccionAsociada",
                             data: "nro_cambio="+nro_cambio,
                             success: function(data){
-                                irAFrame('<?php echo base_url('accion_piezas_asociadas'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                                if(data == 1) {
+                                    irAFrame('<?php echo base_url('accion_piezas_asociadas'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                                }else {
+                                    jAlert("ERROR: Borrar accion de cambio de pieza no se puede ejecutar, debido a que la pieza del armamento ya no posee dicha pieza", "Error");
+                                }
                           }
                         });                        
                     }

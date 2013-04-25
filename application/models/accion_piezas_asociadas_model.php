@@ -62,6 +62,20 @@ class accion_piezas_asociadas_model extends CI_Model {
         return $datos;
     }
     
+    function obtenerPiezaFicha($nro_serie, $marca, $calibre, $modelo) {
+        
+        $query = $this->db->query("SELECT nro_pieza
+                                   FROM fichas_piezas
+                                   WHERE nro_serie = ".$this->db->escape($nro_serie)." 
+                                   AND marca = ".$this->db->escape($marca)." 
+                                   AND calibre = ".$this->db->escape($calibre)." 
+                                   AND modelo = ".$this->db->escape($modelo));
+        
+        $row = $query->row();
+        
+        return $row->nro_pieza;
+    }
+    
     function eliminarAccionAsociada($nro_cambio, $nro_orden, $nro_accion, $nro_pieza_anterior, $nro_pieza_nueva, $nro_parte, $nombre_parte, $nro_serie, $marca, $calibre, $modelo, $nro_catalogo) {
         
         $this->db->trans_start();

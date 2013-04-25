@@ -123,7 +123,13 @@ class accion_piezas_asociadas extends CI_Controller {
         $modelo             = $datos[9];
         $nro_catalogo       = $datos[10];
         
-        $this->accion_piezas_asociadas_model->eliminarAccionAsociada($nro_cambio, $nro_orden, $nro_accion, $nro_pieza_anterior, $nro_pieza_nueva, $nro_parte, $nombre_parte, $nro_serie, $marca, $calibre, $modelo, $nro_catalogo);
+        if($nro_pieza_nueva == $this->accion_piezas_asociadas_model->obtenerPiezaFicha($nro_serie, $marca, $calibre, $modelo)) {
+            $this->accion_piezas_asociadas_model->eliminarAccionAsociada($nro_cambio, $nro_orden, $nro_accion, $nro_pieza_anterior, $nro_pieza_nueva, $nro_parte, $nombre_parte, $nro_serie, $marca, $calibre, $modelo, $nro_catalogo);
+            echo 1;
+        }else {
+            echo 0;
+        }
+        
     }
     
     function validarDatos() {

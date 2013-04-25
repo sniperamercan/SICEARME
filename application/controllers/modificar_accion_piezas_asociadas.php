@@ -30,6 +30,7 @@ class modificar_accion_piezas_asociadas extends CI_Controller {
     function index() {
         
         $nro_accion = $_SESSION['editar_nro_accion'];
+        $_SESSION['nro_accion'] = $nro_accion;
         
         $nro_orden = $this->modificar_accion_piezas_asociadas_model->cargoNroOrden($nro_accion);
         
@@ -126,8 +127,11 @@ class modificar_accion_piezas_asociadas extends CI_Controller {
         $modelo             = $datos[9];
         $nro_catalogo       = $datos[10];
         
-        if($this->modificar_accion_piezas_asociadas_model->obtenerPiezaFichaArma($nro_orden) == $nro_pieza_nueva) {
+        if($nro_pieza_nueva == $this->modificar_accion_piezas_asociadas_model->obtenerPiezaFicha($nro_serie, $marca, $calibre, $modelo)) {
             $this->modificar_accion_piezas_asociadas_model->eliminarAccionAsociada($nro_cambio, $nro_orden, $nro_accion, $nro_pieza_anterior, $nro_pieza_nueva, $nro_parte, $nombre_parte, $nro_serie, $marca, $calibre, $modelo, $nro_catalogo);
+            echo 1;
+        }else {
+            echo 0;
         }
         
     }

@@ -239,7 +239,7 @@ class accion_ordenes_trabajo_model extends CI_Model {
         return $datos;
     }
     
-    function eliminarAccionAsociada($nro_accion) {
+    function eliminarAccionAsociada($nro_accion, $nro_pieza_anterior) {
         
         $this->db->trans_start();
         
@@ -257,23 +257,23 @@ class accion_ordenes_trabajo_model extends CI_Model {
                 );
                 
                 $this->db->insert("stock_repuestos_nro_pieza", $data_stock);
-                
-                $datos_arma = $this->obtenerDatosArma($nro_accion);
-                
-                $data_ficha_where = array(
-                    'nro_serie' => $datos_arma[0],
-                    'marca'     => $datos_arma[1],
-                    'calibre'   => $datos_arma[2],
-                    'modelo'    => $datos_arma[3]
-                );
-                
-                $data_ficha_set = array(
-                    'nro_pieza' => $piezas_usadas[$i]
-                );
-                
-                $this->db->update("fichas_piezas", $data_ficha_set, $data_ficha_where);
             }
 
+            $datos_arma = $this->obtenerDatosArma($nro_accion);
+
+            $data_ficha_where = array(
+                'nro_serie' => $datos_arma[0],
+                'marca'     => $datos_arma[1],
+                'calibre'   => $datos_arma[2],
+                'modelo'    => $datos_arma[3]
+            );
+
+            $data_ficha_set = array(
+                'nro_pieza' => $nro_pieza_anterior
+            );
+
+            $this->db->update("fichas_piezas", $data_ficha_set, $data_ficha_where);            
+            
             //elmino los registros de cambio de piezas secundarias y el detalle de la orden
             $data_accion_where = array(
                 'nro_accion' => $nro_accion
@@ -286,6 +286,21 @@ class accion_ordenes_trabajo_model extends CI_Model {
         
     }
     
+    function hayPiezaCambio($nro_accion) {
+        
+        $query = $this->db->query("SELECT f.*
+                                   FROM fichas_piezas f
+                                   INNER JOIN ordenes_trabajo o ON o.nro_serie = f.nro_serie AND o.marca = f.marca AND o.calibre = f.calibre AND o.modelo = f.modelo
+                                   INNER JOIN detalles_ordenes_trabajo d ON o.nro_orden = d.nro_orden
+                                   WHERE d.nro_accion = ".$this->db->escape($nro_accion)."
+                                   AND f.nro_pieza IN (SELECT c.nro_pieza_nueva 
+                                                       FROM cambio_piezas_asociadas_ordenes_trabajo c 
+                                                       WHERE c.nro_pieza_nueva = f.nro_pieza 
+                                                       AND c.nro_accion = ".$this->db->escape($nro_accion).")");
+        
+        return $query->num_rows();
+    }
+    
     function obtenerPiezaCambio($nro_accion) {
         
         $query = $this->db->query("SELECT f.nro_pieza
@@ -293,9 +308,26 @@ class accion_ordenes_trabajo_model extends CI_Model {
                                    INNER JOIN ordenes_trabajo o ON o.nro_serie = f.nro_serie AND o.marca = f.marca AND o.calibre = f.calibre AND o.modelo = f.modelo
                                    INNER JOIN detalles_ordenes_trabajo d ON o.nro_orden = d.nro_orden
                                    WHERE d.nro_accion = ".$this->db->escape($nro_accion)."
-                                   AND f.nro_pieza IN (SELECT c.nro_pieza_nueva FROM cambio_piezas_asociadas_ordenes_trabajo c WHERE c.nro_pieza_nueva = f.nro_pieza)");
+                                   AND f.nro_pieza IN (SELECT c.nro_pieza_nueva 
+                                                       FROM cambio_piezas_asociadas_ordenes_trabajo c 
+                                                       WHERE c.nro_pieza_nueva = f.nro_pieza 
+                                                       AND c.nro_accion = ".$this->db->escape($nro_accion).")");
         
-        return $query->num_rows();
+        $row = $query->row();
+        
+        return $row->nro_pieza;
+    }    
+    
+    function obtenerPiezaCambioAnterior($nro_accion, $nro_pieza) {
+        
+        $query = $this->db->query("SELECT nro_pieza_anterior
+                                   FROM cambio_piezas_asociadas_ordenes_trabajo
+                                   WHERE nro_accion = ".$this->db->escape($nro_accion)." 
+                                   AND nro_pieza_nueva = ".$this->db->escape($nro_pieza));
+        
+        $row = $query->row();
+        
+        return $row->nro_pieza_anterior;
     }
     
     function obtenerDatosArma($nro_accion) {
