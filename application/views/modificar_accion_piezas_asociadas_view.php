@@ -200,6 +200,11 @@
 
                     <div id="imprimir">
                                  
+                        <dl>
+                        <dt></dt>
+                        <dd><label> Nro pieza actual que tiene el armamento - <?php echo $nro_pieza_actual ?></label></dd>
+                        </dl> 
+                        
                         <div class="datagrid" style="margin-top: 30px;">
                             <table> 
                                 <thead style="text-align: center;">
