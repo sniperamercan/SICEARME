@@ -7,7 +7,7 @@ class busqueda_fichas_taller_model extends CI_Model {
         $this->load->database();
     }
     
-    //para paginado
+    //para paginado Unidad 99 - Taller de armamento
     function cantidadRegistros($condicion){
         $query = $this->db->query("SELECT *
                                    FROM stock_unidades s
@@ -17,6 +17,7 @@ class busqueda_fichas_taller_model extends CI_Model {
         return $query->num_rows();
     }
 
+    //Unidad 99 - Taller de armamento
     function consulta_db($ini, $param, $condicion, $order){
         
         $result = array();

@@ -23,6 +23,7 @@ class alta_ordenes_trabajo_model extends CI_Model {
         return $unidades;
     }
     
+    //unidad 99 Taller de armamento
     function cargoNroSeries() {
        
         $query = $this->db->query("SELECT DISTINCT nro_serie

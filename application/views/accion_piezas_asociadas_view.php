@@ -77,7 +77,7 @@
                         $("#nombre_parte").val("");
                         $("#nro_catalogo").val("");
                         
-                        if(data[0] !== 0) {
+                        if(data[0] != 0) {
                             $("#nro_pieza_nueva").val(data[0]);
                             $("#nro_parte").val(data[1]);
                             $("#nombre_parte").val(data[2]);
@@ -99,7 +99,7 @@
                
                         $("#nro_pieza_anterior").val("");
                         
-                        if(data !== 0) {
+                        if(data != 0) {
                             $("#nro_pieza_anterior").val(data);
                         }
                    }

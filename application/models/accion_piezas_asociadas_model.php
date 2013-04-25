@@ -76,6 +76,17 @@ class accion_piezas_asociadas_model extends CI_Model {
         return $row->nro_pieza;
     }
     
+    function hayDatosFicha($nro_orden) {
+        
+        $query = $this->db->query("SELECT f.nro_pieza
+                                   FROM fichas_piezas f
+                                   INNER JOIN ordenes_trabajo o ON f.nro_serie = o.nro_serie AND f.marca = o.marca AND f.calibre = o.calibre AND f.modelo = o.modelo
+                                   WHERE o.nro_orden = ".$this->db->escape($nro_orden));
+                                   
+        
+        return $query->num_rows();
+    }    
+    
     function obtenerDatosFicha($nro_orden) {
         
         $query = $this->db->query("SELECT f.nro_pieza

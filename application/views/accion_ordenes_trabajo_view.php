@@ -177,9 +177,11 @@
                    url: "<?php base_url(); ?>accion_ordenes_trabajo/cargoAcciones",
                    data: "nro_orden="+nro_orden,
                    success: function(data) {
-                       if(data !== 0) {
+                       if(data != 0) {
                            $("#acciones").html("");
                            $("#acciones").html(data);
+                       }else {
+                           $("#acciones").html("");
                        }
                    }
                 }); 
