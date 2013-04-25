@@ -12,7 +12,8 @@ class busqueda_fichas_taller_model extends CI_Model {
         $query = $this->db->query("SELECT *
                                    FROM stock_unidades s
                                    INNER JOIN fichas f ON s.nro_serie = f.nro_serie AND s.marca = f.marca AND s.calibre = f.calibre AND s.modelo = f.modelo 
-                                   WHERE ".$condicion);
+                                   WHERE ".$condicion."
+                                   AND s.idunidad = 99");
         
         return $query->num_rows();
     }
@@ -26,6 +27,7 @@ class busqueda_fichas_taller_model extends CI_Model {
                                    FROM stock_unidades s
                                    INNER JOIN fichas f ON s.nro_serie = f.nro_serie AND s.marca = f.marca AND s.calibre = f.calibre AND s.modelo = f.modelo 
                                    WHERE ".$condicion."
+                                   AND s.idunidad = 99
                                    ORDER BY ".$order."
                                    LIMIT ".$ini.",".$param);
         

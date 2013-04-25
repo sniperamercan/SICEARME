@@ -28,6 +28,7 @@ class alta_ordenes_trabajo_model extends CI_Model {
        
         $query = $this->db->query("SELECT DISTINCT nro_serie
                                    FROM stock_unidades
+                                   WHERE idunidad = 99
                                    ORDER BY nro_serie");
         
         $nro_series = array();
