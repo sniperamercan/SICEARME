@@ -469,10 +469,8 @@ class accion_ordenes_trabajo extends CI_Controller {
                 break;
             
             case 2: //accion piezas asociadas
-                if($this->accion_ordenes_trabajo_model->hayPiezaCambio($nro_accion)) {
-                    $nro_pieza = $this->accion_ordenes_trabajo_model->obtenerPiezaCambio($nro_accion);
-                    $nro_pieza_anterior = $this->accion_ordenes_trabajo_model->obtenerPiezaCambioAnterior($nro_accion, $nro_pieza);
-                    $this->accion_ordenes_trabajo_model->eliminarAccionAsociada($nro_accion, $nro_pieza_anterior);
+                if(!$this->accion_ordenes_trabajo_model->hayPiezaCambio($nro_accion)) {
+                    $this->accion_ordenes_trabajo_model->eliminarAccionAsociada($nro_accion);
                     echo "Accion piezas asociadas Nro - ".$nro_accion." anulada correctamente";
                 }else{
                     echo "ERROR: Borrar accion de cambio de pieza no se puede ejecutar, debido a que la pieza del armamento ya no posee dicha pieza";
