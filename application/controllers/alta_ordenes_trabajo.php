@@ -133,9 +133,9 @@ class alta_ordenes_trabajo extends CI_Controller {
         $calibre   = $_SESSION['seleccion_busqueda2'];
         $modelo    = $_SESSION['seleccion_busqueda3'];
         
-        if(empty($nro_serie)) {
+        if(empty($nro_serie) && $this->alta_ordenes_trabajo_model->hayNroSeries()) {
             //Cargo nro de series de armamentos que esten en deposito inicial
-            $nro_series_array = $this->alta_actas_alta_model->cargoNroSeries();
+            $nro_series_array = $this->alta_ordenes_trabajo_model->cargoNroSeries();
 
             $aux = '""';
             $nro_series  = "<option> </option>";
@@ -173,6 +173,52 @@ class alta_ordenes_trabajo extends CI_Controller {
         
         echo json_encode($retorno);        
     }    
+    
+    function verHistorico() {
+        
+        $nro_serie = $_POST['nro_serie'];
+        $marca     = $_POST['marca'];
+        $calibre   = $_POST['calibre'];
+        $modelo    = $_POST['modelo'];
+        
+        $actas_baja_arm = array();
+        
+        if(!empty($nro_serie) && !empty($marca) && !empty($calibre) && !empty($modelo) && $this->alta_ordenes_trabajo_model->hayHistorio($nro_serie, $marca, $calibre, $modelo)) {
+        
+            $datos = $this->alta_ordenes_trabajo_model->verHistorio($nro_serie, $marca, $calibre, $modelo);
+
+            /*
+               $datos[] = $row->nro_acta;
+               $datos[] = $row->fecha_transaccion;
+               $datos[] = $row->nombreunidad;
+             */
+
+            $concat = "<p style='font-weight: bold;'> Detalle de los movimientos previos del armamento seleccionado </p>";
+
+            $concat .= "<div class='datagrid'><table><thead><th> Nro acta </th><th> Fecha </th> <th> Unidad </th></thead>";  
+
+            $j = 0;
+
+            for($i=0; $i<count($datos); $i=$i+3) {
+                if($j % 2 == 0){
+                    $class = "";
+                }else{
+                    $class = "alt";
+                } 
+                $concat .= "<tbody><tr class='".$class."'> <td style='text-align: center;'>".$datos[$i]."</td> <td>".$datos[$i+1]."</td> <td>".$datos[$i+2]."</td> </tr></tbody>";
+                $j++;
+            }
+
+            $concat .= "</table>";
+
+            $concat .= "</div>";
+        }else {
+            $concat = "<p style='font-weight: bold;'> Detalle de los movimientos previos del armamento seleccionado </p>";
+            $concat .= "<p style='font-weight: bold;'> VERIFIQUE: No selecciono ningun armamento </p>";
+        }
+        
+        echo $concat;
+    }
     
     function validarDatos() {
         

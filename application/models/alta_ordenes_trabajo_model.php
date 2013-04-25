@@ -23,6 +23,16 @@ class alta_ordenes_trabajo_model extends CI_Model {
         return $unidades;
     }
     
+    function hayNroSeries() {
+        
+        $query = $this->db->query("SELECT *
+                                   FROM stock_unidades
+                                   WHERE idunidad = 99
+                                   ORDER BY nro_serie");
+        
+        return $query->num_rows();          
+    }
+    
     //unidad 99 Taller de armamento
     function cargoNroSeries() {
        
@@ -113,6 +123,42 @@ class alta_ordenes_trabajo_model extends CI_Model {
             $datos[] = "";
         }
         
+        return $datos;
+    }
+    
+    function hayHistorio($nro_serie, $marca, $calibre, $modelo) {
+        
+        $query = $this->db->query("SELECT a.nro_acta, a.fecha_transaccion, u.nombreunidad
+                                   FROM actas_baja a
+                                   INNER JOIN actas_baja_devolucion_armamento d ON d.nro_acta = a.nro_acta
+                                   INNER JOIN unidades u ON u.idunidad = a.unidad_entrega
+                                   WHERE d.nro_serie = ".$this->db->escape($nro_serie)."
+                                   AND d.marca = ".$this->db->escape($marca)."
+                                   AND d.calibre = ".$this->db->escape($calibre)."
+                                   AND d.modelo = ".$this->db->escape($modelo));
+        
+        return $query->num_rows();
+    }    
+    
+    function verHistorio($nro_serie, $marca, $calibre, $modelo) {
+        
+        $query = $this->db->query("SELECT a.nro_acta, a.fecha_transaccion, u.nombreunidad
+                                   FROM actas_baja a
+                                   INNER JOIN actas_baja_devolucion_armamento d ON d.nro_acta = a.nro_acta
+                                   INNER JOIN unidades u ON u.idunidad = a.unidad_entrega
+                                   WHERE d.nro_serie = ".$this->db->escape($nro_serie)."
+                                   AND d.marca = ".$this->db->escape($marca)."
+                                   AND d.calibre = ".$this->db->escape($calibre)."
+                                   AND d.modelo = ".$this->db->escape($modelo));
+        
+        $datos = array();
+        
+        foreach($query->result() as $row) {
+            $datos[] = $row->nro_acta;
+            $datos[] = $row->fecha_transaccion;
+            $datos[] = $row->nombreunidad;
+        }    
+            
         return $datos;
     }
     
