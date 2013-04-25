@@ -12,7 +12,7 @@ class modificar_accion_piezas_secundarias extends CI_Controller {
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('accion_piezas_secundarias_model');
+        $this->load->model('modificar_accion_piezas_secundarias_model');
         $this->load->library('mensajes');
         $this->load->library('perms'); 
         $this->load->library('form_validation'); 
@@ -29,15 +29,19 @@ class modificar_accion_piezas_secundarias extends CI_Controller {
     
     function index() {
         
-        $data['nro_orden'] = $_SESSION['nro_orden'];
         
-        $nro_orden  = $_SESSION['nro_orden'];
-        $nro_accion = $_SESSION['nro_accion'];
+        $nro_accion = $_SESSION['editar_nro_accion'];
+        $_SESSION['nro_accion'] = $nro_accion;
+        
+        $nro_orden = $this->modificar_accion_piezas_secundarias_model->cargoNroOrden($nro_accion);
         
         $data['acciones'] = "";
         
-        if($this->accion_piezas_secundarias_model->hayDatosAccion($nro_orden, $nro_accion)) {
-            $datos_accion = $this->accion_piezas_secundarias_model->cargoDatosAccion($nro_orden, $nro_accion);
+        $data['nro_orden'] = $nro_orden;
+        $_SESSION['nro_orden'] = $nro_orden;
+        
+        if($this->modificar_accion_piezas_secundarias_model->hayDatosAccion($nro_orden, $nro_accion)) {
+            $datos_accion = $this->modificar_accion_piezas_secundarias_model->cargoDatosAccion($nro_orden, $nro_accion);
             
             /*
                 $datos[] = $row->nro_cambio;   0
@@ -62,7 +66,7 @@ class modificar_accion_piezas_secundarias extends CI_Controller {
         }
         
         //Llamo a la vista
-        $this->load->view('accion_piezas_secundarias_view', $data);  
+        $this->load->view('modificar_accion_piezas_secundarias_view', $data);  
     }
     
     function cargoRepuestosFiltro() {
@@ -75,7 +79,7 @@ class modificar_accion_piezas_secundarias extends CI_Controller {
             $datos[] = $nro_parte;
             $datos[] = $nombre_parte;
 
-            $cantidad = $this->accion_piezas_secundarias_model->cargoCantidad($nro_parte, $nombre_parte);
+            $cantidad = $this->modificar_accion_piezas_secundarias_model->cargoCantidad($nro_parte, $nombre_parte);
 
             $datos[] = $cantidad;            
         }else {
@@ -90,7 +94,7 @@ class modificar_accion_piezas_secundarias extends CI_Controller {
         $nro_cambio = $_POST['nro_cambio'];
         
         //obtengo los valores de ese cambio 
-        $datos_accion = $this->accion_piezas_secundarias_model->cargoDatosAccionEliminar($nro_cambio);
+        $datos_accion = $this->modificar_accion_piezas_secundarias_model->cargoDatosAccionEliminar($nro_cambio);
         
         /*
             $datos[] = $row->nro_parte;    0
@@ -103,11 +107,11 @@ class modificar_accion_piezas_secundarias extends CI_Controller {
         $cantidad     = $datos_accion[2];
         
         //obtengo la cantidad actual para ese stock 
-        $cant_actual = $this->accion_piezas_secundarias_model->cargoCantidadActual($nro_parte, $nombre_parte);
+        $cant_actual = $this->modificar_accion_piezas_secundarias_model->cargoCantidadActual($nro_parte, $nombre_parte);
         
         $cant_actualizar = $cant_actual + $cantidad;
         
-        $this->accion_piezas_secundarias_model->eliminarAccionSecundaria($nro_cambio, $nro_parte, $nombre_parte, $cant_actualizar);
+        $this->modificar_accion_piezas_secundarias_model->eliminarAccionSecundaria($nro_cambio, $nro_parte, $nombre_parte, $cant_actualizar);
     }
     
     function validarDatos() {
@@ -173,7 +177,7 @@ class modificar_accion_piezas_secundarias extends CI_Controller {
             }
         }else {
             $cant_total = $cant_actual - $cant_usar;
-            $this->accion_piezas_secundarias_model->altaAccionPiezasSecundarias($nro_parte, $nombre_parte, $cant_usar, $cant_total);
+            $this->modificar_accion_piezas_secundarias_model->altaAccionPiezasSecundarias($nro_parte, $nombre_parte, $cant_usar, $cant_total);
             echo 1;
         }
     }

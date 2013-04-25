@@ -7,6 +7,17 @@ class modificar_accion_piezas_secundarias_model extends CI_Model {
         $this->load->database();
     }
     
+    function cargoNroOrden($nro_accion) {
+        
+        $query = $this->db->query("SELECT DISTINCT nro_orden AS nro
+                                   FROM detalles_ordenes_trabajo
+                                   WHERE nro_accion = ".$this->db->escape($nro_accion));
+        
+        $row = $query->row();
+        
+        return $row->nro;
+    }
+    
     function cargoCantidad($nro_parte, $nombre_parte) {
         
         $query = $this->db->query("SELECT cantidad

@@ -43,7 +43,7 @@
                 
                 $.ajax({
                     type: "post",  
-                    url: "<?php base_url(); ?>accion_piezas_secundarias/validarDatos",
+                    url: "<?php base_url(); ?>modificar_accion_piezas_secundarias/validarDatos",
                     data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&cant_actual="+cant_actual+"&cant_usar="+cant_usar,
                     success: function(data){
                         if(data == 1){            
@@ -67,7 +67,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>accion_piezas_secundarias/cargoRepuestosFiltro",
+                   url: "<?php base_url(); ?>modificar_accion_piezas_secundarias/cargoRepuestosFiltro",
                    success: function(data) {
                
                         $("#nro_parte").val("");
@@ -90,10 +90,10 @@
                     if(r) {
                         $.ajax({
                             type: "post",  
-                            url: "<?php base_url(); ?>accion_piezas_secundarias/eliminarAccionSimple",
+                            url: "<?php base_url(); ?>modificar_accion_piezas_secundarias/eliminarAccionSimple",
                             data: "nro_cambio="+nro_cambio,
                             success: function(data){
-                                irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                                irAFrame('<?php echo base_url('modificar_accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
                           }
                         });                        
                     }
@@ -109,7 +109,7 @@
 
         <div>			
 
-            <h1> Accion de cambios de piezas secundarias de un armamento </h1>    
+            <h1> Modifcar Accion de cambios de piezas secundarias de un armamento </h1>    
             
             <fieldset>	
             
