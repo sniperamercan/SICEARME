@@ -45,11 +45,11 @@
                 
                 $.ajax({
                     type: "post",  
-                    url: "<?php base_url(); ?>accion_piezas_asociadas/validarDatos",
+                    url: "<?php base_url(); ?>modificar_accion_piezas_asociadas/validarDatos",
                     data: "nro_pieza_nueva="+nro_pieza_nueva+"&nro_pieza_anterior="+nro_pieza_anterior+"&nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
                     success: function(data){
                         if(data == 1){            
-                            jAlert("CORRECTO: La pieza fue modificada para el armamento correctamente", "Correcto", function() { irAFrame('<?php echo base_url('accion_piezas_asociadas'); ?>','Taller armamento >> Accion >> Ordenes de trabajo'); });
+                            jAlert("CORRECTO: La pieza fue modificada para el armamento correctamente", "Correcto", function() { irAFrame('<?php echo base_url('modificar_accion_piezas_asociadas'); ?>','Taller armamento >> Accion >> Ordenes de trabajo'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
@@ -69,7 +69,7 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>accion_piezas_asociadas/cargoRepuestosFiltro",
+                   url: "<?php base_url(); ?>modificar_accion_piezas_asociadas/cargoRepuestosFiltro",
                    success: function(data) {
                
                         $("#nro_pieza_nueva").val("");
@@ -94,7 +94,7 @@
             function cargoPiezasArmamentoFiltro() {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>accion_piezas_asociadas/cargoPiezasArmamentoFiltro",
+                   url: "<?php base_url(); ?>modificar_accion_piezas_asociadas/cargoPiezasArmamentoFiltro",
                    success: function(data) {
                
                         $("#nro_pieza_anterior").val("");
@@ -113,10 +113,15 @@
                     if(r) {
                         $.ajax({
                             type: "post",  
-                            url: "<?php base_url(); ?>accion_piezas_asociadas/eliminarAccionAsociada",
+                            url: "<?php base_url(); ?>modificar_accion_piezas_asociadas/eliminarAccionAsociada",
                             data: "nro_cambio="+nro_cambio,
                             success: function(data){
-                                irAFrame('<?php echo base_url('accion_piezas_asociadas'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                                
+                                if(data == 1) {
+                                    irAFrame('<?php echo base_url('modificar_accion_piezas_asociadas'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                                }else{
+                                    jAlert("ERROR: Borrar accion de cambio de pieza no se puede ejecutar, debido a que la pieza del armamento ya no posee dicha pieza", "Error");
+                                }
                           }
                         });                        
                     }
@@ -132,7 +137,7 @@
 
         <div>			
 
-            <h1> Accion de cambios de piezas asociadas a un armamento </h1>    
+            <h1> Modificar Accion de cambios de piezas asociadas a un armamento </h1>    
             
             <fieldset>	
             

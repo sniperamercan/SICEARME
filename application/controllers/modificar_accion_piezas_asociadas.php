@@ -29,20 +29,23 @@ class modificar_accion_piezas_asociadas extends CI_Controller {
     
     function index() {
         
-        $data['nro_orden'] = $_SESSION['nro_orden'];
+        $nro_accion = $_SESSION['editar_nro_accion'];
         
-        $nro_orden  = $_SESSION['nro_orden'];
-        $nro_accion = $_SESSION['nro_accion'];
+        $nro_orden = $this->modificar_accion_piezas_asociadas_model->cargoNroOrden($nro_accion);
+        
+        $_SESSION['nro_orden'] = $nro_orden;
+        
+        $data['nro_orden'] = $nro_orden;
         
         $data['acciones'] = "";
         
-        if($this->accion_piezas_asociadas_model->hayDatosAccion($nro_orden, $nro_accion)) {
-            $datos_accion = $this->accion_piezas_asociadas_model->cargoDatosAccion($nro_orden, $nro_accion);
+        if($this->modificar_accion_piezas_asociadas_model->hayDatosAccion($nro_orden, $nro_accion)) {
+            $datos_accion = $this->modificar_accion_piezas_asociadas_model->cargoDatosAccion($nro_orden, $nro_accion);
             
             /*
                 $datos[] = $row->nro_cambio;         0
-                $datos[] = $row->nro_pieza_nueva; 1
-                $datos[] = $row->nro_pieza_anterior;    2
+                $datos[] = $row->nro_pieza_nueva;    1
+                $datos[] = $row->nro_pieza_anterior; 2
              */
             
             for($i=0; $i<count($datos_accion); $i=$i+3) {
@@ -60,7 +63,7 @@ class modificar_accion_piezas_asociadas extends CI_Controller {
         }
         
         //Llamo a la vista
-        $this->load->view('accion_piezas_asociadas_view', $data);  
+        $this->load->view('modificar_accion_piezas_asociadas_view', $data);  
     }
     
     function cargoRepuestosFiltro() {
@@ -95,7 +98,7 @@ class modificar_accion_piezas_asociadas extends CI_Controller {
         $nro_cambio = $_POST['nro_cambio'];
         
         //obtengo informacion del cambio
-        $datos = $this->accion_piezas_asociadas_model->obtenerDatos($nro_cambio);
+        $datos = $this->modificar_accion_piezas_asociadas_model->obtenerDatos($nro_cambio);
         
         /*
             $datos[] = $row->nro_orden; 0
@@ -123,7 +126,10 @@ class modificar_accion_piezas_asociadas extends CI_Controller {
         $modelo             = $datos[9];
         $nro_catalogo       = $datos[10];
         
-        $this->accion_piezas_asociadas_model->eliminarAccionAsociada($nro_cambio, $nro_orden, $nro_accion, $nro_pieza_anterior, $nro_pieza_nueva, $nro_parte, $nombre_parte, $nro_serie, $marca, $calibre, $modelo, $nro_catalogo);
+        if($this->modificar_accion_piezas_asociadas_model->obtenerPiezaFichaArma($nro_orden) == $nro_pieza_nueva) {
+            $this->modificar_accion_piezas_asociadas_model->eliminarAccionAsociada($nro_cambio, $nro_orden, $nro_accion, $nro_pieza_anterior, $nro_pieza_nueva, $nro_parte, $nombre_parte, $nro_serie, $marca, $calibre, $modelo, $nro_catalogo);
+        }
+        
     }
     
     function validarDatos() {
@@ -160,7 +166,7 @@ class modificar_accion_piezas_asociadas extends CI_Controller {
         }else {
             $nro_orden  = $_SESSION['nro_orden'];
             $nro_accion = $_SESSION['nro_accion'];
-            $this->accion_piezas_asociadas_model->altaAccionPiezasAsociadas($nro_pieza_nueva, $nro_pieza_anterior, $nro_orden, $nro_accion, $nro_parte, $nombre_parte, $nro_catalogo);
+            $this->modificar_accion_piezas_asociadas_model->altaAccionPiezasAsociadas($nro_pieza_nueva, $nro_pieza_anterior, $nro_orden, $nro_accion, $nro_parte, $nombre_parte, $nro_catalogo);
             echo 1;
         }
     }

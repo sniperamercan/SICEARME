@@ -286,6 +286,18 @@ class accion_ordenes_trabajo_model extends CI_Model {
         
     }
     
+    function obtenerPiezaCambio($nro_accion) {
+        
+        $query = $this->db->query("SELECT f.nro_pieza
+                                   FROM fichas_piezas f
+                                   INNER JOIN ordenes_trabajo o ON o.nro_serie = f.nro_serie AND o.marca = f.marca AND o.calibre = f.calibre AND o.modelo = f.modelo
+                                   INNER JOIN detalles_ordenes_trabajo d ON o.nro_orden = d.nro_orden
+                                   WHERE d.nro_accion = ".$this->db->escape($nro_accion)."
+                                   AND f.nro_pieza IN (SELECT c.nro_pieza_nueva FROM cambio_piezas_asociadas_ordenes_trabajo c WHERE c.nro_pieza_nueva = f.nro_pieza)");
+        
+        return $query->num_rows();
+    }
+    
     function obtenerDatosArma($nro_accion) {
         
         $query = $this->db->query("SELECT o.nro_serie, o.marca, o.calibre, o.modelo
