@@ -40,7 +40,7 @@ class modificar_accion_piezas_asociadas extends CI_Controller {
         
         $data['acciones'] = "";
         
-        $data['nro_pieza_actual'] = $this->accion_piezas_asociadas_model->obtenerPiezaFicha($nro_orden);
+        $data['nro_pieza_actual'] = $this->modificar_accion_piezas_asociadas_model->obtenerDatosFicha($nro_orden);
         
         if($this->modificar_accion_piezas_asociadas_model->hayDatosAccion($nro_orden, $nro_accion)) {
             $datos_accion = $this->modificar_accion_piezas_asociadas_model->cargoDatosAccion($nro_orden, $nro_accion);
