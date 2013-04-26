@@ -148,11 +148,11 @@
                     if(r) {           
                         $.ajax({
                             type: 'post',
-                            url: "<?php echo base_url("mb_ordenes_trabajo/eliminarOrdenTrabajo"); ?>",
+                            url: "<?php echo base_url("mb_ordenes_trabajo/cambiarEstadoOrdenTrabajo"); ?>",
                             data: "nro_orden="+nro_orden,
                             success: function(data){
                                 if(data == 1) {
-                                    jAlert("La orden de trabajo nro - "+nro_orden+" fue modificada con exito", "CAMBIAR ESTADO DE ORDEN DE TRABAJO", function() { irAFrame('<?php echo base_url('mb_ordenes_trabajo'); ?>','Taller armamento >> Modificar >> Ordenes de trabajo') } );
+                                    $.colorbox({href:"<?php echo base_url('modificar_estado_orden_trabajo'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"MODIFICAR ESTADO DE UNA ORDEN DE TRABAJO", onClosed: function(){ irAFrame('<?php echo base_url('mb_ordenes_trabajo'); ?>','Taller armamento >> Modificar >> Ordenes de trabajo') } });
                                 }else {
                                     jAlert("ERROR: La orden de trabajo nro - "+nro_orden+" no pudo ser modificada", "CAMBIAR ESTADO DE ORDEN DE TRABAJO");
                                 }

@@ -362,7 +362,12 @@ class mb_ordenes_trabajo extends CI_Controller {
         }else {
             echo 0;
         }
-    }    
+    }   
+    
+    function cambiarEstadoOrdenTrabajo() {
+         $_SESSION['nro_orden'] = $_POST['nro_orden'];
+         echo 1;
+    }
 }
 
 ?>
