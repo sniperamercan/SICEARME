@@ -43,9 +43,10 @@ class mb_ordenes_trabajo extends CI_Controller {
                 && isset($_POST['calibre']) && isset($_POST['fecha1']) && isset($_POST['fecha2']) ) { 
             
             $condicion = "";
-            $and = 0;
+            $and = 1;
  
             if(!empty($_POST['nro_orden'])){
+                $condicion .= " AND ";
                 $aux = "%".$_POST['nro_orden']."%";
                 $condicion .= " nro_orden LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
@@ -92,7 +93,7 @@ class mb_ordenes_trabajo extends CI_Controller {
         if(isset($_SESSION['condicion']) && !empty($_SESSION['condicion'])){
             $condicion = $_SESSION['condicion'];      
         }else{
-            $condicion = 1;
+            $condicion = "";
         }
         //Fin, armo condiciones where para sql
         

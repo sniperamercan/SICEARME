@@ -11,7 +11,8 @@ class mb_ordenes_trabajo_model extends CI_Model {
     function cantidadRegistros($condicion){
         $query = $this->db->query("SELECT * 
                                    FROM ordenes_trabajo
-                                   WHERE ".$condicion);
+                                   WHERE estado_orden_trabajo = 0
+                                   ".$condicion);
         
         return $query->num_rows();
     }
@@ -23,7 +24,8 @@ class mb_ordenes_trabajo_model extends CI_Model {
         $query = $this->db->query("SELECT nro_orden, fecha, nro_serie, marca, calibre, modelo, nombreunidad, estado_orden_trabajo
                                    FROM ordenes_trabajo o
                                    INNER JOIN unidades u ON u.idunidad = o.idunidad
-                                   WHERE ".$condicion."
+                                   WHERE estado_orden_trabajo = 0
+                                   ".$condicion."
                                    ORDER BY ".$order."
                                    LIMIT ".$ini.",".$param);
         
