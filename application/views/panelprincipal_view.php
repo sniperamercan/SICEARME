@@ -365,9 +365,8 @@
                                 
                                     <li><a href="#"> Listado </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_ordenes_de_trabajo'); ?>','Taller armamento >> Listado >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_estado_armamento'); ?>','Taller armamento >> Listado >> Estado del armamento');"> Estado del armamento </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_historial_reparacion'); ?>','Taller armamento >> Listado >> Historial de reparacion');"> Historial de reparacion </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_ordenes_trabajo'); ?>','Taller armamento >> Listado >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_acciones_ordenes_trabajo'); ?>','Taller armamento >> Listado >> Estado del armamento');"> Acciones de una orden </a></li>
                                         </ul>
                                     </li>
                                 
