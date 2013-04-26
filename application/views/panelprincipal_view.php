@@ -344,7 +344,7 @@
                                     <li><a href="#"> Accion </a>
                                         <ul>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('accion_mutaciones_armamento'); ?>','Taller armamento >> Accion >> Mutaciones de armamento');"> Mutaciones de armamento </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('accion_mutacion_armamento'); ?>','Taller armamento >> Accion >> Mutacion de armamento');"> Mutacion de armamento </a></li>
                                         </ul>
                                     </li> 
                                 

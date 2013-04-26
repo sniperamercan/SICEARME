@@ -217,7 +217,7 @@
                 
                 <dl> 		
                 <dt><label for="observaciones"> Observaciones </label></dt>	
-                <dd><textarea id="observaciones"> <?php echo $observaciones; ?>" </textarea></dd> 					
+                <dd><textarea id="observaciones"> <?php echo $observaciones; ?> </textarea></dd> 					
                 </dl>                
                 
             </fieldset>	
