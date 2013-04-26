@@ -214,7 +214,11 @@ class alta_ordenes_trabajo extends CI_Controller {
             $concat .= "</div>";
         }else {
             $concat = "<p style='font-weight: bold;'> Detalle de los movimientos previos del armamento seleccionado </p>";
-            $concat .= "<p style='font-weight: bold;'> VERIFIQUE: No selecciono ningun armamento </p>";
+            if((!empty($nro_serie) && !empty($marca) && !empty($calibre) && !empty($modelo)) && !$this->alta_ordenes_trabajo_model->hayHistorio($nro_serie, $marca, $calibre, $modelo)) {
+                $concat .= "<p style='font-weight: bold;'> El armamento no tiene actas de baja generado </p>";
+            }else {
+                $concat .= "<p style='font-weight: bold;'> VERIFIQUE: No selecciono ningun armamento </p>";
+            }
         }
         
         echo $concat;
