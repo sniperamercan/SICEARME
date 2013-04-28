@@ -37,11 +37,12 @@
                 
                 var nro_parte    = $("#nro_parte").val();
                 var nombre_parte = $("#nombre_parte").val();
+                var nro_catalogo = $("#nro_catalogo").val();
                 
                 $.ajax({ 
                     type: 'post',
                     url: '<?php echo base_url(); ?>busqueda_repuestos/consulta/0',
-                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte,
+                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
                     success: function(){
                         cargoConsulta();
                     }
@@ -78,14 +79,14 @@
                 });           
             }      
             
-            function seleccion(nro_parte, nombre_parte) {
+            function seleccion(nro_parte, nombre_parte, nro_catalogo) {
                 
                 $.ajax({
                     type: 'post',
                     url: "<?php echo base_url("busqueda_repuestos/seteoSeleccion"); ?>",
-                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte,
+                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
                     success: function(){
-                        jAlert("Repuestos seleccionado Nro de parte - "+nro_parte+" Nombre - "+nombre_parte, "SELECCION", parent.$.fn.colorbox.close());                        
+                        jAlert("Repuestos seleccionado Nro de parte - "+nro_parte+" Nombre - "+nombre_parte+" Nro catalogo -"+nro_catalogo, "SELECCION", parent.$.fn.colorbox.close());                        
                     }                  
                 });            
             }
@@ -115,6 +116,10 @@
                 <td><label> &emsp; Nombre parte   - </label> </td> <td>  <input type="text" class="text" id="nombre_parte" /></td>
             </tr>
             
+            <tr>
+                <td><label> &emsp; Nro catalogo - </label> </td> <td> <input type="text" class="text" id="nro_catalogo" /></td>
+            </tr>            
+            
         </table>
         
         <br /> 
@@ -134,14 +139,19 @@
                         <th> Seleccion  </th>
                         <th onclick="orderBy(0)"> Nro parte    </th>
                         <th onclick="orderBy(1)"> Nombre parte </th>
-                        <th onclick="orderBy(2)"> Cantidad     </th>
+                        <th onclick="orderBy(2)"> Nro catalogo </th>
+                        <th> Tipo     </th>
+                        <th> Marca    </th>
+                        <th> Calibre  </th>
+                        <th> Modelo   </th>
+                        <th onclick="orderBy(3)"> Cantidad     </th>
                     </tr>
                 </thead>
 
                 <tbody id="datos_consulta"> </tbody>   
 
                 <tfoot>
-                    <tr> <td colspan="4"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="9"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
                 
            </table>  

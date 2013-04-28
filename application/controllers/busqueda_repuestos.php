@@ -26,6 +26,7 @@ class busqueda_repuestos extends CI_Controller {
         
         $_SESSION['seleccion_busqueda']  = ""; //elemento que se selecciona
         $_SESSION['seleccion_busqueda1'] = ""; //elemento que se selecciona
+        $_SESSION['seleccion_busqueda2'] = ""; //elemento que se selecciona
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
         $this->load->view("busqueda_repuestos_view");
@@ -35,7 +36,7 @@ class busqueda_repuestos extends CI_Controller {
     function consulta($param="",$cantReg=30) {   
      
         //Inicio, armo condiciones where para sql
-        if( isset($_POST['nro_parte']) && isset($_POST['nombre_parte']) ) { 
+        if( isset($_POST['nro_parte']) && isset($_POST['nombre_parte']) && isset($_POST['nro_catalogo']) ) { 
             
             $condicion = "";
             $and = 0;
@@ -54,7 +55,16 @@ class busqueda_repuestos extends CI_Controller {
                 $aux = "%".$_POST['nombre_parte']."%";
                 $condicion .= " nombre_parte LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
-            }            
+            }        
+            
+            if(!empty($_POST['nro_catalogo'])){
+                if($and == 1){
+                    $condicion .= " AND ";
+                }
+                $aux = "%".$_POST['nro_catalogo']."%";
+                $condicion .= " nro_interno_catalogo LIKE ".$this->db->escape($aux);
+                $and = 1; //agrego AND en proximo filtro
+            }             
             
             $_SESSION['condicion'] = $condicion;
         }
@@ -86,7 +96,7 @@ class busqueda_repuestos extends CI_Controller {
           
         $j=0;
         
-        for($i=0;$i<count($result);$i=$i+3) {
+        for($i=0;$i<count($result);$i=$i+8) {
             
             if($j % 2 == 0){
                 $class = "";
@@ -94,15 +104,32 @@ class busqueda_repuestos extends CI_Controller {
                 $class = "alt";
             }                        
             
+            /*
+            $result[] = $row->nro_parte; 0
+            $result[] = $row->nombre_parte; 1
+            $result[] = $row->nro_interno_catalogo; 2
+            $result[] = $row->tipo_arma; 3
+            $result[] = $row->marca; 4
+            $result[] = $row->calibre; 5
+            $result[] = $row->modelo; 6
+            $result[] = $row->cantidad; 7
+             */
+            
             $aux_nro_parte    = '"'.$result[$i].'"';
             $aux_nombre_parte = '"'.$result[$i+1].'"';
+            $aux_nro_catalogo = '"'.$result[$i+2].'"';
             
             $concat .= "
                 <tr class='".$class."'> 
-                    <td onclick='seleccion(".$aux_nro_parte.",".$aux_nombre_parte.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/select.png' /> </td>
+                    <td onclick='seleccion(".$aux_nro_parte.",".$aux_nombre_parte.",".$aux_nro_catalogo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/select.png' /> </td>
                     <td> ".$result[$i]." </td>
                     <td> ".$result[$i+1]." </td>
                     <td style='text-align: center;'> ".$result[$i+2]." </td>
+                    <td> ".$result[$i+3]." </td>
+                    <td> ".$result[$i+4]." </td>
+                    <td> ".$result[$i+5]." </td>
+                    <td> ".$result[$i+6]." </td>
+                    <td style='text-align: center;'> ".$result[$i+7]." </td>
                 </tr>
             ";
             
@@ -203,18 +230,28 @@ class busqueda_repuestos extends CI_Controller {
         
         $concat .= '
             <tr>
-                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro parte </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro parte    </td>
                 <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nombre parte </td>
-                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Cantidad </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Nro catalogo </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Tipo         </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Marca        </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Calibre      </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Modelo       </td>
+                <td style="background-color: #B45F04; color: white; text-align: center; font-size: 12px;"> Cantidad     </td>
             </tr>   
         ';
                 
-        for($i=0;$i<count($result);$i=$i+3) {            
+        for($i=0;$i<count($result);$i=$i+8) {            
             $concat .= "
                 <tr>
                     <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i]."   </td>
                     <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+1]." </td>
                     <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+2]." </td>
+                    <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+3]." </td>
+                    <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+4]." </td>
+                    <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+5]." </td>
+                    <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+6]." </td>
+                    <td style='background-color: #F5ECCE; color: black; text-align: left; font-size: 12px;'> ".$result[$i+7]." </td>
                 </tr>
             ";
         }                  
@@ -239,6 +276,10 @@ class busqueda_repuestos extends CI_Controller {
             case 1:
                 $_SESSION['order'][0] = 'nombre_parte';
                 break;
+            
+            case 2:
+                $_SESSION['order'][0] = 'nro_interno_catalogo';
+                break;            
         }
        
         if(!isset($_SESSION['order'][1])){
@@ -254,6 +295,7 @@ class busqueda_repuestos extends CI_Controller {
             
         $_SESSION['seleccion_busqueda']  = $_POST['nro_parte'];
         $_SESSION['seleccion_busqueda1'] = $_POST['nombre_parte'];
+        $_SESSION['seleccion_busqueda2'] = $_POST['nro_catalogo'];
         
         /*al seleccionar un catalogo del listado usar esta variable de sesion 
         *   $_SESSION['seleccion_busqueda']

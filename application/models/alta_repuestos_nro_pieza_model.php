@@ -7,6 +7,19 @@ class alta_repuestos_nro_pieza_model extends CI_Model {
         $this->load->database();
     }
     
+    function cargoCantidad($nro_parte, $nombre_parte, $nro_catalogo) {
+        
+        $query = $this->db->query("SELECT cantidad 
+                                   FROM stock_repuestos
+                                   WHERE nro_parte =".$this->db->escape($nro_parte)."
+                                   AND nombre_parte =".$this->db->escape($nombre_parte)."
+                                   AND nro_interno_catalogo =".$this->db->escape($nro_catalogo));
+        
+        $row = $query->row();
+        
+        return $row->cantidad;
+    }
+    
     function altaRepuestoNroPieza($nro_pieza, $nro_parte, $nombre_parte, $cant_actual, $nro_catalogo) {
         
         $this->db->trans_start();

@@ -36,13 +36,15 @@ class alta_repuestos_nro_pieza extends CI_Controller {
         
         $datos = array();
         
-        if( !empty($_SESSION['seleccion_busqueda']) && !empty($_SESSION['seleccion_busqueda1']) ) {
+        if( !empty($_SESSION['seleccion_busqueda']) && !empty($_SESSION['seleccion_busqueda1']) && !empty($_SESSION['seleccion_busqueda2'])  ) {
             $nro_parte    = $_SESSION['seleccion_busqueda'];
-            $nombre_parte = $_SESSION['seleccion_busqueda1'];            
+            $nombre_parte = $_SESSION['seleccion_busqueda1'];    
+            $nro_catalogo = $_SESSION['seleccion_busqueda2'];  
             $datos[] = $nro_parte;
             $datos[] = $nombre_parte;
+            $datos[] = $nro_catalogo;
 
-            $cantidad = $this->accion_piezas_secundarias_model->cargoCantidad($nro_parte, $nombre_parte);
+            $cantidad = $this->alta_repuestos_nro_pieza_model->cargoCantidad($nro_parte, $nombre_parte, $nro_catalogo);
 
             $datos[] = $cantidad;            
         }else {
@@ -50,17 +52,6 @@ class alta_repuestos_nro_pieza extends CI_Controller {
         }
         
         echo json_encode($datos);
-    }
-    
-    function cargoCatalogosFiltro() {
-        
-        if(isset($_SESSION['seleccion_busqueda'])) {
-            $retorno = $_SESSION['seleccion_busqueda'];   
-        }else {
-            $retorno = '';
-        }
-        
-        echo $retorno;        
     }
     
     function validarDatos() {

@@ -64,37 +64,23 @@
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>accion_piezas_secundarias/cargoRepuestosFiltro",
+                   url: "<?php base_url(); ?>alta_repuestos_nro_pieza/cargoRepuestosFiltro",
                    success: function(data) {
                
                         $("#nro_parte").val("");
                         $("#nombre_parte").val("");
+                        $("#nro_catalogo").val("");
                         $("#cant_actual").val("");
                         
-                        if(data[0] !== 0) {
+                        if(data[0] != 0) {
                             $("#nro_parte").val(data[0]);
                             $("#nombre_parte").val(data[1]);
-                            $("#cant_actual").val(data[2]);
+                            $("#nro_catalogo").val(data[2]);
+                            $("#cant_actual").val(data[3]);
                         }
                    }
                 });                
             }
-            
-            function busquedaCatalogos() {
-                $.colorbox({href:"<?php echo base_url('busqueda_catalogos'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA CATALOGOS", onClosed: function(){ cargoCatalogosFiltro(); } });
-            }
-            
-            function cargoCatalogosFiltro() {
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>alta_repuestos_nro_pieza/cargoCatalogosFiltro",
-                   success: function(data) {
-                       $("#nro_catalogo").val("");
-                       $("#nro_catalogo").val(data);
-                   }
-                });                
-            }            
-            
         </script>
         
     </head>
@@ -128,29 +114,19 @@
                 </dl> 
                 
                 <dl>
+                <dt><label for="nro_catalogo"> Nro catalogo </label></dt>
+                <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" /></dd>
+                </dl>                
+                
+                <dl>
                 <dt><label for="cant_actual"> Cant actual </label></dt>
                 <dd><input readonly="readonly" type="text" id="cant_actual" class="txtautomatico" /></dd>
-                </dl> 
-                
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
-                
-                <p class="subtituloform"> Cargo el catalogo al cual pertenece este armamento </p>
-                
-                <dl>
-                <dt><label> Buscar catalogo </label></dt>
-                <dd><img style="cursor: pointer;" onclick="busquedaCatalogos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
-                </dl>         
-                
-                <dl>
-                <dt><label for="nro_catalogo"> Nro catalogo </label></dt>
-                <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" /> </dd>
-                </dl>                   
+                </dl>
                 
             </fieldset>	
 
             <fieldset class="action">	
                 <button style="margin-right: 20px;" onclick="altaRepuestoNroPieza();"> Ingresar pieza (Nro) </button> 
-                <button style="margin-right: 20px;" onclick="volver();"> Volver </button> 
             </fieldset>  
             
             <hr />

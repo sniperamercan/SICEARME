@@ -102,7 +102,7 @@
                 </dl>         
                 
                 <dl>
-                <dt><label for="nro_catalogo"> Nro catalogo </label></dt>
+                <dt><label for="nro_catalogo"> Nro catalogo <font color="red"> * </font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" /> </dd>
                 </dl>                 
                 

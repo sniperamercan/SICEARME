@@ -47,14 +47,15 @@ class alta_stock_de_almacen extends CI_Controller {
         $patterns = array();
         $patterns[] = '/"/';
         $patterns[] = "/'/";
-        $patterns[] = "&";
-        $patterns[] = '&';
+        
+        $patterns[] = '&"&';
+        $patterns[] = "&'&";
         
         $nro_parte    = preg_replace($patterns, '', $_POST["nro_parte"]);
         $nombre_parte = preg_replace($patterns, '', $_POST["nombre_parte"]);
         $precio       = $_POST["precio"];
         $cantidad     = $_POST["cantidad"];
-        $nro_catalogo  = $_POST["nro_catalogo"];
+        $nro_catalogo = $_POST["nro_catalogo"];
         
         $mensaje_error = array();
         
