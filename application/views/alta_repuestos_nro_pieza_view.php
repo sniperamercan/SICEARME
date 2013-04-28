@@ -48,12 +48,31 @@
                     data: "nro_pieza="+nro_pieza+"&nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&cant_actual="+cant_actual+"&nro_catalogo="+nro_catalogo,
                     success: function(data){
                         if(data == 1){            
-                            jAlert("Repuesto con Nro de pieza ingresado correctamente", "Correcto", function() { irAFrame('<?php echo base_url('alta_repuestos_nro_pieza'); ?>','Almacen >> Alta >> Nro pierzas'); });
+                            jAlert("Repuesto con Nro de pieza ingresado correctamente", "Correcto", function() { limpioCampos(); });
                         }else{
                             jAlert(data, "Error");
                         }                            
-                  }
+                    }
                 });               
+            }
+            
+            function limpioCampos() {
+                $("#nro_pieza").val("");
+                $("#nro_pieza").focus();
+                
+                var nro_parte      = $("#nro_parte").val();
+                var nombre_parte   = $("#nombre_parte").val();
+                var nro_catalogo   = $("#nro_catalogo").val();
+                
+                $.ajax({
+                    type: "post",  
+                    url: "<?php base_url(); ?>alta_repuestos_nro_pieza/cargoCantidad",
+                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
+                    success: function(data){
+                        $("#cant_actual").val(data);
+                    }
+                });                 
+                
             }
             
             function busquedaRepuestos() {

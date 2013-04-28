@@ -54,6 +54,15 @@ class alta_repuestos_nro_pieza extends CI_Controller {
         echo json_encode($datos);
     }
     
+    function cargoCantidad() {
+        
+        $nro_parte    = $_POST["nro_parte"];
+        $nombre_parte = $_POST["nombre_parte"];
+        $nro_catalogo = $_POST["nro_catalogo"];    
+        
+        return $this->cargoCantidad($nro_parte, $nombre_parte, $nro_catalogo);
+    }
+    
     function validarDatos() {
         
         $nro_pieza    = $_POST["nro_pieza"];

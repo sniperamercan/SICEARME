@@ -33,7 +33,7 @@ class alta_repuestos_nro_pieza_model extends CI_Model {
             $data_accion_where = array(
                 'nro_parte'    => $nro_parte,
                 'nombre_parte' => $nombre_parte,
-                'nro_catalogo' => $nro_catalogo
+                'nro_interno_catalogo' => $nro_catalogo
             );
 
             $this->db->update('stock_repuestos', $data_accion_set, $data_accion_where);
