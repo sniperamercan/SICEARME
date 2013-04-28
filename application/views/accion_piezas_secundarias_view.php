@@ -61,10 +61,9 @@
             }
             
             function busquedaRepuestos() {
-                
                 $.ajax({
                     type: "post",  
-                    url: "<?php base_url(); ?>accion_piezas_secundarias/cargoRepuesto",
+                    url: "<?php base_url(); ?>accion_piezas_secundarias/previoCargoRepuesto",
                     success: function(){
                         $.colorbox({href:"<?php echo base_url('busqueda_repuestos'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA REPUESTOS", onClosed: function(){ cargoRepuestosFiltro(); } });
                     }
@@ -179,12 +178,12 @@
                             <table> 
                                 <thead style="text-align: center;">
                                     <tr>
-                                        <th> Nro cambio </th> <th> Nro parte </th> <th> Nombre </th> <th> Cantidad </th> <th> Borrar </th> 
+                                        <th> Nro cambio </th> <th> Nro parte </th> <th> Nombre </th> <th> Catalogo </th> <th> Cantidad </th> <th> Borrar </th> 
                                     </tr>
                                 </thead>
                                 <tbody id="acciones"> <?php echo $acciones; ?> </tbody>
                                 <tfoot>
-                                    <tr> <td colspan="5"> <div id="paging"> <br /> </div> </td> </tr>
+                                    <tr> <td colspan="6"> <div id="paging"> <br /> </div> </td> </tr>
                                 </tfoot>                                
                             </table> 
                         </div>

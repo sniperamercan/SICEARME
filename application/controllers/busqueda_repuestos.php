@@ -36,7 +36,7 @@ class busqueda_repuestos extends CI_Controller {
     function consulta($param="",$cantReg=30) {   
      
         //Inicio, armo condiciones where para sql
-        if( isset($_POST['nro_parte']) && isset($_POST['nombre_parte']) && isset($_POST['nro_catalogo']) ) { 
+        if( (isset($_POST['nro_parte']) && isset($_POST['nombre_parte']) && isset($_POST['nro_catalogo'])) || isset($_SESSION['nro_catalogo_busqueda']) ) { 
             
             $condicion = "";
             $and = 0;
@@ -70,9 +70,9 @@ class busqueda_repuestos extends CI_Controller {
                 if($and == 1){
                     $condicion .= " AND ";
                 }
-                $aux = $_POST['nro_catalogo'];
+                $aux = $_SESSION['nro_catalogo_busqueda'];
                 $condicion .= " nro_interno_catalogo = ".$this->db->escape($aux);
-                $and = 1; //agrego AND en proximo filtro      
+                $and = 1; //agrego AND en proximo filtro  
             }
             
             $_SESSION['condicion'] = $condicion;

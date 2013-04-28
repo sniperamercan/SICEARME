@@ -12,7 +12,7 @@ class accion_ordenes_trabajo_model extends CI_Model {
         $query = $this->db->query("SELECT nro_orden
                                    FROM ordenes_trabajo
                                    WHERE estado_orden_trabajo = 0
-                                   ORDER BY nro_orden");
+                                   ORDER BY nro_orden DESC");
         
         $retorno = array();
         

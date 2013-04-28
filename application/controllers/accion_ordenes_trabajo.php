@@ -31,6 +31,7 @@ class accion_ordenes_trabajo extends CI_Controller {
         
         $_SESSION['nro_orden']  = "";
         $_SESSION['nro_accion'] = "";
+        unset($_SESSION['nro_catalogo_busqueda']);
         
         //cargo los nro de ordenes ingresados hasta el momento
         $nro_ordenes = $this->accion_ordenes_trabajo_model->cargoNroOrdenes();
