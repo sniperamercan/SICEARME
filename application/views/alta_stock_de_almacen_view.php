@@ -39,11 +39,12 @@
                 var nombre_parte = $("#nombre_parte").val();
                 var precio       = $("#precio").val();
                 var cantidad     = $("#cantidad").val();
+                var nro_catalogo = $("#nro_catalogo").val();
                 
                 $.ajax({
                     type: "post",  
                     url: "<?php base_url(); ?>alta_stock_de_almacen/validarDatos",
-                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&precio="+precio+"&cantidad="+cantidad,
+                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&precio="+precio+"&cantidad="+cantidad+"&nro_catalogo="+nro_catalogo,
                     success: function(data){
                         if(data == 1){            
                             jAlert("Stock de parte ingresado correctamente al stock del almacen", "Correcto", function() { irAFrame('<?php echo base_url('alta_stock_de_almacen'); ?>','Almacen >> Alta >> Respuestos'); });
@@ -53,6 +54,21 @@
                   }
                 });               
             }
+            
+            function busquedaCatalogos() {
+                $.colorbox({href:"<?php echo base_url('busqueda_catalogos'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA CATALOGOS", onClosed: function(){ cargoCatalogosFiltro(); } });
+            }
+            
+            function cargoCatalogosFiltro() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_stock_de_almacen/cargoCatalogosFiltro",
+                   success: function(data) {
+                       $("#nro_catalogo").val("");
+                       $("#nro_catalogo").val(data);
+                   }
+                });                
+            }              
             
         </script>
         
@@ -75,7 +91,25 @@
                 <dt><label for="nombre_parte"> Nombre <font color="red"> * </font> </label></dt>	
                 <dd><input type="text" id="nombre_parte" class="text" /></dd> 					
                 </dl>
-
+                
+                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                
+                <p class="subtituloform"> Cargo el catalogo al cual pertenece este armamento </p>
+                
+                <dl>
+                <dt><label> Buscar catalogo </label></dt>
+                <dd><img style="cursor: pointer;" onclick="busquedaCatalogos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
+                </dl>         
+                
+                <dl>
+                <dt><label for="nro_catalogo"> Nro catalogo </label></dt>
+                <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" /> </dd>
+                </dl>                 
+                
+                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                
+                <p class="subtituloform"> Datos de stock </p>                
+                
                 <dl> 		
                 <dt><label for="precio"> Precio <font color="red"> * </font> </label></dt>	
                 <dd><input type="text" id="precio" class="number" /></dd> 					
