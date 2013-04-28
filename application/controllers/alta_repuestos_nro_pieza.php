@@ -28,6 +28,8 @@ class alta_repuestos_nro_pieza extends CI_Controller {
     }
     
     function index() {
+        
+        unset($_SESSION['nro_catalogo_busqueda']);
         //Llamo a la vista
         $this->load->view('alta_repuestos_nro_pieza_view');  
     }

@@ -43,7 +43,8 @@ class accion_piezas_secundarias extends CI_Controller {
                 $datos[] = $row->nro_cambio;   0
                 $datos[] = $row->nro_parte;    1
                 $datos[] = $row->nombre_parte; 2 
-                $datos[] = $row->cantidad;     3
+                $datos[] = $row->nro_catalogo; 3 
+                $datos[] = $row->cantidad;     4
              */
             
             for($i=0; $i<count($datos_accion); $i=$i+4) {
@@ -63,6 +64,10 @@ class accion_piezas_secundarias extends CI_Controller {
         
         //Llamo a la vista
         $this->load->view('accion_piezas_secundarias_view', $data);  
+    }
+    
+    function previoCargoRespusto() {
+        $_SESSION['nro_catalogo_busqueda'] = $this->accion_piezas_secundarias_model->cargoNroCatalogo($nro_orden);
     }
     
     function cargoRepuestosFiltro() {

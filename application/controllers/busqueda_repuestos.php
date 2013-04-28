@@ -64,7 +64,16 @@ class busqueda_repuestos extends CI_Controller {
                 $aux = "%".$_POST['nro_catalogo']."%";
                 $condicion .= " nro_interno_catalogo LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
-            }             
+            }  
+            
+            if(isset($_SESSION['nro_catalogo_busqueda'])) {
+                if($and == 1){
+                    $condicion .= " AND ";
+                }
+                $aux = $_POST['nro_catalogo'];
+                $condicion .= " nro_interno_catalogo = ".$this->db->escape($aux);
+                $and = 1; //agrego AND en proximo filtro      
+            }
             
             $_SESSION['condicion'] = $condicion;
         }

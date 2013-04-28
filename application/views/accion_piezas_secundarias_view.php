@@ -38,13 +38,14 @@
                 
                 var nro_parte    = $("#nro_parte").val();
                 var nombre_parte = $("#nombre_parte").val();
+                var nro_catalogo = $("#nro_catalogo").val();
                 var cant_actual  = $("#cant_actual").val();
                 var cant_usar    = $("#cant_usar").val();
                 
                 $.ajax({
                     type: "post",  
                     url: "<?php base_url(); ?>accion_piezas_secundarias/validarDatos",
-                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&cant_actual="+cant_actual+"&cant_usar="+cant_usar,
+                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo+"&cant_actual="+cant_actual+"&cant_usar="+cant_usar,
                     success: function(data){
                         if(data == 1){            
                             jAlert("Pieza utilizada correctamente en la orden de trabajo", "Correcto", function() { irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo'); });
@@ -60,7 +61,14 @@
             }
             
             function busquedaRepuestos() {
-                $.colorbox({href:"<?php echo base_url('busqueda_repuestos'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA REPUESTOS", onClosed: function(){ cargoRepuestosFiltro(); } });
+                
+                $.ajax({
+                    type: "post",  
+                    url: "<?php base_url(); ?>accion_piezas_secundarias/cargoRepuesto",
+                    success: function(){
+                        $.colorbox({href:"<?php echo base_url('busqueda_repuestos'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA REPUESTOS", onClosed: function(){ cargoRepuestosFiltro(); } });
+                    }
+                });
             }
             
             function cargoRepuestosFiltro() {
@@ -72,12 +80,14 @@
                
                         $("#nro_parte").val("");
                         $("#nombre_parte").val("");
+                        $("#nro_catalogo").val("");
                         $("#cant_actual").val("");
                         
                         if(data[0] !== 0) {
                             $("#nro_parte").val(data[0]);
                             $("#nombre_parte").val(data[1]);
-                            $("#cant_actual").val(data[2]);
+                            $("#nro_catalogo").val(data[2]);
+                            $("#cant_actual").val(data[3]);
                         }
                    }
                 });                
@@ -132,6 +142,11 @@
                 <dt><label for="nombre_parte"> Nombre parte </label></dt>
                 <dd><input readonly="readonly" type="text" id="nombre_parte" class="txtautomatico" /></dd>
                 </dl> 
+                
+                <dl>
+                <dt><label for="nro_catalogo"> Nro catalogo </label></dt>
+                <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" /></dd>
+                </dl>                 
                 
                 <dl>
                 <dt><label for="cant_actual"> Cant actual </label></dt>
