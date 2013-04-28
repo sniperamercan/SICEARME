@@ -27,8 +27,8 @@ class mb_acciones_ordenes_trabajo_model extends CI_Model {
                                    INNER JOIN ordenes_trabajo o ON d.nro_orden = o.nro_orden
                                    WHERE o.estado_orden_trabajo = 0
                                    ".$condicion."
-                                   ORDER BY ".$order."
-                                   LIMIT ".$ini.",".$param);
+                                   ORDER BY ".$order);
+                                   //LIMIT ".$ini.",".$param);
         
         foreach($query->result() as $row){
             $result[] = $row->nro_accion;

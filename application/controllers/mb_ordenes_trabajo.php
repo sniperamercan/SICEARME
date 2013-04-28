@@ -137,6 +137,18 @@ class mb_ordenes_trabajo extends CI_Controller {
             $result[] = $row->nombreunidad;
             $result[] = $row->estado_orden_trabajo;        
             */
+            
+            switch($result[$i+7]) {
+                
+                case 0:
+                    $estado_orden_trabajo = "abierta";
+                    break;
+                
+                case 1:
+                    $estado_orden_trabajo = "cerrada";
+                    break;
+            }
+            
             $concat .= "
                 <tr class='".$class."'> 
                     <td style='text-align: center;'> ".$result[$i]." </td>
@@ -146,7 +158,7 @@ class mb_ordenes_trabajo extends CI_Controller {
                     <td> ".$result[$i+4]." </td>
                     <td> ".$result[$i+5]." </td>
                     <td> ".$result[$i+6]." </td>
-                    <td style='text-align: center;'> ".$result[$i+7]." </td>
+                    <td> ".$estado_orden_trabajo." </td>
                     <td onclick='verObservaciones(".$aux_nro_orden.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
                     <td onclick='cambiarEstado(".$aux_nro_orden.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/refresh.png' /> </td>
                     <td onclick='editarOrden(".$aux_nro_orden.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/edit.png' /> </td>
