@@ -101,7 +101,7 @@ class mb_acciones_ordenes_trabajo extends CI_Controller {
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
-            $order = "nro_accion";
+            $order = "nro_orden";
         }
         //Fin verifico order        
         
@@ -206,7 +206,7 @@ class mb_acciones_ordenes_trabajo extends CI_Controller {
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
-            $order = "nro_accion";
+            $order = "nro_orden";
         }
         //Fin verifico order
         
