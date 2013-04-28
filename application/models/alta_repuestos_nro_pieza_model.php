@@ -32,7 +32,8 @@ class alta_repuestos_nro_pieza_model extends CI_Model {
 
             $data_accion_where = array(
                 'nro_parte'    => $nro_parte,
-                'nombre_parte' => $nombre_parte
+                'nombre_parte' => $nombre_parte,
+                'nro_catalogo' => $nro_catalogo
             );
 
             $this->db->update('stock_repuestos', $data_accion_set, $data_accion_where);
@@ -40,7 +41,7 @@ class alta_repuestos_nro_pieza_model extends CI_Model {
             $data_db_logs = array(
                 'tipo_movimiento' => 'update',
                 'tabla'           => 'stock_repuestos',
-                'clave_tabla'     => 'nro_parte = '.$nro_parte.', nombre parte = '.$nombre_parte,
+                'clave_tabla'     => 'nro_parte = '.$nro_parte.', nombre parte = '.$nombre_parte.', nro_catalog = '.$nro_catalogo,
                 'usuario'         => base64_decode($_SESSION['usuario'])
             );        
 
@@ -57,7 +58,6 @@ class alta_repuestos_nro_pieza_model extends CI_Model {
         
         $this->db->trans_complete();
     }
-    
 }
 
 ?>
