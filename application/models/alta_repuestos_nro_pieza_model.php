@@ -20,11 +20,12 @@ class alta_repuestos_nro_pieza_model extends CI_Model {
         return $row->cantidad;
     }
     
-    function existePieza($nro_parte, $nombre_parte, $nro_catalogo) {
+    function existePieza($nro_pieza, $nro_parte, $nombre_parte, $nro_catalogo) {
         
         $query = $this->db->query("SELECT *
                                    FROM stock_repuestos_nro_pieza
-                                   WHERE nro_parte =".$this->db->escape($nro_parte)."
+                                   WHERE nro_pieza =".$this->db->escape($nro_pieza)."
+                                   AND nro_parte =".$this->db->escape($nro_parte)."
                                    AND nombre_parte =".$this->db->escape($nombre_parte)."
                                    AND nro_interno_catalogo =".$this->db->escape($nro_catalogo));
         

@@ -69,6 +69,7 @@
                     url: "<?php base_url(); ?>alta_repuestos_nro_pieza/cargoCantidad",
                     data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
                     success: function(data){
+                        $("#cant_actual").val("");
                         $("#cant_actual").val(data);
                     }
                 });                 

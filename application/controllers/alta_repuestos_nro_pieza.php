@@ -60,7 +60,7 @@ class alta_repuestos_nro_pieza extends CI_Controller {
         $nombre_parte = $_POST["nombre_parte"];
         $nro_catalogo = $_POST["nro_catalogo"];    
         
-        return $this->alta_repuestos_nro_pieza_model->cargoCantidad($nro_parte, $nombre_parte, $nro_catalogo);
+        echo $this->alta_repuestos_nro_pieza_model->cargoCantidad($nro_parte, $nombre_parte, $nro_catalogo);
     }
     
     function validarDatos() {
@@ -101,7 +101,7 @@ class alta_repuestos_nro_pieza extends CI_Controller {
             $mensaje_error[] = 7;
         }        
         
-        if($this->alta_repuestos_nro_pieza_model->existePieza($nro_parte, $nombre_parte, $nro_catalogo)) {
+        if($this->alta_repuestos_nro_pieza_model->existePieza($nro_pieza, $nro_parte, $nombre_parte, $nro_catalogo)) {
             $mensaje_error[] = 8;
         }
         
