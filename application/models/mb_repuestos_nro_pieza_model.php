@@ -6,37 +6,40 @@ class mb_repuestos_nro_pieza extends CI_Model {
         parent::__construct();
         $this->load->database();
     }
-
-    function cantidadActual($nro_parte) {
-        
-        $cantidad_actual = $this->db->query("SELECT cantidad
-                                   FROM stock_repuestos
-                                   WHERE nro_parte = ".$this->db->escape($nro_parte));
-        
-        return $cantidad_actual;
-    }
     
-    function ajusteStock($nro_parte, $cantidad) {
+    //para paginado
+    function cantidadRegistros($condicion){
         
-        $cantidad_actual = $this->db->query("SELECT cantidad
-                                   FROM stock_repuestos
-                                   WHERE nro_parte = ".$this->db->escape($nro_parte));
+        $query = $this->db->query("SELECT * 
+                                   FROM stock_repuestos_nro_pieza
+                                   WHERE ".$condicion);
         
-        $data_stock = array(
-            'cantidad' => $cantidad_actual - $cantidad
-        );
+        return $query->num_rows();
+    }
+
+    function consulta_db($ini, $param, $condicion, $order){
         
-        $data_db_logs = array(
-            'tipo_movimiento' => 'update',
-            'tabla'           => 'stock_repuestos',
-            'clave_tabla'     => 'nro_parte = '.$nro_parte,
-            'usuario'         => base64_decode($_SESSION['usuario'])
-        );        
+        $result = array();
+
+        $query = $this->db->query("SELECT s.nro_pieza, s.nro_parte, s.nombre_parte, s.nro_interno_catalogo, c.tipo_arma, c.marca, c.calibre, c.modelo
+                                   FROM stock_repuestos_nro_pieza s
+                                   INNER JOIN catalogos c ON s.nro_interno_catalogo = c.nro_interno
+                                   WHERE ".$condicion."
+                                   ORDER BY ".$order."
+                                   LIMIT ".$ini.",".$param);
         
-        $this->db->trans_start();
-            $this->db->update('stock_repuestos', $data_stock);
-            $this->db->insert('db_logs', $data_db_logs);
-        $this->db->trans_complete();    
+        foreach($query->result() as $row){
+            $result[] = $row->nro_pieza;
+            $result[] = $row->nro_parte;
+            $result[] = $row->nombre_parte;
+            $result[] = $row->nro_interno_catalogo;
+            $result[] = $row->tipo_arma;
+            $result[] = $row->marca;
+            $result[] = $row->calibre;
+            $result[] = $row->modelo;
+        }
+        
+        return $result;
     }
 }
 

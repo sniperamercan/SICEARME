@@ -35,12 +35,15 @@
      
             function filtrar(){
                 
-                var nro_pieza    = $("#nro_pieza").val();         
+                var nro_pieza    = $("#nro_pieza").val();      
+                var nro_catalogo = $("#nro_catalogo").val();      
+                var nro_parte    = $("#nro_parte").val();      
+                var nombre_parte = $("#nombre_parte").val();      
                 
                 $.ajax({ 
                     type: 'post',
                     url: '<?php echo base_url(); ?>mb_repuestos_nro_pieza/consulta/0',
-                    data: "nro_pieza="+nro_pieza,
+                    data: "nro_pieza="+nro_pieza+"&nro_catalogo="+nro_catalogo+"&nro_parte="+nro_parte+"&nombre_parte"+nombre_parte,
                     success: function(){
                         cargoConsulta();
                     }
@@ -70,16 +73,27 @@
                 });            
             }
             
-            function editarRepuestosNroPieza(nro_pieza) {
+            function editar(nro_parte, nombre_parte, nro_catalogo) {
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("mb_repuestos_nro_pieza/editarRepuestosNroPieza"); ?>",
-                    data: "nro_pieza="+nro_pieza,
+                    url: "<?php echo base_url("mb_repuestos_nro_pieza/editar"); ?>",
+                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
                     success: function(){
-                        irAFrame('<?php echo base_url('modificar_respuesto_nro_pieza'); ?>','Almacen >> Modificar >> Nro Pieza');
+                        irAFrame('<?php echo base_url('mb_stock_de_almacen'); ?>','Almacen >> Modificar >> Repuestos');
                     }                  
                 });            
             }
+            
+            function eliminar(nro_parte, nombre_parte, nro_catalogo) {
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo base_url("mb_repuestos_nro_pieza/eliminar"); ?>",
+                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
+                    success: function(){
+                        irAFrame('<?php echo base_url('mb_stock_de_almacen'); ?>','Almacen >> Modificar >> Repuestos');
+                    }                  
+                });            
+            } 
                   
         </script>
         
@@ -91,6 +105,12 @@
             
             <tr>
                 <td><label> &emsp; Nro pieza       - </label> </td> <td> <input type="text" class="text" id="nro_pieza" /></td>
+                <td><label> &emsp; Nro catalogo    - </label> </td> <td> <input type="text" class="text" id="nro_catalogo" /></td>
+            </tr> 
+            
+            <tr>
+                <td><label> &emsp; Nro parte       - </label> </td> <td> <input type="text" class="text" id="nro_parte" /></td>
+                <td><label> &emsp; Nombre parte    - </label> </td> <td> <input type="text" class="text" id="nombre_parte" /></td>
             </tr>            
 
         </table>
@@ -109,15 +129,23 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> Nro pieza   </th>
-                        <th> Editar    </th>
+                        <th onclick="orderBy(0)"> Nro pieza     </th>
+                        <th onclick="orderBy(1)"> Nro parte     </th>
+                        <th onclick="orderBy(2)"> Nombre        </th>
+                        <th onclick="orderBy(3)"> Catalogo      </th>
+                        <th> Tipo    </th>
+                        <th> Marca   </th>
+                        <th> Calibre </th>
+                        <th> Modelo  </th>
+                        <th> Editar      </th>
+                        <th> Eliminar    </th>
                     </tr>
                 </thead>
 
                 <tbody id="datos_consulta"> </tbody>   
 
                 <tfoot>
-                    <tr> <td colspan="12"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="10"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
                 
            </table>  

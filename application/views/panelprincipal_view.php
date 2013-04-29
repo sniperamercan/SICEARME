@@ -390,19 +390,21 @@
                                 <li><a href="#"> Alta </a>
                                     <ul>
                                         <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_stock_de_almacen'); ?>','Almacen >> Alta >> Respuestos');"> Repuestos </a></li>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_repuestos_nro_pieza'); ?>','Almacen >> Alta >> Nro pierzas');"> Nro piezas </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_repuestos_nro_pieza'); ?>','Almacen >> Alta >> Nro piezas');"> Nro piezas </a></li>
                                     </ul>
                                 </li> 
 
                                 <li><a href="#"> Modificar </a>
                                     <ul>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_repuestos'); ?>','Almacen >> Modificar >> Respuestos');"> Respuestos </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_stock_de_almacen'); ?>','Almacen >> Modificar >> Respuestos');"> Respuestos </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_repuestos_nro_pieza'); ?>','Almacen >> Modificar >> Nro piezas');"> Nro piezas </a></li>
                                     </ul>
                                 </li>
 
                                 <li><a href="#"> Listado </a>
                                     <ul>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_repuestos'); ?>','Almacen >> Listado >> Respuestos');"> Respuestos </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_stock_de_almacen'); ?>','Almacen >> Listado >> Respuestos');"> Respuestos </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_repuestos_nro_pieza'); ?>','Almacen >> Listado >> Nro piezas');"> Nro piezas </a></li>
                                     </ul>
                                 </li>
                                 
