@@ -483,17 +483,20 @@ class accion_ordenes_trabajo extends CI_Controller {
     
     function validarDatos() {
         
-        $patterns[] = '&"&';
-        $patterns[] = "&'&";
+        $patterns[] = '/"/';
+        $patterns[] = "/'/";        
         
-        $patterns[] = '{"{';
-        $patterns[] = "{'{";
+        $patterns[] = '/&/';
+        $patterns[] = "/&/";
         
-        $patterns[] = '}"}';
-        $patterns[] = '}"}';
+        $patterns[] = '/{/';
+        $patterns[] = "/{/";
         
-        $patterns[] = '|"|';
-        $patterns[] = '|"|';        
+        $patterns[] = '/}/';
+        $patterns[] = '/}/';
+        
+        $patterns[] = '/|/';
+        $patterns[] = '/|/';        
         
         $fecha          = $_POST["fecha"];
         $nro_orden      = $_POST["nro_orden"];

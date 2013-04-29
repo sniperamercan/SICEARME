@@ -118,6 +118,17 @@
                 });                
             }
               
+            function imprimir(nro_orden) {
+                $.ajax({
+                    type: "post",  
+                    url: "<?php base_url(); ?>listado_ordenes_trabajo/imprimir",
+                    data: "nro_orden="+nro_orden,
+                    success: function(){
+                        window.open ("<?php echo base_url("imprimir_ordenes_trabajo"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0");
+                  }
+                });                
+            }              
+              
         </script>
         
     </head>
