@@ -50,7 +50,7 @@ class mb_stock_de_almacen extends CI_Controller {
             $and = 0;
  
             if(!empty($_POST['nro_parte'])){
-                $aux = $_POST['nro_parte'];
+                $aux = "%".$_POST['nro_parte']."%";
                 $condicion .= " nro_parte LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }          

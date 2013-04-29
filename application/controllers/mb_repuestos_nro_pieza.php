@@ -47,7 +47,7 @@ class mb_repuestos_nro_pieza extends CI_Controller {
             $and = 0;
  
             if(!empty($_POST['nro_pieza'])){
-                $aux = $_POST['nro_pieza'];
+                $aux = "%".$_POST['nro_pieza']."%";
                 $condicion .= " nro_pieza LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }          
