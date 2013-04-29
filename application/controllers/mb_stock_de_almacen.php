@@ -33,7 +33,9 @@ class mb_stock_de_almacen extends CI_Controller {
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
         
-        $_SESSION['nro_parte'] = ""; //para el editar
+        $_SESSION['nro_parte']    = '';
+        $_SESSION['nombre_parte'] = '';
+        $_SESSION['nro_catalogo'] = '';
         
         $this->load->view("mb_stock_de_almacen_view");
     }

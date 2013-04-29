@@ -1,6 +1,6 @@
 <?php
 
-class mb_repuestos_nro_pieza extends CI_Model {
+class mb_repuestos_nro_pieza_model extends CI_Model {
     
     function __construct() {
         parent::__construct();

@@ -13,6 +13,7 @@ class mb_repuestos_nro_pieza extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         $this->load->model('mb_repuestos_nro_pieza_model');
+        $this->load->library('pagination');
         $this->load->library('mensajes');
         $this->load->library('perms'); 
         $this->load->library('form_validation'); 
@@ -28,7 +29,10 @@ class mb_repuestos_nro_pieza extends CI_Controller {
     }
     
     function index() {
-        $_SESSION['nro_pieza'] = '';
+        $_SESSION['nro_pieza']    = '';
+        $_SESSION['nro_parte']    = '';
+        $_SESSION['nombre_parte'] = '';
+        $_SESSION['nro_catalogo'] = '';
         $this->load->view('mb_repuestos_nro_pieza_view');  
     }
     
@@ -105,7 +109,7 @@ class mb_repuestos_nro_pieza extends CI_Controller {
           
         $j=0;
         
-        for($i=0;$i<count($result);$i=$i+4) {
+        for($i=0;$i<count($result);$i=$i+8) {
             
             if($j % 2 == 0){
                 $class = "";
@@ -146,7 +150,7 @@ class mb_repuestos_nro_pieza extends CI_Controller {
             $j++;
         }                  
         
-        $config['base_url'] = site_url("mb_stock_de_almacen/consulta");
+        $config['base_url'] = site_url("mb_repuestos_nro_pieza/consulta");
         $config['total_rows'] = $this->mb_repuestos_nro_pieza_model->cantidadRegistros($condicion);
         $config['per_page'] = $cantReg;
         $config['first_link'] = 'Primera';
