@@ -26,8 +26,8 @@ class listado_ordenes_trabajo_model extends CI_Model {
                                    INNER JOIN unidades u ON u.idunidad = o.idunidad
                                    WHERE (estado_orden_trabajo = 0 OR estado_orden_trabajo = 1)
                                    ".$condicion."
-                                   ORDER BY ".$order."
-                                   LIMIT ".$ini.",".$param);
+                                   ORDER BY ".$order);
+                                   //LIMIT ".$ini.",".$param);
         
         foreach($query->result() as $row){
             $result[] = $row->nro_orden;

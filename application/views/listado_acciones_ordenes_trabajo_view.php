@@ -91,7 +91,7 @@
                     url: "<?php echo base_url("listado_acciones_ordenes_trabajo/consulta"); ?>",
                     success: function(data){
                         $("#datos_consulta").html(data[0]);
-                        $("#paginado").html(data[1]);
+                        //$("#paginado").html(data[1]);
                     }                  
                 });            
             }
