@@ -4,15 +4,15 @@
 * Equipo - UDEPGCALIT
 * Año - 2013
 * Iteracion - Primera Iteracion
-* Clase - ajuste_stock_almacen
+* Clase - mb_stock_de_almacen
 */
 
-class ajuste_stock_almacen extends CI_Controller {
+class mb_stock_de_almacen extends CI_Controller {
 
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('ajuste_stock_almacen_model');
+        $this->load->model('mb_stock_de_almacen_model');
         $this->load->library('perms');
         $this->load->library('pagination');   
         $this->load->library('mensajes');
@@ -35,7 +35,7 @@ class ajuste_stock_almacen extends CI_Controller {
         
         $_SESSION['nro_parte'] = ""; //para el editar
         
-        $this->load->view("ajuste_stock_almacen_view");
+        $this->load->view("mb_stock_de_almacen_view");
     }
     
     //cantReg = cantidad de registros x pagina
@@ -107,7 +107,7 @@ class ajuste_stock_almacen extends CI_Controller {
         
         $concat = "";
         
-        $result = $this->ajuste_stock_almacen_model->consulta_db($param, $cantReg, $condicion, $order);
+        $result = $this->mb_stock_de_almacen_model->consulta_db($param, $cantReg, $condicion, $order);
           
         $j=0;
         
@@ -141,8 +141,8 @@ class ajuste_stock_almacen extends CI_Controller {
             $j++;
         }                  
         
-        $config['base_url'] = site_url("ajuste_stock_almacen/consulta");
-        $config['total_rows'] = $this->ajuste_stock_almacen_model->cantidadRegistros($condicion);
+        $config['base_url'] = site_url("mb_stock_de_almacen/consulta");
+        $config['total_rows'] = $this->mb_stock_de_almacen_model->cantidadRegistros($condicion);
         $config['per_page'] = $cantReg;
         $config['first_link'] = 'Primera';
         $config['last_link'] = 'Ultima';
@@ -195,7 +195,7 @@ class ajuste_stock_almacen extends CI_Controller {
             echo "La pagina inicial y final deben de estar completadas ";
         }else if( $a_pagina < $de_pagina ){
             echo "La pagina inicila no puede ser mayor que la pagina final verifique";
-        }else if( $this->ajuste_stock_almacen_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
+        }else if( $this->mb_stock_de_almacen_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
             echo "No existe tal cantidad de paginas para esa consulta verifique";
         }else{
             echo "1";
@@ -226,7 +226,7 @@ class ajuste_stock_almacen extends CI_Controller {
         
         $concat = "";
         
-        $result = $this->ajuste_stock_almacen_model->consulta_db($param, $cantReg, $condicion, $order);
+        $result = $this->mb_stock_de_almacen_model->consulta_db($param, $cantReg, $condicion, $order);
                 
         
         $concat .= '<center>';

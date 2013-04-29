@@ -1,6 +1,6 @@
 <?php
 
-class ajuste_stock_almacen_model extends CI_Model {
+class mb_stock_de_almacen extends CI_Model {
     
     function __construct() {
         parent::__construct();
@@ -48,7 +48,6 @@ class ajuste_stock_almacen_model extends CI_Model {
         
         return $row->cantidad;
     }
-    
     
 }
 

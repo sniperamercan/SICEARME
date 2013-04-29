@@ -42,7 +42,7 @@
                 
                 $.ajax({ 
                     type: 'post',
-                    url: '<?php echo base_url(); ?>ajuste_stock_almacen/consulta/0',
+                    url: '<?php echo base_url(); ?>mb_stock_de_almacen/consulta/0',
                     data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&precio="+precio+"&cantidad="+cantidad,
                     success: function(){
                         cargoConsulta();
@@ -51,13 +51,13 @@
             }
             
             function impresion(){                
-                $.colorbox({href:"<?php echo base_url('ajuste_stock_almacen/seteoImpresion'); ?>", top: true, iframe: false, scrolling: false, innerWidth: 800, innerHeight: 200, title: "IMPRESION"});                
+                $.colorbox({href:"<?php echo base_url('mb_stock_de_almacen/seteoImpresion'); ?>", top: true, iframe: false, scrolling: false, innerWidth: 800, innerHeight: 200, title: "IMPRESION"});                
             } 
 
             function seteoImpresion(de_pagina, a_pagina){                
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("ajuste_stock_almacen/armoImpresion"); ?>",
+                    url: "<?php echo base_url("mb_stock_de_almacen/armoImpresion"); ?>",
                     data: "de_pagina="+de_pagina+"&a_pagina="+a_pagina,
                     success: function(data){
                         if(data == "1"){
@@ -72,7 +72,7 @@
             function orderBy(param){            
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("ajuste_stock_almacen/orderBy"); ?>",
+                    url: "<?php echo base_url("mb_stock_de_almacen/orderBy"); ?>",
                     data: "order="+param,
                     success: function(){
                         cargoConsulta();                       
@@ -84,7 +84,7 @@
                 $.ajax({
                     type: 'post',
                     dataType: 'json',
-                    url: "<?php echo base_url("ajuste_stock_almacen/consulta"); ?>",
+                    url: "<?php echo base_url("mb_stock_de_almacen/consulta"); ?>",
                     success: function(data){
                         $("#datos_consulta").html(data[0]);
                         $("#paginado").html(data[1]);
@@ -95,10 +95,10 @@
             function editarStock(nro_parte) {
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("ajuste_stock_almacen/editarStock"); ?>",
+                    url: "<?php echo base_url("mb_stock_de_almacen/editarStock"); ?>",
                     data: "nro_parte="+nro_parte,
                     success: function(){
-                        irAFrame('<?php echo base_url('ajuste_cantidad_stock'); ?>','Almacen >> Ajuste >> Stock');
+                        irAFrame('<?php echo base_url('modificar_stock_de_almacen'); ?>','Almacen >> Modificar >> Repuestos');
                     }                  
                 });            
             }
