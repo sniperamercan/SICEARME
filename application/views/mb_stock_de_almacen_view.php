@@ -102,14 +102,22 @@
             }
             
             function eliminar(nro_parte, nombre_parte, nro_catalogo) {
-                $.ajax({
-                    type: 'post',
-                    url: "<?php echo base_url("mb_stock_de_almacen/eliminar"); ?>",
-                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
-                    success: function(){
-                        irAFrame('<?php echo base_url('mb_stock_de_almacen'); ?>','Almacen >> Modificar >> Repuestos');
-                    }                  
-                });            
+                 jConfirm('Estas seguro que quieres eliminar dicho repuesto del almacen', 'ELIMINAR REPUESTO DEL ALMACEN', function(r) {
+                    if(r) {           
+                        $.ajax({
+                            type: 'post',
+                            url: "<?php echo base_url("mb_stock_de_almacen/eliminar"); ?>",
+                            data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
+                            success: function(data){
+                                if(data == 1) {
+                                    jAlert("El repuesto fue eliminado del stock del almacen", "ELIMINAR REPUESTO DEL ALMACEN", function() { irAFrame('<?php echo base_url('mb_stock_de_almacen'); ?>','Almacen >> Modificar >> Respuestos') } );
+                                }else {
+                                    jAlert("ERROR: El repuesto no se pudo eliminar del sistema", "ELIMINAR REPUESTO DEL ALMACEN");
+                                }
+                            }                  
+                        });   
+                    }
+                });           
             }            
                   
         </script>
