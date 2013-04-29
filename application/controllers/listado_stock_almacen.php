@@ -126,8 +126,7 @@ class listado_stock_almacen extends CI_Controller {
                     <td> ".$result[$i+5]." </td>
                     <td> ".$result[$i+6]." </td>
                     <td style='text-align: center;'> ".$result[$i+7]." </td>
-                    <td onclick='editar(".$aux_nro_parte.",".$aux_nombre_parte.",".$aux_nro_catalogo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/edit.png' /> </td>
-                    <td onclick='eliminar(".$aux_nro_parte.",".$aux_nombre_parte.",".$aux_nro_catalogo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/delete.gif' /> </td>
+                    <td onclick='imprimir(".$aux_nro_parte.",".$aux_nombre_parte.",".$aux_nro_catalogo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/print.png' /> </td>
                 </tr>
             ";
             

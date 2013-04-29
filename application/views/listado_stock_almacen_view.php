@@ -40,7 +40,7 @@
                 
                 $.ajax({ 
                     type: 'post',
-                    url: '<?php echo base_url(); ?>listado_stock_de_almacen/consulta/0',
+                    url: '<?php echo base_url(); ?>listado_stock_almacen/consulta/0',
                     data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte,
                     success: function(){
                         cargoConsulta();
@@ -49,13 +49,13 @@
             }
             
             function impresion(){                
-                $.colorbox({href:"<?php echo base_url('listado_stock_de_almacen/seteoImpresion'); ?>", top: true, iframe: false, scrolling: false, innerWidth: 800, innerHeight: 200, title: "IMPRESION"});                
+                $.colorbox({href:"<?php echo base_url('listado_stock_almacen/seteoImpresion'); ?>", top: true, iframe: false, scrolling: false, innerWidth: 800, innerHeight: 200, title: "IMPRESION"});                
             } 
 
             function seteoImpresion(de_pagina, a_pagina){                
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("listado_stock_de_almacen/armoImpresion"); ?>",
+                    url: "<?php echo base_url("listado_stock_almacen/armoImpresion"); ?>",
                     data: "de_pagina="+de_pagina+"&a_pagina="+a_pagina,
                     success: function(data){
                         if(data == "1"){
@@ -70,7 +70,7 @@
             function orderBy(param){            
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("listado_stock_de_almacen/orderBy"); ?>",
+                    url: "<?php echo base_url("listado_stock_almacen/orderBy"); ?>",
                     data: "order="+param,
                     success: function(){
                         cargoConsulta();                       
@@ -82,7 +82,7 @@
                 $.ajax({
                     type: 'post',
                     dataType: 'json',
-                    url: "<?php echo base_url("listado_stock_de_almacen/consulta"); ?>",
+                    url: "<?php echo base_url("listado_stock_almacen/consulta"); ?>",
                     success: function(data){
                         $("#datos_consulta").html(data[0]);
                         $("#paginado").html(data[1]);
@@ -156,7 +156,7 @@
                 <tbody id="datos_consulta"> </tbody>   
 
                 <tfoot>
-                    <tr> <td colspan="10"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="9"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
                 
            </table>  
