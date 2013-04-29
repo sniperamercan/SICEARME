@@ -117,7 +117,7 @@ class listado_ordenes_trabajo extends CI_Controller {
           
         $j=0;
         
-        for($i=0;$i<count($result);$i=$i+8) {
+        for($i=0;$i<count($result);$i=$i+9) {
             
             if($j % 2 == 0){
                 $class = "";
@@ -135,7 +135,8 @@ class listado_ordenes_trabajo extends CI_Controller {
             $result[] = $row->calibre;
             $result[] = $row->modelo;
             $result[] = $row->nombreunidad;
-            $result[] = $row->estado_orden_trabajo;        
+            $result[] = $row->estado_orden_trabajo;   
+            $result[] = $row->estado_arma;        
             */
             
             switch($result[$i+7]) {
@@ -147,7 +148,24 @@ class listado_ordenes_trabajo extends CI_Controller {
                 case 1:
                     $estado_orden_trabajo = "cerrada";
                     break;
-            }            
+            }     
+            
+            $estado_arma = "-";
+            
+            switch($result[$i+8]) {
+                
+                case "reparado":
+                    $estado_arma = "<font color='green'> reparado </font>";
+                    break;
+                
+                case "reparado con desperfectos":
+                    $estado_arma = "<font color='#AEB404'> con desperfectos </font>";
+                    break;
+                
+                case "sin reparacion":
+                    $estado_arma = "<font color='red'> sin reparacion </font>";
+                    break;  
+            }
             
             $concat .= "
                 <tr class='".$class."'> 
@@ -159,6 +177,7 @@ class listado_ordenes_trabajo extends CI_Controller {
                     <td> ".$result[$i+5]." </td>
                     <td> ".$result[$i+6]." </td>
                     <td> ".$estado_orden_trabajo." </td>
+                    <td style='font-weight: bold;'> ".$estado_arma." </td>
                     <td onclick='verObservaciones(".$aux_nro_orden.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
                     <td onclick='verAcciones(".$aux_nro_orden.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
                     <td onclick='imprimirOrdenTrabajo(".$aux_nro_orden.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/print.png' /> </td>

@@ -116,7 +116,7 @@
                         irAFrame('<?php echo base_url('listado_de_una_accion_ordenes_trabajo'); ?>','Taller armamento >> Listado >> Acciones de una orden de trabajo');
                   }
                 });                
-            }             
+            }
               
         </script>
         
@@ -166,6 +166,7 @@
                         <th onclick="orderBy(5)"> Modelo          </th>
                         <th> Unidad                               </th>
                         <th onclick="orderBy(6)"> Estado orden    </th>
+                        <th> Estado arma      </th>
                         <th> Ver obser        </th>
                         <th> Acciones         </th>
                         <th> Imprimir         </th>
@@ -175,7 +176,7 @@
                 <tbody id="datos_consulta"> </tbody>   
 
                 <tfoot>
-                    <tr> <td colspan="10"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="12"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
                 
            </table>  

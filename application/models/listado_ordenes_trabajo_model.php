@@ -21,7 +21,7 @@ class listado_ordenes_trabajo_model extends CI_Model {
         
         $result = array();
 
-        $query = $this->db->query("SELECT nro_orden, fecha, nro_serie, marca, calibre, modelo, nombreunidad, estado_orden_trabajo
+        $query = $this->db->query("SELECT nro_orden, fecha, nro_serie, marca, calibre, modelo, nombreunidad, estado_orden_trabajo, estado_arma
                                    FROM ordenes_trabajo o
                                    INNER JOIN unidades u ON u.idunidad = o.idunidad
                                    WHERE (estado_orden_trabajo = 0 OR estado_orden_trabajo = 1)
@@ -38,6 +38,7 @@ class listado_ordenes_trabajo_model extends CI_Model {
             $result[] = $row->modelo;
             $result[] = $row->nombreunidad;
             $result[] = $row->estado_orden_trabajo;
+            $result[] = $row->estado_arma;
         }
         
         return $result;
