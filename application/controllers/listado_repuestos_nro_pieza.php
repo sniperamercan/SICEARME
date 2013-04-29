@@ -142,8 +142,7 @@ class listado_repuestos_nro_pieza extends CI_Controller {
                     <td> ".$result[$i+5]." </td>
                     <td> ".$result[$i+6]." </td>
                     <td> ".$result[$i+7]." </td>
-                    <td onclick='editar(".$aux_nro_pieza.",".$aux_nro_parte.",".$aux_nombre_parte.",".$aux_nro_catalogo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/edit.png' /> </td>
-                    <td onclick='eliminar(".$aux_nro_pieza.",".$aux_nro_parte.",".$aux_nombre_parte.",".$aux_nro_catalogo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/delete.gif' /> </td>
+                    <td onclick='imprimir(".$aux_nro_pieza.",".$aux_nro_parte.",".$aux_nombre_parte.",".$aux_nro_catalogo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/print.png' /> </td>
                 </tr>
             ";
             
