@@ -148,6 +148,14 @@ class modificar_accion_piezas_asociadas extends CI_Controller {
         
     }
     
+    function volver() {
+        if($_SESSION['volver'] != "") {
+            echo $_SESSION['volver'];
+        }else {
+            echo 0;
+        }
+    }
+    
     function validarDatos() {
         
         $nro_pieza_nueva    = $_POST["nro_pieza_nueva"];

@@ -56,7 +56,17 @@
             }
             
             function volver() {
-                irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>modificar_accion_piezas_secundarias/volver",
+                   success: function(data) {
+                        if(data == 0) {
+                            irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                        }else {
+                            irAFrame('<?php echo base_url('mb_acciones_ordenes_trabajo'); ?>','Taller armamento >> Modificar >> Acciones de una orden');
+                        }
+                   }
+                });
             }
             
             function busquedaRepuestos() {

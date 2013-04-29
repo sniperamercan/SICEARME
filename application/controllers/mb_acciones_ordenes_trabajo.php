@@ -32,6 +32,7 @@ class mb_acciones_ordenes_trabajo extends CI_Controller {
         
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
+        $_SESSION['volver'] = "";
         $this->load->view("mb_acciones_ordenes_trabajo_view");
     }
     
@@ -535,6 +536,8 @@ class mb_acciones_ordenes_trabajo extends CI_Controller {
         $nro_accion = $_SESSION['editar_nro_accion'];
         
         $tipo_accion = $this->mb_acciones_ordenes_trabajo_model->cargoTipoAccion($nro_accion);
+        
+        $_SESSION['volver'] = 1;
         
         echo $tipo_accion;
     }

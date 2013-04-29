@@ -114,6 +114,14 @@ class modificar_accion_piezas_secundarias extends CI_Controller {
         $this->modificar_accion_piezas_secundarias_model->eliminarAccionSecundaria($nro_cambio, $nro_parte, $nombre_parte, $cant_actualizar);
     }
     
+    function volver() {
+        if($_SESSION['volver'] != "") {
+            echo $_SESSION['volver'];
+        }else {
+            echo 0;
+        }
+    }
+    
     function validarDatos() {
         
         $nro_parte    = $_POST["nro_parte"];

@@ -74,6 +74,14 @@ class modificar_accion_simple extends CI_Controller {
         $this->load->view('modificar_accion_simple_view', $data);  
     }
     
+    function volver() {
+        if($_SESSION['volver'] != "") {
+            echo $_SESSION['volver'];
+        }else {
+            echo 0;
+        }
+    }
+    
     function validarDatos() {
         
         $fecha          = $_POST["fecha"];
