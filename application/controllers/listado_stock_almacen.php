@@ -160,7 +160,6 @@ class listado_stock_almacen extends CI_Controller {
     }    
     
     function seteoImpresion() { 
-        
         $this->load->view("impresion_view");    
     }
     
@@ -187,11 +186,11 @@ class listado_stock_almacen extends CI_Controller {
             echo "La pagina inicial y final deben de estar completadas ";
         }else if( $a_pagina < $de_pagina ){
             echo "La pagina inicila no puede ser mayor que la pagina final verifique";
-        }else if( $this->listado_stock_almacen_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
+        }else if( $this->mb_stock_de_almacen_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
             echo "No existe tal cantidad de paginas para esa consulta verifique";
         }else{
             echo "1";
-            if( $this->listado_stock_almacen_model->cantidadRegistros($condicion) <= 30 ){
+            if( $this->ajuste_stock_almacen_model->cantidadRegistros($condicion) <= 30 ){
                 $ini   = 0;
                 $param = 30;
                 $this->consultaImpresion($condicion, $ini, $param, $order);
@@ -218,7 +217,7 @@ class listado_stock_almacen extends CI_Controller {
         
         $concat = "";
         
-        $result = $this->listado_stock_almacen_model->consulta_db($param, $cantReg, $condicion, $order);
+        $result = $this->mb_stock_de_almacen_model->consulta_db($param, $cantReg, $condicion, $order);
                 
         
         $concat .= '<center>';
@@ -227,21 +226,28 @@ class listado_stock_almacen extends CI_Controller {
         
         $concat .= '
             <tr>
-                <th onclick="orderBy(0)"> Nro parte   </th>
-                <th onclick="orderBy(1)"> Nombre      </th>
-                <th onclick="orderBy(2)"> Precio      </th>
-                <th onclick="orderBy(3)"> Cantidad    </th>
+                <th> Nro parte     </th>
+                <th> Nombre        </th>
+                <th> Catalogo      </th>
+                <th> Tipo    </th>
+                <th> Marca   </th>
+                <th> Calibre </th>
+                <th> Modelo  </th>
+                <th> Cantidad    </th>
             </tr>   
         ';
                 
-        for($i=0;$i<count($result);$i=$i+4) {            
+        for($i=0;$i<count($result);$i=$i+8) {            
             $concat .= "
-                <tr>
-                    <td  style='text-align: center;'> ".$result[$i]." </td>
+                <tr> 
+                    <td> ".$result[$i]." </td>
                     <td> ".$result[$i+1]." </td>
-                    <td> ".$result[$i+2]." </td>
+                    <td style='text-align: center;'> ".$result[$i+2]." </td>
                     <td> ".$result[$i+3]." </td>
                     <td> ".$result[$i+4]." </td>
+                    <td> ".$result[$i+5]." </td>
+                    <td> ".$result[$i+6]." </td>
+                    <td style='text-align: center;'> ".$result[$i+7]." </td>
                 </tr>
             ";
         }                  

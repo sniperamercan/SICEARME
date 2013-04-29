@@ -117,7 +117,7 @@
         
         <br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp;             
+        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>                       
         
         <br /> 
         
