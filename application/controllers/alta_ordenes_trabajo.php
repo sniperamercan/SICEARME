@@ -228,19 +228,19 @@ class alta_ordenes_trabajo extends CI_Controller {
         
         $patterns = array();
         $patterns[] = '/"/';
-        $patterns[] = "/'/";
+        $patterns[] = "/'/";        
         
-        $patterns[] = '&"&';
-        $patterns[] = "&'&";
+        $patterns[] = '/&/';
+        $patterns[] = "/&/";
         
-        $patterns[] = '{"{';
-        $patterns[] = "{'{";
+        $patterns[] = '/{/';
+        $patterns[] = "/{/";
         
-        $patterns[] = '}"}';
-        $patterns[] = '}"}';
+        $patterns[] = '/}/';
+        $patterns[] = '/}/';
         
-        $patterns[] = '|"|';
-        $patterns[] = '|"|';
+        $patterns[] = '/|/';
+        $patterns[] = '/|/';  
         
         $fecha         = preg_replace($patterns, '', $_POST["fecha"]);
         $unidad        = preg_replace($patterns, '', $_POST["unidad"]);
