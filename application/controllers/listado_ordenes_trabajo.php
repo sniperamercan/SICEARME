@@ -137,6 +137,18 @@ class listado_ordenes_trabajo extends CI_Controller {
             $result[] = $row->nombreunidad;
             $result[] = $row->estado_orden_trabajo;        
             */
+            
+            switch($result[$i+7]) {
+                
+                case 0:
+                    $estado_orden_trabajo = "abierta";
+                    break;
+                
+                case 1:
+                    $estado_orden_trabajo = "cerrada";
+                    break;
+            }            
+            
             $concat .= "
                 <tr class='".$class."'> 
                     <td style='text-align: center;'> ".$result[$i]." </td>
@@ -146,8 +158,9 @@ class listado_ordenes_trabajo extends CI_Controller {
                     <td> ".$result[$i+4]." </td>
                     <td> ".$result[$i+5]." </td>
                     <td> ".$result[$i+6]." </td>
-                    <td style='text-align: center;'> ".$result[$i+7]." </td>
+                    <td> ".$estado_orden_trabajo." </td>
                     <td onclick='verObservaciones(".$aux_nro_orden.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
+                    <td onclick='verAcciones(".$aux_nro_orden.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
                     <td onclick='imprimirOrdenTrabajo(".$aux_nro_orden.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/print.png' /> </td>
                 </tr>
             ";
@@ -338,6 +351,10 @@ class listado_ordenes_trabajo extends CI_Controller {
 
         echo $concat;
     } 
+    
+    function verAcciones() {
+        $_SESSION['nro_orden'] = $_POST['nro_orden'];
+    }
 }
 
 ?>

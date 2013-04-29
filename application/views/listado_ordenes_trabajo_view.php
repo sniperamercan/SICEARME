@@ -105,7 +105,18 @@
                         jAlert(data, "OBSERVACIONES DE LA ORDEN DE TRABAJO");
                   }
                 });                
-            }            
+            }  
+            
+            function verAcciones(nro_orden) {
+                $.ajax({
+                    type: "post",  
+                    url: "<?php base_url(); ?>listado_ordenes_trabajo/verAcciones",
+                    data: "nro_orden="+nro_orden,
+                    success: function(data){
+                        irAFrame('<?php echo base_url('listado_de_una_accion_ordenes_trabajo'); ?>','Taller armamento >> Listado >> Acciones de una orden de trabajo');
+                  }
+                });                
+            }             
               
         </script>
         
@@ -156,6 +167,7 @@
                         <th> Unidad                               </th>
                         <th onclick="orderBy(6)"> Estado orden    </th>
                         <th> Ver obser        </th>
+                        <th> Acciones         </th>
                         <th> Imprimir         </th>
                     </tr>
                 </thead>
