@@ -35,44 +35,25 @@
      
             function filtrar(){
                 
-                var nro_parte     = $("#nro_parte").val();
-                var nombre_parte  = $("#nombre_parte").val();
-                var precio        = $("#precio").val();
-                var cantidad      = $("#cantidad").val();
+                var nro_pieza    = $("#nro_pieza").val();      
+                var nro_catalogo = $("#nro_catalogo").val();      
+                var nro_parte    = $("#nro_parte").val();      
+                var nombre_parte = $("#nombre_parte").val();      
                 
                 $.ajax({ 
                     type: 'post',
-                    url: '<?php echo base_url(); ?>listado_stock_almacen_nro_serie/consulta/0',
-                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&precio="+precio+"&cantidad="+cantidad,
+                    url: '<?php echo base_url(); ?>listado_repuestos_nro_pieza/consulta/0',
+                    data: "nro_pieza="+nro_pieza+"&nro_catalogo="+nro_catalogo+"&nro_parte="+nro_parte+"&nombre_parte="+nombre_parte,
                     success: function(){
                         cargoConsulta();
                     }
                 });                
-            }
-            
-            function impresion(){                
-                $.colorbox({href:"<?php echo base_url('listado_stock_almacen_nro_serie/seteoImpresion'); ?>", top: true, iframe: false, scrolling: false, innerWidth: 800, innerHeight: 200, title: "IMPRESION"});                
-            } 
-
-            function seteoImpresion(de_pagina, a_pagina){                
-                $.ajax({
-                    type: 'post',
-                    url: "<?php echo base_url("listado_stock_almacen_nro_serie/armoImpresion"); ?>",
-                    data: "de_pagina="+de_pagina+"&a_pagina="+a_pagina,
-                    success: function(data){
-                        if(data == "1"){
-                            window.open ("<?php echo base_url("contenido_impresion"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0");
-                        }else{
-                            jAlert(data);
-                        }
-                    }                  
-                });
-            }            
+            }      
             
             function orderBy(param){            
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("listado_stock_almacen_nro_serie/orderBy"); ?>",
+                    url: "<?php echo base_url("listado_repuestos_nro_pieza/orderBy"); ?>",
                     data: "order="+param,
                     success: function(){
                         cargoConsulta();                       
@@ -84,7 +65,7 @@
                 $.ajax({
                     type: 'post',
                     dataType: 'json',
-                    url: "<?php echo base_url("listado_stock_almacen_nro_serie/consulta"); ?>",
+                    url: "<?php echo base_url("listado_repuestos_nro_pieza/consulta"); ?>",
                     success: function(data){
                         $("#datos_consulta").html(data[0]);
                         $("#paginado").html(data[1]);
@@ -92,16 +73,27 @@
                 });            
             }
             
-            function imprimirStock(nro_parte) {
+            function editar(nro_parte, nombre_parte, nro_catalogo) {
                 $.ajax({
-                    type: "post",  
-                    url: "<?php base_url(); ?>listado_stock_almacen_nro_serie/imprimirStock",
-                    data: "nro_parte="+nro_parte,
+                    type: 'post',
+                    url: "<?php echo base_url("listado_repuestos_nro_pieza/editar"); ?>",
+                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
                     success: function(){
-                        window.open ("<?php echo base_url("imprimir_stock_almacen_nro_serie"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0");
-                  }
-                });                
-            }            
+                        irAFrame('<?php echo base_url('mb_stock_de_almacen'); ?>','Almacen >> Modificar >> Repuestos');
+                    }                  
+                });            
+            }
+            
+            function eliminar(nro_parte, nombre_parte, nro_catalogo) {
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo base_url("listado_repuestos_nro_pieza/eliminar"); ?>",
+                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
+                    success: function(){
+                        irAFrame('<?php echo base_url('mb_stock_de_almacen'); ?>','Almacen >> Modificar >> Repuestos');
+                    }                  
+                });            
+            } 
                   
         </script>
         
@@ -112,20 +104,20 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Nro parte       - </label> </td> <td> <input type="text" class="text" id="nro_parte" /></td>
-                <td><label> &emsp; Nombre - </label> </td> <td>  <input type="text" class="text" id="nombre_parte" /></td>
-            </tr>
+                <td><label> &emsp; Nro pieza       - </label> </td> <td> <input type="text" class="text" id="nro_pieza" /></td>
+                <td><label> &emsp; Nro catalogo    - </label> </td> <td> <input type="text" class="text" id="nro_catalogo" /></td>
+            </tr> 
             
             <tr>
-                <td><label> &emsp; Precio       - </label> </td> <td> <input type="text" class="text" id="precio" /></td>
-                <td><label> &emsp; Cantidad - </label> </td> <td>  <input type="text" class="text" id="cantidad" /></td>
+                <td><label> &emsp; Nro parte       - </label> </td> <td> <input type="text" class="text" id="nro_parte" /></td>
+                <td><label> &emsp; Nombre parte    - </label> </td> <td> <input type="text" class="text" id="nombre_parte" /></td>
             </tr>            
 
         </table>
         
         <br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp;             
         
         <br /> 
         
@@ -137,18 +129,22 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> Numero      </th>
-                        <th onclick="orderBy(1)"> Nombre      </th>
-                        <th onclick="orderBy(2)"> Precio      </th>
-                        <th onclick="orderBy(3)"> Cantidad    </th>
-                        <th> Imprimir      </th>                        
+                        <th onclick="orderBy(0)"> Nro pieza     </th>
+                        <th onclick="orderBy(1)"> Nro parte     </th>
+                        <th onclick="orderBy(2)"> Nombre        </th>
+                        <th onclick="orderBy(3)"> Catalogo      </th>
+                        <th> Tipo     </th>
+                        <th> Marca    </th>
+                        <th> Calibre  </th>
+                        <th> Modelo   </th>
+                        <th> Imprimir </th>
                     </tr>
                 </thead>
 
                 <tbody id="datos_consulta"> </tbody>   
 
                 <tfoot>
-                    <tr> <td colspan="12"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="9"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
                 
            </table>  
