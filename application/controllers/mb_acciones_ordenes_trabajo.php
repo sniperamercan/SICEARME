@@ -117,6 +117,8 @@ class mb_acciones_ordenes_trabajo extends CI_Controller {
           
         $j=0;
         
+        $nro_orden_anterior = 0;
+        
         for($i=0;$i<count($result);$i=$i+5) {
             
             if($j % 2 == 0){
@@ -148,12 +150,16 @@ class mb_acciones_ordenes_trabajo extends CI_Controller {
                 case 2: //accion piezas asociadas
                     $tipo_accion = "accion piezas asociadas";
                     break;
-            }            
+            }      
+            
+            if($nro_orden_anterior != $result[$i+1] && $nro_orden_anterior != 0) {
+                $concat .=  '<tr> <td colspan="8" style="background-color:#8C8C8C;"> <div id="paging"> <br /> </div> </td> </tr>';
+            }
             
             $concat .= "
                 <tr class='".$class."'> 
-                    <td style='text-align: center;'> ".$result[$i]." </td>
                     <td style='text-align: center; font-weight: bold; color: black;'> ".$result[$i+1]." </td>
+                    <td style='text-align: center;'> ".$result[$i]." </td>
                     <td style='text-align: center;'> ".$result[$i+2]." </td>
                     <td> ".$result[$i+3]." </td>
                     <td> ".$tipo_accion." </td>
@@ -164,6 +170,8 @@ class mb_acciones_ordenes_trabajo extends CI_Controller {
             ";
             
             $j++;
+            
+            $nro_orden_anterior = $result[$i+1];
         }                  
         
         $config['base_url'] = site_url("mb_acciones_ordenes_trabajo/consulta");
