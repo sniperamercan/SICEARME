@@ -3,7 +3,7 @@
 /*
 * Equipo - UDEPGCALIT
 * Año - 2013
-* Iteracion - Primera Iteracion
+* Iteracion - Segunda Iteracion
 * Clase - listado_stock_almacen
 */
 
@@ -13,61 +13,57 @@ class listado_stock_almacen extends CI_Controller {
         parent::__construct();
         $this->load->helper('url');
         $this->load->model('listado_stock_almacen_model');
-        $this->load->library('perms'); 
+        $this->load->library('perms');
         $this->load->library('pagination');   
-        $this->load->library('mensajes'); 
+        $this->load->library('mensajes');
         $this->load->library('form_validation'); 
         
-        if(!$this->perms->VerificoUsuario()) {
+        if(!$this->perms->VerificoUsuario()){
             die($this->mensajes->sinPermisos());
-        }         
+        }
         
         //Modulo solo visible para el peril 6 y 7 - Usuarios taller de armamento y Administradores taller de armamento 
         if(!$this->perms->verificoPerfil6() && !$this->perms->verificoPerfil7()) {
             die($this->mensajes->sinPermisos());
-        }
+        }        
     }
     
     function index() {
+        
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
+        
+        $_SESSION['nro_parte']    = '';
+        $_SESSION['nombre_parte'] = '';
+        $_SESSION['nro_catalogo'] = '';
+        
         $this->load->view("listado_stock_almacen_view");
     }
     
     //cantReg = cantidad de registros x pagina
     function consulta($param="",$cantReg=30) {   
      
-        //INICIO, ARMO CONDICIONES WHERE PARA SQL
-        if(isset($_POST['nombre_parte']) && isset($_POST['precio'])
-                && isset($_POST['cantidad']) ) { 
+        //Inicio, armo condiciones where para sql
+        if( isset($_POST['nro_parte']) && isset($_POST['nombre_parte']) ) {
             
             $condicion = "";
             $and = 0;
  
-            if(!empty($_POST['nombre_parte'])){
-                $aux = $_POST['nombre_parte'];
-                $condicion .= " nombre_parte LIKE ".$this->db->escape($aux);
+            if(!empty($_POST['nro_parte'])){
+                $aux = "%".$_POST['nro_parte']."%";
+                $condicion .= " nro_parte LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }          
             
-            if(!empty($_POST['precio'])){
+            if(!empty($_POST['nombre_parte'])){
                 if($and == 1){
                     $condicion .= " AND ";
                 }
-                $aux = "%".$_POST['precio']."%";
-                $condicion .= " precio LIKE ".$this->db->escape($aux);
+                $aux = "%".$_POST['nombre_parte']."%";
+                $condicion .= " nombre_parte LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }
-            
-            if(!empty($_POST['cantidad'])){
-                if($and == 1){
-                    $condicion .= " AND ";
-                }
-                $aux = "%".$_POST['cantidad']."%";
-                $condicion .= " cantidad LIKE ".$this->db->escape($aux);
-                $and = 1; //agrego AND en proximo filtro
-            }   
-            
+                    
             $_SESSION['condicion'] = $condicion;
         }
         
@@ -76,7 +72,7 @@ class listado_stock_almacen extends CI_Controller {
         }else{
             $condicion = 1;
         }
-        //FIN, ARMO CONDICIONES WHERE PARA SQL
+        //Fin, armo condiciones where para sql
         
         //Verifico el order si esta seteado si no por defecto de esta consulta
         if(isset($_SESSION['order'])){
@@ -98,7 +94,7 @@ class listado_stock_almacen extends CI_Controller {
           
         $j=0;
         
-        for($i=0;$i<count($result);$i=$i+4) {
+        for($i=0;$i<count($result);$i=$i+8) {
             
             if($j % 2 == 0){
                 $class = "";
@@ -106,31 +102,39 @@ class listado_stock_almacen extends CI_Controller {
                 $class = "alt";
             }                        
             
-            $aux_nro_parte = '"'.$result[$i].'"';
+            $aux_nro_parte    = '"'.$result[$i].'"';
+            $aux_nombre_parte = '"'.$result[$i+1].'"';
+            $aux_nro_catalogo = '"'.$result[$i+2].'"';
             /* 
              * lo que contiene el array adentro 
-            $result[] = $row->nro_parte;
-            $result[] = $row->nombre_parte;
-            $result[] = $row->precio;
-            $result[] = $row->cantidad;         
+            $result[] = $row->nro_parte; 0
+            $result[] = $row->nombre_parte; 1
+            $result[] = $row->nro_interno_catalogo; 2
+            $result[] = $row->tipo_arma; 3 
+            $result[] = $row->marca; 4
+            $result[] = $row->calibre; 5 
+            $result[] = $row->modelo; 6 
+            $result[] = $row->cantidad; 7          
             */
             $concat .= "
                 <tr class='".$class."'> 
-                    <td  style='text-align: center;'> ".$result[$i]." </td>
+                    <td> ".$result[$i]." </td>
                     <td> ".$result[$i+1]." </td>
-                    <td> ".$result[$i+2]." </td>
+                    <td style='text-align: center;'> ".$result[$i+2]." </td>
                     <td> ".$result[$i+3]." </td>
                     <td> ".$result[$i+4]." </td>
-                    <td onclick='imprimirStock(".$aux_nro_parte.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
-                    <td onclick='imprimirStock(".$aux_nro_parte.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/print.png' /> </td>                         
+                    <td> ".$result[$i+5]." </td>
+                    <td> ".$result[$i+6]." </td>
+                    <td style='text-align: center;'> ".$result[$i+7]." </td>
+                    <td onclick='editar(".$aux_nro_parte.",".$aux_nombre_parte.",".$aux_nro_catalogo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/edit.png' /> </td>
+                    <td onclick='eliminar(".$aux_nro_parte.",".$aux_nombre_parte.",".$aux_nro_catalogo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/delete.gif' /> </td>
                 </tr>
             ";
             
             $j++;
-            
         }                  
         
-        $config['base_url'] = site_url("listado_stock/consulta");
+        $config['base_url'] = site_url("listado_stock_almacen/consulta");
         $config['total_rows'] = $this->listado_stock_almacen_model->cantidadRegistros($condicion);
         $config['per_page'] = $cantReg;
         $config['first_link'] = 'Primera';
@@ -148,7 +152,7 @@ class listado_stock_almacen extends CI_Controller {
         
         $paginado .= '</center>';
         
-        //retorno de datos json
+        //Retorno de datos json
         $retorno = array();
         $retorno[] = $concat;
         $retorno[] = $paginado;
@@ -156,7 +160,7 @@ class listado_stock_almacen extends CI_Controller {
         echo json_encode($retorno);
     }    
     
-    function seteoImpresion() {   
+    function seteoImpresion() { 
         
         $this->load->view("impresion_view");    
     }
@@ -224,6 +228,7 @@ class listado_stock_almacen extends CI_Controller {
         
         $concat .= '
             <tr>
+                <th onclick="orderBy(0)"> Nro parte   </th>
                 <th onclick="orderBy(1)"> Nombre      </th>
                 <th onclick="orderBy(2)"> Precio      </th>
                 <th onclick="orderBy(3)"> Cantidad    </th>
@@ -256,14 +261,18 @@ class listado_stock_almacen extends CI_Controller {
         switch($order){
             
             case 0:
-                $_SESSION['order'][0] = 'nombre_parte';
+                $_SESSION['order'][0] = 'nro_parte';
                 break;
             
             case 1:
-                $_SESSION['order'][0] = 'precio';
+                $_SESSION['order'][0] = 'nombre_parte';
                 break;
             
             case 2:
+                $_SESSION['order'][0] = 'nro_interno_catalogo';
+                break;
+            
+            case 3:
                 $_SESSION['order'][0] = 'cantidad';
                 break;
             
@@ -276,11 +285,6 @@ class listado_stock_almacen extends CI_Controller {
         }else if($_SESSION['order'][1] == "ASC"){
             $_SESSION['order'][1] = "DESC";
         }        
-    }
-    
-    function imprimirStock() {
-        
-        $_SESSION['imprimir_nro_parte'] = $_POST['nro_parte'];
     }
 }
 

@@ -403,7 +403,7 @@
 
                                 <li><a href="#"> Listado </a>
                                     <ul>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_stock_de_almacen'); ?>','Almacen >> Listado >> Respuestos');"> Respuestos </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_stock_almacen'); ?>','Almacen >> Listado >> Respuestos');"> Respuestos </a></li>
                                         <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_repuestos_nro_pieza'); ?>','Almacen >> Listado >> Nro piezas');"> Nro piezas </a></li>
                                     </ul>
                                 </li>
