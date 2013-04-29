@@ -250,40 +250,44 @@ class alta_ordenes_trabajo extends CI_Controller {
         $modelo        = preg_replace($patterns, '', $_POST["modelo"]);
         $observaciones = preg_replace($patterns, '', $_POST["observaciones"]);
         
-        $mensjError = array();
+        $mensja_error = array();
         $retorno = array();
         
         if(empty($fecha)) {
-            $mensjError[] = 1;
+            $mensja_error[] = 1;
         }
         
         if(empty($unidad)) {
-            $mensjError[] = 2;
+            $mensja_error[] = 2;
         }
         
         if(empty($nro_serie)) {
-            $mensjError[] = 3;
+            $mensja_error[] = 3;
         }
         
         if(empty($marca)) {
-            $mensjError[] = 4;
+            $mensja_error[] = 4;
         }        
         
         if(empty($calibre)) {
-            $mensjError[] = 5;
+            $mensja_error[] = 5;
         }        
 
         if(empty($modelo)) {
-            $mensjError[] = 6;
+            $mensja_error[] = 6;
         }        
 
         if(empty($observaciones)) {
-            $mensjError[] = 7;
+            $mensja_error[] = 7;
         }        
        
-        if(count($mensjError) > 0) {
+        if($this->alta_ordenes_trabajo_model->verificoOrdenTrabajo($nro_serie, $marca, $calibre, $modelo)) {
+            $mensja_error[] = 8;
+        }
+        
+        if(count($mensja_error) > 0) {
             
-            switch($mensjError[0]) {
+            switch($mensja_error[0]) {
                 
                 case 1:
                     $retorno[] = $this->mensajes->errorVacio('fecha');
@@ -312,6 +316,10 @@ class alta_ordenes_trabajo extends CI_Controller {
                 case 7:
                     $retorno[] = $this->mensajes->errorVacio('observaciones');
                     break;
+                
+                case 8:
+                    $retorno[] = "ERROR: El armamento seleccionado ya tiene una orden de trabajo abierta";
+                    break;                
             }
         }else {
             $nro_orden = $this->alta_ordenes_trabajo_model->altaOrdenTrabajo($fecha, $unidad, $nro_serie, $marca, $calibre, $modelo, $observaciones);

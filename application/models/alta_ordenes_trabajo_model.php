@@ -36,10 +36,10 @@ class alta_ordenes_trabajo_model extends CI_Model {
     //unidad 99 Taller de armamento
     function cargoNroSeries() {
        
-        $query = $this->db->query("SELECT DISTINCT nro_serie
-                                   FROM stock_unidades
+        $query = $this->db->query("SELECT DISTINCT s.nro_serie
+                                   FROM stock_unidades s
                                    WHERE idunidad = 99
-                                   ORDER BY nro_serie");
+                                   ORDER BY s.nro_serie");
         
         $nro_series = array();
         
@@ -49,6 +49,19 @@ class alta_ordenes_trabajo_model extends CI_Model {
         
         return $nro_series;        
     }    
+    
+    function verificoOrdenTrabajo($nro_serie, $marca, $calibre, $modelo) {
+        
+        $query = $this->db->query("SELECT *
+                                   FROM ordenes_trabajo
+                                   WHERE nro_serie = ".$this->db->escape($nro_serie)."
+                                   AND marca   = ".$this->db->escape($marca)."
+                                   AND calibre = ".$this->db->escape($calibre)." 
+                                   AND modelo  = ".$this->db->escape($modelo)."
+                                   AND estado_orden_trabajo = 0");
+        
+        return $query->num_rows();
+    }
     
     function cargoMarcas($nro_serie) {
         

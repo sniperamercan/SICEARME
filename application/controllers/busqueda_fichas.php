@@ -186,7 +186,6 @@ class busqueda_fichas extends CI_Controller {
     }    
     
     function seteoImpresion() {    
-        
         $this->load->view("impresion_view");    
     }
     
