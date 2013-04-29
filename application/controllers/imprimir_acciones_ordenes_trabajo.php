@@ -42,9 +42,9 @@ class imprimir_acciones_ordenes_trabajo extends CI_Controller {
         
         $nro_accion = $_SESSION['nro_accion'];
         
-        $result = $this->imprimir_ordenes_trabajo_model->consulta_db_acciones($nro_accion);
+        $result = $this->imprimir_acciones_ordenes_trabajo_model->consulta_db_acciones($nro_accion);
         
-        $concat .="
+        $concat ="
 
             <div class='datagrid'>
             <table>
@@ -67,7 +67,7 @@ class imprimir_acciones_ordenes_trabajo extends CI_Controller {
         $result[] = $row->tipo_accion;       
         */
             
-        switch($result[$i+2]) {
+        switch($result[2]) {
 
             case 0: //accion simple
                 $tipo_accion = "accion simple";
@@ -84,8 +84,8 @@ class imprimir_acciones_ordenes_trabajo extends CI_Controller {
 
         $concat .= "
             <tr>
-                <td style='text-align: center;'> ".$result[$i]." </td>
-                <td> ".$result[$i+1]." </td>
+                <td style='text-align: center;'> ".$result[0]." </td>
+                <td> ".$result[1]." </td>
                 <td> ".$tipo_accion." </td>
             </tr>
         ";
@@ -105,7 +105,7 @@ class imprimir_acciones_ordenes_trabajo extends CI_Controller {
     
     function verInformacion($nro_accion) {
         
-        $tipo_accion = $this->imprimir_ordenes_trabajo_model->cargoTipoAccion($nro_accion);
+        $tipo_accion = $this->imprimir_acciones_ordenes_trabajo_model->cargoTipoAccion($nro_accion);
         
         switch($tipo_accion) {
             
@@ -128,7 +128,7 @@ class imprimir_acciones_ordenes_trabajo extends CI_Controller {
     function verInformacionAccionSimple($nro_accion) {
         
         //obtengo informacion de la accion
-        $datos = $this->imprimir_ordenes_trabajo_model->verInformacionAccionSimple($nro_accion);
+        $datos = $this->imprimir_acciones_ordenes_trabajo_model->verInformacionAccionSimple($nro_accion);
         
         /*
          *  $retorno[] = $row->nro_orden;   0
@@ -174,7 +174,7 @@ class imprimir_acciones_ordenes_trabajo extends CI_Controller {
     function verInformacionAccionSecundaria($nro_accion) {
         
         //obtengo informacion de la accion
-        $datos = $this->imprimir_ordenes_trabajo_model->verInformacionAccionSimple($nro_accion);
+        $datos = $this->imprimir_acciones_ordenes_trabajo_model->verInformacionAccionSimple($nro_accion);
         
         /*
             $retorno[] = $row->nro_orden;   0
@@ -186,7 +186,7 @@ class imprimir_acciones_ordenes_trabajo extends CI_Controller {
         
         $nro_orden = $datos[0];
         
-        $datos = $this->imprimir_ordenes_trabajo_model->verInformacionAccionSecundaria($nro_orden, $nro_accion);
+        $datos = $this->imprimir_acciones_ordenes_trabajo_model->verInformacionAccionSecundaria($nro_orden, $nro_accion);
         
         /*
             $retorno[] = $row->nro_cambio;    0
@@ -223,7 +223,7 @@ class imprimir_acciones_ordenes_trabajo extends CI_Controller {
     function verInformacionAccionAsociada($nro_accion) {
         
         //obtengo informacion de la accion
-        $datos = $this->imprimir_ordenes_trabajo_model->verInformacionAccionSimple($nro_accion);
+        $datos = $this->imprimir_acciones_ordenes_trabajo_model->verInformacionAccionSimple($nro_accion);
         
         /*
             $retorno[] = $row->nro_orden;   0
@@ -235,7 +235,7 @@ class imprimir_acciones_ordenes_trabajo extends CI_Controller {
         
         $nro_orden = $datos[0];
         
-        $datos = $this->imprimir_ordenes_trabajo_model->verInformacionAccionAsociada($nro_orden, $nro_accion);
+        $datos = $this->imprimir_acciones_ordenes_trabajo_model->verInformacionAccionAsociada($nro_orden, $nro_accion);
         
         /*
             $retorno[] = $row->nro_cambio;          0
