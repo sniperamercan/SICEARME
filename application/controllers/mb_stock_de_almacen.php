@@ -294,9 +294,12 @@ class mb_stock_de_almacen extends CI_Controller {
     }
     
     function eliminar() {
-        $_SESSION['nro_parte']    = $_POST['nro_parte'];
-        $_SESSION['nombre_parte'] = $_POST['nombre_catalogo'];
-        $_SESSION['nro_catalogo'] = $_POST['nro_catalogo'];
+        $nro_parte    = $_POST['nro_parte'];
+        $nombre_parte = $_POST['nombre_catalogo'];
+        $nro_catalogo = $_POST['nro_catalogo'];
+        
+        $this->mb_stock_de_almacen_model->eliminar($nro_parte, $nombre_parte, $nro_catalogo);
+        echo 1;
     }    
     
 }
