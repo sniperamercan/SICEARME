@@ -149,13 +149,13 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> Nro accion   </th>
-                        <th onclick="orderBy(1)"> Nro orden    </th>
-                        <th onclick="orderBy(2)"> Fecha        </th>
-                        <th onclick="orderBy(3)"> Seccion      </th>
-                        <th onclick="orderBy(4)"> Tipo         </th>
-                        <th> Ver detalle      </th>
-                        <th> Imprimir         </th>
+                        <th> Nro orden   </th>
+                        <th> Nro accion    </th>
+                        <th> Fecha        </th>
+                        <th> Seccion      </th>
+                        <th> Tipo         </th>
+                        <th> Ver detalle  </th>
+                        <th> Imprimir     </th>
                     </tr>
                 </thead>
 
