@@ -43,7 +43,7 @@
                 $.ajax({ 
                     type: 'post',
                     url: '<?php echo base_url(); ?>mb_repuestos_nro_pieza/consulta/0',
-                    data: "nro_pieza="+nro_pieza+"&nro_catalogo="+nro_catalogo+"&nro_parte="+nro_parte+"&nombre_parte"+nombre_parte,
+                    data: "nro_pieza="+nro_pieza+"&nro_catalogo="+nro_catalogo+"&nro_parte="+nro_parte+"&nombre_parte="+nombre_parte,
                     success: function(){
                         cargoConsulta();
                     }

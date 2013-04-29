@@ -82,7 +82,7 @@ class mb_repuestos_nro_pieza extends CI_Controller {
             $_SESSION['condicion'] = $condicion;
         }
         
-        if(isset($_SESSION['condicion']) && !empty($_SESSION['condicion'])){
+        if(isset($_SESSION['condicion']) && !empty($_SESSION['condicion'])) {
             $condicion = $_SESSION['condicion'];      
         }else{
             $condicion = 1;
@@ -171,7 +171,7 @@ class mb_repuestos_nro_pieza extends CI_Controller {
         //Retorno de datos json
         $retorno = array();
         $retorno[] = $concat;
-        $retorno[] = $paginado;
+        //$retorno[] = $paginado;
         
         echo json_encode($retorno);
     }    
