@@ -164,7 +164,7 @@ class listado_acciones_ordenes_trabajo extends CI_Controller {
                     <td> ".$result[$i+3]." </td>
                     <td> ".$tipo_accion." </td>
                     <td onclick='verInformacion(".$aux_nro_accion.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
-                    <td onclick='imprimirAccion(".$aux_nro_accion.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/print.png' /> </td>
+                    <td onclick='imprimir(".$aux_nro_accion.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/print.png' /> </td>
                 </tr>
             ";
             
@@ -498,6 +498,10 @@ class listado_acciones_ordenes_trabajo extends CI_Controller {
         
         return $concat;        
         
+    }
+    
+    function imprimir() {
+        $_SESSION['nro_accion'] = $_POST['nro_accion'];
     }
 }
 
