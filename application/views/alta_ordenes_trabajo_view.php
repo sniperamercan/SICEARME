@@ -84,16 +84,29 @@
                 });                
             }            
             
+            function vacioCamposArma() {
+                $("#marca").html("");
+                $("#calibre").html("");
+                $("#modelo").html("");
+                $("#tipo_arma").val("");
+                $("#sistema").val("");
+            }
+            
             function cargoMarcas(nro_serie) {
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>alta_ordenes_trabajo/cargoMarcas",
-                   data: "nro_serie="+nro_serie,
-                   success: function(data) {
-                       $("#marca").html("");
-                       $("#marca").html(data);
-                   }
-                });                
+                
+                if(nro_serie == "") {
+                    vacioCamposArma();
+                }else {
+                    $.ajax({
+                       type: "post",
+                       url: "<?php base_url(); ?>alta_ordenes_trabajo/cargoMarcas",
+                       data: "nro_serie="+nro_serie,
+                       success: function(data) {
+                           $("#marca").html("");
+                           $("#marca").html(data);
+                       }
+                    }); 
+                }
             }
             
             function cargoCalibres(nro_serie, marca) {
