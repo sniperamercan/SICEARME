@@ -50,6 +50,25 @@
                 });                
             }      
             
+             function impresion(){                
+                $.colorbox({href:"<?php echo base_url('mb_repuestos_nro_pieza/seteoImpresion'); ?>", top: true, iframe: false, scrolling: false, innerWidth: 800, innerHeight: 200, title: "IMPRESION"});                
+            } 
+
+            function seteoImpresion(de_pagina, a_pagina){                
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo base_url("mb_repuestos_nro_pieza/armoImpresion"); ?>",
+                    data: "de_pagina="+de_pagina+"&a_pagina="+a_pagina,
+                    success: function(data){
+                        if(data == "1"){
+                            window.open ("<?php echo base_url("contenido_impresion"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0");
+                        }else{
+                            jAlert(data);
+                        }
+                    }                  
+                });
+            }            
+            
             function orderBy(param){            
                 $.ajax({
                     type: 'post',
@@ -125,7 +144,7 @@
         
         <br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp;             
+        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>                  
         
         <br /> 
         

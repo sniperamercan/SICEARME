@@ -175,6 +175,106 @@ class mb_repuestos_nro_pieza extends CI_Controller {
         
         echo json_encode($retorno);
     }    
+    
+    function seteoImpresion() { 
+        $this->load->view("impresion_view");    
+    }
+    
+    function armoImpresion(){   
+        
+        $de_pagina = $_POST['de_pagina'];
+        $a_pagina  = $_POST['a_pagina'];
+      
+        //Verifico el order si esta seteado si no por defecto de esta consulta
+        if(isset($_SESSION['order'])){
+            $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
+        }else{
+            $order = "nro_pieza";
+        }
+        //Fin verifico order
+        
+        if(isset($_SESSION['condicion']) && !empty($_SESSION['condicion'])){
+            $condicion = $_SESSION['condicion'];      
+        }else{
+            $condicion = 1;
+        }
+               
+        if( empty($de_pagina) || empty($a_pagina) ){            
+            echo "La pagina inicial y final deben de estar completadas ";
+        }else if( $a_pagina < $de_pagina ){
+            echo "La pagina inicila no puede ser mayor que la pagina final verifique";
+        }else if( $this->mb_repuestos_nro_pieza_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
+            echo "No existe tal cantidad de paginas para esa consulta verifique";
+        }else{
+            echo "1";
+            if( $this->mb_repuestos_nro_pieza_model->cantidadRegistros($condicion) <= 30 ){
+                $ini   = 0;
+                $param = 30;
+                $this->consultaImpresion($condicion, $ini, $param, $order);
+            }else{
+                if($de_pagina == $a_pagina){
+                    $ini   = $de_pagina * 30 - 30; //pagina inicial
+                    $param = 30;
+                }else{
+                    $ini   = $de_pagina * 30 - 30; //pagina inicial
+                    $param = ($a_pagina - $de_pagina) * 30 + 30; //cantidad de registros a mostrar
+                }
+                $this->consultaImpresion($condicion, $ini, $param, $order);
+            }
+        }    
+    }    
+    
+    function consultaImpresion($condicion, $param, $cantReg, $order) {        
+       
+        $result = array();
+        
+        if($param == ""){
+            $param = 0;
+        }            
+        
+        $concat = "";
+        
+        $result = $this->mb_repuestos_nro_pieza_model->consulta_db($param, $cantReg, $condicion, $order);
+                
+        
+        $concat .= '<center>';
+        
+        $concat .= '<table style="border: none; width: 50%">';
+        
+        $concat .= '
+            <tr>
+                <th> Nro pieza     </th>
+                <th> Nro parte     </th>
+                <th> Nombre        </th>
+                <th> Catalogo      </th>
+                <th> Tipo    </th>
+                <th> Marca   </th>
+                <th> Calibre </th>
+                <th> Modelo  </th>
+            </tr>   
+        ';
+                
+        for($i=0;$i<count($result);$i=$i+8) {            
+            $concat .= "
+                <tr> 
+                    <td  style='text-align: center;'> ".$result[$i]." </td>
+                    <td> ".$result[$i+1]." </td>
+                    <td> ".$result[$i+2]." </td>
+                    <td style='text-align: center;'> ".$result[$i+3]." </td>
+                    <td> ".$result[$i+4]." </td>
+                    <td> ".$result[$i+5]." </td>
+                    <td> ".$result[$i+6]." </td>
+                    <td> ".$result[$i+7]." </td>
+                </tr>
+            ";
+        }                  
+        
+        $concat .= '</table>';     
+                
+        $concat .= '</center>';
+               
+        $_SESSION['contenido'] = $concat;                
+    }     
        
     function orderBy() {     
         
