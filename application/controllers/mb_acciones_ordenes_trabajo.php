@@ -153,7 +153,7 @@ class mb_acciones_ordenes_trabajo extends CI_Controller {
             $concat .= "
                 <tr class='".$class."'> 
                     <td style='text-align: center;'> ".$result[$i]." </td>
-                    <td style='text-align: center;'> ".$result[$i+1]." </td>
+                    <td style='text-align: center; font-weight: bold; color: black;'> ".$result[$i+1]." </td>
                     <td style='text-align: center;'> ".$result[$i+2]." </td>
                     <td> ".$result[$i+3]." </td>
                     <td> ".$tipo_accion." </td>
