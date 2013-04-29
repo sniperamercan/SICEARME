@@ -41,6 +41,38 @@ class mb_repuestos_nro_pieza_model extends CI_Model {
         
         return $result;
     }
+    
+    function eliminar($nro_pieza, $nro_parte, $nombre_parte, $nro_interno_catalogo) {
+        
+        $this->db->trans_start();
+        
+            $data_stock_where = array(
+                'nro_pieza'            => $nro_pieza,
+                'nro_parte'            => $nro_parte,
+                'nombre_parte'         => $nombre_parte,
+                'nro_interno_catalogo' => $nro_interno_catalogo
+            );
+
+            $this->db->delete('stock_repuestos_nro_pieza', $data_stock_where);
+            
+            $data_db_logs = array(
+                'tipo_movimiento' => 'delete',
+                'tabla'           => 'stock_repuestos_nro_pieza',
+                'clave_tabla'     => 'nro_pieza = '.$nro_pieza.', nro_parte = '.$nro_parte.", nombre_parte = ".$nombre_parte.", nro_interno_catalogo = ".$nro_interno_catalogo,
+                'usuario'         => base64_decode($_SESSION['usuario'])
+            );             
+            
+            $this->db->insert('db_logs', $data_db_logs);
+        
+        $this->db->trans_complete();
+        
+        //verifico que la transaccion fue completada
+        if ($this->db->trans_status() === FALSE) {
+            return 0;
+        }else {
+            return 1;
+        }
+    }    
 }
 
 ?>

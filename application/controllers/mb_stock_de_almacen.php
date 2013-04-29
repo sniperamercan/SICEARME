@@ -298,8 +298,7 @@ class mb_stock_de_almacen extends CI_Controller {
         $nombre_parte = $_POST['nombre_catalogo'];
         $nro_catalogo = $_POST['nro_catalogo'];
         
-        $this->mb_stock_de_almacen_model->eliminar($nro_parte, $nombre_parte, $nro_catalogo);
-        echo 1;
+        return $this->mb_stock_de_almacen_model->eliminar($nro_parte, $nombre_parte, $nro_catalogo);
     }    
     
 }
