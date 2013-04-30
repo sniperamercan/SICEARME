@@ -110,7 +110,10 @@
                        $('#marca').val(data[2]);
                        $('#calibre').val(data[3]);
                        $('#modelo').val(data[4]);
-                       
+                       $('#tipo_arma').val("");  
+                       $('#sistema').val(""); 
+                       $('#tipo_arma').val(data[5]);
+                       $('#sistema').val(data[6]);
                    }
                 });                
             } 

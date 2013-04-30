@@ -120,6 +120,8 @@ class alta_fichas extends CI_Controller {
             $retorno[] = $info_catalogos[0];
             $retorno[] = $info_catalogos[1];
             $retorno[] = $info_catalogos[2];
+            $retorno[] = $info_catalogos[3];
+            $retorno[] = $info_catalogos[4];
         }
         
         echo json_encode($retorno);
