@@ -170,7 +170,7 @@
             <fieldset>	
                 
                 <dl>
-                <dt><label for="fecha"> Fecha </label></dt>
+                <dt><label for="fecha"> Fecha <font color="red"> * </font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="fecha" class="text" value="<?php echo $fecha; ?>" /></dd>
                 </dl>                
                 
@@ -179,39 +179,39 @@
                 <p class="subtituloform"> Datos del arma </p>
                 
                 <dl> 		
-                <dt><label for="nro_serie"> Nro serie </label></dt>	
+                <dt><label for="nro_serie"> Nro serie <font color="red"> * </font> </label></dt>	
                 <dd><select id="nro_serie" onchange="cargoMarcas(this.value);"> <?php echo $nro_series; ?> </select> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="marca"> Marca </label></dt>	
+                <dt><label for="marca"> Marca <font color="red"> * </font> </label></dt>	
                 <dd><select id="marca" onchange="cargoCalibres($('#nro_serie').val(), this.value);"> <?php echo $marca; ?> </select></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="calibre"> Calibre </label></dt>	
+                <dt><label for="calibre"> Calibre <font color="red"> * </font> </label></dt>	
                 <dd><select id="calibre" onchange="cargoModelos($('#nro_serie').val(), $('#marca').val(), this.value);"> <?php echo $calibre; ?> </select></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="modelo"> Modelo </label></dt>	
+                <dt><label for="modelo"> Modelo <font color="red"> * </font> </label></dt>	
                 <dd><select id="modelo" onchange="cargoDatos($('#nro_serie').val(), $('#marca').val(), $('#calibre').val(), this.value);"> <?php echo $modelo; ?> </select></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="tipo_arma"> Tipo arma </label></dt>	
+                <dt><label for="tipo_arma"> Tipo arma <font color="red"> * </font> </label></dt>	
                 <dd><input readonly="readonly" type="text" id="tipo_arma" class="txtautomatico" value="<?php echo $tipo_arma; ?>" /></dd> 					
                 </dl>
                 
                 <dl>
-                <dt><label for="sistema"> Sistema </label></dt>
+                <dt><label for="sistema"> Sistema <font color="red"> * </font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="sistema" class="txtautomatico" value="<?php echo $sistema; ?>" /></dd>
                 </dl>                
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <dl>
-                <dt><label for="unidad"> Unidad </label></dt>
+                <dt><label for="unidad"> Unidad <font color="red"> * </font> </label></dt>
                 <dd><select id="unidad"> <?php echo $unidades; ?> </select> <img style="cursor: pointer;" onclick="verHistorico();" src="<?php echo base_url(); ?>images/eye.png" alt="ver historico" /></dd>
                 </dl>                  
                 

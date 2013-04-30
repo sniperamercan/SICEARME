@@ -152,12 +152,12 @@
             <fieldset>	
             
                 <dl>
-                <dt><label> Orden de trabajo  </label></dt>
+                <dt><label> Orden de trabajo <font color="red"> * </font> </label></dt>
                 <dd><label> Nro - <?php echo $nro_orden ?>  </label></dd>
                 </dl>                 
                 
                 <dl>
-                <dt><label> Buscar repuesto </label></dt>
+                <dt><label> Buscar repuesto <font color="red"> * </font> </label></dt>
                 <dd><img style="cursor: pointer;" onclick="busquedaRepuestos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>  
                 
@@ -184,7 +184,7 @@
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <dl>
-                <dt><label> Piezas armamento </label></dt>
+                <dt><label> Piezas armamento <font color="red"> * </font> </label></dt>
                 <dd><img style="cursor: pointer;" onclick="busquedaPiezasArmamento();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>                 
                 

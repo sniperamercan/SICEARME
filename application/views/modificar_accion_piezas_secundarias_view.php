@@ -124,12 +124,12 @@
             <fieldset>	
             
                 <dl>
-                <dt><label> Orden de trabajo  </label></dt>
+                <dt><label> Orden de trabajo <font color="red"> * </font> </label></dt>
                 <dd><label> Nro - <?php echo $nro_orden ?>  </label></dd>
                 </dl>                 
                 
                 <dl>
-                <dt><label> Buscar repuesto </label></dt>
+                <dt><label> Buscar repuesto <font color="red"> * </font> </label></dt>
                 <dd><img style="cursor: pointer;" onclick="busquedaRepuestos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>                 
                 
@@ -149,7 +149,7 @@
                 </dl> 
                 
                 <dl>
-                <dt><label for="cant_usar"> Cant a usar </label></dt>
+                <dt><label for="cant_usar"> Cant a usar <font color="red"> * </font> </label></dt>
                 <dd><input type="text" id="cant_usar" class="number" /></dd>
                 </dl> 
                 
