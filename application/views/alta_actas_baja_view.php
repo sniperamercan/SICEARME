@@ -274,6 +274,11 @@
                    success: function(data) {
                        if(data[0] == 1) {
                            $("#entregas_fichas").append(data[1]);
+                           jAlert("CORRECTO: Armamento agregado con exito", "Correcto");
+                           $("#nro_serie").val("");
+                           $("#marca").val("");
+                           $("#calibre").val("");
+                           $("#modelo").val("");
                        }else {
                            jAlert(data[0], "Error");
                        }
@@ -316,6 +321,12 @@
                    success: function(data) {
                        if(data[0] == 1) {
                            $("#entregas_accesorios").append(data[1]);
+                           jAlert("CORRECTO: Accesorio agregado con exito", "Correcto");
+                           $("#nro_serie_accesorio").val("");
+                           $("#marca_accesorio").val("");
+                           $("#calibre_accesorio").val("");
+                           $("#modelo_accesorio").val("");
+                           $("#nro_accesorio").val("");
                        }else {
                            jAlert(data[0], "Error");
                        }
