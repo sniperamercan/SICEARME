@@ -28,6 +28,19 @@ class modificar_ordenes_trabajo_model extends CI_Model {
         return $datos;
     }
 
+    function verificoOrdenTrabajo($nro_serie, $marca, $calibre, $modelo) {
+        
+        $query = $this->db->query("SELECT *
+                                   FROM ordenes_trabajo
+                                   WHERE nro_serie = ".$this->db->escape($nro_serie)."
+                                   AND marca   = ".$this->db->escape($marca)."
+                                   AND calibre = ".$this->db->escape($calibre)." 
+                                   AND modelo  = ".$this->db->escape($modelo)."
+                                   AND estado_orden_trabajo = 0");
+        
+        return $query->num_rows();
+    }
+    
     function cargoUnidades() {
         
         $query = $this->db->query("SELECT idunidad, nombreunidad

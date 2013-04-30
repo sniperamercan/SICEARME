@@ -68,14 +68,14 @@
                    dataType: "json",
                    url: "<?php base_url(); ?>modificar_ordenes_trabajo/cargoFichasFiltro",
                    success: function(data) {
-                       $("#nro_serie").html("");
-                       $("#nro_serie").html(data[0]);
-                       $("#marca").html("");
-                       $("#marca").html(data[1]);
-                       $("#calibre").html("");
-                       $("#calibre").html(data[2]);
-                       $("#modelo").html("");
-                       $("#modelo").html(data[3]);
+                       $("#nro_serie").val("");
+                       $("#nro_serie").val(data[0]);
+                       $("#marca").val("");
+                       $("#marca").val(data[1]);
+                       $("#calibre").val("");
+                       $("#calibre").val(data[2]);
+                       $("#modelo").val("");
+                       $("#modelo").val(data[3]);
                        $("#tipo_arma").val("");
                        $("#sistema").val("");
                        $("#tipo_arma").val(data[4]);
@@ -180,32 +180,32 @@
                 
                 <dl> 		
                 <dt><label for="nro_serie"> Nro serie <font color="red"> * </font> </label></dt>	
-                <dd><select id="nro_serie" onchange="cargoMarcas(this.value);"> <?php echo $nro_series; ?> </select> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" value="<?php echo $nro_serie; ?>" /> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="marca"> Marca <font color="red"> * </font> </label></dt>	
-                <dd><select id="marca" onchange="cargoCalibres($('#nro_serie').val(), this.value);"> <?php echo $marca; ?> </select></dd> 					
+                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" value="<?php echo $marca; ?>" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre"> Calibre <font color="red"> * </font> </label></dt>	
-                <dd><select id="calibre" onchange="cargoModelos($('#nro_serie').val(), $('#marca').val(), this.value);"> <?php echo $calibre; ?> </select></dd> 					
+                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" value="<?php echo $calibre; ?>" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="modelo"> Modelo <font color="red"> * </font> </label></dt>	
-                <dd><select id="modelo" onchange="cargoDatos($('#nro_serie').val(), $('#marca').val(), $('#calibre').val(), this.value);"> <?php echo $modelo; ?> </select></dd> 					
+                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" value="<?php echo $modelo; ?>" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="tipo_arma"> Tipo arma <font color="red"> * </font> </label></dt>	
-                <dd><input readonly="readonly" type="text" id="tipo_arma" class="txtautomatico" value="<?php echo $tipo_arma; ?>" /></dd> 					
+                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" value="<?php echo $tipo_arma; ?>" /></dd> 					
                 </dl>
                 
                 <dl>
                 <dt><label for="sistema"> Sistema <font color="red"> * </font> </label></dt>
-                <dd><input readonly="readonly" type="text" id="sistema" class="txtautomatico" value="<?php echo $sistema; ?>" /></dd>
+                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" value="<?php echo $sistema; ?>" /></dd>
                 </dl>                
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>

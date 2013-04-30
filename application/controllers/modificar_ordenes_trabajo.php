@@ -52,6 +52,11 @@ class modificar_ordenes_trabajo extends CI_Controller {
         $data['observaciones'] = $datos_orden[5];
         $idunidad              = $datos_orden[6];
         
+        $data['nro_serie'] = $nro_serie;
+        $data['marca']     = $marca;
+        $data['calibre']   = $calibre;
+        $data['modelo']    = $modelo;
+        
         //Cargo las unidades
         $unidades = $this->modificar_ordenes_trabajo_model->cargoUnidades();
         
@@ -65,24 +70,6 @@ class modificar_ordenes_trabajo extends CI_Controller {
             }
         }
         //Fin cargo unidades
-        
-        //Cargo nro de series de armamentos que esten en deposito inicial
-        $nro_series = $this->modificar_ordenes_trabajo_model->cargoNroSeries();
-        
-        $data['nro_series'] = "<option> </option>";
-        
-        foreach($nro_series as $val) {
-            if($val == $nro_serie) {
-                $data['nro_series'] .= "<option selected='selected' value='".$val."'>".$val."</option>";
-            }else {
-                $data['nro_series'] .= "<option value='".$val."'>".$val."</option>";
-            }
-        }
-        //Fin cargo nro de series de armamento en deposito inicial
-        
-        $data['marca']   = "<option selected='selected' value='".$marca."'>".$marca."</option>";
-        $data['calibre'] = "<option selected='selected' value='".$calibre."'>".$calibre."</option>";
-        $data['modelo']  = "<option selected='selected' value='".$modelo."'>".$modelo."</option>";
         
         $datos = $this->modificar_ordenes_trabajo_model->cargoDatos($nro_serie, $marca, $calibre, $modelo);
         
@@ -169,38 +156,12 @@ class modificar_ordenes_trabajo extends CI_Controller {
         $calibre   = $_SESSION['seleccion_busqueda2'];
         $modelo    = $_SESSION['seleccion_busqueda3'];
         
-        if(empty($nro_serie) && $this->modificar_ordenes_trabajo_model->hayNroSeries()) {
-            //Cargo nro de series de armamentos que esten en deposito inicial
-            $nro_series_array = $this->modificar_ordenes_trabajo_model->cargoNroSeries();
-
-            $aux = '""';
-            $nro_series  = "<option> </option>";
-
-            foreach($nro_series_array as $val) {
-                $aux = '"'.$val.'"';
-                $nro_series .= "<option value='".$val."'>".$val."</option>";
-            }
-            //Fin cargo nro de series de armamento en deposito inicial            
-        }else {
-            $nro_series  = "<option> </option>";
-            $nro_series .= "<option selected='selected' value='".$nro_serie."'>".$nro_serie."</option>";
-        }
-
-        $marcas  = "<option> </option>";
-        $marcas .= "<option selected='selected' value='".$marca."'>".$marca."</option>";
-        
-        $calibres  = "<option> </option>";
-        $calibres .= "<option selected='selected' value='".$calibre."'>".$calibre."</option>";
-        
-        $modelos  = "<option> </option>";
-        $modelos .= "<option selected='selected' value='".$modelo."'>".$modelo."</option>";        
-        
         //Retorno los datos
         $retorno = array();
-        $retorno[] = $nro_series;
-        $retorno[] = $marcas;
-        $retorno[] = $calibres;
-        $retorno[] = $modelos;
+        $retorno[] = $nro_serie;
+        $retorno[] = $marca;
+        $retorno[] = $calibre;
+        $retorno[] = $modelo;
         
         $datos = $this->modificar_ordenes_trabajo_model->cargoDatos($nro_serie, $marca, $calibre, $modelo);
         
@@ -270,40 +231,44 @@ class modificar_ordenes_trabajo extends CI_Controller {
         $modelo        = preg_replace($patterns, '', $_POST["modelo"]);
         $observaciones = preg_replace($patterns, '', $_POST["observaciones"]);
         
-        $mensjError = array();
+        $mensja_error = array();
         $retorno = array();
         
         if(empty($fecha)) {
-            $mensjError[] = 1;
+            $mensja_error[] = 1;
         }
         
         if(empty($unidad)) {
-            $mensjError[] = 2;
+            $mensja_error[] = 2;
         }
         
         if(empty($nro_serie)) {
-            $mensjError[] = 3;
+            $mensja_error[] = 3;
         }
         
         if(empty($marca)) {
-            $mensjError[] = 4;
+            $mensja_error[] = 4;
         }        
         
         if(empty($calibre)) {
-            $mensjError[] = 5;
+            $mensja_error[] = 5;
         }        
 
         if(empty($modelo)) {
-            $mensjError[] = 6;
+            $mensja_error[] = 6;
         }        
 
         if(empty($observaciones)) {
-            $mensjError[] = 7;
+            $mensja_error[] = 7;
+        }  
+        
+        if($this->alta_ordenes_trabajo_model->verificoOrdenTrabajo($nro_serie, $marca, $calibre, $modelo)) {
+            $mensja_error[] = 8;
         }        
        
-        if(count($mensjError) > 0) {
+        if(count($mensja_error) > 0) {
             
-            switch($mensjError[0]) {
+            switch($mensja_error[0]) {
                 
                 case 1:
                     $retorno[] = $this->mensajes->errorVacio('fecha');
@@ -332,6 +297,10 @@ class modificar_ordenes_trabajo extends CI_Controller {
                 case 7:
                     $retorno[] = $this->mensajes->errorVacio('observaciones');
                     break;
+                
+                case 8:
+                    $retorno[] = "ERROR: El armamento seleccionado ya tiene una orden de trabajo abierta";
+                    break;                
             }
         }else {
             $nro_orden = $_SESSION['nro_orden'];
