@@ -256,12 +256,12 @@
             <fieldset>	
 
                 <dl>
-                <dt><label for="fecha"> Fecha </label></dt>
+                <dt><label for="fecha"> Fecha <font color="red"> * </font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="fecha" class="text" /></dd>
                 </dl>                
                 
                 <dl>
-                <dt><label for="nro_orden"> Nro orden </label></dt>
+                <dt><label for="nro_orden"> Nro orden <font color="red"> * </font> </label></dt>
                 <dd><select id="nro_orden" onchange='cargoDatosArma(this.value);'> <?php echo $nro_ordenes ?> </select> <img style="cursor: pointer;" onclick="busquedaOrdenesTrabajo();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>                 
                 
@@ -297,7 +297,7 @@
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <dl>
-                <dt><label for="seccion"> Seccion </label></dt>
+                <dt><label for="seccion"> Seccion <font color="red"> * </font> </label></dt>
                 <dd><select id="seccion"> <?php echo $secciones ?> </select> <img style="cursor: pointer;" onclick="crearSeccion();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
                 </dl>       
                 

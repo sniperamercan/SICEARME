@@ -114,12 +114,12 @@
             <fieldset>	
                 
                 <dl>
-                <dt><label for="nro_pieza"> Nro pieza </label></dt>
+                <dt><label for="nro_pieza"> Nro pieza <font color="red"> * </font></label></dt>
                 <dd><input type="text" id="nro_pieza" class="number" /></dd>
                 </dl>                 
                 
                 <dl>
-                <dt><label> Buscar repuesto </label></dt>
+                <dt><label> Buscar repuesto <font color="red"> * </font></label></dt>
                 <dd><img style="cursor: pointer;" onclick="busquedaRepuestos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>                 
                 

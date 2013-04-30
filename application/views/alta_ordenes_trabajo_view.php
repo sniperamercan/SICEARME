@@ -179,7 +179,7 @@
             <fieldset>	
                 
                 <dl>
-                <dt><label for="fecha"> Fecha </label></dt>
+                <dt><label for="fecha"> Fecha <font color="red"> * </font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="fecha" class="text" /></dd>
                 </dl>                
                 
@@ -188,39 +188,39 @@
                 <p class="subtituloform"> Datos del arma </p>
                 
                 <dl> 		
-                <dt><label for="nro_serie"> Nro serie </label></dt>	
+                <dt><label for="nro_serie"> Nro serie <font color="red"> * </font> </label></dt>	
                 <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" /> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="marca"> Marca </label></dt>	
+                <dt><label for="marca"> Marca <font color="red"> * </font> </label></dt>	
                 <dd><input readonly="readonly" type="text" id="marca" class="txtautomatico" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="calibre"> Calibre </label></dt>	
+                <dt><label for="calibre"> Calibre <font color="red"> * </font> </label></dt>	
                 <dd><input readonly="readonly" type="text" id="calibre" class="txtautomatico" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="modelo"> Modelo </label></dt>	
+                <dt><label for="modelo"> Modelo <font color="red"> * </font> </label></dt>	
                 <dd><input readonly="readonly" type="text" id="modelo" class="txtautomatico" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="tipo_arma"> Tipo arma </label></dt>	
+                <dt><label for="tipo_arma"> Tipo arma <font color="red"> * </font> </label></dt>	
                 <dd><input readonly="readonly" type="text" id="tipo_arma" class="txtautomatico" /></dd> 					
                 </dl>
                 
                 <dl>
-                <dt><label for="sistema"> Sistema </label></dt>
+                <dt><label for="sistema"> Sistema <font color="red"> * </font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="sistema" class="txtautomatico" /></dd>
                 </dl>                
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <dl>
-                <dt><label for="unidad"> Unidad </label></dt>
+                <dt><label for="unidad"> Unidad <font color="red"> * </font> </label></dt>
                 <dd><select id="unidad"> <?php echo $unidades; ?> </select> <img style="cursor: pointer;" onclick="verHistorico();" src="<?php echo base_url(); ?>images/eye.png" alt="ver historico" /></dd>
                 </dl>                  
                 
