@@ -321,7 +321,7 @@
                 
                 <dl> 		
                 <dt><label for="nro_serie"> Nro serie </label></dt>	
-                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" /><img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" /> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
