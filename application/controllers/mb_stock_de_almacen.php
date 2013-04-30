@@ -155,7 +155,7 @@ class mb_stock_de_almacen extends CI_Controller {
         //Retorno de datos json
         $retorno = array();
         $retorno[] = $concat;
-        $retorno[] = $paginado;
+        //$retorno[] = $paginado;
         
         echo json_encode($retorno);
     }    

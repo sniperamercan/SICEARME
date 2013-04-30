@@ -24,8 +24,8 @@ class mb_stock_de_almacen_model extends CI_Model {
                                    FROM stock_repuestos s
                                    INNER JOIN catalogos c ON s.nro_interno_catalogo = c.nro_interno
                                    WHERE ".$condicion."
-                                   ORDER BY ".$order."
-                                   LIMIT ".$ini.",".$param);
+                                   ORDER BY ".$order);
+                                   //LIMIT ".$ini.",".$param);
         
         foreach($query->result() as $row){
             $result[] = $row->nro_parte;
