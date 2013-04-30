@@ -189,38 +189,12 @@ class alta_actas_alta extends CI_Controller {
         $calibre   = $_SESSION['seleccion_busqueda2'];
         $modelo    = $_SESSION['seleccion_busqueda3'];
         
-        if(empty($nro_serie)) {
-            //Cargo nro de series de armamentos que esten en deposito inicial
-            $nro_series_array = $this->alta_actas_alta_model->cargoNroSeries();
-
-            $aux = '""';
-            $nro_series  = "<option> </option>";
-
-            foreach($nro_series_array as $val) {
-                $aux = '"'.$val.'"';
-                $nro_series .= "<option value='".$val."'>".$val."</option>";
-            }
-            //Fin cargo nro de series de armamento en deposito inicial            
-        }else {
-            $nro_series  = "<option> </option>";
-            $nro_series .= "<option selected='selected' value='".$nro_serie."'>".$nro_serie."</option>";
-        }
-
-        $marcas  = "<option> </option>";
-        $marcas .= "<option selected='selected' value='".$marca."'>".$marca."</option>";
-        
-        $calibres  = "<option> </option>";
-        $calibres .= "<option selected='selected' value='".$calibre."'>".$calibre."</option>";
-        
-        $modelos  = "<option> </option>";
-        $modelos .= "<option selected='selected' value='".$modelo."'>".$modelo."</option>";        
-        
         //Retorno los datos
         $retorno = array();
-        $retorno[] = $nro_series;
-        $retorno[] = $marcas;
-        $retorno[] = $calibres;
-        $retorno[] = $modelos;
+        $retorno[] = $nro_serie;
+        $retorno[] = $marca;
+        $retorno[] = $calibre;
+        $retorno[] = $modelo;
         
         echo json_encode($retorno);        
     }
@@ -232,43 +206,14 @@ class alta_actas_alta extends CI_Controller {
         $calibre       = $_SESSION['seleccion_busqueda2'];
         $modelo        = $_SESSION['seleccion_busqueda3'];
         $nro_accesorio = $_SESSION['seleccion_busqueda4'];
-       
-        if(empty($nro_serie)) {
-            //Cargo nro de series de armamentos que esten en deposito inicial
-            $nro_series_array = $this->alta_actas_alta_model->cargoNroSeries();
-
-            $aux = '""';
-            $nro_series  = "<option> </option>";
-
-            foreach($nro_series_array as $val) {
-                $aux = '"'.$val.'"';
-                $nro_series .= "<option value='".$val."'>".$val."</option>";
-            }
-            //Fin cargo nro de series de armamento en deposito inicial            
-        }else {
-            $nro_series  = "<option> </option>";
-            $nro_series .= "<option selected='selected' value='".$nro_serie."'>".$nro_serie."</option>";
-        }
-
-        $marcas  = "<option> </option>";
-        $marcas .= "<option selected='selected' value='".$marca."'>".$marca."</option>";
-        
-        $calibres  = "<option> </option>";
-        $calibres .= "<option selected='selected' value='".$calibre."'>".$calibre."</option>";
-
-        $modelos  = "<option> </option>";
-        $modelos .= "<option selected='selected' value='".$modelo."'>".$modelo."</option>";
-        
-        $nro_accesorios  = "<option> </option>";
-        $nro_accesorios .= "<option selected='selected' value='".$nro_accesorio."'>".$nro_accesorio."</option>";        
         
         //Retorno los datos
         $retorno = array();
-        $retorno[] = $nro_series;
-        $retorno[] = $marcas;
-        $retorno[] = $calibres;
-        $retorno[] = $modelos;
-        $retorno[] = $nro_accesorios;
+        $retorno[] = $nro_serie;
+        $retorno[] = $marca;
+        $retorno[] = $calibre;
+        $retorno[] = $modelo;
+        $retorno[] = $nro_accesorio;
         
         echo json_encode($retorno);        
     }    

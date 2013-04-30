@@ -155,14 +155,14 @@
                    dataType: "json",
                    url: "<?php base_url(); ?>alta_actas_alta/cargoFichasFiltro",
                    success: function(data) {
-                       $("#nro_serie").html("");
-                       $("#nro_serie").html(data[0]);
-                       $("#marca").html("");
-                       $("#marca").html(data[1]);
-                       $("#calibre").html("");
-                       $("#calibre").html(data[2]);
-                       $("#modelo").html("");
-                       $("#modelo").html(data[3]);
+                       $("#nro_serie").val("");
+                       $("#nro_serie").val(data[0]);
+                       $("#marca").val("");
+                       $("#marca").val(data[1]);
+                       $("#calibre").val("");
+                       $("#calibre").val(data[2]);
+                       $("#modelo").val("");
+                       $("#modelo").val(data[3]);
                    }
                 });                
             } 
@@ -173,16 +173,16 @@
                    dataType: "json",
                    url: "<?php base_url(); ?>alta_actas_alta/cargoAccesoriosFiltro",
                    success: function(data) {
-                       $("#nro_serie_accesorio").html("");
-                       $("#nro_serie_accesorio").html(data[0]);
-                       $("#marca_accesorio").html("");
-                       $("#marca_accesorio").html(data[1]);
-                       $("#calibre_accesorio").html("");
-                       $("#calibre_accesorio").html(data[2]);
-                       $("#modelo_accesorio").html("");
-                       $("#modelo_accesorio").html(data[3]);
-                       $("#nro_accesorio").html("");
-                       $("#nro_accesorio").html(data[4]);                       
+                       $("#nro_serie_accesorio").val("");
+                       $("#nro_serie_accesorio").val(data[0]);
+                       $("#marca_accesorio").val("");
+                       $("#marca_accesorio").val(data[1]);
+                       $("#calibre_accesorio").val("");
+                       $("#calibre_accesorio").val(data[2]);
+                       $("#modelo_accesorio").val("");
+                       $("#modelo_accesorio").val(data[3]);
+                       $("#nro_accesorio").val("");
+                       $("#nro_accesorio").val(data[4]);                       
                    }
                 });                
             } 
@@ -321,22 +321,22 @@
                 
                 <dl> 		
                 <dt><label for="nro_serie"> Nro serie </label></dt>	
-                <dd><select id="nro_serie" onchange="cargoMarcas(this.value);"> <?php echo $nro_series; ?> </select> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" /><img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="marca"> Marca </label></dt>	
-                <dd><select id="marca" onchange="cargoCalibres($('#nro_serie').val(), this.value);"> </select></dd> 					
+                <dd><input readonly="readonly" type="text" id="marca" class="txtautomatico" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre"> Calibre </label></dt>	
-                <dd><select id="calibre" onchange="cargoModelos($('#nro_serie').val(), $('#marca').val(), this.value);"> </select></dd> 					
+                <dd><input readonly="readonly" type="text" id="calibre" class="txtautomatico" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="modelo"> Modelo </label></dt>	
-                <dd><select id="modelo"> </select></dd> 					
+                <dd><input readonly="readonly" type="text" id="modelo" class="txtautomatico" /></dd> 					
                 </dl>
                 
                 <button style="margin-right: 20px;" onclick="agregarFicha();"> Agregar armamento </button>     
@@ -347,27 +347,27 @@
                 
                 <dl> 		
                 <dt><label for="nro_serie_accesorio"> Nro serie </label></dt>	
-                <dd><select id="nro_serie_accesorio" onchange="cargoMarcasAccesorios(this.value);"> <?php echo $nro_series_accesorios; ?> </select> <img style="cursor: pointer;" onclick="busquedaAccesorios();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><input readonly="readonly" type="text" id="nro_serie_accesorio" class="txtautomatico" /> <img style="cursor: pointer;" onclick="busquedaAccesorios();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="marca_accesorio"> Marca </label></dt>	
-                <dd><select id="marca_accesorio" onchange="cargoCalibresAccesorios($('#nro_serie_accesorio').val(), this.value);"> </select> </dd> 					
+                <dd><input readonly="readonly" type="text" id="marca_accesorio" class="txtautomatico" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre_accesorio"> Calibre </label></dt>	
-                <dd><select id="calibre_accesorio" onchange="cargoModelosAccesorios($('#nro_serie_accesorio').val(), $('#marca_accesorio').val(), this.value);"> </select> </dd> 					
+                <dd><input readonly="readonly" type="text" id="calibre_accesorio" class="txtautomatico" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="modelo_accesorio"> Modelo </label></dt>	
-                <dd><select id="modelo_accesorio" onchange="cargoNroAccesorios($('#nro_serie_accesorio').val(), $('#marca_accesorio').val(), $('#calibre_accesorio').val(), $('#modelo_accesorio').val());"> </select></dd> 					
+                <dd><input readonly="readonly" type="text" id="modelo_accesorio" class="txtautomatico" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="nro_accesorio"> Nro accesorio </label></dt>	
-                <dd><select id="nro_accesorio"> </select></dd> 					
+                <dd><input readonly="readonly" type="text" id="nro_accesorio" class="txtautomatico" /></dd> 					
                 </dl>                
                 
                 <button style="margin-right: 20px;" onclick="agregarAccesorio();"> Agregar accesorio </button>               
