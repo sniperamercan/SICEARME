@@ -68,14 +68,14 @@
                    dataType: "json",
                    url: "<?php base_url(); ?>alta_ordenes_trabajo/cargoFichasFiltro",
                    success: function(data) {
-                       $("#nro_serie").html("");
-                       $("#nro_serie").html(data[0]);
-                       $("#marca").html("");
-                       $("#marca").html(data[1]);
-                       $("#calibre").html("");
-                       $("#calibre").html(data[2]);
-                       $("#modelo").html("");
-                       $("#modelo").html(data[3]);
+                       $("#nro_serie").val("");
+                       $("#nro_serie").val(data[0]);
+                       $("#marca").val("");
+                       $("#marca").val(data[1]);
+                       $("#calibre").val("");
+                       $("#calibre").val(data[2]);
+                       $("#modelo").val("");
+                       $("#modelo").val(data[3]);
                        $("#tipo_arma").val("");
                        $("#sistema").val("");
                        $("#tipo_arma").val(data[4]);
@@ -189,22 +189,22 @@
                 
                 <dl> 		
                 <dt><label for="nro_serie"> Nro serie </label></dt>	
-                <dd><select id="nro_serie" onchange="cargoMarcas(this.value);"> <?php echo $nro_series; ?> </select> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" /> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="marca"> Marca </label></dt>	
-                <dd><select id="marca" onchange="cargoCalibres($('#nro_serie').val(), this.value);"> </select></dd> 					
+                <dd><input readonly="readonly" type="text" id="marca" class="txtautomatico" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre"> Calibre </label></dt>	
-                <dd><select id="calibre" onchange="cargoModelos($('#nro_serie').val(), $('#marca').val(), this.value);"> </select></dd> 					
+                <dd><input readonly="readonly" type="text" id="calibre" class="txtautomatico" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="modelo"> Modelo </label></dt>	
-                <dd><select id="modelo" onchange="cargoDatos($('#nro_serie').val(), $('#marca').val(), $('#calibre').val(), this.value);"> </select></dd> 					
+                <dd><input readonly="readonly" type="text" id="modelo" class="txtautomatico" /></dd> 					
                 </dl>
                 
                 <dl> 		

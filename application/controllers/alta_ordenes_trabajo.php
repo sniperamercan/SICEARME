@@ -133,38 +133,12 @@ class alta_ordenes_trabajo extends CI_Controller {
         $calibre   = $_SESSION['seleccion_busqueda2'];
         $modelo    = $_SESSION['seleccion_busqueda3'];
         
-        if(empty($nro_serie) && $this->alta_ordenes_trabajo_model->hayNroSeries()) {
-            //Cargo nro de series de armamentos que esten en deposito inicial
-            $nro_series_array = $this->alta_ordenes_trabajo_model->cargoNroSeries();
-
-            $aux = '""';
-            $nro_series  = "<option> </option>";
-
-            foreach($nro_series_array as $val) {
-                $aux = '"'.$val.'"';
-                $nro_series .= "<option value='".$val."'>".$val."</option>";
-            }
-            //Fin cargo nro de series de armamento en deposito inicial            
-        }else {
-            $nro_series  = "<option> </option>";
-            $nro_series .= "<option selected='selected' value='".$nro_serie."'>".$nro_serie."</option>";
-        }
-
-        $marcas  = "<option> </option>";
-        $marcas .= "<option selected='selected' value='".$marca."'>".$marca."</option>";
-        
-        $calibres  = "<option> </option>";
-        $calibres .= "<option selected='selected' value='".$calibre."'>".$calibre."</option>";
-        
-        $modelos  = "<option> </option>";
-        $modelos .= "<option selected='selected' value='".$modelo."'>".$modelo."</option>";        
-        
         //Retorno los datos
         $retorno = array();
-        $retorno[] = $nro_series;
-        $retorno[] = $marcas;
-        $retorno[] = $calibres;
-        $retorno[] = $modelos;
+        $retorno[] = $nro_serie;
+        $retorno[] = $marca;
+        $retorno[] = $calibre;
+        $retorno[] = $modelo;
         
         $datos = $this->alta_ordenes_trabajo_model->cargoDatos($nro_serie, $marca, $calibre, $modelo);
         
