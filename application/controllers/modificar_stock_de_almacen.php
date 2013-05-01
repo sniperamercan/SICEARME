@@ -28,6 +28,13 @@ class modificar_stock_de_almacen extends CI_Controller {
     }
     
     function index() {      
+        
+        //cargo datos del repusto en base a variables de sesion
+        $nro_parte    = $_SESSION['nro_parte'];
+        $nombre_parte = $_SESSION['nombre_parte'];
+        
+        
+        
         $this->load->view('modificar_stock_de_almacen_view');
     }
     
