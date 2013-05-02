@@ -180,6 +180,7 @@ class listado_ordenes_trabajo extends CI_Controller {
                     <td style='font-weight: bold;'> ".$estado_arma." </td>
                     <td onclick='verObservaciones(".$aux_nro_orden.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
                     <td onclick='verAcciones(".$aux_nro_orden.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
+                    <td onclick='imprimir(".$aux_nro_orden.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
                     <td onclick='imprimir(".$aux_nro_orden.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/print.png' /> </td>
                 </tr>
             ";

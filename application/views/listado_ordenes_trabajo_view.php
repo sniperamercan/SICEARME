@@ -180,6 +180,7 @@
                         <th> Estado arma      </th>
                         <th> Ver obser        </th>
                         <th> Acciones         </th>
+                        <th> Visualizar       </th>
                         <th> Imprimir         </th>
                     </tr>
                 </thead>
@@ -187,7 +188,7 @@
                 <tbody id="datos_consulta"> </tbody>   
 
                 <tfoot>
-                    <tr> <td colspan="12"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="13"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
                 
            </table>  

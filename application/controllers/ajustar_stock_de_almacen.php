@@ -78,6 +78,10 @@ class ajustar_stock_de_almacen extends CI_Controller {
             $mensaje_error[] = 3;
         }
         
+        if($ajuste <= 0) {
+            $mensaje_error[] = 4;
+        }
+        
         if(count($mensaje_error) > 0) {
             
             switch($mensaje_error[0]) {
@@ -93,6 +97,10 @@ class ajustar_stock_de_almacen extends CI_Controller {
                 case 3:
                     echo "ERROR: La cantidad de ajuste no puede ser mayor que la cantidad actual";
                     break;
+                
+                case 4:
+                    echo "ERROR: La cantidad de ajuste debe ser mayor que 0";
+                    break;                
             }
         }else {
             $cantidad = $cantidad - $ajuste;
