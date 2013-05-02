@@ -291,6 +291,12 @@ class listado_stock_almacen extends CI_Controller {
             $_SESSION['order'][1] = "DESC";
         }        
     }
+    
+    function imprimir() {
+        $_SESSION['nro_parte']    = $_POST['nro_parte'];
+        $_SESSION['nombre_parte'] = $_POST['nombre_parte'];
+        $_SESSION['nro_catalogo'] = $_POST['nro_catalogo'];
+    }    
 }
 
 ?>

@@ -308,20 +308,12 @@ class listado_repuestos_nro_pieza extends CI_Controller {
         }        
     }
     
-    function editar() {
+    function imprimir() {
         $_SESSION['nro_pieza']    = $_POST['nro_pieza'];
         $_SESSION['nro_parte']    = $_POST['nro_parte'];
         $_SESSION['nombre_parte'] = $_POST['nombre_catalogo'];
         $_SESSION['nro_catalogo'] = $_POST['nro_catalogo'];
     }
-    
-    function eliminar() {
-        $_SESSION['nro_pieza']    = $_POST['nro_pieza'];
-        $_SESSION['nro_parte']    = $_POST['nro_parte'];
-        $_SESSION['nombre_parte'] = $_POST['nombre_catalogo'];
-        $_SESSION['nro_catalogo'] = $_POST['nro_catalogo'];
-    } 
-    
 }
 
 ?>

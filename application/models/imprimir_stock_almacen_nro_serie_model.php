@@ -7,22 +7,22 @@ class imprimir_stock_almacen_nro_serie_model extends CI_Model {
         $this->load->database();
     }    
     
-    function datosStock($nro_parte) {
+    function datosCatalogo($nro_catalogo) {
         
-        $query = $this->db->query("SELECT nro_parte, nombre_parte, precio_unitario, cantidad
-                                   FROM stock_repuestos
-                                   WHERE nro_parte = ".$this->db->escape($nro_parte));
+        $query = $this->db->query("SELECT tipo_arma, marca, calibre, modelo
+                                   FROM catalogos
+                                   WHERE nro_interno = ".$this->db->escape($nro_catalogo));
         
-        $retorno = array();
+        $datos = array();
         
         $row = $query->row();
         
-        $retorno[] = $row->nro_parte;
-        $retorno[] = $row->nombre_parte;
-        $retorno[] = $row->precio;
-        $retorno[] = $row->cantidad;
-       
-        return $retorno;
+        $datos[] = $row->tipo_arma;
+        $datos[] = $row->marca;
+        $datos[] = $row->calibre;
+        $datos[] = $row->modelo;
+        
+        return $datos;
     }
 }
 

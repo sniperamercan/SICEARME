@@ -59,61 +59,33 @@
            
             <div class="datagrid">
 
-                 <table>
+                <table>
 
-                     <thead style='text-align: center; cursor: pointer;'>
-                         <tr>      
-                             <th> Nro Parte            </th>
-                             <th> Nombre               </th>
-                             <th> Precio               </th>
-                             <th> Cantida              </th>
-                         </tr>
-                     </thead>
+                    <thead style='text-align: center; cursor: pointer;'>
+                        <tr>      
+                            <th> Nro pieza     </th>
+                            <th> Nro parte     </th>
+                            <th> Nombre        </th>
+                            <th> Catalogo      </th>
+                            <th> Tipo          </th>
+                            <th> Marca         </th>
+                            <th> Calibre       </th>
+                            <th> Modelo        </th>
+                            <th> Cantidad      </th>
+                        </tr>
+                    </thead>
 
-                     <tbody style="text-align: center"> 
-                         <tr>      
-                             <td> <?php echo $nro_parte; ?>      </td>
-                             <td> <?php echo $nombre_parte; ?>   </td>
-                             <td> <?php echo $precio; ?>       </td>
-                             <td> <?php echo $cantidad; ?>           </td>
-                         </tr>                
-                     </tbody>   
+                    <tbody id="datos_consulta"> <?php echo $contenido; ?> </tbody>   
 
-                </table>  
+                    <tfoot>
+                        <tr> <td colspan="8"> <div id="paging"> <br /> </div> </td> </tr>
+                    </tfoot>
 
-            </div>     
+               </table>  
 
-            <hr />
-            
-            <p class="subtituloform"> Datos del stock con nro serie </p>
-
-            <div class="datagrid">
-
-                 <table>
-
-                     <thead style='text-align: center; cursor: pointer;'>
-                         <tr>      
-                             <th> Nro parte    </th>
-                             <th> Nombre       </th>
-                             <th> Precio       </th>
-                             <th> Cantida      </th>
-                         </tr>
-                     </thead>
-
-                     <tbody style="text-align: center"> 
-                         <tr>      
-                             <td> <?php echo $nro_parte; ?> </td>
-                             <td> <?php echo $nombre_parte; ?>     </td>
-                             <td> <?php echo $precio; ?>   </td>
-                             <td> <?php echo $cantidad; ?>    </td>
-                         </tr>                
-                     </tbody>   
-
-                </table> 
-
-            </div> 
+           </div>
         
         </div>    
-    </body>    
+    </body>     
     
 </html>

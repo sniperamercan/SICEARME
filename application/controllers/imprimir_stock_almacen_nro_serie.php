@@ -22,38 +22,44 @@ class imprimir_stock_almacen_nro_serie extends CI_Controller {
             die($this->mensajes->sinPermisos());
         }
         
-        //Modulo solo visible para el peril 6 y 7 - Usuarios taller de armamento y Administradores taller de armamento  
-        if(!$this->perms->verificoPerfil6() && !$this->perms->verificoPerfil7()) {
+        //Modulo solo visible para el peril 9 y 10 - Usuarios taller de armamento y Administradores taller de armamento  
+        if(!$this->perms->verificoPerfil9() && !$this->perms->verificoPerfil10()) {
             die($this->mensajes->sinPermisos());
         }        
     }
     
     function index() {
 
-        if(isset($_SESSION['imprimir_nro_parte']) && !empty($_SESSION['imprimir_nro_parte'])) {
-            $nro_catalogo = $_SESSION['imprimir_nro_parte'];
-        }else {
-            $nro_catalogo = 0;
-        }
-            
-        //Obtengo todos los datos del stock en un array
-        $datos_catalogo = $this->imprimir_stock_almacen_nro_serie_model->datosStock($nro_parte);
+        $nro_parte       = $_SESSION['nro_parte'];
+        $nombre_parte    = $_SESSION['nombre_parte'];
+        $nro_catalogo    = $_SESSION['nro_catalogo'];
         
-        /*
-            $retorno[] = $row->nro_parte;       1
-            $retorno[] = $row->nombre_parte;    2
-            $retorno[] = $row->precio;          3
-            $retorno[] = $row->cantidad;        4
-         */
+        $datos = $this->imprimir_stock_almacen_model->datosCatalogo($nro_catalogo);
         
-        $data['nro_parte']       = $nro_parte;
-        $data['nombre_parte']    = $datos_catalogo[0];
-        $data['precio']          = $datos_catalogo[1];
-        $data['cantidad']        = $datos_catalogo[2];
-            
+        $tipo_arma = $datos[0];
+        $marca     = $datos[1];
+        $calibre   = $datos[2];
+        $modelo    = $datos[3];
+        
+        $cantidad = $this->imprimir_stock_almacen_model->cantidadActual($nro_parte, $nombre_parte, $nro_catalogo);
+        
+        $concat = "
+            <tr> 
+                <td> ".$nro_parte." </td>
+                <td> ".$nombre_parte." </td>
+                <td style='text-align: center;'> ".$nro_catalogo." </td>
+                <td> ".$tipo_arma." </td>
+                <td> ".$marca." </td>
+                <td> ".$calibre." </td>
+                <td> ".$modelo." </td>
+                <td style='text-align: center;'> ".$cantidad." </td>
+            </tr>
+        ";
+        
+        $data['contenido'] = $concat;
         
         //Cargo la vista
-        $this->load->view("imprimir_stock_almacen_nro_serie_view", $data);
+        $this->load->view("imprimir_stock_almacen_view", $data);
     }
     
 }
