@@ -70,7 +70,12 @@
                 if ($('#10').is(':checked')) {
                     permisos[i] = $('#10').val();
                     i++;
-                }            
+                } 
+                
+                if ($('#11').is(':checked')) {
+                    permisos[i] = $('#11').val();
+                    i++;
+                }                
                 
                 $.ajax({
                     type: "post",  

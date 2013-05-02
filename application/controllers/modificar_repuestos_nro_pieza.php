@@ -21,8 +21,8 @@ class modificar_repuestos_nro_pieza extends CI_Controller {
             die($this->mensajes->sinPermisos());
         }         
         
-        //Modulo solo visible para el peril 6 y 7 - Usuarios taller de armamento y Administradores taller de armamento 
-        if(!$this->perms->verificoPerfil6() && !$this->perms->verificoPerfil7()) {
+        //Modulo solo visible para el peril 10 - Administradores Almacen Taller de armamento
+        if(!$this->perms->verificoPerfil10()) {
             die($this->mensajes->sinPermisos());
         }
     }

@@ -21,8 +21,8 @@ class modificar_stock_de_almacen extends CI_Controller {
             die($this->mensajes->sinPermisos());
         }         
         
-        //Modulo solo visible para el peril 7 - Administradores taller de armamento 
-        if(!$this->perms->verificoPerfil7()) {
+        //Modulo solo visible para el peril 10 - Administradores Almacen Taller de armamento
+        if(!$this->perms->verificoPerfil10()) {
             die($this->mensajes->sinPermisos());
         }
     }
