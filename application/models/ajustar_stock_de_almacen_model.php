@@ -1,6 +1,6 @@
 <?php
 
-class modificar_stock_de_almacen_model extends CI_Model {
+class ajustar_stock_de_almacen_model extends CI_Model {
     
     function __construct() {
         parent::__construct();
@@ -20,44 +20,28 @@ class modificar_stock_de_almacen_model extends CI_Model {
         return $row->cantidad;
     }
 
-    function modificarRepuesto($nro_parte, $nombre_parte, $nro_catalogo, $nro_parte_ant, $nombre_parte_ant, $nro_catalogo_ant) {
-        
-        $cantidad = $this->cantidadActual($nro_parte_ant, $nombre_parte_ant, $nro_catalogo_ant);
+    function ajustarRepuesto($nro_parte, $nombre_parte, $nro_catalogo, $cantidad) {
         
         $data_stock_where = array(
-            'nro_parte'            => $nro_parte_ant,
-            'nombre_parte'         => $nombre_parte_ant,
-            'nro_interno_catalogo' => $nro_catalogo_ant
-        );
-        
-        $this->db->delete("stock_repuestos", $data_stock_where);
-        
-        $data_stock = array(
-            'nro_parte'            => $nro_parte,
-            'nombre_parte'         => $nombre_parte,
-            'nro_interno_catalogo' => $nro_catalogo,
-            'cantidad'             => $cantidad
-        );
-        
-        $this->db->insert('stock_repuestos', $data_stock);  
-        
-        $data_stock_set = array(
             'nro_parte'            => $nro_parte,
             'nombre_parte'         => $nombre_parte,
             'nro_interno_catalogo' => $nro_catalogo
+        );
+        
+        $data_stock_set = array(
+            'cantidad' => $cantidad,
         );        
         
-        $this->db->update('ingreso_stock_repuestos', $data_stock_set, $data_stock_where);   
+        $this->db->update('stock_repuestos', $data_stock_set, $data_stock_where);   
         
         $data_db_logs = array(
-            'tipo_movimiento' => 'insert',
+            'tipo_movimiento' => 'update',
             'tabla'           => 'stock_repuestos',
             'clave_tabla'     => 'nro_parte = '.$nro_parte.', nombre_parte ='.$nombre_parte.', nro_interno_catalogo ='.$nro_catalogo,
             'usuario'         => base64_decode($_SESSION['usuario'])
         );        
         
         $this->db->insert('db_logs', $data_db_logs);    
-
     }
     
     function cantidadActual($nro_parte, $nombre_parte, $nro_catalogo) {

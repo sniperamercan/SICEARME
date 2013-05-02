@@ -52,6 +52,7 @@ class mb_stock_de_almacen_model extends CI_Model {
             );
 
             $this->db->delete('stock_repuestos', $data_stock_where);
+            $this->db->delete('ingreso_stock_repuestos', $data_stock_where);
             
             $data_db_logs = array(
                 'tipo_movimiento' => 'delete',
@@ -63,13 +64,6 @@ class mb_stock_de_almacen_model extends CI_Model {
             $this->db->insert('db_logs', $data_db_logs);
         
         $this->db->trans_complete();
-        
-        //verifico que la transaccion fue completada
-        if ($this->db->trans_status() === FALSE) {
-            return 0;
-        }else {
-            return 1;
-        }        
     }
 }
 

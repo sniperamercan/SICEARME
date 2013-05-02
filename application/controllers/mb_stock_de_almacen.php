@@ -126,6 +126,7 @@ class mb_stock_de_almacen extends CI_Controller {
                     <td> ".$result[$i+5]." </td>
                     <td> ".$result[$i+6]." </td>
                     <td style='text-align: center;'> ".$result[$i+7]." </td>
+                    <td onclick='ajustarStock(".$aux_nro_parte.",".$aux_nombre_parte.",".$aux_nro_catalogo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/refresh.png' /> </td>
                     <td onclick='editar(".$aux_nro_parte.",".$aux_nombre_parte.",".$aux_nro_catalogo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/edit.png' /> </td>
                     <td onclick='eliminar(".$aux_nro_parte.",".$aux_nombre_parte.",".$aux_nro_catalogo.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/delete.gif' /> </td>
                 </tr>
@@ -295,16 +296,17 @@ class mb_stock_de_almacen extends CI_Controller {
     
     function editar() {
         $_SESSION['nro_parte']    = $_POST['nro_parte'];
-        $_SESSION['nombre_parte'] = $_POST['nombre_catalogo'];
+        $_SESSION['nombre_parte'] = $_POST['nombre_parte'];
         $_SESSION['nro_catalogo'] = $_POST['nro_catalogo'];
     }
     
     function eliminar() {
         $nro_parte    = $_POST['nro_parte'];
-        $nombre_parte = $_POST['nombre_catalogo'];
+        $nombre_parte = $_POST['nombre_parte'];
         $nro_catalogo = $_POST['nro_catalogo'];
         
-        return $this->mb_stock_de_almacen_model->eliminar($nro_parte, $nombre_parte, $nro_catalogo);
+        $this->mb_stock_de_almacen_model->eliminar($nro_parte, $nombre_parte, $nro_catalogo);
+        echo 1;
     }    
     
 }

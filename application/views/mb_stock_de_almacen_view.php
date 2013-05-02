@@ -96,10 +96,21 @@
                     url: "<?php echo base_url("mb_stock_de_almacen/editar"); ?>",
                     data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
                     success: function(){
-                        irAFrame('<?php echo base_url('mb_stock_de_almacen'); ?>','Almacen >> Modificar >> Repuestos');
+                        irAFrame('<?php echo base_url('modificar_stock_de_almacen'); ?>','Almacen >> Modificar >> Repuestos');
                     }                  
                 });            
             }
+            
+            function ajustarStock(nro_parte, nombre_parte, nro_catalogo) {
+                $.ajax({
+                    type: 'post',
+                    url: "<?php echo base_url("mb_stock_de_almacen/editar"); ?>",
+                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
+                    success: function(){
+                        irAFrame('<?php echo base_url('ajustar_stock_de_almacen'); ?>','Almacen >> Modificar >> Repuestos');
+                    }                  
+                });            
+            }            
             
             function eliminar(nro_parte, nombre_parte, nro_catalogo) {
                  jConfirm('Estas seguro que quieres eliminar dicho repuesto del almacen', 'ELIMINAR REPUESTO DEL ALMACEN', function(r) {
@@ -157,6 +168,7 @@
                         <th> Calibre </th>
                         <th> Modelo  </th>
                         <th onclick="orderBy(3)"> Cantidad    </th>
+                        <th> Ajustar     </th>
                         <th> Editar      </th>
                         <th> Eliminar    </th>
                     </tr>
@@ -165,7 +177,7 @@
                 <tbody id="datos_consulta"> </tbody>   
 
                 <tfoot>
-                    <tr> <td colspan="10"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="11"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
                 
            </table>  

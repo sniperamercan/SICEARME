@@ -33,19 +33,17 @@
                 $("input:button").button(); 
             });	
 
-            function modificarStock() {
+            function ajustarStock() {
                 
-                var nro_parte    = $("#nro_parte").val();
-                var nombre_parte = $("#nombre_parte").val();
-                var nro_catalogo = $("#nro_catalogo").val();
+                var ajuste = $("#ajuste").val();
                 
                 $.ajax({
                     type: "post",  
-                    url: "<?php base_url(); ?>modificar_stock_de_almacen/validarDatos",
-                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
+                    url: "<?php base_url(); ?>ajustar_stock_de_almacen/validarDatos",
+                    data: "ajuste="+ajuste,
                     success: function(data){
                         if(data == 1){            
-                            jAlert("Datos del repuesto modificado correctamente", "Correcto", function() { volver(); });
+                            jAlert("CORRECTO: Stock del repuestos modificado correctamente", "Correcto", function() { volver(); });
                         }else{
                             jAlert(data, "Error");
                         }                            
@@ -57,21 +55,6 @@
                 irAFrame('<?php echo base_url('mb_stock_de_almacen'); ?>','Almacen >> Alta >> Respuestos');
             }
             
-            function busquedaCatalogos() {
-                $.colorbox({href:"<?php echo base_url('busqueda_catalogos'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA CATALOGOS", onClosed: function(){ cargoCatalogosFiltro(); } });
-            }
-            
-            function cargoCatalogosFiltro() {
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>modificar_stock_de_almacen/cargoCatalogosFiltro",
-                   success: function(data) {
-                       $("#nro_catalogo").val("");
-                       $("#nro_catalogo").val(data);
-                   }
-                });                
-            }              
-            
         </script>
         
     </head>
@@ -80,18 +63,18 @@
 
         <div>			
 
-            <h1> Modificar stock de almacen </h1>    
+            <h1> Ajustar stock de almacen </h1>    
             
             <fieldset>	
                 
                 <dl>
                 <dt><label for="nro_parte"> Nro parte </label></dt>
-                <dd><input type="text" id="nro_parte" class="text" value="<?php echo $nro_parte; ?>" /></dd>
+                <dd><input readonly="readonly" type="text" id="nro_parte" class="txtautomatico" value="<?php echo $nro_parte; ?>" /></dd>
                 </dl>                
                 
                 <dl> 		
-                <dt><label for="nombre_parte"> Nombre <font color="red"> * </font> </label></dt>	
-                <dd><input type="text" id="nombre_parte" class="text" value="<?php echo $nombre_parte; ?>" /></dd> 					
+                <dt><label for="nombre_parte"> Nombre </label></dt>	
+                <dd><input readonly="readonly" type="text" id="nombre_parte" class="txtautomatico" value="<?php echo $nombre_parte; ?>" /></dd> 					
                 </dl>
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
@@ -99,19 +82,32 @@
                 <p class="subtituloform"> Cargo el catalogo al cual pertenece este armamento </p>
                 
                 <dl>
-                <dt><label> Buscar catalogo </label></dt>
-                <dd><img style="cursor: pointer;" onclick="busquedaCatalogos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
-                </dl>         
-                
-                <dl>
-                <dt><label for="nro_catalogo"> Nro catalogo <font color="red"> * </font> </label></dt>
+                <dt><label for="nro_catalogo"> Nro catalogo </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" value="<?php echo $nro_catalogo; ?>" /> </dd>
-                </dl>                 
+                </dl>     
+                
+                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                
+                <p class="subtituloform"> Datos de stock </p>
+                
+                <dl> 		
+                <dt><label for="cantidad"> Cantidad </label></dt>	
+                <dd><input type="text" id="cantidad" class="txtautomatico" readonly="readonly" value="<?php echo $cantidad; ?>" /></dd> 					
+                </dl> 
+                
+                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                
+                <p class="subtituloform"> <font color="#B40404"> La cantidad de ajuste resta al stock que tiene actualmente el repuesto </font> </p>
+                
+                <dl> 		
+                <dt><label for="cantidad"> Ajuste <font color="red"> * </font> </label></dt>	
+                <dd><input type="text" id="ajuste" class="number" /></dd> 					
+                </dl> 
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="modificarStock();"> Modificar stock </button>
+                <button style="margin-right: 20px;" onclick="ajustarStock();"> Ajustar stock </button>
                 <button style="margin-right: 20px;" onclick="volver();"> Volver </button>
             </fieldset>  
             
