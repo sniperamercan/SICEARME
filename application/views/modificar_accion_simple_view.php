@@ -48,7 +48,7 @@
                     data: "fecha="+fecha+"&nro_orden="+nro_orden+"&seccion="+seccion+"&observaciones="+observaciones,
                     success: function(data){
                         if(data == 1){            
-                            jAlert("CORRECTO: La accion fue modificada correctamente", "Correcto", function() { irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Accion >> Ordenes de trabajo'); });
+                            jAlert("CORRECTO: La accion fue modificada correctamente", "Correcto", function() { volver(); });
                         }else{
                             jAlert(data, "Error");
                         }                            

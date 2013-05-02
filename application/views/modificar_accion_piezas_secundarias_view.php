@@ -47,7 +47,7 @@
                     data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&cant_actual="+cant_actual+"&cant_usar="+cant_usar,
                     success: function(data){
                         if(data == 1){            
-                            jAlert("Pieza utilizada correctamente en la orden de trabajo", "Correcto", function() { irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo'); });
+                            jAlert("Pieza utilizada correctamente en la orden de trabajo", "Correcto", function() { volver(); });
                         }else{
                             jAlert(data, "Error");
                         }                            

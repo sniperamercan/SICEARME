@@ -49,7 +49,7 @@
                     data: "nro_pieza_nueva="+nro_pieza_nueva+"&nro_pieza_anterior="+nro_pieza_anterior+"&nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
                     success: function(data){
                         if(data == 1){            
-                            jAlert("CORRECTO: La pieza fue modificada para el armamento correctamente", "Correcto", function() { irAFrame('<?php echo base_url('modificar_accion_piezas_asociadas'); ?>','Taller armamento >> Accion >> Ordenes de trabajo'); });
+                            jAlert("CORRECTO: La pieza fue modificada para el armamento correctamente", "Correcto", function() { volver(); });
                         }else{
                             jAlert(data, "Error");
                         }                            
