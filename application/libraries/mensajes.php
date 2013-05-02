@@ -104,6 +104,10 @@ class mensajes {
         return "El usuario ".$usuario." fue eliminado con éxito del sistema.";
     }
     
+    function caracteresNoPermitidos() {
+        return "ERROR: Uso de caracteres no permitidos: &,',/,\,$,#";
+    }
+    
     
 }
 

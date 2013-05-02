@@ -37,6 +37,11 @@
                 
                 var ajuste = $("#ajuste").val();
                 
+                if(/^[a-zA-Z0-9- ]*$/.test(ajuste) == false) {
+                    jAlert("ERROR: Uso de caracteres no permitidos: &,',/,\,$,#", "Error");
+                    return false;
+                }                        
+                
                 $.ajax({
                     type: "post",  
                     url: "<?php base_url(); ?>ajustar_stock_de_almacen/validarDatos",
