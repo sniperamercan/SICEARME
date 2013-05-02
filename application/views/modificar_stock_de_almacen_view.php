@@ -35,8 +35,8 @@
 
             function modificarStock() {
                 
-                var nro_parte    = $("#nro_parte").val();
-                var nombre_parte = $("#nombre_parte").val();
+                var nro_parte    = cambiarCaracterNroParte();
+                var nombre_parte = cambiarCaracterNombreParte();
                 var nro_catalogo = $("#nro_catalogo").val();
                 
                 $.ajax({
@@ -52,6 +52,18 @@
                   }
                 });               
             }
+            
+            function cambiarCaracterNroParte() {
+                var val = $("#nro_parte").val();    
+                while (val !=(val = val.replace('&', '')));
+                return val;
+            }  
+            
+            function cambiarCaracterNombreParte() {
+                var val = $("#nombre_parte").val();    
+                while (val !=(val = val.replace('&', '')));
+                return val;
+            }              
             
             function volver() {
                 irAFrame('<?php echo base_url('mb_stock_de_almacen'); ?>','Almacen >> Alta >> Respuestos');

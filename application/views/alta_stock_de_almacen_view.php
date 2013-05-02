@@ -35,8 +35,8 @@
 
             function altaStock() {
                 
-                var nro_parte    = $("#nro_parte").val();
-                var nombre_parte = $("#nombre_parte").val();
+                var nro_parte    = cambiarCaracterNroParte;
+                var nombre_parte = cambiarCaracterNombreParte;
                 var precio       = $("#precio").val();
                 var cantidad     = $("#cantidad").val();
                 var nro_catalogo = $("#nro_catalogo").val();
@@ -54,6 +54,18 @@
                   }
                 });               
             }
+            
+            function cambiarCaracterNroParte() {
+                var val = $("#nro_parte").val();    
+                while (val !=(val = val.replace('&', '')));
+                return val;
+            }  
+            
+            function cambiarCaracterNombreParte() {
+                var val = $("#nombre_parte").val();    
+                while (val !=(val = val.replace('&', '')));
+                return val;
+            }            
             
             function busquedaCatalogos() {
                 $.colorbox({href:"<?php echo base_url('busqueda_catalogos'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA CATALOGOS", onClosed: function(){ cargoCatalogosFiltro(); } });
