@@ -312,17 +312,18 @@ class mb_repuestos_nro_pieza extends CI_Controller {
     function editar() {
         $_SESSION['nro_pieza']    = $_POST['nro_pieza'];
         $_SESSION['nro_parte']    = $_POST['nro_parte'];
-        $_SESSION['nombre_parte'] = $_POST['nombre_catalogo'];
+        $_SESSION['nombre_parte'] = $_POST['nombre_parte'];
         $_SESSION['nro_catalogo'] = $_POST['nro_catalogo'];
     }
     
     function eliminar() {
         $nro_pieza    = $_POST['nro_pieza'];
         $nro_parte    = $_POST['nro_parte'];
-        $nombre_parte = $_POST['nombre_catalogo'];
+        $nombre_parte = $_POST['nombre_parte'];
         $nro_catalogo = $_POST['nro_catalogo'];
         
-        return $this->mb_repuestos_nro_pieza_model->eliminar($nro_pieza, $nro_parte, $nombre_parte, $nro_catalogo);
+        $this->mb_repuestos_nro_pieza_model->eliminar($nro_pieza, $nro_parte, $nombre_parte, $nro_catalogo);
+        echo 1;
     } 
     
 }

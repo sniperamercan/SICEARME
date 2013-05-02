@@ -39,16 +39,15 @@
                 var nro_pieza      = $("#nro_pieza").val();
                 var nro_parte      = $("#nro_parte").val();
                 var nombre_parte   = $("#nombre_parte").val();
-                var cant_actual    = $("#cant_actual").val();
                 var nro_catalogo   = $("#nro_catalogo").val();
                 
                 $.ajax({
                     type: "post",  
                     url: "<?php base_url(); ?>modificar_repuestos_nro_pieza/validarDatos",
-                    data: "nro_pieza="+nro_pieza+"&nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&cant_actual="+cant_actual+"&nro_catalogo="+nro_catalogo,
+                    data: "nro_pieza="+nro_pieza+"&nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
                     success: function(data){
                         if(data == 1){            
-                            jAlert("Repuesto con Nro de pieza modificado correctamente", "Correcto", function() { limpioCampos(); });
+                            jAlert("Repuesto con Nro de pieza modificado correctamente", "Correcto", function() { volver(); });
                         }else{
                             jAlert(data, "Error");
                         }                            
@@ -56,51 +55,10 @@
                 });               
             }
             
-            function limpioCampos() {
-                $("#nro_pieza").val("");
-                $("#nro_pieza").focus();
-                
-                var nro_parte      = $("#nro_parte").val();
-                var nombre_parte   = $("#nombre_parte").val();
-                var nro_catalogo   = $("#nro_catalogo").val();
-                
-                $.ajax({
-                    type: "post",  
-                    url: "<?php base_url(); ?>modificar_repuestos_nro_pieza/cargoCantidad",
-                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
-                    success: function(data){
-                        $("#cant_actual").val("");
-                        $("#cant_actual").val(data);
-                    }
-                });                 
-                
-            }
+            function volver() {
+                irAFrame('<?php echo base_url('mb_repuestos_nro_pieza'); ?>','Almacen >> Modificar >> Nro piezas');
+            }  
             
-            function busquedaRepuestos() {
-                $.colorbox({href:"<?php echo base_url('busqueda_repuestos'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA REPUESTOS", onClosed: function(){ cargoRepuestosFiltro(); } });
-            }
-            
-            function cargoRepuestosFiltro() {
-                $.ajax({
-                   type: "post",
-                   dataType: "json",
-                   url: "<?php base_url(); ?>modificar_repuestos_nro_pieza/cargoRepuestosFiltro",
-                   success: function(data) {
-               
-                        $("#nro_parte").val("");
-                        $("#nombre_parte").val("");
-                        $("#nro_catalogo").val("");
-                        $("#cant_actual").val("");
-                        
-                        if(data[0] != 0) {
-                            $("#nro_parte").val(data[0]);
-                            $("#nombre_parte").val(data[1]);
-                            $("#nro_catalogo").val(data[2]);
-                            $("#cant_actual").val(data[3]);
-                        }
-                   }
-                });                
-            }
         </script>
         
     </head>
@@ -115,38 +73,29 @@
                 
                 <dl>
                 <dt><label for="nro_pieza"> Nro pieza </label></dt>
-                <dd><input type="text" id="nro_pieza" class="number" /></dd>
-                </dl>                 
-                
-                <dl>
-                <dt><label> Buscar repuesto </label></dt>
-                <dd><img style="cursor: pointer;" onclick="busquedaRepuestos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
+                <dd><input type="text" id="nro_pieza" class="number" value="<?php echo $nro_pieza; ?>" /></dd>
                 </dl>                 
                 
                 <dl>
                 <dt><label for="nro_parte"> Nro parte </label></dt>
-                <dd><input readonly="readonly" type="text" id="nro_parte" class="txtautomatico" /> </dd>
+                <dd><input readonly="readonly" type="text" id="nro_parte" class="txtautomatico" value="<?php echo $nro_parte; ?>" /> </dd>
                 </dl>                 
 
                 <dl>
                 <dt><label for="nombre_parte"> Nombre parte </label></dt>
-                <dd><input readonly="readonly" type="text" id="nombre_parte" class="txtautomatico" /></dd>
+                <dd><input readonly="readonly" type="text" id="nombre_parte" class="txtautomatico" value="<?php echo $nombre_parte; ?>" /></dd>
                 </dl> 
                 
                 <dl>
                 <dt><label for="nro_catalogo"> Nro catalogo </label></dt>
-                <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" /></dd>
+                <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" value="<?php echo $nro_catalogo; ?>" /></dd>
                 </dl>                
-                
-                <dl>
-                <dt><label for="cant_actual"> Cant actual </label></dt>
-                <dd><input readonly="readonly" type="text" id="cant_actual" class="txtautomatico" /></dd>
-                </dl>
                 
             </fieldset>	
 
             <fieldset class="action">	
                 <button style="margin-right: 20px;" onclick="modificarRepuestoNroPieza();"> Modificar pieza (Nro) </button> 
+                <button style="margin-right: 20px;" onclick="volver();"> Volver </button>
             </fieldset>  
             
             <hr />

@@ -32,41 +32,31 @@ class modificar_repuestos_nro_pieza_model extends CI_Model {
         return $query->num_rows();
     }    
     
-    function modificarRepuestoNroPieza($nro_pieza, $nro_parte, $nombre_parte, $cant_actual, $nro_catalogo) {
+    function modificarRepuestoNroPieza($nro_pieza, $nro_parte, $nombre_parte, $nro_catalogo, $nro_pieza_anterior) {
         
         $this->db->trans_start();
         
-            $cant_total = $cant_actual - 1;
-        
             $data_accion_set = array(
-                'cantidad' => $cant_total
+                'nro_pieza' => $nro_pieza
             );
 
             $data_accion_where = array(
-                'nro_parte'    => $nro_parte,
-                'nombre_parte' => $nombre_parte,
+                'nro_pieza'            => $nro_pieza_anterior,
+                'nro_parte'            => $nro_parte,
+                'nombre_parte'         => $nombre_parte,
                 'nro_interno_catalogo' => $nro_catalogo
             );
 
-            $this->db->update('stock_repuestos', $data_accion_set, $data_accion_where);
+            $this->db->update('stock_repuestos_nro_pieza', $data_accion_set, $data_accion_where);
 
             $data_db_logs = array(
                 'tipo_movimiento' => 'update',
-                'tabla'           => 'stock_repuestos',
-                'clave_tabla'     => 'nro_parte = '.$nro_parte.', nombre parte = '.$nombre_parte.', nro_catalog = '.$nro_catalogo,
+                'tabla'           => 'stock_repuestos_nro_pieza',
+                'clave_tabla'     => 'nro_pieza = '.$nro_pieza.', nro_parte = '.$nro_parte.', nombre parte = '.$nombre_parte.', nro_catalogo = '.$nro_catalogo,
                 'usuario'         => base64_decode($_SESSION['usuario'])
             );        
 
             $this->db->insert('db_logs', $data_db_logs);
-
-            $data_stock = array(
-                'nro_pieza'              => $nro_pieza,
-                'nro_interno_catalogo'   => $nro_catalogo,
-                'nro_parte'              => $nro_parte,
-                'nombre_parte'           => $nombre_parte
-            );
-
-            $this->db->update('stock_repuestos_nro_pieza', $data_stock);
         
         $this->db->trans_complete();
     }

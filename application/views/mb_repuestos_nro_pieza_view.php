@@ -92,13 +92,13 @@
                 });            
             }
             
-            function editar(nro_parte, nombre_parte, nro_catalogo) {
+            function editar(nro_pieza, nro_parte, nombre_parte, nro_catalogo) {
                 $.ajax({
                     type: 'post',
                     url: "<?php echo base_url("mb_repuestos_nro_pieza/editar"); ?>",
-                    data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
+                    data: "nro_pieza="+nro_pieza+"&nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
                     success: function(){
-                        irAFrame('<?php echo base_url('mb_stock_de_almacen'); ?>','Almacen >> Modificar >> Repuestos');
+                        irAFrame('<?php echo base_url('modificar_repuestos_nro_pieza'); ?>','Almacen >> Modificar >> Nro pieza');
                     }                  
                 });            
             }

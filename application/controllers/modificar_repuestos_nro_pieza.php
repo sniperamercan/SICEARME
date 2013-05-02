@@ -28,8 +28,14 @@ class modificar_repuestos_nro_pieza extends CI_Controller {
     }
     
     function index() {
+        
+        $data['nro_pieza']    = $_SESSION['nro_pieza'];
+        $data['nro_parte']    = $_SESSION['nro_parte'];
+        $data['nombre_parte'] = $_SESSION['nombre_parte'];
+        $data['nro_catalogo'] = $_SESSION['nro_catalogo'];
+        
         //Llamo a la vista
-        $this->load->view('modificar_repuestos_nro_pieza_view');  
+        $this->load->view('modificar_repuestos_nro_pieza_view', $data);  
     }
     
     function cargoRepuestosFiltro() {
@@ -68,7 +74,6 @@ class modificar_repuestos_nro_pieza extends CI_Controller {
         $nro_pieza    = $_POST["nro_pieza"];
         $nro_parte    = $_POST["nro_parte"];
         $nombre_parte = $_POST["nombre_parte"];
-        $cant_actual  = $_POST["cant_actual"];
         $nro_catalogo = $_POST["nro_catalogo"];
         
         $mensaje_error = array();
@@ -85,24 +90,16 @@ class modificar_repuestos_nro_pieza extends CI_Controller {
             $mensaje_error[] = 3;
         }
         
-        if(empty($cant_actual)) {
-            $mensaje_error[] = 4;
-        }
-        
         if(!$this->form_validation->numeric($nro_pieza)) {
-            $mensaje_error[] = 5;
-        }  
-        
-        if($cant_actual < 1) {
-            $mensaje_error[] = 6;
+            $mensaje_error[] = 4;
         }        
         
         if(empty($nro_catalogo)) {
-            $mensaje_error[] = 7;
+            $mensaje_error[] = 5;
         }        
         
         if($this->modificar_repuestos_nro_pieza_model->existePieza($nro_pieza, $nro_parte, $nombre_parte, $nro_catalogo)) {
-            $mensaje_error[] = 8;
+            $mensaje_error[] = 6;
         }
         
         if(count($mensaje_error) > 0) {
@@ -122,27 +119,20 @@ class modificar_repuestos_nro_pieza extends CI_Controller {
                     break;
                 
                 case 4:
-                    echo $this->mensajes->errorVacio('cant actual');
-                    break;
-                
-                case 5:
                     echo $this->mensajes->errorNumerico('nro pieza');
                     break;
                 
-                case 6:
-                    echo "ERROR: La cantidad no hay stock suficiente para numerar de dicho repuesto";
-                    break;   
-                
-                case 7:
+                case 5:
                     echo $this->mensajes->errorVacio('nro catalogo');
                     break; 
                 
-                case 8:
+                case 6:
                     echo $this->mensajes->errorExiste('nro pieza');
                     break;                
             }
         }else {
-            $this->modificar_repuestos_nro_pieza_model->modificarRepuestoNroPieza($nro_pieza, $nro_parte, $nombre_parte, $cant_actual, $nro_catalogo);
+            $nro_pieza_anterior = $_SESSION['nro_pieza'];
+            $this->modificar_repuestos_nro_pieza_model->modificarRepuestoNroPieza($nro_pieza, $nro_parte, $nombre_parte, $nro_catalogo, $nro_pieza_anterior);
             echo 1;
         }
     }
