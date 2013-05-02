@@ -192,27 +192,27 @@
                 
                 <dl> 		
                 <dt><label for="marca"> Marca <font color="red"> * </font> </label></dt>	
-                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" value="<?php echo $marca; ?>" /></dd> 					
+                <dd><input readonly="readonly" type="text" id="marca" class="txtautomatico" value="<?php echo $marca; ?>" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre"> Calibre <font color="red"> * </font> </label></dt>	
-                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" value="<?php echo $calibre; ?>" /></dd> 					
+                <dd><input readonly="readonly" type="text" id="calibre" class="txtautomatico" value="<?php echo $calibre; ?>" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="modelo"> Modelo <font color="red"> * </font> </label></dt>	
-                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" value="<?php echo $modelo; ?>" /></dd> 					
+                <dd><input readonly="readonly" type="text" id="modelo" class="txtautomatico" value="<?php echo $modelo; ?>" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="tipo_arma"> Tipo arma <font color="red"> * </font> </label></dt>	
-                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" value="<?php echo $tipo_arma; ?>" /></dd> 					
+                <dd><input readonly="readonly" type="text" id="tipo_arma" class="txtautomatico" value="<?php echo $tipo_arma; ?>" /></dd> 					
                 </dl>
                 
                 <dl>
                 <dt><label for="sistema"> Sistema <font color="red"> * </font> </label></dt>
-                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" value="<?php echo $sistema; ?>" /></dd>
+                <dd><input readonly="readonly" type="text" id="sistema" class="txtautomatico" value="<?php echo $sistema; ?>" /></dd>
                 </dl>                
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>

@@ -270,7 +270,7 @@ class modificar_ordenes_trabajo extends CI_Controller {
             $mensja_error[] = 7;
         }  
         
-        if($this->alta_ordenes_trabajo_model->verificoOrdenTrabajo($nro_serie, $marca, $calibre, $modelo)) {
+        if($this->modificar_ordenes_trabajo_model->verificoOrdenTrabajo($nro_serie, $marca, $calibre, $modelo)) {
             $mensja_error[] = 8;
         }        
        

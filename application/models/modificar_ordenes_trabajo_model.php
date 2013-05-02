@@ -30,13 +30,14 @@ class modificar_ordenes_trabajo_model extends CI_Model {
 
     function verificoOrdenTrabajo($nro_serie, $marca, $calibre, $modelo) {
         
-        $query = $this->db->query("SELECT *
-                                   FROM ordenes_trabajo
-                                   WHERE nro_serie = ".$this->db->escape($nro_serie)."
-                                   AND marca   = ".$this->db->escape($marca)."
-                                   AND calibre = ".$this->db->escape($calibre)." 
-                                   AND modelo  = ".$this->db->escape($modelo)."
-                                   AND estado_orden_trabajo = 0");
+        $query = $this->db->query("SELECT d.*
+                                   FROM detalles_ordenes_trabajo d
+                                   INNER JOIN ordenes_trabajo o ON d.nro_orden = o.nro_orden
+                                   WHERE o.nro_serie = ".$this->db->escape($nro_serie)."
+                                   AND o.marca   = ".$this->db->escape($marca)."
+                                   AND o.calibre = ".$this->db->escape($calibre)." 
+                                   AND o.modelo  = ".$this->db->escape($modelo)."
+                                   AND o.estado_orden_trabajo = 0");
         
         return $query->num_rows();
     }
