@@ -134,14 +134,18 @@
                         <th> Seleccion  </th>
                         <th onclick="orderBy(0)"> Nro pieza     </th>
                         <th onclick="orderBy(1)"> Tipo pieza    </th>
-                        <th onclick="orderBy(2)"> Descripcion  </th>
+                        <th onclick="orderBy(2)"> Descripcion   </th>
+                        <th> Nro serie     </th>
+                        <th> Marca         </th>
+                        <th> Calibre       </th>
+                        <th> Modelo        </th>                        
                     </tr>
                 </thead>
 
                 <tbody id="datos_consulta"> </tbody>   
 
                 <tfoot>
-                    <tr> <td colspan="4"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="8"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
                 
            </table>  

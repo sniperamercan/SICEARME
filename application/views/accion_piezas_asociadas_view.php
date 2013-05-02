@@ -195,7 +195,7 @@
                 
                 <h1> Cambio de piezas </h1>       
                 
-                <label style="margin-top: 20px;"> Nro pieza actual que tiene el armamento - <font color="red"> <?php echo $nro_pieza_actual ?> </font></label>
+                <label style="margin-top: 20px;"> Piezas del armamento <font color="red"> <?php echo $nro_pieza_actual ?> </font></label>
                 
                 <br /> <br />
                 

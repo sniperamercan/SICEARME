@@ -85,7 +85,7 @@ class busqueda_piezas extends CI_Controller {
           
         $j=0;
         
-        for($i=0;$i<count($result);$i=$i+3) {
+        for($i=0;$i<count($result);$i=$i+7) {
             
             if($j % 2 == 0){
                 $class = "";
@@ -95,12 +95,26 @@ class busqueda_piezas extends CI_Controller {
             
             $aux_nro_pieza = '"'.$result[$i].'"';
             
+            /*
+               $result[] = $row->nro_pieza;   0
+               $result[] = $row->tipo_pieza;  1
+               $result[] = $row->descripcion; 2 
+               $result[] = $nro_serie;        3
+               $result[] = $marca;            4
+               $result[] = $calibre;          5
+               $result[] = $modelo;           6
+             */
+            
             $concat .= "
                 <tr class='".$class."'> 
                     <td onclick='seleccion(".$aux_nro_pieza.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/select.png' /> </td>
                     <td> ".$result[$i]."   </td>
                     <td> ".$result[$i+1]." </td>
                     <td> ".$result[$i+2]." </td>
+                    <td> ".$result[$i+3]." </td>
+                    <td> ".$result[$i+4]." </td>
+                    <td> ".$result[$i+5]." </td>
+                    <td> ".$result[$i+6]." </td>
                 </tr>
             ";
             

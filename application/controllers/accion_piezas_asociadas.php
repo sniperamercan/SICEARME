@@ -41,7 +41,7 @@ class accion_piezas_asociadas extends CI_Controller {
         if($this->accion_piezas_asociadas_model->hayDatosFicha($nro_orden)) {
             $datos = $this->accion_piezas_asociadas_model->obtenerDatosFicha($nro_orden);
             foreach($datos as $val) {
-                $data['nro_pieza_actual'] .= $val."/"; 
+                $data['nro_pieza_actual'] .= "Nro pieza - ".$val."/ "; 
             }
             $data['nro_pieza_actual'] = substr($data['nro_pieza_actual'], 0, -1);
         }else {

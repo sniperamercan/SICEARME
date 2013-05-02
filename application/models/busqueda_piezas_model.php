@@ -35,8 +35,13 @@ class busqueda_piezas_model extends CI_Model {
                                    FROM ordenes_trabajo
                                    WHERE nro_orden = ".$this->db->escape($_SESSION['nro_orden']));
         
-        $row = $query->row();        
+        $row = $query->row();    
         
+        $nro_serie = $row->nro_serie;
+        $marca     = $row->marca;
+        $calibre   = $row->calibre;
+        $modelo    = $row->modelo;
+                
         $query = $this->db->query("SELECT nro_pieza, tipo_pieza, descripcion
                                    FROM fichas_piezas
                                    WHERE nro_serie = ".$this->db->escape($row->nro_serie)."
@@ -51,6 +56,10 @@ class busqueda_piezas_model extends CI_Model {
             $result[] = $row->nro_pieza;
             $result[] = $row->tipo_pieza;
             $result[] = $row->descripcion;
+            $result[] = $nro_serie;
+            $result[] = $marca;
+            $result[] = $calibre;
+            $result[] = $modelo;            
         }
         
         return $result;
