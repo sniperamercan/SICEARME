@@ -71,7 +71,6 @@
                             <th> Marca         </th>
                             <th> Calibre       </th>
                             <th> Modelo        </th>
-                            <th> Cantidad      </th>
                         </tr>
                     </thead>
 

@@ -311,7 +311,7 @@ class listado_repuestos_nro_pieza extends CI_Controller {
     function imprimir() {
         $_SESSION['nro_pieza']    = $_POST['nro_pieza'];
         $_SESSION['nro_parte']    = $_POST['nro_parte'];
-        $_SESSION['nombre_parte'] = $_POST['nombre_catalogo'];
+        $_SESSION['nombre_parte'] = $_POST['nombre_parte'];
         $_SESSION['nro_catalogo'] = $_POST['nro_catalogo'];
     }
 }
