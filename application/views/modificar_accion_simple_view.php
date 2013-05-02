@@ -84,7 +84,7 @@
                    url: "<?php base_url(); ?>modificar_accion_simple/volver",
                    success: function(data) {
                         if(data == 0) {
-                            irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                            irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Modificar >> Acciones de una orden');
                         }else {
                             irAFrame('<?php echo base_url('mb_acciones_ordenes_trabajo'); ?>','Taller armamento >> Modificar >> Acciones de una orden');
                         }
