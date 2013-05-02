@@ -42,7 +42,7 @@ Class PanelPrincipal extends CI_Controller{
         
         $reg = array();
         $reg = $this->panelprincipal_model->informacionUsuario_db();
-        $info = "<b><u> INFORMACION SOBRE USTED </u></b> <br /><br /><br /> <b> Nombre - </b> ".$reg['nombre']." ".$reg['apellido']." <br /><br /> ";
+        $info = "<b><u> INFORMACION SOBRE USTED </u></b> <br /><br /><br /> <b> Nombre - </b> ".$reg['nombre']." ".$reg['apellido']." <br /><br /> <b> IP - </b>".$_SERVER['REMOTE_ADDR'];
         
         echo $info;
     }	
