@@ -98,7 +98,7 @@
                     url: "<?php echo base_url("mb_repuestos_nro_pieza/editar"); ?>",
                     data: "nro_pieza="+nro_pieza+"&nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
                     success: function(){
-                        irAFrame('<?php echo base_url('modificar_repuestos_nro_pieza'); ?>','Almacen >> Modificar >> Nro pieza');
+                        irAFrame('<?php echo base_url('modificar_repuestos_nro_pieza'); ?>','Almacen >> Modificar >> Nro piezas');
                     }                  
                 });            
             }

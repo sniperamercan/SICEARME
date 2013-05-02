@@ -35,8 +35,8 @@
 
             function altaStock() {
                 
-                var nro_parte    = cambiarCaracterNroParte;
-                var nombre_parte = cambiarCaracterNombreParte;
+                var nro_parte    = cambiarCaracterNroParte();
+                var nombre_parte = cambiarCaracterNombreParte();
                 var precio       = $("#precio").val();
                 var cantidad     = $("#cantidad").val();
                 var nro_catalogo = $("#nro_catalogo").val();
@@ -47,7 +47,7 @@
                     data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&precio="+precio+"&cantidad="+cantidad+"&nro_catalogo="+nro_catalogo,
                     success: function(data){
                         if(data == 1){            
-                            jAlert("Stock de parte ingresado correctamente al stock del almacen", "Correcto", function() { irAFrame('<?php echo base_url('alta_stock_de_almacen'); ?>','Almacen >> Alta >> Respuestos'); });
+                            jAlert("CORRECTO: Stock ingresado correctamente al stock del almacen", "Correcto", function() { irAFrame('<?php echo base_url('alta_stock_de_almacen'); ?>','Almacen >> Alta >> Respuestos'); });
                         }else{
                             jAlert(data, "Error");
                         }                            

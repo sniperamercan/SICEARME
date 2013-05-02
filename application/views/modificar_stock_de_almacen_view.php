@@ -45,7 +45,7 @@
                     data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
                     success: function(data){
                         if(data == 1){            
-                            jAlert("Datos del repuesto modificado correctamente", "Correcto", function() { volver(); });
+                            jAlert("CORRECTO: Datos del repuesto modificado correctamente", "Correcto", function() { volver(); });
                         }else{
                             jAlert(data, "Error");
                         }                            
