@@ -243,12 +243,12 @@
                 <p class="subtituloform"> Datos de pieza nueva principal que va a portar el armamento </p>
                 
                  <dl>
-                <dt><label> Buscar repuesto <font color="red"> * </font> </label></dt>
+                <dt><label> Buscar repuesto </label></dt>
                 <dd><img style="cursor: pointer;" onclick="busquedaRepuestos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>  
                 
                 <dl>
-                <dt><label for="nro_pieza_nueva"> Nro pieza </label></dt>
+                <dt><label for="nro_pieza_nueva"> Nro pieza <font color="red"> * </font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_pieza_nueva" class="txtautomatico" /> </dd>
                 </dl>  
                 
