@@ -134,10 +134,21 @@ class accion_mutacion_armamento extends CI_Controller {
     
     function validarDatos() {
         
+        $patterns[] = '/"/';
+        $patterns[] = "/'/";        
+        
+        $patterns[] = '/\&/';
+        
+        $patterns[] = '/{/';
+        
+        $patterns[] = '/}/';
+        
+        $patterns[] = '/|/';        
+        
         $fecha           = $_POST["fecha"];
         $nro_orden       = $_POST["nro_orden"];
         $seccion         = $_POST["seccion"];
-        $observaciones   = $_POST["observaciones"];
+        $observaciones = preg_replace($patterns, '', $_POST["observaciones"]);
         $nro_pieza_nueva = $_POST["nro_pieza_nueva"];
         
         $mensaje_error = array();

@@ -45,11 +45,17 @@ class alta_stock_de_almacen extends CI_Controller {
     function validarDatos() {
         
         $patterns = array();
+
         $patterns[] = '/"/';
-        $patterns[] = "/'/";
+        $patterns[] = "/'/";        
         
-        $patterns[] = '&"&';
-        $patterns[] = "&'&";
+        $patterns[] = '/\&/';
+        
+        $patterns[] = '/{/';
+        
+        $patterns[] = '/}/';
+        
+        $patterns[] = '/|/';        
         
         $nro_parte    = preg_replace($patterns, '', $_POST["nro_parte"]);
         $nombre_parte = preg_replace($patterns, '', $_POST["nombre_parte"]);

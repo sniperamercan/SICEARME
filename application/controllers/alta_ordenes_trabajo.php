@@ -201,20 +201,15 @@ class alta_ordenes_trabajo extends CI_Controller {
     function validarDatos() {
         
         $patterns = array();
+        
         $patterns[] = '/"/';
         $patterns[] = "/'/";        
-        
-        $patterns[] = '/&/';
-        $patterns[] = "/&/";
-        
+
         $patterns[] = '/{/';
-        $patterns[] = "/{/";
         
-        $patterns[] = '/}/';
         $patterns[] = '/}/';
         
         $patterns[] = '/|/';
-        $patterns[] = '/|/';  
         
         $fecha         = preg_replace($patterns, '', $_POST["fecha"]);
         $unidad        = preg_replace($patterns, '', $_POST["unidad"]);
@@ -222,7 +217,8 @@ class alta_ordenes_trabajo extends CI_Controller {
         $marca         = preg_replace($patterns, '', $_POST["marca"]);
         $calibre       = preg_replace($patterns, '', $_POST["calibre"]);
         $modelo        = preg_replace($patterns, '', $_POST["modelo"]);
-        $observaciones = preg_replace($patterns, '', $_POST["observaciones"]);
+        
+        $observaciones = preg_replace($patterns, '', $observaciones);
         
         $mensja_error = array();
         $retorno = array();
