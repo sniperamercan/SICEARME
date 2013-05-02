@@ -382,7 +382,7 @@
                     
                     <!-- INICIO ALMACEN -->
                         
-                    <?php if($this->perms->verificoPerfil9()) { ?>
+                    <?php if($this->perms->verificoPerfil9() || $this->perms->verificoPerfil10()) { ?>
 
                         <li><a href="#"> Almacen </a>
                             <ul>
@@ -394,12 +394,16 @@
                                     </ul>
                                 </li> 
 
-                                <li><a href="#"> Modificar </a>
-                                    <ul>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_stock_de_almacen'); ?>','Almacen >> Modificar >> Respuestos');"> Respuestos </a></li>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_repuestos_nro_pieza'); ?>','Almacen >> Modificar >> Nro piezas');"> Nro piezas </a></li>
-                                    </ul>
-                                </li>
+                                <?php if($this->perms->verificoPerfil10()) { ?>
+                                
+                                    <li><a href="#"> Modificar </a>
+                                        <ul>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_stock_de_almacen'); ?>','Almacen >> Modificar >> Respuestos');"> Respuestos </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_repuestos_nro_pieza'); ?>','Almacen >> Modificar >> Nro piezas');"> Nro piezas </a></li>
+                                        </ul>
+                                    </li>
+                                
+                                <?php } ?> 
 
                                 <li><a href="#"> Listado </a>
                                     <ul>
@@ -417,7 +421,7 @@
                     
                     <!-- INICIO CONSULTAS -->
                         
-                    <?php if($this->perms->verificoPerfil10()) { ?>
+                    <?php if($this->perms->verificoPerfil11()) { ?>
 
                         <li><a href="#"> Consultas </a>
                             <ul>

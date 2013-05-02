@@ -183,7 +183,7 @@ Class Perms extends CI_Model {
             return $query->num_rows();
         }
         
-        //Usuario Consultas
+        //Administrador Almacen Taller de armamento
         public function verificoPerfil10(){
             
             if( !isset($_SESSION['usuario']) ) {
@@ -198,6 +198,21 @@ Class Perms extends CI_Model {
             return $query->num_rows();
         }        
 
+        //Usuario Consultas
+        public function verificoPerfil11(){
+            
+            if( !isset($_SESSION['usuario']) ) {
+                return false;
+            }
+            
+            $query = $this->db->query("SELECT *
+                                       FROM permisos_usuario
+                                       WHERE perfil = 11
+                                       AND usuario = ".$this->db->escape(base64_decode($_SESSION['usuario'])));
+            
+            return $query->num_rows();
+        }         
+        
 }
 
 
