@@ -41,7 +41,8 @@
                 var marca         = $("#marca").val();
                 var calibre       = $("#calibre").val();
                 var modelo        = $("#modelo").val();
-                var observaciones = $("#observaciones").val();
+                
+                var observaciones = cambiarCaracter();
  
                 $.ajax({
                     type: "post",  
@@ -57,6 +58,12 @@
                     }
                 });               
             }
+            
+            function cambiarCaracter(){
+                var val = $("#observaciones").val();    
+                while (val !=(val = val.replace('&', '')));
+                return val;
+            }             
             
             function busquedaFichas() {
                 $.colorbox({href:"<?php echo base_url('busqueda_fichas_taller'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA FICHAS", onClosed: function(){ cargoFichasFiltro(); } });

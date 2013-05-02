@@ -49,6 +49,8 @@
                                 var seccion         = $("#seccion").val();
                                 var observaciones   = $("#observaciones").val();
                                 var nro_pieza_nueva = $("#nro_pieza_nueva").val();
+                                
+                                var observaciones = cambiarCaracter();
 
                                 $.ajax({
                                     type: "post",  
@@ -67,6 +69,12 @@
                     }
                 });
             }
+            
+            function cambiarCaracter(){
+                var val = $("#observaciones").val();    
+                while (val !=(val = val.replace('&', '')));
+                return val;
+            }            
             
             //cargo y creo Secciones
             function crearSeccion() {

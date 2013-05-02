@@ -60,10 +60,22 @@ class accion_ordenes_trabajo extends CI_Controller {
     
     function accionPiezasSecundarias() {
         
+        $patterns = array();
+        
+        $patterns[] = '/"/';
+        $patterns[] = "/'/";        
+
+        $patterns[] = '/{/';
+        
+        $patterns[] = '/}/';
+        
+        $patterns[] = '/|/';        
+        
         $fecha          = $_POST["fecha"];
         $nro_orden      = $_POST["nro_orden"];
         $seccion        = $_POST["seccion"];
-        $observaciones  = $_POST["observaciones"];
+        
+        $observaciones = preg_replace($patterns, '', $_POST["observaciones"]);
         
         $mensaje_error = array();
         
@@ -116,10 +128,22 @@ class accion_ordenes_trabajo extends CI_Controller {
     
     function accionPiezasAsociadas() {
         
+        $patterns = array();
+        
+        $patterns[] = '/"/';
+        $patterns[] = "/'/";        
+
+        $patterns[] = '/{/';
+        
+        $patterns[] = '/}/';
+        
+        $patterns[] = '/|/';        
+        
         $fecha          = $_POST["fecha"];
         $nro_orden      = $_POST["nro_orden"];
         $seccion        = $_POST["seccion"];
-        $observaciones  = $_POST["observaciones"];
+        
+        $observaciones = preg_replace($patterns, '', $_POST["observaciones"]);
         
         $mensaje_error = array();
         
@@ -483,20 +507,21 @@ class accion_ordenes_trabajo extends CI_Controller {
     
     function validarDatos() {
         
+        $patterns = array();
+        
         $patterns[] = '/"/';
         $patterns[] = "/'/";        
-        
-        $patterns[] = '/\&/';
-        
+
         $patterns[] = '/{/';
         
         $patterns[] = '/}/';
         
-        $patterns[] = '/|/';      
+        $patterns[] = '/|/';     
         
         $fecha          = $_POST["fecha"];
         $nro_orden      = $_POST["nro_orden"];
         $seccion        = $_POST["seccion"];
+        
         $observaciones = preg_replace($patterns, '', $_POST["observaciones"]);
         
         $mensaje_error = array();

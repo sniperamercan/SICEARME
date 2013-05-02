@@ -134,6 +134,8 @@ class accion_mutacion_armamento extends CI_Controller {
     
     function validarDatos() {
         
+        $patterns = array();
+        
         $patterns[] = '/"/';
         $patterns[] = "/'/";        
         
@@ -148,8 +150,9 @@ class accion_mutacion_armamento extends CI_Controller {
         $fecha           = $_POST["fecha"];
         $nro_orden       = $_POST["nro_orden"];
         $seccion         = $_POST["seccion"];
-        $observaciones = preg_replace($patterns, '', $_POST["observaciones"]);
         $nro_pieza_nueva = $_POST["nro_pieza_nueva"];
+        
+        $observaciones = preg_replace($patterns, '', $_POST["observaciones"]);
         
         $mensaje_error = array();
         

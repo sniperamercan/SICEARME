@@ -211,14 +211,14 @@ class alta_ordenes_trabajo extends CI_Controller {
         
         $patterns[] = '/|/';
         
-        $fecha         = preg_replace($patterns, '', $_POST["fecha"]);
-        $unidad        = preg_replace($patterns, '', $_POST["unidad"]);
-        $nro_serie     = preg_replace($patterns, '', $_POST["nro_serie"]);
-        $marca         = preg_replace($patterns, '', $_POST["marca"]);
-        $calibre       = preg_replace($patterns, '', $_POST["calibre"]);
-        $modelo        = preg_replace($patterns, '', $_POST["modelo"]);
+        $fecha      = $_POST["fecha"];
+        $unidad     = $_POST["unidad"];
+        $nro_serie  = $_POST["nro_serie"];
+        $marca      = $_POST["marca"];
+        $calibre    = $_POST["calibre"];
+        $modelo     = $_POST["modelo"];
         
-        $observaciones = preg_replace($patterns, '', $observaciones);
+        $observaciones = preg_replace($patterns, '', $_POST["observaciones"]);
         
         $mensja_error = array();
         $retorno = array();

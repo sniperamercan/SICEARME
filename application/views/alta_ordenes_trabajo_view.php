@@ -40,8 +40,11 @@
                 var nro_serie     = $("#nro_serie").val();
                 var marca         = $("#marca").val();
                 var calibre       = $("#calibre").val();
-                var modelo        = $("#modelo").val();
-                var observaciones = $("#observaciones").val();
+                var modelo        = $("#modelo").val();     
+                
+                var observaciones = cambiarCaracter();
+                
+                alert(observaciones);
  
                 $.ajax({
                     type: "post",  
@@ -56,6 +59,12 @@
                         }                            
                     }
                 });               
+            }
+            
+            function cambiarCaracter(){
+                var val = $("#observaciones").val();    
+                while (val !=(val = val.replace('&', '')));
+                return val;
             }
             
             function busquedaFichas() {
