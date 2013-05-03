@@ -48,7 +48,7 @@ class listado_cambios_piezas_asociadas extends CI_Controller {
             if(!empty($_POST['nro_orden'])){
                 $condicion .= " AND ";
                 $aux = "%".$_POST['nro_orden']."%";
-                $condicion .= " nro_orden LIKE ".$this->db->escape($aux);
+                $condicion .= " c.nro_orden LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }          
             
@@ -57,7 +57,7 @@ class listado_cambios_piezas_asociadas extends CI_Controller {
                     $condicion .= " AND ";
                 }
                 $aux = "%".$_POST['nro_pieza']."%";
-                $condicion .= " nro_pieza_nueva LIKE ".$this->db->escape($aux);
+                $condicion .= " c.nro_pieza_nueva LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }
             
@@ -66,7 +66,7 @@ class listado_cambios_piezas_asociadas extends CI_Controller {
                     $condicion .= " AND ";
                 }
                 $aux = "%".$_POST['nro_parte']."%";
-                $condicion .= " nro_parte LIKE ".$this->db->escape($aux);
+                $condicion .= " c.nro_parte LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }
             
@@ -75,7 +75,7 @@ class listado_cambios_piezas_asociadas extends CI_Controller {
                     $condicion .= " AND ";
                 }
                 $aux = "%".$_POST['nombre_parte']."%";
-                $condicion .= " nombre_parte LIKE ".$this->db->escape($aux);
+                $condicion .= " c.nombre_parte LIKE ".$this->db->escape($aux);
                 $and = 1; //agrego AND en proximo filtro
             }     
             

@@ -9,8 +9,9 @@ class listado_cambios_piezas_asociadas_model extends CI_Model {
     
     //para paginado
     function cantidadRegistros($condicion){
-        $query = $this->db->query("SELECT * 
-                                   FROM ordenes_trabajo
+        $query = $this->db->query("SELECT *
+                                   FROM cambio_piezas_asociadas_ordenes_trabajo c
+                                   INNER JOIN ordenes_trabajo o ON c.nro_orden = o.nro_orden
                                    WHERE (estado_orden_trabajo = 0 OR estado_orden_trabajo = 1)
                                    ".$condicion);
         

@@ -37,17 +37,15 @@
      
             function filtrar(){
                 
-                var nro_orden    = $("#nro_orden").val();
-                var nro_serie    = $("#nro_serie").val();
-                var marca        = $("#marca").val();
-                var calibre      = $("#calibre").val();
-                var fecha1       = $("#fecha1").val();
-                var fecha2       = $("#fecha2").val();                
+                var nro_orden     = $("#nro_orden").val();
+                var nro_pieza     = $("#nro_pieza").val();
+                var nro_parte     = $("#nro_parte").val();
+                var nombre_parte  = $("#nombre_parte").val();
                 
                 $.ajax({ 
                     type: 'post',
                     url: '<?php echo base_url(); ?>listado_cambios_piezas_asociadas/consulta/0',
-                    data: "nro_orden="+nro_orden+"&nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&fecha1="+fecha1+"&fecha2="+fecha2,
+                    data: "nro_orden="+nro_orden+"&nro_pieza="+nro_pieza+"&nro_parte="+nro_parte+"&nombre_parte="+nombre_parte,
                     success: function(){
                         cargoConsulta();
                     }
@@ -65,7 +63,7 @@
                     data: "de_pagina="+de_pagina+"&a_pagina="+a_pagina,
                     success: function(data){
                         if(data == "1"){
-                            window.open ("<?php echo base_url("contenido_impresion"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0");
+                            window.open ("<?php echo base_url("contenido_impresion"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,status=1,menubar=1,resizable=0");
                         }else{
                             jAlert(data);
                         }
@@ -152,15 +150,15 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> Nro orden       </th>
+                        <th onclick="orderBy(0);"> Nro orden       </th>
                         <th> Nro serie       </th>
                         <th> Marca           </th>
                         <th> Calibre         </th>
                         <th> Modelo          </th>
-                        <th onclick="orderBy(1)"> Pieza ant       </th>
-                        <th onclick="orderBy(2)"> Pieza nueva     </th>
-                        <th onclick="orderBy(3)"> Nro parte       </th>
-                        <th onclick="orderBy(4)"> Nombre parte    </th>
+                        <th onclick="orderBy(1);"> Pieza ant       </th>
+                        <th onclick="orderBy(2);"> Pieza nueva     </th>
+                        <th onclick="orderBy(3);"> Nro parte       </th>
+                        <th onclick="orderBy(4);"> Nombre parte    </th>
                         <th> Ver obser        </th>
                         <th> Visualizar       </th>
                         <th> Imprimir         </th>
