@@ -116,14 +116,15 @@ class accion_ordenes_trabajo extends CI_Controller {
                     break;
             }
         }else {
-            $tipo_accion = 1; //accion piezas secundarias
-            $nro_accion = $this->accion_ordenes_trabajo_model->altaAccionSimple($fecha, $nro_orden, $seccion, $observaciones, $tipo_accion);
+            //$tipo_accion = 1; //accion piezas secundarias
+            //$nro_accion = $this->accion_ordenes_trabajo_model->altaAccionSimple($fecha, $nro_orden, $seccion, $observaciones, $tipo_accion);
             //almacen info de orden en variables de session 
-            $_SESSION['nro_orden']  = $nro_orden;
-            $_SESSION['nro_accion'] = $nro_accion;       
+            $_SESSION['nro_orden']      = $nro_orden;
+            $_SESSION['fecha']          = $fecha;
+            $_SESSION['seccion']        = $seccion; 
+            $_SESSION['observaciones']  = $observaciones;
             echo 1;
-        }        
-        
+        }       
     }
     
     function accionPiezasAsociadas() {

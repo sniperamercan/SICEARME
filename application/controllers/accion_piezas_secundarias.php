@@ -31,8 +31,13 @@ class accion_piezas_secundarias extends CI_Controller {
         
         $data['nro_orden'] = $_SESSION['nro_orden'];
         
-        $nro_orden  = $_SESSION['nro_orden'];
-        $nro_accion = $_SESSION['nro_accion'];
+        $nro_orden = $_SESSION['nro_orden'];
+        
+        if(isset($_SESSION['nro_accion']) && !empty($_SESSION['nro_accion'])) {
+            $nro_accion = $_SESSION['nro_accion'];
+        }else {
+            $nro_accion = 0;
+        }
         
         $data['acciones'] = "";
         
@@ -123,11 +128,18 @@ class accion_piezas_secundarias extends CI_Controller {
     
     function validarDatos() {
         
+        //datos de la accion piezas secundarias
         $nro_parte    = $_POST["nro_parte"];
         $nombre_parte = $_POST["nombre_parte"];
         $nro_catalogo = $_POST["nro_catalogo"];
         $cant_actual  = $_POST["cant_actual"];
         $cant_usar    = $_POST["cant_usar"];
+        
+        //datos de la accion simple
+        $nro_orden     = $_SESSION['nro_orden'];     
+        $fecha         = $_SESSION['fecha'];          
+        $seccion       = $_SESSION['seccion'];        
+        $observaciones = $_SESSION['observaciones'];
 
         $mensaje_error = array();
         
@@ -192,8 +204,15 @@ class accion_piezas_secundarias extends CI_Controller {
                     break;                
             }
         }else {
+            $tipo_accion = 1;
             $cant_total = $cant_actual - $cant_usar;
-            $this->accion_piezas_secundarias_model->altaAccionPiezasSecundarias($nro_parte, $nombre_parte, $nro_catalogo, $cant_usar, $cant_total);
+            if(!isset($_SESSION['nro_accion']) || empty($_SESSION['nro_accion'])) {
+                $nro_accion = $this->accion_piezas_secundarias_model->altaAccionSimple($fecha, $nro_orden, $seccion, $observaciones, $tipo_accion);
+                $_SESSION['nro_accion'] = $nro_accion;
+            }else {
+                $nro_accion = $_SESSION['nro_accion'];
+            }
+            $this->accion_piezas_secundarias_model->altaAccionPiezasSecundarias($nro_parte, $nombre_parte, $nro_catalogo, $cant_usar, $cant_total, $nro_orden, $nro_accion);
             echo 1;
         }
     }

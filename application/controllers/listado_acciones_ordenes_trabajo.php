@@ -140,15 +140,15 @@ class listado_acciones_ordenes_trabajo extends CI_Controller {
             switch($result[$i+4]) {
 
                 case 0: //accion simple
-                    $tipo_accion = "accion simple";
+                    $tipo_accion = "Accion simple";
                     break;
 
                 case 1: //accion piezas secundarias
-                    $tipo_accion = "accion piezas secundarias";
+                    $tipo_accion = "Accion piezas secundarias";
                     break;
 
                 case 2: //accion piezas asociadas
-                    $tipo_accion = "accion piezas asociadas";
+                    $tipo_accion = "Accion piezas asociadas";
                     break;
             }      
             
