@@ -63,15 +63,15 @@
 
                     <thead style='text-align: center; cursor: pointer;'>
                         <tr>      
-                        <th> Nro orden       </th>
-                        <th> Nro serie       </th>
-                        <th> Marca           </th>
-                        <th> Calibre         </th>
-                        <th> Modelo          </th>
-                        <th> Pieza ant       </th>
-                        <th> Pieza nueva     </th>
-                        <th> Nro parte       </th>
-                        <th> Nombre parte    </th>
+                            <th> Nro orden       </th>
+                            <th> Nro serie       </th>
+                            <th> Marca           </th>
+                            <th> Calibre         </th>
+                            <th> Modelo          </th>
+                            <th> Pieza ant       </th>
+                            <th> Pieza nueva     </th>
+                            <th> Nro parte       </th>
+                            <th> Nombre parte    </th>
                         </tr>
                     </thead>
 

@@ -64,7 +64,6 @@ class imprimir_cambios_piezas_asociadas extends CI_Controller {
                 <td> ".$marca." </td>
                 <td> ".$calibre." </td>
                 <td> ".$modelo." </td>
-                <td> ".$calibre." </td>
                 <td style='text-align: center;'> ".$nro_pieza_anterior." </td>
                 <td style='text-align: center;'> ".$nro_pieza_nueva." </td>    
                 <td> ".$nro_parte." </td>
@@ -75,7 +74,7 @@ class imprimir_cambios_piezas_asociadas extends CI_Controller {
         $data['contenido'] = $concat;
         
         //Cargo la vista
-        $this->load->view("imprimir_cambios_piezas_asociadas", $data);
+        $this->load->view("imprimir_cambios_piezas_asociadas_view", $data);
     }
     
 }
