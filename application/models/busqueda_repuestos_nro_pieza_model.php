@@ -41,6 +41,7 @@ class busqueda_repuestos_nro_pieza_model extends CI_Model {
                                    FROM stock_repuestos_nro_pieza s
                                    INNER JOIN catalogos c ON s.nro_interno_catalogo = c.nro_interno
                                    WHERE c.nro_interno = ".$this->db->escape($row->nro_interno_catalogo)."
+                                   AND s.nombre_parte  = ".$this->db->escape($_SESSION['tipo_pieza'])."    
                                    ".$condicion."
                                    ORDER BY ".$order."
                                    LIMIT ".$ini.",".$param);

@@ -53,7 +53,7 @@
                         }else{
                             jAlert(data, "Error");
                         }                            
-                  }
+                    }
                 });               
             }            
             
@@ -62,7 +62,22 @@
             }
             
             function busquedaRepuestos() {
-                $.colorbox({href:"<?php echo base_url('busqueda_repuestos_nro_pieza'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA REPUESTOS", onClosed: function(){ cargoRepuestosFiltro(); } });
+                
+                var nro_pieza = $("#nro_pieza_anterior").val();
+                
+                if(nro_pieza == "") {
+                    jAlert("ERROR: Debe seleccionar una pieza del armamento antes de buscar en el almacen", "Error");
+                    return false;
+                }
+            
+                $.ajax({
+                    type: "post",  
+                    url: "<?php base_url(); ?>accion_piezas_asociadas/busquedaRepuestos",
+                    data: "nro_pieza="+nro_pieza,
+                    success: function(){
+                        $.colorbox({href:"<?php echo base_url('busqueda_repuestos_nro_pieza'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA REPUESTOS", onClosed: function(){ cargoRepuestosFiltro(); } });                           
+                    }
+                });    
             }
             
             function cargoRepuestosFiltro() {
@@ -88,6 +103,12 @@
             }
             
             function busquedaPiezasArmamento() {
+            
+                $("#nro_pieza_nueva").val("");
+                $("#nro_parte").val("");
+                $("#nombre_parte").val("");
+                $("#nro_catalogo").val("");
+            
                 $.colorbox({href:"<?php echo base_url('busqueda_piezas'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA PIEZAS", onClosed: function(){ cargoPiezasArmamentoFiltro(); } });
             }
             
@@ -121,10 +142,9 @@
                                 }else {
                                     jAlert("ERROR: Borrar accion de cambio de pieza no se puede ejecutar, debido a que la pieza del armamento ya no posee dicha pieza", "Error");
                                 }
-                          }
+                            }
                         });                        
                     }
-                    
                 });
             }
             
@@ -145,9 +165,23 @@
                 <dd><label> Nro - <?php echo $nro_orden ?>  </label></dd>
                 </dl>                 
                 
+                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                
+                <dl>
+                <dt><label> Piezas armamento </label></dt>
+                <dd><img style="cursor: pointer;" onclick="busquedaPiezasArmamento();" src="<?php echo base_url(); ?>images/search.png" /> <label> (Pieza que contiene actualmente el armamento) </label> </dd>
+                </dl>                 
+                
+                <dl>
+                <dt><label for="nro_pieza_anterior"> Nro pieza <font color="red"> * </font> </label></dt>
+                <dd><input readonly="readonly" type="text" id="nro_pieza_anterior" class="txtautomatico" /> </dd>
+                </dl> 
+                
+                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                
                 <dl>
                 <dt><label> Buscar repuesto </label></dt>
-                <dd><img style="cursor: pointer;" onclick="busquedaRepuestos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
+                <dd><img style="cursor: pointer;" onclick="busquedaRepuestos();" src="<?php echo base_url(); ?>images/search.png" /> <label> (Pieza nueva seleccionada del almacen) </label> </dd>
                 </dl>  
                 
                 <dl>
@@ -169,18 +203,6 @@
                 <dt><label for="nro_catalogo"> Nro catalogo <font color="red"> * </font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" /> </dd>
                 </dl>                
-
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
-                
-                <dl>
-                <dt><label> Piezas armamento </label></dt>
-                <dd><img style="cursor: pointer;" onclick="busquedaPiezasArmamento();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
-                </dl>                 
-                
-                <dl>
-                <dt><label for="nro_pieza_anterior"> Nro pieza <font color="red"> * </font> </label></dt>
-                <dd><input readonly="readonly" type="text" id="nro_pieza_anterior" class="txtautomatico" /> </dd>
-                </dl>     
                 
             </fieldset>	
 

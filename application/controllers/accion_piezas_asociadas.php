@@ -31,6 +31,8 @@ class accion_piezas_asociadas extends CI_Controller {
         
         $data['nro_orden'] = $_SESSION['nro_orden'];
         
+        $_SESSION['tipo_pieza'] = "";
+        
         $nro_orden  = $_SESSION['nro_orden'];
 
         if(isset($_SESSION['nro_accion']) && !empty($_SESSION['nro_accion'])) {
@@ -106,6 +108,16 @@ class accion_piezas_asociadas extends CI_Controller {
         
         echo $nro_pieza;
     }    
+    
+    function busquedaRepuestos() {
+        
+        $nro_orden = $_SESSION['nro_orden'];
+        $nro_pieza = $_POST['nro_pieza'];
+        
+        $tipo_pieza = $this->accion_piezas_asociadas_model->cargoTipoPieza($nro_orden, $nro_pieza);
+        
+        $_SESSION['tipo_pieza'] = $tipo_pieza;
+    }
     
     function eliminarAccionAsociada() {
         
