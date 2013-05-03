@@ -173,6 +173,36 @@ class accion_piezas_asociadas_model extends CI_Model {
         
     }
     
+    function altaAccionSimple($fecha, $nro_orden, $seccion, $observaciones, $tipo_accion) {
+        
+        $data_accion_simple = array(
+            'nro_orden'   => $nro_orden,
+            'fecha'       => $fecha,
+            'seccion'     => $seccion,
+            'detalles'    => $observaciones,
+            'tipo_accion' => $tipo_accion //0 - accion simple 1- accion piezas secundarias 2- accion piezas asociadas.
+        );
+        
+        $this->db->insert('detalles_ordenes_trabajo', $data_accion_simple);
+        
+        $query = $this->db->query("SELECT last_insert_id() as nro_accion");
+
+        $row = $query->row();
+
+        $nro_accion = $row->nro_accion;           
+ 
+        $data_db_logs = array(
+            'tipo_movimiento' => 'insert',
+            'tabla'           => 'detalles_ordenes_trabajo',
+            'clave_tabla'     => 'nro_orden = '.$nro_orden,
+            'usuario'         => base64_decode($_SESSION['usuario'])
+        );        
+            
+        $this->db->insert('db_logs', $data_db_logs);
+        
+        return $nro_accion;
+    }     
+    
     function altaAccionPiezasAsociadas($nro_pieza_nueva, $nro_pieza_anterior, $nro_orden, $nro_accion, $nro_parte, $nombre_parte, $nro_catalogo) {
         
         $this->db->trans_start();

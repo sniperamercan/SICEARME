@@ -32,7 +32,12 @@ class accion_piezas_asociadas extends CI_Controller {
         $data['nro_orden'] = $_SESSION['nro_orden'];
         
         $nro_orden  = $_SESSION['nro_orden'];
-        $nro_accion = $_SESSION['nro_accion'];
+
+        if(isset($_SESSION['nro_accion']) && !empty($_SESSION['nro_accion'])) {
+            $nro_accion = $_SESSION['nro_accion'];
+        }else {
+            $nro_accion = 0;
+        }        
         
         $data['acciones'] = "";
         
@@ -52,8 +57,8 @@ class accion_piezas_asociadas extends CI_Controller {
             $datos_accion = $this->accion_piezas_asociadas_model->cargoDatosAccion($nro_orden, $nro_accion);
             
             /*
-                $datos[] = $row->nro_cambio;         0
-                $datos[] = $row->nro_pieza_nueva; 1
+                $datos[] = $row->nro_cambio;            0
+                $datos[] = $row->nro_pieza_nueva;       1
                 $datos[] = $row->nro_pieza_anterior;    2
              */
             
@@ -146,6 +151,7 @@ class accion_piezas_asociadas extends CI_Controller {
     
     function validarDatos() {
         
+        //datos de accion piezas asociadas
         $nro_pieza_nueva    = $_POST["nro_pieza_nueva"];
         $nro_pieza_anterior = $_POST["nro_pieza_anterior"];
         
@@ -153,6 +159,12 @@ class accion_piezas_asociadas extends CI_Controller {
         $nombre_parte = $_POST['nombre_parte'];
         $nro_catalogo = $_POST['nro_catalogo'];
 
+        //datos de la accion simple
+        $nro_orden     = $_SESSION['nro_orden'];     
+        $fecha         = $_SESSION['fecha'];          
+        $seccion       = $_SESSION['seccion'];        
+        $observaciones = $_SESSION['observaciones'];        
+        
         $mensaje_error = array();
         
         if(empty($nro_pieza_nueva)) {
@@ -176,8 +188,13 @@ class accion_piezas_asociadas extends CI_Controller {
                     break;               
             }
         }else {
-            $nro_orden  = $_SESSION['nro_orden'];
-            $nro_accion = $_SESSION['nro_accion'];
+            $tipo_accion = 2;
+            if(!isset($_SESSION['nro_accion']) || empty($_SESSION['nro_accion'])) {
+                $nro_accion = $this->accion_piezas_asociadas_model->altaAccionSimple($fecha, $nro_orden, $seccion, $observaciones, $tipo_accion);
+                $_SESSION['nro_accion'] = $nro_accion;
+            }else {
+                $nro_accion = $_SESSION['nro_accion'];
+            }
             $this->accion_piezas_asociadas_model->altaAccionPiezasAsociadas($nro_pieza_nueva, $nro_pieza_anterior, $nro_orden, $nro_accion, $nro_parte, $nombre_parte, $nro_catalogo);
             echo 1;
         }

@@ -141,44 +141,44 @@
             <fieldset>	
             
                 <dl>
-                <dt><label> Orden de trabajo <font color="red"> * </font> </label></dt>
+                <dt><label> Orden de trabajo </label></dt>
                 <dd><label> Nro - <?php echo $nro_orden ?>  </label></dd>
                 </dl>                 
                 
                 <dl>
-                <dt><label> Buscar repuesto <font color="red"> * </font> </label></dt>
+                <dt><label> Buscar repuesto </label></dt>
                 <dd><img style="cursor: pointer;" onclick="busquedaRepuestos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>  
                 
                 <dl>
-                <dt><label for="nro_pieza_nueva"> Nro pieza </label></dt>
+                <dt><label for="nro_pieza_nueva"> Nro pieza <font color="red"> * </font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_pieza_nueva" class="txtautomatico" /> </dd>
                 </dl>  
                 
                 <dl>
-                <dt><label for="nro_parte"> Nro parte </label></dt>
+                <dt><label for="nro_parte"> Nro parte <font color="red"> * </font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_parte" class="txtautomatico" /> </dd>
                 </dl>
                 
                 <dl>
-                <dt><label for="nombre_parte"> Nombre parte </label></dt>
+                <dt><label for="nombre_parte"> Nombre parte <font color="red"> * </font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="nombre_parte" class="txtautomatico" /> </dd>
                 </dl>
                 
                 <dl>
-                <dt><label for="nro_catalogo"> Nro catalogo </label></dt>
+                <dt><label for="nro_catalogo"> Nro catalogo <font color="red"> * </font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" /> </dd>
                 </dl>                
 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <dl>
-                <dt><label> Piezas armamento <font color="red"> * </font> </label></dt>
+                <dt><label> Piezas armamento </label></dt>
                 <dd><img style="cursor: pointer;" onclick="busquedaPiezasArmamento();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>                 
                 
                 <dl>
-                <dt><label for="nro_pieza_anterior"> Nro pieza </label></dt>
+                <dt><label for="nro_pieza_anterior"> Nro pieza <font color="red"> * </font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_pieza_anterior" class="txtautomatico" /> </dd>
                 </dl>     
                 
