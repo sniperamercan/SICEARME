@@ -153,7 +153,11 @@ class modificar_accion_piezas_secundarias extends CI_Controller {
         
         if($cant_usar > $cant_actual) {
             $mensaje_error[] = 6;
-        }          
+        }      
+        
+        if($cant_usar <= 0) {
+            $mensaje_error[] = 7;
+        }        
         
         if(count($mensaje_error) > 0) {
             
@@ -181,7 +185,11 @@ class modificar_accion_piezas_secundarias extends CI_Controller {
                 
                 case 6:
                     echo "ERROR: La cantidad a usar no puede ser mayor que la cantidad que hay en stock";
-                    break;                
+                    break;   
+                
+                case 7:
+                    echo $this->mensajes->errorCantidad('cant a usar');
+                    break;                 
             }
         }else {
             $cant_total = $cant_actual - $cant_usar;

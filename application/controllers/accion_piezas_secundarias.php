@@ -169,7 +169,11 @@ class accion_piezas_secundarias extends CI_Controller {
         
         if(empty($nro_catalogo)) {
             $mensaje_error[] = 7;
-        }         
+        }      
+        
+        if($cant_usar <= 0) {
+            $mensaje_error[] = 8;
+        }
         
         if(count($mensaje_error) > 0) {
             
@@ -201,7 +205,11 @@ class accion_piezas_secundarias extends CI_Controller {
                 
                 case 7:
                     echo $this->mensajes->errorVacio('nro catalogo');
-                    break;                
+                    break;
+                
+                case 8:
+                    echo $this->mensajes->errorCantidad('cant a usar');
+                    break;     
             }
         }else {
             $tipo_accion = 1;
