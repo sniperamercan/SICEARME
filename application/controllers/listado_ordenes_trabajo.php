@@ -169,7 +169,7 @@ class listado_ordenes_trabajo extends CI_Controller {
             
             $concat .= "
                 <tr class='".$class."'> 
-                    <td style='text-align: center;'> ".$result[$i]." </td>
+                    <td style='text-align: center;'> ".$result[$i]."   </td>
                     <td style='text-align: center;'> ".$result[$i+1]." </td>
                     <td> ".$result[$i+2]." </td>
                     <td> ".$result[$i+3]." </td>
