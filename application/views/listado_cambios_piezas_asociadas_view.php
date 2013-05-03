@@ -46,7 +46,7 @@
                 
                 $.ajax({ 
                     type: 'post',
-                    url: '<?php echo base_url(); ?>listado_ordenes_trabajo/consulta/0',
+                    url: '<?php echo base_url(); ?>listado_cambios_piezas_asociadas/consulta/0',
                     data: "nro_orden="+nro_orden+"&nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&fecha1="+fecha1+"&fecha2="+fecha2,
                     success: function(){
                         cargoConsulta();
@@ -55,13 +55,13 @@
             }
             
             function impresion(){                
-                $.colorbox({href:"<?php echo base_url('listado_ordenes_trabajo/seteoImpresion'); ?>", iframe: false, scrolling: false, innerWidth: 800, innerHeight: 200, title: "IMPRESION"});                
+                $.colorbox({href:"<?php echo base_url('listado_cambios_piezas_asociadas/seteoImpresion'); ?>", iframe: false, scrolling: false, innerWidth: 800, innerHeight: 200, title: "IMPRESION"});                
             } 
 
             function seteoImpresion(de_pagina, a_pagina){                
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("listado_ordenes_trabajo/armoImpresion"); ?>",
+                    url: "<?php echo base_url("listado_cambios_piezas_asociadas/armoImpresion"); ?>",
                     data: "de_pagina="+de_pagina+"&a_pagina="+a_pagina,
                     success: function(data){
                         if(data == "1"){
@@ -76,7 +76,7 @@
             function orderBy(param){            
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("listado_ordenes_trabajo/orderBy"); ?>",
+                    url: "<?php echo base_url("listado_cambios_piezas_asociadas/orderBy"); ?>",
                     data: "order="+param,
                     success: function(){
                         cargoConsulta();                       
@@ -88,7 +88,7 @@
                 $.ajax({
                     type: 'post',
                     dataType: 'json',
-                    url: "<?php echo base_url("listado_ordenes_trabajo/consulta"); ?>",
+                    url: "<?php echo base_url("listado_cambios_piezas_asociadas/consulta"); ?>",
                     success: function(data){
                         $("#datos_consulta").html(data[0]);
                         //$("#paginado").html(data[1]);
@@ -99,7 +99,7 @@
             function verObservaciones(nro_orden) {
                 $.ajax({
                     type: "post",  
-                    url: "<?php base_url(); ?>listado_ordenes_trabajo/verObservaciones",
+                    url: "<?php base_url(); ?>listado_cambios_piezas_asociadas/verObservaciones",
                     data: "nro_orden="+nro_orden,
                     success: function(data){
                         jAlert(data, "OBSERVACIONES DE LA ORDEN DE TRABAJO");
@@ -107,24 +107,13 @@
                 });                
             }  
             
-            function verAcciones(nro_orden) {
-                $.ajax({
-                    type: "post",  
-                    url: "<?php base_url(); ?>listado_ordenes_trabajo/verAcciones",
-                    data: "nro_orden="+nro_orden,
-                    success: function(data){
-                        irAFrame('<?php echo base_url('listado_de_una_accion_ordenes_trabajo'); ?>','Taller armamento >> Listado >> Acciones de una orden de trabajo');
-                  }
-                });                
-            }
-              
             function imprimir(nro_orden) {
                 $.ajax({
                     type: "post",  
-                    url: "<?php base_url(); ?>listado_ordenes_trabajo/imprimir",
+                    url: "<?php base_url(); ?>listado_cambios_piezas_asociadas/imprimir",
                     data: "nro_orden="+nro_orden,
                     success: function(){
-                        window.open ("<?php echo base_url("imprimir_ordenes_trabajo"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,status=1,menubar=1,resizable=0");
+                        window.open ("<?php echo base_url("imprimir_cambios_piezas_asociadas"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,status=1,menubar=1,resizable=0");
                   }
                 });                
             }              
@@ -138,20 +127,14 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Nro orden - </label> </td> <td>  <input type="text" class="text" id="nro_orden" /></td>
-                <td><label> &emsp; Nro serie  - </label> </td> <td>  <input type="text" class="text" id="nro_serie" /></td>
+                <td><label> &emsp; Nro orden  - </label> </td> <td>  <input type="text" class="text" id="nro_orden" /></td>
+                <td><label> &emsp; Nro pieza  - </label> </td> <td>  <input type="text" class="text" id="nro_pieza" /></td>
             </tr>
             
             <tr>
-                <td><label> &emsp; Marca      - </label> </td> <td>  <input type="text" class="text" id="marca" /></td>
-                <td><label> &emsp; Calibre - </label> </td> <td>  <input type="text" class="text" id="calibre" /></td>
+                <td><label> &emsp; Nro parte      - </label> </td> <td>  <input type="text" class="text" id="nro_parte" /></td>
+                <td><label> &emsp; Nombre parte   - </label> </td> <td>  <input type="text" class="text" id="nombre_parte" /></td>
             </tr>   
-
-            <tr>
-                <td><label> &emsp; Fecha 1 - </label> </td> <td>  <input type="text" class="text" id="fecha1" /></td>
-                <td><label> &emsp; Fecha 2 - </label> </td> <td>  <input type="text" class="text" id="fecha2" /></td>
-            </tr>            
-            
             
         </table>
         
@@ -170,16 +153,15 @@
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
                         <th onclick="orderBy(0)"> Nro orden       </th>
-                        <th onclick="orderBy(1)"> Fecha           </th>
-                        <th onclick="orderBy(2)"> Nro serie       </th>
-                        <th onclick="orderBy(3)"> Marca           </th>
-                        <th onclick="orderBy(4)"> Calibre         </th>
-                        <th onclick="orderBy(5)"> Modelo          </th>
-                        <th> Unidad                               </th>
-                        <th onclick="orderBy(6)"> Estado orden    </th>
-                        <th> Estado arma      </th>
+                        <th> Nro serie       </th>
+                        <th> Marca           </th>
+                        <th> Calibre         </th>
+                        <th> Modelo          </th>
+                        <th onclick="orderBy(1)"> Pieza ant       </th>
+                        <th onclick="orderBy(2)"> Pieza nueva     </th>
+                        <th onclick="orderBy(3)"> Nro parte       </th>
+                        <th onclick="orderBy(4)"> Nombre parte    </th>
                         <th> Ver obser        </th>
-                        <th> Acciones         </th>
                         <th> Visualizar       </th>
                         <th> Imprimir         </th>
                     </tr>
@@ -188,7 +170,7 @@
                 <tbody id="datos_consulta"> </tbody>   
 
                 <tfoot>
-                    <tr> <td colspan="13"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="12"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
                 
            </table>  

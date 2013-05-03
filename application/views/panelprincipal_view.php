@@ -367,6 +367,7 @@
                                         <ul>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_ordenes_trabajo'); ?>','Taller armamento >> Listado >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_acciones_ordenes_trabajo'); ?>','Taller armamento >> Listado >> Estado del armamento');"> Acciones de una orden </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_cambios_piezas_asociadas'); ?>','Taller armamento >> Listado >> Cambios piezas asociadas');"> Cambios piezas asociadas </a></li>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_mutaciones_armamentos'); ?>','Taller armamento >> Listado >> Mutaciones de armamentos');"> Mutaciones de armamentos </a></li>
                                         </ul>
                                     </li>
