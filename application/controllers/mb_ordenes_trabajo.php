@@ -141,11 +141,11 @@ class mb_ordenes_trabajo extends CI_Controller {
             switch($result[$i+7]) {
                 
                 case 0:
-                    $estado_orden_trabajo = "abierta";
+                    $estado_orden_trabajo = "Abierta";
                     break;
                 
                 case 1:
-                    $estado_orden_trabajo = "cerrada";
+                    $estado_orden_trabajo = "Cerrada";
                     break;
             }
             
