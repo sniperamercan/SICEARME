@@ -105,11 +105,11 @@
                 });                
             }  
             
-            function imprimir(nro_orden) {
+            function imprimir(nro_cambio) {
                 $.ajax({
                     type: "post",  
                     url: "<?php base_url(); ?>listado_cambios_piezas_asociadas/imprimir",
-                    data: "nro_orden="+nro_orden,
+                    data: "nro_cambio="+nro_cambio,
                     success: function(){
                         window.open ("<?php echo base_url("imprimir_cambios_piezas_asociadas"); ?>", "mywindow","toolbar=0,scrollbars=1,location=0,status=1,menubar=1,resizable=0");
                   }

@@ -332,7 +332,7 @@ class listado_cambios_piezas_asociadas extends CI_Controller {
     } 
     
     function imprimir() {
-        $_SESSION['nro_orden'] = $_POST['nro_orden'];
+        $_SESSION['nro_cambio'] = $_POST['nro_cambio'];
     }    
 }
 
