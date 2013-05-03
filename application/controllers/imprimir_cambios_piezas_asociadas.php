@@ -4,7 +4,7 @@
 * Equipo - UDEPGCALIT
 * Año - 2013
 * Iteracion - Primera Iteracion
-* Clase - imprimir_stock_almacen
+* Clase - imprimir_cambios_piezas_asociadas
 */
 
 class imprimir_cambios_piezas_asociadas extends CI_Controller {
