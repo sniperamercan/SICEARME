@@ -299,19 +299,19 @@
                                 
                                 <li><a href="#"> Alta </a>
                                     <ul>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_inventarios_reserva'); ?>','Reserva >> Alta >> Inventarios reserva');"> Inventarios reserva </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_inventario_reserva'); ?>','Reserva >> Alta >> Inventario reserva');"> Inventario reserva </a></li>
                                     </ul>
                                 </li> 
 
                                 <li><a href="#"> Modificar </a>
                                     <ul>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_inventarios_reserva'); ?>','Reserva >> Modificar >> Inventarios reserva');"> Inventarios reserva </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_inventario_reserva'); ?>','Reserva >> Modificar >> Inventario reserva');"> Inventario reserva </a></li>
                                     </ul>
                                 </li>
 
                                 <li><a href="#"> Listado </a>
                                     <ul>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_inventarios_reserva'); ?>','Reserva >> Listado >> Inventarios reserva');"> Inventarios reserva </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_inventario_reserva'); ?>','Reserva >> Listado >> Inventario reserva');"> Inventario reserva </a></li>
                                     </ul>
                                 </li>
                                 

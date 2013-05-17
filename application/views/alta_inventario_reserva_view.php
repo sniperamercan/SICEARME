@@ -27,31 +27,27 @@
         <script type="text/javascript">
 
             $(document).ready(function() {
-                $("#fecha").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
                 $("input:submit").button();
                 $("button").button(); 
                 $("input:button").button(); 
             });	
 
-            function altaOrdenTrabajo() {
+            function altaInventario() {
     
-                var fecha         = $("#fecha").val();
-                var unidad        = $("#unidad").val();
-                var nro_serie     = $("#nro_serie").val();
-                var marca         = $("#marca").val();
-                var calibre       = $("#calibre").val();
-                var modelo        = $("#modelo").val();     
-                
-                var observaciones = cambiarCaracter();
+                var nro_serie      = $("#nro_serie").val();
+                var marca          = $("#marca").val();
+                var calibre        = $("#calibre").val();
+                var modelo         = $("#modelo").val();     
+                var deposito_nuevo = $("#deposito_nuevo").val();
                 
                 $.ajax({
                     type: "post",  
                     dataType: "json",
-                    url: "<?php base_url(); ?>alta_ordenes_trabajo/validarDatos",
-                    data: "fecha="+fecha+"&unidad="+unidad+"&nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&observaciones="+observaciones,
+                    url: "<?php base_url(); ?>alta_inventario_reserva/validarDatos",
+                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&deposito_nuevo="+deposito_nuevo,
                     success: function(data){
-                        if(data[0] == "1"){            
-                            jAlert("Orden de trabajo generada con exito - <b> Nro de orden generado = "+data[1]+" </b>", "Correcto", function() { irAFrame('<?php echo base_url('alta_ordenes_trabajo'); ?>','Taller armamento >> Alta >> Ordenes de trabajo'); });
+                        if(data == "1"){            
+                            jAlert("CORRECTO: Inventario de reserva ingresado con exito", "Correcto", function() { irAFrame('<?php echo base_url('alta_inventario_reserva'); ?>','Reserva >> Alta >> Inventario reserva'); });
                         }else{
                             jAlert(data[0], "Error");
                         }                            
@@ -59,21 +55,15 @@
                 });               
             }
             
-            function cambiarCaracter(){
-                var val = $("#observaciones").val();    
-                while (val !=(val = val.replace('&', '')));
-                return val;
-            }
-            
             function busquedaFichas() {
-                $.colorbox({href:"<?php echo base_url('busqueda_fichas_taller'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA FICHAS", onClosed: function(){ cargoFichasFiltro(); } });
+                $.colorbox({href:"<?php echo base_url('busqueda_fichas_reserva'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA FICHAS", onClosed: function(){ cargoFichasFiltro(); } });
             }
             
             function cargoFichasFiltro() {
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_ordenes_trabajo/cargoFichasFiltro",
+                   url: "<?php base_url(); ?>alta_inventario_reserva/cargoFichasFiltro",
                    success: function(data) {
                        $("#nro_serie").val("");
                        $("#nro_serie").val(data[0]);
@@ -86,7 +76,9 @@
                        $("#tipo_arma").val("");
                        $("#sistema").val("");
                        $("#tipo_arma").val(data[4]);
-                       $("#sistema").val(data[5]);                       
+                       $("#sistema").val(data[5]); 
+                       $("#deposito_actual").val("");
+                       $("#deposito_actual").val(data[6]);
                    }
                 });                
             }            
@@ -97,81 +89,41 @@
                 $("#modelo").html("");
                 $("#tipo_arma").val("");
                 $("#sistema").val("");
-            }
-            
-            function cargoMarcas(nro_serie) {
-                
-                if(nro_serie == "") {
-                    vacioCamposArma();
-                }else {
-                    $.ajax({
-                       type: "post",
-                       url: "<?php base_url(); ?>alta_ordenes_trabajo/cargoMarcas",
-                       data: "nro_serie="+nro_serie,
-                       success: function(data) {
-                           $("#marca").html("");
-                           $("#marca").html(data);
-                       }
-                    }); 
-                }
-            }
-            
-            function cargoCalibres(nro_serie, marca) {
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>alta_ordenes_trabajo/cargoCalibres",
-                   data: "nro_serie="+nro_serie+"&marca="+marca,
-                   success: function(data) {
-                       $("#calibre").html("");
-                       $("#calibre").html(data);
-                   }
-                });                
-            }
-            
-            function cargoModelos(nro_serie, marca, calibre) {
-                $.ajax({
-                   type: "post",
-                   url: "<?php base_url(); ?>alta_ordenes_trabajo/cargoModelos",
-                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre,
-                   success: function(data) {
-                       $("#modelo").html("");
-                       $("#modelo").html(data);
-                   }
-                });                
+                $("#deposito_actual").val("");
             }
             
             function cargoDatos(nro_serie, marca, calibre, modelo) {
                 $.ajax({
                    type: "post",
                    dataType: "json",
-                   url: "<?php base_url(); ?>alta_ordenes_trabajo/cargoDatos",
+                   url: "<?php base_url(); ?>alta_inventario_reserva/cargoDatos",
                    data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
                    success: function(data) {
                        $("#tipo_arma").val("");
                        $("#sistema").val("");
+                       $("#deposito_actual").val("");
                        $("#tipo_arma").val(data[0]);
                        $("#sistema").val(data[1]);
+                       $("#deposito_actual").val(data[2]);
                    }
                 });                 
             }
             
-            function verHistorico() {
-                
-                var nro_serie     = $("#nro_serie").val();
-                var marca         = $("#marca").val();
-                var calibre       = $("#calibre").val();
-                var modelo        = $("#modelo").val();                
+            //cargo y creo Empresas
+            function crearDeposito() {
+                $.colorbox({href:"<?php echo base_url('alta_deposito'); ?>", top:false, iframe:false, innerWidth:800, innerHeight:200, title:"ALTA DEPOSITO", onClosed: function(){ cargoDepositos(); } });
+            }            
             
+            function cargoDepositos() {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>alta_ordenes_trabajo/verHistorico",
-                   data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo,
+                   url: "<?php base_url(); ?>alta_inventario_reserva/cargoDepositos",
                    success: function(data) {
-                        jAlert(data, "Historico armamento");
+                       $("#deposito_nuevo").html(data);
                    }
-                });              
-            
-            }
+                });
+            }     
+            //fin cargo y creo Empresas            
             
         </script>
         
@@ -181,16 +133,9 @@
 
         <div>			
 
-            <h1> Alta de ordenes de trabajo </h1>    
+            <h1> Alta inventario reserva </h1>    
             
             <fieldset>	
-                
-                <dl>
-                <dt><label for="fecha"> Fecha <font color="red"> * </font> </label></dt>
-                <dd><input readonly="readonly" type="text" id="fecha" class="text" /></dd>
-                </dl>                
-                
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> Datos del arma </p>
                 
@@ -227,19 +172,21 @@
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <dl>
-                <dt><label for="unidad"> Unidad <font color="red"> * </font> </label></dt>
-                <dd><select id="unidad"> <?php echo $unidades; ?> </select> <img style="cursor: pointer;" onclick="verHistorico();" src="<?php echo base_url(); ?>images/eye.png" alt="ver historico" /></dd>
+                <dt><label for="deposito_actual"> Dept act </label></dt>
+                <dd><input readonly="readonly" type="text" id="deposito_actual" class="txtautomatico" /></dd>
                 </dl>                  
                 
-                <dl> 		
-                <dt><label for="observaciones"> Observaciones </label></dt>	
-                <dd><textarea id="observaciones"> </textarea></dd> 					
-                </dl>                
+                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                
+                <dl>
+                <dt><label for="deposito_nuevo"> Dept nuev <font color="red"> * </font> </label></dt>
+                <dd><select id="deposito_nuevo"> <?php echo $depositos; ?> </select> <img style="cursor: pointer;" onclick="crearDeposito();" src="<?php echo base_url(); ?>images/sumar.png" alt="alta deposito" /></dd>
+                </dl>                  
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="altaOrdenTrabajo();"> Alta orden de trabajo </button>
+                <button style="margin-right: 20px;" onclick="altaInventario();"> Alta de inventario </button>
             </fieldset>  
             
         </div>        
