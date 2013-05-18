@@ -296,13 +296,6 @@
 
                         <li><a href="#"> Reserva </a>
                             <ul>
-                                
-                                <li><a href="#"> Alta </a>
-                                    <ul>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_inventario_reserva'); ?>','Reserva >> Alta >> Inventario reserva');"> Inventario reserva </a></li>
-                                    </ul>
-                                </li> 
-
                                 <li><a href="#"> Modificar </a>
                                     <ul>
                                         <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_inventario_reserva'); ?>','Reserva >> Modificar >> Inventario reserva');"> Inventario reserva </a></li>
