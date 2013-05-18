@@ -312,6 +312,12 @@
                                         <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_inventario_reserva'); ?>','Reserva >> Modificar >> Inventario reserva');"> Inventario reserva </a></li>
                                     </ul>
                                 </li>
+                                
+                                <li><a href="#"> Actas </a>
+                                    <ul>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_actas_baja_reserva'); ?>','Reserva >> Actas >> Acta baja');"> Actas baja </a></li>
+                                    </ul>
+                                </li>                                 
 
                                 <li><a href="#"> Listado </a>
                                     <ul>
