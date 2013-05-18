@@ -235,6 +235,16 @@
                                     </li>
                                 
                                 <?php } ?> 
+                                    
+                                <?php if($this->perms->verificoPerfil2() || $this->perms->verificoPerfil3()) { ?>
+                                
+                                    <li><a href="#"> Consulta </a>
+                                        <ul>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_stock_total_armas_detallado'); ?>','O.C.I >> Consulta >> Stock total armas detallado');"> Stock total armas detallado </a></li>
+                                        </ul>
+                                    </li>
+                                
+                                <?php } ?>                                     
                                 
                             </ul>
                         </li>  
