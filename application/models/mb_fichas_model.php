@@ -24,8 +24,8 @@ class mb_fichas_model extends CI_Model {
                                    FROM fichas f
                                    INNER JOIN catalogos c ON c.nro_interno = f.nro_interno_catalogo
                                    WHERE ".$condicion."
-                                   ORDER BY ".$order."
-                                   LIMIT ".$ini.",".$param);
+                                   ORDER BY ".$order);
+                                   //LIMIT ".$ini.",".$param);
         
         foreach($query->result() as $row){
             $result[] = $row->nro_serie;

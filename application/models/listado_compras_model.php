@@ -23,8 +23,8 @@ class listado_compras_model extends CI_Model {
         $query = $this->db->query("SELECT nro_interno, nro_compra, fecha, empresa_proveedora, pais_empresa, descripcion, modalidad, cantidad_armas, precio
                                    FROM compras
                                    WHERE ".$condicion."
-                                   ORDER BY ".$order."
-                                   LIMIT ".$ini.",".$param);
+                                   ORDER BY ".$order);
+                                   //LIMIT ".$ini.",".$param);
         
         foreach($query->result() as $row){
             $result[] = $row->nro_interno;

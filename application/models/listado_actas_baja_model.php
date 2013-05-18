@@ -191,8 +191,8 @@ class listado_actas_baja_model extends CI_Model {
         $query = $this->db->query("SELECT nro_acta, fecha_transaccion, unidad_entrega, unidad_recibe, representante_sma, representante_unidad, representante_supervision, estado
                                    FROM actas_baja
                                    WHERE ".$condicion."
-                                   ORDER BY ".$order."
-                                   LIMIT ".$ini.",".$param);
+                                   ORDER BY ".$order);
+                                   //LIMIT ".$ini.",".$param);
         
         foreach($query->result() as $row){
             $result[] = $row->nro_acta;

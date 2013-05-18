@@ -23,8 +23,8 @@ class listado_catalogos_model extends CI_Model {
         $query = $this->db->query("SELECT nro_interno, tipo_arma, marca, calibre, modelo, sistema, año_fabricacion, empresa, pais_origen, vencimiento
                                    FROM catalogos
                                    WHERE ".$condicion."
-                                   ORDER BY ".$order."
-                                   LIMIT ".$ini.",".$param);
+                                   ORDER BY ".$order);
+                                   //LIMIT ".$ini.",".$param);
         
         foreach($query->result() as $row){
             $result[] = $row->nro_interno;

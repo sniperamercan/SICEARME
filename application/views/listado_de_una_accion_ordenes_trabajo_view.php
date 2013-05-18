@@ -105,8 +105,6 @@
        <br /> 
         
        <button onclick="volver();"> Volver </button>
-            
-       <div id="paginado"> </div>     
         
     </body>    
     

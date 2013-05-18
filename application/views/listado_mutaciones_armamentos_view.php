@@ -156,8 +156,6 @@
            </table>  
             
        </div>     
-            
-       <div id="paginado"> </div>     
         
     </body>    
     
