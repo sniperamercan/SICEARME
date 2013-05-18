@@ -305,7 +305,7 @@
 
                                 <li><a href="#"> Modificar </a>
                                     <ul>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('modificar_inventario_reserva'); ?>','Reserva >> Modificar >> Inventario reserva');"> Inventario reserva </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_inventario_reserva'); ?>','Reserva >> Modificar >> Inventario reserva');"> Inventario reserva </a></li>
                                     </ul>
                                 </li>
 

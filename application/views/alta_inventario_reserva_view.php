@@ -125,6 +125,16 @@
             }     
             //fin cargo y creo Empresas            
             
+            function volver() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>alta_inventario_reserva/volver",
+                   success: function() {
+                        irAFrame('<?php echo base_url('mb_inventario_reserva'); ?>','Reserva >> Modificar >> Inventario reserva');
+                   }
+                });
+            }            
+            
         </script>
         
     </head>
@@ -133,7 +143,7 @@
 
         <div>			
 
-            <h1> Alta inventario reserva </h1>    
+            <h1> Modificar inventario reserva </h1>    
             
             <fieldset>	
                 
@@ -141,39 +151,39 @@
                 
                 <dl> 		
                 <dt><label for="nro_serie"> Nro serie <font color="red"> * </font> </label></dt>	
-                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" /> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
+                <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" value="<?php echo $nro_serie; ?>" /> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="marca"> Marca <font color="red"> * </font> </label></dt>	
-                <dd><input readonly="readonly" type="text" id="marca" class="txtautomatico" /></dd> 					
+                <dd><input readonly="readonly" type="text" id="marca" class="txtautomatico" value="<?php echo $marca; ?>" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="calibre"> Calibre <font color="red"> * </font> </label></dt>	
-                <dd><input readonly="readonly" type="text" id="calibre" class="txtautomatico" /></dd> 					
+                <dd><input readonly="readonly" type="text" id="calibre" class="txtautomatico" value="<?php echo $calibre; ?>" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="modelo"> Modelo <font color="red"> * </font> </label></dt>	
-                <dd><input readonly="readonly" type="text" id="modelo" class="txtautomatico" /></dd> 					
+                <dd><input readonly="readonly" type="text" id="modelo" class="txtautomatico" value="<?php echo $modelo; ?>" /></dd> 					
                 </dl>
                 
                 <dl> 		
                 <dt><label for="tipo_arma"> Tipo arma <font color="red"> * </font> </label></dt>	
-                <dd><input readonly="readonly" type="text" id="tipo_arma" class="txtautomatico" /></dd> 					
+                <dd><input readonly="readonly" type="text" id="tipo_arma" class="txtautomatico" value="<?php echo $tipo_arma; ?>" /></dd> 					
                 </dl>
                 
                 <dl>
                 <dt><label for="sistema"> Sistema <font color="red"> * </font> </label></dt>
-                <dd><input readonly="readonly" type="text" id="sistema" class="txtautomatico" /></dd>
+                <dd><input readonly="readonly" type="text" id="sistema" class="txtautomatico" value="<?php echo $sistema; ?>" /></dd>
                 </dl>                
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <dl>
                 <dt><label for="deposito_actual"> Dept act </label></dt>
-                <dd><input readonly="readonly" type="text" id="deposito_actual" class="txtautomatico" /></dd>
+                <dd><input readonly="readonly" type="text" id="deposito_actual" class="txtautomatico" value="<?php echo $deposito; ?>" /></dd>
                 </dl>                  
                 
                 <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
@@ -187,6 +197,7 @@
 
             <fieldset class="action">	
                 <button style="margin-right: 20px;" onclick="altaInventario();"> Alta de inventario </button>
+                <button style="margin-right: 20px;" onclick="volver();"> Volver </button>
             </fieldset>  
             
         </div>        

@@ -29,7 +29,30 @@ class alta_inventario_reserva extends CI_Controller {
     
     function index() {
         
-        //Cargo nro de series de armamentos que esten en deposito inicial
+        $nro_serie = $_SESSION['nro_serie'];
+        $marca     = $_SESSION['marca'];
+        $calibre   = $_SESSION['calibre'];
+        $modelo    = $_SESSION['modelo'];
+        
+        $data['nro_serie'] = $nro_serie;
+        $data['marca']     = $marca;
+        $data['calibre']   = $calibre;
+        $data['modelo']    = $modelo;
+        
+        if($this->alta_inventario_reserva_model->hayStockReserva($nro_serie, $marca, $calibre, $modelo)) {
+            $deposito = $this->alta_inventario_reserva_model->cargoStockReserva($nro_serie, $marca, $calibre, $modelo);
+        }else {
+            $deposito = "SIN DEPOSITO";
+        }       
+        
+        $data['deposito'] = $deposito;
+        
+        $datos = $this->alta_inventario_reserva_model->cargoDatos($nro_serie, $marca, $calibre, $modelo);
+        
+        $data['tipo_arma'] = $datos[0];
+        $data['sistema']   = $datos[1];
+        
+        //Cargo depositos
         if($this->alta_inventario_reserva_model->hayDepositos()) {
             $depositos = $this->alta_inventario_reserva_model->cargoDepositos();
         }else{
@@ -44,7 +67,7 @@ class alta_inventario_reserva extends CI_Controller {
             $aux = '"'.$val.'"';
             $data['depositos'] .= "<option value='".$val."'>".$val."</option>";
         }
-        //Fin cargo nro de series de armamento en deposito inicial
+        //Fin cargo depositos
         
         $this->load->view('alta_inventario_reserva_view', $data); 
     }
@@ -126,6 +149,13 @@ class alta_inventario_reserva extends CI_Controller {
         
         echo json_encode($retorno);        
     }    
+    
+    function volver() {
+        $_SESSION['nro_serie'] = "";
+        $_SESSION['marca']     = "";
+        $_SESSION['calibre']   = "";
+        $_SESSION['modelo']    = "";  
+    }
     
     function validarDatos() {
         
