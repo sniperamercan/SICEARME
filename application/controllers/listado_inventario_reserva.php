@@ -190,7 +190,7 @@ class listado_inventario_reserva extends CI_Controller {
         if(isset($_SESSION['condicion']) && !empty($_SESSION['condicion'])){
             $condicion = $_SESSION['condicion'];      
         }else{
-            $condicion = 1;
+            $condicion = "";
         }
                
         if( empty($de_pagina) || empty($a_pagina) ){            
@@ -244,12 +244,13 @@ class listado_inventario_reserva extends CI_Controller {
                 <th> Deposito     </th>
             </tr>   
         ';
-                
-        if($result[$i+4] == "") {
-            $result[$i+4] = "SIN DEPOSITO";
-        }        
         
-        for($i=0;$i<count($result);$i=$i+5) {            
+        for($i=0;$i<count($result);$i=$i+5) {         
+            
+            if($result[$i+4] == "") {
+                $result[$i+4] = "SIN DEPOSITO";
+            }               
+            
             $concat .= "
                 <tr>
                     <td style='text-align: center;'> ".$result[$i]." </td>
