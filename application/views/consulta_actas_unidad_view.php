@@ -51,7 +51,7 @@
             }
             
             function impresion(){                
-                $.colorbox({href:"<?php echo base_url('consulta_actas_unidad/seteoImpresion'); ?>", iframe: false, scrolling: false, innerWidth: 800, innerHeight: 200, title: "IMPRESION"});                
+                $('#datos_consulta').printElement();                
             } 
 
             function seteoImpresion(de_pagina, a_pagina){                

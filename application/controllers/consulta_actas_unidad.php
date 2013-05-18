@@ -289,7 +289,7 @@ class consulta_actas_unidad extends CI_Controller {
         if(isset($_SESSION['order'])){
             $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
         }else{
-            $order = "nro_serie";
+            $order = "nro_acta";
         }
         //Fin verifico order
         
@@ -303,11 +303,11 @@ class consulta_actas_unidad extends CI_Controller {
             echo "La pagina inicial y final deben de estar completadas ";
         }else if( $a_pagina < $de_pagina ){
             echo "La pagina inicila no puede ser mayor que la pagina final verifique";
-        }else if( $this->consulta_historial_movimiento_ficha_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
+        }else if( $this->consulta_actas_unidad_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
             echo "No existe tal cantidad de paginas para esa consulta verifique";
         }else{
             echo "1";
-            if( $this->consulta_historial_movimiento_ficha_model->cantidadRegistros($condicion) <= 30 ){
+            if( $this->consulta_actas_unidad_model->cantidadRegistros($condicion) <= 30 ){
                 $ini   = 0;
                 $param = 30;
                 $this->consultaImpresion($condicion, $ini, $param, $order);
