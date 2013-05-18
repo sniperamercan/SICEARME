@@ -208,7 +208,7 @@ class consulta_stock_total_armas_detallado extends CI_Controller {
         if(isset($_SESSION['condicion']) && !empty($_SESSION['condicion'])){
             $condicion = $_SESSION['condicion'];      
         }else{
-            $condicion = 1;
+            $condicion = "";
         }
                
         if( empty($de_pagina) || empty($a_pagina) ){            
@@ -245,43 +245,76 @@ class consulta_stock_total_armas_detallado extends CI_Controller {
         }            
         
         $concat = "";
-        
+
         $result = $this->consulta_stock_total_armas_detallado_model->consulta_db($param, $cantReg, $condicion, $order);
+
+        $j=0;
+
+        $nombreunidad = $this->consulta_stock_total_armas_detallado_model->nombreUnidad($_SESSION['unidad']);
+        $total = $this->consulta_stock_total_armas_detallado_model->cantidadRegistros($condicion);
                 
         
         $concat .= '<center>';
         
-        $concat .= '<table style="border: none; width: 50%">';
-        
-        $concat .= '
-            <tr>
-                <th> Nro orden    </th>
-                <th> Fecha        </th>
-                <th> Nro serie    </th>
-                <th> Marca        </th>
-                <th> Calibre      </th>
-                <th> Modelo       </th>
-                <th> Unidad       </th>
-                <th> Estado orden </th>
-            </tr>   
-        ';
-                
-        for($i=0;$i<count($result);$i=$i+8) {            
-            $concat .= "
-                <tr>
-                    <td style='text-align: center;'> ".$result[$i]." </td>
-                    <td style='text-align: center;'> ".$result[$i+1]." </td>
-                    <td> ".$result[$i+2]." </td>
-                    <td> ".$result[$i+3]." </td>
-                    <td> ".$result[$i+4]." </td>
-                    <td> ".$result[$i+5]." </td>
-                    <td> ".$result[$i+6]." </td>
-                    <td style='text-align: center;'> ".$result[$i+7]." </td>
-                </tr>
-            ";
-        }                  
-        
-        $concat .= '</table>';     
+            $concat .= '
+                <p class="subtituloform"> '.$nombreunidad. ' &nbsp;&nbsp;&nbsp;&nbsp; Total de armas - '.$total.' </p>
+
+                <table>
+
+                    <thead style="text-align: center; cursor: pointer;">
+                        <tr>      
+                            <th onclick="orderBy(0)"> Nro serie  </th>
+                            <th onclick="orderBy(1)"> Marca      </th>
+                            <th onclick="orderBy(2)"> Calibre    </th>
+                            <th onclick="orderBy(3)"> Modelo     </th>
+                            <th> Tipo    </th>
+                            <th> Sistema </th>
+                        </tr>
+                    </thead>
+
+            ';   
+            
+            $concat .= '<tbody>';
+            
+            for($i=0;$i<count($result);$i=$i+6) {
+
+                if($j % 2 == 0){
+                    $class = "";
+                }else{
+                    $class = "alt";
+                }                        
+
+                /* 
+                 * lo que contiene el array adentro 
+                $result[] = $row->nro_serie;
+                $result[] = $row->marca;
+                $result[] = $row->calibre;
+                $result[] = $row->modelo;       
+                */
+            
+                $concat .= "
+                    <tr class='".$class."'> 
+                        <td style='text-align: center;'> ".$result[$i]."   </td>
+                        <td> ".$result[$i+1]." </td>
+                        <td> ".$result[$i+2]." </td>
+                        <td> ".$result[$i+3]." </td>
+                        <td> ".$result[$i+4]." </td>
+                        <td> ".$result[$i+5]." </td>
+                    </tr>
+                ";
+
+                $j++;
+            }                  
+
+            $concat .= '</tbody>';
+            
+            $concat .= '
+                <tfoot>
+                    <tr> <td colspan="6"> <div id="paging"> <br /> </div> </td> </tr>
+                </tfoot>
+            ';      
+            
+            $concat .= '</table>';    
                 
         $concat .= '</center>';
                
