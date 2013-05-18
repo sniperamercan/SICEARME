@@ -293,6 +293,13 @@
                                     </li>
                                 
                                 <?php } ?> 
+                                    
+                                <li><a href="#"> Consulta </a>
+                                    <ul>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_historial_movimiento_ficha'); ?>','Abastecimiento >> Consulta >> Historial movimiento ficha');"> Historial movimiento ficha </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_actas_unidad'); ?>','Abastecimiento >> Consulta >> Actas unidad');"> Actas unidad </a></li>
+                                    </ul>
+                                </li>                                    
                                 
                             </ul>
                         </li>  

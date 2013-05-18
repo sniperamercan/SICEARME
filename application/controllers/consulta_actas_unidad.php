@@ -4,15 +4,15 @@
 * Equipo - UDEPGCALIT
 * Año - 2013
 * Iteracion - Tercera Iteracion
-* Clase - consulta_historial_movimiento_ficha
+* Clase - consulta_actas_unidad
 */
 
-class consulta_historial_movimiento_ficha extends CI_Controller {
+class consulta_actas_unidad extends CI_Controller {
 
     function __construct() {
         parent::__construct();
         $this->load->helper('url');
-        $this->load->model('consulta_historial_movimiento_ficha_model');
+        $this->load->model('consulta_actas_unidad_model');
         $this->load->library('perms');
         $this->load->library('pagination');   
         $this->load->library('mensajes');
@@ -30,9 +30,19 @@ class consulta_historial_movimiento_ficha extends CI_Controller {
     
     function index() {
         
+         //cargo unidades
+        $unidades = $this->consulta_actas_unidad_model->cargoUnidades();
+        
+        $data['unidades'] = "<option value=''> Seleccione... </option>";
+        
+        for($i=0; $i<count($unidades); $i=$i+2) {
+            $data['unidades'] .= "<option value='".$unidades[$i]."'>".$unidades[$i+1]."</option>";
+        }
+        //fin cargo unidades           
+        
         unset($_SESSION['condicion']); //reinicio filtro
         unset($_SESSION['order']); //reinicio el order
-        $this->load->view("consulta_historial_movimiento_ficha_view");
+        $this->load->view("consulta_actas_unidad_view", $data);
     }
     
     //cantReg = cantidad de registros x pagina
@@ -41,45 +51,17 @@ class consulta_historial_movimiento_ficha extends CI_Controller {
         $result = array();
         
         //Inicio, armo condiciones where para sql
-        if(isset($_POST['nro_serie']) && isset($_POST['marca']) && isset($_POST['calibre']) && isset($_POST['modelo'])) { 
+        if(isset($_POST['unidad'])) { 
             
             $condicion = "";
             $and = 0;
             
-            $_SESSION['nro_serie'] = $_POST['nro_serie'];
-            $_SESSION['marca']     = $_POST['marca'];
-            $_SESSION['calibre']   = $_POST['calibre'];
-            $_SESSION['modelo']    = $_POST['modelo'];
+            $_SESSION['unidad'] = $_POST['unidad'];
  
-            if(!empty($_POST['nro_serie'])) {
-                $condicion .= " nro_serie = ".$this->db->escape($_POST['nro_serie']);
+            if(!empty($_POST['unidad'])) {
+                $condicion .= " unidad_recibe = ".$this->db->escape($_POST['unidad']);
                 $and = 1; //agrego AND en proximo filtro
             } 
-            
-            if(!empty($_POST['marca'])) {
-                $condicion .= " AND ";
-                $condicion .= " marca = ".$this->db->escape($_POST['marca']);
-                $and = 1; //agrego AND en proximo filtro
-            } 
-            
-            if(!empty($_POST['calibre'])) {
-                $condicion .= " AND ";
-                $condicion .= " calibre = ".$this->db->escape($_POST['calibre']);
-                $and = 1; //agrego AND en proximo filtro
-            }
-            
-            if(!empty($_POST['modelo'])) {
-                $condicion .= " AND ";
-                $condicion .= " modelo = ".$this->db->escape($_POST['modelo']);
-                $and = 1; //agrego AND en proximo filtro
-            }             
-            
-            if(!empty($_POST['nro_serie']) && (isset($_POST['fecha1']) && isset($_POST['fecha2']))) {
-                if((!empty($_POST['fecha1']) && !empty($_POST['fecha2'])) && ($_POST['fecha1'] <= $_POST['fecha2'])) {
-                    $condicion .= " AND ";
-                    $condicion .= "fecha_transaccion BETWEEN ".$_POST['fecha1']." AND ".$_POST['fecha2'];
-                }
-            }
             
             $_SESSION['condicion'] = $condicion;
         }
@@ -113,25 +95,27 @@ class consulta_historial_movimiento_ficha extends CI_Controller {
             
             $concat = "";
 
-            $result = $this->consulta_historial_movimiento_ficha_model->consulta_db_actas_alta($param, $cantReg, $condicion, $order);
+            $condicion = " unidad_recibe = ".$this->db->escape($_SESSION['unidad']);
+            
+            $result = $this->consulta_actas_unidad_model->consulta_db_actas_alta($param, $cantReg, $condicion, $order);
 
             $j=0;
 
-            $total = $this->consulta_historial_movimiento_ficha_model->cantidadRegistros_alta($condicion);
+            $nombreunidad = $this->consulta_actas_unidad_model->nombreUnidad($_SESSION['unidad']);
+            $total = $this->consulta_actas_unidad_model->cantidadRegistros_alta($condicion);
             
             $concat .= '
                 
                 <p class="subtituloform"> ACTAS ALTA </p>
 
-                <p class="subtituloform"> Nro serie - '.$_SESSION['nro_serie']. ' &nbsp;&nbsp; Marca - '.$_SESSION['modelo'].' &nbsp;&nbsp; Calibre - '.$_SESSION['calibre'].' &nbsp;&nbsp; Modelo - '.$_SESSION['modelo'].' &nbsp;&nbsp;&nbsp;&nbsp; Total - '.$total.'</p>
-
+                <p class="subtituloform"> '.$nombreunidad. ' &nbsp;&nbsp;&nbsp;&nbsp; Total actas - '.$total.' </p>
+                    
                 <table>
 
                     <thead style="text-align: center; cursor: pointer;">
                         <tr>      
                             <th onclick="orderBy(0)"> Nro acta       </th>
                             <th onclick="orderBy(1)"> Unidad Or      </th>
-                            <th onclick="orderBy(2)"> Unidad De      </th>
                             <th onclick="orderBy(3)"> Fecha          </th>
                         </tr>
                     </thead>
@@ -140,7 +124,7 @@ class consulta_historial_movimiento_ficha extends CI_Controller {
             
             $concat .= '<tbody>';
             
-            for($i=0;$i<count($result);$i=$i+4) {
+            for($i=0;$i<count($result);$i=$i+3) {
 
                 if($j % 2 == 0){
                     $class = "";
@@ -152,16 +136,14 @@ class consulta_historial_movimiento_ficha extends CI_Controller {
                  * lo que contiene el array adentro 
                 $result[] = $row->nro_acta;
                 $result[] = $row->unidad_entrega;
-                $result[] = $row->unidad_recibe;
                 $result[] = $row->fecha_transaccion;      
                 */
             
                 $concat .= "
                     <tr class='".$class."'> 
                         <td style='text-align: center;'> ".$result[$i]."   </td>
-                        <td> ".$this->consulta_historial_movimiento_ficha_model->nombreUnidad($result[$i+1])." </td>
-                        <td> ".$this->consulta_historial_movimiento_ficha_model->nombreUnidad($result[$i+2])." </td>
-                        <td style='text-align: center;'> ".$result[$i+3]." </td>
+                        <td> ".$this->consulta_actas_unidad_model->nombreUnidad($result[$i+1])." </td>
+                        <td style='text-align: center;'> ".$result[$i+2]." </td>
                     </tr>
                 ";
 
@@ -172,7 +154,7 @@ class consulta_historial_movimiento_ficha extends CI_Controller {
             
             $concat .= '
                 <tfoot>
-                    <tr> <td colspan="4"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="3"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
             ';      
             
@@ -183,26 +165,28 @@ class consulta_historial_movimiento_ficha extends CI_Controller {
             
             //-----------------------------//
             //ACTAS BAJA
+            
+            $condicion = " unidad_entrega = ".$this->db->escape($_SESSION['unidad']);
           
-            $result = $this->consulta_historial_movimiento_ficha_model->consulta_db_actas_baja($param, $cantReg, $condicion, $order);
+            $result = $this->consulta_actas_unidad_model->consulta_db_actas_baja($param, $cantReg, $condicion, $order);
 
             $j=0;
 
-            $total = $this->consulta_historial_movimiento_ficha_model->cantidadRegistros_baja($condicion);
+            $nombreunidad = $this->consulta_actas_unidad_model->nombreUnidad($_SESSION['unidad']);
+            $total = $this->consulta_actas_unidad_model->cantidadRegistros_baja($condicion);
             
             $concat .= '
                 
                 <p class="subtituloform"> ACTAS BAJA </p>
 
-                <p class="subtituloform"> Nro serie - '.$_SESSION['nro_serie']. ' &nbsp;&nbsp; Marca - '.$_SESSION['modelo'].' &nbsp;&nbsp; Calibre - '.$_SESSION['calibre'].' &nbsp;&nbsp; Modelo - '.$_SESSION['modelo'].' &nbsp;&nbsp;&nbsp;&nbsp; Total - '.$total.'</p>
-
+                <p class="subtituloform"> '.$nombreunidad. ' &nbsp;&nbsp;&nbsp;&nbsp; Total actas - '.$total.' </p>
+                    
                 <table>
 
                     <thead style="text-align: center; cursor: pointer;">
                         <tr>      
                             <th onclick="orderBy(0)"> Nro acta       </th>
                             <th onclick="orderBy(1)"> Unidad Or      </th>
-                            <th onclick="orderBy(2)"> Unidad De      </th>
                             <th onclick="orderBy(3)"> Fecha          </th>
                         </tr>
                     </thead>
@@ -211,7 +195,7 @@ class consulta_historial_movimiento_ficha extends CI_Controller {
             
             $concat .= '<tbody>';
             
-            for($i=0;$i<count($result);$i=$i+4) {
+            for($i=0;$i<count($result);$i=$i+3) {
 
                 if($j % 2 == 0){
                     $class = "";
@@ -223,16 +207,14 @@ class consulta_historial_movimiento_ficha extends CI_Controller {
                  * lo que contiene el array adentro 
                 $result[] = $row->nro_acta;
                 $result[] = $row->unidad_entrega;
-                $result[] = $row->unidad_recibe;
                 $result[] = $row->fecha_transaccion;      
                 */
             
                 $concat .= "
                     <tr class='".$class."'> 
                         <td style='text-align: center;'> ".$result[$i]."   </td>
-                        <td> ".$this->consulta_historial_movimiento_ficha_model->nombreUnidad($result[$i+1])." </td>
-                        <td> ".$this->consulta_historial_movimiento_ficha_model->nombreUnidad($result[$i+2])." </td>
-                        <td style='text-align: center;'> ".$result[$i+3]." </td>
+                        <td> ".$this->consulta_actas_unidad_model->nombreUnidad($result[$i+1])." </td>
+                        <td style='text-align: center;'> ".$result[$i+2]." </td>
                     </tr>
                 ";
 
@@ -243,14 +225,14 @@ class consulta_historial_movimiento_ficha extends CI_Controller {
             
             $concat .= '
                 <tfoot>
-                    <tr> <td colspan="4"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="3"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
             ';      
             
-            $concat .= '</table>';            
+            $concat .= '</table>';          
             
-            $config['base_url'] = site_url("consulta_historial_movimiento_ficha/consulta");
-            $config['total_rows'] = $this->consulta_historial_movimiento_ficha_model->cantidadRegistros_alta($condicion);
+            $config['base_url'] = site_url("consulta_actas_unidad/consulta");
+            $config['total_rows'] = $this->consulta_actas_unidad_model->cantidadRegistros_alta($condicion);
             $config['per_page'] = $cantReg;
             $config['first_link'] = 'Primera';
             $config['last_link'] = 'Ultima';
