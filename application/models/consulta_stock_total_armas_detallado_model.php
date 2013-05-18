@@ -24,7 +24,7 @@ class consulta_stock_total_armas_detallado_model extends CI_Model {
     }
     
     //para paginado
-    function cantidadRegistros($condicion){
+    function cantidadRegistros($condicion) {
         $query = $this->db->query("SELECT *
                                    FROM stock_unidades
                                    WHERE ".$condicion);
@@ -32,12 +32,14 @@ class consulta_stock_total_armas_detallado_model extends CI_Model {
         return $query->num_rows();
     }
 
-    function consulta_db($ini, $param, $condicion, $order){
+    function consulta_db($ini, $param, $condicion, $order) {
         
         $result = array();
 
-        $query = $this->db->query("SELECT nro_serie, marca, calibre, modelo
-                                   FROM stock_unidades
+        $query = $this->db->query("SELECT s.nro_serie, s.marca, s.calibre, s.modelo, c.tipo_arma, c.sistema
+                                   FROM stock_unidades s
+                                   INNER JOIN fichas f ON s.nro_serie = f.nro_serie AND s.marca = f.marca AND s.calibre = f.calibre AND s.modelo = f.modelo
+                                   INNER JOIN catalogos c ON f.nro_interno_catalogo = c.nro_interno
                                    WHERE ".$condicion."
                                    ORDER BY ".$order);
                                    //LIMIT ".$ini.",".$param);
@@ -47,6 +49,8 @@ class consulta_stock_total_armas_detallado_model extends CI_Model {
             $result[] = $row->marca;
             $result[] = $row->calibre;
             $result[] = $row->modelo;
+            $result[] = $row->tipo_arma;
+            $result[] = $row->sistema;
         }
         
         return $result;

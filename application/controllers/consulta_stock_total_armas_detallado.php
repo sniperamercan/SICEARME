@@ -98,9 +98,10 @@ class consulta_stock_total_armas_detallado extends CI_Controller {
             $j=0;
 
             $nombreunidad = $this->consulta_stock_total_armas_detallado_model->nombreUnidad($_SESSION['unidad']);
+            $total = $this->consulta_stock_total_armas_detallado_model->cantidadRegistros($condicion);
             
             $concat .= '
-                <p class="subtituloform"> '.$nombreunidad.' </p>
+                <p class="subtituloform"> '.$nombreunidad. ' &nbsp;&nbsp;&nbsp;&nbsp; Total de armas - '.$total.' </p>
 
                 <table>
 
@@ -110,6 +111,8 @@ class consulta_stock_total_armas_detallado extends CI_Controller {
                             <th onclick="orderBy(1)"> Marca      </th>
                             <th onclick="orderBy(2)"> Calibre    </th>
                             <th onclick="orderBy(3)"> Modelo     </th>
+                            <th> Tipo    </th>
+                            <th> Sistema </th>
                         </tr>
                     </thead>
 
@@ -117,7 +120,7 @@ class consulta_stock_total_armas_detallado extends CI_Controller {
             
             $concat .= '<tbody>';
             
-            for($i=0;$i<count($result);$i=$i+4) {
+            for($i=0;$i<count($result);$i=$i+6) {
 
                 if($j % 2 == 0){
                     $class = "";
@@ -139,6 +142,8 @@ class consulta_stock_total_armas_detallado extends CI_Controller {
                         <td> ".$result[$i+1]." </td>
                         <td> ".$result[$i+2]." </td>
                         <td> ".$result[$i+3]." </td>
+                        <td> ".$result[$i+4]." </td>
+                        <td> ".$result[$i+5]." </td>
                     </tr>
                 ";
 
@@ -149,7 +154,7 @@ class consulta_stock_total_armas_detallado extends CI_Controller {
             
             $concat .= '
                 <tfoot>
-                    <tr> <td colspan="4"> <div id="paging"> <br /> </div> </td> </tr>
+                    <tr> <td colspan="6"> <div id="paging"> <br /> </div> </td> </tr>
                 </tfoot>
             ';      
             
