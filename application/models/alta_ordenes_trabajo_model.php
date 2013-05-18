@@ -187,7 +187,7 @@ class alta_ordenes_trabajo_model extends CI_Model {
             'modelo'               => $modelo,
             'observaciones'        => $observaciones,
             'idunidad'             => $unidad,
-            'estado_arma'          => 0,
+            'estado_arma'          => 'en reparacion',
             'estado_orden_trabajo' => 0,
             'usuario'              => base64_decode($_SESSION['usuario'])
         );

@@ -12,8 +12,7 @@ class busqueda_fichas_totales_model extends CI_Model {
         $query = $this->db->query("SELECT *
                                    FROM stock_unidades s
                                    INNER JOIN fichas f ON s.nro_serie = f.nro_serie AND s.marca = f.marca AND s.calibre = f.calibre AND s.modelo = f.modelo 
-                                   WHERE ".$condicion." 
-                                   AND idunidad = ".$this->db->escape($_SESSION['unidad']));
+                                   WHERE ".$condicion);
         
         return $query->num_rows();
     }
@@ -26,8 +25,8 @@ class busqueda_fichas_totales_model extends CI_Model {
                                    FROM stock_unidades s
                                    INNER JOIN fichas f ON s.nro_serie = f.nro_serie AND s.marca = f.marca AND s.calibre = f.calibre AND s.modelo = f.modelo 
                                    WHERE ".$condicion."
-                                   ORDER BY ".$order."
-                                   LIMIT ".$ini.",".$param);
+                                   ORDER BY ".$order);
+                                   //LIMIT ".$ini.",".$param);
         
         foreach($query->result() as $row) {
             $result[] = $row->nro_serie;

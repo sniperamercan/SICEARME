@@ -383,6 +383,12 @@
                                     </li>
                                 
                                 <?php } ?> 
+                                    
+                                <li><a href="#"> Consulta </a>
+                                    <ul>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_estado_actual_arma'); ?>','Taller armamento >> Consulta >> Estado actual de arma');"> Estado actual arma </a></li>
+                                    </ul>
+                                </li>                                    
                                 
                             </ul>
                         </li>  
