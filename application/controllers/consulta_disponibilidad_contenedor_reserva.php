@@ -137,7 +137,7 @@ class consulta_disponibilidad_contenedor_reserva extends CI_Controller {
             
             $concat .= '<tbody>';
             
-            for($i=0;$i<count($result);$i=$i++) {
+            for($i=0;$i<count($result);$i++) {
 
                 if($j % 2 == 0){
                     $class = "";
