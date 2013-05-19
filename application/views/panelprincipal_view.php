@@ -336,6 +336,7 @@
                                     <ul>
                                         <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_disponibilidad_reserva'); ?>','Reserva >> Consulta >> Disponibilidad armamento');"> Disponibilidad armamento </a></li>
                                         <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_disponibilidad_tipo_arma_reserva'); ?>','Reserva >> Consulta >> Disponibilidad tipo de arma');"> Disponibilidad tipo de arma </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_disponibilidad_contenedor_reserva'); ?>','Reserva >> Consulta >> Disponibilidad contenedor');"> Disponibilidad contenedor </a></li>
                                     </ul>
                                 </li>                                 
                                 

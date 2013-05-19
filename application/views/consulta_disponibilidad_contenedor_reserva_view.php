@@ -35,12 +35,13 @@
      
             function filtrarDisponibilidad(){
                 
+                var deposito     = $("#deposito").val();          
                 var nro_catalogo = $("#nro_catalogo").val();                       
                 
                 $.ajax({ 
                     type: 'post',
-                    url: '<?php echo base_url(); ?>consulta_disponibilidad_tipo_arma_reserva/consulta/0',
-                    data: "nro_catalogo="+nro_catalogo,
+                    url: '<?php echo base_url(); ?>consulta_disponibilidad_contenedor_reserva/consulta/0',
+                    data: "nro_catalogo="+nro_catalogo+"&deposito="+deposito,
                     success: function(){
                         cargoConsultaDisponibilidad();
                     }
@@ -54,7 +55,7 @@
             function seteoImpresion(de_pagina, a_pagina){                
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("consulta_disponibilidad_tipo_arma_reserva/armoImpresion"); ?>",
+                    url: "<?php echo base_url("consulta_disponibilidad_contenedor_reserva/armoImpresion"); ?>",
                     data: "de_pagina="+de_pagina+"&a_pagina="+a_pagina,
                     success: function(data){
                         if(data == "1"){
@@ -69,7 +70,7 @@
             function orderBy(param){            
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("consulta_disponibilidad_tipo_arma_reserva/orderBy"); ?>",
+                    url: "<?php echo base_url("consulta_disponibilidad_contenedor_reserva/orderBy"); ?>",
                     data: "order="+param,
                     success: function(){
                         cargoConsulta();                       
@@ -81,12 +82,12 @@
                 $.ajax({
                     type: 'post',
                     dataType: 'json',
-                    url: "<?php echo base_url("consulta_disponibilidad_tipo_arma_reserva/consulta"); ?>",
+                    url: "<?php echo base_url("consulta_disponibilidad_contenedor_reserva/consulta"); ?>",
                     success: function(data){
                         if(data[0] != 0) {
                             $("#datos_consulta").html(data[0]);
                         }else {
-                            jAlert("ERROR: Debe seleccionar un catalogo para realizar dicha consulta", "Error");
+                            jAlert("ERROR: Debe seleccionar datos para realizar dicha consulta", "Error");
                         }
                         
                     }                  
@@ -100,11 +101,10 @@
             function cargoCatalogosFiltro() {
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>consulta_disponibilidad_tipo_arma_reserva/cargoCatalogosFiltro",
+                   url: "<?php base_url(); ?>consulta_disponibilidad_contenedor_reserva/cargoCatalogosFiltro",
                    success: function(data) {
                        $("#nro_catalogo").val("");
                        $("#nro_catalogo").val(data);
-                       filtrarDisponibilidad();
                    }
                 });                
             }             
@@ -113,6 +113,16 @@
     </head>
     
     <body class="cuerpo">
+        
+        <table>
+            
+            <tr>
+                <td><label> &emsp; Deposito - </label> </td> <td>  <select id="deposito"> <?php echo $depositos; ?> </select> </td>
+            </tr>
+            
+        </table>
+        
+        <br />         
         
         <dl>
         <dt><label> Buscar catalogo </label></dt>
@@ -126,7 +136,7 @@
         
         <br /><br /><br /> 
         
-        &emsp; <button onclick="impresion();"> Imprimir </button>              
+        &emsp; <button onclick="filtrarDisponibilidad();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>                    
         
         <br /> 
         
