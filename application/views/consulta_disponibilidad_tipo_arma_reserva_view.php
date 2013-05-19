@@ -33,28 +33,28 @@
                 //cargoConsulta();
             });	     
      
-            function filtrar(){
+            function filtrarDisponibilidad(){
                 
-                var deposito = $("#deposito").val();               
+                var nro_catalogo = $("#nro_catalogo").val();                       
                 
                 $.ajax({ 
                     type: 'post',
-                    url: '<?php echo base_url(); ?>consulta_disponibilidad_reserva/consulta/0',
-                    data: "deposito="+deposito,
+                    url: '<?php echo base_url(); ?>consulta_disponibilidad_tipo_arma_reserva/consulta/0',
+                    data: "nro_catalogo="+nro_catalogo,
                     success: function(){
-                        cargoConsulta();
+                        cargoConsultaDisponibilidad();
                     }
                 });                
             }
             
-            function impresion(){                
+            function impresion(){ 
                 $('#datos_consulta').printElement();   
             } 
 
             function seteoImpresion(de_pagina, a_pagina){                
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("consulta_disponibilidad_reserva/armoImpresion"); ?>",
+                    url: "<?php echo base_url("consulta_disponibilidad_tipo_arma_reserva/armoImpresion"); ?>",
                     data: "de_pagina="+de_pagina+"&a_pagina="+a_pagina,
                     success: function(data){
                         if(data == "1"){
@@ -69,7 +69,7 @@
             function orderBy(param){            
                 $.ajax({
                     type: 'post',
-                    url: "<?php echo base_url("consulta_disponibilidad_reserva/orderBy"); ?>",
+                    url: "<?php echo base_url("consulta_disponibilidad_tipo_arma_reserva/orderBy"); ?>",
                     data: "order="+param,
                     success: function(){
                         cargoConsulta();                       
@@ -77,38 +77,56 @@
                 });           
             }      
 
-            function cargoConsulta() {
+            function cargoConsultaDisponibilidad() {
                 $.ajax({
                     type: 'post',
                     dataType: 'json',
-                    url: "<?php echo base_url("consulta_disponibilidad_reserva/consulta"); ?>",
+                    url: "<?php echo base_url("consulta_disponibilidad_tipo_arma_reserva/consulta"); ?>",
                     success: function(data){
                         if(data[0] != 0) {
                             $("#datos_consulta").html(data[0]);
                         }else {
-                            jAlert("ERROR: Debe seleccionar un deposito para realizar dicha consulta", "Error");
+                            jAlert("ERROR: Debe seleccionar una unidad para realizar dicha consulta", "Error");
                         }
                         
                     }                  
                 });            
             }
+            
+            function busquedaCatalogos() {
+                $.colorbox({href:"<?php echo base_url('busqueda_catalogos'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA CATALOGOS", onClosed: function(){ cargoCatalogosFiltro(); } });
+            }
+            
+            function cargoCatalogosFiltro() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>consulta_disponibilidad_tipo_arma_reserva/cargoCatalogosFiltro",
+                   success: function(data) {
+                       $("#nro_catalogo").val("");
+                       $("#nro_catalogo").val(data);
+                       filtrarDisponibilidad();
+                   }
+                });                
+            }             
         </script>
         
     </head>
     
     <body class="cuerpo">
         
-        <table>
-            
-            <tr>
-                <td><label> &emsp; Deposito - </label> </td> <td>  <select id="deposito"> <?php echo $depositos; ?> </select> </td>
-            </tr>
-            
-        </table>
+        <dl>
+        <dt><label> Buscar catalogo </label></dt>
+        <dd><img style="cursor: pointer;" onclick="busquedaCatalogos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
+        </dl>         
+
+        <dl>
+        <dt><label for="nro_catalogo"> Nro catalogo <font color="red"> * </font> </label></dt>
+        <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" /> </dd>
+        </dl>     
         
-        <br /> 
+        <br /><br /><br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &emsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         
