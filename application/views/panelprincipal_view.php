@@ -436,6 +436,12 @@
                                     </ul>
                                 </li>
                                 
+                                <li><a href="#"> Consulta </a>
+                                    <ul>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_movimientos_repuestos'); ?>','Almacen >> Consulta >> Movimientos repuestos');"> Movimientos repuestos </a></li>
+                                    </ul>
+                                </li>                                 
+                                
                             </ul>
                         </li>  
 
