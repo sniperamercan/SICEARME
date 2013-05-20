@@ -158,18 +158,18 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> Numero          </th>
-                        <th onclick="orderBy(1)"> N. Compra       </th>
-                        <th onclick="orderBy(2)"> Fecha           </th>
-                        <th onclick="orderBy(3)"> Empresa         </th>
-                        <th onclick="orderBy(4)"> Pais            </th>
-                        <th onclick="orderBy(5)"> Descr           </th>
-                        <th onclick="orderBy(6)"> Mod             </th>
-                        <th onclick="orderBy(7)"> Cant armas      </th>
-                        <th onclick="orderBy(8)"> Precio total    </th>
-                        <th> Ver cat       </th>
-                        <th> Ver           </th>
-                        <th> Imprimir      </th>
+                        <th onclick="orderBy(0)"> Num       </th>
+                        <th onclick="orderBy(1)"> N Com     </th>
+                        <th onclick="orderBy(2)"> Fecha     </th>
+                        <th onclick="orderBy(3)"> Emp       </th>
+                        <th onclick="orderBy(4)"> Pais      </th>
+                        <th onclick="orderBy(5)"> Desc      </th>
+                        <th onclick="orderBy(6)"> Mod       </th>
+                        <th onclick="orderBy(7)"> Cant Arm  </th>
+                        <th onclick="orderBy(8)"> Prec Tot  </th>
+                        <th> Cat </th>
+                        <th> Ver </th>
+                        <th> Imp </th>
                     </tr>
                 </thead>
 

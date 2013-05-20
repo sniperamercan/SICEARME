@@ -83,12 +83,12 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th> Nro accion    </th>
-                        <th> Fecha        </th>
-                        <th> Seccion      </th>
-                        <th> Tipo         </th>
-                        <th> Ver detalle  </th>
-                        <th> Imprimir     </th>
+                        <th> N Acc   </th>
+                        <th> Fecha   </th>
+                        <th> Secc    </th>
+                        <th> Tipo    </th>
+                        <th> Det     </th>
+                        <th> Imp     </th>
                     </tr>
                 </thead>
 

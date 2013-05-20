@@ -139,14 +139,14 @@
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
                         <th> Seleccion  </th>
-                        <th onclick="orderBy(0)"> Nro pieza    </th>
-                        <th onclick="orderBy(1)"> Nro parte    </th>
-                        <th onclick="orderBy(2)"> Nombre parte </th>
-                        <th onclick="orderBy(3)"> Nro catalogo </th>
-                        <th> Tipo arma    </th>
-                        <th> Marca        </th>
-                        <th> Calibre      </th>
-                        <th> Modelo       </th>
+                        <th onclick="orderBy(0)"> N Pie   </th>
+                        <th onclick="orderBy(1)"> N Par   </th>
+                        <th onclick="orderBy(2)"> Nom Par </th>
+                        <th onclick="orderBy(3)"> N Cat   </th>
+                        <th> T Arma </th>
+                        <th> Mar    </th>
+                        <th> Cal    </th>
+                        <th> Mod    </th>
                     </tr>
                 </thead>
 

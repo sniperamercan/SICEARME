@@ -118,15 +118,15 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> Nro pieza     </th>
-                        <th onclick="orderBy(1)"> Nro parte     </th>
-                        <th onclick="orderBy(2)"> Nombre        </th>
-                        <th onclick="orderBy(3)"> Catalogo      </th>
-                        <th> Tipo     </th>
-                        <th> Marca    </th>
-                        <th> Calibre  </th>
-                        <th> Modelo   </th>
-                        <th> Imprimir </th>
+                        <th onclick="orderBy(0)"> N Pie  </th>
+                        <th onclick="orderBy(1)"> N Par  </th>
+                        <th onclick="orderBy(2)"> Nom    </th>
+                        <th onclick="orderBy(3)"> Cat    </th>
+                        <th> Tip  </th>
+                        <th> Mar  </th>
+                        <th> Cal  </th>
+                        <th> Mod  </th>
+                        <th> Imp  </th>
                     </tr>
                 </thead>
 

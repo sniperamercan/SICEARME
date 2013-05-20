@@ -160,17 +160,17 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> Nro parte     </th>
-                        <th onclick="orderBy(1)"> Nombre        </th>
-                        <th onclick="orderBy(2)"> Catalogo      </th>
-                        <th> Tipo    </th>
-                        <th> Marca   </th>
-                        <th> Calibre </th>
-                        <th> Modelo  </th>
-                        <th onclick="orderBy(3)"> Cantidad    </th>
-                        <th> Ajustar     </th>
-                        <th> Editar      </th>
-                        <th> Eliminar    </th>
+                        <th onclick="orderBy(0)"> N Par  </th>
+                        <th onclick="orderBy(1)"> Nom    </th>
+                        <th onclick="orderBy(2)"> Cat    </th>
+                        <th> Tip  </th>
+                        <th> Mar  </th>
+                        <th> Cal  </th>
+                        <th> Mod  </th>
+                        <th onclick="orderBy(3)"> Cant   </th>
+                        <th> Aju  </th>
+                        <th> Edi  </th>
+                        <th> Eli  </th>
                     </tr>
                 </thead>
 

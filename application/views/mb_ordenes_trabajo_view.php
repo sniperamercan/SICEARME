@@ -203,18 +203,18 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> Nro orden       </th>
-                        <th onclick="orderBy(1)"> Fecha           </th>
-                        <th onclick="orderBy(2)"> Nro serie       </th>
-                        <th onclick="orderBy(3)"> Marca           </th>
-                        <th onclick="orderBy(4)"> Calibre         </th>
-                        <th onclick="orderBy(5)"> Modelo          </th>
-                        <th> Unidad                               </th>
-                        <th onclick="orderBy(6)"> Estado orden    </th>
-                        <th> Ver obser        </th>
-                        <th> Cambiar estado   </th>
-                        <th> Editar           </th>
-                        <th> Eliminar         </th>
+                        <th onclick="orderBy(0)"> N Ord   </th>
+                        <th onclick="orderBy(1)"> Fecha   </th>
+                        <th onclick="orderBy(2)"> N Ser   </th>
+                        <th onclick="orderBy(3)"> Mar     </th>
+                        <th onclick="orderBy(4)"> Cal     </th>
+                        <th onclick="orderBy(5)"> Mod     </th>
+                        <th> Unidad </th>
+                        <th onclick="orderBy(6)"> Est Ord </th>
+                        <th> Obs    </th>
+                        <th> C Est  </th>
+                        <th> Edi    </th>
+                        <th> Eli    </th>
                     </tr>
                 </thead>
 

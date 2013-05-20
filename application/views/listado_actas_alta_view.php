@@ -161,18 +161,18 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> N. Acta             </th>
-                        <th onclick="orderBy(1)"> Fecha               </th>
-                        <th onclick="orderBy(2)"> U. Entrega          </th>
-                        <th onclick="orderBy(3)"> U. Recibe           </th>
-                        <th onclick="orderBy(4)"> Repr SMA            </th>
-                        <th onclick="orderBy(5)"> Repr unidad         </th>
-                        <th onclick="orderBy(6)"> Supervision         </th>
-                        <th onclick="orderBy(7)"> Estado              </th>
-                        <th> Ver observ </th>
-                        <th> Ver entr   </th>
-                        <th> Ver   </th>
-                        <th> Imprimir   </th>
+                        <th onclick="orderBy(0)"> N acta   </th>
+                        <th onclick="orderBy(1)"> Fecha    </th>
+                        <th onclick="orderBy(2)"> U Ent    </th>
+                        <th onclick="orderBy(3)"> U Rec    </th>
+                        <th onclick="orderBy(4)"> Rep SMA  </th>
+                        <th onclick="orderBy(5)"> Rep U    </th>
+                        <th onclick="orderBy(6)"> Super    </th>
+                        <th onclick="orderBy(7)"> Est      </th>
+                        <th> Obs </th>
+                        <th> Entr   </th>
+                        <th> Ver    </th>
+                        <th> Imp    </th>
                     </tr>
                 </thead>
 

@@ -217,20 +217,20 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> N. Acta            </th>
-                        <th onclick="orderBy(1)"> Fecha                </th>
-                        <th onclick="orderBy(2)"> U. Entrega       </th>
-                        <th onclick="orderBy(3)"> U. Recibe        </th>
-                        <th onclick="orderBy(4)"> Repr SMA    </th>
-                        <th onclick="orderBy(5)"> Repr unidad </th>
-                        <th onclick="orderBy(6)"> Supervision          </th>
-                        <th onclick="orderBy(7)"> Estado               </th>
-                        <th> Ver observ </th>
-                        <th> Ver entr   </th>
-                        <th> Activar    </th>
-                        <th> Imprimir   </th>
-                        <th> Editar     </th>
-                        <th> Eliminar   </th>
+                        <th onclick="orderBy(0)"> N Acta    </th>
+                        <th onclick="orderBy(1)"> Fecha     </th>
+                        <th onclick="orderBy(2)"> U Ent     </th>
+                        <th onclick="orderBy(3)"> U Rec     </th>
+                        <th onclick="orderBy(4)"> Rep SMA   </th>
+                        <th onclick="orderBy(5)"> Rep U     </th>
+                        <th onclick="orderBy(6)"> Super     </th>
+                        <th onclick="orderBy(7)"> Est       </th>
+                        <th> Obs  </th>
+                        <th> Entr </th>
+                        <th> Act  </th>
+                        <th> Imp  </th>
+                        <th> Edi  </th>
+                        <th> Eli  </th>
                     </tr>
                 </thead>
 

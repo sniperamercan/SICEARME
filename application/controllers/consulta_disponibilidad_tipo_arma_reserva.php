@@ -111,13 +111,13 @@ class consulta_disponibilidad_tipo_arma_reserva extends CI_Controller {
             $total = $this->consulta_disponibilidad_tipo_arma_reserva_model->cantidadRegistros($condicion);
             
             $concat .= '
-                <p class="subtituloform"> Tipo arma - '.$datos_arma[0].' &nbsp;&nbsp; Marca - '.$datos_arma[1].' &nbsp;&nbsp; Calibre - '.$datos_arma[2].' &nbsp;&nbsp; Modelo - '.$datos_arma[3].' &nbsp;&nbsp; Sistema - '.$datos_arma[4].' &nbsp;&nbsp;&nbsp;&nbsp; Total - '.$total.' </p>
+                <p class="subtituloform"> T Arm - '.$datos_arma[0].' &nbsp;&nbsp; Mar - '.$datos_arma[1].' &nbsp;&nbsp; Cal - '.$datos_arma[2].' &nbsp;&nbsp; Mod - '.$datos_arma[3].' &nbsp;&nbsp; Sis - '.$datos_arma[4].' &nbsp;&nbsp;&nbsp;&nbsp; Total - '.$total.' </p>
 
                 <table>
 
                     <thead style="text-align: center; cursor: pointer;">
                         <tr>      
-                            <th> Contenedor  </th>
+                            <th> Depos  </th>
                             <th> Stock       </th>
                         </tr>
                     </thead>

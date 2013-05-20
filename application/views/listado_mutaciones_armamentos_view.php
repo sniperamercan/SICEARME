@@ -135,15 +135,15 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> Nro mutacion       </th>
-                        <th onclick="orderBy(1)"> Nro orden    </th>
-                        <th onclick="orderBy(2)"> Nro serie       </th>
-                        <th onclick="orderBy(3)"> Marca           </th>
-                        <th onclick="orderBy(4)"> Calibre         </th>
-                        <th onclick="orderBy(5)"> Modelo          </th>
-                        <th onclick="orderBy(6)"> Nuevo Nro serie </th>
-                        <th onclick="orderBy(7)"> Fecha           </th>
-                        <th onclick="orderBy(8)"> Seccion         </th>
+                        <th onclick="orderBy(0)"> N Mut     </th>
+                        <th onclick="orderBy(1)"> N Ord     </th>
+                        <th onclick="orderBy(2)"> N Ser     </th>
+                        <th onclick="orderBy(3)"> Mar       </th>
+                        <th onclick="orderBy(4)"> Cal       </th>
+                        <th onclick="orderBy(5)"> Mod       </th>
+                        <th onclick="orderBy(6)"> Nue N Ser </th>
+                        <th onclick="orderBy(7)"> Fecha     </th>
+                        <th onclick="orderBy(8)"> Secc      </th>
                     </tr>
                 </thead>
 

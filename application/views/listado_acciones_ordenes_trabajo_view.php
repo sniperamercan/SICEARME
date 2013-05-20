@@ -159,13 +159,13 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th> Nro orden   </th>
-                        <th> Nro accion    </th>
-                        <th> Fecha        </th>
-                        <th> Seccion      </th>
-                        <th> Tipo         </th>
-                        <th> Ver detalle  </th>
-                        <th> Imprimir     </th>
+                        <th> N Orden    </th>
+                        <th> N Accion   </th>
+                        <th> Fecha      </th>
+                        <th> Secc       </th>
+                        <th> Tipo       </th>
+                        <th> V det      </th>
+                        <th> Imp        </th>
                     </tr>
                 </thead>
 

@@ -178,18 +178,18 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> N. Serie     </th>
-                        <th onclick="orderBy(1)"> Marca        </th>
-                        <th onclick="orderBy(2)"> Calibre      </th>
-                        <th onclick="orderBy(3)"> Modelo       </th>
-                        <th onclick="orderBy(4)"> Tipo         </th>
-                        <th onclick="orderBy(5)"> Sistema      </th>
-                        <th onclick="orderBy(6)"> N. Compra    </th>
-                        <th onclick="orderBy(7)"> N. Catalogo  </th>
-                        <th> Ver acc        </th>
-                        <th> Ver piezas     </th>
-                        <th> Ver           </th>
-                        <th> Imprimir      </th>                        
+                        <th onclick="orderBy(0)"> N Ser   </th>
+                        <th onclick="orderBy(1)"> Mar     </th>
+                        <th onclick="orderBy(2)"> Cal     </th>
+                        <th onclick="orderBy(3)"> Mod     </th>
+                        <th onclick="orderBy(4)"> Tip     </th>
+                        <th onclick="orderBy(5)"> Sis     </th>
+                        <th onclick="orderBy(6)"> N Comp  </th>
+                        <th onclick="orderBy(7)"> N Cat   </th>
+                        <th> Acc </th>
+                        <th> Pie </th>
+                        <th> Ver </th>
+                        <th> Imp </th>                        
                     </tr>
                 </thead>
 

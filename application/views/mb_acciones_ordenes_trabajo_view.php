@@ -192,14 +192,14 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>
-                        <th> Nro orden    </th>
-                        <th> Nro accion   </th>
-                        <th> Fecha        </th>
-                        <th> Seccion      </th>
-                        <th> Tipo         </th>
-                        <th> Ver detalle  </th>
-                        <th> Editar       </th>
-                        <th> Eliminar     </th>
+                        <th> N Ord   </th>
+                        <th> N Acc   </th>
+                        <th> Fecha   </th>
+                        <th> Secc    </th>
+                        <th> Tip     </th>
+                        <th> Det     </th>
+                        <th> Edi     </th>
+                        <th> Eli     </th>
                     </tr>
                 </thead>
 

@@ -145,13 +145,13 @@
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
                         <th> Seleccion  </th>
-                        <th onclick="orderBy(0)"> Nro orden   </th>
+                        <th onclick="orderBy(0)"> N Ord   </th>
                         <th> Fecha </th>
-                        <th onclick="orderBy(1)"> Nro serie   </th>
-                        <th onclick="orderBy(2)"> Marca       </th>
-                        <th onclick="orderBy(3)"> Calibre     </th>
-                        <th onclick="orderBy(4)"> Modelo      </th>
-                        <th> Unidad </th>
+                        <th onclick="orderBy(1)"> N Ser   </th>
+                        <th onclick="orderBy(2)"> Mar     </th>
+                        <th onclick="orderBy(3)"> Cal     </th>
+                        <th onclick="orderBy(4)"> Mod     </th>
+                        <th> Un </th>
                     </tr>
                 </thead>
 

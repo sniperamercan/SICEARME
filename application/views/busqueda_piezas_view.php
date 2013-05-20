@@ -132,13 +132,13 @@
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
                         <th> Seleccion  </th>
-                        <th onclick="orderBy(0)"> Nro pieza     </th>
-                        <th onclick="orderBy(1)"> Tipo pieza    </th>
-                        <th onclick="orderBy(2)"> Descripcion   </th>
-                        <th> Nro serie     </th>
-                        <th> Marca         </th>
-                        <th> Calibre       </th>
-                        <th> Modelo        </th>                        
+                        <th onclick="orderBy(0)"> N Pie  </th>
+                        <th onclick="orderBy(1)"> T Pie  </th>
+                        <th onclick="orderBy(2)"> Desc   </th>
+                        <th> N Ser  </th>
+                        <th> Mar    </th>
+                        <th> Cal    </th>
+                        <th> Mod    </th>                        
                     </tr>
                 </thead>
 

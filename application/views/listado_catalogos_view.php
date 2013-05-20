@@ -145,18 +145,18 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> Numero      </th>
-                        <th onclick="orderBy(1)"> Tipo        </th>
-                        <th onclick="orderBy(2)"> Marca       </th>
-                        <th onclick="orderBy(3)"> Calibre     </th>
-                        <th onclick="orderBy(4)"> Modelo      </th>
-                        <th onclick="orderBy(5)"> Sistema     </th>
-                        <th onclick="orderBy(6)"> Fab         </th>
-                        <th onclick="orderBy(7)"> Empresa     </th>
-                        <th onclick="orderBy(8)"> Origen      </th>
-                        <th onclick="orderBy(9)"> Venc        </th>
-                        <th> Ver           </th>
-                        <th> Imprimir      </th>                        
+                        <th onclick="orderBy(0)"> Num  </th>
+                        <th onclick="orderBy(1)"> Tip  </th>
+                        <th onclick="orderBy(2)"> Mar  </th>
+                        <th onclick="orderBy(3)"> Cal  </th>
+                        <th onclick="orderBy(4)"> Mod  </th>
+                        <th onclick="orderBy(5)"> Sis  </th>
+                        <th onclick="orderBy(6)"> Fab  </th>
+                        <th onclick="orderBy(7)"> Emp  </th>
+                        <th onclick="orderBy(8)"> Ori  </th>
+                        <th onclick="orderBy(9)"> Ven  </th>
+                        <th> Ver </th>
+                        <th> Imp </th>                        
                     </tr>
                 </thead>
 

@@ -150,18 +150,18 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0);"> Nro orden       </th>
-                        <th> Nro serie       </th>
-                        <th> Marca           </th>
-                        <th> Calibre         </th>
-                        <th> Modelo          </th>
-                        <th onclick="orderBy(1);"> Pieza ant       </th>
-                        <th onclick="orderBy(2);"> Pieza nueva     </th>
-                        <th onclick="orderBy(3);"> Nro parte       </th>
-                        <th onclick="orderBy(4);"> Nombre parte    </th>
-                        <th> Ver obser        </th>
-                        <th> Visualizar       </th>
-                        <th> Imprimir         </th>
+                        <th onclick="orderBy(0);"> N Ord   </th>
+                        <th> N Ser </th>
+                        <th> Mar   </th>
+                        <th> Cal   </th>
+                        <th> Mod   </th>
+                        <th onclick="orderBy(1);"> P Ant   </th>
+                        <th onclick="orderBy(2);"> P Nue   </th>
+                        <th onclick="orderBy(3);"> N Par   </th>
+                        <th onclick="orderBy(4);"> Nom Par </th>
+                        <th> Obs </th>
+                        <th> Vis </th>
+                        <th> Imp </th>
                     </tr>
                 </thead>
 
