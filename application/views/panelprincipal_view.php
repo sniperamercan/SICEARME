@@ -241,6 +241,7 @@
                                     <li><a href="#"> Consulta </a>
                                         <ul>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_stock_total_armas_detallado'); ?>','O.C.I >> Consulta >> Stock total armas detallado');"> Stock total armas detallado </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_stock_total_armas_resumido'); ?>','O.C.I >> Consulta >> Stock total armas resumido');"> Stock total armas resumido </a></li>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_historial_movimiento_ficha'); ?>','O.C.I >> Consulta >> Historial movimiento ficha');"> Historial movimiento ficha </a></li>
                                         </ul>
                                     </li>
