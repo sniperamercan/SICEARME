@@ -49,7 +49,7 @@
                     data: "fecha="+fecha+"&unidad_entrega="+unidad_entrega+"&representante_sma="+representante_sma+"&representante_unidad="+representante_unidad+"&supervision="+supervision+"&observaciones="+observaciones,
                     success: function(data){
                         if(data[0] == "1"){            
-                            jAlert("El acta se genero con exito, el nro de acta de baja generado es - "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('alta_actas_baja'); ?>','Abastecimiento >> Actas >> Acta baja'); });
+                            jAlert("El acta se genero con exito, el nro de acta de baja generado es - "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('alta_actas_baja_reserva'); ?>','Reserva >> Actas >> Acta baja'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
