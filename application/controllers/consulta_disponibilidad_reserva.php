@@ -35,7 +35,7 @@ class consulta_disponibilidad_reserva extends CI_Controller {
         
         $data['depositos'] = "<option value=''> Seleccione... </option>";
         
-        for($i=0; $i<count($depositos); $i=$i+2) {
+        for($i=0; $i<count($depositos); $i++) {
             $data['depositos'] .= "<option value='".$depositos[$i]."'>".$depositos[$i]."</option>";
         }
         //fin cargo depositos

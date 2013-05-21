@@ -22,8 +22,8 @@ class consulta_disponibilidad_contenedor_reserva extends CI_Controller {
             die($this->mensajes->sinPermisos());
         }
         
-        //Modulo solo visible para el peril 2 y 3 - Usuario O.C.I y Administrador O.C.I
-        if(!$this->perms->verificoPerfil2() && !$this->perms->verificoPerfil3()) {
+        //Modulo solo visible para el peril 8 - Usuario Reserva
+        if(!$this->perms->verificoPerfil8()) {
             die($this->mensajes->sinPermisos());
         }        
     }
@@ -35,7 +35,7 @@ class consulta_disponibilidad_contenedor_reserva extends CI_Controller {
         
         $data['depositos'] = "<option value=''> Seleccione... </option>";
         
-        for($i=0; $i<count($depositos); $i=$i+2) {
+        for($i=0; $i<count($depositos); $i++) {
             $data['depositos'] .= "<option value='".$depositos[$i]."'>".$depositos[$i]."</option>";
         }
         //fin cargo depositos        
