@@ -17,7 +17,7 @@ Class Version extends CI_Model {
     }
 
     function getVersion() {
-        return 'Ultima actualizacion - '.$this->getFechaVersion().' <br /> <img src="'.base_url().'images/html5.png" />';
+        return 'Ultima actualizacion - '.$this->getFechaVersion().' <br /> <img src="'.base_url().'images/html5.png" /> <img src="'.base_url().'images/apple.png" /> ';
     }
     
     function getFechaVersion() {

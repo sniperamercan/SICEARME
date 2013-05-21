@@ -172,7 +172,7 @@
                         <img style="margin-right: 20px;" src="<?php echo base_url(); ?>images/menu.png" />
                         
                         <img style="cursor: pointer;" onclick="irAFrame('<?php echo base_url('correo'); ?>','Correo');" id="correo" src="<?php echo base_url(); ?>images/sobre_vacio.png" />
-                        <a onclick='informacionUsuario();' style='cursor: pointer'> <img title='usuario' src='<?php echo base_url('images/user_32.gif'); ?>'/></a><label> <?php echo base64_decode($_SESSION['usuario']); ?> </label>	
+                        <a onclick='informacionUsuario();' style='cursor: pointer'> <img title='usuario' src='<?php echo base_url('images/user_32.gif'); ?>'/></a>
                     </td>  
 
                     <td style="border: none; width: 30%" align="right">
