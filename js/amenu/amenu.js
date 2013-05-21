@@ -11,7 +11,7 @@ $.fn.amenu=function(settings)
 		z: 0,
 		params: new Array(),
 		init: function(elem,settings) {
-			this.params.speed=400;
+			this.params.speed=200;
 			this.params.animation='show';
 			
 			if (typeof(settings) != 'undefined') {

@@ -86,6 +86,10 @@
                        $('#navegacion1').html(navigation); 
                        verificarCorreo();
                        
+                       //cerrar el amenu (compatibilidad IPAD/IPHONE)
+                       $('#amenu-list').find('a').removeClass('active');
+                       $('#amenu-list').find('ul').stop(true,true).css('display','none');
+                       
                        //alert($("body").height());
 
                        //go to top   
