@@ -146,12 +146,12 @@
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
                         <th> Seleccion  </th>
-                        <th onclick="orderBy(0)"> N Com  </th>
-                        <th onclick="orderBy(1)"> N Cat  </th>
-                        <th onclick="orderBy(2)"> T Arm  </th>
-                        <th onclick="orderBy(3)"> Mar    </th>
-                        <th onclick="orderBy(4)"> Cal    </th>
-                        <th onclick="orderBy(5)"> Mod    </th>
+                        <th onclick="orderBy(0)"> Nº Compra  </th>
+                        <th onclick="orderBy(1)"> Nº Cat.    </th>
+                        <th onclick="orderBy(2)"> Tipo Arma  </th>
+                        <th onclick="orderBy(3)"> Marca      </th>
+                        <th onclick="orderBy(4)"> Calibre    </th>
+                        <th onclick="orderBy(5)"> Modelo     </th>
                     </tr>
                 </thead>
 

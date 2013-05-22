@@ -171,7 +171,7 @@
                     <td style="border: none; width: 70%;" align="left">	
                         <img style="margin-right: 20px;" src="<?php echo base_url(); ?>images/menu.png" />
                         
-                        <img style="cursor: pointer;" onclick="irAFrame('<?php echo base_url('correo'); ?>','Correo');" id="correo" src="<?php echo base_url(); ?>images/sobre_vacio.png" />
+                        <img title="correo" style="cursor: pointer;" onclick="irAFrame('<?php echo base_url('correo'); ?>','Correo');" id="correo" src="<?php echo base_url(); ?>images/sobre_vacio.png" />
                         <a onclick='informacionUsuario();' style='cursor: pointer'> <img title='usuario' src='<?php echo base_url('images/user_32.gif'); ?>'/></a>
                     </td>  
 
@@ -422,7 +422,7 @@
                         
                     <?php if($this->perms->verificoPerfil9() || $this->perms->verificoPerfil10()) { ?>
 
-                        <li><a href="#"> Almacen </a>
+                        <li><a href="#"> Almacén </a>
                             <ul>
                                 
                                 <li><a href="#"> Alta </a>
@@ -481,7 +481,7 @@
                     
                     <?php if($this->perms->verificoPerfil1()) { ?>
 
-                        <li><a href="#"> Administracion </a>
+                        <li><a href="#"> Administración </a>
                             <ul>
                                 <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_usuarios'); ?>','Administracion >> Alta usuarios');"> Alta usuario </a></li>
                                 <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_usuarios'); ?>','Administracion >> Modificar usuarios');"> Modificar usuarios </a></li>

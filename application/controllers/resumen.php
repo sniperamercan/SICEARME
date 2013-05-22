@@ -92,10 +92,10 @@ class resumen extends CI_Controller {
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th> Usu    </th>
-                        <th> Fecha  </th>
-                        <th> Hora   </th>
-                        <th> IP     </th>
+                        <th> Usuario      </th>
+                        <th> Fecha        </th>
+                        <th> Hora         </th>
+                        <th> Dirección IP </th>
                     </tr>
                 </thead>
 
@@ -163,13 +163,13 @@ class resumen extends CI_Controller {
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th> N Ord  </th>
-                        <th> Fecha  </th>
-                        <th> N Ser  </th>
-                        <th> Mar    </th>
-                        <th> Cal    </th>
-                        <th> Mod    </th>
-                        <th> Uni    </th>
+                        <th> Nº Orden   </th>
+                        <th> Fecha      </th>
+                        <th> Nº Serie   </th>
+                        <th> Marca      </th>
+                        <th> Calibre    </th>
+                        <th> Modelo     </th>
+                        <th> Unidad     </th>
                     </tr>
                 </thead>
 
@@ -230,10 +230,10 @@ class resumen extends CI_Controller {
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th> N par  </th>
-                        <th> Nom par  </th>
-                        <th> N Cat  </th>
-                        <th> Cant    </th>
+                        <th> Nº Parte       </th>
+                        <th> Nombre parte   </th>
+                        <th> Nº Cat.        </th>
+                        <th> Cantidad       </th>
                     </tr>
                 </thead>
 
@@ -302,14 +302,14 @@ class resumen extends CI_Controller {
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th> N Int   </th>
-                        <th> N Com   </th>
-                        <th> Fecha   </th>
-                        <th> Emp     </th>
-                        <th> Pais    </th>
-                        <th> Mod     </th>
-                        <th> Cant    </th>
-                        <th> Prec    </th>
+                        <th> Nº          </th>
+                        <th> Nº Compra   </th>
+                        <th> Fecha       </th>
+                        <th> Empresa     </th>
+                        <th> Pais        </th>
+                        <th> Modelo      </th>
+                        <th> Cant.       </th>
+                        <th> Precio      </th>
                     </tr>
                 </thead>
 
@@ -372,11 +372,11 @@ class resumen extends CI_Controller {
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th> N Acta  </th>
-                        <th> N Ser  </th>
-                        <th> Mar    </th>
-                        <th> Cal    </th>
-                        <th> Mod    </th>
+                        <th> Nº Acta   </th>
+                        <th> Nº Serie  </th>
+                        <th> Marca     </th>
+                        <th> Calibre   </th>
+                        <th> Modelo    </th>
                     </tr>
                 </thead>
 

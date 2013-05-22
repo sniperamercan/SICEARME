@@ -41,7 +41,7 @@
 
 #amenu-wrapper {
 	height: 40px;
-	background-color: #1C1C1C;
+	background-color: #0B3B0B;
 	border: none;
 	padding: 0px 10px;
 	border-radius: 7px;
@@ -67,7 +67,7 @@
 }
 #amenu-list li a:hover, #amenu-list li a.active {
 	color: #FFFFFF;
-	background-color: #424242;
+	background-color: #585858;
 	border-left: none;
 }
 
@@ -76,7 +76,7 @@
 }
 #amenu-list ul li {
 	height: 30px;
-	background-color: #1C1C1C;
+	background-color: #0B3B0B;
 	border-top: 1px solid #444444;
 	border-bottom: 1px solid #090909;
 }
@@ -90,6 +90,6 @@
 	border-left: none;
 }
 #amenu-list ul li a:hover, #amenu-list ul li a.active {
-	background-color: #424242;
+	background-color: #585858;
 	color: #FFFFFF;
 }
