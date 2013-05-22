@@ -107,9 +107,9 @@ class consulta_movimientos_repuestos extends CI_Controller {
 
                     <thead style="text-align: center; cursor: pointer;">
                         <tr>      
-                            <th onclick="orderBy(0)"> Fecha </th>
-                            <th onclick="orderBy(1)"> Secc  </th>
-                            <th onclick="orderBy(2)"> Cant  </th>
+                            <th> Fecha </th>
+                            <th> Secc  </th>
+                            <th> Cant  </th>
                         </tr>
                     </thead>
 

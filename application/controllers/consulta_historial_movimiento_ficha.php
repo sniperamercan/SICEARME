@@ -129,10 +129,10 @@ class consulta_historial_movimiento_ficha extends CI_Controller {
 
                     <thead style="text-align: center; cursor: pointer;">
                         <tr>      
-                            <th onclick="orderBy(0)"> N Acta  </th>
-                            <th onclick="orderBy(1)"> Un Or   </th>
-                            <th onclick="orderBy(2)"> Un De   </th>
-                            <th onclick="orderBy(3)"> Fecha   </th>
+                            <th> N Acta  </th>
+                            <th> Un Or   </th>
+                            <th> Un De   </th>
+                            <th> Fecha   </th>
                         </tr>
                     </thead>
 
@@ -200,10 +200,10 @@ class consulta_historial_movimiento_ficha extends CI_Controller {
 
                     <thead style="text-align: center; cursor: pointer;">
                         <tr>      
-                            <th onclick="orderBy(0)"> N Acta  </th>
-                            <th onclick="orderBy(1)"> Un Or   </th>
-                            <th onclick="orderBy(2)"> Un De   </th>
-                            <th onclick="orderBy(3)"> Fecha   </th>
+                            <th> N Acta  </th>
+                            <th> Un Or   </th>
+                            <th> Un De   </th>
+                            <th> Fecha   </th>
                         </tr>
                     </thead>
 

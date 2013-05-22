@@ -118,7 +118,7 @@ class consulta_disponibilidad_tipo_arma_reserva extends CI_Controller {
                     <thead style="text-align: center; cursor: pointer;">
                         <tr>      
                             <th> Depos  </th>
-                            <th> Stock       </th>
+                            <th> Stock  </th>
                         </tr>
                     </thead>
 

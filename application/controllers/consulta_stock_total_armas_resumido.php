@@ -114,9 +114,9 @@ class consulta_stock_total_armas_resumido extends CI_Controller {
 
                     <thead style="text-align: center; cursor: pointer;">
                         <tr>      
-                            <th onclick="orderBy(1)"> Mar  </th>
-                            <th onclick="orderBy(2)"> Cal  </th>
-                            <th onclick="orderBy(3)"> Mod  </th>
+                            <th> Mar  </th>
+                            <th> Cal  </th>
+                            <th> Mod  </th>
                             <th> Tip  </th>
                             <th> Sis  </th>
                             <th> Cant </th>
