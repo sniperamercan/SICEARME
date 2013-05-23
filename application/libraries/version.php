@@ -17,7 +17,7 @@ Class Version extends CI_Model {
     }
 
     function getVersion() {
-        return 'Ultima actualizacion - '.$this->getFechaVersion().' <br /> <img src="'.base_url().'images/html5.png" /> <img src="'.base_url().'images/apple.png" /> ';
+        return 'Ultima actualización - '.$this->getFechaVersion().' <br /> <img src="'.base_url().'images/html5.png" /> <img src="'.base_url().'images/apple.png" /> ';
     }
     
     function getFechaVersion() {
@@ -41,7 +41,7 @@ Class Version extends CI_Model {
     }
 
     public function getInfo() {
-        return 'SICEARME (Sistema centralizado de Armas del Ejercito) - <b>'.$this->getVer().'</b>';
+        return 'SICEARME (Sistema centralizado de Armas del Ejército) - <b>'.$this->getVer().'</b>';
     } 
     
     //si o si se necesita en el html a usar, tener la css de las grillas correspondientes. datagrid
@@ -52,7 +52,7 @@ Class Version extends CI_Model {
                            <thead>
                                <tr>
                                    <th> Fecha       </th>
-                                   <th> Informacion </th>
+                                   <th> Información </th>
                                </tr>
                            </thead>
                    ';
@@ -75,7 +75,7 @@ Class Version extends CI_Model {
         $concat .= '</tbody> 
 
                     <tfoot>
-                        <tr><td colspan="2"><div id="paging"> <font style="color: #1C1C1C; font-size: 13px; margin-left: 3px;"> Version de sistema - '.$this->getVer().' </font> </div></td></tr>
+                        <tr><td colspan="2"><div id="paging"> <font style="color: #1C1C1C; font-size: 13px; margin-left: 3px;"> Versión de sistema - '.$this->getVer().' </font> </div></td></tr>
                     </tfoot>      
                     </table>    
                     </div>

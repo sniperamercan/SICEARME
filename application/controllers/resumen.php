@@ -268,7 +268,7 @@ class resumen extends CI_Controller {
             $result[] = $row->precio;              7
          */
 
-        $concat = "<p class='subtituloform'> Resumen O.C.I </p>";
+        $concat = "<p class='subtituloform'> Resumen O.C.I. </p>";
         $tbody  = "";
         $j=0;
 

@@ -35,24 +35,24 @@
 
         <div>			
 
-            <h1> Incremento de version del sistema </h1>  
+            <h1> Incremento de versión del sistema </h1>  
             
             <fieldset>	
 
                 <dl>
-                <dt><label for="version"> Version actual </label></dt>
+                <dt><label for="version"> Versión actual </label></dt>
                 <dd><label id="version"> <?php echo $version; ?> </label></dd>
                 </dl>
                 
                 <dl>
-                <dt><label for="version"> Version nueva </label></dt>
+                <dt><label for="version"> Versión nueva </label></dt>
                 <dd><label id="version"> <?php echo $version_nueva; ?> </label></dd>
                 </dl>                
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button onclick="ingresarDatos();"> Incrementar version </button>
+                <button onclick="ingresarDatos();"> Incrementar versión </button>
             </fieldset>           
             
         </div>        

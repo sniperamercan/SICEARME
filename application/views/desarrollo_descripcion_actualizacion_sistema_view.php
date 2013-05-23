@@ -47,34 +47,34 @@
 
         <div>			
 
-            <h1>Descripcion de actualizacion sobre version actual del sistema</h1>    
+            <h1>Descripción de actualizacion sobre versión actual del sistema</h1>    
             
             <fieldset>	
 
                 <dl>
-                <dt><label for="version"> Version actual </label></dt>
+                <dt><label for="version"> Versión actual </label></dt>
                 <dd><label id="version"> <?php echo $version; ?> </label></dd>
                 </dl>                 
 
                 <dl>
-                <dt><label for="fecha"> Fecha </label></dt>
+                <dt><label for="fecha"> Fecha <font color="red">*</font> </label></dt>
                 <dd><input type="text" id="fecha" class="date" readonly="readonly" /></dd>
                 </dl>                
                 
                 <dl>
-                <dt><label for="descripcion"> Descripcion </label></dt>
+                <dt><label for="descripcion"> Descripción <font color="red">*</font> </label></dt>
                 <dd><textarea id="descripcion"> </textarea></dd>
                 </dl>
                 
                 <dl>
-                <dt><label for="critica"> Critica </label></dt>
+                <dt><label for="critica"> Crítica </label></dt>
                 <dd><input id="critica" name="critica" type="checkbox" value="1"></dd>
                 </dl>
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button onclick="ingresarDatos();"> Agregar descripcion </button>
+                <button onclick="ingresarDatos();"> Agregar descripción </button>
             </fieldset>           
             
         </div>        

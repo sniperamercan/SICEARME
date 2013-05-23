@@ -489,9 +489,8 @@
 
                         <li><a href="#"> Desarrollo </a>
                             <ul>
-                                <li><a href="#" onclick="irAFrame('<?php echo base_url('desarrollo_descripcion_actualizacion_sistema'); ?>','Administracion >> Desarrollo >> Descripcion actualizacion');"> Descripcion actualizacion </a></li>
-                                <li><a href="#" onclick="irAFrame('<?php echo base_url('desarrollo_incremento_version_sistema'); ?>','Adminitracion >> Desarrollo >> Incremento version');"> Incremento version </a></li>
-                                <li><a href="#" onclick="<?php $this->version->copiarVersion(); ?>"> Copiar version a servidor </a></li>
+                                <li><a href="#" onclick="irAFrame('<?php echo base_url('desarrollo_descripcion_actualizacion_sistema'); ?>','Desarrollo >> Descripción actualización');"> Descripción actualización </a></li>
+                                <li><a href="#" onclick="irAFrame('<?php echo base_url('desarrollo_incremento_version_sistema'); ?>','Desarrollo >> Incremento versión');"> Incremento versión </a></li>
                             </ul>
                         </li>                         
                         
