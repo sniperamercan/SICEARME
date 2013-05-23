@@ -128,6 +128,10 @@
                         }
                 });
             }
+            
+            function abrirManual() {
+                window.open ("<?php echo base_url(); ?>manual/manual.pdf", "mywindow","toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=1,resizable=0");
+            }
 
             function destruyoSession(){
                 $.ajax({
