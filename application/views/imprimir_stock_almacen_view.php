@@ -63,10 +63,10 @@
 
                     <thead style='text-align: center; cursor: pointer;'>
                         <tr>      
-                            <th> Nro parte     </th>
+                            <th> Nº parte      </th>
                             <th> Nombre        </th>
-                            <th> Catalogo      </th>
-                            <th> Tipo          </th>
+                            <th> Catálogo      </th>
+                            <th> Tipo arma     </th>
                             <th> Marca         </th>
                             <th> Calibre       </th>
                             <th> Modelo        </th>

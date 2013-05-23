@@ -56,7 +56,7 @@
             }
             
             function volver() {
-                irAFrame('<?php echo base_url('mb_repuestos_nro_pieza'); ?>','Almacen >> Modificar >> Nro piezas');
+                irAFrame('<?php echo base_url('mb_repuestos_nro_pieza'); ?>','Almacen >> Modificar/Anular >> Piezas');
             }  
             
         </script>
@@ -67,17 +67,17 @@
 
         <div>			
 
-            <h1> Modificar repuestos con Nro de pieza </h1>    
+            <h1> Modificar pieza </h1>    
             
             <fieldset>	
                 
                 <dl>
-                <dt><label for="nro_pieza"> Nro pieza </label></dt>
+                <dt><label for="nro_pieza"> Nº pieza </label></dt>
                 <dd><input type="text" id="nro_pieza" class="number" value="<?php echo $nro_pieza; ?>" /></dd>
                 </dl>                 
                 
                 <dl>
-                <dt><label for="nro_parte"> Nro parte </label></dt>
+                <dt><label for="nro_parte"> Nº parte </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_parte" class="txtautomatico" value="<?php echo $nro_parte; ?>" /> </dd>
                 </dl>                 
 
@@ -87,14 +87,14 @@
                 </dl> 
                 
                 <dl>
-                <dt><label for="nro_catalogo"> Nro catalogo </label></dt>
+                <dt><label for="nro_catalogo"> Nº catálogo </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" value="<?php echo $nro_catalogo; ?>" /></dd>
                 </dl>                
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="modificarRepuestoNroPieza();"> Modificar pieza (Nro) </button> 
+                <button style="margin-right: 20px;" onclick="modificarRepuestoNroPieza();"> Modificar pieza </button> 
                 <button style="margin-right: 20px;" onclick="volver();"> Volver </button>
             </fieldset>  
             

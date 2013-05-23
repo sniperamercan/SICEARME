@@ -92,12 +92,12 @@
 
         <div>			
 
-            <h1> Modificar stock de almacen </h1>    
+            <h1> Modificar repuesto </h1>    
             
             <fieldset>	
                 
                 <dl>
-                <dt><label for="nro_parte"> Nro parte </label></dt>
+                <dt><label for="nro_parte"> Nº parte </label></dt>
                 <dd><input type="text" id="nro_parte" class="text" value="<?php echo $nro_parte; ?>" /></dd>
                 </dl>                
                 
@@ -106,24 +106,24 @@
                 <dd><input type="text" id="nombre_parte" class="text" value="<?php echo $nombre_parte; ?>" /></dd> 					
                 </dl>
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
-                <p class="subtituloform"> Cargo el catalogo al cual pertenece este armamento </p>
+                <p class="subtituloform"> Cargo el catálogo al cual pertenece este armamento </p>
                 
                 <dl>
-                <dt><label> Buscar catalogo </label></dt>
+                <dt><label> Buscar catálogo </label></dt>
                 <dd><img style="cursor: pointer;" onclick="busquedaCatalogos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>         
                 
                 <dl>
-                <dt><label for="nro_catalogo"> Nro catalogo <font color="red"> * </font> </label></dt>
+                <dt><label for="nro_catalogo"> Nº catálogo <font color="red"> * </font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" value="<?php echo $nro_catalogo; ?>" /> </dd>
                 </dl>                 
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="modificarStock();"> Modificar stock </button>
+                <button style="margin-right: 20px;" onclick="modificarStock();"> Modificar repuesto </button>
                 <button style="margin-right: 20px;" onclick="volver();"> Volver </button>
             </fieldset>  
             

@@ -101,15 +101,15 @@ class consulta_movimientos_repuestos extends CI_Controller {
             $total = $this->consulta_movimientos_repuestos_model->cantidadRegistros($condicion) + $this->consulta_movimientos_repuestos_model->cantidadRegistros_asociadas($condicion);
             
             $concat .= '
-                <p class="subtituloform"> Nro catalogo - '.$_SESSION['nro_catalogo']. ' &nbsp;&nbsp;&nbsp;&nbsp; Total - '.$total.' </p>
+                <p class="subtituloform"> Nº catálogo - '.$_SESSION['nro_catalogo']. ' &nbsp;&nbsp;&nbsp;&nbsp; Total - '.$total.' </p>
 
                 <table>
 
                     <thead style="text-align: center; cursor: pointer;">
                         <tr>      
-                            <th> Fecha </th>
-                            <th> Secc  </th>
-                            <th> Cant  </th>
+                            <th> Fecha    </th>
+                            <th> Sección  </th>
+                            <th> Cantidad </th>
                         </tr>
                     </thead>
 

@@ -109,12 +109,12 @@
 
         <div>			
 
-            <h1> Alta de repuestos con Nro de pieza </h1>    
+            <h1> Alta de pieza </h1>    
             
             <fieldset>	
                 
                 <dl>
-                <dt><label for="nro_pieza"> Nro pieza <font color="red"> * </font></label></dt>
+                <dt><label for="nro_pieza"> Nº pieza <font color="red"> * </font></label></dt>
                 <dd><input type="text" id="nro_pieza" class="number" /></dd>
                 </dl>                 
                 
@@ -124,7 +124,7 @@
                 </dl>                 
                 
                 <dl>
-                <dt><label for="nro_parte"> Nro parte </label></dt>
+                <dt><label for="nro_parte"> Nº parte </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_parte" class="txtautomatico" /> </dd>
                 </dl>                 
 
@@ -134,19 +134,19 @@
                 </dl> 
                 
                 <dl>
-                <dt><label for="nro_catalogo"> Nro catalogo </label></dt>
+                <dt><label for="nro_catalogo"> Nº catálogo </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" /></dd>
                 </dl>                
                 
                 <dl>
-                <dt><label for="cant_actual"> Cant actual </label></dt>
+                <dt><label for="cant_actual"> Cant. actual </label></dt>
                 <dd><input readonly="readonly" type="text" id="cant_actual" class="txtautomatico" /></dd>
                 </dl>
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="altaRepuestoNroPieza();"> Ingresar pieza (Nro) </button> 
+                <button style="margin-right: 20px;" onclick="altaRepuestoNroPieza();"> Ingresar pieza </button> 
             </fieldset>  
             
             <hr />

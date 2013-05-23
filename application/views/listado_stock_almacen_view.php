@@ -110,15 +110,15 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Nro parte  - </label> </td> <td> <input type="text" class="text" id="nro_parte" /></td>
-                <td><label> &emsp; Nombre     - </label> </td> <td> <input type="text" class="text" id="nombre_parte" /></td>
+                <td><label> Nº parte  </label> </td> <td> <input type="text" class="text" id="nro_parte" /></td>
+                <td><label> Nombre     </label> </td> <td> <input type="text" class="text" id="nombre_parte" /></td>
             </tr>
 
         </table>
         
         <br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="filtrar();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         
@@ -130,15 +130,15 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> N Par    </th>
-                        <th onclick="orderBy(1)"> Nom      </th>
-                        <th onclick="orderBy(2)"> Cat      </th>
-                        <th> Tip  </th>
-                        <th> Mar  </th>
-                        <th> Cal  </th>
-                        <th> Mod  </th>
-                        <th onclick="orderBy(3)"> Cant     </th>
-                        <th> Imp  </th>
+                        <th onclick="orderBy(0)"> Nº parte    </th>
+                        <th onclick="orderBy(1)"> Nombre      </th>
+                        <th onclick="orderBy(2)"> Nº cat.     </th>
+                        <th> Tipo arma  </th>
+                        <th> Marca      </th>
+                        <th> Calibre    </th>
+                        <th> Modelo     </th>
+                        <th onclick="orderBy(3)"> Cantidad    </th>
+                        <th> Imprimir  </th>
                     </tr>
                 </thead>
 

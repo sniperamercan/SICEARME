@@ -68,12 +68,12 @@
 
         <div>			
 
-            <h1> Ajustar stock de almacen </h1>    
+            <h1> Ajustar stock de repuesto </h1>    
             
             <fieldset>	
                 
                 <dl>
-                <dt><label for="nro_parte"> Nro parte </label></dt>
+                <dt><label for="nro_parte"> Nº parte </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_parte" class="txtautomatico" value="<?php echo $nro_parte; ?>" /></dd>
                 </dl>                
                 
@@ -82,16 +82,16 @@
                 <dd><input readonly="readonly" type="text" id="nombre_parte" class="txtautomatico" value="<?php echo $nombre_parte; ?>" /></dd> 					
                 </dl>
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
-                <p class="subtituloform"> Cargo el catalogo al cual pertenece este armamento </p>
+                <p class="subtituloform"> Cargo el catálogo al cual pertenece este armamento </p>
                 
                 <dl>
-                <dt><label for="nro_catalogo"> Nro catalogo </label></dt>
+                <dt><label for="nro_catalogo"> Nº catálogo </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" value="<?php echo $nro_catalogo; ?>" /> </dd>
                 </dl>     
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> Datos de stock </p>
                 
@@ -100,7 +100,7 @@
                 <dd><input type="text" id="cantidad" class="txtautomatico" readonly="readonly" value="<?php echo $cantidad; ?>" /></dd> 					
                 </dl> 
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> <font color="#B40404"> La cantidad de ajuste resta al stock que tiene actualmente el repuesto </font> </p>
                 
