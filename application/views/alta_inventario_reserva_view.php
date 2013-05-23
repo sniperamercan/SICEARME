@@ -150,7 +150,7 @@
                 <p class="subtituloform"> Datos del arma </p>
                 
                 <dl> 		
-                <dt><label for="nro_serie"> Nro serie <font color="red"> * </font> </label></dt>	
+                <dt><label for="nro_serie"> Nº serie <font color="red"> * </font> </label></dt>	
                 <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" value="<?php echo $nro_serie; ?>" /> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
@@ -179,24 +179,24 @@
                 <dd><input readonly="readonly" type="text" id="sistema" class="txtautomatico" value="<?php echo $sistema; ?>" /></dd>
                 </dl>                
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <dl>
-                <dt><label for="deposito_actual"> Dept act </label></dt>
+                <dt><label for="deposito_actual"> Dep. origen </label></dt>
                 <dd><input readonly="readonly" type="text" id="deposito_actual" class="txtautomatico" value="<?php echo $deposito; ?>" /></dd>
                 </dl>                  
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <dl>
-                <dt><label for="deposito_nuevo"> Dept nuev <font color="red"> * </font> </label></dt>
+                <dt><label for="deposito_nuevo"> Dep. destino <font color="red"> * </font> </label></dt>
                 <dd><select id="deposito_nuevo"> <?php echo $depositos; ?> </select> <img style="cursor: pointer;" onclick="crearDeposito();" src="<?php echo base_url(); ?>images/sumar.png" alt="alta deposito" /></dd>
                 </dl>                  
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="altaInventario();"> Alta de inventario </button>
+                <button style="margin-right: 20px;" onclick="altaInventario();"> Modificar inventario </button>
                 <button style="margin-right: 20px;" onclick="volver();"> Volver </button>
             </fieldset>  
             

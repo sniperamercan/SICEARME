@@ -114,10 +114,14 @@
     
     <body class="cuerpo">
         
+        <p class="subtituloform"> Filtro obligatorio </p>
+        
+        <hr />        
+        
         <table>
             
             <tr>
-                <td><label> &emsp; Deposito - </label> </td> <td>  <select id="deposito"> <?php echo $depositos; ?> </select> </td>
+                <td><label> &emsp; Depósito - </label> </td> <td>  <select id="deposito"> <?php echo $depositos; ?> </select> </td>
             </tr>
             
         </table>
@@ -125,12 +129,12 @@
         <br />         
         
         <dl>
-        <dt><label> Buscar catalogo </label></dt>
+        <dt><label> Buscar catálogo </label></dt>
         <dd><img style="cursor: pointer;" onclick="busquedaCatalogos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
         </dl>         
 
         <dl>
-        <dt><label for="nro_catalogo"> Nro catalogo <font color="red"> * </font> </label></dt>
+        <dt><label for="nro_catalogo"> Nº catalogo </label></dt>
         <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" /> </dd>
         </dl>     
         

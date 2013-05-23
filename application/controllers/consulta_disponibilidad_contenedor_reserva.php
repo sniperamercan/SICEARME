@@ -129,7 +129,7 @@ class consulta_disponibilidad_contenedor_reserva extends CI_Controller {
 
                     <thead style="text-align: center; cursor: pointer;">
                         <tr>      
-                            <th> N Ser  </th>
+                            <th> Nº Serie  </th>
                         </tr>
                     </thead>
 

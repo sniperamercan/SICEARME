@@ -323,9 +323,9 @@
                                     </ul>
                                 </li>
                                 
-                                <li><a href="#"> Actas </a>
+                                <li><a href="#"> Altas </a>
                                     <ul>
-                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_actas_baja_reserva'); ?>','Reserva >> Actas >> Acta baja');"> Actas baja </a></li>
+                                        <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_actas_baja_reserva'); ?>','Reserva >> Altas >> Actas de baja');"> Actas de baja </a></li>
                                     </ul>
                                 </li>                                 
 

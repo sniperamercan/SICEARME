@@ -98,10 +98,14 @@
     
     <body class="cuerpo">
         
+        <p class="subtituloform"> Filtro obligatorio </p>
+        
+        <hr />        
+        
         <table>
             
             <tr>
-                <td><label> &emsp; Deposito - </label> </td> <td>  <select id="deposito"> <?php echo $depositos; ?> </select> </td>
+                <td><label> &emsp; Depósito - </label> </td> <td>  <select id="deposito"> <?php echo $depositos; ?> </select> </td>
             </tr>
             
         </table>

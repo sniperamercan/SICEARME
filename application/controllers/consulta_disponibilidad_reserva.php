@@ -100,18 +100,18 @@ class consulta_disponibilidad_reserva extends CI_Controller {
             $total = $this->consulta_disponibilidad_reserva_model->cantidadRegistros($condicion);
             
             $concat .= '
-                <p class="subtituloform"> Deposito - '.$_SESSION['deposito']. ' &nbsp;&nbsp;&nbsp;&nbsp; Total - '.$total.' </p>
+                <p class="subtituloform"> Depósito - '.$_SESSION['deposito']. ' &nbsp;&nbsp;&nbsp;&nbsp; Total - '.$total.' </p>
 
                 <table>
 
                     <thead style="text-align: center; cursor: pointer;">
                         <tr>      
-                            <th> N Ser  </th>
-                            <th> Mar    </th>
-                            <th> Cal    </th>
-                            <th> Mod    </th>
-                            <th> Tip    </th>
-                            <th> Sis    </th>
+                            <th> Nº serie   </th>
+                            <th> Marca      </th>
+                            <th> Calibre    </th>
+                            <th> Modelo     </th>
+                            <th> Tipo arma  </th>
+                            <th> Sistema    </th>
                         </tr>
                     </thead>
 

@@ -114,13 +114,17 @@
     
     <body class="cuerpo">
         
+        <p class="subtituloform"> Filtro obligatorio </p>
+        
+        <hr />
+        
         <dl>
         <dt><label> Buscar catalogo </label></dt>
         <dd><img style="cursor: pointer;" onclick="busquedaCatalogos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
         </dl>         
 
         <dl>
-        <dt><label for="nro_catalogo"> Nro catalogo <font color="red"> * </font> </label></dt>
+        <dt><label for="nro_catalogo"> Nº catálogo </label></dt>
         <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" /> </dd>
         </dl>     
         

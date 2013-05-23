@@ -360,37 +360,37 @@
 
         <div>			
 
-            <h1> Alta actas de baja reserva </h1>    
+            <h1> Alta de acta de baja (reserva) </h1>    
             
             <fieldset>	
 
                 <dl>
-                <dt><label for="fecha"> Fecha </label></dt>
+                <dt><label for="fecha"> Fecha <font color="red">*</font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="fecha" class="text" /></dd>
                 </dl>                
 
                 <dl> 		
-                <dt><label for="unidad_entrega"> Unidad entrega </label></dt>	
+                <dt><label for="unidad_entrega"> Unidad entrega <font color="red">*</font> </label></dt>	
                 <dd><select id="unidad_entrega"> <option value="96"> Reserva </option> </select></dd> 					
                 </dl>                
                 
                 <dl> 		
-                <dt><label for="unidad_recibe"> Unidad recibe </label></dt>	
+                <dt><label for="unidad_recibe"> Unidad recibe <font color="red">*</font> </label></dt>	
                 <dd><input type="text" id="unidad_recibe" class="txtautomatico" readonly="readonly" value="S.M.A" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="representante_sma"> Repr SMA </label></dt>	
+                <dt><label for="representante_sma"> Repr. SMA <font color="red">*</font> </label></dt>	
                 <dd><input type="text" id="representante_sma" class="text" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="representante_unidad"> Repr unidad </label></dt>	
+                <dt><label for="representante_unidad"> Repr. unidad <font color="red">*</font> </label></dt>	
                 <dd><input type="text" id="representante_unidad" class="text" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="supervision"> Supervision </label></dt>	
+                <dt><label for="supervision"> Supervisor <font color="red">*</font> </label></dt>	
                 <dd><input type="text" id="supervision" class="text" /></dd> 					
                 </dl>                
  
@@ -399,12 +399,12 @@
                 <dd><textarea id="observaciones"> </textarea></dd> 					
                 </dl>
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> Armamento a entregar </p>
                 
                 <dl> 		
-                <dt><label for="nro_serie"> Nro serie </label></dt>	
+                <dt><label for="nro_serie"> Nº serie </label></dt>	
                 <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" /> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
@@ -425,12 +425,12 @@
                 
                 <button style="margin-right: 20px;" onclick="agregarFicha();"> Agregar armamento </button>     
                 
-                <p><img src="<?php echo base_url(); ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> Accesorios a entregar </p>
                 
                 <dl> 		
-                <dt><label for="nro_serie_accesorio"> Nro serie </label></dt>	
+                <dt><label for="nro_serie_accesorio"> Nº serie </label></dt>	
                 <dd><input readonly="readonly" type="text" id="nro_serie_accesorio" class="txtautomatico" /> <img style="cursor: pointer;" onclick="busquedaAccesorios();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
@@ -450,7 +450,7 @@
                 </dl>
                 
                 <dl> 		
-                <dt><label for="nro_accesorio"> Nro accesorio </label></dt>	
+                <dt><label for="nro_accesorio"> Nº accesorio </label></dt>	
                 <dd><input readonly="readonly" type="text" id="nro_accesorio" class="txtautomatico" /></dd> 					
                 </dl>                
                 
@@ -476,7 +476,7 @@
                             <table> 
                                 <thead>
                                     <tr>
-                                        <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> </th>
+                                        <th> Nº serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> </th>
                                     </tr>
                                 </thead>
                                 <tbody id="entregas_fichas"></tbody>
@@ -506,7 +506,7 @@
                             <table> 
                                 <thead>
                                     <tr> 
-                                        <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Nro accesorio </th> <th> </th>
+                                        <th> Nº serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Nº accesorio </th> <th> </th>
                                     </tr>
                                 </thead>
                                 <tbody id="entregas_accesorios"></tbody>
