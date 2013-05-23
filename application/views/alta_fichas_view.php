@@ -236,56 +236,56 @@
 
         <div>			
 
-            <h1> Alta fichas </h1>    
+            <h1> Alta de ficha </h1>    
             
             <fieldset>	
 
                 <dl>
-                <dt><label for="nro_serie"> Nro serie </label></dt>
+                <dt><label for="nro_serie"> Nº serie <font color='red'>*</font> </label></dt>
                 <dd><input type="text" id="nro_serie" class="text" /></dd>
                 </dl>                
                 
                 <dl> 		
-                <dt><label for="marca"> Marca </label></dt>	
+                <dt><label for="marca"> Marca <font color='red'>*</font> </label></dt>	
                 <dd><input type="text" id="marca" class="txtautomatico" readonly="readonly" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="calibre"> Calibre </label></dt>	
+                <dt><label for="calibre"> Calibre <font color='red'>*</font> </label></dt>	
                 <dd><input type="text" id="calibre" class="txtautomatico" readonly="readonly" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="modelo"> Modelo </label></dt>	
+                <dt><label for="modelo"> Modelo <font color='red'>*</font> </label></dt>	
                 <dd><input type="text" id="modelo" class="txtautomatico" readonly="readonly" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="tipo_arma"> Tipo </label></dt>	
+                <dt><label for="tipo_arma"> Tipo <font color='red'>*</font> </label></dt>	
                 <dd><input type="text" id="tipo_arma" class="txtautomatico" readonly="readonly" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="sistema"> Sistema </label></dt>	
+                <dt><label for="sistema"> Sistema <font color='red'>*</font> </label></dt>	
                 <dd><input type="text" id="sistema" class="txtautomatico" readonly="readonly" /></dd> 					
                 </dl>               
                 
                 <dl> 		
-                <dt><label for="nro_compra"> Nro compra </label></dt>	
+                <dt><label for="nro_compra"> Nº compra <font color='red'>*</font> </label></dt>	
                 <dd><select id="nro_compra" onchange="cargoNroCatalogos(this.value);"> <?php echo $nro_compras; ?> </select> <img style="cursor: pointer;" onclick="busquedaCompras();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>                
                 
                 <dl> 		
-                <dt><label for="nro_catalogo"> Nro catalogo </label></dt>	
+                <dt><label for="nro_catalogo"> Nº catálogo <font color='red'>*</font> </label></dt>	
                 <dd><select id="nro_catalogo" onchange="cargoInformacion(this.value);"> <option selected="selected" val=""> </option>  </select></dd> 					
                 </dl>
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> Accesorios - </p>
 
                 <dl>
-                <dt><label for="nro_accesorio"> Nro accesorio </label></dt>
+                <dt><label for="nro_accesorio"> Nº accesorio </label></dt>
                 <dd><input type="text" id="nro_accesorio" class="text" /></dd>
                 </dl> 
                 
@@ -295,19 +295,19 @@
                 </dl>                
                 
                 <dl>
-                <dt><label for="descricion_accesorio"> Descripcion </label></dt>
+                <dt><label for="descricion_accesorio"> Descripción </label></dt>
                 <dd><input type="text" id="descripcion_accesorio" class="text" /></dd>
                 </dl>                
                 
                 <p><button id="agregar_accesorio" onclick="agregarAccesorio();"> Agregar accesorio </button></p>
 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <div class="datagrid">
                     <table> 
                         <thead>
                             <tr>
-                                <th> Nro accesorio </th> <th> Tipo </th> <th> Descripcion </th> <th> </th>
+                                <th> Nº accesorio </th> <th> Tipo </th> <th> Descripción </th> <th> </th>
                             </tr>
                         </thead>
                         <tbody id="accesorios"></tbody> 
@@ -317,12 +317,12 @@
                     </table> 
                 </div>
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> Piezas - </p>
 
                 <dl>
-                <dt><label for="nro_pieza"> Nro pieza </label></dt>
+                <dt><label for="nro_pieza"> Nº pieza </label></dt>
                 <dd><input type="text" id="nro_pieza" class="text" /></dd>
                 </dl> 
                 
@@ -332,19 +332,19 @@
                 </dl>                
                 
                 <dl>
-                <dt><label for="descricion_pieza"> Descripcion </label></dt>
+                <dt><label for="descricion_pieza"> Descripción </label></dt>
                 <dd><input type="text" id="descripcion_pieza" class="text" /></dd>
                 </dl>                
                 
                 <p><button id="agregar_pieza" onclick="agregarPieza();"> Agregar pieza &nbsp;&nbsp;&nbsp;&nbsp; </button></p>
 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <div class="datagrid">
                     <table> 
                         <thead>
                             <tr>
-                                <th> Nro pieza </th> <th> Tipo </th> <th> Descripcion </th> <th> </th>
+                                <th> Nº pieza </th> <th> Tipo </th> <th> Descripción </th> <th> </th>
                             </tr>
                         </thead>
                         <tbody id="piezas"></tbody> 

@@ -63,9 +63,9 @@
 
                      <thead style='text-align: center; cursor: pointer;'>
                          <tr>      
-                             <th> Nro interno compra </th>
-                             <th> Nro compra    </th>
-                             <th> Fecha    </th>
+                             <th> Nº           </th>
+                             <th> Nº compra    </th>
+                             <th> Fecha        </th>
                          </tr>
                      </thead>
 
@@ -92,7 +92,7 @@
                      <thead style='text-align: center; cursor: pointer;'>
                          <tr>      
                              <th> Empresa </th>
-                             <th> Pais   </th>
+                             <th> País    </th>
                          </tr>
                      </thead>
 
@@ -115,7 +115,7 @@
 
                      <thead style='text-align: center; cursor: pointer;'>
                          <tr>      
-                             <th> Descripcion </th>
+                             <th> Descripción </th>
                              <th> Modalidad </th>
                          </tr>
                      </thead>
@@ -133,7 +133,7 @@
 
             <hr />
 
-            <p class="subtituloform"> Catalogos asociados a la compra </p>
+            <p class="subtituloform"> Catálogos asociados a la compra </p>
 
             <div class="datagrid">
 
@@ -141,13 +141,13 @@
 
                      <thead style='text-align: center; cursor: pointer;'>
                          <tr>      
-                             <th> Nro catalogo </th>
+                             <th> Nº cat.      </th>
                              <th> Tipo arma    </th>
                              <th> Marca        </th>
                              <th> Calibre      </th>
                              <th> Modelo       </th>
                              <th> Sistema      </th>
-                             <th> Cant armas   </th>
+                             <th> Cant. armas  </th>
                              <th> Costo        </th>
                          </tr>
                      </thead>

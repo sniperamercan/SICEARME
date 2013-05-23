@@ -63,11 +63,11 @@
 
                      <thead style='text-align: center; cursor: pointer;'>
                          <tr>      
-                             <th> Nro catalogo         </th>
-                             <th> Fecha fabricacion    </th>
-                             <th> Vencimiento          </th>
-                             <th> Empresa              </th>
-                             <th> Origen               </th>
+                             <th> Nº cat.      </th>
+                             <th> Año fab.     </th>
+                             <th> Vencimiento  </th>
+                             <th> Empresa      </th>
+                             <th> Origen       </th>
                          </tr>
                      </thead>
 

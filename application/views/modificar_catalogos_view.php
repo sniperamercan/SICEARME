@@ -63,7 +63,7 @@
                     data: "tipo_arma="+tipo_arma+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&sistema="+sistema+"&empresa="+empresa+"&pais_empresa="+pais_empresa+"&fabricacion="+fabricacion+"&vencimiento="+vencimiento,
                     success: function(data){
                         if(data[0] == "1"){            
-                            jAlert("Catalogo modificado con exito - Nro de catalogo = "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('mb_catalogos'); ?>','O.C.I >> Modificar/Anular >> Catalogos');  });
+                            jAlert("Catálogo modificado con exito - Nº de catálogo = "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('mb_catalogos'); ?>','O.C.I. >> Modificar/Anular >> Catálogos');  });
                         }else{
                             jAlert(data[0], "Error");
                         }                            
@@ -72,7 +72,7 @@
             }
             
             function volverListado() {
-                irAFrame('<?php echo base_url('mb_catalogos'); ?>','O.C.I >> Modificar/Anular >> Catalogos');
+                irAFrame('<?php echo base_url('mb_catalogos'); ?>','O.C.I. >> Modificar/Anular >> Catálogos');
             }            
             
             //INICIO llamadas a crear los tipos
@@ -186,59 +186,59 @@
 
         <div>			
 
-            <h1> Modificar catalogos </h1>    
+            <h1> Modificar catálogo </h1>    
             
             <fieldset>	
                 
                 <dl> 		
-                <dt><label for="tipo_arma"> Tipo arma </label></dt>	
+                <dt><label for="tipo_arma"> Tipo arma <font color="red">*</font> </label></dt>	
                 <dd><select id="tipo_arma"> </select> <img style="cursor: pointer;" onclick="crearTipoArma();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="marca"> Marca </label></dt>	
+                <dt><label for="marca"> Marca <font color="red">*</font> </label></dt>	
                 <dd><select id="marca"> </select> <img style="cursor: pointer;" onclick="crearMarca();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="calibre"> Calibre </label></dt>	
+                <dt><label for="calibre"> Calibre <font color="red">*</font> </label></dt>	
                 <dd><select id="calibre"> </select> <img style="cursor: pointer;" onclick="crearCalibre();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="modelo"> Modelo </label></dt>	
+                <dt><label for="modelo"> Modelo <font color="red">*</font> </label></dt>	
                 <dd><select id="modelo"> </select> <img style="cursor: pointer;" onclick="crearModelo();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="sistema"> Sistema </label></dt>	
+                <dt><label for="sistema"> Sistema <font color="red">*</font> </label></dt>	
                 <dd><select id="sistema"> </select> <img style="cursor: pointer;" onclick="crearSistema();" src="<?php echo base_url(); ?>images/sumar.png" /></dd> 					
                 </dl>
                 
                 <dl>
-                <dt><label for="empresa"> Empresa </label></dt>
+                <dt><label for="empresa"> Empresa <font color="red">*</font> </label></dt>
                 <dd><select id="empresa"> <?php echo $empresas; ?> </select> <img style="cursor: pointer;" onclick="crearEmpresa();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
                 </dl>                
                 
                 <dl>
-                <dt><label for="pais_empresa"> Pais empresa </label></dt>
+                <dt><label for="pais_empresa"> País empresa <font color="red">*</font> </label></dt>
                 <dd><select id="pais_empresa"> <?php echo $paises ?> </select></dd>
                 </dl>                 
 
                 <dl>
-                <dt><label for="fabricacion"> Año Fabricacion </label></dt>
+                <dt><label for="fabricacion"> Año Fabricación <font color="red">*</font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="fabricacion" class="text" value="<?php echo $fabricacion; ?>" /></dd>
                 </dl>
                 
                 <dl>
-                <dt><label for="vencimiento"> Vencimiento </label></dt>
+                <dt><label for="vencimiento"> Vencimiento <font color="red">*</font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="vencimiento" class="text" value="<?php echo $vencimiento; ?>" /></dd>
                 </dl>  
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="modificarCatalogo();"> Modificar catalogo </button> <button style="margin-right: 20px;" onclick="volverListado();"> Volver al listado de catalogos </button>
+                <button style="margin-right: 20px;" onclick="modificarCatalogo();"> Modificar catálogo </button> <button style="margin-right: 20px;" onclick="volverListado();"> Volver al listado de catálogos </button>
             </fieldset>  
             
         </div>        

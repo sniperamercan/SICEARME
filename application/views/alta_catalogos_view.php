@@ -163,59 +163,59 @@
 
         <div>			
 
-            <h1> Alta catalogos </h1>    
+            <h1> Alta de catálogo </h1>    
             
             <fieldset>	
                 
                 <dl> 		
-                <dt><label for="tipo_arma"> Tipo arma </label></dt>	
+                <dt><label for="tipo_arma"> Tipo arma <font color='red'>*</font> </label></dt>	
                 <dd><select id="tipo_arma"> <?php echo $tipos_armas; ?> </select> <?php if(!$_SESSION['crear_catalogo']) { ?> <img style="cursor: pointer;" onclick="crearTipoArma();" src="<?php echo base_url(); ?>images/sumar.png" /> <?php } ?> </dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="marca"> Marca </label></dt>	
+                <dt><label for="marca"> Marca <font color='red'>*</font> </label></dt>	
                 <dd><select id="marca"> <?php echo $marcas; ?> </select> <?php if(!$_SESSION['crear_catalogo']) { ?> <img style="cursor: pointer;" onclick="crearMarca();" src="<?php echo base_url(); ?>images/sumar.png" /> <?php } ?> </dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="calibre"> Calibre </label></dt>	
+                <dt><label for="calibre"> Calibre  <font color='red'>*</font> </label></dt>	
                 <dd><select id="calibre"> <?php echo $calibres; ?> </select> <?php if(!$_SESSION['crear_catalogo']) { ?> <img style="cursor: pointer;" onclick="crearCalibre();" src="<?php echo base_url(); ?>images/sumar.png" /> <?php } ?> </dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="modelo"> Modelo </label></dt>	
+                <dt><label for="modelo"> Modelo <font color='red'>*</font> </label></dt>	
                 <dd><select id="modelo"> <?php echo $modelos; ?> </select> <?php if(!$_SESSION['crear_catalogo']) { ?> <img style="cursor: pointer;" onclick="crearModelo();" src="<?php echo base_url(); ?>images/sumar.png" /> <?php } ?> </dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="sistema"> Sistema </label></dt>	
+                <dt><label for="sistema"> Sistema <font color='red'>*</font> </label></dt>	
                 <dd><select id="sistema"> <?php echo $sistemas; ?> </select> <?php if(!$_SESSION['crear_catalogo']) { ?> <img style="cursor: pointer;" onclick="crearSistema();" src="<?php echo base_url(); ?>images/sumar.png" /> <?php } ?> </dd> 					
                 </dl>
                 
                 <dl>
-                <dt><label for="empresa"> Empresa </label></dt>
+                <dt><label for="empresa"> Empresa <font color='red'>*</font> </label></dt>
                 <dd><select id="empresa"> <?php echo $empresas; ?> </select> <?php if(!$_SESSION['crear_catalogo']) { ?> <img style="cursor: pointer;" onclick="crearEmpresa();" src="<?php echo base_url(); ?>images/sumar.png" /> <?php } ?> </dd>
                 </dl>                
                 
                 <dl>
-                <dt><label for="pais_empresa"> Pais empresa </label></dt>
+                <dt><label for="pais_empresa"> País empresa <font color='red'>*</font> </label></dt>
                 <dd><select id="pais_empresa"> <?php echo $paises ?> </select></dd>
                 </dl>                 
 
                 <dl>
-                <dt><label for="fabricacion"> Año Fabricacion </label></dt>
+                <dt><label for="fabricacion"> Año Fabricación <font color='red'>*</font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="fabricacion" class="text" /></dd>
                 </dl>
                 
                 <dl>
-                <dt><label for="vencimiento"> Vencimiento </label></dt>
+                <dt><label for="vencimiento"> Vencimiento <font color='red'>*</font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="vencimiento" class="text" /></dd>
                 </dl>  
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="altaCatalogo();"> Alta catalogo </button>
+                <button style="margin-right: 20px;" onclick="altaCatalogo();"> Alta catálogo </button>
             </fieldset>  
             
         </div>        

@@ -135,7 +135,7 @@
         <hr />
         
         <dl> 		
-        <dt><label for="nro_serie"> Nro serie </label></dt>	
+        <dt><label for="nro_serie"> Nº serie </label></dt>	
         <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" /> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
         </dl>
 
@@ -161,14 +161,14 @@
         
         <table>     
             <tr>
-                <td><label> &emsp; Fecha 1 - </label> </td> <td>  <input type="text" class="text" id="fecha1" /></td>
-                <td><label> &emsp; Fecha 2 - </label> </td> <td>  <input type="text" class="text" id="fecha2" /></td>
+                <td><label> Fecha desde   </label> </td> <td>  <input type="text" class="text" id="fecha1" /></td>
+                <td><label> Fecha hasta   </label> </td> <td>  <input type="text" class="text" id="fecha2" /></td>
             </tr> 
         </table>
         
         <br /> 
         
-        &emsp; <button onclick="filtrarConsulta();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="filtrarConsulta();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         

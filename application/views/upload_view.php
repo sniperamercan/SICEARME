@@ -99,18 +99,21 @@
             
             <form enctype="multipart/form-data" method="POST">
 
-            <h1> Subir archivos catalogo </h1>        
+            <h1> Subir archivos del catálogo </h1>        
             
             <fieldset>	
 
                 <dl>
-                <dt><label for="catalogo"> Catalogos </label></dt>
+                <dt><label for="catalogo"> Catálogos <font color='red'>*</font> </label></dt>
                 <dd><select id="catalogo"> <?php echo $catalogos; ?> </select> <img style="cursor: pointer;" onclick="busquedaCatalogos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>              
                 
-                <div style="padding-left: 20px; margin-top: 50px" id="archivos">
+                <div id="archivos">
                     
-                    <label style="margin-right: 10px;"> Archivos </label> <span class="add_field" style="cursor: pointer;"><img src="<?php echo base_url() ?>images/add.png" /></span>
+                    <dl>
+                    <dt><label> Archivos <font color='red'>*</font> </label></dt>
+                    <dd><span class="add_field" style="cursor: pointer;"><img src="<?php echo base_url() ?>images/add.png" /></span></dd>
+                    </dl>                    
                     
                     <br /><br />
                     

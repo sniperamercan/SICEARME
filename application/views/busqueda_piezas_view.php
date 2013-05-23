@@ -111,15 +111,15 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Nro pieza - </label> </td> <td> <input type="text" class="text" id="nro_serie" /></td>
-                <td><label> &emsp; Tipo pieza - </label> </td> <td>  <input type="text" class="text" id="nro_compra" /></td>
+                <td><label> Nº pieza     </label> </td> <td> <input type="text" class="text" id="nro_serie" /></td>
+                <td><label> Tipo pieza   </label> </td> <td>  <input type="text" class="text" id="nro_compra" /></td>
             </tr>            
             
         </table>
         
         <br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="filtrar();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         
@@ -132,10 +132,10 @@
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
                         <th> Seleccion  </th>
-                        <th onclick="orderBy(0)"> Nº Pieza    </th>
-                        <th onclick="orderBy(1)"> Tipo Pieza  </th>
-                        <th onclick="orderBy(2)"> Descripcion </th>
-                        <th> Nº Serie  </th>
+                        <th onclick="orderBy(0)"> Nº pieza    </th>
+                        <th onclick="orderBy(1)"> Tipo pieza  </th>
+                        <th onclick="orderBy(2)"> Descripción </th>
+                        <th> Nº serie  </th>
                         <th> Marca     </th>
                         <th> Calibre   </th>
                         <th> Modelo    </th>                        

@@ -354,7 +354,7 @@ class mb_fichas extends CI_Controller {
         }else {
             $accesorios = array();
             $accesorios = $this->mb_fichas_model->verAccesorios($nro_serie, $marca, $calibre, $modelo);
-            $concat = "<p style='font-weight: bold;'> Acceorios asociados a la ficha </p><div class='datagrid'><table><thead><th> Nro accesorios </th><th> Tipo accesorio </th><th> Descripcion </th></thead>";
+            $concat = "<p style='font-weight: bold;'> Acceorios asociados a la ficha </p><div class='datagrid'><table><thead><th> Nº accesorio </th><th> Tipo accesorio </th><th> Descripción </th></thead>";
            
             /*
              * retorno del array de catalogos
@@ -393,7 +393,7 @@ class mb_fichas extends CI_Controller {
         }else {
             $piezas = array();
             $piezas = $this->mb_fichas_model->verPiezas($nro_serie, $marca, $calibre, $modelo);
-            $concat = "<p style='font-weight: bold;'> Piezas asociados a la ficha </p><div class='datagrid'><table><thead><th> Nro pieza </th><th> Tipo pieza </th><th> Descripcion </th></thead>";
+            $concat = "<p style='font-weight: bold;'> Piezas asociados a la ficha </p><div class='datagrid'><table><thead><th> Nº pieza </th><th> Tipo pieza </th><th> Descripción </th></thead>";
            
             /*
              * retorno del array de catalogos

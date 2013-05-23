@@ -115,25 +115,25 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Nro serie - </label> </td> <td> <input type="text" class="text" id="nro_serie" /></td>
-                <td><label> &emsp; Nro compra - </label> </td> <td>  <input type="text" class="text" id="nro_compra" /></td>
+                <td><label> Nº serie    </label> </td> <td> <input type="text" class="text" id="nro_serie" /></td>
+                <td><label> Nº compra   </label> </td> <td>  <input type="text" class="text" id="nro_compra" /></td>
             </tr>            
             
             <tr>
-                <td><label> &emsp; Nro catalogo - </label> </td> <td>  <input type="text" class="text" id="nro_catalogo" /></td>
-                <td><label> &emsp; Marca - </label> </td> <td>  <input type="text" class="text" id="marca" /></td>
+                <td><label> Nº catalogo   </label> </td> <td>  <input type="text" class="text" id="nro_catalogo" /></td>
+                <td><label> Marca         </label> </td> <td>  <input type="text" class="text" id="marca" /></td>
             </tr>
             
             <tr>
-                <td><label> &emsp; Calibre - </label> </td> <td> <input type="text" class="text" id="calibre" /></td>
-                <td><label> &emsp; Modelo - </label> </td> <td>  <input type="text" class="text" id="modelo" /></td>
+                <td><label> Calibre   </label> </td> <td> <input type="text" class="text" id="calibre" /></td>
+                <td><label> Modelo    </label> </td> <td>  <input type="text" class="text" id="modelo" /></td>
             </tr>            
             
         </table>
         
         <br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="filtrar();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         
@@ -146,9 +146,9 @@
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
                         <th> Seleccion  </th>
-                        <th onclick="orderBy(0)"> Nº Serie   </th>
-                        <th onclick="orderBy(1)"> Nº Compra  </th>
-                        <th onclick="orderBy(2)"> Nº Cat.    </th>
+                        <th onclick="orderBy(0)"> Nº serie   </th>
+                        <th onclick="orderBy(1)"> Nº compra  </th>
+                        <th onclick="orderBy(2)"> Nº cat.    </th>
                         <th onclick="orderBy(3)"> Marca      </th>
                         <th onclick="orderBy(4)"> Calibre    </th>
                         <th onclick="orderBy(5)"> Modelo     </th>

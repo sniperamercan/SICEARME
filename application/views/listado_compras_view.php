@@ -5,7 +5,7 @@
         
         <style>
             .datagrid table { border-collapse: collapse; text-align: left; width: 100%; } 
-            .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #8C8C8C; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
+            .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: auto; border: 1px solid #8C8C8C; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
             .datagrid table td, .datagrid table th { padding: 3px 10px; }
             
             .datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8C8C8C), color-stop(1, #7D7D7D) );background:-moz-linear-gradient( center top, #8C8C8C 5%, #7D7D7D 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8C8C8C', endColorstr='#7D7D7D');background-color:#8C8C8C; color:#FFFFFF; font-size: 15px; font-weight: bold; border-left: 1px solid #A3A3A3; } 
@@ -127,18 +127,18 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Nro compra - </label> </td> <td>  <input type="text" class="text" id="nro_compra" /></td>
-                <td><label> &emsp; Modalidad  - </label> </td> <td>  <input type="text" class="text" id="modalidad" /></td>
+                <td><label> Nº compra    </label> </td> <td>  <input type="text" class="text" id="nro_compra" /></td>
+                <td><label> Modalidad    </label> </td> <td>  <input type="text" class="text" id="modalidad" /></td>
             </tr>
             
             <tr>
-                <td><label> &emsp; Empresa      - </label> </td> <td>  <input type="text" class="text" id="empresa" /></td>
-                <td><label> &emsp; Pais empresa - </label> </td> <td>  <input type="text" class="text" id="pais_empresa" /></td>
+                <td><label> Empresa        </label> </td> <td>  <input type="text" class="text" id="empresa" /></td>
+                <td><label> País empresa   </label> </td> <td>  <input type="text" class="text" id="pais_empresa" /></td>
             </tr>            
 
             <tr>
-                <td><label> &emsp; Fecha 1 - </label> </td> <td>  <input type="text" class="text" id="fecha1" /></td>
-                <td><label> &emsp; Fecha 2 - </label> </td> <td>  <input type="text" class="text" id="fecha2" /></td>
+                <td><label> Fecha desde   </label> </td> <td>  <input type="text" class="text" id="fecha1" /></td>
+                <td><label> Fecha hasta   </label> </td> <td>  <input type="text" class="text" id="fecha2" /></td>
             </tr>            
             
             
@@ -146,7 +146,7 @@
         
         <br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="filtrar();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         
@@ -158,18 +158,18 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> Num       </th>
-                        <th onclick="orderBy(1)"> N Com     </th>
-                        <th onclick="orderBy(2)"> Fecha     </th>
-                        <th onclick="orderBy(3)"> Emp       </th>
-                        <th onclick="orderBy(4)"> Pais      </th>
-                        <th onclick="orderBy(5)"> Desc      </th>
-                        <th onclick="orderBy(6)"> Mod       </th>
-                        <th onclick="orderBy(7)"> Cant Arm  </th>
-                        <th onclick="orderBy(8)"> Prec Tot  </th>
-                        <th> Cat </th>
-                        <th> Ver </th>
-                        <th> Imp </th>
+                        <th onclick="orderBy(0)"> Nº           </th>
+                        <th onclick="orderBy(1)"> Nº Compra    </th>
+                        <th onclick="orderBy(2)"> Fecha        </th>
+                        <th onclick="orderBy(3)"> Empresa      </th>
+                        <th onclick="orderBy(4)"> País         </th>
+                        <th onclick="orderBy(5)"> Descripción  </th>
+                        <th onclick="orderBy(6)"> Modalidad    </th>
+                        <th onclick="orderBy(7)"> Cant. armas  </th>
+                        <th onclick="orderBy(8)"> Precio       </th>
+                        <th> Nº cat      </th>
+                        <th> Ver      </th>
+                        <th> Imprimir </th>
                     </tr>
                 </thead>
 

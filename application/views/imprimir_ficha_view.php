@@ -63,7 +63,7 @@
 
                      <thead style='text-align: center; cursor: pointer;'>
                          <tr>      
-                             <th> Nro serie  </th>
+                             <th> Nº serie   </th>
                              <th> Marca      </th>
                              <th> Calibre    </th>
                              <th> Modelo     </th>
@@ -97,9 +97,9 @@
 
                      <thead style='text-align: center; cursor: pointer;'>
                          <tr>      
-                             <th> Nro accesorio     </th>
+                             <th> Nº accesorio      </th>
                              <th> Tipo accesorio    </th>
-                             <th> Descripcion       </th>
+                             <th> Descripción       </th>
                          </tr>
                      </thead>
 
@@ -119,9 +119,9 @@
 
                      <thead style='text-align: center; cursor: pointer;'>
                          <tr>      
-                             <th> Nro pieza     </th>
+                             <th> Nº pieza      </th>
                              <th> Tipo pieza    </th>
-                             <th> Descripcion       </th>
+                             <th> Descripción   </th>
                          </tr>
                      </thead>
 

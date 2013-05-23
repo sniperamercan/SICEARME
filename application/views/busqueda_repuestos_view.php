@@ -112,19 +112,19 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Nro parte      - </label> </td> <td> <input type="text" class="text" id="nro_parte" /></td>
-                <td><label> &emsp; Nombre parte   - </label> </td> <td>  <input type="text" class="text" id="nombre_parte" /></td>
+                <td><label> Nº parte      </label> </td> <td> <input type="text" class="text" id="nro_parte" /></td>
+                <td><label> Nombre parte  </label> </td> <td>  <input type="text" class="text" id="nombre_parte" /></td>
             </tr>
             
             <tr>
-                <td><label> &emsp; Nro catalogo - </label> </td> <td> <input type="text" class="text" id="nro_catalogo" /></td>
+                <td><label> Nº catálogo </label> </td> <td> <input type="text" class="text" id="nro_catalogo" /></td>
             </tr>            
             
         </table>
         
         <br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="filtrar();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         
@@ -137,14 +137,14 @@
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
                         <th> Seleccion  </th>
-                        <th onclick="orderBy(0)"> Nº Parte   </th>
-                        <th onclick="orderBy(1)"> Nom Parte  </th>
-                        <th onclick="orderBy(2)"> Nº Cat.    </th>
+                        <th onclick="orderBy(0)"> Nº parte   </th>
+                        <th onclick="orderBy(1)"> Nombre parte  </th>
+                        <th onclick="orderBy(2)"> Nº cat.    </th>
                         <th> Tipo     </th>
                         <th> Marca    </th>
                         <th> Calibre  </th>
                         <th> Modelo   </th>
-                        <th onclick="orderBy(3)"> Cant </th>
+                        <th onclick="orderBy(3)"> Cantidad </th>
                     </tr>
                 </thead>
 

@@ -114,18 +114,18 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Nro orden       - </label> </td> <td> <input type="text" class="text" id="nro_orden" /></td>
-                <td><label> &emsp; Nro serie - </label> </td> <td>  <input type="text" class="text" id="nro_serie" /></td>
+                <td><label> Nº orden   </label> </td> <td> <input type="text" class="text" id="nro_orden" /></td>
+                <td><label> Nº serie   </label> </td> <td>  <input type="text" class="text" id="nro_serie" /></td>
             </tr>
             
             <tr>
-                <td><label> &emsp; Marca       - </label> </td> <td> <input type="text" class="text" id="marca" /></td>
-                <td><label> &emsp; Calibre - </label> </td> <td>  <input type="text" class="text" id="calibre" /></td>
+                <td><label> Marca     </label> </td> <td> <input type="text" class="text" id="marca" /></td>
+                <td><label> Calibre   </label> </td> <td>  <input type="text" class="text" id="calibre" /></td>
                 
             </tr> 
             
             <tr>
-                <td><label> &emsp; Modelo       - </label> </td> <td> <input type="text" class="text" id="modelo" /></td>
+                <td><label> Modelo </label> </td> <td> <input type="text" class="text" id="modelo" /></td>
             </tr> 
             
         </table>
@@ -147,11 +147,11 @@
                         <th> Seleccion  </th>
                         <th onclick="orderBy(0)"> Nº Ord.    </th>
                         <th> Fecha </th>
-                        <th onclick="orderBy(1)"> Nº Serie   </th>
+                        <th onclick="orderBy(1)"> Nº serie   </th>
                         <th onclick="orderBy(2)"> Marca      </th>
                         <th onclick="orderBy(3)"> Calibre    </th>
                         <th onclick="orderBy(4)"> Modelo     </th>
-                        <th> Un </th>
+                        <th> Unidad </th>
                     </tr>
                 </thead>
 

@@ -147,18 +147,18 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Nro serie - </label> </td> <td>  <input type="text" class="text" id="nro_serie" /></td>
-                <td><label> &emsp; Marca  - </label> </td> <td>  <input type="text" class="text" id="marca" /></td>
+                <td><label> Nº serie  </label> </td> <td>  <input type="text" class="text" id="nro_serie" /></td>
+                <td><label> Marca     </label> </td> <td>  <input type="text" class="text" id="marca" /></td>
             </tr>
             
             <tr>
-                <td><label> &emsp; Calibre      - </label> </td> <td>  <input type="text" class="text" id="calibre" /></td>
-                <td><label> &emsp; Modelo - </label> </td> <td>  <input type="text" class="text" id="modelo" /></td>
+                <td><label> Calibre  </label> </td> <td>  <input type="text" class="text" id="calibre" /></td>
+                <td><label> Modelo   </label> </td> <td>  <input type="text" class="text" id="modelo" /></td>
             </tr>            
 
             <tr>
-                <td><label> &emsp; Nro compra - </label> </td> <td>  <input type="text" class="text" id="nro_compra" /></td>
-                <td><label> &emsp; Nro catalogo - </label> </td> <td>  <input type="text" class="text" id="nro_catalogo" /></td>
+                <td><label> Nº compra   </label> </td> <td>  <input type="text" class="text" id="nro_compra" /></td>
+                <td><label> Nº catálogo </label> </td> <td>  <input type="text" class="text" id="nro_catalogo" /></td>
             </tr>            
             
             
@@ -166,7 +166,7 @@
         
         <br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="filtrar();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         
@@ -178,18 +178,18 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> N Ser   </th>
-                        <th onclick="orderBy(1)"> Mar     </th>
-                        <th onclick="orderBy(2)"> Cal     </th>
-                        <th onclick="orderBy(3)"> Mod     </th>
-                        <th onclick="orderBy(4)"> Tip     </th>
-                        <th onclick="orderBy(5)"> Sis     </th>
-                        <th onclick="orderBy(6)"> N Comp  </th>
-                        <th onclick="orderBy(7)"> N Cat   </th>
-                        <th> Acc </th>
-                        <th> Pie </th>
-                        <th> Ver </th>
-                        <th> Imp </th>                        
+                        <th onclick="orderBy(0)"> Nº serie   </th>
+                        <th onclick="orderBy(1)"> Marca      </th>
+                        <th onclick="orderBy(2)"> Calibre    </th>
+                        <th onclick="orderBy(3)"> Modelo     </th>
+                        <th onclick="orderBy(4)"> Tipo arma  </th>
+                        <th onclick="orderBy(5)"> Sistema    </th>
+                        <th onclick="orderBy(6)"> Nº compra  </th>
+                        <th onclick="orderBy(7)"> Nº cat.    </th>
+                        <th> Acc.     </th>
+                        <th> Piezas   </th>
+                        <th> Ver      </th>
+                        <th> Imprimir </th>                        
                     </tr>
                 </thead>
 

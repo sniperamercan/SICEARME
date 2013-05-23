@@ -51,7 +51,7 @@
                     data: "nro_compra="+nro_compra+"&fecha="+fecha+"&empresa="+empresa+"&pais_empresa="+pais_empresa+"&descripcion="+descripcion+"&modalidad="+modalidad,
                     success: function(data){
                         if(data[0] == 1){            
-                            jAlert("Compra modificada  con exito Nro interno de compra - "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('mb_compras'); ?>','O.C.I >> Modificar/Anular >> Compras'); });
+                            jAlert("Compra modificada  con exito Nro interno de compra - "+data[1], "Correcto", function() { irAFrame('<?php echo base_url('mb_compras'); ?>','O.C.I. >> Modificar/Anular >> Compras'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
@@ -60,7 +60,7 @@
             }
             
             function volverListado() {
-                irAFrame('<?php echo base_url('mb_compras'); ?>','O.C.I >> Modificar/Anular >> Compras');
+                irAFrame('<?php echo base_url('mb_compras'); ?>','O.C.I. >> Modificar/Anular >> Compras');
             }              
             
             function agregarCatalogo() {
@@ -169,51 +169,51 @@
 
         <div>			
 
-            <h1> Modificar compras </h1>    
+            <h1> Modificar compra </h1>    
             
             <fieldset>	
 
                 <dl>
-                <dt><label for="nro_compra"> Numero compra </label></dt>
+                <dt><label for="nro_compra"> Nº compra <font color="red">*</font> </label></dt>
                 <dd><input type="text" id="nro_compra" class="text" value="<?php echo $nro_compra; ?>" /></dd>
                 </dl>
 
                 <dl>
-                <dt><label for="fecha"> Fecha </label></dt>
+                <dt><label for="fecha"> Fecha <font color="red">*</font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="fecha" class="text" value="<?php echo $fecha; ?>" /></dd>
                 </dl>                
                 
                 <dl>
-                <dt><label for="empresa"> Empresa </label></dt>
+                <dt><label for="empresa"> Empresa <font color="red">*</font> </label></dt>
                 <dd><select id="empresa"> <?php echo $empresas ?> </select> <img style="cursor: pointer;" onclick="crearEmpresa();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
                 </dl>                
                 
                 <dl>
-                <dt><label for="pais_empresa"> Pais empresa </label></dt>
+                <dt><label for="pais_empresa"> País empresa <font color="red">*</font> </label></dt>
                 <dd><select id="pais_empresa"> <?php echo $paises ?> </select></dd>
                 </dl>                 
 
                 <dl>
-                <dt><label for="descripcion"> Descripcion </label></dt>
+                <dt><label for="descripcion"> Descripción <font color="red">*</font> </label></dt>
                 <dd><input type="text" id="descripcion" class="text" value="<?php echo $descripcion; ?>"/></dd>
                 </dl>                 
                 
                 <dl>
-                <dt><label for="modalidad"> Modalidad </label></dt>
+                <dt><label for="modalidad"> Modalidad <font color="red">*</font> </label></dt>
                 <dd><input type="text" id="modalidad" class="text" value="<?php echo $modalidad; ?>" /></dd>
                 </dl>                 
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> Detalles de la compra </p>
                 
                 <dl>
-                <dt><label for="catalogo"> Catalogo </label></dt>
+                <dt><label for="catalogo"> Catálogo </label></dt>
                 <dd><select id="catalogo"> <?php echo $catalogos ?> </select> <img style="cursor: pointer;" onclick="busquedaCatalogos();" src="<?php echo base_url(); ?>images/search.png" />  <img style="cursor: pointer;" onclick="crearCatalogo();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
                 </dl>  
                 
                 <dl>
-                <dt><label for="cant_total_armas"> Cant total armas </label></dt>
+                <dt><label for="cant_total_armas"> Cant. total armas </label></dt>
                 <dd><input type="text" id="cant_total_armas" class="number" /></dd>
                 </dl>                 
                 
@@ -222,7 +222,7 @@
                 <dd><input type="text" id="costo_total" class="number" /></dd>
                 </dl>                 
                 
-                <button style="margin-right: 20px;" onclick="agregarCatalogo();"> Agregar catalogo </button>
+                <button style="margin-right: 20px;" onclick="agregarCatalogo();"> Agregar catálogo </button>
                 
             </fieldset>	
 
@@ -234,7 +234,7 @@
             
             <div>
                 
-                <h1> Catalogos </h1>       
+                <h1> Catálogos </h1>       
                 
                 <fieldset>	
 
@@ -244,7 +244,7 @@
                             <table> 
                                 <thead style="text-align: center;">
                                     <tr>
-                                        <th> Nro catalogo </th> <th> Tipo arma </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Sistema </th> <th> Cant armas </th> <th> Costo </th> <th> </th> 
+                                        <th> Nº cat. </th> <th> Tipo arma </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Sistema </th> <th> Cant. armas </th> <th> Costo </th> <th> </th> 
                                     </tr>
                                 </thead>
                                 <tbody id="catalogos"> <?php echo $compras_catalogos; ?> </tbody>

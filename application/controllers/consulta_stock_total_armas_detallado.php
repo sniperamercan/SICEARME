@@ -107,12 +107,12 @@ class consulta_stock_total_armas_detallado extends CI_Controller {
 
                     <thead style="text-align: center; cursor: pointer;">
                         <tr>      
-                            <th> N Ser    </th>
-                            <th> Mar      </th>
-                            <th> Cal      </th>
-                            <th> Mod      </th>
-                            <th> Tipo     </th>
-                            <th> Sis      </th>
+                            <th> Nº serie    </th>
+                            <th> Marca       </th>
+                            <th> Calibre     </th>
+                            <th> Modelo      </th>
+                            <th> Tipo arma   </th>
+                            <th> Sistema     </th>
                         </tr>
                     </thead>
 
@@ -186,172 +186,6 @@ class consulta_stock_total_armas_detallado extends CI_Controller {
             echo json_encode($retorno);
         }
     }    
-    
-    function seteoImpresion() {
-        
-        $this->load->view("impresion_view");    
-    }
-    
-    function armoImpresion(){   
-        
-        $de_pagina = $_POST['de_pagina'];
-        $a_pagina  = $_POST['a_pagina'];
-      
-        //Verifico el order si esta seteado si no por defecto de esta consulta
-        if(isset($_SESSION['order'])){
-            $order = $_SESSION['order'][0]." ".$_SESSION['order'][1];
-        }else{
-            $order = "nro_serie";
-        }
-        //Fin verifico order
-        
-        if(isset($_SESSION['condicion']) && !empty($_SESSION['condicion'])){
-            $condicion = $_SESSION['condicion'];      
-        }else{
-            $condicion = "";
-        }
-               
-        if( empty($de_pagina) || empty($a_pagina) ){            
-            echo "La pagina inicial y final deben de estar completadas ";
-        }else if( $a_pagina < $de_pagina ){
-            echo "La pagina inicila no puede ser mayor que la pagina final verifique";
-        }else if( $this->consulta_stock_total_armas_detallado_model->cantidadRegistros($condicion) < (($a_pagina * 30) - 30) ){
-            echo "No existe tal cantidad de paginas para esa consulta verifique";
-        }else{
-            echo "1";
-            if( $this->consulta_stock_total_armas_detallado_model->cantidadRegistros($condicion) <= 30 ){
-                $ini   = 0;
-                $param = 30;
-                $this->consultaImpresion($condicion, $ini, $param, $order);
-            }else{
-                if($de_pagina == $a_pagina){
-                    $ini   = $de_pagina * 30 - 30; //pagina inicial
-                    $param = 30;
-                }else{
-                    $ini   = $de_pagina * 30 - 30; //pagina inicial
-                    $param = ($a_pagina - $de_pagina) * 30 + 30; //cantidad de registros a mostrar
-                }
-                $this->consultaImpresion($condicion, $ini, $param, $order);
-            }
-        }    
-    }    
-    
-    function consultaImpresion($condicion, $param, $cantReg, $order) {        
-       
-        $result = array();
-        
-        if($param == ""){
-            $param = 0;
-        }            
-        
-        $concat = "";
-
-        $result = $this->consulta_stock_total_armas_detallado_model->consulta_db($param, $cantReg, $condicion, $order);
-
-        $j=0;
-
-        $nombreunidad = $this->consulta_stock_total_armas_detallado_model->nombreUnidad($_SESSION['unidad']);
-        $total = $this->consulta_stock_total_armas_detallado_model->cantidadRegistros($condicion);
-                
-        
-        $concat .= '<center>';
-        
-            $concat .= '
-                <p class="subtituloform"> '.$nombreunidad. ' &nbsp;&nbsp;&nbsp;&nbsp; Total de armas - '.$total.' </p>
-
-                <table>
-
-                    <thead style="text-align: center; cursor: pointer;">
-                        <tr>      
-                            <th onclick="orderBy(0)"> Nro serie  </th>
-                            <th onclick="orderBy(1)"> Marca      </th>
-                            <th onclick="orderBy(2)"> Calibre    </th>
-                            <th onclick="orderBy(3)"> Modelo     </th>
-                            <th> Tipo    </th>
-                            <th> Sistema </th>
-                        </tr>
-                    </thead>
-
-            ';   
-            
-            $concat .= '<tbody>';
-            
-            for($i=0;$i<count($result);$i=$i+6) {
-
-                if($j % 2 == 0){
-                    $class = "";
-                }else{
-                    $class = "alt";
-                }                        
-
-                /* 
-                 * lo que contiene el array adentro 
-                $result[] = $row->nro_serie;
-                $result[] = $row->marca;
-                $result[] = $row->calibre;
-                $result[] = $row->modelo;       
-                */
-            
-                $concat .= "
-                    <tr class='".$class."'> 
-                        <td style='text-align: center;'> ".$result[$i]."   </td>
-                        <td> ".$result[$i+1]." </td>
-                        <td> ".$result[$i+2]." </td>
-                        <td> ".$result[$i+3]." </td>
-                        <td> ".$result[$i+4]." </td>
-                        <td> ".$result[$i+5]." </td>
-                    </tr>
-                ";
-
-                $j++;
-            }                  
-
-            $concat .= '</tbody>';
-            
-            $concat .= '
-                <tfoot>
-                    <tr> <td colspan="6"> <div id="paging"> <br /> </div> </td> </tr>
-                </tfoot>
-            ';      
-            
-            $concat .= '</table>';    
-                
-        $concat .= '</center>';
-               
-        $_SESSION['contenido'] = $concat;                
-    } 
-    
-    function orderBy() {     
-        
-        $order = $_POST['order'];  
-        
-        switch($order){
-            
-            case 0:
-                $_SESSION['order'][0] = 'nro_serie';
-                break;
-            
-            case 1:
-                $_SESSION['order'][0] = 'marca';
-                break;
-            
-            case 2:
-                $_SESSION['order'][0] = 'calibre';
-                break;
-            
-            case 3:
-                $_SESSION['order'][0] = 'modelo';
-                break;
-        }
-       
-        if(!isset($_SESSION['order'][1])){
-            $_SESSION['order'][1] = "ASC";
-        }else if($_SESSION['order'][1] == "DESC"){
-            $_SESSION['order'][1] = "ASC";
-        }else if($_SESSION['order'][1] == "ASC"){
-            $_SESSION['order'][1] = "DESC";
-        }        
-    }
 }
 
 ?>

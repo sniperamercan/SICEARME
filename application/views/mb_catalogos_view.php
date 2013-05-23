@@ -5,7 +5,7 @@
         
         <style>
             .datagrid table { border-collapse: collapse; text-align: left; width: 100%; } 
-            .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #8C8C8C; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
+            .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: auto; border: 1px solid #8C8C8C; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
             .datagrid table td, .datagrid table th { padding: 3px 10px; }
             
             .datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8C8C8C), color-stop(1, #7D7D7D) );background:-moz-linear-gradient( center top, #8C8C8C 5%, #7D7D7D 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8C8C8C', endColorstr='#7D7D7D');background-color:#8C8C8C; color:#FFFFFF; font-size: 15px; font-weight: bold; border-left: 1px solid #A3A3A3; } 
@@ -100,14 +100,14 @@
                     url: "<?php echo base_url("mb_catalogos/editarCatalogo"); ?>",
                     data: "nro_catalogo="+nro_catalogo,
                     success: function(){
-                        irAFrame('<?php echo base_url('modificar_catalogos'); ?>','O.C.I >> Modificar/Anular >> Catalogos');
+                        irAFrame('<?php echo base_url('modificar_catalogos'); ?>','O.C.I. >> Modificar/Anular >> Catálogos');
                     }                  
                 });            
             }
             
             function eliminarCatalogo(nro_catalogo) {
             
-                 jConfirm('Estas seguro que quieres eliminar el catalogo - '+nro_catalogo, 'ELIMINAR CATALOGO DEL SISTEMA', function(r) {
+                 jConfirm('Estas seguro que quieres eliminar el catalogo - '+nro_catalogo, 'ELIMINAR CATÁLOGO DEL SISTEMA', function(r) {
                     if(r) {           
                         $.ajax({
                             type: 'post',
@@ -115,10 +115,10 @@
                             data: "nro_catalogo="+nro_catalogo,
                             success: function(data){
                                 if(data == 1) {
-                                    jAlert("El catalogo nro - "+nro_catalogo+" fue eliminado con exito del sistema", "ELIMINAR CATALOGO", function() { irAFrame('<?php echo base_url('mb_catalogos'); ?>','O.C.I >> Modificar/Anular >> Catalogos') } );
+                                    jAlert("El catálogo nro - "+nro_catalogo+" fue eliminado con exito del sistema", "ELIMINAR CATÁLOGO", function() { irAFrame('<?php echo base_url('mb_catalogos'); ?>','O.C.I. >> Modificar/Anular >> Catálogos') } );
                                 }else {
 
-                                    jAlert("ERROR: El catalogo nro - "+nro_catalogo+" no se puede elimianar del sistema, debido a que esta asociados a fichas", "ELIMINAR CATALOGO");
+                                    jAlert("ERROR: El catálogo nro - "+nro_catalogo+" no se puede elimianar del sistema, debido a que esta asociados a fichas", "ELIMINAR CATÁLOGO");
                                 }
 
                             }                  
@@ -136,18 +136,18 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Tipo arma       - </label> </td> <td> <input type="text" class="text" id="tipo_arma" /></td>
-                <td><label> &emsp; Marca - </label> </td> <td>  <input type="text" class="text" id="marca" /></td>
+                <td><label> Tipo arma </label> </td> <td> <input type="text" class="text" id="tipo_arma" /></td>
+                <td><label> Marca     </label> </td> <td>  <input type="text" class="text" id="marca" /></td>
             </tr>
             
             <tr>
-                <td><label> &emsp; Calibre       - </label> </td> <td> <input type="text" class="text" id="calibre" /></td>
-                <td><label> &emsp; Modelo - </label> </td> <td>  <input type="text" class="text" id="modelo" /></td>
+                <td><label> Calibre  </label> </td> <td> <input type="text" class="text" id="calibre" /></td>
+                <td><label> Modelo   </label> </td> <td>  <input type="text" class="text" id="modelo" /></td>
             </tr>            
 
             <tr>
-                <td><label> &emsp; Empresa       - </label> </td> <td> <input type="text" class="text" id="empresa" /></td>
-                <td><label> &emsp; Pais origen - </label> </td> <td>  <input type="text" class="text" id="pais_origen" /></td>
+                <td><label> Empresa      </label> </td> <td> <input type="text" class="text" id="empresa" /></td>
+                <td><label> País origen  </label> </td> <td>  <input type="text" class="text" id="pais_origen" /></td>
             </tr>            
             
             
@@ -155,7 +155,7 @@
         
         <br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="filtrar();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         
@@ -167,18 +167,18 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> Num  </th>
-                        <th onclick="orderBy(1)"> Tip  </th>
-                        <th onclick="orderBy(2)"> Mar  </th>
-                        <th onclick="orderBy(3)"> Cal  </th>
-                        <th onclick="orderBy(4)"> Mod  </th>
-                        <th onclick="orderBy(5)"> Sis  </th>
-                        <th onclick="orderBy(6)"> Fab  </th>
-                        <th onclick="orderBy(7)"> Emp  </th>
-                        <th onclick="orderBy(8)"> Ori  </th>
-                        <th onclick="orderBy(9)"> Ven  </th>
-                        <th> Edi  </th>
-                        <th> Eli  </th>
+                        <th onclick="orderBy(0)"> Nº       </th>
+                        <th onclick="orderBy(1)"> Tipo     </th>
+                        <th onclick="orderBy(2)"> Marca    </th>
+                        <th onclick="orderBy(3)"> Calibre  </th>
+                        <th onclick="orderBy(4)"> Modelo   </th>
+                        <th onclick="orderBy(5)"> Sistema  </th>
+                        <th onclick="orderBy(6)"> Año fab. </th>
+                        <th onclick="orderBy(7)"> Empresa  </th>
+                        <th onclick="orderBy(8)"> Origen   </th>
+                        <th onclick="orderBy(9)"> Venc.    </th>
+                        <th> Editar  </th>
+                        <th> Borrar  </th>
                     </tr>
                 </thead>
 

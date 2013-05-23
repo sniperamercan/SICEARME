@@ -114,12 +114,12 @@ class consulta_stock_total_armas_resumido extends CI_Controller {
 
                     <thead style="text-align: center; cursor: pointer;">
                         <tr>      
-                            <th> Mar  </th>
-                            <th> Cal  </th>
-                            <th> Mod  </th>
-                            <th> Tip  </th>
-                            <th> Sis  </th>
-                            <th> Cant </th>
+                            <th> Marca      </th>
+                            <th> Calibre    </th>
+                            <th> Modelo     </th>
+                            <th> Tipo arma  </th>
+                            <th> Sistema    </th>
+                            <th> Cantidad   </th>
                         </tr>
                     </thead>
 

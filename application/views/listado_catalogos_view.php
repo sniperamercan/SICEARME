@@ -114,18 +114,18 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Tipo arma       - </label> </td> <td> <input type="text" class="text" id="tipo_arma" /></td>
-                <td><label> &emsp; Marca - </label> </td> <td>  <input type="text" class="text" id="marca" /></td>
+                <td><label> Tipo arma  </label> </td> <td> <input type="text" class="text" id="tipo_arma" /></td>
+                <td><label> Marca      </label> </td> <td>  <input type="text" class="text" id="marca" /></td>
             </tr>
             
             <tr>
-                <td><label> &emsp; Calibre       - </label> </td> <td> <input type="text" class="text" id="calibre" /></td>
-                <td><label> &emsp; Modelo - </label> </td> <td>  <input type="text" class="text" id="modelo" /></td>
+                <td><label> Calibre  </label> </td> <td> <input type="text" class="text" id="calibre" /></td>
+                <td><label> Modelo   </label> </td> <td>  <input type="text" class="text" id="modelo" /></td>
             </tr>            
 
             <tr>
-                <td><label> &emsp; Empresa       - </label> </td> <td> <input type="text" class="text" id="empresa" /></td>
-                <td><label> &emsp; Pais origen - </label> </td> <td>  <input type="text" class="text" id="pais_origen" /></td>
+                <td><label> Empresa      </label> </td> <td> <input type="text" class="text" id="empresa" /></td>
+                <td><label> País origen  </label> </td> <td>  <input type="text" class="text" id="pais_origen" /></td>
             </tr>            
             
             
@@ -133,7 +133,7 @@
         
         <br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="filtrar();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         
@@ -145,18 +145,18 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> Num  </th>
-                        <th onclick="orderBy(1)"> Tip  </th>
-                        <th onclick="orderBy(2)"> Mar  </th>
-                        <th onclick="orderBy(3)"> Cal  </th>
-                        <th onclick="orderBy(4)"> Mod  </th>
-                        <th onclick="orderBy(5)"> Sis  </th>
-                        <th onclick="orderBy(6)"> Fab  </th>
-                        <th onclick="orderBy(7)"> Emp  </th>
-                        <th onclick="orderBy(8)"> Ori  </th>
-                        <th onclick="orderBy(9)"> Ven  </th>
-                        <th> Ver </th>
-                        <th> Imp </th>                        
+                        <th onclick="orderBy(0)"> Nº           </th>
+                        <th onclick="orderBy(1)"> Tipo arma    </th>
+                        <th onclick="orderBy(2)"> Marca        </th>
+                        <th onclick="orderBy(3)"> Calibre      </th>
+                        <th onclick="orderBy(4)"> Modelo       </th>
+                        <th onclick="orderBy(5)"> Sistema      </th>
+                        <th onclick="orderBy(6)"> Año fab.     </th>
+                        <th onclick="orderBy(7)"> Empresa      </th>
+                        <th onclick="orderBy(8)"> Origen       </th>
+                        <th onclick="orderBy(9)"> Vencimiento  </th>
+                        <th> Ver      </th>
+                        <th> Imprimir </th>                        
                     </tr>
                 </thead>
 

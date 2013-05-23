@@ -113,20 +113,20 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Tipo arma       - </label> </td> <td> <input type="text" class="text" id="tipo_arma" /></td>
-                <td><label> &emsp; Marca - </label> </td> <td>  <input type="text" class="text" id="marca" /></td>
+                <td><label> Tipo arma  </label> </td> <td> <input type="text" class="text" id="tipo_arma" /></td>
+                <td><label> Marca      </label> </td> <td>  <input type="text" class="text" id="marca" /></td>
             </tr>
             
             <tr>
-                <td><label> &emsp; Calibre       - </label> </td> <td> <input type="text" class="text" id="calibre" /></td>
-                <td><label> &emsp; Modelo - </label> </td> <td>  <input type="text" class="text" id="modelo" /></td>
+                <td><label> Calibre  </label> </td> <td> <input type="text" class="text" id="calibre" /></td>
+                <td><label> Modelo   </label> </td> <td>  <input type="text" class="text" id="modelo" /></td>
             </tr>            
             
         </table>
         
         <br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="filtrar();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         
@@ -139,8 +139,8 @@
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
                         <th> Seleccion  </th>
-                        <th onclick="orderBy(0)"> Nº Int     </th>
-                        <th onclick="orderBy(1)"> Tipo Arma  </th>
+                        <th onclick="orderBy(0)"> Nº         </th>
+                        <th onclick="orderBy(1)"> Tipo arma  </th>
                         <th onclick="orderBy(2)"> Marca      </th>
                         <th onclick="orderBy(3)"> Calibre    </th>
                         <th onclick="orderBy(4)"> Modelo     </th>

@@ -101,7 +101,7 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Unidad - </label> </td> <td>  <select id="unidad"> <?php echo $unidades; ?> </select> </td>
+                <td><label> Unidad </label> </td> <td>  <select id="unidad"> <?php echo $unidades; ?> </select> </td>
             </tr>
             
         </table>

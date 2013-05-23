@@ -346,7 +346,7 @@ class mb_compras extends CI_Controller {
         }else {
             $catalogos = array();
             $catalogos = $this->mb_compras_model->verCatalogos($nro_interno);
-            $concat = "<p style='font-weight: bold;'> Catalogos asociados a la compra nro - ".$nro_interno." </p><div class='datagrid'><table><thead><th> Nro catalogo </th><th> Tipo arma </th><th> Marca </th><th> Calibre </th><th> Modelo </th><th> Sistema </th><th> Empresa </th><th> Pais </th></thead>";
+            $concat = "<p style='font-weight: bold;'> Catálogos asociados a la compra nro - ".$nro_interno." </p><div class='datagrid'><table><thead><th> Nº cat </th><th> Tipo arma </th><th> Marca </th><th> Calibre </th><th> Modelo </th><th> Sistema </th><th> Empresa </th><th> País </th></thead>";
            
             /*
              * retorno del array de catalogos

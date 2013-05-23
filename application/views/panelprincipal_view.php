@@ -170,15 +170,13 @@
                 <tr>
                     <td style="border: none; width: 70%;" align="left">	
                         <img style="margin-right: 20px;" src="<?php echo base_url(); ?>images/menu.png" />
-                        
                         <img title="correo" style="cursor: pointer;" onclick="irAFrame('<?php echo base_url('correo'); ?>','Correo');" id="correo" src="<?php echo base_url(); ?>images/sobre_vacio.png" />
-                        <a onclick='informacionUsuario();' style='cursor: pointer'> <img title='usuario' src='<?php echo base_url('images/user_32.gif'); ?>'/></a>
                     </td>  
 
                     <td style="border: none; width: 30%" align="right">
                         <div class="dock" id="dock">
                             <div class="dock-container">
-                                  <?php if($this->perms->verificoPerfil1()) { ?><a class="dock-item" onclick='$.colorbox({href:"<?php echo base_url('alta_usuarios'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:700, title:"AGREGAR USUARIO"});'><img src='<?php echo base_url('images/user_add.png'); ?>' alt="Agregar usuario" /><span>Agregar usuario</span></a><?php } ?>
+                                  <a class="dock-item" onclick='informacionUsuario();' style='cursor: pointer'> <img title='usuario' src='<?php echo base_url('images/user_32.gif'); ?>'/><span>Informacion</span></a>
                                   <a class="dock-item" onclick='window.open ("js/calculadora/calculadora.html", "mywindow","toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=206,height=200");'><img src='<?php echo base_url('images/calc.png'); ?>' alt="Calculadora" /><span>Calculadora</span></a> 
                                   <a class="dock-item" onclick='$.colorbox({href:"<?php echo base_url('modificar_clave'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:300, title:"MODIFICAR CLAVE"});'><img src='<?php echo base_url('images/key.png'); ?>' alt="Modificar clave" /><span>Modificar clave</span></a>    
                                   <a class="dock-item" onclick='cerrarSesion();'><img style="cursor: pointer;" src="<?php echo base_url(); ?>images/exit.png" /><span>Salir</span></a>                                     
@@ -200,17 +198,17 @@
                     
                     <?php if($this->perms->verificoPerfil2() || $this->perms->verificoPerfil3()) { ?>
 
-                        <li><a href="#"> O.C.I </a>
+                        <li><a href="#"> O.C.I. </a>
                             <ul>
                                 
                                 <?php if($this->perms->verificoPerfil2() || $this->perms->verificoPerfil3()) { ?>
                                 
                                     <li><a href="#"> Altas </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_compras'); ?>','O.C.I >> Alta >> Compras');"> Compras </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_catalogos'); ?>','O.C.I >> Alta >> Catalogos');"> Catalogos </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('upload'); ?>','O.C.I >> Cargo documentos / imagenes');"> Cargo documentos / imagenes </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_fichas'); ?>','O.C.I >> Alta >> Fichas');"> Fichas </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_compras'); ?>','O.C.I. >> Alta >> Compras');"> Compras </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_catalogos'); ?>','O.C.I. >> Alta >> Catálogos');"> Catálogos </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('upload'); ?>','O.C.I. >> Cargo documentos / imágenes');"> Cargo documentos / imágenes </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_fichas'); ?>','O.C.I. >> Alta >> Fichas');"> Fichas </a></li>
                                         </ul>
                                     </li> 
                                 
@@ -220,9 +218,9 @@
                                     
                                     <li><a href="#"> Modificar/Anular </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_compras'); ?>','O.C.I >> Modificar/Anular >> Compras');"> Compras </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_catalogos'); ?>','O.C.I >> Modificar/Anular >> Catalogos');"> Catalogos </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_fichas'); ?>','O.C.I >> Modificar/Anular >> Fichas');"> Fichas </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_compras'); ?>','O.C.I. >> Modificar/Anular >> Compras');"> Compras </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_catalogos'); ?>','O.C.I. >> Modificar/Anular >> Catálogos');"> Catálogos </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_fichas'); ?>','O.C.I. >> Modificar/Anular >> Fichas');"> Fichas </a></li>
                                         </ul>
                                     </li>
                                 
@@ -232,10 +230,10 @@
                                 
                                     <li><a href="#"> Listado </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_compras'); ?>','O.C.I >> Listado >> Compras');"> Compras </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_catalogos'); ?>','O.C.I >> Listado >> Catalogos');"> Catalogos </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_fichas'); ?>','O.C.I >> Listado >> Fichas');"> Fichas </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_documentos_imagenes_catalogos'); ?>','O.C.I >> Listado >> Documentos / imagenes (Catalogos)');"> Documentos / imagenes (Catalogos) </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_compras'); ?>','O.C.I. >> Listado >> Compras');"> Compras </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_catalogos'); ?>','O.C.I. >> Listado >> Catálogos');"> Catálogos </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_fichas'); ?>','O.C.I. >> Listado >> Fichas');"> Fichas </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_documentos_imagenes_catalogos'); ?>','O.C.I. >> Listado >> Documentos / imágenes (catálogos)');"> Documentos / imágenes (catálogos) </a></li>
                                         </ul>
                                     </li>
                                 
@@ -245,9 +243,9 @@
                                 
                                     <li><a href="#"> Consulta </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_stock_total_armas_detallado'); ?>','O.C.I >> Consulta >> Stock total armas detallado');"> Stock total armas detallado </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_stock_total_armas_resumido'); ?>','O.C.I >> Consulta >> Stock total armas resumido');"> Stock total armas resumido </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_historial_movimiento_ficha'); ?>','O.C.I >> Consulta >> Historial movimiento ficha');"> Historial movimiento ficha </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_stock_total_armas_detallado'); ?>','O.C.I. >> Consulta >> Stock total armas detallado');"> Stock total armas detallado </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_stock_total_armas_resumido'); ?>','O.C.I. >> Consulta >> Stock total armas resumido');"> Stock total armas resumido </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('consulta_historial_movimiento_ficha'); ?>','O.C.I. >> Consulta >> Historial movimiento ficha');"> Historial movimiento ficha </a></li>
                                         </ul>
                                     </li>
                                 
@@ -508,7 +506,7 @@
             
         </header>    
             
-        <section id="cuerpo_pagina" style="margin-left: 50px; margin-right: 50px;">
+        <section id="cuerpo_pagina" style="margin-left: 10px; margin-right: 10px;">
             <br />				
             <label id="navegacion1" style="color: #151515; font-size: 12px; cursor: pointer; font-weight: bold; text-shadow: -2px 2px 3px #888; margin-left: 5px;"> </label>
             <hr /><br />            

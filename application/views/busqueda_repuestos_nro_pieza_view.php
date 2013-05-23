@@ -113,20 +113,20 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Nro pieza  - </label> </td> <td>  <input type="text" class="text" id="nro_pieza" /></td>
-                <td><label> &emsp; Nro parte  - </label> </td> <td>  <input type="text" class="text" id="nro_parte" /></td>
+                <td><label> Nº pieza  </label> </td> <td>  <input type="text" class="text" id="nro_pieza" /></td>
+                <td><label> Nº parte  </label> </td> <td>  <input type="text" class="text" id="nro_parte" /></td>
             </tr>
             
             <tr>
-                <td><label> &emsp; Nombre parte  - </label> </td> <td>  <input type="text" class="text" id="nombre_parte" /></td>
-                <td><label> &emsp; Nro catalogo  - </label> </td> <td>  <input type="text" class="text" id="nro_catalogo" /></td>
+                <td><label> Nombre parte </label> </td> <td>  <input type="text" class="text" id="nombre_parte" /></td>
+                <td><label> Nº catálogo  </label> </td> <td>  <input type="text" class="text" id="nro_catalogo" /></td>
             </tr>            
             
         </table>
         
         <br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="filtrar();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         
@@ -139,11 +139,11 @@
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
                         <th> Seleccion  </th>
-                        <th onclick="orderBy(0)"> Nº Pieza     </th>
-                        <th onclick="orderBy(1)"> Nº Parte     </th>
-                        <th onclick="orderBy(2)"> Nombre Parte </th>
-                        <th onclick="orderBy(3)"> Nº Cat.      </th>
-                        <th> Tipo Arma  </th>
+                        <th onclick="orderBy(0)"> Nº pieza     </th>
+                        <th onclick="orderBy(1)"> Nº parte     </th>
+                        <th onclick="orderBy(2)"> Nombre parte </th>
+                        <th onclick="orderBy(3)"> Nº cat.      </th>
+                        <th> Tipo arma  </th>
                         <th> Marca      </th>
                         <th> Calibre    </th>
                         <th> Modelo     </th>

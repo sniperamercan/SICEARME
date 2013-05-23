@@ -132,12 +132,12 @@
 
         <div>			
             
-            <h1> Documentos / Imagenes (Catalogos) </h1>        
+            <h1> Documentos / imágenes (catálogos) </h1>        
             
             <fieldset>	
 
                 <dl>
-                <dt><label for="catalogo"> Catalogos </label></dt>
+                <dt><label for="catalogo"> Catálogos </label></dt>
                 <dd><select onchange="cargoDocumentos(this.value);" id="catalogo"> <?php echo $catalogos; ?> </select> <img style="cursor: pointer;" onclick="busquedaCatalogos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>              
                 
