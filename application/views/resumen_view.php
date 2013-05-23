@@ -13,6 +13,7 @@
             
             .datagrid table tbody td { background: #F2FBEF; color: #7D7D7D; border-left: 1px solid #DBDBDB; border-bottom: 1px solid #DBDBDB; font-size: 12px;font-weight: normal; }
             .datagrid table tbody .alt td { background: #E6F8E0; color: #7D7D7D; }
+            .datagrid table tbody .critica td { background: #F6CECE; color: #7D7D7D; }
             .datagrid table tbody td:first-child { border-left: none; }
             .datagrid table tbody tr:last-child td { border-bottom: none; }
             

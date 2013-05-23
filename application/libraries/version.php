@@ -65,8 +65,8 @@ Class Version extends CI_Model {
                                    ORDER BY fecha DESC");
         
         foreach($query->result() as $row) {
-            if($row->critica){
-                $concat .= '<tr style="background-color: #F5A9A9;"> <td>'.$row->fecha.'</td> <td> *'.$row->descripcion.' </td> </tr>';
+            if($row->critica == 1){
+                $concat .= '<tr class="critica"> <td>'.$row->fecha.'</td> <td> *'.$row->descripcion.' </td> </tr>';
             }else{
                 $concat .= '<tr> <td>'.$row->fecha.'</td> <td> *'.$row->descripcion.' </td> </tr>';
             }
