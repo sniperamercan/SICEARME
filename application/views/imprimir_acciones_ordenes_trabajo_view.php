@@ -67,7 +67,7 @@
 
         <hr /><br /><br />         
             
-        <div id="contenido">  <h1> Nro de accion - <?php echo $nro_accion; ?> </h1> </div>     
+        <div id="contenido">  <h1> Nº de acción - <?php echo $nro_accion; ?> </h1> </div>     
         
     </body>    
     

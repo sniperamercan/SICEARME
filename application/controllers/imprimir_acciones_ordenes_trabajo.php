@@ -52,7 +52,7 @@ class imprimir_acciones_ordenes_trabajo extends CI_Controller {
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
                         <th> Fecha        </th>
-                        <th> Seccion      </th>
+                        <th> Sección      </th>
                         <th> Tipo         </th>
                     </tr>
                 </thead>
@@ -138,9 +138,9 @@ class imprimir_acciones_ordenes_trabajo extends CI_Controller {
             $retorno[] = $row->tipo_accion; 4
          */
         
-        $concat = "<h2> Detalle de la accion Nro - ".$nro_accion." </h2>";
+        $concat = "<h2> Detalle de la acción Nº - ".$nro_accion." </h2>";
 
-        $concat .= "<div class='datagrid'><table><thead><th> Fecha </th><th> Seccion </th></thead>";  
+        $concat .= "<div class='datagrid'><table><thead><th> Fecha </th><th> Sección </th></thead>";  
         
         $j = 0;
 
@@ -199,7 +199,7 @@ class imprimir_acciones_ordenes_trabajo extends CI_Controller {
         
         $concat .= "<h3> Detalles de repuestos usados </h3>";
 
-        $concat .= "<div class='datagrid'><table><thead><th> Nro cambio </th><th> Nro parte </th><th> Nombre parte </th> <th> Cantidad </th></thead>";  
+        $concat .= "<div class='datagrid'><table><thead><th> Nº cambio </th><th> Nº parte </th><th> Nombre parte </th> <th> Cantidad </th></thead>";  
         
         $j = 0;
 
@@ -249,7 +249,7 @@ class imprimir_acciones_ordenes_trabajo extends CI_Controller {
         
         $concat .= "<h3> Detalles de piezas cambiadas al armamento </h3>";
 
-        $concat .= "<div class='datagrid'><table><thead><th> Nro cambio </th><th> Pieza anterior </th><th> Pieza nueva </th> <th> Nro parte </th> <th> Nombre parte </th> </thead>";  
+        $concat .= "<div class='datagrid'><table><thead><th> Nº cambio </th><th> Pieza anterior </th><th> Pieza nueva </th> <th> Nº parte </th> <th> Nombre parte </th> </thead>";  
         
         $j = 0;
 

@@ -85,7 +85,6 @@ class listado_de_una_accion_ordenes_trabajo extends CI_Controller {
                     <td> ".$result[$i+2]." </td>
                     <td> ".$tipo_accion." </td>
                     <td onclick='verInformacion(".$aux_nro_accion.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/eye.png' /> </td>
-                    <td onclick='imprimirAccion(".$aux_nro_accion.");' style='text-align: center; cursor: pointer;'> <img src='".base_url()."images/print.png' /> </td>
                 </tr>
             ";
             
@@ -136,9 +135,9 @@ class listado_de_una_accion_ordenes_trabajo extends CI_Controller {
             $retorno[] = $row->tipo_accion; 4
          */
         
-        $concat = "<p style='font-weight: bold;'> Detalle de la accion Nro - ".$nro_accion." Nro de orden - ".$datos[0]." </p>";
+        $concat = "<p style='font-weight: bold;'> Detalle de la acción Nº - ".$nro_accion." Nº orden - ".$datos[0]." </p>";
 
-        $concat .= "<div class='datagrid'><table><thead><th> Fecha </th><th> Seccion </th></thead>";  
+        $concat .= "<div class='datagrid'><table><thead><th> Fecha </th><th> Sección </th></thead>";  
         
         $j = 0;
 

@@ -5,7 +5,7 @@
         
         <style>
             .datagrid table { border-collapse: collapse; text-align: left; width: 100%; } 
-            .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #8C8C8C; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
+            .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: auto; border: 1px solid #8C8C8C; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
             .datagrid table td, .datagrid table th { padding: 3px 10px; }
             
             .datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8C8C8C), color-stop(1, #7D7D7D) );background:-moz-linear-gradient( center top, #8C8C8C 5%, #7D7D7D 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8C8C8C', endColorstr='#7D7D7D');background-color:#8C8C8C; color:#FFFFFF; font-size: 15px; font-weight: bold; border-left: 1px solid #A3A3A3; } 
@@ -62,7 +62,7 @@
             }
             
             function volver() {
-                irAFrame('<?php echo base_url('listado_ordenes_trabajo'); ?>','Taller armamento >> Listado >> Ordenes de trabajo');
+                irAFrame('<?php echo base_url('listado_ordenes_trabajo'); ?>','Taller armamento >> Listado >> Órdenes de trabajo');
             }
               
         </script>
@@ -71,7 +71,7 @@
     
     <body class="cuerpo">
         
-        <h1> Acciones de la orden de trabajo Nro - <?php echo $nro_orden; ?> </h1>
+        <h1> Acciones de la orden de trabajo Nº - <?php echo $nro_orden; ?> </h1>
         
         <button onclick="volver();"> Volver </button>
         
@@ -83,12 +83,11 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th> N Acc   </th>
-                        <th> Fecha   </th>
-                        <th> Secc    </th>
-                        <th> Tipo    </th>
-                        <th> Det     </th>
-                        <th> Imp     </th>
+                        <th> Nº acción  </th>
+                        <th> Fecha      </th>
+                        <th> Sección    </th>
+                        <th> Tipo       </th>
+                        <th> Ver        </th>
                     </tr>
                 </thead>
 

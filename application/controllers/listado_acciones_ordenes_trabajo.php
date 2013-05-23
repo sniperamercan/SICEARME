@@ -367,9 +367,9 @@ class listado_acciones_ordenes_trabajo extends CI_Controller {
             $retorno[] = $row->tipo_accion; 4
          */
         
-        $concat = "<p style='font-weight: bold;'> Detalle de la accion Nro - ".$nro_accion." Nro de orden - ".$datos[0]." </p>";
+        $concat = "<p style='font-weight: bold;'> Detalle de la acción Nº - ".$nro_accion." Nº orden - ".$datos[0]." </p>";
 
-        $concat .= "<div class='datagrid'><table><thead><th> Fecha </th><th> Seccion </th></thead>";  
+        $concat .= "<div class='datagrid'><table><thead><th> Fecha </th><th> Sección </th></thead>";  
         
         $j = 0;
 
