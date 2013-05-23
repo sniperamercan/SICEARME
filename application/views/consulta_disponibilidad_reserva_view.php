@@ -105,7 +105,7 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Depósito - </label> </td> <td>  <select id="deposito"> <?php echo $depositos; ?> </select> </td>
+                <td><label> Depósito </label> </td> <td>  <select id="deposito"> <?php echo $depositos; ?> </select> </td>
             </tr>
             
         </table>

@@ -135,7 +135,7 @@
             
         </table>
         
-        <br /> 
+        <br /> <br />
         
         &nbsp; <button onclick="filtrarConsulta();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         

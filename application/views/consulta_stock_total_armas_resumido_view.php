@@ -86,7 +86,7 @@
             
         </table>
         
-        <br /> 
+        <br /><br /> 
         
         &nbsp; <button onclick="filtrar();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         
