@@ -241,7 +241,7 @@
                             <table> 
                                 <thead style="text-align: center;">
                                     <tr>
-                                        <th> Nº Cat. </th> <th> Tipo arma </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Sistema </th> <th> Cant. armas </th> <th> Costo </th> <th> </th> 
+                                        <th> Nº Cat. </th> <th> Tipo arma </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Sistema </th> <th> Cant. armas </th> <th> Costo </th> <th> Borrar </th> 
                                     </tr>
                                 </thead>
                                 <tbody id="catalogos"></tbody>
