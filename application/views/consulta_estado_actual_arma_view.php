@@ -20,7 +20,7 @@
                     display:inline-block;
                     color:#ffffff;
                     font-family:arial;
-                    font-size:20px;
+                    font-size:15px;
                     font-weight:bold;
                     padding:6px 24px;
                     text-decoration:none;
@@ -50,7 +50,7 @@
                     display:inline-block;
                     color:#ffffff;
                     font-family:arial;
-                    font-size:20px;
+                    font-size:15px;
                     font-weight:bold;
                     padding:6px 24px;
                     text-decoration:none;
@@ -80,7 +80,7 @@
                     display:inline-block;
                     color:#ffffff;
                     font-family:arial;
-                    font-size:20px;
+                    font-size:15px;
                     font-weight:bold;
                     padding:6px 24px;
                     text-decoration:none;
