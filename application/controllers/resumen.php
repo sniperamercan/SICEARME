@@ -162,9 +162,9 @@ class resumen extends CI_Controller {
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th> Nº Orden   </th>
+                        <th> Nº orden   </th>
                         <th> Fecha      </th>
-                        <th> Nº Serie   </th>
+                        <th> Nº serie   </th>
                         <th> Marca      </th>
                         <th> Calibre    </th>
                         <th> Modelo     </th>
@@ -199,7 +199,7 @@ class resumen extends CI_Controller {
             $result[] = $row->cantidad;                3
          */
 
-        $concat = "<p class='subtituloform'> Resumen Almacen </p>";
+        $concat = "<p class='subtituloform'> Resumen Almacén </p>";
         $tbody  = "";
         $j=0;
 
@@ -229,9 +229,9 @@ class resumen extends CI_Controller {
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th> Nº Parte       </th>
+                        <th> Nº parte       </th>
                         <th> Nombre parte   </th>
-                        <th> Nº Cat.        </th>
+                        <th> Nº cat.        </th>
                         <th> Cantidad       </th>
                     </tr>
                 </thead>
@@ -302,7 +302,7 @@ class resumen extends CI_Controller {
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
                         <th> Nº          </th>
-                        <th> Nº Compra   </th>
+                        <th> Nº compra   </th>
                         <th> Fecha       </th>
                         <th> Empresa     </th>
                         <th> Pais        </th>
@@ -371,8 +371,8 @@ class resumen extends CI_Controller {
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th> Nº Acta   </th>
-                        <th> Nº Serie  </th>
+                        <th> Nº acta   </th>
+                        <th> Nº serie  </th>
                         <th> Marca     </th>
                         <th> Calibre   </th>
                         <th> Modelo    </th>
