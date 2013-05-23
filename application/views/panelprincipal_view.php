@@ -170,15 +170,15 @@
                 <tr>
                     <td style="border: none; width: 70%;" align="left">	
                         <img style="margin-right: 20px;" src="<?php echo base_url(); ?>images/menu.png" />
-                        <img title="correo" style="cursor: pointer;" onclick="irAFrame('<?php echo base_url('correo'); ?>','Correo');" id="correo" src="<?php echo base_url(); ?>images/sobre_vacio.png" />
+                        <img title="Correo" style="cursor: pointer;" onclick="irAFrame('<?php echo base_url('correo'); ?>','Correo');" id="correo" src="<?php echo base_url(); ?>images/sobre_vacio.png" />
                     </td>  
 
                     <td style="border: none; width: 30%" align="right">
-                        <div class="dock" id="dock">
-                            <div class="dock-container">
-                                  <a class="dock-item" onclick='informacionUsuario();' style='cursor: pointer'> <img title='usuario' src='<?php echo base_url('images/user_32.gif'); ?>'/><span>Informacion</span></a>
-                                  <a class="dock-item" onclick='$.colorbox({href:"<?php echo base_url('modificar_clave'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:300, title:"MODIFICAR CLAVE"});'><img src='<?php echo base_url('images/key.png'); ?>' alt="Modificar clave" /><span>Modificar clave</span></a>    
-                                  <a class="dock-item" onclick='cerrarSesion();'><img style="cursor: pointer;" src="<?php echo base_url(); ?>images/exit.png" /><span>Salir</span></a>                                     
+                        <div>
+                            <div>
+                                  <a onclick='informacionUsuario();' style='cursor: pointer;'> <img title='Información usuario' src='<?php echo base_url('images/user.png'); ?>'/></a>
+                                  <a onclick='$.colorbox({href:"<?php echo base_url('modificar_clave'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:300, title:"MODIFICAR CLAVE"});'><img style='cursor: pointer;' src='<?php echo base_url('images/key.png'); ?>' title="Modificar clave" /></a>    
+                                  <a onclick='cerrarSesion();'><img style='cursor: pointer;' title='Salir del sistema' style="cursor: pointer;" src="<?php echo base_url(); ?>images/exit.png" /></a>                                     
                             </div>
                         </div> 				
 
