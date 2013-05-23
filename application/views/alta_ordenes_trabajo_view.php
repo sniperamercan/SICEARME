@@ -181,7 +181,7 @@
 
         <div>			
 
-            <h1> Alta de ordenes de trabajo </h1>    
+            <h1> Alta de orden de trabajo </h1>    
             
             <fieldset>	
                 
@@ -190,12 +190,12 @@
                 <dd><input readonly="readonly" type="text" id="fecha" class="text" /></dd>
                 </dl>                
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> Datos del arma </p>
                 
                 <dl> 		
-                <dt><label for="nro_serie"> Nro serie <font color="red"> * </font> </label></dt>	
+                <dt><label for="nro_serie"> Nº serie <font color="red"> * </font> </label></dt>	
                 <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" /> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
@@ -224,7 +224,7 @@
                 <dd><input readonly="readonly" type="text" id="sistema" class="txtautomatico" /></dd>
                 </dl>                
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <dl>
                 <dt><label for="unidad"> Unidad <font color="red"> * </font> </label></dt>
@@ -239,7 +239,7 @@
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="altaOrdenTrabajo();"> Alta orden de trabajo </button>
+                <button style="margin-right: 20px;" onclick="altaOrdenTrabajo();"> Alta de orden de trabajo </button>
             </fieldset>  
             
         </div>        

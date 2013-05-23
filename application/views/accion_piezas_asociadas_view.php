@@ -49,7 +49,7 @@
                     data: "nro_pieza_nueva="+nro_pieza_nueva+"&nro_pieza_anterior="+nro_pieza_anterior+"&nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
                     success: function(data){
                         if(data == 1){            
-                            jAlert("CORRECTO: La pieza fue modificada para el armamento correctamente", "Correcto", function() { irAFrame('<?php echo base_url('accion_piezas_asociadas'); ?>','Taller armamento >> Accion >> Ordenes de trabajo'); });
+                            jAlert("CORRECTO: La pieza fue modificada para el armamento correctamente", "Correcto", function() { irAFrame('<?php echo base_url('accion_piezas_asociadas'); ?>','Taller armamento >> Acción >> Órdenes de trabajo'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
@@ -58,7 +58,7 @@
             }            
             
             function volver() {
-                irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Acción >> Órdenes de trabajo');
             }
             
             function busquedaRepuestos() {
@@ -138,7 +138,7 @@
                             data: "nro_cambio="+nro_cambio,
                             success: function(data){
                                 if(data == 1) {
-                                    irAFrame('<?php echo base_url('accion_piezas_asociadas'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                                    irAFrame('<?php echo base_url('accion_piezas_asociadas'); ?>','Taller armamento >> Acción >> Órdenes de trabajo');
                                 }else {
                                     jAlert("ERROR: Borrar accion de cambio de pieza no se puede ejecutar, debido a que la pieza del armamento ya no posee dicha pieza", "Error");
                                 }
@@ -156,51 +156,51 @@
 
         <div>			
 
-            <h1> Accion de cambios de piezas asociadas a un armamento </h1>    
+            <h1> Acción de cambio de piezas asociadas </h1>    
             
             <fieldset>	
             
                 <dl>
-                <dt><label> Orden de trabajo </label></dt>
-                <dd><label> Nro - <?php echo $nro_orden ?>  </label></dd>
+                <dt><label> Nº orden </label></dt>
+                <dd><label> <?php echo $nro_orden ?> </label></dd>
                 </dl>                 
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <dl>
-                <dt><label> Piezas armamento </label></dt>
+                <dt><label> Pieza a cambiar <font color="red"> * </font> </label></dt>
                 <dd><img style="cursor: pointer;" onclick="busquedaPiezasArmamento();" src="<?php echo base_url(); ?>images/search.png" /> <label> (Pieza que contiene actualmente el armamento) </label> </dd>
                 </dl>                 
                 
                 <dl>
-                <dt><label for="nro_pieza_anterior"> Nro pieza <font color="red"> * </font> </label></dt>
+                <dt><label for="nro_pieza_anterior"> Nº pieza </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_pieza_anterior" class="txtautomatico" /> </dd>
                 </dl> 
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <dl>
-                <dt><label> Buscar repuesto </label></dt>
-                <dd><img style="cursor: pointer;" onclick="busquedaRepuestos();" src="<?php echo base_url(); ?>images/search.png" /> <label> (Pieza nueva seleccionada del almacen) </label> </dd>
+                <dt><label> Buscar repuesto <font color="red"> * </font> </label></dt>
+                <dd><img style="cursor: pointer;" onclick="busquedaRepuestos();" src="<?php echo base_url(); ?>images/search.png" /> <label> (Nueva pieza a elegir del almacén) </label> </dd>
                 </dl>  
                 
                 <dl>
-                <dt><label for="nro_pieza_nueva"> Nro pieza <font color="red"> * </font> </label></dt>
+                <dt><label for="nro_pieza_nueva"> Nº pieza </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_pieza_nueva" class="txtautomatico" /> </dd>
                 </dl>  
                 
                 <dl>
-                <dt><label for="nro_parte"> Nro parte <font color="red"> * </font> </label></dt>
+                <dt><label for="nro_parte"> Nº parte </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_parte" class="txtautomatico" /> </dd>
                 </dl>
                 
                 <dl>
-                <dt><label for="nombre_parte"> Nombre parte <font color="red"> * </font> </label></dt>
+                <dt><label for="nombre_parte"> Nombre parte </label></dt>
                 <dd><input readonly="readonly" type="text" id="nombre_parte" class="txtautomatico" /> </dd>
                 </dl>
                 
                 <dl>
-                <dt><label for="nro_catalogo"> Nro catalogo <font color="red"> * </font> </label></dt>
+                <dt><label for="nro_catalogo"> Nº catálogo </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" /> </dd>
                 </dl>                
                 
@@ -229,7 +229,7 @@
                             <table> 
                                 <thead style="text-align: center;">
                                     <tr>
-                                        <th> Nro cambio </th> <th> Nro pieza nueva </th> <th> Nro pieza anterior </th> <th> Borrar </th> 
+                                        <th> Nº cambio </th> <th> Nº pieza nueva </th> <th> Nº pieza anterior </th> <th> Borrar </th> 
                                     </tr>
                                 </thead>
                                 <tbody id="acciones"> <?php echo $acciones; ?> </tbody>

@@ -183,7 +183,7 @@
 
         <div>			
 
-            <h1> Mutacion de armamento - <font color="red"> *este seguro de realizar esta accion </font> </h1>    
+            <h1> Mutación de armamento - <font color="red"> * ¿Esta seguro de realizar esta acción? </font> </h1>    
             
             <fieldset>	
 
@@ -193,16 +193,16 @@
                 </dl>                
                 
                 <dl>
-                <dt><label for="nro_orden"> Nro orden <font color="red"> * </font> </label></dt>
+                <dt><label for="nro_orden"> Nº orden <font color="red"> * </font> </label></dt>
                 <dd><select id="nro_orden" onchange='cargoDatosArma(this.value);'> <?php echo $nro_ordenes ?> </select> <img style="cursor: pointer;" onclick="busquedaOrdenesTrabajo();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>                 
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> Datos del arma </p>
                 
                 <dl>
-                <dt><label for="nro_serie"> Nro serie </label></dt>
+                <dt><label for="nro_serie"> Nº serie </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" /></dd>
                 </dl>     
                 
@@ -226,10 +226,10 @@
                 <dd><input readonly="readonly" type="text" id="tipo_arma" class="txtautomatico" /></dd>
                 </dl>                 
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <dl>
-                <dt><label for="seccion"> Seccion <font color="red"> * </font> </label></dt>
+                <dt><label for="seccion"> Sección <font color="red"> * </font> </label></dt>
                 <dd><select id="seccion"> <?php echo $secciones ?> </select> <img style="cursor: pointer;" onclick="crearSeccion();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
                 </dl>       
                 
@@ -238,22 +238,22 @@
                 <dd><textarea id="observaciones"> </textarea></dd> 					
                 </dl>       
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> Datos de pieza nueva principal que va a portar el armamento </p>
                 
                  <dl>
-                <dt><label> Buscar repuesto </label></dt>
+                <dt><label> Buscar repuesto <font color="red"> * </font> </label></dt>
                 <dd><img style="cursor: pointer;" onclick="busquedaRepuestos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>  
                 
                 <dl>
-                <dt><label for="nro_pieza_nueva"> Nro pieza <font color="red"> * </font> </label></dt>
+                <dt><label for="nro_pieza_nueva"> Nº pieza </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_pieza_nueva" class="txtautomatico" /> </dd>
                 </dl>  
                 
                 <dl>
-                <dt><label for="nro_parte"> Nro parte </label></dt>
+                <dt><label for="nro_parte"> Nº parte </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_parte" class="txtautomatico" /> </dd>
                 </dl>
                 
@@ -263,14 +263,14 @@
                 </dl>
                 
                 <dl>
-                <dt><label for="nro_catalogo"> Nro catalogo </label></dt>
+                <dt><label for="nro_catalogo"> Nº catálogo </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" /> </dd>
                 </dl>               
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="accionMutacionArma();"> Cambiar pieza principal del Arma (chasis) </button> 
+                <button style="margin-right: 20px;" onclick="accionMutacionArma();"> Cambiar pieza principal del arma (chasis) </button> 
             </fieldset>  
              
         </div>        

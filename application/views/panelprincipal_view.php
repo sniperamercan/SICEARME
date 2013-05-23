@@ -361,7 +361,7 @@
                                 
                                     <li><a href="#"> Alta </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_ordenes_trabajo'); ?>','Taller armamento >> Alta >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_ordenes_trabajo'); ?>','Taller armamento >> Alta >> Órdenes de trabajo');"> Órdenes de trabajo </a></li>
                                         </ul>
                                     </li> 
                                 
@@ -369,10 +369,10 @@
                                     
                                 <?php if($this->perms->verificoPerfil6() || $this->perms->verificoPerfil7()) { ?>
                                 
-                                    <li><a href="#"> Accion </a>
+                                    <li><a href="#"> Acción </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('accion_mutacion_armamento'); ?>','Taller armamento >> Accion >> Mutacion de armamento');"> Mutacion de armamento </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Acción >> Órdenes de trabajo');"> Órdenes de trabajo </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('accion_mutacion_armamento'); ?>','Taller armamento >> Acción >> Mutación de armamento');"> Mutación de armamento </a></li>
                                         </ul>
                                     </li> 
                                 
@@ -380,10 +380,10 @@
                                 
                                 <?php if($this->perms->verificoPerfil7()) { ?>    
                                     
-                                    <li><a href="#"> Modificar </a>
+                                    <li><a href="#"> Modificar/Anular </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_ordenes_trabajo'); ?>','Taller armamento >> Modificar >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_acciones_ordenes_trabajo'); ?>','Taller armamento >> Modificar >> Acciones de una orden');"> Acciones de una orden </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_ordenes_trabajo'); ?>','Taller armamento >> Modificar/Anular >> Órdenes de trabajo');"> Órdenes de trabajo </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_acciones_ordenes_trabajo'); ?>','Taller armamento >> Modificar/Anular >> Acciones de una orden');"> Acciones de una orden </a></li>
                                         </ul>
                                     </li>
                                 
@@ -393,8 +393,8 @@
                                 
                                     <li><a href="#"> Listado </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_ordenes_trabajo'); ?>','Taller armamento >> Listado >> Ordenes de trabajo');"> Ordenes de trabajo </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_acciones_ordenes_trabajo'); ?>','Taller armamento >> Listado >> Estado del armamento');"> Acciones de una orden </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_ordenes_trabajo'); ?>','Taller armamento >> Listado >> Órdenes de trabajo');"> Órdenes de trabajo </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_acciones_ordenes_trabajo'); ?>','Taller armamento >> Listado >> Acciones de una orden');"> Acciones de una orden </a></li>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_cambios_piezas_asociadas'); ?>','Taller armamento >> Listado >> Cambios piezas asociadas');"> Cambios piezas asociadas </a></li>
                                             <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_mutaciones_armamentos'); ?>','Taller armamento >> Listado >> Mutaciones de armamentos');"> Mutaciones de armamentos </a></li>
                                         </ul>

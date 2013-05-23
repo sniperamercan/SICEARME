@@ -234,7 +234,7 @@
         <hr />
         
         <dl> 		
-        <dt><label for="nro_serie"> Nro serie </label></dt>	
+        <dt><label for="nro_serie"> Nº serie </label></dt>	
         <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" /> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
         </dl>
 
@@ -254,7 +254,7 @@
         
         <br /><br /><br />  
         
-        &emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br />
         

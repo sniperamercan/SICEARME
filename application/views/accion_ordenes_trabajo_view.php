@@ -86,7 +86,7 @@
                    data: "fecha="+fecha+"&nro_orden="+nro_orden+"&seccion="+seccion+"&observaciones="+observaciones,
                    success: function(data) {
                        if(data == 1) {
-                           irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                           irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>','Taller armamento >> Acción >> Órdenes de trabajo');
                        }else {
                            jAlert(data, "Error");
                        }
@@ -108,7 +108,7 @@
                    data: "fecha="+fecha+"&nro_orden="+nro_orden+"&seccion="+seccion+"&observaciones="+observaciones,
                    success: function(data) {
                        if(data == 1) {
-                           irAFrame('<?php echo base_url('accion_piezas_asociadas'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                           irAFrame('<?php echo base_url('accion_piezas_asociadas'); ?>','Taller armamento >> Acción >> Órdenes de trabajo');
                        }else {
                            jAlert(data, "Error");
                        }
@@ -236,15 +236,15 @@
                        
                        switch(data) {
                            case '0':
-                               irAFrame('<?php echo base_url('modificar_accion_simple'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                               irAFrame('<?php echo base_url('modificar_accion_simple'); ?>','Taller armamento >> Acción >> Órdenes de trabajo');
                                break;
                                
                            case '1':
-                               irAFrame('<?php echo base_url('modificar_accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                               irAFrame('<?php echo base_url('modificar_accion_piezas_secundarias'); ?>','Taller armamento >> Acción >> Órdenes de trabajo');
                                break;
                            
                            case '2':
-                               irAFrame('<?php echo base_url('modificar_accion_piezas_asociadas'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                               irAFrame('<?php echo base_url('modificar_accion_piezas_asociadas'); ?>','Taller armamento >> Acción >> Órdenes de trabajo');
                                break;
                        }
                    }
@@ -260,7 +260,7 @@
 
         <div>			
 
-            <h1> Accion sobre una orden de trabajo </h1>    
+            <h1> Acción sobre una orden de trabajo </h1>    
             
             <fieldset>	
 
@@ -270,16 +270,16 @@
                 </dl>                
                 
                 <dl>
-                <dt><label for="nro_orden"> Nro orden <font color="red"> * </font> </label></dt>
+                <dt><label for="nro_orden"> Nº orden <font color="red"> * </font> </label></dt>
                 <dd><select id="nro_orden" onchange='cargoDatosArma(this.value);'> <?php echo $nro_ordenes ?> </select> <img style="cursor: pointer;" onclick="busquedaOrdenesTrabajo();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>                 
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> Datos del arma </p>
                 
                 <dl>
-                <dt><label for="nro_serie"> Nro serie </label></dt>
+                <dt><label for="nro_serie"> Nº serie </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" /></dd>
                 </dl>     
                 
@@ -303,24 +303,24 @@
                 <dd><input readonly="readonly" type="text" id="tipo_arma" class="txtautomatico" /></dd>
                 </dl>                 
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <dl>
-                <dt><label for="seccion"> Seccion <font color="red"> * </font> </label></dt>
+                <dt><label for="seccion"> Sección <font color="red"> * </font> </label></dt>
                 <dd><select id="seccion"> <?php echo $secciones ?> </select> <img style="cursor: pointer;" onclick="crearSeccion();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
                 </dl>       
                 
                 <dl> 		
-                <dt><label for="observaciones"> Observaciones </label></dt>	
+                <dt><label for="observaciones"> Observaciones <font color="red"> * </font> </label></dt>	
                 <dd><textarea id="observaciones"> </textarea></dd> 					
                 </dl>                
                 
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="altaAccionSimple();"> Accion simple </button> 
-                <button style="margin-right: 20px;" onclick="altaAccionPiezaSecundarias();"> Accion piezas secundarias </button> 
-                <button style="margin-right: 20px;" onclick="altaAccionPiezaAsociadas();"> Accion piezas asociadas </button>
+                <button style="margin-right: 20px;" onclick="altaAccionSimple();"> Acción simple </button> 
+                <button style="margin-right: 20px;" onclick="altaAccionPiezaSecundarias();"> Acción cambio pieza secundarias </button> 
+                <button style="margin-right: 20px;" onclick="altaAccionPiezaAsociadas();"> Acción cambio pieza asociada </button>
             </fieldset>  
             
             <hr />
@@ -337,7 +337,7 @@
                             <table> 
                                 <thead style="text-align: center;">
                                     <tr>
-                                        <th> Nro accion </th> <th> Fecha </th> <th> Seccion </th> <th> Tipo accion </th> <th> Ver </th> <th> Editar </th> <th> Borrar </th> 
+                                        <th> Nº acción </th> <th> Fecha </th> <th> Sección </th> <th> Tipo acción </th> <th> Ver </th> <th> Editar </th> <th> Borrar </th> 
                                     </tr>
                                 </thead>
                                 <tbody id="acciones"></tbody>

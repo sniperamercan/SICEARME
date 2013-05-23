@@ -169,7 +169,7 @@ class alta_ordenes_trabajo extends CI_Controller {
 
             $concat = "<p style='font-weight: bold;'> Detalle de los movimientos previos del armamento seleccionado </p>";
 
-            $concat .= "<div class='datagrid'><table><thead><th> Nro acta </th><th> Fecha </th> <th> Unidad </th></thead>";  
+            $concat .= "<div class='datagrid'><table><thead><th> Nº acta </th><th> Fecha </th> <th> Unidad </th></thead>";  
 
             $j = 0;
 

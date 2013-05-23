@@ -135,9 +135,9 @@
 
         <div>			
 
-            <h1> Modificar estado de orden de trabajo Nro - <?php echo $nro_orden; ?> </h1>    
+            <h1> Modificar estado de orden de trabajo Nº - <?php echo $nro_orden; ?> </h1>    
             
-            <p class="subtituloform"> Luego de la reparacion en que estado quedo el armamento - </p>
+            <p class="subtituloform"> Indicar el estado final del armamento luego de la reparación </p>
             
             <fieldset>	
                 

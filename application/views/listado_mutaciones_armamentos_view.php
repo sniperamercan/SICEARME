@@ -5,7 +5,7 @@
         
         <style>
             .datagrid table { border-collapse: collapse; text-align: left; width: 100%; } 
-            .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #8C8C8C; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
+            .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: auto; border: 1px solid #8C8C8C; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
             .datagrid table td, .datagrid table th { padding: 3px 10px; }
             
             .datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8C8C8C), color-stop(1, #7D7D7D) );background:-moz-linear-gradient( center top, #8C8C8C 5%, #7D7D7D 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8C8C8C', endColorstr='#7D7D7D');background-color:#8C8C8C; color:#FFFFFF; font-size: 15px; font-weight: bold; border-left: 1px solid #A3A3A3; } 
@@ -104,18 +104,18 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Nro mutacion - </label> </td> <td>  <input type="text" class="text" id="nro_mutacion" /></td>
-                <td><label> &emsp; Nro orden    - </label> </td> <td>  <input type="text" class="text" id="nro_orden" /></td>
+                <td><label> Nº mutación </label> </td> <td>  <input type="text" class="text" id="nro_mutacion" /></td>
+                <td><label> Nº orden    </label> </td> <td>  <input type="text" class="text" id="nro_orden" /></td>
             </tr>
             
             <tr>
-                <td><label> &emsp; Nro serie       - </label> </td> <td>  <input type="text" class="text" id="nro_serie" /></td>
-                <td><label> &emsp; Nuevo nro serie - </label> </td> <td>  <input type="text" class="text" id="nuevo_nro_serie" /></td>
+                <td><label> Nº serie       </label> </td> <td>  <input type="text" class="text" id="nro_serie" /></td>
+                <td><label> Nuevo nº serie </label> </td> <td>  <input type="text" class="text" id="nuevo_nro_serie" /></td>
             </tr>   
 
             <tr>
-                <td><label> &emsp; Fecha 1 - </label> </td> <td>  <input type="text" class="text" id="fecha1" /></td>
-                <td><label> &emsp; Fecha 2 - </label> </td> <td>  <input type="text" class="text" id="fecha2" /></td>
+                <td><label> Fecha desde </label> </td> <td>  <input type="text" class="text" id="fecha1" /></td>
+                <td><label> Fecha hasta </label> </td> <td>  <input type="text" class="text" id="fecha2" /></td>
             </tr>            
             
             
@@ -123,7 +123,7 @@
         
         <br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="filtrar();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         
@@ -135,15 +135,15 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> N Mut     </th>
-                        <th onclick="orderBy(1)"> N Ord     </th>
-                        <th onclick="orderBy(2)"> N Ser     </th>
-                        <th onclick="orderBy(3)"> Mar       </th>
-                        <th onclick="orderBy(4)"> Cal       </th>
-                        <th onclick="orderBy(5)"> Mod       </th>
-                        <th onclick="orderBy(6)"> Nue N Ser </th>
-                        <th onclick="orderBy(7)"> Fecha     </th>
-                        <th onclick="orderBy(8)"> Secc      </th>
+                        <th onclick="orderBy(0)"> Nº mutación    </th>
+                        <th onclick="orderBy(1)"> Nº orden       </th>
+                        <th onclick="orderBy(2)"> Nº serie       </th>
+                        <th onclick="orderBy(3)"> Marca          </th>
+                        <th onclick="orderBy(4)"> Calibre        </th>
+                        <th onclick="orderBy(5)"> Modelo         </th>
+                        <th onclick="orderBy(6)"> Nuevo nº serie </th>
+                        <th onclick="orderBy(7)"> Fecha          </th>
+                        <th onclick="orderBy(8)"> Sección        </th>
                     </tr>
                 </thead>
 

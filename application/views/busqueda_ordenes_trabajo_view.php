@@ -146,7 +146,7 @@
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
                         <th> Seleccion  </th>
-                        <th onclick="orderBy(0)"> Nº Ord.    </th>
+                        <th onclick="orderBy(0)"> Nº orden   </th>
                         <th> Fecha </th>
                         <th onclick="orderBy(1)"> Nº serie   </th>
                         <th onclick="orderBy(2)"> Marca      </th>

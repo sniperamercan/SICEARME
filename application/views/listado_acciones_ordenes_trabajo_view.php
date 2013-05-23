@@ -5,7 +5,7 @@
         
         <style>
             .datagrid table { border-collapse: collapse; text-align: left; width: 100%; } 
-            .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #8C8C8C; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
+            .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: auto; border: 1px solid #8C8C8C; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
             .datagrid table td, .datagrid table th { padding: 3px 10px; }
             
             .datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8C8C8C), color-stop(1, #7D7D7D) );background:-moz-linear-gradient( center top, #8C8C8C 5%, #7D7D7D 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8C8C8C', endColorstr='#7D7D7D');background-color:#8C8C8C; color:#FFFFFF; font-size: 15px; font-weight: bold; border-left: 1px solid #A3A3A3; } 
@@ -128,18 +128,18 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Nro accion - </label> </td> <td>  <input type="text" class="text" id="nro_accion" /></td>
-                <td><label> &emsp; Nro orden  - </label> </td> <td>  <input type="text" class="text" id="nro_orden" /></td>
+                <td><label> Nº acción </label> </td> <td>  <input type="text" class="text" id="nro_accion" /></td>
+                <td><label> Nº orden  </label> </td> <td>  <input type="text" class="text" id="nro_orden" /></td>
             </tr>
             
             <tr>
-                <td><label> &emsp; Seccion      - </label> </td> <td>  <input type="text" class="text" id="seccion" /></td>
-                <td><label> &emsp; Tipo accion  - </label> </td> <td>  <input type="text" class="text" id="tipo_accion" /></td>
+                <td><label> Sección      </label> </td> <td>  <input type="text" class="text" id="seccion" /></td>
+                <td><label> Tipo acción  </label> </td> <td>  <input type="text" class="text" id="tipo_accion" /></td>
             </tr>   
 
             <tr>
-                <td><label> &emsp; Fecha 1 - </label> </td> <td>  <input type="text" class="text" id="fecha1" /></td>
-                <td><label> &emsp; Fecha 2 - </label> </td> <td>  <input type="text" class="text" id="fecha2" /></td>
+                <td><label> Fecha desde </label> </td> <td>  <input type="text" class="text" id="fecha1" /></td>
+                <td><label> Fecha hasta </label> </td> <td>  <input type="text" class="text" id="fecha2" /></td>
             </tr>            
             
             
@@ -147,7 +147,7 @@
         
         <br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="filtrar();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         
@@ -159,13 +159,13 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th> N Orden    </th>
-                        <th> N Accion   </th>
-                        <th> Fecha      </th>
-                        <th> Secc       </th>
-                        <th> Tipo       </th>
-                        <th> V det      </th>
-                        <th> Imp        </th>
+                        <th> Nº orden      </th>
+                        <th> Nº acción     </th>
+                        <th> Fecha         </th>
+                        <th> Sección       </th>
+                        <th> Tipo arma     </th>
+                        <th> Ver           </th>
+                        <th> Imprimir      </th>
                     </tr>
                 </thead>
 

@@ -5,7 +5,7 @@
         
         <style>
             .datagrid table { border-collapse: collapse; text-align: left; width: 100%; } 
-            .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #8C8C8C; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
+            .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: auto; border: 1px solid #8C8C8C; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
             .datagrid table td, .datagrid table th { padding: 3px 10px; }
             
             .datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8C8C8C), color-stop(1, #7D7D7D) );background:-moz-linear-gradient( center top, #8C8C8C 5%, #7D7D7D 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8C8C8C', endColorstr='#7D7D7D');background-color:#8C8C8C; color:#FFFFFF; font-size: 15px; font-weight: bold; border-left: 1px solid #A3A3A3; } 
@@ -111,7 +111,7 @@
             
             function eliminarAccion(nro_accion) {
             
-                jConfirm('Esta seguro que desea anular la accion Nro - '+nro_accion+'?', 'Confirme anulacion de accion', function(r) {
+                jConfirm('Esta seguro que desea anular la accion Nro - '+nro_accion+'?', 'Confirme anulacion de acción', function(r) {
                     
                     if(r) {
                         $.ajax({
@@ -119,7 +119,7 @@
                            url: "<?php base_url(); ?>mb_acciones_ordenes_trabajo/eliminarAccion",
                            data: "nro_accion="+nro_accion,
                            success: function(data) {
-                               jAlert(data, "Anulacion correcta", function() { irAFrame('<?php echo base_url('mb_acciones_ordenes_trabajo'); ?>','Taller armamento >> Modificar >> Acciones de una orden'); });
+                               jAlert(data, "Anulacion correcta", function() { irAFrame('<?php echo base_url('mb_acciones_ordenes_trabajo'); ?>','Taller armamento >> Modificar/Anular >> Acciones de una orden'); });
                            }
                         });  
                     }
@@ -136,15 +136,15 @@
                        
                        switch(data) {
                            case '0':
-                               irAFrame('<?php echo base_url('modificar_accion_simple'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                               irAFrame('<?php echo base_url('modificar_accion_simple'); ?>','Taller armamento >> Acción >> Órdenes de trabajo');
                                break;
                                
                            case '1':
-                               irAFrame('<?php echo base_url('modificar_accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                               irAFrame('<?php echo base_url('modificar_accion_piezas_secundarias'); ?>','Taller armamento >> Acción >> Órdenes de trabajo');
                                break;
                            
                            case '2':
-                               irAFrame('<?php echo base_url('modificar_accion_piezas_asociadas'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                               irAFrame('<?php echo base_url('modificar_accion_piezas_asociadas'); ?>','Taller armamento >> Acción >> Órdenes de trabajo');
                                break;
                        }
                    }
@@ -161,18 +161,18 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Nro accion - </label> </td> <td>  <input type="text" class="text" id="nro_accion" /></td>
-                <td><label> &emsp; Nro orden  - </label> </td> <td>  <input type="text" class="text" id="nro_orden" /></td>
+                <td><label> Nº acción </label> </td> <td>  <input type="text" class="text" id="nro_accion" /></td>
+                <td><label> Nº orden  </label> </td> <td>  <input type="text" class="text" id="nro_orden" /></td>
             </tr>
             
             <tr>
-                <td><label> &emsp; Seccion      - </label> </td> <td>  <input type="text" class="text" id="seccion" /></td>
-                <td><label> &emsp; Tipo accion  - </label> </td> <td>  <input type="text" class="text" id="tipo_accion" /></td>
+                <td><label> Sección     </label> </td> <td>  <input type="text" class="text" id="seccion" /></td>
+                <td><label> Tipo acción </label> </td> <td>  <input type="text" class="text" id="tipo_accion" /></td>
             </tr>   
 
             <tr>
-                <td><label> &emsp; Fecha 1 - </label> </td> <td>  <input type="text" class="text" id="fecha1" /></td>
-                <td><label> &emsp; Fecha 2 - </label> </td> <td>  <input type="text" class="text" id="fecha2" /></td>
+                <td><label> Fecha desde </label> </td> <td>  <input type="text" class="text" id="fecha1" /></td>
+                <td><label> Fecha hasta </label> </td> <td>  <input type="text" class="text" id="fecha2" /></td>
             </tr>            
             
             
@@ -180,7 +180,7 @@
         
         <br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="filtrar();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         
@@ -192,14 +192,14 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>
-                        <th> N Ord   </th>
-                        <th> N Acc   </th>
-                        <th> Fecha   </th>
-                        <th> Secc    </th>
-                        <th> Tip     </th>
-                        <th> Det     </th>
-                        <th> Edi     </th>
-                        <th> Eli     </th>
+                        <th> Nº orden   </th>
+                        <th> Nº accion  </th>
+                        <th> Fecha      </th>
+                        <th> Sección    </th>
+                        <th> Tipo arma  </th>
+                        <th> Detalle    </th>
+                        <th> Editar     </th>
+                        <th> Borrar     </th>
                     </tr>
                 </thead>
 

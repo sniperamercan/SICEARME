@@ -150,7 +150,6 @@ class resumen extends CI_Controller {
                     <td> ".$result[$i+4]." </td>
                     <td> ".$result[$i+5]." </td>
                     <td> ".$result[$i+6]." </td>
-                    <td> ".$result[$i+7]." </td>
                 </tr>
             ";
 

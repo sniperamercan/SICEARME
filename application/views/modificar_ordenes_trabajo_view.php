@@ -51,7 +51,7 @@
                     data: "fecha="+fecha+"&unidad="+unidad+"&nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&observaciones="+observaciones,
                     success: function(data){
                         if(data[0] == "1"){            
-                            jAlert("CORRECTO: Orden de trabajo modificada con exito", "Correcto", function() { irAFrame('<?php echo base_url('mb_ordenes_trabajo'); ?>','Taller armamento >> Modificar >> Ordenes de trabajo'); });
+                            jAlert("CORRECTO: Orden de trabajo modificada con exito", "Correcto", function() { irAFrame('<?php echo base_url('mb_ordenes_trabajo'); ?>','Taller armamento >> Modificar >> Órdenes de trabajo'); });
                         }else{
                             jAlert(data[0], "Error");
                         }                            
@@ -161,7 +161,7 @@
             }
             
             function volver() {
-                irAFrame('<?php echo base_url('mb_ordenes_trabajo'); ?>','Taller armamento >> Modificar >> Ordenes de trabajo');
+                irAFrame('<?php echo base_url('mb_ordenes_trabajo'); ?>','Taller armamento >> Modificar/Anular >> Órdenes de trabajo');
             }
             
         </script>
@@ -172,7 +172,7 @@
 
         <div>			
 
-            <h1> Modificar ordenes de trabajo </h1>    
+            <h1> Modificar orden de trabajo </h1>    
             
             <fieldset>	
                 
@@ -181,12 +181,12 @@
                 <dd><input readonly="readonly" type="text" id="fecha" class="text" value="<?php echo $fecha; ?>" /></dd>
                 </dl>                
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> Datos del arma </p>
                 
                 <dl> 		
-                <dt><label for="nro_serie"> Nro serie <font color="red"> * </font> </label></dt>	
+                <dt><label for="nro_serie"> Nº serie <font color="red"> * </font> </label></dt>	
                 <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" value="<?php echo $nro_serie; ?>" /> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
@@ -215,8 +215,8 @@
                 <dd><input readonly="readonly" type="text" id="sistema" class="txtautomatico" value="<?php echo $sistema; ?>" /></dd>
                 </dl>                
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
-                
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
+
                 <dl>
                 <dt><label for="unidad"> Unidad <font color="red"> * </font> </label></dt>
                 <dd><select id="unidad"> <?php echo $unidades; ?> </select> <img style="cursor: pointer;" onclick="verHistorico();" src="<?php echo base_url(); ?>images/eye.png" alt="ver historico" /></dd>

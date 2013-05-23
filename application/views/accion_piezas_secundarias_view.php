@@ -48,7 +48,7 @@
                     data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo+"&cant_actual="+cant_actual+"&cant_usar="+cant_usar,
                     success: function(data){
                         if(data == 1){            
-                            jAlert("CORRECTO: Pieza utilizada correctamente en la orden de trabajo", "Correcto", function() { irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo'); });
+                            jAlert("CORRECTO: Pieza utilizada correctamente en la orden de trabajo", "Correcto", function() { irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>','Taller armamento >> Acción >> Órdenes de trabajo'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
@@ -57,7 +57,7 @@
             }
             
             function volver() {
-                irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Acción >> Órdenes de trabajo');
             }
             
             function busquedaRepuestos() {
@@ -102,7 +102,7 @@
                             url: "<?php base_url(); ?>accion_piezas_secundarias/eliminarAccionSimple",
                             data: "nro_cambio="+nro_cambio,
                             success: function(data){
-                                irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                                irAFrame('<?php echo base_url('accion_piezas_secundarias'); ?>','Taller armamento >> Acción >> Órdenes de trabajo');
                           }
                         });                        
                     }
@@ -118,13 +118,13 @@
 
         <div>			
 
-            <h1> Accion de cambios de piezas secundarias de un armamento </h1>    
+            <h1> Acción de cambio de piezas secundarias </h1>    
             
             <fieldset>	
             
                 <dl>
-                <dt><label> Orden de trabajo <font color="red"> * </font>  </label></dt>
-                <dd><label> Nro - <?php echo $nro_orden ?>  </label></dd>
+                <dt><label> Nº orden </label></dt>
+                <dd><label> <?php echo $nro_orden ?>  </label></dd>
                 </dl>                 
                 
                 <dl>
@@ -133,7 +133,7 @@
                 </dl>                 
                 
                 <dl>
-                <dt><label for="nro_parte"> Nro parte </label></dt>
+                <dt><label for="nro_parte"> Nº parte </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_parte" class="txtautomatico" /> </dd>
                 </dl>                 
 
@@ -143,17 +143,17 @@
                 </dl> 
                 
                 <dl>
-                <dt><label for="nro_catalogo"> Nro catalogo </label></dt>
+                <dt><label for="nro_catalogo"> Nº catálogo </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" /></dd>
                 </dl>                 
                 
                 <dl>
-                <dt><label for="cant_actual"> Cant actual </label></dt>
+                <dt><label for="cant_actual"> Cant. actual </label></dt>
                 <dd><input readonly="readonly" type="text" id="cant_actual" class="txtautomatico" /></dd>
                 </dl> 
                 
                 <dl>
-                <dt><label for="cant_usar"> Cant a usar <font color="red"> * </font> </label></dt>
+                <dt><label for="cant_usar"> Cant. a usar <font color="red"> * </font> </label></dt>
                 <dd><input type="text" id="cant_usar" class="number" /></dd>
                 </dl> 
                 
@@ -178,7 +178,7 @@
                             <table> 
                                 <thead style="text-align: center;">
                                     <tr>
-                                        <th> Nro cambio </th> <th> Nro parte </th> <th> Nombre </th> <th> Catalogo </th> <th> Cantidad </th> <th> Borrar </th> 
+                                        <th> Nº cambio </th> <th> Nº parte </th> <th> Nombre </th> <th> Catálogo </th> <th> Cantidad </th> <th> Borrar </th> 
                                     </tr>
                                 </thead>
                                 <tbody id="acciones"> <?php echo $acciones; ?> </tbody>
