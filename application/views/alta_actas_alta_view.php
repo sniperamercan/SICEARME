@@ -317,7 +317,7 @@
                 </dl>
                 
                 <dl> 		
-                <dt><label for="supervision"> Supervision <font color="red">*</font> </label></dt>	
+                <dt><label for="supervision"> Supervisión <font color="red">*</font> </label></dt>	
                 <dd><input type="text" id="supervision" class="text" /></dd> 					
                 </dl>                
  

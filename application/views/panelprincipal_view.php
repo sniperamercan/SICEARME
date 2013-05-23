@@ -177,7 +177,6 @@
                         <div class="dock" id="dock">
                             <div class="dock-container">
                                   <a class="dock-item" onclick='informacionUsuario();' style='cursor: pointer'> <img title='usuario' src='<?php echo base_url('images/user_32.gif'); ?>'/><span>Informacion</span></a>
-                                  <a class="dock-item" onclick='window.open ("js/calculadora/calculadora.html", "mywindow","toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=206,height=200");'><img src='<?php echo base_url('images/calc.png'); ?>' alt="Calculadora" /><span>Calculadora</span></a> 
                                   <a class="dock-item" onclick='$.colorbox({href:"<?php echo base_url('modificar_clave'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:300, title:"MODIFICAR CLAVE"});'><img src='<?php echo base_url('images/key.png'); ?>' alt="Modificar clave" /><span>Modificar clave</span></a>    
                                   <a class="dock-item" onclick='cerrarSesion();'><img style="cursor: pointer;" src="<?php echo base_url(); ?>images/exit.png" /><span>Salir</span></a>                                     
                             </div>
