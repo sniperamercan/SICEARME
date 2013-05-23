@@ -111,7 +111,7 @@ class listado_usuarios extends CI_Controller {
         }else {
             $permisos = array();
             $permisos = $this->listado_usuarios_model->verPermisos($usuario);
-            $concat = "<p style='font-weight: bold;'> Permisos del usuario - ".$usuario." </p><table style='border: 1px solid black; border-collapse: collapse;'><thhead> <th style='background-color: #8C8C8C; color: white;'> Perfil </th> <th style='background-color: #8C8C8C; color: white;'> Descripcion </th> </thead>";
+            $concat = "<p style='font-weight: bold;'> Permisos del usuario - ".$usuario." </p><table style='border: 1px solid black; border-collapse: collapse;'><thhead> <th style='background-color: #8C8C8C; color: white;'> Perfil </th> <th style='background-color: #8C8C8C; color: white;'> Descripción </th> </thead>";
             
             $j = 0;
             

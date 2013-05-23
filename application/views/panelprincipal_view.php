@@ -483,7 +483,7 @@
                                 <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_usuarios'); ?>','Administración >> Alta usuarios');"> Alta usuario </a></li>
                                 <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_usuarios'); ?>','Administración >> Modificar usuarios');"> Modificar usuarios </a></li>
                                 <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_usuarios'); ?>','Administración >> Listado usuarios');"> Listado usuarios </a></li>
-                                <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_logs_ingresos'); ?>','Administración >> Ver logs ingresos');"> Ver logs ingresos </a></li>
+                                <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_logs_ingresos'); ?>','Administración >> Registro de ingresos');"> Registro de ingresos </a></li>
                             </ul>
                         </li>  
 

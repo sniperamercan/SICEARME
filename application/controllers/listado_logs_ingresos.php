@@ -69,10 +69,10 @@ class listado_logs_ingresos extends CI_Controller {
         
         $concat .= '
             <tr>      
-                <th> Usuario </th>
-                <th> Fecha   </th>
-                <th> Hora    </th>
-                <th> IP      </th>
+                <th> Usuario      </th>
+                <th> Fecha        </th>
+                <th> Hora         </th>
+                <th> Dirección IP </th>
             </tr>   
         ';
         
