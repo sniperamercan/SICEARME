@@ -266,10 +266,10 @@
                                 
                                 <?php if($this->perms->verificoPerfil4() || $this->perms->verificoPerfil5()) { ?>
                                 
-                                    <li><a href="#"> Actas </a>
+                                    <li><a href="#"> Altas </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_actas_alta'); ?>','Abastecimiento >> Actas >> Acta alta');"> Actas alta </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_actas_baja'); ?>','Abastecimiento >> Actas >> Acta baja');"> Actas baja </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_actas_alta'); ?>','Abastecimiento >> Altas >> Actas de alta');"> Actas de alta </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_actas_baja'); ?>','Abastecimiento >> Altas >> Actas de baja');"> Actas de baja </a></li>
                                         </ul>
                                     </li> 
                                 
@@ -277,10 +277,10 @@
                                 
                                 <?php if($this->perms->verificoPerfil5()) { ?>    
                                     
-                                    <li><a href="#"> Modificar </a>
+                                    <li><a href="#"> Modificar/Anular </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_actas_alta'); ?>','Abastecimiento >> Modificar >> Actas altas');"> Actas altas </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_actas_baja'); ?>','Abastecimiento >> Modificar >> Actas bajas');"> Actas bajas </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_actas_alta'); ?>','Abastecimiento >> Modificar/Anular >> Actas de alta');"> Actas de alta </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_actas_baja'); ?>','Abastecimiento >> Modificar/Anular >> Actas de baja');"> Actas de baja </a></li>
                                         </ul>
                                     </li>
                                 
@@ -290,8 +290,8 @@
                                 
                                     <li><a href="#"> Listado </a>
                                         <ul>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_actas_alta'); ?>','Abastecimiento >> Listado >> Actas altas');"> Actas altas </a></li>
-                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_actas_baja'); ?>','Abastecimiento >> Listado >> Actas bajas');"> Actas bajas </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_actas_alta'); ?>','Abastecimiento >> Listado >> Actas de alta');"> Actas de alta </a></li>
+                                            <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_actas_baja'); ?>','Abastecimiento >> Listado >> Actas de baja');"> Actas de baja </a></li>
                                         </ul>
                                     </li>
                                 

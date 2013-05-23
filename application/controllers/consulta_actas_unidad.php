@@ -114,9 +114,9 @@ class consulta_actas_unidad extends CI_Controller {
 
                     <thead style="text-align: center; cursor: pointer;">
                         <tr>      
-                            <th> N Acta  </th>
-                            <th> Un Or   </th>
-                            <th> Fecha   </th>
+                            <th> Nº acta        </th>
+                            <th> Unidad entrega </th>
+                            <th> Fecha          </th>
                         </tr>
                     </thead>
 
@@ -185,9 +185,9 @@ class consulta_actas_unidad extends CI_Controller {
 
                     <thead style="text-align: center; cursor: pointer;">
                         <tr>      
-                            <th> N Acta   </th>
-                            <th> Un Or    </th>
-                            <th> Fecha    </th>
+                            <th> Nº acta        </th>
+                            <th> Unidad recibe  </th>
+                            <th> Fecha          </th>
                         </tr>
                     </thead>
 

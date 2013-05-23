@@ -62,7 +62,7 @@
 
                      <thead style='text-align: center; cursor: pointer;'>
                          <tr>      
-                             <th> Nro acta </th>
+                             <th> Nº acta </th>
                              <th> Fecha    </th>
                          </tr>
                      </thead>
@@ -134,7 +134,7 @@
 
                      <thead style='text-align: center; cursor: pointer;'>
                          <tr>      
-                             <th> Nro serie </th>
+                             <th> Nº serie </th>
                              <th> Marca     </th>
                              <th> Calibre   </th>
                              <th> Modelo    </th>
@@ -155,11 +155,11 @@
 
                      <thead style='text-align: center; cursor: pointer;'>
                          <tr>      
-                             <th> Nro serie     </th>
+                             <th> Nº serie     </th>
                              <th> Marca         </th>
                              <th> Calibre       </th>
                              <th> Modelo        </th>
-                             <th> Nro accesorio </th>
+                             <th> Nº accesorio </th>
                          </tr>
                      </thead>
 

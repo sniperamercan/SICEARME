@@ -49,7 +49,7 @@
                     data: "fecha="+fecha+"&unidad_recibe="+unidad_recibe+"&representante_sma="+representante_sma+"&representante_unidad="+representante_unidad+"&supervision="+supervision+"&observaciones="+observaciones,
                     success: function(data){
                         if(data[0] == "1"){            
-                            jAlert("El acta fue modificada con exito", "Correcto", function() { irAFrame('<?php echo base_url('mb_actas_alta'); ?>','Abastecimiento >> Modificar >> Acta alta'); });
+                            jAlert("El acta fue modificada con exito", "Correcto", function() { irAFrame('<?php echo base_url('mb_actas_alta'); ?>','Abastecimiento >> Modificar/Anular >> Actas de alta'); });
                         }else{
                             jAlert(data, "Error");
                         }                            
@@ -58,7 +58,7 @@
             }
             
             function volverListado() {
-                irAFrame('<?php echo base_url('mb_actas_alta'); ?>','Abastecimiento >> Modificar >> Acta alta');
+                irAFrame('<?php echo base_url('mb_actas_alta'); ?>','Abastecimiento >> Modificar/Anular >> Actas de alta');
             }
             
             function cargoMarcas(nro_serie) {
@@ -279,37 +279,37 @@
 
         <div>			
 
-            <h1> Modificar actas de alta </h1>    
+            <h1> Modificar acta de alta </h1>    
             
             <fieldset>	
 
                 <dl>
-                <dt><label for="fecha"> Fecha </label></dt>
+                <dt><label for="fecha"> Fecha <font color="red">*</font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="fecha" class="text" value="<?php echo $fecha; ?>" /></dd>
                 </dl>                
                 
                 <dl> 		
-                <dt><label for="unidad_entrega"> Unidad entrega </label></dt>	
+                <dt><label for="unidad_entrega"> Unidad entrega <font color="red">*</font> </label></dt>	
                 <dd><input type="text" id="unidad_entrega" class="txtautomatico" readonly="readonly" value="S.M.A" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="unidad_recibe"> Unidad recibe </label></dt>	
+                <dt><label for="unidad_recibe"> Unidad recibe <font color="red">*</font> </label></dt>	
                 <dd><select id="unidad_recibe"> <?php echo $unidades; ?> </select></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="representante_sma"> Repr SMA </label></dt>	
+                <dt><label for="representante_sma"> Repr. SMA <font color="red">*</font> </label></dt>	
                 <dd><input type="text" id="representante_sma" class="text" value="<?php echo $representante_sma; ?>" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="representante_unidad"> Repr unidad </label></dt>	
+                <dt><label for="representante_unidad"> Repr. unidad <font color="red">*</font> </label></dt>	
                 <dd><input type="text" id="representante_unidad" class="text" value="<?php echo $representante_unidad; ?>" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="supervision"> Supervision </label></dt>	
+                <dt><label for="supervision"> Supervisor <font color="red">*</font> </label></dt>	
                 <dd><input type="text" id="supervision" class="text" value="<?php echo $supervision; ?>" /></dd> 					
                 </dl>                
  
@@ -318,12 +318,12 @@
                 <dd><textarea id="observaciones"> <?php echo $observaciones ?> </textarea></dd> 					
                 </dl>
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> Armamento a entregar </p>
                 
                 <dl> 		
-                <dt><label for="nro_serie"> Nro serie </label></dt>	
+                <dt><label for="nro_serie"> Nº serie </label></dt>	
                 <dd><select id="nro_serie" onchange="cargoMarcas(this.value);"> <?php echo $nro_series; ?> </select> <img style="cursor: pointer;" onclick="busquedaFichas();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
@@ -344,12 +344,12 @@
                 
                 <button style="margin-right: 20px;" onclick="agregarFicha();"> Agregar armamento </button>     
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> Accesorios a entregar </p>
                 
                 <dl> 		
-                <dt><label for="nro_serie_accesorio"> Nro serie </label></dt>	
+                <dt><label for="nro_serie_accesorio"> Nº serie </label></dt>	
                 <dd><select id="nro_serie_accesorio" onchange="cargoMarcasAccesorios(this.value);"> <?php echo $nro_series_accesorios; ?> </select> <img style="cursor: pointer;" onclick="busquedaAccesorios();" src="<?php echo base_url(); ?>images/search.png" /></dd> 					
                 </dl>
                 
@@ -369,7 +369,7 @@
                 </dl>
                 
                 <dl> 		
-                <dt><label for="nro_accesorio"> Nro accesorio </label></dt>	
+                <dt><label for="nro_accesorio"> Nº accesorio </label></dt>	
                 <dd><select id="nro_accesorio"> </select></dd> 					
                 </dl>                
                 
@@ -395,7 +395,7 @@
                             <table> 
                                 <thead>
                                     <tr>
-                                        <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> </th>
+                                        <th> Nº serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> </th>
                                     </tr>
                                 </thead>
                                 <tbody id="entregas_fichas"> <?php echo $entrega_fichas; ?> </tbody>
@@ -425,7 +425,7 @@
                             <table> 
                                 <thead>
                                     <tr> 
-                                        <th> Nro serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Nro accesorio </th> <th> </th>
+                                        <th> Nº serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Nº accesorio </th> <th> </th>
                                     </tr>
                                 </thead>
                                 <tbody id="entregas_accesorios"> <?php echo $entrega_accesorios; ?> </tbody>

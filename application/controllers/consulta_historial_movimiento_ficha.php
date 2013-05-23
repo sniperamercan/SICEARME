@@ -129,10 +129,10 @@ class consulta_historial_movimiento_ficha extends CI_Controller {
 
                     <thead style="text-align: center; cursor: pointer;">
                         <tr>      
-                            <th> Nº acta      </th>
-                            <th> Unidad or.   </th>
-                            <th> Unidad de.   </th>
-                            <th> Fecha        </th>
+                            <th> Nº acta          </th>
+                            <th> Unidad entrega   </th>
+                            <th> Unidad recibe    </th>
+                            <th> Fecha            </th>
                         </tr>
                     </thead>
 
@@ -200,10 +200,10 @@ class consulta_historial_movimiento_ficha extends CI_Controller {
 
                     <thead style="text-align: center; cursor: pointer;">
                         <tr>      
-                            <th> Nº acta      </th>
-                            <th> Unidad or.   </th>
-                            <th> Unidad de.   </th>
-                            <th> Fecha        </th>
+                            <th> Nº acta          </th>
+                            <th> Unidad entrega   </th>
+                            <th> Unidad recibe    </th>
+                            <th> Fecha            </th>
                         </tr>
                     </thead>
 

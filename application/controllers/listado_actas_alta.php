@@ -235,7 +235,7 @@ class listado_actas_alta extends CI_Controller {
         
         $concat .= '
             <tr>
-                <th onclick="orderBy(0)"> Nro acta             </th>
+                <th onclick="orderBy(0)"> Nº acta              </th>
                 <th onclick="orderBy(1)"> Fecha                </th>
                 <th onclick="orderBy(2)"> Unidad entrega       </th>
                 <th onclick="orderBy(3)"> Unidad recibe        </th>
@@ -346,7 +346,7 @@ class listado_actas_alta extends CI_Controller {
             
             $concat = "<p style='font-weight: bold;'> Entregas asociadas al nro de acta - ".$nro_acta." </p>";
             
-            $concat .= "<div class='datagrid'><table><thead><th> Nro serie </th><th> Marca </th><th> Calibre </th><th> Modelo </th></thead>";
+            $concat .= "<div class='datagrid'><table><thead><th> Nº serie </th><th> Marca </th><th> Calibre </th><th> Modelo </th></thead>";
            
             /*
              * $retorno[] = $row->nro_serie;
@@ -373,7 +373,7 @@ class listado_actas_alta extends CI_Controller {
             
             $concat .= "<br /> <br />";
             
-            $concat .= "<div class='datagrid'><table><thead><th> Nro serie </th><th> Marca </th><th> Calibre </th><th> Modelo </th><th> Nro accesorio </th></thead>";
+            $concat .= "<div class='datagrid'><table><thead><th> Nº serie </th><th> Marca </th><th> Calibre </th><th> Modelo </th><th> Nº accesorio </th></thead>";
            
             /*
              * $retorno[] = $row->nro_serie;

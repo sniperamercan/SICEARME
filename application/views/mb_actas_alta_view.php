@@ -133,7 +133,7 @@
                     url: "<?php echo base_url("mb_actas_alta/editarActa"); ?>",
                     data: "nro_acta="+nro_acta,
                     success: function(){
-                        irAFrame('<?php echo base_url('modificar_actas_alta'); ?>','Abastecimiento >> Modificar >> Actas altas');
+                        irAFrame('<?php echo base_url('modificar_actas_alta'); ?>','Abastecimiento >> Modificar/Anular >> Actas de alta');
                     }                  
                 });  
             }

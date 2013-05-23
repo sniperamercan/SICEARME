@@ -307,17 +307,17 @@
                 </dl>
                 
                 <dl> 		
-                <dt><label for="representante_sma"> Repr SMA <font color="red">*</font> </label></dt>	
+                <dt><label for="representante_sma"> Repr. SMA <font color="red">*</font> </label></dt>	
                 <dd><input type="text" id="representante_sma" class="text" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="representante_unidad"> Repr unidad <font color="red">*</font> </label></dt>	
+                <dt><label for="representante_unidad"> Repr. unidad <font color="red">*</font> </label></dt>	
                 <dd><input type="text" id="representante_unidad" class="text" /></dd> 					
                 </dl>
                 
                 <dl> 		
-                <dt><label for="supervision"> Supervisión <font color="red">*</font> </label></dt>	
+                <dt><label for="supervision"> Supervisor <font color="red">*</font> </label></dt>	
                 <dd><input type="text" id="supervision" class="text" /></dd> 					
                 </dl>                
  

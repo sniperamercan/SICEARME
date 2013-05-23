@@ -222,11 +222,11 @@
                         <th onclick="orderBy(2)"> Unidad entrega   </th>
                         <th onclick="orderBy(3)"> Unidad recibe    </th>
                         <th onclick="orderBy(4)"> Rep. SMA         </th>
-                        <th onclick="orderBy(5)"> Rep U            </th>
+                        <th onclick="orderBy(5)"> Rep Unidad       </th>
                         <th onclick="orderBy(6)"> Supervisor       </th>
                         <th onclick="orderBy(7)"> Estado           </th>
                         <th> Obs.        </th>
-                        <th> Devolucion  </th>
+                        <th> Devolución  </th>
                         <th> Activar     </th>
                         <th> Imprimir    </th>
                         <th> Editar      </th>

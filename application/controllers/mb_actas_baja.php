@@ -352,7 +352,7 @@ class mb_actas_baja extends CI_Controller {
             
             $concat = "<p style='font-weight: bold;'> Devoluciones asociadas al nro de acta - ".$nro_acta." </p>";
             
-            $concat .= "<div class='datagrid'><table><thead><th> Nro serie </th><th> Marca </th><th> Calibre </th><th> Modelo </th></thead>";
+            $concat .= "<div class='datagrid'><table><thead><th> Nº serie </th><th> Marca </th><th> Calibre </th><th> Modelo </th></thead>";
            
             /*
              * $retorno[] = $row->nro_serie;
@@ -379,7 +379,7 @@ class mb_actas_baja extends CI_Controller {
             
             $concat .= "<br /> <br />";
             
-            $concat .= "<div class='datagrid'><table><thead><th> Nro serie </th><th> Marca </th><th> Calibre </th><th> Modelo </th><th> Nro accesorio </th></thead>";
+            $concat .= "<div class='datagrid'><table><thead><th> Nº serie </th><th> Marca </th><th> Calibre </th><th> Modelo </th><th> Nº accesorio </th></thead>";
            
             /*
              * $retorno[] = $row->nro_serie;
