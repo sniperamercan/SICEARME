@@ -252,7 +252,7 @@
         <dt><label for="modelo"> Modelo </label></dt>	
         <dd><input readonly="readonly" type="text" id="modelo" class="txtautomatico" /></dd> 	
         
-        <br /><br /><br />  
+        <br /><br /><br /><br /><br /><br />  
         
         &nbsp; <button onclick="impresion();"> Imprimir </button>              
         

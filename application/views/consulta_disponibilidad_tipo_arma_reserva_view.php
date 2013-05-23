@@ -128,9 +128,9 @@
         <dd><input readonly="readonly" type="text" id="nro_catalogo" class="txtautomatico" /> </dd>
         </dl>     
         
-        <br /><br /><br /> 
+        <br /><br /><br /><br /><br /><br />
         
-        &emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         

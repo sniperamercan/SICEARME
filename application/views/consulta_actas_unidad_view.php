@@ -130,14 +130,14 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Unidad - </label> </td> <td>  <select id="unidad"> <?php echo $unidades; ?> </select> </td>
+                <td><label> Unidad </label> </td> <td>  <select id="unidad"> <?php echo $unidades; ?> </select> </td>
             </tr>
             
         </table>
         
         <br /> 
         
-        &emsp; <button onclick="filtrarConsulta();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="filtrarConsulta();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         
