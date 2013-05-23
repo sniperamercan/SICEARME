@@ -5,101 +5,95 @@
         
         <style>
             
-            button.reparada {
-                    font-family: Arial, Helvetica, sans-serif;
-                    font-size: 14px;
-                    color: #ffffff;
-                    padding: 10px 20px;
-                    background: -moz-linear-gradient(
-                            top,
-                            #42ff42 0%,
-                            #146600);
-                    background: -webkit-gradient(
-                            linear, left top, left bottom, 
-                            from(#42ff42),
-                            to(#146600));
-                    -moz-border-radius: 10px;
-                    -webkit-border-radius: 10px;
-                    border-radius: 10px;
-                    border: 1px solid #134201;
-                    -moz-box-shadow:
-                            0px 1px 3px rgba(000,000,000,0.5),
-                            inset 0px 0px 2px rgba(255,255,255,1);
-                    -webkit-box-shadow:
-                            0px 1px 3px rgba(000,000,000,0.5),
-                            inset 0px 0px 2px rgba(255,255,255,1);
-                    box-shadow:
-                            0px 1px 3px rgba(000,000,000,0.5),
-                            inset 0px 0px 2px rgba(255,255,255,1);
-                    text-shadow:
-                            0px -1px 0px rgba(000,000,000,0.4),
-                            0px 1px 0px rgba(255,255,255,0.3);
-                    margin-left: 0px;
+            .reparada {
+                    -moz-box-shadow:inset 0px 1px 0px 0px #a4e271;
+                    -webkit-box-shadow:inset 0px 1px 0px 0px #a4e271;
+                    box-shadow:inset 0px 1px 0px 0px #a4e271;
+                    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #89c403), color-stop(1, #77a809) );
+                    background:-moz-linear-gradient( center top, #89c403 5%, #77a809 100% );
+                    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#89c403', endColorstr='#77a809');
+                    background-color:#89c403;
+                    -moz-border-radius:6px;
+                    -webkit-border-radius:6px;
+                    border-radius:6px;
+                    border:1px solid #74b807;
+                    display:inline-block;
+                    color:#ffffff;
+                    font-family:arial;
+                    font-size:20px;
+                    font-weight:bold;
+                    padding:6px 24px;
+                    text-decoration:none;
+                    text-shadow:1px 1px 0px #528009;
+            }.reparada:hover {
+                    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #77a809), color-stop(1, #89c403) );
+                    background:-moz-linear-gradient( center top, #77a809 5%, #89c403 100% );
+                    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77a809', endColorstr='#89c403');
+                    background-color:#77a809;
+            }.reparada:active {
+                    position:relative;
+                    top:1px;
             }
           
-            button.reparada_fallas {
-                    font-family: Arial, Helvetica, sans-serif;
-                    font-size: 14px;
-                    color: #ffffff;
-                    padding: 10px 20px;
-                    background: -moz-linear-gradient(
-                            top,
-                            #f7ff05 0%,
-                            #6d7a0c);
-                    background: -webkit-gradient(
-                            linear, left top, left bottom, 
-                            from(#f7ff05),
-                            to(#6d7a0c));
-                    -moz-border-radius: 10px;
-                    -webkit-border-radius: 10px;
-                    border-radius: 10px;
-                    border: 1px solid #66500c;
-                    -moz-box-shadow:
-                            0px 1px 3px rgba(000,000,000,0.5),
-                            inset 0px 0px 2px rgba(255,255,255,1);
-                    -webkit-box-shadow:
-                            0px 1px 3px rgba(000,000,000,0.5),
-                            inset 0px 0px 2px rgba(255,255,255,1);
-                    box-shadow:
-                            0px 1px 3px rgba(000,000,000,0.5),
-                            inset 0px 0px 2px rgba(255,255,255,1);
-                    text-shadow:
-                            0px -1px 0px rgba(000,000,000,0.4),
-                            0px 1px 0px rgba(255,255,255,0.3);
-                    margin-left: 0px;
+            .reparada_fallas {
+                    -moz-box-shadow:inset 0px 1px 0px 0px #fed897;
+                    -webkit-box-shadow:inset 0px 1px 0px 0px #fed897;
+                    box-shadow:inset 0px 1px 0px 0px #fed897;
+                    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f6b33d), color-stop(1, #d29105) );
+                    background:-moz-linear-gradient( center top, #f6b33d 5%, #d29105 100% );
+                    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f6b33d', endColorstr='#d29105');
+                    background-color:#f6b33d;
+                    -moz-border-radius:6px;
+                    -webkit-border-radius:6px;
+                    border-radius:6px;
+                    border:1px solid #eda933;
+                    display:inline-block;
+                    color:#ffffff;
+                    font-family:arial;
+                    font-size:20px;
+                    font-weight:bold;
+                    padding:6px 24px;
+                    text-decoration:none;
+                    text-shadow:1px 1px 0px #cd8a15;
+            }.reparada_fallas:hover {
+                    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #d29105), color-stop(1, #f6b33d) );
+                    background:-moz-linear-gradient( center top, #d29105 5%, #f6b33d 100% );
+                    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#d29105', endColorstr='#f6b33d');
+                    background-color:#d29105;
+            }.reparada_fallas:active {
+                    position:relative;
+                    top:1px;
             }
             
-            button.fallas {
-                    font-family: Arial, Helvetica, sans-serif;
-                    font-size: 14px;
-                    color: #ffffff;
-                    padding: 10px 20px;
-                    background: -moz-linear-gradient(
-                            top,
-                            #ff0d05 0%,
-                            #4f1414);
-                    background: -webkit-gradient(
-                            linear, left top, left bottom, 
-                            from(#ff0d05),
-                            to(#4f1414));
-                    -moz-border-radius: 10px;
-                    -webkit-border-radius: 10px;
-                    border-radius: 10px;
-                    border: 1px solid #8a3030;
-                    -moz-box-shadow:
-                            0px 1px 3px rgba(000,000,000,0.5),
-                            inset 0px 0px 2px rgba(255,255,255,1);
-                    -webkit-box-shadow:
-                            0px 1px 3px rgba(000,000,000,0.5),
-                            inset 0px 0px 2px rgba(255,255,255,1);
-                    box-shadow:
-                            0px 1px 3px rgba(000,000,000,0.5),
-                            inset 0px 0px 2px rgba(255,255,255,1);
-                    text-shadow:
-                            0px -1px 0px rgba(000,000,000,0.4),
-                            0px 1px 0px rgba(255,255,255,0.3);
-                    margin-left: 0px;
-            }            
+            .fallas {
+                    -moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
+                    -webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;
+                    box-shadow:inset 0px 1px 0px 0px #f29c93;
+                    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100) );
+                    background:-moz-linear-gradient( center top, #fe1a00 5%, #ce0100 100% );
+                    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100');
+                    background-color:#fe1a00;
+                    -moz-border-radius:6px;
+                    -webkit-border-radius:6px;
+                    border-radius:6px;
+                    border:1px solid #d83526;
+                    display:inline-block;
+                    color:#ffffff;
+                    font-family:arial;
+                    font-size:20px;
+                    font-weight:bold;
+                    padding:6px 24px;
+                    text-decoration:none;
+                    text-shadow:1px 1px 0px #b23e35;
+            }.fallas:hover {
+                    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00) );
+                    background:-moz-linear-gradient( center top, #ce0100 5%, #fe1a00 100% );
+                    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00');
+                    background-color:#ce0100;
+            }.fallas:active {
+                    position:relative;
+                    top:1px;
+            }           
             
             .datagrid table { border-collapse: collapse; text-align: left; width: 100%; } 
             .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: auto; border: 1px solid #8C8C8C; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
@@ -124,11 +118,11 @@
         <script type="text/javascript">
      
             $(document).ready(function() {
-                $("input:submit").button();
+                //$("input:submit").button();
                 $("button").button(); 
-                $("input:button").button(); 
-                $("#fecha1").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
-                $("#fecha2").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
+                //$("input:button").button(); 
+                //$("#fecha1").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
+                //$("#fecha2").datepicker({ dateFormat: "yy-mm-dd", monthNames: ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"], dayNames: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"], dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"], changeYear: true, changeMonth: true, dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"], monthNamesShort: ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"] } );
                 //cargoConsulta();
             });	     
      
