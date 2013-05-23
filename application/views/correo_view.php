@@ -87,7 +87,7 @@
                 <table cellpadding="3" cellspacing="3" id="correos" width="100%" style="font-size: 13px;"> 
 
                     <tr style="text-align: center; background: #F2F5A9; font-weight: bold;">
-                        <td>  </td> <td> Envio </td> <td> Asunto </td> <td> Fecha </td> <td> </td>
+                        <td>  </td> <td> Envío </td> <td> Asunto </td> <td> Fecha </td> <td> </td>
                         <?php echo $correo; ?>
                     </tr>    
 
