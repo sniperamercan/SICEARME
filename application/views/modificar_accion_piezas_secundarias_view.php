@@ -61,9 +61,9 @@
                    url: "<?php base_url(); ?>modificar_accion_piezas_secundarias/volver",
                    success: function(data) {
                         if(data == 0) {
-                            irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Modificar >> Acciones de una orden');
+                            irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Modificar/Anular >> Acciones de una orden');
                         }else {
-                            irAFrame('<?php echo base_url('mb_acciones_ordenes_trabajo'); ?>','Taller armamento >> Modificar >> Acciones de una orden');
+                            irAFrame('<?php echo base_url('mb_acciones_ordenes_trabajo'); ?>','Taller armamento >> Modificar/Anular >> Acciones de una orden');
                         }
                    }
                 });
@@ -103,7 +103,7 @@
                             url: "<?php base_url(); ?>modificar_accion_piezas_secundarias/eliminarAccionSimple",
                             data: "nro_cambio="+nro_cambio,
                             success: function(data){
-                                irAFrame('<?php echo base_url('modificar_accion_piezas_secundarias'); ?>','Taller armamento >> Accion >> Ordenes de trabajo');
+                                irAFrame('<?php echo base_url('modificar_accion_piezas_secundarias'); ?>','Taller armamento >> Acción >> Órdenes de trabajo');
                           }
                         });                        
                     }
@@ -119,37 +119,37 @@
 
         <div>			
 
-            <h1> Modifcar Accion de cambios de piezas secundarias de un armamento </h1>    
+            <h1> Modifcar acción de cambio de piezas secundarias </h1>    
             
             <fieldset>	
             
                 <dl>
-                <dt><label> Orden de trabajo </label></dt>
-                <dd><label> Nro - <?php echo $nro_orden ?>  </label></dd>
+                <dt><label> Nº orden </label></dt>
+                <dd><label> <?php echo $nro_orden ?>  </label></dd>
                 </dl>                 
                 
                 <dl>
-                <dt><label> Buscar repuesto </label></dt>
+                <dt><label> Buscar repuesto <font color="red"> * </font> </label></dt>
                 <dd><img style="cursor: pointer;" onclick="busquedaRepuestos();" src="<?php echo base_url(); ?>images/search.png" /> </dd>
                 </dl>                 
                 
                 <dl>
-                <dt><label for="nro_parte"> Nro parte <font color="red"> * </font> </label></dt>
+                <dt><label for="nro_parte"> Nº parte </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_parte" class="txtautomatico" /> </dd>
                 </dl>                 
 
                 <dl>
-                <dt><label for="nombre_parte"> Nombre parte <font color="red"> * </font> </label></dt>
+                <dt><label for="nombre_parte"> Nombre parte </label></dt>
                 <dd><input readonly="readonly" type="text" id="nombre_parte" class="txtautomatico" /></dd>
                 </dl> 
                 
                 <dl>
-                <dt><label for="cant_actual"> Cant actual </label></dt>
+                <dt><label for="cant_actual"> Cant. actual </label></dt>
                 <dd><input readonly="readonly" type="text" id="cant_actual" class="txtautomatico" /></dd>
                 </dl> 
                 
                 <dl>
-                <dt><label for="cant_usar"> Cant a usar <font color="red"> * </font> </label></dt>
+                <dt><label for="cant_usar"> Cant. a usar <font color="red"> * </font> </label></dt>
                 <dd><input type="text" id="cant_usar" class="number" /></dd>
                 </dl> 
                 
@@ -174,7 +174,7 @@
                             <table> 
                                 <thead style="text-align: center;">
                                     <tr>
-                                        <th> Nro cambio </th> <th> Nro parte </th> <th> Nombre </th> <th> Cantidad </th> <th> Borrar </th> 
+                                        <th> Nº cambio </th> <th> Nº parte </th> <th> Nombre </th> <th> Cantidad </th> <th> Borrar </th> 
                                     </tr>
                                 </thead>
                                 <tbody id="acciones"> <?php echo $acciones; ?> </tbody>

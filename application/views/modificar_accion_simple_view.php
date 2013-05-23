@@ -84,9 +84,9 @@
                    url: "<?php base_url(); ?>modificar_accion_simple/volver",
                    success: function(data) {
                         if(data == 0) {
-                            irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Modificar >> Acciones de una orden');
+                            irAFrame('<?php echo base_url('accion_ordenes_trabajo'); ?>','Taller armamento >> Modificar/Anular >> Acciones de una orden');
                         }else {
-                            irAFrame('<?php echo base_url('mb_acciones_ordenes_trabajo'); ?>','Taller armamento >> Modificar >> Acciones de una orden');
+                            irAFrame('<?php echo base_url('mb_acciones_ordenes_trabajo'); ?>','Taller armamento >> Modificar/Anular >> Acciones de una orden');
                         }
                    }
                 });
@@ -101,7 +101,7 @@
 
         <div>			
 
-            <h1> Modificar accion simple </h1>    
+            <h1> Modificar acción simple </h1>    
             
             <fieldset>	
 
@@ -111,16 +111,16 @@
                 </dl>                
                 
                 <dl>
-                <dt><label for="nro_orden"> Nro orden <font color="red"> * </font> </label></dt>
+                <dt><label for="nro_orden"> Nº orden <font color="red"> * </font> </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_orden" class="txtautomatico" value="<?php echo $nro_orden; ?>" /></dd>
                 </dl>                 
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <p class="subtituloform"> Datos del arma </p>
                 
                 <dl>
-                <dt><label for="nro_serie"> Nro serie </label></dt>
+                <dt><label for="nro_serie"> Nº serie </label></dt>
                 <dd><input readonly="readonly" type="text" id="nro_serie" class="txtautomatico" value="<?php echo $nro_serie; ?>" /></dd>
                 </dl>     
                 
@@ -144,10 +144,10 @@
                 <dd><input readonly="readonly" type="text" id="tipo_arma" class="txtautomatico" value="<?php echo $tipo_arma; ?>" /></dd>
                 </dl>                 
                 
-                <p><img src="<?php echo base_url() ?>images/barra.png" /></p>
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
                 <dl>
-                <dt><label for="seccion"> Seccion <font color="red"> * </font> </label></dt>
+                <dt><label for="seccion"> Sección <font color="red"> * </font> </label></dt>
                 <dd><select id="seccion"> <?php echo $secciones ?> </select> <img style="cursor: pointer;" onclick="crearSeccion();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
                 </dl>       
                 
@@ -159,7 +159,7 @@
             </fieldset>	
 
             <fieldset class="action">	
-                <button style="margin-right: 20px;" onclick="modificarAccionSimple();"> Modificar accion simple </button> 
+                <button style="margin-right: 20px;" onclick="modificarAccionSimple();"> Modificar acción simple </button> 
                 <button style="margin-right: 20px;" onclick="volver();"> Volver </button> 
             </fieldset>  
             
