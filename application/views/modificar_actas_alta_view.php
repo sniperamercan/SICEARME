@@ -395,7 +395,7 @@
                             <table> 
                                 <thead>
                                     <tr>
-                                        <th> Nº serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> </th>
+                                        <th> Nº serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Borrar </th>
                                     </tr>
                                 </thead>
                                 <tbody id="entregas_fichas"> <?php echo $entrega_fichas; ?> </tbody>
@@ -425,7 +425,7 @@
                             <table> 
                                 <thead>
                                     <tr> 
-                                        <th> Nº serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Nº accesorio </th> <th> </th>
+                                        <th> Nº serie </th> <th> Marca </th> <th> Modelo </th> <th> Calibre </th> <th> Nº accesorio </th> <th> Borrar </th>
                                     </tr>
                                 </thead>
                                 <tbody id="entregas_accesorios"> <?php echo $entrega_accesorios; ?> </tbody>

@@ -310,7 +310,7 @@
                     <table> 
                         <thead>
                             <tr>
-                                <th> Nº accesorio </th> <th> Tipo </th> <th> Descripción </th> <th> </th>
+                                <th> Nº accesorio </th> <th> Tipo </th> <th> Descripción </th> <th> Borrar </th>
                             </tr>
                         </thead>
                         <tbody id="accesorios"> <?php echo $accesorios; ?> </tbody> 
@@ -347,7 +347,7 @@
                     <table> 
                         <thead>
                             <tr>
-                                <th> Nº pieza </th> <th> Tipo </th> <th> Descripción </th> <th> </th>
+                                <th> Nº pieza </th> <th> Tipo </th> <th> Descripción </th> <th> Borrar </th>
                             </tr>
                         </thead>
                         <tbody id="piezas"> <?php echo $piezas; ?> </tbody> 
