@@ -176,6 +176,7 @@
                     <td style="border: none; width: 30%" align="right">
                         <div>
                             <div>
+                              <a onclick='abrirManual();' style='cursor: pointer;'> <img title='Manual de usuario' src='<?php echo base_url('images/manual.png'); ?>'/></a>
                               <a onclick='$.colorbox({href:"<?php echo base_url('modificar_clave'); ?>", top:true, iframe:false, innerWidth:800, innerHeight:300, title:"MODIFICAR CLAVE"});'><img style='cursor: pointer;' src='<?php echo base_url('images/key.png'); ?>' title="Modificar clave" /></a>    
                               <a onclick='informacionUsuario();' style='cursor: pointer;'> <img title='Información usuario' src='<?php echo base_url('images/user.png'); ?>'/></a>
                               <a onclick='cerrarSesion();'><img style='cursor: pointer;' title='Salir del sistema' style="cursor: pointer;" src="<?php echo base_url(); ?>images/exit.png" /></a>                                     
