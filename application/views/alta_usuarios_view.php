@@ -77,18 +77,22 @@
                     i++;
                 }                
                 
-                $.ajax({
-                    type: "post",  
-                    dataType: "json",
-                    url: "<?php base_url(); ?>alta_usuarios/validarDatos",
-                    data: "usuario="+usuario+"&nombre="+nombre+"&apellido="+apellido+"&clave="+clave+"&persmisos="+JSON.stringify(permisos),
-                    success: function(data){
-                        if(data == "1"){            
-                            jAlert("Alta de usuario correcta", "Correcto", function() { irAFrame('<?php echo base_url('alta_usuarios'); ?>','Administracion >> Alta usuarios'); });
-                        }else{
-                            jAlert(data, "Error");
-                        }                            
-                  }
+                jConfirm('Estas seguro que desea ingresar dicho usuario?', 'ALTA USUARIO', function(r) {
+                    if(r) {           
+                        $.ajax({
+                            type: "post",  
+                            dataType: "json",
+                            url: "<?php base_url(); ?>alta_usuarios/validarDatos",
+                            data: "usuario="+usuario+"&nombre="+nombre+"&apellido="+apellido+"&clave="+clave+"&persmisos="+JSON.stringify(permisos),
+                            success: function(data){
+                                if(data == "1"){            
+                                    jAlert("Alta de usuario correcta", "Correcto", function() { irAFrame('<?php echo base_url('alta_usuarios'); ?>','Administración >> Alta usuarios'); });
+                                }else{
+                                    jAlert(data, "Error");
+                                }                            
+                          }
+                        });  
+                    }
                 });               
             }
         </script>
@@ -120,7 +124,7 @@
                 
                 <dl>
                 <dt><label for="clave"> Clave </label></dt>
-                <dd><input type="text" id="clave" class="text" /></dd>
+                <dd><input type="password" id="clave" class="text" /></dd>
                 </dl>                 
                 
                 <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
