@@ -89,7 +89,8 @@
                     url: "<?php echo base_url("busqueda_accesorios/seteoSeleccion"); ?>",
                     data: "nro_serie="+nro_serie+"&marca="+marca+"&calibre="+calibre+"&modelo="+modelo+"&nro_accesorio="+nro_accesorio,
                     success: function(){
-                        jAlert("Nro serie - "+nro_serie+", Marca - "+marca+", Calibre - "+calibre+", Modelo - "+modelo+" Nro accesorio - "+nro_accesorio+" seleccionados", "SELECCION", parent.$.fn.colorbox.close());                        
+                        parent.$.fn.colorbox.close();
+                        //jAlert("Nro serie - "+nro_serie+", Marca - "+marca+", Calibre - "+calibre+", Modelo - "+modelo+" Nro accesorio - "+nro_accesorio+" seleccionados", "SELECCION", parent.$.fn.colorbox.close());                        
                     }                  
                 });            
             }

@@ -88,7 +88,8 @@
                     url: "<?php echo base_url("busqueda_ordenes_trabajo/seteoSeleccion"); ?>",
                     data: "nro_orden="+nro_orden,
                     success: function(){
-                        jAlert("Nro de orden seleccionado - "+nro_orden, "SELECCION", parent.$.fn.colorbox.close());                        
+                        parent.$.fn.colorbox.close();
+                        //jAlert("Nro de orden seleccionado - "+nro_orden, "SELECCION", parent.$.fn.colorbox.close());                        
                     }                  
                 });            
             }

@@ -87,7 +87,8 @@
                     url: "<?php echo base_url("busqueda_catalogos/seteoSeleccion"); ?>",
                     data: "nro_interno="+nro_interno,
                     success: function(){
-                        jAlert("Nro interno - "+nro_interno+" seleccionado", "SELECCION", parent.$.fn.colorbox.close());                        
+                        parent.$.fn.colorbox.close();
+                        //jAlert("Nro interno - "+nro_interno+" seleccionado", "SELECCION", parent.$.fn.colorbox.close());                        
                     }                  
                 });            
             }

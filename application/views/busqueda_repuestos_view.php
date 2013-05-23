@@ -86,7 +86,8 @@
                     url: "<?php echo base_url("busqueda_repuestos/seteoSeleccion"); ?>",
                     data: "nro_parte="+nro_parte+"&nombre_parte="+nombre_parte+"&nro_catalogo="+nro_catalogo,
                     success: function(){
-                        jAlert("Repuestos seleccionado Nro de parte - "+nro_parte+" Nombre - "+nombre_parte+" Nro catalogo -"+nro_catalogo, "SELECCION", parent.$.fn.colorbox.close());                        
+                        parent.$.fn.colorbox.close();
+                        //jAlert("Repuestos seleccionado Nro de parte - "+nro_parte+" Nombre - "+nombre_parte+" Nro catalogo -"+nro_catalogo, "SELECCION", parent.$.fn.colorbox.close());                        
                     }                  
                 });            
             }

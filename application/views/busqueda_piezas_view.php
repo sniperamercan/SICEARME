@@ -85,7 +85,8 @@
                     url: "<?php echo base_url("busqueda_piezas/seteoSeleccion"); ?>",
                     data: "nro_pieza="+nro_pieza,
                     success: function(){
-                        jAlert("Nro pieza - "+nro_pieza+" seleccionado", "SELECCION", parent.$.fn.colorbox.close());                        
+                        parent.$.fn.colorbox.close();
+                        //jAlert("Nro pieza - "+nro_pieza+" seleccionado", "SELECCION", parent.$.fn.colorbox.close());                        
                     }                  
                 });            
             }
