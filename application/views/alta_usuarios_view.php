@@ -123,8 +123,8 @@
                 <dd><input type="text" id="clave" class="text" /></dd>
                 </dl>                 
                 
-                <img src="<?php base_url() ?>images/barra.png" />
-                
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
+   
                 <p class="subtituloform"> Permisos </p>
                 
                 <?php echo $permisos_usuario ?> 

@@ -43,15 +43,15 @@ class mb_usuarios extends CI_Controller {
         
         $concat .= "
             <tr>      
-                <th style='text-align: center;'> Usuario      </th>
-                <th style='text-align: center;'> Nombre       </th>
-                <th style='text-align: center;'> Apellido     </th>
-                <th style='text-align: center;'> Estado       </th>
-                <th style='text-align: center;'> Permisos     </th>
+                <th style='text-align: center;'> Usuario           </th>
+                <th style='text-align: center;'> Nombre            </th>
+                <th style='text-align: center;'> Apellido          </th>
+                <th style='text-align: center;'> Estado            </th>
+                <th style='text-align: center;'> Permisos          </th>
                 <th style='text-align: center;'> Inactivar/Activar </th>
-                <th style='text-align: center;'> Vaciar clave </th>
-                <th style='text-align: center;'> Editar       </th>
-                <th style='text-align: center;'> Eliminar     </th>
+                <th style='text-align: center;'> Vaciar clave      </th>
+                <th style='text-align: center;'> Editar            </th>
+                <th style='text-align: center;'> Borrar            </th>
             </tr>   
         ";
         
@@ -166,7 +166,7 @@ class mb_usuarios extends CI_Controller {
         }else {
             $permisos = array();
             $permisos = $this->mb_usuarios_model->verPermisos($usuario);
-            $concat = "<p style='font-weight: bold;'> Permisos del usuario - ".$usuario." </p><div class='datagrid'><table><thead> <th> Perfil </th> <th> Descripcion </th> </thead>";
+            $concat = "<p style='font-weight: bold;'> Permisos del usuario - ".$usuario." </p><div class='datagrid'><table><thead> <th> Perfil </th> <th> Descripción </th> </thead>";
             
             $j = 0;
             

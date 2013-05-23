@@ -480,10 +480,10 @@
 
                         <li><a href="#"> Administración </a>
                             <ul>
-                                <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_usuarios'); ?>','Administracion >> Alta usuarios');"> Alta usuario </a></li>
-                                <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_usuarios'); ?>','Administracion >> Modificar usuarios');"> Modificar usuarios </a></li>
-                                <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_usuarios'); ?>','Administracion >> Listado usuarios');"> Listado usuarios </a></li>
-                                <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_logs_ingresos'); ?>','Administracion >> Ver logs ingresos');"> Ver logs ingresos </a></li>
+                                <li><a href="#" onclick="irAFrame('<?php echo base_url('alta_usuarios'); ?>','Administración >> Alta usuarios');"> Alta usuario </a></li>
+                                <li><a href="#" onclick="irAFrame('<?php echo base_url('mb_usuarios'); ?>','Administración >> Modificar usuarios');"> Modificar usuarios </a></li>
+                                <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_usuarios'); ?>','Administración >> Listado usuarios');"> Listado usuarios </a></li>
+                                <li><a href="#" onclick="irAFrame('<?php echo base_url('listado_logs_ingresos'); ?>','Administración >> Ver logs ingresos');"> Ver logs ingresos </a></li>
                             </ul>
                         </li>  
 
