@@ -5,7 +5,7 @@
         
         <style>
             .datagrid table { border-collapse: collapse; text-align: left; width: 100%; } 
-            .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: hidden; border: 1px solid #8C8C8C; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
+            .datagrid {font: normal 12px/150% Arial, Helvetica, sans-serif; background: #fff; overflow: auto; border: 1px solid #8C8C8C; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; }
             .datagrid table td, .datagrid table th { padding: 3px 10px; }
             
             .datagrid table thead th {background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #8C8C8C), color-stop(1, #7D7D7D) );background:-moz-linear-gradient( center top, #8C8C8C 5%, #7D7D7D 100% );filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#8C8C8C', endColorstr='#7D7D7D');background-color:#8C8C8C; color:#FFFFFF; font-size: 15px; font-weight: bold; border-left: 1px solid #A3A3A3; } 
@@ -191,13 +191,13 @@
         <table>
             
             <tr>
-                <td><label> &emsp; Nro acta - </label> </td> <td>  <input type="text" class="text" id="nro_acta" /></td>
-                <td><label> &emsp; Estado - </label> </td> <td>  <input type="text" class="text" id="estado" /></td>
+                <td><label> Nº acta  </label> </td> <td>  <input type="text" class="text" id="nro_acta" /></td>
+                <td><label> Estado   </label> </td> <td>  <input type="text" class="text" id="estado" /></td>
             </tr>
          
             <tr>
-                <td><label> &emsp; Fecha 1 - </label> </td> <td>  <input type="text" class="text" id="fecha1" /></td>
-                <td><label> &emsp; Fecha 2 - </label> </td> <td>  <input type="text" class="text" id="fecha2" /></td>
+                <td><label> Fecha desde </label> </td> <td>  <input type="text" class="text" id="fecha1" /></td>
+                <td><label> Fecha hasta </label> </td> <td>  <input type="text" class="text" id="fecha2" /></td>
             </tr>            
             
             
@@ -205,7 +205,7 @@
         
         <br /> 
         
-        &emsp; <button onclick="filtrar();"> Buscar </button> &emsp;&emsp; <button onclick="impresion();"> Imprimir </button>              
+        &nbsp; <button onclick="filtrar();"> Buscar </button> &nbsp;&nbsp; <button onclick="impresion();"> Imprimir </button>              
         
         <br /> 
         
@@ -217,20 +217,20 @@
 
                 <thead style='text-align: center; cursor: pointer;'>
                     <tr>      
-                        <th onclick="orderBy(0)"> N Acta  </th>
-                        <th onclick="orderBy(1)"> Fecha   </th>
-                        <th onclick="orderBy(2)"> U Ent   </th>
-                        <th onclick="orderBy(3)"> U Rece  </th>
-                        <th onclick="orderBy(4)"> Rep SMA </th>
-                        <th onclick="orderBy(5)"> Rep U   </th>
-                        <th onclick="orderBy(6)"> Super   </th>
-                        <th onclick="orderBy(7)"> Est     </th>
-                        <th> Obs  </th>
-                        <th> Dev  </th>
-                        <th> Act  </th>
-                        <th> Imp  </th>
-                        <th> Edi  </th>
-                        <th> Eli  </th>
+                        <th onclick="orderBy(0)"> Nº acta          </th>
+                        <th onclick="orderBy(1)"> Fecha            </th>
+                        <th onclick="orderBy(2)"> Unidad entrega   </th>
+                        <th onclick="orderBy(3)"> Unidad recibe    </th>
+                        <th onclick="orderBy(4)"> Rep. SMA         </th>
+                        <th onclick="orderBy(5)"> Rep U            </th>
+                        <th onclick="orderBy(6)"> Supervisor       </th>
+                        <th onclick="orderBy(7)"> Estado           </th>
+                        <th> Obs.        </th>
+                        <th> Devolucion  </th>
+                        <th> Activar     </th>
+                        <th> Imprimir    </th>
+                        <th> Editar      </th>
+                        <th> Borrar      </th>
                     </tr>
                 </thead>
 
