@@ -11,7 +11,7 @@ class resumen_model extends CI_Model {
         
         $query = $this->db->query("SELECT logusuario, logfecha, loghora, logip
                                    FROM logs_ingresos
-                                   ORDER BY logfecha, loghora DESC
+                                   ORDER BY logfecha DESC
                                    LIMIT 0, 10");
         
         $result = array();
