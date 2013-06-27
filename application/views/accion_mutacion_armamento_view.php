@@ -137,18 +137,19 @@
             
             function busquedaRepuestos() {
              
-                var nro_orden = $("#nro_orden").val();
+                var nro_pieza = $("#nro_pieza_anterior").val();
+                
+                if(nro_pieza == "") {
+                    jAlert("ERROR: Debe seleccionar una pieza del armamento antes de buscar en el almacen", "Error");
+                    return false;
+                }
             
                 $.ajax({
                    type: "post",
-                   url: "<?php base_url(); ?>accion_mutacion_armamento/cargoNroOrdenTrabajo",
-                   data: "nro_orden="+nro_orden,
-                   success: function(data) {
-                       if(data == 1) {
-                           $.colorbox({href:"<?php echo base_url('busqueda_repuestos_nro_pieza'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA REPUESTOS", onClosed: function(){ cargoRepuestosFiltro(); } });
-                       }else {
-                           jAlert("ERROR: Debe de seleccionar un nro de orden primero y luego buscar el repuesto en el almacen", "Error");
-                       }
+                   url: "<?php base_url(); ?>accion_mutacion_armamento/busquedaRepuestos",
+                   data: "nro_pieza="+nro_pieza,
+                   success: function() {
+                       $.colorbox({href:"<?php echo base_url('busqueda_repuestos_nro_pieza'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA REPUESTOS", onClosed: function(){ cargoRepuestosFiltro(); } });
                    }
                 });                
             }

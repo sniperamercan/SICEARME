@@ -7,6 +7,19 @@ class accion_mutacion_armamento_model extends CI_Model {
         $this->load->database();
     }
 
+    function cargoTipoPieza($nro_orden, $nro_pieza) {
+        
+        $query = $this->db->query("SELECT f.tipo_pieza
+                                   FROM fichas_piezas f
+                                   INNER JOIN ordenes_trabajo o ON o.nro_serie = f.nro_serie AND o.marca = f.marca AND o.calibre = f.calibre AND o.modelo = f.modelo
+                                   WHERE o.nro_orden = ".$this->db->escape($nro_orden)."
+                                   AND f.nro_pieza = ".$this->db->escape($nro_pieza));
+        
+        $row = $query->row();
+        
+        return $row->tipo_pieza;
+    }     
+    
     function cargoNroOrdenes() {
         
         $query = $this->db->query("SELECT nro_orden

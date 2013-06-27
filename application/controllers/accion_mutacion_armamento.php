@@ -143,6 +143,16 @@ class accion_mutacion_armamento extends CI_Controller {
         }
     }
     
+    function busquedaRepuestos() {
+        
+        $nro_orden = $_SESSION['nro_orden'];
+        $nro_pieza = $_POST['nro_pieza'];
+        
+        $tipo_pieza = $this->accion_mutacion_armamento_model->cargoTipoPieza($nro_orden, $nro_pieza);
+        
+        $_SESSION['tipo_pieza'] = $tipo_pieza;
+    }    
+    
     function validarDatos() {
         
         $patterns = array();
