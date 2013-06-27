@@ -55,6 +55,17 @@ class accion_mutacion_armamento extends CI_Controller {
         $this->load->view('accion_mutacion_armamento_view', $data);  
     }
 
+    function cargoPiezasArmamentoFiltro() {
+
+        if( !empty($_SESSION['seleccion_busqueda']) ) {
+            $nro_pieza = $_SESSION['seleccion_busqueda'];
+        }else {
+            $nro_pieza = 0;
+        }
+        
+        echo $nro_pieza;
+    }     
+    
     function cargoOrdenesTrabajoFiltro() {
         
         $nro_ordenes = $this->accion_mutacion_armamento_model->cargoNroOrdenes();

@@ -173,7 +173,45 @@
                         }
                    }
                 });                
-            }             
+            } 
+            
+            function busquedaPiezasArmamento() {
+            
+                $("#nro_pieza_nueva").val("");
+                $("#nro_parte").val("");
+                $("#nombre_parte").val("");
+                $("#nro_catalogo").val("");            
+            
+                var nro_orden = $("#nro_orden").val();
+            
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>accion_mutacion_armamento/cargoNroOrdenTrabajo",
+                   data: "nro_orden="+nro_orden,
+                   success: function(data) {
+                       if(data == 1) {
+                           $.colorbox({href:"<?php echo base_url('busqueda_piezas'); ?>", top:false, iframe:false, innerWidth:900, innerHeight:700, title:"BUSQUEDA PIEZAS", onClosed: function(){ cargoPiezasArmamentoFiltro(); } });
+                       }else {
+                           jAlert("ERROR: Debe de seleccionar un nro de orden primero y luego buscar el repuesto en el almacen", "Error");
+                       }
+                   }
+                });             
+            }   
+            
+            function cargoPiezasArmamentoFiltro() {
+                $.ajax({
+                   type: "post",
+                   url: "<?php base_url(); ?>accion_mutacion_armamento/cargoPiezasArmamentoFiltro",
+                   success: function(data) {
+               
+                        $("#nro_pieza_anterior").val("");
+                        
+                        if(data != 0) {
+                            $("#nro_pieza_anterior").val(data);
+                        }
+                   }
+                });                
+            }              
     
         </script>
         
@@ -228,6 +266,18 @@
                 
                 <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
                 
+                <dl>
+                <dt><label> Pieza a cambiar <font color="red"> * </font> </label></dt>
+                <dd><img style="cursor: pointer;" onclick="busquedaPiezasArmamento();" src="<?php echo base_url(); ?>images/search.png" /> <label> (Pieza que contiene actualmente el armamento) </label> </dd>
+                </dl>                 
+                
+                <dl>
+                <dt><label for="nro_pieza_anterior"> Nº pieza </label></dt>
+                <dd><input readonly="readonly" type="text" id="nro_pieza_anterior" class="txtautomatico" /> </dd>
+                </dl> 
+                
+                <p><img style='width: 100%; height: 6px;' src="<?php echo base_url() ?>images/barra.png" /></p>
+                                
                 <dl>
                 <dt><label for="seccion"> Sección <font color="red"> * </font> </label></dt>
                 <dd><select id="seccion"> <?php echo $secciones ?> </select> <img style="cursor: pointer;" onclick="crearSeccion();" src="<?php echo base_url(); ?>images/sumar.png" /></dd>
